@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,9 +10,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
-</head>
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -37,13 +39,13 @@ nav {
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 #nav-1 {
-  background: #3ac569;
+  background: #cff0da;
 }
 
 
 .link-1 {
   transition: 0.3s ease;
-  background: #3ac569;
+  background: #cff0da;
   color: #88dba3;
   font-size: 20px;
   text-decoration: none;
@@ -74,14 +76,16 @@ nav {
 </head>
 
 <body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"
+	scope="application"/>
+<c:set var="loginpage" value="login.me"/>
   <div style="width:100%; height:40px; text-align: right">
-    <a class="gonav" href="#">아이디 비밀번호찾기</a>
-    <a class="gonav" href="#">회원가입</a> 
-    <a class="gonav" href="#">로그인</a> 
-
+    <a class="gonav" href="${ loginpage }">아이디 비밀번호찾기</a>
+    <a class="gonav" href="${ loginpage }">회원가입</a> 
+    <a class="gonav" href="${ loginpage }">로그인</a> 
 </div>
 <nav id="nav-1">
-  <a class="link-2" href="#"><img id="sewlogo"src="resources/images/로고.jpg"></a>
+  <a class="link-2" href="#"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
   <a class="link-1" href="#">Home</a>
   <a class="link-1" href="#">단어장</a>
   <a class="link-1" href="#">클래스</a>

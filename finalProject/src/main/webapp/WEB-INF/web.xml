@@ -53,6 +53,8 @@
 		<url-pattern>*.in</url-pattern>
 		<url-pattern>*.vi</url-pattern>
 		<url-pattern>*.voca</url-pattern>
+		<url-pattern>*.me</url-pattern>
+		<url-pattern>*.ck</url-pattern>
 		<!-- 앞으로 *.do 인 요청들은 DispatcherServlet에서 HandlerMapping을 통해
 			해당 Controller 요청하도록 함 -->
 	</servlet-mapping>
