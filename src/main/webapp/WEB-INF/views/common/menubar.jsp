@@ -10,6 +10,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Document</title>
+	  <c:set var="contextPath" value="${ pageContext.request.contextPath }" scope="application"/>
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -88,7 +89,7 @@ nav {
   <a class="link-2" href="#"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
   <a class="link-1" href="#">Home</a>
   <a class="link-1" href="#">단어장</a>
-  <a class="link-1" href="#">클래스</a>
+  <a class="link-1" href="ClassList.do">클래스</a>
   <a class="link-1" href="#">고객센터</a>
 </nav>
 </body>
