@@ -43,7 +43,7 @@
                 <td>2020년 1월 3주차 테스트</td>
                 <td>2020-01-20</td>
                 <td>45</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
+                <td><button type="button" class="btn btn-secondary" onclick="location.href='goTest.do'">확인</button></td>
             </tr>
             <tr>
                 <th scope="row">8</th>

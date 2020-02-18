@@ -1,0 +1,148 @@
+@charset "UTF-8";
+        p {
+            display: block;
+            margin-block-start: 1em;
+            margin-block-end: 1em;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        .modal-card-head{
+            position: relative;
+            border-bottom: 1px solid #dbdbdb;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+
+        .modal-card-head, .modal-card-foot {
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            background-color: whitesmoke;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+            -webkit-box-pack: start;
+            -ms-flex-pack: start;
+            justify-content: flex-start;
+            padding: 20px;
+            position: relative;
+        }
+        *{
+            box-sizing: inherit;
+        }
+        div{
+            display: block;
+        }
+        .modal-card-body {
+            padding: 0;
+            width: 210mm;
+            height: 220mm;
+            -webkit-overflow-scrolling: touch;
+            overflow-x: scroll;
+            overflow-y: scroll;
+            background-color: white;
+            -webkit-box-flex: 1;
+            flex-grow: 1;
+            flex-shrink: 1;
+            overflow: auto;
+        }
+        .quiz-header{
+            position: relative;
+            height: 70mm;
+        }
+        .quiz-header .doc-title {
+            position: absolute;
+            top: 10mm;
+            left: 15mm;
+            font-size: 25mm;
+            font-weight: 700;
+            line-height: 29mm;
+        }
+        .quiz-header .doc-sub-title {
+            position: absolute;
+            top: 35mm;
+            left: 15mm;
+            font-size: 25mm;
+            font-weight: 700;
+            line-height: 29mm;
+        }
+        .blank-box-wrapper{
+            position: absolute;
+            top: 10mm;
+            right: 15mm;
+        }
+        .blank-box{
+            width:35mm;
+            height: 19mm;
+            float: left;
+            margin-left: 1mm;
+            border: .5mm solid gray;
+            border-radius: 2mm;
+            padding: 1.5mm;
+        }
+        .quiz-info-box-wrapper{
+            position: absolute;
+            top:32mm;
+            left:88mm;
+            right: 15mm;
+        }
+        .quiz-info-box{
+            height: 8mm;
+            padding: 1.5mm;
+        }
+        .quiz-contents{
+            margin-left: 3mm;
+            margin-right: 3mm;
+        }
+        .word-box{
+            width:50%;
+            height: 16.6mm;
+            margin-bottom: 1mm;
+            display: inline-block;
+            position: relative;
+            font-size: 3.5mm;
+            overflow-wrap: break-word;
+            line-height: 4mm;
+            overflow: hidden;
+            color:#000;
+        }
+        .word-number{
+            position: absolute;
+            right: 92%;
+            color:gray;
+            line-height: 13mm;
+        }
+        .filled-box{
+            position: absolute;
+            left:10%;
+            width:37mm;
+            line-height: 13mm;
+            font-weight: 700;
+        }
+        .text-box{
+            position: absolute;
+            left:10%;
+            width:37mm;
+            line-height: 13mm;
+            font-weight: 700;
+        }
+        .empty-box{
+            position: absolute;
+            left:50%;
+            width:42mm;
+            height: 12.4mm;
+            border-bottom: .2mm solid #000;
+        }
+        .closebtn{
+            font-size:36px;
+            color: #000;
+            text-decoration: none;
+        }
+        .closebtn:hover{
+            color: rgb(0,154,200);
+			display: block;
+			transition: 0.2s ease-in-out;
+        }

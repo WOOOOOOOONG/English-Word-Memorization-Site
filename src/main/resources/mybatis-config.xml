@@ -9,9 +9,19 @@
 	</settings>
 
 	<typeAliases>
+		<typeAlias type="com.kh.spring.classs.model.vo.Classs" alias="Classs"/>
+		<typeAlias type="com.kh.spring.classs.model.vo.ClassMember" alias="ClassMember"/>
+		<typeAlias type="com.kh.spring.classs.model.vo.ClassTest" alias="ClassTest"/>
+		<typeAlias type="com.kh.spring.classs.model.vo.TestVoca" alias="TestVoca"/>
+		<typeAlias type="com.kh.spring.common.model.vo.Storage" alias="Storage"/>
 	</typeAliases>
 	
 	<mappers>
+		<mapper resource="mappers/classs-mapper.xml"/>
+		<mapper resource="mappers/classMember-mapper.xml"/>
+		<mapper resource="mappers/classTest-mapper.xml"/>
+		<mapper resource="mappers/testVoca-mapper.xml"/>
+		<mapper resource="mappers/storage-mapper.xml"/>
 	</mappers>
 
 </configuration>

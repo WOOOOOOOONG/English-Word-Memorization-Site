@@ -1,3 +1,5 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -5,21 +7,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<%
+		Date today = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String realday = sdf.format(today);
+	%>
 	
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
-	<script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
 	
-	<!-- include summernote css/js-->
-    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
 
+	<!-- 스와이프 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script> 
+    
+
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="../classs/summerNote.jsp" />
+	
+	<form action="insertClass.do" method="post" enctype="multipart/form-data">
 	<div style="background: #ebebeb;" style="height:100vhs">
     <div class="outer" style="width: 800px; height:100vh; margin: 0 auto; padding: 30px 0 36px; background: white;">
 
@@ -85,24 +91,41 @@
         
         <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative;">
             <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">스터디 제목</span>
-            <input type="text" name="" id="" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
+            <input type="text" name="title" id="title" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
         </div>
 
         <div style="float:left; font-size: 22pt; width: 800px; height:50px; position: relative;">
             <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">목적</span>
             <!-- <input type="text" name="" id="" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 15px; font-size:16pt;"> -->
+            <input type="text" name="cateId" id="cateId" style="display:none;" value="no">
+            
+            <!--  셀렉트 체크시 cateId에 밸류값 넘어가도록 -->
+            <script>
+            	$(function(){
+            		$("#inputGroupSelect03").change(function(){
+            			var value = $("#inputGroupSelect03 option:selected").val();
+            			$("#cateId").val(value);
+            		});
+            	});
+            </script>
+            
             <div class="input-group mb-3" style="width:200px; position: absolute; top:20px; left:200px;">
-                <select class="custom-select" id="inputGroupSelect02"
+                <select class="custom-select" id="inputGroupSelect03"
                  style="border: none; border-bottom: 1px solid gray; width:200px; height: 30px; font-size:10pt; border-radius: 0px;">
                   <option selected></option>
-                  <option value="1">토익</option>
-                  <option value="2">텝스</option>
-                  <option value="3">일반 영어</option>
-                  <option value="4">편입</option>
-                  <option value="5">취업</option>
-                  <option value="6">회화</option>
-                  <option value="7">스피킹</option>
-                  <option value="8">기타</option>
+                  <option value="1">TOEIC</option>
+                  <option value="2">TOEFL</option>
+                  <option value="3">TEPS</option>
+                  <option value="4">G-TELP</option>
+                  <option value="5">FLEX</option>
+                  <option value="6">중등</option>
+                  <option value="7">고등</option>
+                  <option value="8">수능</option>
+                  <option value="9">9급 공무원 시험</option>
+                  <option value="10">경찰공무원 영어 시험</option>
+                  <option value="11">편입</option>
+                  <option value="12">프로그래머</option>
+                  <option value="13">기타</option>
                 </select>
             </div>
         </div>
@@ -111,6 +134,18 @@
             <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">레벨</span>
             <!-- <input type="text" name="" id="" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 15px; font-size:16pt;"> -->
             <div class="input-group mb-3" style="width:200px; position: absolute; top:20px; left:200px;">
+            	
+            <input type="text" name="level" id="level" style="display:none;" value="no">
+            <!--  셀렉트 체크시 cateId에 밸류값 넘어가도록 -->
+            <script>
+            	$(function(){
+            		$("#inputGroupSelect02").change(function(){
+            			var value = $("#inputGroupSelect02 option:selected").text();
+            			$("#level").val(value);
+            		});
+            	});
+            </script>
+            
                 <select class="custom-select" id="inputGroupSelect02"
                  style="border: none; border-bottom: 1px solid gray; width:200px; height: 30px; font-size:10pt; border-radius: 0px;">
                   <option selected></option>
@@ -134,24 +169,55 @@
         <div id="off" style="display:none;">
             <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative; border-top:1px solid #dcdcdc; margin-top:15px;">
                 <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">지역</span>
-                <input type="text" name="" id="" placeholder="ex) 강남" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
+                <input type="text" name="local" value="" id="local" placeholder="ex) 강남" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
 
                 <span style="position:absolute; left:450px; top:30px; font-size:11pt; color:#787878;">인원</span>
-                <input type="number" name="" id="" min="0"; style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:16pt; width: 50px; height: 30px;">
+                <input type="number" value="1000" name="memberCount" id="memberCount" min="0" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:16pt; width: 50px; height: 30px;">
             </div>
 
             
 
             <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative;">
                 <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시작일</span>
-                <input type="date" name="" id="" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:14pt; width: 200px; height: 30px;">
+                <input type="date" name="startday" id="startday" min="<%= realday %>"  style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:14pt; width: 200px; height: 30px;">
                 <span style="position:absolute; left:450px; top:30px; font-size:11pt; color:#787878;">종료일</span>
-                <input type="date" name="" id="" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:14pt; width: 200px; height: 30px;">
+                <input type="date" name="endday" id="endday" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:14pt; width: 200px; height: 30px;" disabled>
+                <input type="text" name="schedule" id="schedule" style="display:none;" value="">
+                 
+                <!-- 시작일 끝나는일  스트링 합치기-->
+                <script>
+                	var schedule;
+                	
+                	$(function(){
+                		$("#startday").change(function(){
+                			var sday = $(this).val();
+                			var y = sday.split("-")[0];
+                			var m = sday.split("-")[1];
+                			var d = sday.split("-")[2];
+                			var day = y + "년 " + m + "월 " + d + "일";
+                			schedule = day;
+                			$("#endday").removeAttr("disabled");
+                			document.getElementById("endday").min = sday;
+                			
+                		});
+                		
+                		$("#endday").change(function(){
+                			var sday = $(this).val();
+                			var y = sday.split("-")[0];
+                			var m = sday.split("-")[1];
+                			var d = sday.split("-")[2];
+                			var day = y + "년 " + m + "월 " + d + "일";
+                			schedule += " - " + day;
+                			$("#schedule").val(schedule);
+                		});
+                	});
+                </script>
+                
             </div>
 
             <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative; border-bottom: 1px solid #dcdcdc; padding : 40px;">
                 <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시간</span>
-                <input type="text" name="" id="" placeholder="ex)16:00 - 18:00" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
+                <input type="text" name="time" id="time" value="" placeholder="ex)16:00 - 18:00" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
             </div>
         </div>
 
@@ -176,14 +242,14 @@
         <!-- 썸머 노트 -->
         <div style="float:left; position: relative; height:600px; width:100px; margin-top:20px;">
             <div>
-                <textarea name="content" id="summernote" value=""></textarea> 
+                <textarea name="comment" id="summernote"></textarea>
             </div>
         </div>
 
         <!-- <div style="float:left; position: relative; width:800px; margin-top:100px;"> -->
         <div style="float:left; position: absolute; width:800px; top:600px; left:200px;">
             <button type="button" class="btn btn-secondary" id="btn4">PREVIOUS</button>
-            <button type="button" class="btn btn-secondary" id="btn5">완료</button>
+            <button type="submit" class="btn btn-secondary" id="btn5">완료</button>
         </div>
     </div>
 
@@ -258,7 +324,7 @@
 
         <!-- 썸머 노트 -->
         <script>
-        $(document).ready(function() {
+        /* $(document).ready(function() {
             $('#summernote').summernote({
                     height: 500,                 // set editor height
                     width: 800,
@@ -266,7 +332,26 @@
                     maxHeight: null,             // set maximum height of editor
                     focus: true                  // set focus to editable area after initializing summernote
             });
-       });
+       }); */
+		$("#summernote")
+		.summernote(
+				{
+					"height" : 400,
+					"width" : "800px",
+					"dialogsInBody" : true,
+					"prettifyHtml" : true,
+					"codemirror" : {
+						"mode" : "text/html",
+						"htmlMode" : true,
+						"lineNumbers" : true,
+						"theme" : "monokai",
+						"width" : "100px",
+						"textWrapping" : true
+					},
+					"disableDragAndDrop" : true,
+					
+					"placeholder" : "클래스 소개를 작성해주세요"
+				});
         </script>
 
         <!-- 페이징 -->
@@ -283,11 +368,37 @@
                 $("#page2").css("display","none");
                 $("#page2_title").css("display","none");
             });
+            // 2번쨰 페이지에서 넘어가기 클릭시
             $("#btn3").click(function(){
-                $("#page2").css("display","none");
-                $("#page2_title").css("display","none");
-                $("#page3").css("display","block");
-                $("#page3_title").css("display","block");
+            	if($("#title").val() == ""){
+            		alert("제목을 입력하세요.");
+            	}else if($("#cateId").val() == "no"){
+            		alert("목적을 선택하세요.");
+            	}else if($("#level").val() == "no"){
+            		alert("레벨을 선택하세요.");
+            	}else if(!($("input:radio[name='onoff']").is(":checked"))){
+            		alert("온라인 / 오프라인 선택을 해주세요.");
+            	}else if($("#offline").is(":checked")){
+            		if($("#local").val() == ""){
+            			alert("지역을 입력해주세요");
+            		}else if($("#memberCount").val() == ""){
+            			alert("정원을 입력해주세요.");
+            		}else if($("#schedule").val() == ""){
+            			alert("날짜를 입력해주세요.");
+            		}else if($("#time").val() == ""){
+            			alert("시간대를 입력해주세요.");
+            		}else{
+            			$("#page2").css("display","none");
+    	                $("#page2_title").css("display","none");
+    	                $("#page3").css("display","block");
+    	                $("#page3_title").css("display","block");
+            		}
+            	}else{
+	                $("#page2").css("display","none");
+	                $("#page2_title").css("display","none");
+	                $("#page3").css("display","block");
+	                $("#page3_title").css("display","block");
+            	}
             });
             $("#btn4").click(function(){
                 $("#page2").css("display","block");
@@ -297,9 +408,11 @@
             });
             
         </script>
+        
+        
 
     
     </div>
-
+</form>
 </body>
 </html>
