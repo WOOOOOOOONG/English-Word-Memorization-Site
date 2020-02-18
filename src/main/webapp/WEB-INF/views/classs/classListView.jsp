@@ -105,6 +105,8 @@
 						<i class="fas fa-arrow-right"></i>
 					</span>
 				</button>
+				<button onclick="location.href='myClass.do'">임시</button>
+				<button onclick="location.href='classPorm.do'">클래스 만들러가기 임시</button>
 
 				<!-- 펼쳐지는거 -->
 				<div id="ldiv"
