@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,200 +46,54 @@
 				<tr>
 					<td>ID</td>
 					<th>이름</th>
-					<th>권한</th>
+					<th>닉네임</th>
 					<th>가입일</th>
-					<th>최근접속일</th>
-					<th>회원종류</th>
-					<th>탈퇴여부</th>
+					<th>수정일</th>
+					<th>회원상태</th>
 				</tr>
 			</thead>
 			<tbody>
-				<tr>
-					<td>admin</td>
-					<td>임세웅</td>
-					<td>관리자</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td></td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Hwan</td>
-					<td>신승환</td>
-					<td>쩌리</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>학생</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Hyuk</td>
-					<td>이진혁</td>
-					<td>회원</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>선생님</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Chan</td>
-					<td>이재찬</td>
-					<td>회원</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>선생님</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Anonymous</td>
-					<td>누군가</td>
-					<td>관리자</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td></td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>admin</td>
-					<td>임세웅</td>
-					<td>관리자</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td></td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Hwan</td>
-					<td>신승환</td>
-					<td>쩌리</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>학생</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Hyuk</td>
-					<td>이진혁</td>
-					<td>회원</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>선생님</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Chan</td>
-					<td>이재찬</td>
-					<td>회원</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>선생님</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Anonymous</td>
-					<td>누군가</td>
-					<td>관리자</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td></td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>admin</td>
-					<td>임세웅</td>
-					<td>관리자</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td></td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Hwan</td>
-					<td>신승환</td>
-					<td>쩌리</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>학생</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Hyuk</td>
-					<td>이진혁</td>
-					<td>회원</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>선생님</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Chan</td>
-					<td>이재찬</td>
-					<td>회원</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td>선생님</td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
-				<tr>
-					<td>Anonymous</td>
-					<td>누군가</td>
-					<td>관리자</td>
-					<td>2019-08-31</td>
-					<td>2020-02-11</td>
-					<td></td>
-					<td><select>
-							<option value="Y" selected>Y</option>
-							<option value="N">N</option>
-					</select></td>
-				</tr>
+				<c:if test="${ mList ne null }">
+					<c:forEach var="item" items="${ mList }">
+						<tr>
+							<td>${ item.mId }</td>
+							<td>${ item.name }</td>
+							<td>${ item.nickname }</td>
+							<td>${ item.enrollDate }</td>
+							<td>${ item.updateDate }</td>
+							<c:if test="${ item.userStatus eq 'Y'}">
+								<c:set var="selectedY" value="selected"/>
+							</c:if>
+							<c:if test="${ item.userStatus eq 'N'}">
+								<c:set var="selectedN" value="selected"/>
+							</c:if>
+							<td>
+								<c:url var="updateStatus" value="updateStatus.me">
+									<c:param name="mId" value="${ item.mId }"/>
+									<c:param name="userStatus" value="${ item.userStatus }"/>
+								</c:url>
+								<select id="statusSelected" onchange="changeStatus(this);">
+									<option value="Y" ${ selectedY }>Y</option>									
+									<option value="N" ${ selectedN }>N</option>
+								</select>
+							</td>
+						</tr>
+					</c:forEach>
+				</c:if>
 			</tbody>
 		</table>
 		<script>
+			// datatable
             $(document).ready(function () {
-                $('#table_id').DataTable();
+                $('#table_id').DataTable({
+                	"ordering":false
+                });
             });  
+			
+			// 회원 탈퇴 상태 변경
+			function changeStatus(e) {
+				location.href="${ updateStatus }";
+			}
         </script>
 	</div>
 </body>

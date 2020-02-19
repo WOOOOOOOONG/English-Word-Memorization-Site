@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+	<resultMap id="inquireResultSet" type="Inquire">
+		<id property="iId" column="I_ID"/>
+		<result property="inquirerId" column="INQUIRER_ID"/>
+		<result property="type" column="TYPE"/>
+		<result property="title" column="TITLE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="registDate" column="REGIST_DATE"/>
+		<result property="isAnswer" column="IS_ANSWER"/>
+		<result property="answer" column="ANSWER"/>
+		<result property="reportedId" column="REPORTED_ID"/>
+	</resultMap>
+	
+	<select id="selectInquireList" parameterType="Inquire" resultMap="inquireResultSet">
+		SELECT *
+		FROM Inquire
+	</select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="memberMapper">
+	<resultMap id="memberResultSet" type="Member">
+		<id property="mId" column="MID"/>
+		<result property="pwd" column="PWD"/>
+		<result property="name" column="NAME"/>
+		<result property="birthDate" column="BIRTH_DATE"/>
+		<result property="email" column="EMAIL"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="enrollDate" column="ENROLL_DATE"/>
+		<result property="updateDate" column="UPDATE_DATE"/>
+		<result property="userStatus" column="STATUS"/>
+		<result property="introduce" column="INTRODUCE"/>
+		<result property="nickname" column="NICKNAME"/>
+	</resultMap>
+	
+	<select id="selectList" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM Member
+		<!-- 관리자 페이지에서 탈퇴한 회원도 볼 수 있도록 하기 위해 WHERE STATUS='Y'는 안 넣음 -->
+	</select>
+	
+	<update id="updateStatus" parameterType="Member">
+		UPDATE MEMBER
+		<if test='userStatus.equals("Y")'>
+			SET STATUS='N'
+		</if>
+		<if test='userStatus.equals("N")'>
+			SET STATUS='Y'
+		</if>
+		WHERE MID=#{mId}
+	</update>
+</mapper>
