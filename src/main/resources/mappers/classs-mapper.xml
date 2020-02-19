@@ -1,6 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ClasssMapper">
+	<resultMap id="classResultSet" type="Classs">
+		<id property="cNo" column="CLASS_NO"/>
+		<result property="ornerId" column="ORNER_ID"/>
+		<result property="title" column="CLASS_TITLE"/>
+		<result property="comment" column="CLASS_COMMENT"/>
+		<result property="memberCount" column="MEMBER_COUNT"/>
+		<result property="nowMemberCount" column="MEMBER_COUNT_NOW"/>
+		<result property="level" column="LEVEL"/>
+		<result property="local" column="LOCAL"/>
+		<result property="schedule" column="CLASS_SCHEDULE"/>
+		<result property="time" column="CLASS_TIME"/>
+		<result property="inviteCode" column="INVITE_CODE"/>
+		<result property="classCount" column="CLASS_COUNT"/>
+		<result property="cateId" column="C_ID"/>
+		<result property="classCreateDate" column="CLASS_CREATE_DATE"/>
+	</resultMap>
+
+	<resultMap id="cateResultSet" type="Category">
+		<id property="cId" column="C_ID"/>
+		<result property="name" column="NAME"/>
+	</resultMap>
+
+
 	<insert id="insertClass">
 		INSERT INTO CLASSS VALUES(
 			'cNo' || cno_seq.nextval, #{ornerId}, #{title}, #{comment},
@@ -13,5 +36,13 @@
 		from ( select * from classs
 				where orner_id = #{id} order by class_create_date desc) 
 		where rownum = 1
+	</select>
+	<select id="selectClassList" resultMap="classResultSet">
+		SELECT *
+		FROM CLASSS
+	</select>
+	<select id="selectCateList" resultMap="cateResultSet">
+		SELECT *
+		FROM CATEGORY
 	</select>
 </mapper>

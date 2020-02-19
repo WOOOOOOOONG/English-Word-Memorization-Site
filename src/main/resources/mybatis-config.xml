@@ -14,6 +14,7 @@
 		<typeAlias type="com.kh.spring.classs.model.vo.ClassTest" alias="ClassTest"/>
 		<typeAlias type="com.kh.spring.classs.model.vo.TestVoca" alias="TestVoca"/>
 		<typeAlias type="com.kh.spring.common.model.vo.Storage" alias="Storage"/>
+		<typeAlias type="com.kh.spring.common.model.vo.Category" alias="Category"/>
 	</typeAliases>
 	
 	<mappers>

@@ -1,5 +1,7 @@
 package com.kh.spring.classs.model.vo;
 
+import java.sql.Date;
+
 public class Classs {
 	
 	private String cNo;				// CLASS_NO
@@ -15,11 +17,15 @@ public class Classs {
 	private String inviteCode;		// INVITE_CODE
 	private int	classCount;			// CLASS_COUNT
 	private int cateId;				// C_ID
+	private Date classCreateDate;   // CLASS_CREATE_DATE
 	
 	public Classs() {}
 
+	
+
 	public Classs(String cNo, String ornerId, String title, String comment, int memberCount, int nowMemberCount,
-			String level, String local, String schedule, String time, String inviteCode, int classCount, int cateId) {
+			String level, String local, String schedule, String time, String inviteCode, int classCount, int cateId,
+			Date classCreateDate) {
 		super();
 		this.cNo = cNo;
 		this.ornerId = ornerId;
@@ -34,7 +40,10 @@ public class Classs {
 		this.inviteCode = inviteCode;
 		this.classCount = classCount;
 		this.cateId = cateId;
+		this.classCreateDate = classCreateDate;
 	}
+
+
 
 	public String getcNo() {
 		return cNo;
@@ -139,15 +148,28 @@ public class Classs {
 	public void setCateId(int cateId) {
 		this.cateId = cateId;
 	}
+	
+	
+
+	public Date getClassCreateDate() {
+		return classCreateDate;
+	}
+
+
+
+	public void setClassCreateDate(Date classCreateDate) {
+		this.classCreateDate = classCreateDate;
+	}
+
 
 	@Override
 	public String toString() {
 		return "Classs [cNo=" + cNo + ", ornerId=" + ornerId + ", title=" + title + ", comment=" + comment
-				+ ", membeCount=" + memberCount + ", nowMemberCount=" + nowMemberCount + ", level=" + level + ", local="
-				+ local + ", schedule=" + schedule + ", time=" + time + ", inviteCode=" + inviteCode + ", classCount="
-				+ classCount + ", cateId=" + cateId + "]";
+				+ ", memberCount=" + memberCount + ", nowMemberCount=" + nowMemberCount + ", level=" + level
+				+ ", local=" + local + ", schedule=" + schedule + ", time=" + time + ", inviteCode=" + inviteCode
+				+ ", classCount=" + classCount + ", cateId=" + cateId + ", classCreateDate=" + classCreateDate + "]";
 	}
-	
-	
+
+
 	
 }

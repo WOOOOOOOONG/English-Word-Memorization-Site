@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="StorageMapper">
+	<resultMap id="storageResultSet" type="Storage">
+		<id property="fid" column="FID"/>
+		<result property="refId" column="REFER_ID"/>
+		<result property="category" column="CATEGORY"/>
+		<result property="path" column="PATH"/>
+		<result property="originName" column="ORIGINAL_NAME"/>
+		<result property="changeName" column="CHANGE_NAME"/>
+		<result property="fLevel" column="FLEVEL"/>
+	</resultMap>
+	
 	<insert id="insertClassFile">
 		INSERT INTO STORAGE VALUES(
 			FNO_SEQ.NEXTVAL,#{refId},#{category},#{path},#{originName},
 			#{changeName},#{fLevel}
 		)
 	</insert>
+	
+	<select id="selectFileList" resultMap="storageResultSet">
+		SELECT *
+		FROM STORAGE
+		WHERE REFER_ID = #{cNo}
+	</select>
 </mapper>
