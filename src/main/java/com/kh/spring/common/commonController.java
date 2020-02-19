@@ -14,7 +14,7 @@ import com.kh.spring.mail.MailSender;
 
 @Controller
 public class commonController {
-	@RequestMapping("/login.me")
+	@RequestMapping(value="/login.me")
 	public String gologin() {
 		return "common/login";
 	}

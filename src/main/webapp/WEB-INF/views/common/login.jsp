@@ -155,137 +155,103 @@ body :-ms-input-placeholder {
 #loginform button:hover {
 	background-color: #f5f7f9;
 }
-
 .bg-bubbles {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
 }
-
 .bg-bubbles li {
-	position: absolute;
-	list-style: none;
-	display: block;
-	width: 40px;
-	height: 40px;
-	background-color: rgba(255, 255, 255, 0.15);
-	bottom: -160px;
-	-webkit-animation: square 25s infinite;
-	animation: square 25s infinite;
-	-webkit-transition-timing-function: linear;
-	transition-timing-function: linear;
+  position: absolute;
+  list-style: none;
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.15);
+  bottom: -160px;
+  -webkit-animation: square 25s infinite;
+  animation: square 25s infinite;
+  -webkit-transition-timing-function: linear;
+  transition-timing-function: linear;
 }
-
 .bg-bubbles li:nth-child(1) {
-	left: 10%;
+  left: 10%;
 }
-
 .bg-bubbles li:nth-child(2) {
-	left: 20%;
-	width: 80px;
-	height: 80px;
-	animation-delay: 2s;
-	animation-duration: 17s;
+  left: 20%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 2s;
+  animation-duration: 17s;
 }
-
 .bg-bubbles li:nth-child(3) {
-	left: 25%;
-	animation-delay: 4s;
+  left: 25%;
+  animation-delay: 4s;
 }
-
 .bg-bubbles li:nth-child(4) {
-	left: 40%;
-	width: 60px;
-	height: 60px;
-	animation-duration: 22s;
-	background-color: rgba(255, 255, 255, 0.25);
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  animation-duration: 22s;
+  background-color: rgba(255, 255, 255, 0.25);
 }
-
 .bg-bubbles li:nth-child(5) {
-	left: 70%;
+  left: 70%;
 }
-
 .bg-bubbles li:nth-child(6) {
-	left: 80%;
-	width: 120px;
-	height: 120px;
-	animation-delay: 3s;
-	background-color: rgba(255, 255, 255, 0.2);
+  left: 80%;
+  width: 120px;
+  height: 120px;
+  animation-delay: 3s;
+  background-color: rgba(255, 255, 255, 0.2);
 }
-
 .bg-bubbles li:nth-child(7) {
-	left: 32%;
-	width: 160px;
-	height: 160px;
-	animation-delay: 7s;
+  left: 32%;
+  width: 160px;
+  height: 160px;
+  animation-delay: 7s;
 }
-
 .bg-bubbles li:nth-child(8) {
-	left: 55%;
-	width: 20px;
-	height: 20px;
-	animation-delay: 15s;
-	animation-duration: 40s;
+  left: 55%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 15s;
+  animation-duration: 40s;
+  
 }
-
 .bg-bubbles li:nth-child(9) {
-	left: 25%;
-	width: 10px;
-	height: 10px;
-	animation-delay: 2s;
-	animation-duration: 40s;
-	background-color: rgba(255, 255, 255, 0.3);
+  left: 25%;
+  width: 10px;
+  height: 10px;
+  animation-delay: 2s;
+  animation-duration: 40s;
+  background-color: rgba(255, 255, 255, 0.3);
 }
-
 .bg-bubbles li:nth-child(10) {
-	left: 90%;
-	width: 160px;
-	height: 160px;
-	animation-delay: 11s;
+  left: 90%;
+  width: 160px;
+  height: 160px;
+  animation-delay: 11s;
 }
-
-@
--webkit-keyframes square { 0% {
-	transform: translateY(0);
+@-webkit-keyframes square {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-700px) rotate(600deg);
+  }
 }
-
-100%
-{
-transform
-:
- 
-translateY
-(-700px)
- 
-rotate
-(600deg);
-
-  
+@keyframes square {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-700px) rotate(600deg);
+  }
 }
-}
-@
-keyframes square { 0% {
-	transform: translateY(0);
-}
-
-100%
-{
-transform
-:
- 
-translateY
-(-700px)
- 
-rotate
-(600deg);
-
-  
-}
-}
-div>button {
+div > button {
 	appearance: none;
 	outline: 0;
 	background-color: white;
@@ -458,12 +424,6 @@ div>button {
 									style="width: 30%;" value="인증" >
 								<button id="hiddenemailbtn" type="button" data-toggle="modal"
 									data-target="#checkemailen" style="display:none;"></button>
-							</div>
-							<div class="commentarea"></div>
-							<div class="textdivarea">전화번호</div>
-							<div class="inputdivarea">
-								<input type="text" name="userPhone" placeholder="-를 빼고 입력해주세요"
-									required>
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">생년월일</div>
@@ -672,17 +632,11 @@ div>button {
 				</div>
 				<div class="modal-body" style="width: 90%;">
 					<form id="findmyidform" method="post"
-						action="<%=request.getContextPath()%>/email.ck">
+						action="${contextPath }/findid.ck">
 						<div id="signArea">
 							<div class="textdivarea">이메일</div>
 							<div class="inputdivarea">
-								<input type="text" id="findEmail" name="findEmail" required>
-							</div>
-							<div class="commentarea"></div>
-							<div class="textdivarea">전화번호</div>
-							<div class="inputdivarea">
-								<input type="text" name="findPhone" id="findPhone"
-									placeholder="-를 빼고 입력해주세요" required>
+								<input type="email" id="findEmail" name="findEmail" required>
 							</div>
 							<div class="commentarea"></div>
 
@@ -808,5 +762,6 @@ $(function(){
         });
     </script>
 </body>
-
+ 
+ 
 </html>
