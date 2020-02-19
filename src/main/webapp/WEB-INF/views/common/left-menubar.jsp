@@ -321,11 +321,11 @@ textarea::placeholder {
 		<script>
             $(document).ready(function () {
             	switch(window.location.pathname) {
-            	case "/spring/inquire.ad": 
-            		$(".page1").css("font-weight", "bold");
+            	case "/spring/response.ad": 
+            		$(".page2").css("font-weight", "bold");
             		break;
             	case "/spring/memberManage.ad": 
-            		$(".page2").css("font-weight", "bold");
+            		$(".page1").css("font-weight", "bold");
             		break;
             	case "/spring/classify.cl": 
             		$(".page3").css("font-weight", "bold");
