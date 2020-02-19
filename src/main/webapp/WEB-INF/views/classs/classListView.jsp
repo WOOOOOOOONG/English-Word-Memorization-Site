@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fnc" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%
+	int index = 0;
+%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <!-- include libraries(jQuery, bootstrap) -->
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" rel="stylesheet">
@@ -228,6 +233,15 @@
 		</div>
 	</div>
 
+		<!-- 갯수  -->
+		<c:set var="size" value="${ fnc:length(cList) }"/>
+		<c:set var="csize" value="${ fnc:length(cList) div 3}"/>
+		<c:set var="lasize" value="0"/>
+		<!-- row 개수 -->
+		<c:set var="row" value="${csize+(1-(csize%1))%1}"/>
+		<!-- 마지막 클래스 생성후 for문 break -->
+	
+	
 	<!-- 여기부터 리스트 -->
 	<div class="outer"
 		style="width: 100%; background: #ebebeb; position: relative;">
@@ -235,337 +249,71 @@
 		<div style="width: 1000px; margin: auto; border: 1px solid #ebebeb;">
 			<div
 				style="margin: 60px auto 30px; padding-left: 5px; font-size: 16pt; color: #505050">
-				<span style="font-weight: 600;">804개의 스터디</span>
+				<span style="font-weight: 600;">${ size }개의 스터디</span>
 			</div>
 		</div>
 
-
+	
+		<c:forEach var="i"  begin="1" end="${ row }">
+		 	
 		<!-- row div임 -->
-		<div
-			style="display: flex; align-items: stretch; padding-bottom: 30px; border-bottom: 1px solid #dcdcdc; width: 1000px; margin: 30px auto;" id="origindiv">
+		<div style="display: flex; align-items: stretch; padding-bottom: 30px; border-bottom: 1px solid #dcdcdc; width: 1000px; margin: 30px auto;" id="origindiv">
 
-
-			<!-- 객체 하나 !! -->
-			<a
-				style="display: inline-block; text-decoration: none; margin: auto;"
-				href="classdetail.do">
-				<div
-					style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
-					<div
-						style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
-
-						<!-- 기간 -->
-						<div
-							style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
-							<span style="color: #4c8def;">3개월, 주 1회</span> 11:00 ~ 13:00 (일)
-						</div>
-
-						<!-- 지역 | 레벨-->
-						<div
-							style="margin-top: 36px; text-align: center; color: #a0a0a0; font-size: 11pt;">
-							<span>강남</span> <span>&nbsp; | &nbsp;</span> <span>Beginner</span>
-						</div>
-
-						<!-- 제목 -->
-						<div
-							style="margin: 9pt 0 1pc; text-align: center; color: #3c3c3c; font-size: 14pt; line-height: 1.5em;">
-							같이 입문 영어 <br>정복하실분 구합니다!!
-						</div>
-
-						<!-- 가격? -->
-						<div style="text-align: center;">
-							<span style="color: #f48210; font-weight: 700;">토익</span> <span
-								style="margin-left: 10px; color: #a0a0a0; font-size: 10pt;">12주</span>
-						</div>
-					</div>
-
-
-					<!-- 아이콘 부분 -->
-					<img src="${ contextPath }/resources/image/icon1.jpg"
-						style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
-
-					<!-- 밑에 사진 -->
-					<div
-						style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//main1.jpg');">
-						<div
-							style="background: #cff0da; position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
-							신청 하기</div>
-					</div>
-				</div>
-			</a>
-			<!-- 여기까지 객체-->
-
-			<!-- 객체 하나 !! -->
-			<a
-				style="display: inline-block; text-decoration: none; margin: auto;"
-				href="#">
-				<div
-					style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
-					<div
-						style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
-
-						<!-- 기간 -->
-						<div
-							style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
-							<span style="color: #4c8def;">온라인 스터디</span>
-						</div>
-
-						<!-- 지역 | 레벨-->
-						<div
-							style="margin-top: 36px; text-align: center; color: #a0a0a0; font-size: 11pt;">
-							<!-- <span>강남</span>
-                        <span>&nbsp; | &nbsp;</span> -->
-							<span>Beginner</span>
-						</div>
-
-						<!-- 제목 -->
-						<div
-							style="margin: 9pt 0 1pc; text-align: center; color: #3c3c3c; font-size: 14pt; line-height: 1.5em;">
-							텝스 단어장 공유하실분 ㅋㅋ <br>없나
-						</div>
-
-						<!-- 가격? -->
-						<div style="text-align: center;">
-							<span style="color: #f48210; font-weight: 700;">텝스</span>
-							<!-- <span style="margin-left: 10px; color:#a0a0a0; font-size: 10pt; ">8주</span> -->
-						</div>
-					</div>
-
-
-					<!-- 아이콘 부분 -->
-					<img src="${ contextPath }/resources/image/icon2.jpg"
-						style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
-
-					<!-- 밑에 사진 -->
-					<div
-						style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//Desert.jpg');">
-						<div
-							style="background: #cff0da; position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
-							신청 하기</div>
-					</div>
-				</div>
-			</a>
-			<!-- 여기까지 객체-->
-
-			<!-- 객체 하나 !! -->
-			<a
-				style="display: inline-block; text-decoration: none; margin: auto;"
-				href="#">
-				<div
-					style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
-					<div
-						style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
-
-						<!-- 기간 -->
-						<div
-							style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
-							<span style="color: #4c8def;">온라인 스터디</span>
-							<!-- 11:00 ~ 13:00 (일) -->
-						</div>
-
-						<!-- 지역 | 레벨-->
-						<div
-							style="margin-top: 36px; text-align: center; color: #a0a0a0; font-size: 11pt;">
-							<!-- <span>강남</span>
-                                <span>&nbsp; | &nbsp;</span> -->
-							<span>expert</span>
-						</div>
-
-						<!-- 제목 -->
-						<div
-							style="margin: 9pt 0 1pc; text-align: center; color: #3c3c3c; font-size: 14pt; line-height: 1.5em;">
-							해외 거주 8년, 능숙자와 <br>다양한 이슈로 능동적 토론하기!
-						</div>
-
-						<!-- 가격? -->
-						<div style="text-align: center;">
-							<span style="color: #f48210; font-weight: 700;">회화</span>
-						</div>
-					</div>
-
-
-					<!-- 아이콘 부분 -->
-					<img src="${ contextPath }/resources/image/icon3.jpg"
-						style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
-
-					<!-- 밑에 사진 -->
-					<div
-						style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//Lighthouse.jpg');">
-						<div
-							style="background: #cff0da; position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
-							신청 하기</div>
-					</div>
-				</div>
-			</a>
-			<!-- 여기까지 객체-->
+			<c:forEach var="j" begin="1" end="3">
+				<c:if test="${ size != lasize }"> 
+						<!-- 객체 하나 !! -->
+						<a style="display: inline-block; text-decoration: none; margin: auto;" href="classdetail.do">
+							<div style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
+								<div style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
+			
+									<!-- 기간 -->
+									<div style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
+										<span style="color: #4c8def;">${ cList.get(lasize).schedule }</span> ${ cList.get(lasize).time }
+									</div>
+			
+									<!-- 지역 | 레벨-->
+									<div style="margin-top: 36px; text-align: center; color: #a0a0a0; font-size: 11pt;">
+										<span>${ cList.get(lasize).local }</span> <span>&nbsp; | &nbsp;</span> <span>${ cList.get(lasize).level }</span>
+									</div>
+			
+									<!-- 제목 -->
+									<div style="margin: 9pt 0 1pc; text-align: center; color: #3c3c3c; font-size: 14pt; line-height: 1.5em;">
+										${ cList.get(lasize).title }
+									</div>
+			
+									<!-- 가격? -->
+									<div style="text-align: center;">
+										<span style="color: #f48210; font-weight: 700;">토익</span> 
+										<span style="margin-left: 10px; color: #a0a0a0; font-size: 10pt;">12주</span>
+									</div>
+								</div>
+			
+			
+								<!-- 아이콘 부분 -->
+								<img src="${ contextPath }/resources/image/icon1.jpg"
+									style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
+			
+								<!-- 밑에 사진 -->
+								<div style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//main1.jpg');">
+									<div style="background: #cff0da; position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
+										신청 하기
+									</div>
+								</div>
+							</div>
+						</a>
+						<!-- 여기까지 객체-->
+					<c:set var="lasize" value="${ lasize + 1 }"/>
+					<% index++; %>
+					</c:if>
+					
+				
+			</c:forEach>
 
 		</div>
-		<!-- 여기까지 Row -->
+ </c:forEach>
+			
 		
-				<!-- row div임 -->
-		<div
-			style="display: flex; align-items: stretch; padding-bottom: 30px; border-bottom: 1px solid #dcdcdc; width: 1000px; margin: 30px auto;">
-
-
-			<!-- 객체 하나 !! -->
-			<a
-				style="display: inline-block; text-decoration: none; margin: auto;"
-				href="#">
-				<div
-					style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
-					<div
-						style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
-
-						<!-- 기간 -->
-						<div
-							style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
-							<span style="color: #4c8def;">3개월, 주 1회</span> 11:00 ~ 13:00 (일)
-						</div>
-
-						<!-- 지역 | 레벨-->
-						<div
-							style="margin-top: 36px; text-align: center; color: #a0a0a0; font-size: 11pt;">
-							<span>강남</span> <span>&nbsp; | &nbsp;</span> <span>Beginner</span>
-						</div>
-
-						<!-- 제목 -->
-						<div
-							style="margin: 9pt 0 1pc; text-align: center; color: #3c3c3c; font-size: 14pt; line-height: 1.5em;">
-							같이 입문 영어 <br>정복하실분 구합니다!!
-						</div>
-
-						<!-- 가격? -->
-						<div style="text-align: center;">
-							<span style="color: #f48210; font-weight: 700;">토익</span> <span
-								style="margin-left: 10px; color: #a0a0a0; font-size: 10pt;">12주</span>
-						</div>
-					</div>
-
-
-					<!-- 아이콘 부분 -->
-					<img src="${ contextPath }/resources/image/icon1.jpg"
-						style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
-
-					<!-- 밑에 사진 -->
-					<div
-						style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//main1.jpg');">
-						<div
-							style="background: rgba(220, 0, 0, .6); position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
-							신청 하기</div>
-					</div>
-				</div>
-			</a>
-			<!-- 여기까지 객체-->
-
-			<!-- 객체 하나 !! -->
-			<a
-				style="display: inline-block; text-decoration: none; margin: auto;"
-				href="#">
-				<div
-					style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
-					<div
-						style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
-
-						<!-- 기간 -->
-						<div
-							style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
-							<span style="color: #4c8def;">온라인 스터디</span>
-						</div>
-
-						<!-- 지역 | 레벨-->
-						<div
-							style="margin-top: 36px; text-align: center; color: #a0a0a0; font-size: 11pt;">
-							<!-- <span>강남</span>
-                        <span>&nbsp; | &nbsp;</span> -->
-							<span>Beginner</span>
-						</div>
-
-						<!-- 제목 -->
-						<div
-							style="margin: 9pt 0 1pc; text-align: center; color: #3c3c3c; font-size: 14pt; line-height: 1.5em;">
-							텝스 단어장 공유하실분 ㅋㅋ <br>없나
-						</div>
-
-						<!-- 가격? -->
-						<div style="text-align: center;">
-							<span style="color: #f48210; font-weight: 700;">텝스</span>
-							<!-- <span style="margin-left: 10px; color:#a0a0a0; font-size: 10pt; ">8주</span> -->
-						</div>
-					</div>
-
-
-					<!-- 아이콘 부분 -->
-					<img src="${ contextPath }/resources/image/icon2.jpg"
-						style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
-
-					<!-- 밑에 사진 -->
-					<div
-						style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//Desert.jpg');">
-						<div
-							style="background: rgba(220, 0, 0, .6); position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
-							신청 하기</div>
-					</div>
-				</div>
-			</a>
-			<!-- 여기까지 객체-->
-
-			<!-- 객체 하나 !! -->
-			<a
-				style="display: inline-block; text-decoration: none; margin: auto;"
-				href="#">
-				<div
-					style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
-					<div
-						style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
-
-						<!-- 기간 -->
-						<div
-							style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
-							<span style="color: #4c8def;">온라인 스터디</span>
-							<!-- 11:00 ~ 13:00 (일) -->
-						</div>
-
-						<!-- 지역 | 레벨-->
-						<div
-							style="margin-top: 36px; text-align: center; color: #a0a0a0; font-size: 11pt;">
-							<!-- <span>강남</span>
-                                <span>&nbsp; | &nbsp;</span> -->
-							<span>expert</span>
-						</div>
-
-						<!-- 제목 -->
-						<div
-							style="margin: 9pt 0 1pc; text-align: center; color: #3c3c3c; font-size: 14pt; line-height: 1.5em;">
-							해외 거주 8년, 능숙자와 <br>다양한 이슈로 능동적 토론하기!
-						</div>
-
-						<!-- 가격? -->
-						<div style="text-align: center;">
-							<span style="color: #f48210; font-weight: 700;">회화</span>
-						</div>
-					</div>
-
-
-					<!-- 아이콘 부분 -->
-					<img src="${ contextPath }/resources/image/icon3.jpg"
-						style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
-
-					<!-- 밑에 사진 -->
-					<div
-						style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//Lighthouse.jpg');">
-						<div
-							style="background: rgba(220, 0, 0, .6); position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
-							신청 하기</div>
-					</div>
-				</div>
-			</a>
-			<!-- 여기까지 객체-->
-
-		</div>
-		<!-- 여기까지 Row -->
-
-		
-		
+		<!-- outer 끝 -->
 	</div>
 	
 	<!-- 스크롤 로딩 -->

@@ -1,10 +1,13 @@
 package com.kh.spring.classs.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
 
 @Repository("cDao")
@@ -27,6 +30,24 @@ public class ClassDao {
 	public int insertClassFile(Storage s) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("StorageMapper.insertClassFile",s);
+	}
+
+	// 클래스 리스트 전체 가져오기
+	public ArrayList<Classs> selectClassList() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClasssMapper.selectClassList");
+	}
+
+	// 카테고리 리스트
+	public ArrayList<Category> selectCateList() {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClasssMapper.selectCateList");
+	}
+
+	// 클래스에 맞는 파일 가져오기
+	public ArrayList<Storage> selectFileList(String cNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("StorageMapper.selectFileList",cNo);
 	}
 
 }

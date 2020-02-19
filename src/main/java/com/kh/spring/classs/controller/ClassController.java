@@ -2,6 +2,7 @@ package com.kh.spring.classs.controller;
 
 import java.io.File;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
 
 @Controller
@@ -26,7 +28,24 @@ public class ClassController {
 	// 클래스 리스트 보러감
 	@RequestMapping("ClassList.do")
 	public ModelAndView classList(ModelAndView mv) {
+		ArrayList<Classs> cList = cService.selectClassList();
+		ArrayList<Category> cateList = cService.selectCateList();
+		ArrayList<Storage> fList = new ArrayList<>();
+		
+		for(int i = 0 ; i < cList.size(); i++) {
+			
+			ArrayList<Storage> s = cService.selectFileList(cList.get(i).getcNo());
+			for(int j = 0 ; j < s.size(); j++) {
+				fList.add(s.get(j));
+			}
+		}
+		
+		mv.addObject("cList", cList);
+		mv.addObject("cateList",cateList);
+		mv.addObject("fList",fList);
+		
 		mv.setViewName("classs/classListView");
+
 		return mv;
 	}
 	
@@ -149,6 +168,9 @@ public class ClassController {
 			}
 		}
 		// 사진넣는 부분까지 종료
+		
+		// 사진까지 넣었으면 해당 클래스로 이동해야하지만 아직 만든게없으므로 클래스목로긍로 이동함.
+		mv.setViewName("myClass.do");
 		
 		return mv;
 	}
