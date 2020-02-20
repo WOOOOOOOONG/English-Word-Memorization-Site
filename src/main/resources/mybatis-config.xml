@@ -15,6 +15,7 @@
 		<typeAlias type="com.kh.spring.classs.model.vo.TestVoca" alias="TestVoca"/>
 		<typeAlias type="com.kh.spring.common.model.vo.Storage" alias="Storage"/>
 		<typeAlias type="com.kh.spring.common.model.vo.Category" alias="Category"/>
+		<typeAlias type="com.kh.spring.admin.model.vo.Inquire" alias="Inquire"/>
 	</typeAliases>
 	
 	<mappers>
@@ -23,6 +24,7 @@
 		<mapper resource="mappers/classTest-mapper.xml"/>
 		<mapper resource="mappers/testVoca-mapper.xml"/>
 		<mapper resource="mappers/storage-mapper.xml"/>
+		<mapper resource="mappers/admin-mapper.xml"/>
 	</mappers>
 
 </configuration>

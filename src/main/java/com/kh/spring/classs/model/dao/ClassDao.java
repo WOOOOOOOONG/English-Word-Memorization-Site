@@ -50,4 +50,15 @@ public class ClassDao {
 		return (ArrayList)sqlSession.selectList("StorageMapper.selectFileList",cNo);
 	}
 
+	// 카운트 증가되는 클래스 가져오기
+	public Classs selectClassOneCount(String cNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ClasssMapper.selectClassOne",cNo);
+	}
+
+	// 조회수 증가
+	public int upCount(String cNo) {
+		return sqlSession.update("ClasssMapper.upCount",cNo);
+	}
+
 }

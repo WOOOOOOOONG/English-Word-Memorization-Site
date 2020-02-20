@@ -57,4 +57,11 @@ public class ClassServiceImpl implements ClassService{
 		// TODO Auto-generated method stub
 		return cDao.selectFileList(cNo);
 	}
+
+	// 클래스 하나 찾기, 조회수증가
+	@Override
+	public Classs selectClassOneCount(String cNo) {
+			cDao.upCount(cNo);
+		return cDao.selectClassOneCount(cNo);
+	}
 }
