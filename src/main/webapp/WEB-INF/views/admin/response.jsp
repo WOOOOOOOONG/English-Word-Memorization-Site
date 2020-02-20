@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>	
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,70 +52,124 @@
 						<th>문의 제목</th>
 						<th>등록일</th>
 						<th>답변여부</th>
-						<th>신고된 이름</th>
+						<th>신고된 아이디</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr class="view">
-						<td>1</td>
-						<td>admin</td>
-						<td>임세웅</td>
-						<td>악성유저</td>
-						<td>악성유저 신승환 신고합니다</td>
-						<td>2020-02-11</td>
-						<td><select>
-								<option value="Y" selected>Y</option>
-								<option value="N">N</option>
-						</select></td>
-					</tr>
-					<tr class="inquire">
-						<td colspan="7"><textarea style="width: 100%; height: 200px"
-								placeholder="이 유저는 정말 안되겠습니다. 당장 처리하지 않으면 전 접겠습니다." readonly></textarea>
-						</td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-					</tr>
-					<tr class="answer">
-						<td colspan="7">
-							<div id="summernote"></div>
-						</td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-						<td style="display: none;"></td>
-					</tr>
+					<c:set var="i" value="0"/>
+					<c:forEach var="item" items="${ inquireList }">
+						<c:set var="i" value="${i+1}"/>
+						<tr class="view">
+							<td>${item.iId}</td>
+							<td>${item.inquirerId}</td>
+							<td>임세웅</td> <!-- 이름 따와서 바꾸기 -->
+							<td>${item.type}</td>
+							<td>${item.title}</td>
+							<td>${item.registDate}</td>
+							<td>${item.isAnswer}</td>
+							<td>${item.reportedId}</td>
+						</tr>
+						<tr class="inquire">
+							<td colspan="8"><textarea style="width: 100%; height: 200px"
+									placeholder="${item.content}" readonly></textarea>
+							</td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+							<td style="display: none;"></td>
+						</tr>
+						<!-- 답변이 이미 작성되었으면 보여주기만 하고, 버튼을 '작성' 대신 '삭제'로 바꾼다. -->
+						<c:if test="${item.isAnswer eq 'Y'}">
+							<tr class="answer">
+								<td colspan="8"><textarea style="width: 100%; height: 200px"
+									placeholder="${item.answer}" readonly></textarea>
+								</td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+							</tr>
+							<tr class="answer-button" style="background:none">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<c:url var="responseDelete" value="responseDelete.ad">
+									<c:param name="iId" value="${item.iId}"/>
+								</c:url>
+								<td><button type="button" onclick="location.href='${responseDelete}'">답변 삭제</button></td>
+							</tr>
+						</c:if>
+						<c:if test="${item.isAnswer eq 'N' }">
+							<tr class="answer">
+								<td colspan="8">
+									<div class="summernote" name="note${i}"></div>
+								</td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+								<td style="display: none;"></td>
+							</tr>
+							<tr class="answer-button" style="background:none">
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>						
+								<td><button type="button" onclick="response(${item.iId}, ${i});">답변 등록</button></td>
+							</tr>
+						</c:if>
+					</c:forEach>
 				</tbody>
 			</table>
 
 			<script>
-            $(document).ready(function () {
-                $('#table_id').DataTable({
-                	"ordering":false
-                });
-                
-                $(".inquire").hide();
-                $(".answer").hide();
-                
-	            //content 클래스를 가진 div를 표시/숨김(토글)
-	            $(".view").click(function() {
-	             	$(this).next(".inquire").slideToggle();
-	             	$(this).next(".inquire").next(".answer").slideToggle();
+	            $(document).ready(function () {
+	            	// DataTable 정의
+					$('#table_id').DataTable({
+		            	"ordering":false,
+		            	"pageLength": 40
+		            });
+	            	
+	            	// 문의/답변란 토글 기능
+	                $(".inquire").hide();
+	                $(".answer").hide();
+	                $(".answer-button").hide();
+	                
+		            //content 클래스를 가진 div를 표시/숨김(토글)
+		            $(".view").click(function() {
+		             	$(this).next(".inquire").slideToggle();
+		             	$(this).next(".inquire").next(".answer").slideToggle();
+		             	$(this).next(".inquire").next(".answer").next(".answer-button").slideToggle();
+		            });
+		            
+		            // Summernote 정의
+		            $('.summernote').summernote({
+		                placeholder: "답변 내용을 입력하세요.",
+		                tabsize: 2,
+		                height: 210,
+		                lang: 'ko-KR'
+		            });
 	            });
-	            
-	            $('#summernote').summernote({
-	                placeholder: "답변 내용을 입력하세요.",
-	                tabsize: 2,
-	                height: 210,
-	                lang: 'ko-KR'
-	            });
-            });
-        </script>
+	            function response(iId, i) {
+	            	var text = $($("div[name=note"+i+"]").summernote("code")).text();
+	            	location.href = "http://localhost:8800/spring/response.ad?text="+text+"&iId="+iId;
+	            }
+        	</script>
 		</div>
 	</form>
 </body>

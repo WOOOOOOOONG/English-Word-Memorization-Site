@@ -17,6 +17,30 @@
 	
 	<select id="selectInquireList" parameterType="Inquire" resultMap="inquireResultSet">
 		SELECT *
-		FROM Inquire
+		FROM INQUIRE
 	</select>
+	
+	<select id="selectInquireOne" parameterType="Inquire" resultMap="inquireResultSet">
+		SELECT *
+		FROM INQUIRE
+		WHERE I_ID = #{iId}
+	</select>
+	
+	<!-- <insert id="insertInquire" parameterType="Inquire">
+		INSERT INTO INQUIRE
+		VALUES(#{iId}, #{inquirerId}, #{type}, #{title}, #{content}, #{registDate},
+			#{isAnswer}, #{answer}, #{reportedId})
+	</insert> -->
+	
+	<insert id="insertResponse" parameterType="Inquire">
+		UPDATE INQUIRE
+		SET ANSWER=#{answer}, IS_ANSWER='Y'
+		WHERE I_ID=#{iId}
+	</insert>
+	
+	<update id="deleteResponse" parameterType="Inquire">
+		UPDATE INQUIRE
+		SET ANSWER=NULL, IS_ANSWER='N'
+		WHERE I_ID=#{iId}
+	</update>
 </mapper>

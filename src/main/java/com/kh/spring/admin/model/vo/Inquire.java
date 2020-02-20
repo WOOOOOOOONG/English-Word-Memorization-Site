@@ -10,12 +10,13 @@ public class Inquire {
 	private String content;
 	private Date registDate;
 	private String isAnswer;
-	private String reporterId;
+	private String answer;
+	private String reportedId;
 	
 	public Inquire() {}
 
 	public Inquire(int iId, String inquirerId, String type, String title, String content, Date registDate,
-			String isAnswer, String reporterId) {
+			String isAnswer, String answer, String reportedId) {
 		super();
 		this.iId = iId;
 		this.inquirerId = inquirerId;
@@ -24,7 +25,8 @@ public class Inquire {
 		this.content = content;
 		this.registDate = registDate;
 		this.isAnswer = isAnswer;
-		this.reporterId = reporterId;
+		this.answer = answer;
+		this.reportedId = reportedId;
 	}
 
 	public int getiId() {
@@ -82,19 +84,27 @@ public class Inquire {
 	public void setIsAnswer(String isAnswer) {
 		this.isAnswer = isAnswer;
 	}
-
-	public String getReporterId() {
-		return reporterId;
+	
+	public String getAnswer() {
+		return answer;
 	}
 
-	public void setReporterId(String reporterId) {
-		this.reporterId = reporterId;
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	public String getReportedId() {
+		return reportedId;
+	}
+
+	public void setReporterId(String reportedId) {
+		this.reportedId = reportedId;
 	}
 
 	@Override
 	public String toString() {
 		return "Inquire [iId=" + iId + ", inquirerId=" + inquirerId + ", type=" + type + ", title=" + title
-				+ ", content=" + content + ", registDate=" + registDate + ", isAnswer=" + isAnswer + ", reporterId="
-				+ reporterId + "]";
+				+ ", content=" + content + ", registDate=" + registDate + ", isAnswer=" + isAnswer + ", answer="
+				+ answer + ", reporterId=" + reportedId + "]";
 	}
 }

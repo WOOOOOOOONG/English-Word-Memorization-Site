@@ -16,4 +16,16 @@ public class AdminDao {
 	public ArrayList<Inquire> selectInquireList() {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectInquireList");
 	}
+
+	public Inquire selectInquireOne(int iId) {
+		return sqlSession.selectOne("adminMapper.selectInquireOne", iId);
+	}
+
+	public int insertResponse(Inquire inq) {
+		return sqlSession.insert("adminMapper.insertResponse", inq);
+	}
+
+	public int deleteResponse(int iId) {
+		return sqlSession.update("adminMapper.deleteResponse", iId);
+	}
 }
