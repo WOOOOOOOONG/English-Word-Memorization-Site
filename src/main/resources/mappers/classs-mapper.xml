@@ -45,4 +45,14 @@
 		SELECT *
 		FROM CATEGORY
 	</select>
+	<select id="selectClassOne" resultMap="classResultSet">
+		SELECT *
+		FROM CLASSS
+		WHERE CLASS_NO = #{cNo}
+	</select>
+	<update id="upCount">
+		UPDATE CLASSS
+		SET CLASS_COUNT = CLASS_COUNT + 1
+		WHERE CLASS_NO = #{cNo}
+	</update>
 </mapper>

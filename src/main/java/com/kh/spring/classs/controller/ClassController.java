@@ -3,7 +3,10 @@ package com.kh.spring.classs.controller;
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -51,8 +54,43 @@ public class ClassController {
 	
 	// 클래스 상세정보 보러가기
 	@RequestMapping("classdetail.do")
-	public ModelAndView classDetail(ModelAndView mv) {
+	public ModelAndView classDetail(ModelAndView mv,String cNo) {
+		Classs classs = cService.selectClassOneCount(cNo);
+		ArrayList<Storage> fList = new ArrayList<>();
+		ArrayList<Category> cateList = cService.selectCateList();
+		
+		String img1 = "main1.jpg";
+		String img2 = "main1.jpg";
+		String img3 = "main1.jpg";
+		
+		ArrayList<Storage> s = cService.selectFileList(cNo);
+		if(!s.isEmpty()) {
+			for(int j = 0 ; j < s.size(); j++) {
+				fList.add(s.get(j));
+			}
+		}
+		
+		
+		if(!fList.isEmpty()) {
+			img1 = fList.get(0).getChangeName();
+			img2 = fList.get(1).getChangeName();
+			img3 = fList.get(2).getChangeName();
+		}
+		
+		
+		
+
+		
+		
+		
+		mv.addObject("classs",classs);
+		mv.addObject("img1",img1);
+		mv.addObject("img2",img2);
+		mv.addObject("img3",img3);
+		mv.addObject("cateList",cateList);
+		
 		mv.setViewName("classs/classDetailView");
+		
 		return mv;
 	}
 	
@@ -170,7 +208,8 @@ public class ClassController {
 		// 사진넣는 부분까지 종료
 		
 		// 사진까지 넣었으면 해당 클래스로 이동해야하지만 아직 만든게없으므로 클래스목로긍로 이동함.
-		mv.setViewName("myClass.do");
+		//mv.setViewName("myClass.do");
+		mv.setViewName("ClassList.do");
 		
 		return mv;
 	}
@@ -204,6 +243,37 @@ public class ClassController {
 
 		return renameFileName;
 
+	}
+	
+	// 검색 메소드
+	@RequestMapping("searchClass.do")
+	public ModelAndView searchClass (ModelAndView mv, @RequestParam(value="categoryList", defaultValue="cate") String categoryList,
+				@RequestParam(value="levelList", defaultValue="level") String clevelList,
+				@RequestParam(value="onoffList", defaultValue="onoff") String onoff) {
+		
+		String[] cateList = categoryList.split(",");
+		List<String> searchCate = new ArrayList<String>();
+		Collections.addAll(searchCate,cateList);
+		searchCate.remove("20");
+		System.out.println(searchCate);
+		
+		String[] levelList = clevelList.split(",");
+		List<String> searchLevel = new ArrayList<String>();
+		Collections.addAll(searchLevel, levelList);
+		if(searchLevel.size() > 1) {
+			searchLevel.remove("all");
+		}
+		System.out.println(searchLevel);
+		
+		String[] onoffList = onoff.split(",");
+		List<String> searchOnoff = new ArrayList<String>();
+		Collections.addAll(searchOnoff, onoffList);
+		if(searchOnoff.size() > 1) {
+			searchOnoff.remove("any");
+		}
+		System.out.println(searchOnoff);
+		
+		return mv;
 	}
 
 }
