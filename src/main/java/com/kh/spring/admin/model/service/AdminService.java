@@ -14,6 +14,18 @@ public class AdminService {
 	private AdminDao aDao;
 
 	public ArrayList<Inquire> selectInquireList() {
-		return new AdminDao().selectInquireList();
+		return aDao.selectInquireList();
+	}
+
+	public Inquire selectInquireOne(int iId) {
+		return aDao.selectInquireOne(iId);
+	}
+
+	public int insertResponse(Inquire inq) {
+		return aDao.insertResponse(inq);
+	}
+
+	public int deleteResponse(int iId) {
+		return aDao.deleteResponse(iId);
 	}
 }

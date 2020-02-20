@@ -35,19 +35,9 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/response.ad")
-	public String viewAdminInquire() {
-		return "admin/response";
-	}
-	
 	@RequestMapping(value="/inquire-list.ad")
 	public String viewInquireList() {
 		return "admin/inquire-list";
-	}
-	
-	@RequestMapping(value="/inquire.ad")
-	public String viewResponse() {
-		return "admin/inquire";
 	}
 	
 	@RequestMapping(value="/memberManage.ad")
