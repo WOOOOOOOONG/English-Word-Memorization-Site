@@ -22,7 +22,7 @@
 	<jsp:include page="../common/menubar.jsp" />
 	<jsp:include page="../common/left-menubar.jsp" />
 
-	<form>
+	<form action="inquire.ad" method="post">
 		<div id="content" class="row">
 			<div class="col-md-10">
 				<div class="box box-info">
@@ -34,7 +34,8 @@
 										<label for="job-tipe" class="control-label col-md-2"
 											style="font-weight: bold">유형</label>
 										<div class="col-md-10">
-											<select name="Job[tipe]" class="form-control" id="job-tipe">
+											<select name="Job[tipe]" class="form-control" id="job-tipe"
+												name="type">
 												<option value="0">계정</option>
 												<option value="1">시스템</option>
 												<option value="2">사용자</option>
@@ -55,7 +56,7 @@
 											style="font-weight: bold">제목</label>
 										<div class="col-md-10">
 											<input type="text" autocomplete="off" placeholder="제목을 입력하세요"
-												name="input" class="form-control" id="input-title">
+												name="title" class="form-control" id="input-title">
 										</div>
 										<div class="col-md-offset-2 col-md-10">
 											<div class="hint-block" style="font-size: 12px">제목은 변경할
@@ -125,11 +126,18 @@
 											[ "misc", [ "codeview" ] ] ],
 									"placeholder" : "문의 내용을 입력하세요"
 								});
+				
+				function response() {
+	            	var text = $($("#summernote").summernote("code")).text();
+	            	location.href = "http://localhost:8800/spring/inquire.ad?text="+text;
+	            }
 			</script>
 		</div>
 		<div>
-		<button type="button" class="btn btn-outline-success" style="position: absolute; margin-left: 580px;">Success</button>
-		<button type="button" class="btn btn-outline-danger" style="position: absolute; margin-left: 700px;">Danger</button>
+			<button type="button" class="btn btn-outline-success"
+				style="position: absolute; margin-left: 580px;" onclick="response();">Success</button>
+			<button type="button" class="btn btn-outline-danger"
+				style="position: absolute; margin-left: 700px;">Danger</button>
 		</div>
 	</form>
 </body>

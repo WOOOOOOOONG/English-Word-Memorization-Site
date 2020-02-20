@@ -480,8 +480,8 @@
         <p></p> -->
 
         <div class="wrapper wra4">
-       		<c:url var="admin1" value="inquire.ad"/>
-			<button onclick="location.href='${ admin1 }'">inquire.ad</button>
+       		<c:url var="admin2" value="selectInquireList.ad"/>
+			<button onclick="location.href='${ admin2 }'">문의사항</button>
         
             <div class="message">
                 <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
