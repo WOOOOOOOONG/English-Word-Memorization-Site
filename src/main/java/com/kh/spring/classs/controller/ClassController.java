@@ -77,12 +77,6 @@ public class ClassController {
 			img3 = fList.get(2).getChangeName();
 		}
 		
-		
-		
-
-		
-		
-		
 		mv.addObject("classs",classs);
 		mv.addObject("img1",img1);
 		mv.addObject("img2",img2);
@@ -103,7 +97,8 @@ public class ClassController {
 	
 	// 맞는 클래스 보러가기
 	@RequestMapping("myClass.do")
-	public ModelAndView classDetailView(ModelAndView mv) {
+	public ModelAndView classDetailView(ModelAndView mv,String cNo) {
+		mv.addObject("cNo",cNo);
 		mv.setViewName("classs/myClassView");
 		return mv;
 	}
@@ -255,23 +250,131 @@ public class ClassController {
 		List<String> searchCate = new ArrayList<String>();
 		Collections.addAll(searchCate,cateList);
 		searchCate.remove("20");
-		System.out.println(searchCate);
+		System.out.println("찾는 카테고리 : " + searchCate);
 		
 		String[] levelList = clevelList.split(",");
 		List<String> searchLevel = new ArrayList<String>();
 		Collections.addAll(searchLevel, levelList);
+		String containLevel = "";
 		if(searchLevel.size() > 1) {
 			searchLevel.remove("all");
+			for(int i = 0; i < searchLevel.size(); i++) {
+				containLevel += searchLevel.get(i);
+			}
 		}
-		System.out.println(searchLevel);
+		System.out.println("찾는 레벨 : " + searchLevel);
 		
 		String[] onoffList = onoff.split(",");
 		List<String> searchOnoff = new ArrayList<String>();
 		Collections.addAll(searchOnoff, onoffList);
+		String containOnOff = "";
 		if(searchOnoff.size() > 1) {
 			searchOnoff.remove("any");
+			for(int i = 0 ; i < searchOnoff.size(); i++) {
+				containOnOff += searchOnoff.get(i);
+			}
 		}
-		System.out.println(searchOnoff);
+		System.out.println("찾는 온오프 : " +  searchOnoff);
+		
+		ArrayList<Classs> searchClassList = new ArrayList<>(); 
+		// 카테고리로 검색 
+		for(int i = 0; i < cateList.length; i++) {
+			ArrayList<Classs> reClassList = cService.searchClassList(cateList[i]); 
+			for(int j = 0; j < reClassList.size(); j++) {
+				searchClassList.add(reClassList.get(j));
+			}
+		}
+		System.out.println("카테고리정렬 : " + searchClassList);
+		
+		// 레벨
+		ArrayList<Classs> searchClassList2 = new ArrayList<>(); 
+		
+		if(!searchClassList.isEmpty() && searchLevel.get(0).equals("all")) {
+			System.out.println("클래스는 찾았으나 레벨별 정리는 없음");
+		}else if(containLevel.contains("Beginner")){
+			for(int i = 0; i < searchClassList.size(); i++) {
+				if(searchClassList.get(i).getLevel().equals("Beginner")) {
+					searchClassList2.add(searchClassList.get(i));
+				}
+			}
+		}else if(containLevel.contains("Normal")){
+			for(int i = 0; i < searchClassList.size(); i++) {
+				if(searchClassList.get(i).getLevel().equals("Normal")) {
+					searchClassList2.add(searchClassList.get(i));
+				}
+			}
+		}else {
+			for(int i = 0; i < searchClassList.size(); i++) {
+				if(searchClassList.get(i).getLevel().equals("Expert")) {
+					searchClassList2.add(searchClassList.get(i));
+				}
+			}
+		}
+		
+		ArrayList<Classs> searchClassList3 = new ArrayList<>();
+		// 온라인 오프라인
+		// 레벨별 정렬을 안했다면.
+		if(searchOnoff.get(0).equals("any")) {
+			if(searchClassList2.isEmpty()) {
+				mv.addObject("cList",searchClassList);
+			}else {
+				mv.addObject("cList",searchClassList2);
+			}
+			System.out.println("레벨 정렬안하고 온오프 아무거나 상관없다면.");
+			
+			// 온라인 오프라인정렬을 클릭했으며 레벨별 정렬은 하지않았을때
+		}else if(!searchOnoff.get(0).equals("any") && searchClassList2.isEmpty()) {
+			if(containOnOff.contains("on")) {
+				for(int i = 0 ; i < searchClassList.size(); i++) {
+					if(searchClassList.get(i).getLocal() == null) {
+						searchClassList2.add(searchClassList.get(i));
+					}
+				}
+			}
+			if(containOnOff.contains("off")) {
+				for(int i = 0 ; i < searchClassList.size(); i++) {
+					if(searchClassList.get(i).getLocal() != null) {
+						searchClassList2.add(searchClassList.get(i));
+					}
+				}
+			}
+			mv.addObject("cList",searchClassList2);
+			// 온라인 오프라인정렬을 클릭했으며 레벨별 정렬을 하였을때
+		}else if(!searchOnoff.get(0).equals("any") && !searchClassList2.isEmpty()) {
+			if(containOnOff.contains("on")) {
+				for(int i = 0 ; i < searchClassList2.size(); i++) {
+					if(searchClassList2.get(i).getLocal() == null) {
+						searchClassList3.add(searchClassList2.get(i));
+					}
+				}
+			}
+			if(containOnOff.contains("off")) {
+				for(int i = 0 ; i < searchClassList2.size(); i++) {
+					if(searchClassList2.get(i).getLocal() != null) {
+						searchClassList3.add(searchClassList2.get(i));
+					}
+				}
+			}
+			mv.addObject("cList",searchClassList3);
+		}
+		
+		// 정렬 종료 
+		
+		ArrayList<Category> cateList2 = cService.selectCateList();
+		ArrayList<Storage> fList = new ArrayList<>();
+		
+		for(int i = 0 ; i < searchClassList.size(); i++) {
+			
+			ArrayList<Storage> s = cService.selectFileList(searchClassList.get(i).getcNo());
+			for(int j = 0 ; j < s.size(); j++) {
+				fList.add(s.get(j));
+			}
+		}
+		
+		
+		mv.addObject("cateList",cateList2);
+		mv.addObject("fList",fList);
+		mv.setViewName("classs/classListView");
 		
 		return mv;
 	}

@@ -55,4 +55,10 @@
 		SET CLASS_COUNT = CLASS_COUNT + 1
 		WHERE CLASS_NO = #{cNo}
 	</update>
+	<select id="searchClassList" resultMap="classResultSet">
+		SELECT *
+		FROM CLASSS , CATEGORY
+		WHERE CLASSS.C_ID = CATEGORY.C_ID
+		AND NAME = #{cateList}
+	</select>
 </mapper>

@@ -251,7 +251,8 @@
 			<c:forEach var="j" begin="1" end="3">
 				<c:if test="${ size != lasize }"> 
 						<!-- 객체 하나 !! -->
-						<a style="display: inline-block; text-decoration: none; margin: auto;" href="classdetail.do?cNo=${ cList.get(lasize).cNo }">
+						<%-- <a style="display: inline-block; text-decoration: none; margin: auto;" href="classdetail.do?cNo=${ cList.get(lasize).cNo }"> --%>
+						<a style="display: inline-block; text-decoration: none; margin: auto;" href="myClass.do?cNo=${ cList.get(lasize).cNo }">
 							<div style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
 								<div style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
 			
@@ -321,7 +322,7 @@
 								</c:forEach>
 								
 								<c:if test="${ imgFlag }">
-									<div style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/image//main1.jpg');"></div>
+									<div style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/classImage//main1.jpg');"></div>
 									<c:set var="imgFlag" value="flase"/>
 								</c:if>
 								<c:set var="imgFlag" value="true"/>

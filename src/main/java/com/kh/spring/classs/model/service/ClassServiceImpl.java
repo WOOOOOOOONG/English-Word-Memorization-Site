@@ -64,4 +64,11 @@ public class ClassServiceImpl implements ClassService{
 			cDao.upCount(cNo);
 		return cDao.selectClassOneCount(cNo);
 	}
+
+	// 카테고리로 클래스 찾기
+	@Override
+	public ArrayList<Classs> searchClassList(String cateList) {
+		// TODO Auto-generated method stub
+		return cDao.searchClassList(cateList);
+	}
 }

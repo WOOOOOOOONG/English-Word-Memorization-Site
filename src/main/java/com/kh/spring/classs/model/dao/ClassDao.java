@@ -1,6 +1,7 @@
 package com.kh.spring.classs.model.dao;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +60,13 @@ public class ClassDao {
 	// 조회수 증가
 	public int upCount(String cNo) {
 		return sqlSession.update("ClasssMapper.upCount",cNo);
+	}
+
+	// 카테고리로 클래스 찾기
+	public ArrayList<Classs> searchClassList(String cateList) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClasssMapper.searchClassList",cateList);
+		
 	}
 
 }
