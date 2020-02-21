@@ -17,6 +17,7 @@
 		<result property="nickname" column="NICKNAME"/>
 	</resultMap>
 	
+	
 	<select id="selectList" parameterType="Member" resultMap="memberResultSet">
 		SELECT *
 		FROM Member
@@ -33,4 +34,35 @@
 		</if>
 		WHERE MID=#{mId}
 	</update>
+	<!-- 아이디 중복체크 -->
+	<select id="idCheck" parameterType="string" resultType="int">
+		select count(*) from member where mid=#{mId}
+	</select>
+	<!-- 아이디 찾기 -->
+	<select id="findMemberId" parameterType="string" resultType="string">
+		select mid from member where email=#{email}
+	</select>
+	<!-- 회원가입 -->
+	<insert id="insertMember" parameterType="Member">
+		INSERT INTO MEMBER
+		VALUES(
+		#{mId}, #{pwd}, #{name}, #{birthDate}, #{email}, 
+		#{address}, sysdate,sysdate,default,'자기소개입력', 'nickname')
+	</insert>
+	<!-- 이메일찾기 -->
+	<select id="findEmail" parameterType="string" resultType="string">
+		select email from member
+		where mid=#{mId}
+	</select>
+	<!-- 비밀번호 변경 -->
+	<update id="changeMemberPwd" parameterType="Member">
+		update Member set PWD=#{pwd} where mid=#{mid}
+	</update>
+	
+	<select id="selectMember" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE mID=#{mId}
+		AND STATUS='Y'
+	</select>
 </mapper>

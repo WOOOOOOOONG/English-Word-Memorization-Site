@@ -6,19 +6,20 @@ public class Member {
 	private String mId;
 	private String pwd;
 	private String name;
-	private Date birthDate;
+	private String birthDate;
 	private String email;
 	private String address;
-	private String enrollDate;
-	private String updateDate;
+	private Date enrollDate;
+	private Date updateDate;
 	private String userStatus;
 	private String introduce;
 	private String nickname;
 	
+	
 	public Member() {}
 
-	public Member(String mId, String pwd, String name, Date birthDate, String email, String address, String enrollDate,
-			String updateDate, String userStatus, String introduce, String nickname) {
+	public Member(String mId, String pwd, String name, String birthDate, String email, String address, Date enrollDate,
+			Date updateDate, String userStatus, String introduce, String nickname) {
 		super();
 		this.mId = mId;
 		this.pwd = pwd;
@@ -57,11 +58,11 @@ public class Member {
 		this.name = name;
 	}
 
-	public Date getBirthDate() {
+	public String getBirthDate() {
 		return birthDate;
 	}
 
-	public void setBirthDate(Date birthDate) {
+	public void setBirthDate(String birthDate) {
 		this.birthDate = birthDate;
 	}
 
@@ -81,19 +82,19 @@ public class Member {
 		this.address = address;
 	}
 
-	public String getEnrollDate() {
+	public Date getEnrollDate() {
 		return enrollDate;
 	}
 
-	public void setEnrollDate(String enrollDate) {
+	public void setEnrollDate(Date enrollDate) {
 		this.enrollDate = enrollDate;
 	}
 
-	public String getUpdateDate() {
+	public Date getUpdateDate() {
 		return updateDate;
 	}
 
-	public void setUpdateDate(String updateDate) {
+	public void setUpdateDate(Date updateDate) {
 		this.updateDate = updateDate;
 	}
 

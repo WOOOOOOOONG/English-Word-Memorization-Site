@@ -15,7 +15,6 @@
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
 
-
 <link
 	href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
 	rel="stylesheet">
@@ -155,87 +154,98 @@ body :-ms-input-placeholder {
 #loginform button:hover {
 	background-color: #f5f7f9;
 }
+
 .bg-bubbles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 1;
 }
+
 .bg-bubbles li {
-  position: absolute;
-  list-style: none;
-  display: block;
-  width: 40px;
-  height: 40px;
-  background-color: rgba(255, 255, 255, 0.15);
-  bottom: -160px;
-  -webkit-animation: square 25s infinite;
-  animation: square 25s infinite;
-  -webkit-transition-timing-function: linear;
-  transition-timing-function: linear;
+	position: absolute;
+	list-style: none;
+	display: block;
+	width: 40px;
+	height: 40px;
+	background-color: rgba(255, 255, 255, 0.15);
+	bottom: -160px;
+	-webkit-animation: square 25s infinite;
+	animation: square 25s infinite;
+	-webkit-transition-timing-function: linear;
+	transition-timing-function: linear;
 }
+
 .bg-bubbles li:nth-child(1) {
-  left: 10%;
+	left: 10%;
 }
+
 .bg-bubbles li:nth-child(2) {
-  left: 20%;
-  width: 80px;
-  height: 80px;
-  animation-delay: 2s;
-  animation-duration: 17s;
+	left: 20%;
+	width: 80px;
+	height: 80px;
+	animation-delay: 2s;
+	animation-duration: 17s;
 }
+
 .bg-bubbles li:nth-child(3) {
-  left: 25%;
-  animation-delay: 4s;
+	left: 25%;
+	animation-delay: 4s;
 }
+
 .bg-bubbles li:nth-child(4) {
-  left: 40%;
-  width: 60px;
-  height: 60px;
-  animation-duration: 22s;
-  background-color: rgba(255, 255, 255, 0.25);
+	left: 40%;
+	width: 60px;
+	height: 60px;
+	animation-duration: 22s;
+	background-color: rgba(255, 255, 255, 0.25);
 }
+
 .bg-bubbles li:nth-child(5) {
-  left: 70%;
+	left: 70%;
 }
+
 .bg-bubbles li:nth-child(6) {
-  left: 80%;
-  width: 120px;
-  height: 120px;
-  animation-delay: 3s;
-  background-color: rgba(255, 255, 255, 0.2);
+	left: 80%;
+	width: 120px;
+	height: 120px;
+	animation-delay: 3s;
+	background-color: rgba(255, 255, 255, 0.2);
 }
+
 .bg-bubbles li:nth-child(7) {
-  left: 32%;
-  width: 160px;
-  height: 160px;
-  animation-delay: 7s;
+	left: 32%;
+	width: 160px;
+	height: 160px;
+	animation-delay: 7s;
 }
+
 .bg-bubbles li:nth-child(8) {
-  left: 55%;
-  width: 20px;
-  height: 20px;
-  animation-delay: 15s;
-  animation-duration: 40s;
-  
+	left: 55%;
+	width: 20px;
+	height: 20px;
+	animation-delay: 15s;
+	animation-duration: 40s;
 }
+
 .bg-bubbles li:nth-child(9) {
-  left: 25%;
-  width: 10px;
-  height: 10px;
-  animation-delay: 2s;
-  animation-duration: 40s;
-  background-color: rgba(255, 255, 255, 0.3);
+	left: 25%;
+	width: 10px;
+	height: 10px;
+	animation-delay: 2s;
+	animation-duration: 40s;
+	background-color: rgba(255, 255, 255, 0.3);
 }
+
 .bg-bubbles li:nth-child(10) {
-  left: 90%;
-  width: 160px;
-  height: 160px;
-  animation-delay: 11s;
+	left: 90%;
+	width: 160px;
+	height: 160px;
+	animation-delay: 11s;
 }
-@-webkit-keyframes square {
+	@-webkit-keyframes square {
   0% {
     transform: translateY(0);
   }
@@ -251,7 +261,8 @@ body :-ms-input-placeholder {
     transform: translateY(-700px) rotate(600deg);
   }
 }
-div > button {
+
+div>button {
 	appearance: none;
 	outline: 0;
 	background-color: white;
@@ -312,8 +323,9 @@ div > button {
 	border-top-style: solid;
 	border-top-width: 1px;
 }
-.inputdivarea>input::placeholder{
-	color:rgb(206, 212, 218);
+
+.inputdivarea>input::placeholder {
+	color: rgb(206, 212, 218);
 }
 
 #joinMemberbtn {
@@ -324,25 +336,43 @@ div > button {
 	border: 0.5px double whitesmoke;
 	text-align: center;
 	border-radius: 5px;
-	bottom: 0px;
+	bottom: 10px;
 }
 
 .modal-header {
 	width: 100%;
 	background: #cff0da;
 }
+
+.close {
+	width: 60px;
+}
+
+.modal-body {
+	width: 90%;
+	margin-left: 5%;
+}
 </style>
 </head>
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
+	<c:if test="${ msg != null }">
+		<script>
+		$(function(){
+			alert('${msg}');
+		});
+			
+		</script>
+	</c:if>
 	<div class="wrapper">
 		<div class="container">
 			<h1 style="color: white;">Welcome</h1>
 
-			<form id="loginform" class="form">
-				<input type="text" placeholder="Username"> <input
-					type="password" placeholder="Password">
+			<form id="loginform" class="form" method="post" 
+			action='${contextPath}/Memberlogin.me'>
+				<input type="text" id="loginmId" placeholder="Username"> 
+				<input type="password" id="loginpwd" placeholder="Password">
 				<button type="submit" id="login-button">Login</button>
 			</form>
 			<div id="dd"
@@ -350,19 +380,17 @@ div > button {
 				처음 방문하시는 건가요?
 				<button type="button" id="newuserbtn" data-toggle="modal"
 					data-target="#newMembermodal">회원가입</button>
-				<br>
-				<br> 아이디를 찾고계시는군요
+				<br> <br> 아이디를 찾고계시는군요
 				<button type="button" id="idcheckbtn" data-toggle="modal"
 					data-target="#findmyiddiv">아이디찾기</button>
-				<br>
-				<br> 비밀번호를 찾으시나봐요
+				<br> <br> 비밀번호를 찾으시나봐요
 				<button type="button" id="pwddcheckbtn" data-toggle="modal"
 					data-target="#findmypwddiv">비밀번호찾기</button>
 
 			</div>
 
 		</div>
-
+	<!-- 버블이 방울방울 ㅎ -->
 		<ul class="bg-bubbles">
 			<li></li>
 			<li></li>
@@ -390,20 +418,18 @@ div > button {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body"
-					style="width: 90%; margin-left: 5%; height: 750px;">
+				<div class="modal-body" style="height: 700px;">
 					<form id="insertMemberForm" method="post"
-						onsubmit="return insertcheck();"
-						action='<%=request.getContextPath()%>/insert.me'>
+						onsubmit="return insertcheck();" action='${contextPath}/insert.me'>
 						<div id="signArea">
 							<div class="textdivarea">아이디</div>
 							<div class="inputdivarea">
-								<input type="text" name="userId" required>
+								<input type="text" name="mId" required>
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">비밀번호</div>
 							<div class="inputdivarea">
-								<input type="password" name="userPwd" required>
+								<input type="password" name="pwd" required>
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">비밀번호 확인</div>
@@ -413,33 +439,36 @@ div > button {
 							<div class="commentarea"></div>
 							<div class="textdivarea">이름</div>
 							<div class="inputdivarea">
-								<input type="text" name="userName" required>
+								<input type="text" name="name" required>
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">이메일</div>
 							<div class="inputdivarea">
-								<input type="email" id="userEmail" name="userEmail" required
+								<input type="email" id="userEmail" name="email" required
 									style="width: 68.9%;"> <input type="button"
 									id="checkemailbtn" class="btn btn-success btn-sm"
-									style="width: 30%;" value="인증" >
+									style="width: 30%;" value="인증">
 								<button id="hiddenemailbtn" type="button" data-toggle="modal"
-									data-target="#checkemailen" style="display:none;"></button>
+									data-target="#checkemailen" style="display: none;"></button>
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">생년월일</div>
 							<div class="inputdivarea">
-								<input type="text" name="userBirth" placeholder="ex:19750524"
+								<input type="text" name="birthDate" placeholder="ex:19750524"
 									required>
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">주소</div>
 							<div class="inputdivarea">
-								<input type="text" id="postcode" style="width: 68.9%;"placeholder="우편번호">
-								 <input type="button"class="btn btn-success btn-sm"	style="width: 30%; margin-bottom: 3px;"
+								<input type="text" id="postcode" name="add1"
+									style="width: 68.9%;" placeholder="우편번호"> <input
+									type="button" class="btn btn-success btn-sm"
+									style="width: 30%; margin-bottom: 3px;"
 									onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-								<input type="text" id="address" style="margin-bottom: 3px;"
-									placeholder="주소"><br>
-									 <input type="text"	id="detailAddress" placeholder="상세주소">
+								<input type="text" id="address" name="add2"
+									style="margin-bottom: 3px;" placeholder="주소"><br>
+								<input type="text" name="add3" id="detailAddress"
+									placeholder="상세주소">
 
 							</div>
 
@@ -447,7 +476,7 @@ div > button {
 								src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 							<script>
                             $("#checkemailbtn").click(function(){
-                                $("#newMembermodal").css("opacity",0.8);
+                                
                                 
                                 var code = "";
                                 for(var i=0; i<6; i++ ){
@@ -474,6 +503,7 @@ div > button {
 	                    					$("#answercode").val(code);
 	                    					$("#hiddenemailbtn").click();
 	                    					StartClock();
+	                    					$("#newMembermodal").css("opacity",0.8);
 	                    				},error:function(e){
 	                    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 	                    				}
@@ -533,12 +563,12 @@ div > button {
                                     }
                                 }).open();
                             }
-                            var oldmin = 2;
+                            var oldmin = 4;
                             var oldsec = 60;
                             var timerId = null;
                             function setTime(){
-                            	oldmin =2;
-                            	oldsec= 60;
+                            	oldmin=4;
+                            	oldsec=60;
                             }
                             function PrintTime() {
 								
@@ -552,8 +582,8 @@ div > button {
                             		$("#checkemailcode").attr('disabled', true);
                             	}
                             	
-								$("#trymin").html(oldmin);
-								$("#trysec").html(oldsec);
+								$(".trymin").html(oldmin);
+								$(".trysec").html(oldsec); 
                             }
 
                             function StartClock() {
@@ -565,6 +595,10 @@ div > button {
                             	setTime();
                             	$("#checkemailbtn").click();
                             });
+                            $("#retryemailcode2").click(function(){
+                            	setTime();
+                            	$("#checkemailbtn2").click();
+                            });
                         </script>
 
 							<button type="submit" id="joinMemberbtn">가입하기</button>
@@ -574,6 +608,81 @@ div > button {
 			</div>
 		</div>
 	</div>
+	<script>
+	$(function(){
+		var useable = false;
+		// 비밀번호 일치여부
+		$("#insertMemberForm input[name=userPwdCk]").focusin(function(){
+			$(this).focusout(function(){
+				if($("#insertMemberForm input[name=pwd]").val() != $("#insertMemberForm input[name=userPwdCk]").val()){
+					$("#insertMemberForm input[name=userPwdCk]").parent().next().html("비밀번호가 일치하지 않습니다.");
+				}else{
+					$("#insertMemberForm input[name=userPwdCk]").parent().next().html("");
+				}
+			});
+		});
+		// 아이디 중복검사
+		$("#insertMemberForm input[name=mId]").focusin(function(){
+			$(this).focusout(function(){
+				var mId = $(this);
+				
+				if(mId.val().length > 3){
+					$(this).parent().next().html("");
+					if(!useable){
+						useable=true;
+					$.ajax({
+						url : "idCheck.ck",
+						data : {mId:mId.val()},
+						type : "post",
+						success : function(data){
+							
+							if(data=="fail"){
+								$("#insertMemberForm input[name=mId]").parent().next().html("중복된 아이디입니다").css("color","red");
+								mId.focus();
+								useable=false;
+							}else{
+								if(confirm("사용 가능한 아이디입니다 사용하시겠습니까?")){
+									$(this).parent().next().html("");
+									useable=true;
+									mId.prop("readonly",true);
+									mId.css("background","lightgray");
+								}else{
+									mId.val("");
+								}
+								
+							}
+						}, error : function(){
+							console.log("서버 통신 안됨");
+						}
+						
+					});}
+				}else{
+					$(this).parent().next().html("아이디는 4글자 이상이여야 합니다.");
+				}
+			});
+		});
+	});
+	// 회원가입 사전검사
+	function insertcheck(){
+		var check = $("#insertMemberForm > #signArea > .commentarea");
+		//var check = $("#insertMemberForm .commentarea");
+		 for(var i =0; i<8; i++){
+			if(check[i].innerHTML.length >0){
+				console.log(check[i].innerHTML);
+				check[i].focus();
+				return false;
+			}
+		} 
+
+		 if($("#userEmail").attr("readonly")!='readonly'){
+			 alert("이메일 인증을 해주세요");
+			 return false;
+		 }else{ 
+			return true;
+		 }
+	}
+	</script>
+
 	<!-- 이메일 인증 모달 -->
 	<div class="modal fade" id="checkemailen" data-backdrop="static"
 		tabindex="-2" role="dialog" aria-labelledby="staticBackdropLabel"
@@ -582,22 +691,25 @@ div > button {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel"
-						style="margin-left: 45%;">이메일 인증</h5>
-					<button id="emailclosebtn"type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
+						style="margin-left: 37%;">이메일 인증</h5>
+					<button id="emailclosebtn" type="button" class="close"
+						data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" style="width: 90%;">
-				<input type="text" class="form-control" id="emailcode" style="width:40%; float:left;"
-				 placeholder="인증코드를 입력해주세요" maxlength="6">
-				
-				<button id="checkemailcode" class="btn btn-outline-success" style="width:25%;margin-right:2.5%; margin-left:2.5%;">인증</button>
-				<button id="retryemailcode" class="btn btn-outline-danger" style="width:25%;">재전송</button>
-				<br>
-				<span style="color:red; width:10%;"id="trymin">03</span>:
-				<span style="color:red; width:10%;"id="trysec">00</span>
-				<input id="answercode"type="text" style="display:none;">
+				<div class="modal-body">
+					<input type="text" class="form-control" id="emailcode"
+						style="width: 49%; float: left;" placeholder="인증코드를 입력해주세요"
+						maxlength="6">
+
+					<button id="checkemailcode" class="btn btn-outline-success"
+						style="width: 24%; margin-right: 0.5%; margin-left: 0.5%;">인증</button>
+					<button id="retryemailcode" class="btn btn-outline-danger"
+						style="width: 24%;">재전송</button>
+					<br> <span style="color: red; width: 10%; margin-left: 3%;"
+						class="trymin">03</span>: <span style="color: red; width: 10%;"
+						class="trysec">00</span> 
+						<input id="answercode" type="text"style="display: none;">
 				</div>
 			</div>
 		</div>
@@ -609,13 +721,15 @@ div > button {
 				$("#userEmail").attr("readonly",true);
 				$("#checkemailbtn").attr('disabled', true);
 				$("#emailclosebtn").click();
+			}else{
+				alert("인증번호가 일치하지않습니다.");
 			}
 		});
 		$("#emailclosebtn").click(function(){
 			$("#newMembermodal").css("opacity",1);
 		});
 	</script>
-	
+
 	<!-- 아이디 찾는 모달 -->
 	<div class="modal fade" id="findmyiddiv" data-backdrop="static"
 		tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
@@ -630,10 +744,10 @@ div > button {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" style="width: 90%;">
+				<div class="modal-body">
 					<form id="findmyidform" method="post"
 						action="${contextPath }/findid.ck">
-						<div id="signArea">
+						<div id="signArea2">
 							<div class="textdivarea">이메일</div>
 							<div class="inputdivarea">
 								<input type="email" id="findEmail" name="findEmail" required>
@@ -661,20 +775,34 @@ div > button {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" style="width: 90%;">
-					<form method="post">
-						<div id="signArea">
-							<div class="textdivarea">아이디</div>
-							<div class="inputdivarea">
-								<input type="text" id="findId" name="findId" required>
-							</div>
-							<div class="commentarea"></div>
-							<input type="button" id="checkemailbtn2"
-								class="btn btn-success btn-sm" style="width: 30%;" value="인증"
-								data-toggle="modal" data-target="#checkemailen">
-							<button type="button" id="findmypwdformbtn">비밀번호 찾기</button>
+				<div class="modal-body">
+
+					<div id="signArea3">
+						<div class="textdivarea">아이디</div>
+						<div class="inputdivarea">
+							<input type="text" id="findId" name="findId" required>
 						</div>
-					</form>
+						<div class="commentarea"></div>
+						<input type="button" id="checkemailbtn2"
+							class="btn btn-success btn-sm" style="width: 30%;" value="인증">
+						<br>
+						<div id="findpwdtoemail" style="display: none;">
+							<input type="text" class="form-control" id="emailcode2"
+								style="width: 49%; float: left;" placeholder="인증코드를 입력해주세요"
+								maxlength="6">
+
+							<button id="checkemailcode2" class="btn btn-outline-success"
+								style="width: 24%; margin-right: 0.5%; margin-left: 0.5%;">인증</button>
+							<button id="retryemailcode2" class="btn btn-outline-danger"
+								style="width: 24%;">재전송</button>
+							<br> <span style="color: red; width: 10%; margin-left: 3%;"
+								class="trymin">5</span>: <span style="color: red; width: 10%;"
+								class="trysec">00</span> <input id="answercode2" type="text">
+						</div>
+						<button type="button" id="findmypwdformbtn">비밀번호 찾기</button>
+
+					</div>
+
 				</div>
 			</div>
 		</div>
@@ -682,47 +810,81 @@ div > button {
 	<button id="changemypwdbtn" type="button" data-toggle="modal"
 		data-target="#changemypwd" style="display: none"></button>
 	<script>
+	var email = "";
 $(function(){
-    $("#findmypwdformbtn").click(function(){
-        
-        var userId = $("#findId");
-        var checkHint = $("#findcheckhint");
-        console.log(checkHint.val());
-        var userHint = $("#hintpwd");
-        $.ajax({
-            url : "<%=request.getContextPath()%>/findpwd.chk",
-            data : {
-                userId : userId.val(),
-                checkHint : checkHint.val(),
-                userHint : userHint.val()
-            },
-            type : "post",
-            success : function(data) {
-
-                if (data == "fail") {
-                    alert("비밀번호 찾기 질문이 틀렸거나 아이디가 없습니다.");
-                } else {
-                    $("#changeId").val(userId.val());
-                    $("#closefindpwdbtn").click();
-                    $("#changemypwdbtn").click();
-
-                }
-            },
-            error : function() {
-                console.log("서버 통신 안됨");
-            }
-
-        });
-    });
+	$("#findmypwdformbtn").attr('disabled', true);
+	
+	$("#checkemailcode2").click(function(){
+		if($("#emailcode2").val()==$("#answercode2").val()){
+			alert("인증이 완료되었습니다.");
+			$("#findmypwdformbtn").attr('disabled', false);
+			$("#closefindpwdbtn").click();
+			$("#changemypwdbtn").click();
+			$("#changePwdid").val($("#findId").val());
+		}else{
+			alert("인증번호가 일치하지않습니다.");
+		}
+	});
+	
+	
+    $("#checkemailbtn2").click(function(){
+    	var id = $("#findId").val()
+    	var code = "";
+    	$.ajax({
+			url:"findemail.ck",
+			data:{id:id},
+			type:"post",
+			success:function(data){
+				if(data =="fail"){
+					alert("아이디가 없거나 이메일이 없습니다.");
+				}else{
+					email = data;
+					$("#checkemailbtn2").css("display","none");
+					$("#findpwdtoemail").css("display","block");
+					for(var i=0; i<6; i++ ){
+		                var scode = (Number)(Math.floor((Math.random()*15+1)));
+		                
+		                switch(scode){
+		                    case 10: scode="A"; break;
+		                    case 11: scode="B"; break;
+		                    case 12: scode="C"; break;
+		                    case 13: scode="D"; break; 
+		                    case 14: scode="E"; break;
+		                    case 15: scode="F"; break;
+		                }
+		                code += scode;
+		            }
+		            $.ajax({
+						url:"email.ck",
+						data:{email:email,code:code},
+						type:"post",
+						success:function(data){
+							$("#answercode2").val(code);
+							StartClock();
+						},error:function(e){
+							alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+						}
+						
+					});	 
+					
+				}
+			},error:function(e){
+				alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+			}
+		});	
+    	
+    		
+             
+    	});
 });
 </script>
-	<!-- ajax로 연결해야함 비밀번호 변경하는 모달 -->
+	<!-- 비밀번호 변경하는 모달 -->
 	<div class="modal fade" id="changemypwd" data-backdrop="static"
 		tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
-				<div class="modal-header" style="width: 100%; background: #e3f2fd;">
+				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel"
 						style="margin-left: 38%;">비밀번호 변경</h5>
 					<button type="button" class="close" data-dismiss="modal"
@@ -730,11 +892,13 @@ $(function(){
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" style="width: 90%;">
+				<div class="modal-body">
 					<form id="changePwdForm" method="post"
-						action="<%=request.getContextPath()%>/change.pwd"
+						action="${contextPath }/change.pwd"
 						onsubmit="return checkChangePwd();">
-						<div id="signArea">
+						<div id="signArea4">
+							<input type="text" id="changePwdid" name="changePwdid"
+								style="display: none;">
 							<div class="textdivarea">비밀번호</div>
 							<div class="inputdivarea">
 								<input type="password" id="changePwd" name="changePwd" required>
@@ -757,11 +921,35 @@ $(function(){
 		</div>
 	</div>
 	<script>
-        $("#login-button").click(function (event) {
+        /* $("#login-button").click(function (event) {
             event.preventDefault();
-        });
+        }); */
+        $(function() {
+
+			$("#changePwdCk").focusin(
+					function() {
+						$(this).focusout(
+								function() {
+									if ($("#changePwd").val() != $(
+											"#changePwdCk").val()) {
+										$("#changePwdCk").parent().next().html(
+												"비밀번호가 일치하지 않습니다.");
+									} else {
+										$("#changePwdCk").parent().next().html(
+												"");
+									}
+								});
+					});
+		});
+		function checkChangePwd() {
+			var test = $("#changePwdCk").parent().next().html();
+			if (test.length > 0) {
+				return false;
+			}
+			return true;
+		};
     </script>
 </body>
- 
- 
+
+
 </html>
