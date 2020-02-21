@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fnc" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<!-- 스와이프 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script> 
+    
+    
 <style>
         dl {
     display: block;
@@ -21,6 +28,9 @@
         margin-inline-start: 40px;
         margin: 0;
     padding: 0;
+    }
+    .swiper-slide{
+    	box-sizing:border-box;
     }
     </style>
 </head>
@@ -39,9 +49,31 @@
                     <header>
                         <!-- 사진 -->
                         <div style="position:relative; height:360px;">
-                            <div style="flex-shrink: 0; height: 100%; position: relative;">
+                        	  <div class="swiper-container swiper1" style="width:700px; height:360px; position: relative; top:30px; border: 1px solid gray; cursor: pointer;">
+			                    <div class="swiper-wrapper">
+			                        <div class="swiper-slide">
+	                            		<img src="${ contextPath }/resources/classImage/${ img1 }" style="width: 700px; height: 360px; cursor: pointer;" id="img_swiper1">
+			                      	</div>
+			                        <div class="swiper-slide">
+			                            <img src="${ contextPath }/resources/classImage/${ img2 }" style="width: 700px; height: 360px; cursor: pointer;" id="img_swiper2">
+			                        </div>
+			                        <div class="swiper-slide">
+			                           	<img src="${ contextPath }/resources/classImage/${ img3 }" style="width: 700px; height: 360px; cursor: pointer;" id="img_swiper3">
+			                        </div>
+			                    </div>
+			                
+			                    <!-- 네비게이션 버튼 -->
+			                    <div class="swiper-button-next"></div>
+			                    <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
+			                    <div class="swiper-button-prev"></div>
+			                    <!-- 이전 버튼 -->
+			                
+			                    <!-- 페이징 -->
+			                    <div class="swiper-pagination"></div>
+			                </div>
+                            <%-- <div style="flex-shrink: 0; height: 100%; position: relative;">
                                 <img src="${ contextPath }/resources/image//main1.jpg" style="width:100%; height:100%;">
-                            </div>
+                            </div> --%>
                         </div>
                         <!-- 제목 -->
                         <div style="position: relative; padding: 36px 30px;">
@@ -52,13 +84,12 @@
                                 </div>
                                 <!-- 레벨 한글 -->
                                 <div style="margin-top: 20px;font-size: 1pc;color: #fff;">
-                                    Beginner
+                                    ${ classs.level }
                                 </div>
                             </div>
                             <!-- 지역 -->
-                            <span style="display: inline-block; width: 100%; text-align: center; font-weight: 700; color: #ef6c00;">강남</span>
-                            <h1 style="margin: 15px 0 0; line-height: 1.5em; text-align: center; font-size: 28pt; color: #3c3c3c;">해외 거주 8년, 능숙자와
-                                    <br>다양한 이슈로 능동적 토론하기!</h1>
+                            <span style="display: inline-block; width: 100%; text-align: center; font-weight: 700; color: #ef6c00;">${ classs.local } <c:if test="${ empty classs.local }">온라인</c:if></span>
+                            <h1 style="margin: 15px 0 0; line-height: 1.5em; text-align: center; font-size: 28pt; color: #3c3c3c;">${ classs.title }</h1>
                         </div>
                     <!-- 머리끝 -->
                     </header>
@@ -70,11 +101,7 @@
                                 <h1 style="float:left; clear:right; padding:60px 0 3pc 9pt; width:120px; font-size:14pt; color:#333;">스터디 소개</h1>
                                 <!-- 내용 -->
                                 <div style="float:right; padding:60px 0; width:455px;">
-                                    외국인 친구와 영어로 너무 말해보고 싶은데, 한국말로는 이미 영혼의 베프까지 먹었는데, 정작 문장은 도저히 입 밖으로 나오지 않는 경험.<br>
-                                    다들 있으시 죠? 공부를 하려니 막막하고, 흥미도 붙지 않아 늘 흐지부지되던 경험도 많이들 겪으시죠?<br>
-                                    외국어가 어려운 가장 큰 이유는 사실, 다름이 아니라 우리가 한국말을 너무 잘 하기 때문이에요.<br>
-                                    우리의 한국말 실력과 지식은 너무나도 뛰어난 데, 그것 을 그대로 영어로 translation하려니 힘들 수 밖에요.<br>
-                                     그렇지만 좌절하지 마세요.<br>우리가 이미 다 알고 있는 쉬운 표현들만으로 충분히 회화에 활용되는 마법같은 경험을 하시게될 거에요!
+                                    ${ classs.comment }
                                 </div>
                             </div>
 
@@ -83,24 +110,58 @@
                                 <h2 style="padding:3pc 0 3pc 9pt; font-size:11pt; color:#787878; float:left; clear:right; width: 110px;">상세 정보</h2>
                                 <div style="padding:3pc 0; border-top: 1px solid #e6e6e6; float: right; width: 455px;">
                                     <dl style="float:left; width:430px;">
-
-                                        <dt style="color:#787878; width: 55px;">지역:</dt>
-                                        <dd style="display: inline-block; width:155px;">강남</dd>
-
-                                        <dt style="width:55px; color:#787878;">인원:</dt>
-                                        <dd style="width:145px; display: inline-block;">15 명</dd>
-                                        
-                                        <dt style="color:#787878; width: 55px;">일정:</dt>
-                                        <dd style="display: inline-block; width:355px;">2020-02-06 - 2020-03-01</dd>
-
-                                        <dt style="width:55px; color:#787878;">시간:</dt>
-                                        <dd style="width:355px; display: inline-block;">11:00 - 13:00 (일)</dd>
-
-                                        <dt style="width:100px; color:#787878;">문의 아이디:</dt>
-                                        <dd style="width:280px; display: inline-block;">ajoa2012</dd>
-
-                                        <dt style="width:100px; color:#787878;">핸드폰 번호:</dt>
-                                        <dd style="width:280px; display: inline-block;">010-4187-1160</dd>
+									<c:choose>
+										<c:when test="${ not empty classs.local }">
+											<dt style="color:#787878; width: 55px;">과목:</dt>
+											<dd style="display: inline-block; width:155px;">
+											<c:forEach var="cate" begin="0" end="${fnc:length(cateList) - 1 }">
+												<c:if test="${ classs.cateId == cateList.get(cate).cId }">
+													${ cateList.get(cate).name }
+												</c:if>
+											</c:forEach>
+	                                        </dd>
+	
+	                                        <dt style="width:55px; color:#787878;">레벨:</dt>
+	                                        <dd style="width:145px; display: inline-block;">${ classs.level }</dd>
+	                                        
+	                                        <dt style="color:#787878; width: 55px;">지역:</dt>
+	                                        <dd style="display: inline-block; width:155px;">${ classs.local }</dd>
+	
+	                                        <dt style="width:55px; color:#787878;">인원:</dt>
+	                                        <dd style="width:145px; display: inline-block;">${ classs.memberCount } 명</dd>
+	                                        
+	                                        <dt style="color:#787878; width: 55px;">일정:</dt>
+	                                        <dd style="display: inline-block; width:355px;">${ classs.schedule }</dd>
+	
+	                                        <dt style="width:55px; color:#787878;">시간:</dt>
+	                                        <dd style="width:355px; display: inline-block;">${ classs.time }</dd>
+	
+	                                        <dt style="width:100px; color:#787878;">문의 아이디:</dt>
+	                                        <dd style="width:280px; display: inline-block;">ajoa2012</dd>
+	
+	                                        <dt style="width:100px; color:#787878;">핸드폰 번호:</dt>
+	                                        <dd style="width:280px; display: inline-block;">010-4187-1160</dd>
+                                       	</c:when>
+                                       	<c:otherwise>
+                                       		<dt style="color:#787878; width: 55px;">과목:</dt>
+											<dd style="display: inline-block; width:155px;">
+											<c:forEach var="cate" begin="0" end="${fnc:length(cateList) - 1 }">
+												<c:if test="${ classs.cateId == cateList.get(cate).cId }">
+													${ cateList.get(cate).name }
+												</c:if>
+											</c:forEach>
+	                                        </dd>
+	
+	                                        <dt style="width:55px; color:#787878;">레벨:</dt>
+	                                        <dd style="width:145px; display: inline-block;">${ classs.level }</dd>
+	                                        
+                                       		<dt style="width:100px; color:#787878;">문의 아이디:</dt>
+	                                        <dd style="width:280px; display: inline-block;">ajoa2012</dd>
+	
+	                                        <dt style="width:100px; color:#787878;">핸드폰 번호:</dt>
+	                                        <dd style="width:280px; display: inline-block;">010-4187-1160</dd>
+                                       	</c:otherwise>
+                                    </c:choose>
                                     </dl>
                                 </div>
                             </div>
@@ -108,7 +169,7 @@
                             <!-- 버튼 -->
                             <div>
                                 <input type="button" id="sinchenog" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
-                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto;" value="참여 신청하기">
+                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto;" value="참여 하기">
                             </div>
                         </section>
                     </div>
@@ -118,5 +179,22 @@
             </div>
         </div>
     </div>
+       <!-- 스와이퍼 부분 -->
+        <!-- 스크립트 -->
+        <script>
+            $(function(){
+                new Swiper('.swiper1', {
+                    loop : true, // 반복
+                    pagination : { // 페이징 설정
+                    el : '.swiper-pagination',
+                    clickable : true,
+                    },
+                    navigation : { // 네비게이션 설정
+                    nextEl : '.swiper-button-next', // 다음 버튼 클래스명
+                    prevEl : '.swiper-button-prev', // 이번 버튼 클래스명
+                    },
+                });
+            });
+        </script>
 </body>
 </html>

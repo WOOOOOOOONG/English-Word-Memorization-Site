@@ -26,4 +26,8 @@ public interface ClassService {
 
 	// 클래스에 맞느 파일 가져오기
 	ArrayList<Storage> selectFileList(String cNo);
+
+	// 클래스 하나 찾기
+	Classs selectClassOneCount(String cNo);
+	
 }

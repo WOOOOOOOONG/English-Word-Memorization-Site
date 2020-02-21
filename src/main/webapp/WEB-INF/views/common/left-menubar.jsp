@@ -265,7 +265,7 @@ textarea::placeholder {
 		</header>
 		<ul class="manage">
 			<c:url var="admin1" value="memberManage.ad"/>
-			<c:url var="admin2" value="response.ad"/>
+			<c:url var="admin2" value="selectInquireList.ad"/>
 			<c:url var="class1" value="classify.cl"/>
 			<c:url var="class2" value="total.cl"/>
 			<c:url var="inquire" value="inquire.in"/>
