@@ -278,7 +278,7 @@ main .helper span {
          </c:url>
          <!-- 멤버 권한 -->
          <c:url var="classMemberRight" value="classMemberRight.do">
-         
+         	
          </c:url>
          <!--  멤버 시험 보기 -->
          <c:url var="classMemberTest" value="classMemberTest.do">
@@ -304,10 +304,33 @@ main .helper span {
             <ul class="hide">
                <li class="homepage" id="managermodal" data-toggle="modal" data-target=".bd-example-modal-sm">매니저 전환</li>
                <li class="homepage" id="studymodal" data-toggle="modal" data-target=".studyexit">스터디 폐강</li>
-               <li class="homepage" id="createTest" data-toggle="modal" data-target=".createTest">시험 문제 만들기</li>
+               <li class="homepage" id="createTest" data-toggle="modal" data-target=".createTest" onclick="getAllData('${ cNo }')">시험 문제 만들기</li>
             </ul>
          </li>
       </ul>
+      <script>
+     	// 시험문제 만들기 클릭시
+      	function getAllData(searchInput) {
+     		console.log(searchInput);
+     		var send = JSON.stringify({
+                'search' : searchInput
+             });
+
+             $.ajax({
+                type : "POST",
+                dataType : "json",
+                contentType : "application/json; charset=utf-8",
+                data : send,
+                url : 'http://localhost:1222/getAllData',
+                success : function(data) {
+                   console.log(data);
+                },
+                error : function() {
+                   console.log("error has occured retriving data from MongoServer")
+                }
+             });
+         }
+      </script>
       <script>
             $(document).ready(function () {
                
@@ -359,24 +382,7 @@ main .helper span {
 	</div>
 	<button id="qwe" style="display:none;"></button>
 	<!-- 매니저 확인 -->
-	<script>
-		$(function(){
-			$("#managercn").click(function(){
-				$("#managermodal").click();
-			});
-			
-			$("#managerchk").click(function(){
-				var id = $("#ckid option:selected").val();
-				var con = confirm(id + "님에게 양도하시겠습니까?");
-				if(con == true){
-					alert(id + "님에게 매니저 권한이 양도되었습니다.");
-					location.href="myClass.do";
-				}else{
-					
-				}
-			});
-		});
-	</script>
+
 	
 	
 	<!-- 스터디 폐강 모달-->
@@ -418,7 +424,7 @@ main .helper span {
             <div style="margin-top:1rem; margin-bottom:.5rem; text-align: left;">
                 <label style="display: block; font-weight: 700;">참고 단어장 선택</label>
             </div>
-            <div style="margin-top:1rem; margin-bottom:.5rem; text-align: left; overflow: scroll; height:200px; width:400px;line-height: 40px;">
+            <div style="margin-top:1rem; margin-bottom:.5rem; text-align: left; overflow: scroll; height:200px; width:400px;line-height: 40px;" id="vocaList">
                 <label><input type="checkbox" id="ck1">2020년 1월 1주차 단어장</label><br>
                 <label><input type="checkbox" id="ck2">2020년 1월 2주차 단어장</label><br>
                 <label><input type="checkbox" id="ck3">2020년 1월 3주차 단어장</label><br>
@@ -433,6 +439,8 @@ main .helper span {
                 <label><input type="checkbox" id="ck12">2020년 3월 4주차 단어장</label><br>
             </div>
 
+			<!-- 해당 클래스에 소속된 단어장 리스트를 불러오는 Function -->
+			
             <div style="margin-top:1rem; margin-bottom:.5rem; text-align: left;">
                     <label style="display: block; font-weight: 700;">문제 수 선택</label>
             </div>
@@ -462,7 +470,7 @@ main .helper span {
 			$("#testchk").click(function(){
 				location.href="createTest.do";
 			});
-		})
+		});
 	</script>
 
 </body>

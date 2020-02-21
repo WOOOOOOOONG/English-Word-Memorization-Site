@@ -2,7 +2,6 @@ package com.kh.spring.classs.model.service;
 
 import java.util.ArrayList;
 
-
 import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
@@ -29,5 +28,8 @@ public interface ClassService {
 
 	// 클래스 하나 찾기
 	Classs selectClassOneCount(String cNo);
+
+	// 카테고리로 클래스 찾기
+	ArrayList<Classs> searchClassList(String cateList);
 	
 }
