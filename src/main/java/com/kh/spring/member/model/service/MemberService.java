@@ -21,6 +21,7 @@ public class MemberService {
 		return mDao.selectList();
 	}
 
+	
 	public int updateStatus(Member m) {
 		return mDao.updateStatus(m);
 	}

@@ -17,6 +17,7 @@ public class MemberDao {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList");
 	}
 
+	
 	public int updateStatus(Member m) {
 		return sqlSession.update("memberMapper.updateStatus", m);
 	}

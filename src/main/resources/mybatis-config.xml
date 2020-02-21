@@ -16,7 +16,6 @@
 		<typeAlias type="com.kh.spring.common.model.vo.Storage" alias="Storage"/>
 		<typeAlias type="com.kh.spring.common.model.vo.Category" alias="Category"/>
 		<typeAlias type="com.kh.spring.member.model.vo.Member" alias="Member"/>
-		
 	</typeAliases>
 	
 	<mappers>

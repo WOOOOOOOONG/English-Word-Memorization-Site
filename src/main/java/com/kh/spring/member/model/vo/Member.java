@@ -15,6 +15,7 @@ public class Member {
 	private String introduce;
 	private String nickname;
 	
+	
 	public Member() {}
 
 	public Member(String mId, String pwd, String name, String birthDate, String email, String address, Date enrollDate,

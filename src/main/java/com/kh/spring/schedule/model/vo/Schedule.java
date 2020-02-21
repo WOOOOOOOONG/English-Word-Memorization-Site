@@ -11,4 +11,5 @@ public class Schedule {
 	private String vocaId; // 참조할 id
 	
 	
+	
 }

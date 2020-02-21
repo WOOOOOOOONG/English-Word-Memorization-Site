@@ -8,6 +8,7 @@ public class Friend {
 	
 	public Friend() {}
 	
+	
 	public Friend(String mId, String fId, String groupName, String comment) {
 		super();
 		this.mId = mId;

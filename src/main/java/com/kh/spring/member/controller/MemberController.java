@@ -25,6 +25,7 @@ public class MemberController {
 	@Autowired
 	private MemberService mService;
 	
+	
 	@RequestMapping("memberList.me")
 	public ModelAndView memberList(ModelAndView mv) {
 		ArrayList<Member> memberList = mService.selectList();

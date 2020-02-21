@@ -17,6 +17,7 @@
 		<result property="nickname" column="NICKNAME"/>
 	</resultMap>
 	
+	
 	<select id="selectList" parameterType="Member" resultMap="memberResultSet">
 		SELECT *
 		FROM Member
