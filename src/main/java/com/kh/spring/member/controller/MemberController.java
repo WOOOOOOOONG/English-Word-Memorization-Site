@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
@@ -87,18 +88,18 @@ public class MemberController {
 	}
 	// 아이디 찾기
 	@RequestMapping("findid.ck")
-	public ModelAndView findMemberId(ModelAndView mv,@RequestParam(value="findEmail")String email) {
+	public String findMemberId(RedirectAttributes rd,
+			@RequestParam(value="findEmail")String email) {
 		String msg="찾으신 결과가 없습니다.";
 		
 		String id = mService.findMemberId(email);
 		if(id!=null) {
 			msg="찾으신 아이디는 "+id+"입니다.";
 		}
-		mv.addObject("msg", msg);
-		mv.setViewName("common/login");
-		return mv;
+		rd.addFlashAttribute("msg", msg);
+		return "redirect:login.me";
 	}
-	// 아이디로 이메일 가져오기
+	// 아이디로 이메일 가져오기 ajax
 	@RequestMapping("findemail.ck")
 	public void findEmail(String id,HttpServletResponse response) throws IOException {
 		String email= mService.findEmail(id);
@@ -112,19 +113,20 @@ public class MemberController {
 	}
 	// 비밀번호 변경
 	@RequestMapping("change.pwd")
-	public ModelAndView changeUserPwd(ModelAndView mv,String changePwdid ,String changePwd) {
+	public String changeMemberPwd(RedirectAttributes rd,String changePwdid ,String changePwd) {
 		Member m = new Member();
 		m.setmId(changePwdid);
 		m.setPwd(changePwd);
-		
+		String msg="";
 		int result = mService.changeMemberPwd(m);
 		
 		if(result >0) {
-			mv.setViewName("common/login");
+			msg = "비밀번호가 변경되었습니다.";
 		}else {
-			mv.setViewName("common/errorPage");
+			msg = "비밀번호변경오류!!";
 		}
-		return mv;
+		rd.addFlashAttribute("msg", msg);
+		return "redirect:login.me";
 	}
 	// 로그인
 	@RequestMapping(value="Memberlogin.me", method=RequestMethod.POST)
@@ -145,6 +147,6 @@ public class MemberController {
 	@RequestMapping("Memberlogout.me")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "common/login";
+		return "redirect:login.me";
 	}
 }
