@@ -328,7 +328,7 @@ div>button {
 	color: rgb(206, 212, 218);
 }
 
-#joinMemberbtn {
+.modalsubmitbtn {
 	position: absolute;
 	width: 93%;
 	height: 40px;
@@ -595,13 +595,10 @@ div>button {
                             	setTime();
                             	$("#checkemailbtn").click();
                             });
-                            $("#retryemailcode2").click(function(){
-                            	setTime();
-                            	$("#checkemailbtn2").click();
-                            });
+                            
                         </script>
 
-							<button type="submit" id="joinMemberbtn">가입하기</button>
+							<button type="submit" id="joinMemberbtn" class="modalsubmitbtn">가입하기</button>
 						</div>
 					</form>
 				</div>
@@ -718,6 +715,7 @@ div>button {
 		$("#checkemailcode").click(function(){
 			if($("#emailcode").val()==$("#answercode").val()){
 				alert("인증이 완료되었습니다.");
+				clearInterval(timerId);
 				$("#userEmail").attr("readonly",true);
 				$("#checkemailbtn").attr('disabled', true);
 				$("#emailclosebtn").click();
@@ -766,7 +764,7 @@ div>button {
 		tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
-			<div class="modal-content">
+			<div class="modal-content" id="findpwdmodalcontent">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel"
 						style="margin-left: 38%;">비밀번호찾기</h5>
@@ -785,7 +783,7 @@ div>button {
 						<div class="commentarea"></div>
 						<input type="button" id="checkemailbtn2"
 							class="btn btn-success btn-sm" style="width: 30%;" value="인증">
-						<br>
+						
 						<div id="findpwdtoemail" style="display: none;">
 							<input type="text" class="form-control" id="emailcode2"
 								style="width: 49%; float: left;" placeholder="인증코드를 입력해주세요"
@@ -795,11 +793,13 @@ div>button {
 								style="width: 24%; margin-right: 0.5%; margin-left: 0.5%;">인증</button>
 							<button id="retryemailcode2" class="btn btn-outline-danger"
 								style="width: 24%;">재전송</button>
-							<br> <span style="color: red; width: 10%; margin-left: 3%;"
-								class="trymin">5</span>: <span style="color: red; width: 10%;"
-								class="trysec">00</span> <input id="answercode2" type="text">
+							<br>
+							<span style="color: red; width: 10%; margin-left: 3%;"class="trymin">5</span>: 
+							<span style="color: red; width: 10%;"class="trysec">00</span> 
+							<input id="answercode2" type="text" style="display:none;">
 						</div>
-						<button type="button" id="findmypwdformbtn">비밀번호 찾기</button>
+						<button id="findmypwdformbtn" class="modalsubmitbtn"
+						 style="display:none;">비밀번호 찾기</button>
 
 					</div>
 
@@ -814,9 +814,15 @@ div>button {
 $(function(){
 	$("#findmypwdformbtn").attr('disabled', true);
 	
+	$("#retryemailcode2").click(function(){
+    	setTime();
+    	$("#checkemailbtn2").click();
+    });
+	
 	$("#checkemailcode2").click(function(){
 		if($("#emailcode2").val()==$("#answercode2").val()){
 			alert("인증이 완료되었습니다.");
+			clearInterval(timerId);
 			$("#findmypwdformbtn").attr('disabled', false);
 			$("#closefindpwdbtn").click();
 			$("#changemypwdbtn").click();
@@ -828,7 +834,7 @@ $(function(){
 	
 	
     $("#checkemailbtn2").click(function(){
-    	var id = $("#findId").val()
+    	var id = $("#findId").attr("readonly",true).val();
     	var code = "";
     	$.ajax({
 			url:"findemail.ck",
@@ -839,8 +845,10 @@ $(function(){
 					alert("아이디가 없거나 이메일이 없습니다.");
 				}else{
 					email = data;
+					$("#findmypwdformbtn").css("display","block");
 					$("#checkemailbtn2").css("display","none");
 					$("#findpwdtoemail").css("display","block");
+					$("#findpwdmodalcontent").css("height","280px");
 					for(var i=0; i<6; i++ ){
 		                var scode = (Number)(Math.floor((Math.random()*15+1)));
 		                
@@ -912,7 +920,7 @@ $(function(){
 									required>
 							</div>
 							<div class="commentarea"></div>
-							<button type="submit" id="changepwdformbtn">비밀번호 변경</button>
+							<button type="submit" id="changepwdformbtn" class="modalsubmitbtn">비밀번호 변경</button>
 						</div>
 					</form>
 				</div>
