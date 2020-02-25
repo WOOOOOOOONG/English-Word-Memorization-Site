@@ -152,6 +152,13 @@ public class MemberController {
 		mem.setPwd(loginpwd);
 		
 		Member loginMember = mService.loginMember(mem);
+		
+		if(loginMember != null) {
+			mService.insertVisit(loginMember);	
+		}else {
+			System.out.println(loginMember);
+		}
+		
 		ArrayList<Friend> flist = fService.friendList(loginMember.getmId());
 		model.addAttribute("friendList",flist);
 		model.addAttribute("loginMember", loginMember);

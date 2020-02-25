@@ -15,10 +15,13 @@
 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
+@media screen and (min-width: 400px, min-height:400px)
 body {
-	height: 1050px;
+	height: 110vh;
 	margin: 0;
 	background: whitesmoke;
 }
@@ -30,15 +33,16 @@ main .helper span {
 }
 
 .menu {
-	/* background: #5bc995; */
-	background: #88dba3;
+	/* background: #88dba3; 초록색*/
+	background:white;
 	height: 100%;
 	/* width: 240px; */
 	width: 280px;
 	z-index: 5;
 	outline: none;
 	font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
-	color: #fff;
+	/* color: #fff; 흰색 */
+	color: #424242;
 	float: left;
 }
 
@@ -67,7 +71,9 @@ main .helper span {
 .menu ul {
 	list-style: none;
 	padding: 0.5em 0;
+	text-align:left;
 	margin: 0;
+	background:whitesmoke;
 }
 
 .menu ul li {
@@ -79,6 +85,11 @@ main .helper span {
 	background-size: auto 20px;
 	transition: all 0.15s linear;
 	cursor: pointer;
+}
+
+.icon {
+	/* background-color: whitesmoke; */
+	display:block;
 }
 
 .menu ul li.icon-dashboard {
@@ -98,13 +109,14 @@ main .helper span {
 }
 
 .menu ul li:hover {
-	background-color: rgba(0, 0, 0, 0.1);
+	/* background-color: rgba(0, 0, 0, 0.1); */
+	font-weight: bold;
 }
 
 .menu ul li:focus {
 	outline: none;
 }
-
+}
 @media screen and (max-width: 900px) and (min-width: 400px) {
 	.menu {
 		width: 90px;
@@ -242,7 +254,7 @@ main .helper span {
 }
 
 .hide {
-	display: none;
+	display: block;
 }
 
 .bold-weight {
@@ -252,6 +264,18 @@ main .helper span {
 textarea::placeholder {
 	color: black;
 	border-radius: 5px;
+}
+
+.hilight {
+	font-weight: bold;
+}
+
+.middle {
+	font-weight:600;
+}
+
+.light {
+	font-weight:300;
 }
 </style>
 </head>
@@ -263,56 +287,60 @@ textarea::placeholder {
 				src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
 			<h2>John D.</h2>
 		</header>
+		<br>
 		<ul class="manage">
-			<c:url var="admin1" value="memberManage.ad"/>
+			<c:url var="admin1" value="memberList.me"/>
 			<c:url var="admin2" value="selectInquireList.ad"/>
 			<c:url var="class1" value="classify.cl"/>
 			<c:url var="class2" value="total.cl"/>
-			<c:url var="inquire" value="inquire.in"/>
-			<c:url var="visit1" value="day.vi"/>
-			<c:url var="visit2" value="month.vi"/>
-			<c:url var="visit3" value="time.vi"/>
+			<c:url var="inquire" value="inquireStat.ad"/>
+			<c:url var="visit1" value="visitTime.ad"/>
+			<c:url var="visit2" value="visitDay.ad"/>
+			<c:url var="visit3" value="visitMonth.ad"/>
 			<c:url var="voca1" value="classify.voca"/>
 			<c:url var="voca2" value="total.voca"/>
-			<li tabindex="0" class="icon-users icon"><a><span>멤버
+			
+			<li tabindex="0" class="icon hilight" style=""><a><span><i class="fas fa-user"></i> 멤버
 						관리</span></a>
 				<ul class="hide">
-					<li class="homepage page1" onclick="goHomepage(this, 1);">멤버 전체</li>
+					<li class="homepage page1 light" onclick="goHomepage(this, 1);">멤버 전체</li>
 				</ul></li>
-			<li tabindex="0" class="icon-settings icon"><a><span>문의사항</span></a>
+			<hr>
+			<li tabindex="0" class="icon hilight"><a><span><i class="fas fa-wrench"></i> 문의사항</span></a>
 				<ul class="hide">
-					<li class="homepage page2" onclick="goHomepage(this, 2);">전체 문의</li>
+					<li class="homepage page2 light" onclick="goHomepage(this, 2);">전체 문의</li>
 				</ul></li>
-			<li tabindex="0" class="icon-settings icon"><a><span>통계</span></a>
-				<ul class="hide">
+			<hr>
+			<li tabindex="0" class="icon hilight"><a><span><i class="fa fa-line-chart"></i> 통계</span></a>
+				<ul class="hide middle">
 					<li><a><span>클래스</span></a>
 						<ul class="hide">
-							<li class="homepage page3" onclick="goHomepage(this, 3);">분류별</li>
-							<li class="homepage page4" onclick="goHomepage(this, 4);">조회수별</li>
+							<li class="homepage page3 light" onclick="goHomepage(this, 3);">분류별</li>
+							<li class="homepage page4 light" onclick="goHomepage(this, 4);">조회수별</li>
 						</ul>
 					</li>
 				</ul>
-				<ul class="hide">
+				<ul class="hide middle">
 					<li><a><span>문의</span></a>
 						<ul class="hide">
-							<li class="homepage page5" onclick="goHomepage(this, 5);">분류별</li>
+							<li class="homepage page5 light" onclick="goHomepage(this, 5);">분류별</li>
 						</ul>
 					</li>
 				</ul>
-				<ul class="hide">
+				<ul class="hide middle">
 					<li><a><span>방문기록</span></a>
 						<ul class="hide">
-							<li class="homepage page6" onclick="goHomepage(this, 6);">시간별</li>
-							<li class="homepage page7" onclick="goHomepage(this, 7);">일자별</li>
-							<li class="homepage page8" onclick="goHomepage(this, 8);">월별</li>							
+							<!-- <li class="homepage page6" onclick="goHomepage(this, 6);">시간별</li> -->
+							<li class="homepage page7 light" onclick="goHomepage(this, 7);">일자별</li>
+							<li class="homepage page8 light" onclick="goHomepage(this, 8);">월별</li>							
 						</ul>
 					</li>
 				</ul>			
-				<ul class="hide">
+				<ul class="hide middle">
 					<li><a><span>단어장</span></a>
 						<ul class="hide">
-							<li class="homepage page9" onclick="goHomepage(this, 9);">분류별</li>
-							<li class="homepage page10" onclick="goHomepage(this, 10);">조회수별</li>
+							<li class="homepage page9 light" onclick="goHomepage(this, 9);">분류별</li>
+							<li class="homepage page10 light" onclick="goHomepage(this, 10);">조회수별</li>
 						</ul>
 					</li>
 				</ul>
@@ -393,7 +421,7 @@ textarea::placeholder {
             		url = "${ inquire }";
             		break;
             	case 6:
-            		url = "${ visit3 }";
+            		url = "${ visit1 }";
             		break;
             	case 7:
             		url = "${ visit2 }";

@@ -63,4 +63,8 @@ public class MemberDao {
 	public int insertProfileImg(Member m) {
 		return sqlSession.insert("memberMapper.insertProfileImg",m);
 	}
+
+	public void insertVisit(Member loginMember) {
+		sqlSession.insert("memberMapper.insertVisit", loginMember);
+	}
 }

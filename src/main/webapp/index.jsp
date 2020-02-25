@@ -50,17 +50,16 @@
             width: 95vw;
             background: #31152b;
         }
-        #tab1::after {
+        /* #tab1::after {
             content: '';
             position: absolute;
             width: 5vw;
             height: 25vh;
             background: #31152b;
-            /* background: rgba(0,0,0,0.6); */
             border-radius: 0 20px 20px 0;
             top: 75%;
             right: -5vw;
-        }
+        }  */
         #tab2 {
             width: 90vw;
             background: #723147;
@@ -99,8 +98,7 @@
             position: absolute;
             width: 5vw;
             height: 25vh;
-            /* background: #e6b098; */
-            background: lightgray;
+            background-image: url(resources/images/메인책갈피.jpg);
             border-radius: 0 20px 20px 0;
             top: 0;
             right: -5vw;
@@ -427,7 +425,7 @@
                     <input type="text" placeholder="Username">
                     <input type="password" placeholder="Password">
                     <button type="submit" id="login-button">Login</button>
-                    <p><a href="" onclick="">다음에 할게요</a></p>
+                    <p><a href="viewMain.ad">다음에 할게요</a></p>
                 </form>
             </div>
         </div>
@@ -442,7 +440,7 @@
     </div>
 
     <div id="tab1">
-        <img src="img/3.PNG" class="img-base tab1-img">
+        <img src="img/3.PNG" class="img-base tab1-img"><!-- 클래스와 시험 사진 -->
         <div class="wrapper wra1">
             <div class="message msg1">
                 <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
@@ -452,7 +450,7 @@
     </div>
 
     <div id="tab2">
-        <img src="img/2-2.PNG" class="img-base tab2-img">
+        <img src="img/2-2.PNG" class="img-base tab2-img"><!-- 단어 활용 게임 사진 -->
         <div class="wrapper wra2">
             <div class="message">
                 <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
@@ -462,8 +460,8 @@
     </div>
 
     <div id="tab3">
-        <img src="img/1.PNG" alt="" class="img-base tab3-img1">
-        <img src="img/2-1.PNG" class="img-base tab3-img2">
+        <!-- <img src="img/1.PNG" alt="" class="img-base tab3-img1"> -->
+        <img src="img/2-1.PNG" class="img-base tab3-img2"><!-- 단어 추가 사진 -->
         <div class="wrapper wra3">
             <div class="message">
                 <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
@@ -482,7 +480,6 @@
         <div class="wrapper wra4">
        		<c:url var="admin2" value="selectInquireList.ad"/>
 			<button onclick="location.href='${ admin2 }'">문의사항</button>
-        
             <div class="message">
                 <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
                 <p>저희 '외웟' 홈페이지에서는 자신의 단어장을 만들고, 그로 인해 재밌는 게임으로 공부를 할 수 있으며, 클래스를 꾸려 함께 공부할 수 있게 해놓았습니다.</p>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -35,76 +37,86 @@ body {
 	<div class="table">
 		<div id="chart_div" style="width: 1300px; height: 600px">
 			<script>
-        google.charts.load('current', {packages: ['corechart', 'bar']});
-google.charts.setOnLoadCallback(drawAxisTickColors);
+				var arr = [];
+				$(document).ready(function() {
+					// 값 초기화
+					for(var i = 0; i < 13; i++) {
+						arr[i] = new Array();
+						arr[i] = 0;
+					}
+					// arr[월][일] = 해당값   으로 구분지을 것. 일단 이번년도만 포함하기로 함
+					<c:forEach var="item" items="${logList}">
+						arr[${fn:substring(item.visitDate, 5, 7)}]
+						 = arr[${fn:substring(item.visitDate, 5, 7)}] + 1;
+					</c:forEach>
+				});
+				
+				google.charts.load('current', {
+					packages : [ 'corechart', 'bar' ]
+				});
+				google.charts.setOnLoadCallback(drawAxisTickColors);
 
-function drawAxisTickColors() {
-      var data = new google.visualization.DataTable();
-      var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Element');
-      data.addColumn('number', 'Percentage');
-      data.addRows([
-        ['1월', 0.78],
-        ['2월', 0.21],
-        ['3월', 0.01],
-        ['4월', 0.78],
-        ['5월', 0.21],
-        ['6월', 0.01],
-        ['7월', 0.78],
-        ['8월', 0.21],
-        ['9월', 0.01],
-        ['10월', 0.78],
-        ['11월', 0.21],
-        ['12월', 0.01],
-      ]);
-      var options = {
-        title: '일자별 방문내역',
-          backgroundColor: "whitesmoke",
-          focusTarget: 'category',
-          hAxis: {
-              title: 'Time of Day',
-              format: 'dd',
-              viewWindow: {
-                //   min: [7, 0, 0],
-                //   max: [37, 30, 30]
-              },
-              textStyle: {
-                  fontSize: 14,
-                  color: '#053061',
-                  bold: true,
-                  italic: false
-              },
-              titleTextStyle: {
-                  fontSize: 18,
-                  color: '#053061',
-                  bold: true,
-                  italic: false
-              },
-              gridlines: {count:30}
-          },
-          vAxis: {
-              textStyle: {
-                  fontSize: 18,
-                  color: '#67001f',
-                  bold: false,
-                  italic: false
-              },
-              titleTextStyle: {
-                  fontSize: 18,
-                  color: '#67001f',
-                  bold: true,
-                  italic: false
-              }
-          }
-      };
+				function drawAxisTickColors() {
+					var data = new google.visualization.DataTable();
+					var data = new google.visualization.DataTable();
+					data.addColumn('string', 'Element');
+					data.addColumn('number', 'Percentage');
+					data.addRows([ [ '1월', arr[1] ], [ '2월', arr[2] ],
+							[ '3월', arr[3] ], [ '4월', arr[4] ], [ '5월', arr[5] ],
+							[ '6월', arr[6] ], [ '7월', arr[7] ], [ '8월', arr[8] ],
+							[ '9월', arr[9] ], [ '10월', arr[10] ], [ '11월', arr[11] ],
+							[ '12월', arr[12] ], ]);
+					var options = {
+						title : '일자별 방문내역',
+						backgroundColor : "whitesmoke",
+						focusTarget : 'category',
+						hAxis : {
+							title : 'Time of Day',
+							format : 'dd',
+							viewWindow : {
+							//   min: [7, 0, 0],
+							//   max: [37, 30, 30]
+							},
+							textStyle : {
+								fontSize : 14,
+								color : '#053061',
+								bold : true,
+								italic : false
+							},
+							titleTextStyle : {
+								fontSize : 18,
+								color : '#053061',
+								bold : true,
+								italic : false
+							},
+							gridlines : {
+								count : 30
+							}
+						},
+						vAxis : {
+							textStyle : {
+								fontSize : 18,
+								color : '#67001f',
+								bold : false,
+								italic : false
+							},
+							titleTextStyle : {
+								fontSize : 18,
+								color : '#67001f',
+								bold : true,
+								italic : false
+							}
+						}
+					};
 
-      var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }    
-    </script>
+					var chart = new google.visualization.ColumnChart(document
+							.getElementById('chart_div'));
+					chart.draw(data, options);
+				}
+			</script>
 		</div>
 
-		<table class="fixed_headers">
+		<!-- <table class="fixed_headers">
 			<thead>
 				<tr>
 					<th>Name</th>
@@ -139,7 +151,7 @@ function drawAxisTickColors() {
 					<td>These are yellow.</td>
 				</tr>
 			</tbody>
-		</table>
+		</table> -->
 	</div>
 </body>
 

@@ -1,18 +1,5 @@
-<%@page import="java.util.ArrayList"%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fnc" %>
-<% 
-	Date to = new Date();
- 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
- 	String today = sdf.format(to);
- 	
- 
- 	
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +11,7 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../common/classSideMenubar.jsp"/>
 	
-<form action="insertTest.do" method="post">
+	
 	<div style="position:relative; z-index:0;">
 	<div style="width:200px; height:10px;float:left;"></div>
 	<div style="float:left; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 40; margin-top:30px;  width:1000px; margin:auto; margin-top:30px;">
@@ -33,7 +20,6 @@
 			style="bottom: 0; left: 0; position: absolute; right: 0; top: 0; "></div>
 		<div
 			style="width: 800px; margin: 0; display: flex; box-orient: vertical; box-direction: normal; flex-direction: column; overflow: hidden; background: white; z-index: 41; border-radius: 15px;">
-		
 			<!-- 헤드부분 -->
 			<header class="modal-card-head" style="text-align: center;">
 				<p style="font-size: 15pt; font-weight: 500; margin: auto;">
@@ -55,7 +41,7 @@
 									<h3 style="color: #000; font-size: 14pt; text-align: center;">ajoa2012</h3>
 								</div>
 								<div class="blank-box">
-									<h3 style="color: #000; font-size: 14pt; text-align: center;"><%= today %></h3>
+									<h3 style="color: #000; font-size: 14pt; text-align: center;">2020-02-13</h3>
 								</div>
 								<div class="blank-box">
 									<h3 style="color: red; font-size: 18pt; text-align: center;"></h3>
@@ -64,39 +50,228 @@
 							<div class="quiz-info-box-wrapper">
 								<div class="quiz-info-box">
 									<h5 style="font-size: 3mm; position: absolute; color: #7a7a7a;">총 문제수</h5>
-									<h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">${ count }</h3>
+									<h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">10</h3>
 								</div>
 								
 							</div>
 						</div>
 						<!-- 헤더 끝-->
-						    <!-- 한글,영아 사이즈 -->
-							<c:set var="korSize" value="${ fnc:length(korList) }"/>
-							<c:set var="engSize" value="${ fnc:length(engList) }"/>
+
 						<!-- 컨텐트 시작 -->
 						<div class="quiz-contents">
 							<div style="position: relative;">
 								<!-- 단어 넣기 for문 돌릴 예정 -->
-								<c:forEach var="i" begin="1" end="${ count }" >
-									<div class="word-box" style="float: left;">
-										<div class="word-number">
-											${ i }
-										</div>
-										<div class="filled-box">
-											<div class="text-box">
-												<select class="custom-select" style="width:130px;" id="engS${i}" onchange="writeKOR(${ i },this,this.value)">
-													<c:forEach var="j" begin="0" end="${ korList.size()-1 }">
-														<option id="${ j }" class="${ j }" value="${ j }">${ korList.get(j) }</option>
-													</c:forEach>
-												</select>
-											</div>
-										</div>
-										<div class="empty-box">
-											<div class="text-box" id="korS${ i }"></div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										1 
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS1" onchange="writeKOR(1,this)">
+												<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
 										</div>
 									</div>
-									<!-- for문 끝-->
-								</c:forEach>
+									<div class="empty-box">
+										<div class="text-box" id="korS1"></div>
+									</div>
+								</div>
+								<!-- for문 끝-->
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										2
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS2" onchange="writeKOR(2,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS2"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										3 
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS3" onchange="writeKOR(3,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS3"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										4
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS4" onchange="writeKOR(4,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS4"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										5 
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS5" onchange="writeKOR(5,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS5"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										6 
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS6" onchange="writeKOR(6,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS6"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										7 
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS7" onchange="writeKOR(7,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS7"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										8
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS8" onchange="writeKOR(8,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS8"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+									9
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS9" onchange="writeKOR(9,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS9"></div>
+									</div>
+								</div>
+								<div class="word-box" style="float: left;">
+									<div class="word-number">
+										10
+									</div>
+									<div class="filled-box">
+										<div class="text-box">
+											<select class="custom-select" style="width:130px;" id="engS10" onchange="writeKOR(10,this)">
+											<option></option>
+												<option>recent</option>
+												<option>apple</option>
+												<option>banana</option>
+												<option>one</option>
+												<option>two</option>
+												<option>three</option>
+											</select>
+										</div>
+									</div>
+									<div class="empty-box">
+										<div class="text-box" id="korS10"></div>
+									</div>
+								</div>
 								
 							</div>
 						</div>
@@ -107,26 +282,9 @@
 				</div>
 			</section>
 			
-			<!-- 단어찾기용 -->
-			<c:forEach var="c" begin="0" end="${ korList.size()-1 }">
-				<input type="text" id="text${c}" value="${ engList.get(c) }" style="display:none;">
-				<input type="text" id="textk${c}" value="${ korList.get(c) }" style="display:none;">
-			</c:forEach>
-			
-			<!-- 한글넣기용 -->
-			<c:forEach var="c" begin="1" end="${ count }">
-				<input type="text" id="textkk${c}" style="display:none;">
-			</c:forEach>
-			
-				<input type="text" id="subKor" name="subKor" style="display:none;">
-				<input type="text" id="subEng" name="subEng" style="display:none;">
-				<input type="text" id="testcNo" name="testcNo" value="${ cNo }" style="display:none;">
-				<input type="number" id="testcount" name="testcount" value="${ count }" style="display:none">
-				
             <div style="margin:auto; text-align: center; float:left;">
-            	<input type="button" id="testcn" value="취소" style="width:100px; height:40px; border:0px; background:#e6e6eb">
-            	<input type="button" id="testchk" value="확인" style="width:100px; height:40px; border:0px; background:#606060">
-				<input type="submit" id="subok" style="display:none;">
+				<button style="width:100px; height:40px; border:0px; background:#e6e6eb" id="testcn">취소</button>
+				<button style="width:100px; height:40px; border:0px; background:#606060; color:white;" id="testchk">확인</button>
 			</div>
 		</div>
 		
@@ -134,62 +292,40 @@
 </div>
 
             
-</form>
+
 
 	<script>
-		var fect = 0;
-		var flag = true;
+	function writeKOR(num,thi){
+		var div = $("#korS" + num);
+
+		var value3 = $(thi).attr("selected","selected").val(); // 영어
+	
+		switch(value3){
 		
-		
-		function writeKOR(num,thi,index){
-			var div = $("#korS" + num);
-			
-			
-			index *= 1; // 변환 작업
-			var text = $("#text" + index); // 한글넣는 인풋텍스트
-			div.text(text.val());
-			
-			var value = $("#textk"+index).val();
-			var textt = $("#textkk" + (num));
-			textt.val(value);
-			
-			fect++;
+		case "recent":
+			div.text("최근의");
+			break;
+		case "apple":
+			div.text("사과");
+			break;
+		case "banana":
+			div.text("버내나");
+			break;
+		case "one":
+			div.text("1");
+			break;
+		case "two":
+			div.text("2");
+			break;
+		case "three":
+			div.text("3");
+			break;
 		}
+		
+	}
 	</script>
 	
 	<script>
-		$(function(){
-			$("#testchk").click(function(){
-				
-				var count = ${ count };
-				if(fect < count){
-					alert("빈칸을 전부 채워주세요.");
-				}else if($("#title").val() == ""){
-					alert("제목을 입력해주세요.");
-				}
-				else if(!fect < count){
-					var subEng = $("#subEng");
-					var subKor = $("#subKor");
-						subEng.val("");
-						subKor.val("");
-					
-					// 영어넣기
-					for(i = 0; i < count ; i++){
-						var div = $("#korS" + (i+1));
-						subEng = $("#subEng");
-						subEng.val(subEng.val() + "," + div.text());
-					}
-					// 한글넣기 
-					for(j = 1; j <= count; j++){
-						subKor = $("#subKor");
-						var text = $("#textkk" + j);
-						subKor.val(subKor.val() +"," + text.val());
-					}
-					$("#subok").click();
-				}
-			});
-			
-		});
 	</script>
 </body>
 </html>

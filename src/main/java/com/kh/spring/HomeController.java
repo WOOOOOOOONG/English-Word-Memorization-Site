@@ -35,53 +35,8 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping(value="/inquire-list.ad")
-	public String viewInquireList() {
-		return "admin/inquire-list";
-	}
-	
-	@RequestMapping(value="/memberManage.ad")
-	public String viewAdminMemberManage() {
-		return "admin/member-manage";
-	}
-	
-	@RequestMapping(value="/classify.cl")
-	public String viewClassClassify() {
-		return "statistics/class/classify";
-	}
-	
-	@RequestMapping(value="/total.cl")
-	public String viewClassTotal() {
-		return "statistics/class/total";
-	}
-	
-	@RequestMapping(value="/inquire.in")
-	public String viewInquire() {
-		return "statistics/inquire/inquire";
-	}
-	
-	@RequestMapping(value="/day.vi")
-	public String viewVisitDay() {
-		return "statistics/visit/day";
-	}
-	
-	@RequestMapping(value="/month.vi")
-	public String viewVisitMonth() {
-		return "statistics/visit/month";
-	}
-	
-	@RequestMapping(value="/time.vi")
-	public String viewVisitTime() {
-		return "statistics/visit/time";
-	}
-	
-	@RequestMapping(value="/classify.voca")
-	public String viewVocaClassify() {
-		return "statistics/voca/classify";
-	}
-	
-	@RequestMapping(value="/total.voca")
-	public String viewVocaTotal() {
-		return "statistics/voca/total";
+	@RequestMapping("error.ad")
+	public String home() {
+		return "/common/errorPage";
 	}
 }

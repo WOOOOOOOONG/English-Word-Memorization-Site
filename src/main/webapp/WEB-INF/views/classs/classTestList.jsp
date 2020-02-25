@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,45 +31,76 @@
             </tr>
         </thead>
         <tbody>
-        	<c:forEach var="i" begin="0" end="${testList.size()-1 }">
-	            <tr>
-	                <th scope="row">${ i+1 }</th>
-	                <td>${testList.get(i).testTitle }</td>
-	                
-	                <td>
-	                <c:choose>
-	                	<c:when test="${ !empty vocaList }">
-		                	<c:forEach var="j" begin="0" end="${ vocaList.size()-1 }">
-		                		<%-- <!-- 아이디비교 한번 더들어가야함 && vocaList.get(j).id eq <%= loginUser.name %> --> --%>
-		                		<c:if test="${ testList.get(i).testNo eq vocaList.get(j).testNo }">
-		                			${ vocaList.get(j).testDate }
-		                		</c:if>
-		                	</c:forEach>
-	                	</c:when>
-	                	<c:otherwise>
-	                		미응시
-	                	</c:otherwise>
-	                </c:choose>
-	                </td>
-	                
-	                <td>
-	                	<c:choose>
-	                		<c:when test="${ !empty vocaList }">
-	                			<c:forEach var="j" begin="0" end="${ vocaList.size() -1 }">
-	                				<c:if test="${ testList.get(i).testNo eq vocaList.get(j).testNo }">
-	                					${ vocaList.get(j).score }
-	                				</c:if>
-	                			</c:forEach>
-	                		</c:when>
-	                		<c:otherwise>
-	                			미응시
-	                		</c:otherwise>
-	                	</c:choose>
-	                </td>
-	                <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg">확인</button></td>
-	            </tr>
-            </c:forEach>
-            
+            <tr>
+                <th scope="row">10</th>
+                <td>2020년 1월 4주차 테스트</td>
+                <td>2020-01-27</td>
+                <td>65</td>
+                <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">9</th>
+                <td>2020년 1월 3주차 테스트</td>
+                <td>2020-01-20</td>
+                <td>45</td>
+                <td><button type="button" class="btn btn-secondary" onclick="location.href='goTest.do'">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">8</th>
+                <td>2020년 1월 2주차 테스트</td>
+                <td>2020-01-13</td>
+                <td>70</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">7</th>
+                <td>2020년 1월 1주차 테스트</td>
+                <td>2020-01-06</td>
+                <td>90</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">6</th>
+                <td>2020년 1월 1주차 테스트</td>
+                <td>2020-01-06</td>
+                <td>90</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">5</th>
+                <td>2020년 1월 1주차 테스트</td>
+                <td>2020-01-06</td>
+                <td>90</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">4</th>
+                <td>2020년 1월 1주차 테스트</td>
+                <td>2020-01-06</td>
+                <td>90</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">3</th>
+                <td>2020년 1월 1주차 테스트</td>
+                <td>2020-01-06</td>
+                <td>90</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">2</th>
+                <td>2020년 1월 1주차 테스트</td>
+                <td>2020-01-06</td>
+                <td>90</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
+            <tr>
+                <th scope="row">1</th>
+                <td>2020년 1월 1주차 테스트</td>
+                <td>2020-01-06</td>
+                <td>90</td>
+                <td><button type="button" class="btn btn-secondary">확인</button></td>
+            </tr>
         </tbody>
     </table>
     

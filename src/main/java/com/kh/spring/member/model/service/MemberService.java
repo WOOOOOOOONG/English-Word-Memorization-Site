@@ -71,4 +71,9 @@ public class MemberService {
 	public int updateProfileImg(Member m) {
 		return mDao.updateProfileImg(m);
 	}
+
+
+	public void insertVisit(Member loginMember) {
+		mDao.insertVisit(loginMember);
+	}
 }

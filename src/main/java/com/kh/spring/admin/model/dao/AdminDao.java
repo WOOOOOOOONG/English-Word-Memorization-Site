@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.admin.model.vo.Inquire;
+import com.kh.spring.member.model.vo.VisitRecord;
 
 @Repository("aDao")
 public class AdminDao {
@@ -27,5 +28,9 @@ public class AdminDao {
 
 	public int deleteResponse(int iId) {
 		return sqlSession.update("adminMapper.deleteResponse", iId);
+	}
+
+	public ArrayList<VisitRecord> selectLogList() {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectLogList");
 	}
 }

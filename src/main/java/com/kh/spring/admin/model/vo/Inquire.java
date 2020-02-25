@@ -12,11 +12,12 @@ public class Inquire {
 	private String isAnswer;
 	private String answer;
 	private String reportedId;
+	private String name;
 	
 	public Inquire() {}
 
 	public Inquire(int iId, String inquirerId, String type, String title, String content, Date registDate,
-			String isAnswer, String answer, String reportedId) {
+			String isAnswer, String answer, String reportedId, String name) {
 		super();
 		this.iId = iId;
 		this.inquirerId = inquirerId;
@@ -27,6 +28,7 @@ public class Inquire {
 		this.isAnswer = isAnswer;
 		this.answer = answer;
 		this.reportedId = reportedId;
+		this.name = name;
 	}
 
 	public int getiId() {
@@ -84,7 +86,7 @@ public class Inquire {
 	public void setIsAnswer(String isAnswer) {
 		this.isAnswer = isAnswer;
 	}
-	
+
 	public String getAnswer() {
 		return answer;
 	}
@@ -97,14 +99,22 @@ public class Inquire {
 		return reportedId;
 	}
 
-	public void setReporterId(String reportedId) {
+	public void setReportedId(String reportedId) {
 		this.reportedId = reportedId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
 		return "Inquire [iId=" + iId + ", inquirerId=" + inquirerId + ", type=" + type + ", title=" + title
 				+ ", content=" + content + ", registDate=" + registDate + ", isAnswer=" + isAnswer + ", answer="
-				+ answer + ", reporterId=" + reportedId + "]";
+				+ answer + ", reportedId=" + reportedId + ", name=" + name + "]";
 	}
 }

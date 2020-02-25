@@ -62,7 +62,7 @@
 						<tr class="view">
 							<td>${item.iId}</td>
 							<td>${item.inquirerId}</td>
-							<td>임세웅</td> <!-- 이름 따와서 바꾸기 -->
+							<td>${item.name}</td>
 							<td>${item.type}</td>
 							<td>${item.title}</td>
 							<td>${item.registDate}</td>
@@ -167,7 +167,12 @@
 	            });
 	            function response(iId, i) {
 	            	var text = $($("div[name=note"+i+"]").summernote("code")).text();
-	            	location.href = "http://localhost:8800/spring/response.ad?text="+text+"&iId="+iId;
+	            	console.log(text);
+	            	if(text == "") {
+	            		alert("답변 내용을 입력하세요");
+	            	}else {
+	            		location.href = "http://localhost:8800/spring/response.ad?text="+text+"&iId="+iId;
+	            	}
 	            }
         	</script>
 		</div>

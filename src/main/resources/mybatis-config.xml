@@ -17,6 +17,7 @@
 		<typeAlias type="com.kh.spring.common.model.vo.Category" alias="Category"/>
 		<typeAlias type="com.kh.spring.member.model.vo.Member" alias="Member"/>
 		<typeAlias type="com.kh.spring.admin.model.vo.Inquire" alias="Inquire"/>
+		<typeAlias type="com.kh.spring.member.model.vo.VisitRecord" alias="Visit"/>
 		<typeAlias type="com.kh.spring.friend.model.vo.Friend" alias="Friend"/>
 	</typeAliases>
 	
