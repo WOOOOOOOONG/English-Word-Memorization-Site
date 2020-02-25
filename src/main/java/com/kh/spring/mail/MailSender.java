@@ -15,7 +15,7 @@ public class MailSender {
 	
 	public MailSender() {
 		this.fromEmail = "tlstmdghks4@gmail.com";
-		this.password = "****"; // 비밀번호 입력해야 정상가동 ㅎ
+		this.password = "ssh!1082416"; // 비밀번호 입력해야 정상가동 ㅎ
 	}
 	
 	public void sendMail(String toEmail, String toName, String subject, String content) {

@@ -46,4 +46,21 @@ public class MemberDao {
 	public Member selectMember(Member m) {
 		return sqlSession.selectOne("memberMapper.selectMember", m);
 	}
+
+
+	public String selectProfileImg(Member loginUser) {
+		return sqlSession.selectOne("memberMapper.selectProfileImg",loginUser);
+	}
+
+
+	public int updateProfile(Member m) {
+		return sqlSession.update("memberMapper.updateProfile",m);
+	}
+
+	public int updateProfileImg(Member m) {
+		return sqlSession.update("memberMapper.updateProfileImg",m);
+	}
+	public int insertProfileImg(Member m) {
+		return sqlSession.insert("memberMapper.insertProfileImg",m);
+	}
 }

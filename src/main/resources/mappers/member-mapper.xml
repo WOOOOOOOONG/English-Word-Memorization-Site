@@ -56,13 +56,31 @@
 	</select>
 	<!-- 비밀번호 변경 -->
 	<update id="changeMemberPwd" parameterType="Member">
-		update Member set PWD=#{pwd} where mid=#{mid}
+		update Member set PWD=#{pwd} where mid=#{mId}
 	</update>
-	
+	<!-- 로그인 -->
 	<select id="selectMember" parameterType="Member" resultMap="memberResultSet">
 		SELECT *
 		FROM MEMBER
 		WHERE mID=#{mId}
 		AND STATUS='Y'
 	</select>
+	<!-- 프로필 이미지 찾기 -->
+	<select id="selectProfileImg" parameterType="Member" resultType="string">
+		select change_name from storage where refer_id=#{mId}
+	</select>
+	<!-- 프로필 업데이트 -->
+	<update id="updateProfile" parameterType="Member">
+		update member set introduce=#{introduce},nickname=#{nickname} where mid=#{mId}
+	</update>
+	<update id="updateProfileImg" parameterType="Member">
+		update storage set CHANGE_NAME=#{profileimg} where REFER_ID=#{mId}
+	</update>
+	<!-- 회원가입 시 디폴트 이미지  -->
+	<insert id="insertProfileImg" parameterType="Member">
+		INSERT INTO storage
+		VALUES(
+		FNO_SEQ.nextval,#{mId},default,'profileimg',default,#{profileimg},default
+		)
+	</insert>
 </mapper>

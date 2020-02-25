@@ -24,8 +24,8 @@
    border-top-right-radius: 10%;
    border-bottom-left-radius: 10%;
    border-bottom-right-radius: 10%;
-   border:1px solid black;
-   overflow:hidden;
+  
+   
    box-shadow: 5px 5px 5px;
    width:150px;
    height:150px;
@@ -56,13 +56,18 @@ body {
 }
 #myintroduce{
     width:100%;
-    height:85%;
+    height:90%;
     margin-left:5%;
     resize: none;
 }
 .myicon{
   width:100%; 
-  height:100%;
+  height:150px;
+ 
+   border-top-left-radius: 10%;
+   border-top-right-radius: 10%;
+   border-bottom-left-radius: 10%;
+   border-bottom-right-radius: 10%;
 }
 #profilecontent{
     
@@ -501,41 +506,75 @@ body {
 
         };
     </script>
-    
+    <c:if test="${ loginMember.profileimg =='defaultimg.png' }">
+    	<script>
+    		$(function(){
+    			alert("처음 오셨습니다. 프로필을 작성해주세요 ^^");
+    			$("#profile").click();
+    		});
+    	</script>
+    </c:if>	
     <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="application"/>
     <jsp:include page="../common/menubar.jsp"/>
-    <div id="profile" class="mypageicon"><img src="${ contextPath }/resources/images/user.png" class="myicon">프로필 수정</div>
-	<div id="class" class="mypageicon"><img src="${ contextPath }/resources/images/로고.jpg" class="myicon"></div>
-    <div id="dan" class="mypageicon"><img src="${ contextPath }/resources/images/word.png" class="myicon"></div>
-    <div id="tmzp" class="mypageicon"><img src="${ contextPath }/resources/images/스케쥴.png" class="myicon"></div>
-    <div id="fix" class="mypageicon"><img src="${ contextPath }/resources/images/수정.png" class="myicon"></div>
+    <div id="profile" class="mypageicon">
+		<figure>
+		    <img src="${ contextPath }/resources/images/user.png" class="myicon">
+		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">프로필 관리</figcaption>
+	   </figure>
+    </div>
+	<div id="class" class="mypageicon">
+		<figure>
+		    <img src="${ contextPath }/resources/images/로고.jpg" class="myicon">
+		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">내 클래스</figcaption>
+	   </figure>
+	</div>
+    <div id="dan" class="mypageicon">
+    	<figure>
+		    <img src="${ contextPath }/resources/images/word.png" class="myicon">
+		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">내 단어장</figcaption>
+	   </figure>
+	 </div>
+    <div id="tmzp" class="mypageicon">
+    	<figure>
+			<img src="${ contextPath }/resources/images/스케쥴.png" class="myicon">	
+		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">일정 관리</figcaption>
+	   </figure>
+    </div>
+    <div id="fix" class="mypageicon">
+    	<figure>
+		    <img src="${ contextPath }/resources/images/수정.png" class="myicon">
+		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">개인정보 관리</figcaption>
+	   </figure>
+    </div>
     <!-- 프로필 수정 페이지 -->
     <div id="profilecontent" class="mypagecontent">
         <!-- 프로필 사진 -->
+        <form method="post" action="profile.me" enctype="multipart/form-data">
+        <input type="text"name="mId" style="display:none;" value="${loginMember.mId }">
         <figure id="profilephoto">
-            <input type="file" id="photoinput" accept=".jpg,.jpeg,.png,.gif">
-            <img id="myphoto" onclick="$('#photoinput').click();" />
-            <figcaption>학생</figcaption> <!-- 회원  등급 -->
+            <input type="file" id="photoinput" name="photoinput" accept=".jpg,.jpeg,.png,.gif">
+            <img id="myphoto" src="${contextPath }/resources/profileimg/${loginMember.profileimg}" onclick="$('#photoinput').click();" />
+            <!-- <figcaption>학생</figcaption> 회원  등급 -->
         </figure>
         <div style="background: white; width:50%; margin:2.5%; height:300px; float:left;">
             <!-- 이름 -->
             <div class="form-group row" style="margin-top:10%;">
                 <label for="username" class="col-form-label">이름</label>
-                <input type="text" readonly class="form-control" id="username" value="유정연"
+                <input type="text" readonly class="form-control" id="username" value="${loginMember.name }"
                  style="width:40%;  float: left;">
             </div>
             <!-- 닉네임 -->
             <div class="form-group row">
                 <label for="mynickname" class="col-form-label">닉네임</label>
-                <input type="text" class="form-control" id="mynickname"
-                 placeholder="윾정연" value="윾정연" style="width:40%;  float: left;">
+                <input type="text" class="form-control" id="mynickname" name="nickname"
+                 placeholder="${loginMember.nickname }" style="width:40%;  float: left;">
             </div>
             <!-- 관심분야 -->
             <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <input type="checkbox" id="inter1" disabled="true">
+                        <input type="checkbox" id="inter1">
                     </div>
                 </div>
                 <label for="inter1" type="text" class="form-control">토익</label>
@@ -544,7 +583,7 @@ body {
             <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <input type="checkbox" id="inter2" disabled="true">
+                        <input type="checkbox" id="inter2" >
                     </div>
                 </div>
                 <label for="inter2" type="text" class="form-control">수능</label>
@@ -553,7 +592,7 @@ body {
             <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
                 <div class="input-group-prepend">
                     <div class="input-group-text">
-                        <input type="checkbox" id="inter3" disabled="true">
+                        <input type="checkbox" id="inter3" >
                     </div>
                 </div>
                 <label for="inter3" type="text" class="form-control">스피킹</label>
@@ -562,7 +601,7 @@ body {
             <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
-                            <input type="checkbox" id="inter4" disabled="true">
+                            <input type="checkbox" id="inter4" >
                         </div>
                     </div>
                     <label for="inter4" type="text" class="form-control">공부</label>
@@ -570,23 +609,19 @@ body {
         </div>
 
         <div style="background: white; width:95%; height:40%; margin:2.5%; float:left;">
-            <form style="width:100%; height:100%;">
+            
                 <br>
-
-
-
-                <div class="form-group row" style="float:left; width:100%; height:100%;">
-                    <textarea class="form-control" id="myintroduce" placeholder="자기소개" rows="3"></textarea>
+                <div class="form-group row" style="float:left; width:100%; height:250px;">
+                    <textarea class="form-control" id="myintroduce"name="introduce"
+                     placeholder="자기소개" rows="3">${loginMember.introduce}</textarea>
                 </div>
-
-
-
-            </form>
+            
             <!-- 자기 소개 -->
 
             <button class="btn btn-success" id="profilechangebtn">프로필 수정</button>
+           
         </div>
-
+		 </form>
     </div>
     <script>
         // 사진 미리보기 함수 

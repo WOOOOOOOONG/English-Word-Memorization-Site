@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="friendMapper">
+	<resultMap id="friendResultSet" type="Friend">
+		<id property="mId" column="ID"/>
+		<result property="fId" column="FR_ID"/>
+		<result property="groupName" column="GROUP"/>
+		<result property="comment" column="COMMENT"/>
+		<result property="nickname" column="NICKNAME"/>
+	</resultMap>
+
+	<select id="friendList" parameterType="Friend" resultMap="friendResultSet">
+		SELECT f.* ,m.nickname 
+		FROM FRIEND f , Member m
+		where id=#{mId} and mid=f.fr_id
+	</select>
+</mapper>

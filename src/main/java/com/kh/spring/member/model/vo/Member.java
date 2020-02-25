@@ -14,7 +14,7 @@ public class Member {
 	private String userStatus;
 	private String introduce;
 	private String nickname;
-	
+	private String profileimg;
 	
 	public Member() {}
 
@@ -32,6 +32,14 @@ public class Member {
 		this.userStatus = userStatus;
 		this.introduce = introduce;
 		this.nickname = nickname;
+	}
+	
+	public String getProfileimg() {
+		return profileimg;
+	}
+
+	public void setProfileimg(String profileimg) {
+		this.profileimg = profileimg;
 	}
 
 	public String getmId() {
