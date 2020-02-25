@@ -37,7 +37,7 @@ public class MemberService {
 	public int insertMember(Member m) {
 		String encPwd= bcryptPasswordEncoder.encode(m.getPwd());
 		m.setPwd(encPwd);
-		return mDao.insertMember(m);
+		return (mDao.insertMember(m)+mDao.insertProfileImg(m));
 	}
 
 	public String findEmail(String id) {
@@ -54,10 +54,21 @@ public class MemberService {
 	public Member loginMember(Member m) {
 		
 		Member loginUser = mDao.selectMember(m);
-		
 		if(loginUser != null && !bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
 			loginUser = null;
+		}else {
+			loginUser.setProfileimg(mDao.selectProfileImg(loginUser));
 		}
 		return loginUser;
+	}
+
+
+	public int updateProfile(Member m) {
+		return mDao.updateProfile(m);
+	}
+
+
+	public int updateProfileImg(Member m) {
+		return mDao.updateProfileImg(m);
 	}
 }

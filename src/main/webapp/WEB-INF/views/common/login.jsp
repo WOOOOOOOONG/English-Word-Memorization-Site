@@ -371,8 +371,8 @@ div>button {
 
 			<form id="loginform" class="form" method="post" 
 			action='${contextPath}/Memberlogin.me'>
-				<input type="text" id="loginmId" placeholder="Username"> 
-				<input type="password" id="loginpwd" placeholder="Password">
+				<input type="text" name="loginmId" placeholder="Username"> 
+				<input type="password" name="loginpwd" placeholder="Password">
 				<button type="submit" id="login-button">Login</button>
 			</form>
 			<div id="dd"

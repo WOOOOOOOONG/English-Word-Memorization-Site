@@ -116,6 +116,7 @@ nav {
    border-top-right-radius: 10px;
    overflow:hidden; 
    z-index:10;
+   background:whitesmoke;
 }
 .flno{
 	animation-name: flanino; 
@@ -148,6 +149,7 @@ nav {
  	overflow:scroll;
  	overflow-x:hidden;
  	overflow-y:auto;
+ 	background:whitesmoke;
  }
  #chatexit{
  	position:fixed;
@@ -184,6 +186,40 @@ nav {
         height: 40px;
     }
 }
+.myfriend{
+	text-decoration:none;
+}
+.chattd{
+	vertical-align: top;
+	padding-bottom: 5px;
+}
+.chatprofileimg{
+	display: inline;
+	border-radius: 50%;
+	width:50px;
+	height: 50px;
+	margin-top: 7px;
+	
+}
+.mychatp{
+	font-family: 'Helvetica-Neue', Helvetica, Arial;
+	font-weight: 300;
+	display: inline-block;
+	min-height: 20px;
+	min-width: 70px;
+	margin: 0;
+	vertical-align: top;
+	line-height: 1.4;
+	font-size: 16px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 20px;
+	padding-right: 20px;
+	background-color: #EFF3F7;
+	border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5;
+	margin: 5px 10px 0;
+}
+
 </style>
 
 </head>
@@ -194,9 +230,23 @@ nav {
 <c:set var="loginpage" value="login.me"/>
   <div style="width:100%; height:40px; text-align: right">
   	<c:url var="loginpage" value="login.me"/>
+  	<!-- 로그인 유저가 없을시 -->
+  	<c:if test="${ empty loginMember }">
     <a class="gonav" href="${ loginpage }">아이디 비밀번호찾기</a>
     <a class="gonav" href="${ loginpage }">회원가입</a> 
     <a class="gonav" href="${ loginpage }">로그인</a> 
+    </c:if>
+    <!-- 로그인 유저 있을때 -->
+    <c:if test="${ !empty loginMember }">
+   		 <c:if test="${ loginMember.mId == 'admin' }">
+    		<a class="gonav" href="#">관리자페이지</a>
+    	</c:if>
+    	<c:if test="${ loginMember.mId != 'admin' }">
+    		<a class="gonav"href="mypage.me">마이페이지</a>
+    	</c:if>
+    	<a class="gonav" href="Memberlogout.me">로그아웃</a>
+    	<span class="gonav">${ loginMember.nickname }님 환영합니다.</span>
+    </c:if>
 </div>
 <nav id="nav-1">
   <a class="link-2" href="#"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
@@ -205,17 +255,19 @@ nav {
   <a class="link-1" href="ClassList.do">클래스</a>
   <a class="link-1" href="#">고객센터</a>
 </nav>
-<c:if test="${ !empty sessionScope.loginUser }">
+<c:if test="${ !empty sessionScope.loginMember }">
 <div id="chatting"  >
 	<div id="chatexit"> 
 		<span id="friendname"></span>
+		<input type="text" style="display:none;" id="friendId">
 		<button type="button" class="close" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
 	<br>
-  <table style="width:100%; height:80%;" cellspacing="0" cellpadding="0">
-    <tr>
+  <table id="chattable" style="width:100%; height:80%;" cellspacing="0" cellpadding="0">
+  <thead >
+    <tr style="height:10px;">
       <th width="50"></th>
       <th width="50"></th>
       <th width="50"></th>
@@ -229,32 +281,14 @@ nav {
       <th width="50"></th>
       <th width="50"></th>
     </tr>
-    <tr>
-      <td style="vertical-align: top; padding-bottom: 5px;" width="50"><img style="display: inline; border-radius: 50%; width:50px; height: 50px; margin-top: 7px;" alt="Ben" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/78060/bc-ava.jpg" width="50"></td>
-      <td style="vertical-align: top; padding-bottom: 5px;" colspan="11" style="vertical-align: top;">
-        <p style="font-family: 'Helvetica-Neue', Helvetica, Arial; font-weight: 300; display: inline-block; min-height: 20px; min-width: 70px; margin: 0; vertical-align: top; line-height: 1.4; font-size: 16px; padding-top: 15px; padding-bottom: 15px; padding-left: 20px; padding-right: 20px; background-color: #EFF3F7; border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5; margin: 5px 10px 0;">Hi, I’m Ben.</p><span style="font-family: 'Helvetica-Neue', Helvetica, Arial; font-size: 9px; padding: 4px; letter-spacing: 0.1em; border-radius: 2px; color: #147FD7; text-transform: uppercase; display: block; padding: 10px 10px; clear: both;">Ben Cohen</span></td>
-    </tr>
-    <tr align="right">
-      <td style="vertical-align: top; padding-bottom: 5px;" colspan="11">
-        <p style="float:right; font-family: 'Helvetica-Neue', Helvetica, Arial; font-weight: 300; display: inline-block; min-width: 70px; margin: 0; vertical-align: top; line-height: 1.4; font-size: 16px; padding: 15px 20px; background-color: #EFF3F7; border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5; margin: 5px 10px 0;">And I’m Jerry.</p><span style="float:right; font-family: 'Helvetica-Neue', Helvetica, Arial; font-size: 9px; padding: 4px; letter-spacing: 0.1em; border-radius: 2px; color: #147FD7; text-transform: uppercase; display: block; margin: 5px 10px; clear: both;">Jerry Greenfield</span></td>
-      <td style="vertical-align: top; padding-bottom: 5px;" width="50"><img style="display: inline; border-radius: 50%; width:50px; height: 50px; margin-top: 7px;" alt="Jerry" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/78060/jg-ava.jpg" width="50"></td>
-    </tr>
-    <tr>
-      <td style="vertical-align: top; padding-bottom: 5px;" width="50"><img style="display: inline; border-radius: 50%; width:50px; height: 50px; margin-top: 7px;" alt="Ben" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/78060/bc-ava.jpg" width="50"></td>
-      <td style="vertical-align: top; padding-bottom: 5px;" colspan="11">
-        <p style="font-family: 'Helvetica-Neue', Helvetica, Arial; font-weight: 300; display: inline-block; min-width: 70px; margin: 0; vertical-align: top; line-height: 1.4; font-size: 16px; padding: 15px 20px; background-color: #EFF3F7; border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5; margin: 5px 10px 0;">I’m a person.</p><span style="font-family: 'Helvetica-Neue', Helvetica, Arial; font-size: 9px; padding: 4px; letter-spacing: 0.1em; border-radius: 2px; color: #147FD7; text-transform: uppercase; display: block; margin: 5px 10px; clear: both;">Ben Cohen</span></td>
-    </tr>
-    <tr align="right">
-      <td style="vertical-align: top; padding-bottom: 5px;" colspan="11">
-        <p style="float:right; font-family: 'Helvetica-Neue', Helvetica, Arial; font-weight: 300; display: inline-block; min-width: 70px; margin: 0; vertical-align: top; line-height: 1.4; font-size: 16px; padding: 15px 20px; background-color: #EFF3F7; border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5; margin: 5px 10px 0;">And I’m a person.</p><span style="float:right; font-family: 'Helvetica-Neue', Helvetica, Arial; font-size: 9px; padding: 4px; letter-spacing: 0.1em; border-radius: 2px; color: #147FD7; text-transform: uppercase; display: block; margin: 5px 10px; clear: both;">Jerry Greenfield</span></td>
-      <td style="vertical-align: top; padding-bottom: 5px;" width="50"><img alt="Jerry" style="display: inline; border-radius: 50%; width:50px; height: 50px; margin-top: 7px;" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/78060/jg-ava.jpg" width="50"></td>
-    </tr>
-     
+	</thead>
+    <tbody>
+     </tbody>
     
   </table>
   <br>
 	<div style="width:300px; height:30px;position:fixed; background:whitesmoke; bottom:0;" >
-    	 <textarea style="width:220px; height:30px; margin:0px; resize: none;">
+    	 <textarea id="chatcontent" style="width:220px; height:30px; margin:0px; resize: none;">
     	 </textarea>
     	 <input id="chatsend" type="button" value="전송">
     </div>	
@@ -264,45 +298,35 @@ nav {
 	<div id="friendlisttoggle" >
 		친구리스트
 	</div>
-
 	<ul class="accordion">
-	<li class="accordion-item is-active">
-		<h5 class="accordion-thumb">일반</h5>
-		<ul class="accordion-panel">
-			<li><a class="myfriend" href="#">정연</a></li>
-			<li><a class="myfriend" href="#">지효</a></li>
-			<li><a class="myfriend" href="#">모모</a></li>
-		</ul>
-	</li>
-	
+	<c:forEach var="fl" items="${ friendList }">
+	<c:set var="group" value="${fl.groupName }"/>
 	<li class="accordion-item">
-		<h5 class="accordion-thumb">내친구</h5>
+		<h5 class="accordion-thumb">${fl.groupName }</h5>
 		<ul class="accordion-panel">
-			<li><a class="myfriend" href="#">미나</a></li>
-			<li><a class="myfriend" href="#">나연</a></li>
-			<li><a class="myfriend" href="#">사나</a></li>
+		
+		<c:forEach var="fltwo" items="${ friendList }">
+			<c:if test="${ fl.groupName == fltwo.groupName }">
+				<li><a class="myfriend" href="#">${fltwo.nickname }</a>     
+				<span style="float:right; margin-right:10px;">${fltwo.comment }</span>
+				<input type="text" style="display:none;"value="${fltwo.fId }">
+				</li>
+			</c:if>
+		</c:forEach>
+		
 		</ul>
 	</li>
-	
-	<li class="accordion-item">
-		<h5 class="accordion-thumb">회사 동료</h5>
-		<ul class="accordion-panel">
-			<li><a class="myfriend" href="#">다현</a></li>
-			<li><a class="myfriend" href="#">채영</a></li>
-			<li><a class="myfriend" href="#">나연</a></li>
-		</ul>
-	</li>
+	</c:forEach>
 </ul>
 </div>
 </c:if>
 <script>
+var chatId =null;
 $(function() {
+	// 로딩완료시 채팅입력창 초기화
+	$("#chatcontent").val("");
 	// (Optional) Active an item if it has the class "is-active"	
 	$(".accordion > .accordion-item.is-active").children(".accordion-panel").slideDown();
-	
-	//$(".accordion").css("display","none");
-	
-	
 	$(".accordion-thumb").click(function() {
 		// 다른 애들 안보이게
 		$(this).parent().siblings(".accordion-item").removeClass("is-active").children(".accordion-panel").slideUp();
@@ -327,27 +351,106 @@ $("#friendlisttoggle").click(function(){
 	
 });
 $(".myfriend").click(function(){
-	$("#friendname").html($(this).html());	
-
+	$("#friendname").html($(this).html());
+	var fId = $(this).next().next().val();
+	$("#friendId").val(fId);
 	if($("#chatting").css("display")=="block"){
 		$("#chatting").css("display","none");
+		clearInterval(chatId);
 	}else{
 	// 에이작스 연결하기
-	
-	
-	
-	
-	// 에이작스로 채팅로그 불러온 후 
-	$("#chatting").css("display","block");
+	    chatId = setInterval(chatloggo, 2500);
+	 // 에이작스로 채팅로그 불러온 후 
+		$("#chatting").css("display","block");
 	}
 });
 $(".close").click(function(){
 	$(this).parent().parent().css("display","none");
 
 });
-
+$("#chatsend").click(function(){
+	var content = $("#chatcontent").val();
+	var fId = $("#friendId").val();
+	var mId = '${ loginMember.mId}';
+	// 에이작스
+	$.ajax({
+        url:"chat.do",
+        data:{mId:mId,fId:fId,content:content},
+        type:"post",
+   		success:function(data){
+			//성공
+   			if(data == "success"){
+   				// 마지막에 보낸 글자 없애기
+   	   			$("#chatcontent").val("");
+   				// 채팅보낸거 출력하기
+   	   		var $tr = $("<tr>");
+			var $tdimg = $(" <td class='chattd' width='50'>");
+			var $profileimg = $("<img class='chatprofileimg' src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/78060/jg-ava.jpg' width='50'>");
+			$tdimg.append($profileimg);
+			var $chatContent = $(" <td class='chattd' colspan='11' >");
+			var $chat = $(" <p class='mychatp'>").text(content);
+			$chatContent.append($chat);
+			
+			$tr.append($tdimg);
+			$tr.append($chatContent);
+			$tableBody.append($tr);
+   			}else{
+   				alert("채팅 오류!! 관리자에게 문의하세요");
+   			}
+   		
+		},error:function(e){
+			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+		}
+		
+	});	
 	
+});
+	function chatloggo(mId,fId){
+		var fId = $("#friendId").val();
+		var mId = '${ loginMember.mId}';
+		$.ajax({
+	        url:"chatlog.ck",
+	        data:{mId:mId,fId:fId},
+	        dataType:"json",
+	        type:"post",
+	   		success:function(data){
+				$tableBody = $("#chattable tbody");
+				$tableBody.html("");
+				
+				for(var i in data.clist){
 
+					if(data.clist[i].writerId == mId){
+						var $tr = $("<tr>");
+						var $tdimg = $(" <td class='chattd' width='50'>");
+						var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/"+mId+"img.jpg' width='50'>");
+						$tdimg.append($profileimg);
+						var $chatContent = $(" <td class='chattd' colspan='11' >");
+						var $chat = $(" <p class='mychatp'>").text(data.clist[i].content);
+						$chatContent.append($chat);
+						
+						$tr.append($tdimg);
+						$tr.append($chatContent);
+					}else{
+						var $tr = $("<tr align='right'>");
+						var $tdimg = $(" <td class='chattd' width='50'>");
+						var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/"+fId+"img.png' width='50'>");
+						$tdimg.append($profileimg);
+						var $chatContent = $(" <td class='chattd' colspan='11' >");
+						var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
+						$chatContent.append($chat);
+						
+						$tr.append($chatContent);
+						$tr.append($tdimg);
+					}
+					
+					$tableBody.append($tr);
+				}
+				
+			},error:function(e){
+				alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+			}
+		});
+	} 
 	
 
 </script>
