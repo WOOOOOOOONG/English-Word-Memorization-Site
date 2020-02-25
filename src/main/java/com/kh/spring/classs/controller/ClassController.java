@@ -12,13 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.classs.model.service.ClassService;
+import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
 
@@ -105,7 +109,20 @@ public class ClassController {
 	
 	// 클래스 시험목록 누르면 가는 메소드
 	@RequestMapping("classTestList.do")
-	public ModelAndView classTestList(ModelAndView mv) {
+	public ModelAndView classTestList(ModelAndView mv,String cNo) {
+		System.out.println(cNo);
+		
+		ArrayList<ClassTest> testList = cService.selectTestList(cNo);
+		ArrayList<TestVoca> vocaList = new ArrayList<>();
+		for(int i = 0 ; i < testList.size(); i++) {
+			ArrayList<TestVoca> vocaList2 = cService.selectVocaList(testList.get(i).getTestNo());
+			for(int j = 0; j < vocaList2.size(); i++) {
+				vocaList.add(vocaList.get(j));
+			}
+		}
+		mv.addObject("cNo",cNo);
+		mv.addObject("testList",testList);
+		mv.addObject("vocaList",vocaList);
 		mv.setViewName("classs/classTestList");
 		return mv;
 	}
@@ -124,10 +141,61 @@ public class ClassController {
 		return mv;
 	}
 	
-	// 시험 만들기
+	// 시험 만들기로 이동
 	@RequestMapping("createTest.do")
-	public ModelAndView createTest(ModelAndView mv) {
+	public ModelAndView createTest(ModelAndView mv,
+			@RequestParam(value="chkkor", defaultValue="kkk") String kor,
+			@RequestParam(value="chkeng", defaultValue="eee") String eng,
+			@RequestParam(value="testCount", defaultValue="c10") String StringCount,String testcNo) {
+		
+		// 한글 리스트
+		String[] korListorg = kor.split(","); 
+		List<String> korList = new ArrayList<String>(); 
+		Collections.addAll(korList, korListorg); 
+		
+		// 영어 리스트
+		String[] engListorg = eng.split(","); 
+		List<String> engList = new ArrayList<String>();
+		for(int i = 0 ; i < engListorg.length; i++) {
+			engList.add(engListorg[i]);
+		}
+		//Collections.addAll(engList, engListorg);
+		
+		int count = 0;
+		if(StringCount.equals("c10")) {
+			count = 10;
+		}else if(StringCount.equals("c20")) {
+			count = 20;
+		}else {
+			count = 25;
+		}
+		
+		
+		mv.addObject("korList",korList);
+		mv.addObject("engList",engList);
+		mv.addObject("count",count);
+		mv.addObject("cNo",testcNo);
 		mv.setViewName("classs/createTest");
+		
+		return mv;
+	}
+	// 시험 만들기
+	@RequestMapping("insertTest.do")
+	public ModelAndView insertTest(ModelAndView mv,String title,String testcNo, String subKor, String subEng, int testcount) {
+		String kor = subKor.replaceFirst(",","");
+		String eng = subEng.replaceFirst(",","");
+		
+		ClassTest test = new ClassTest();
+		test.setTestEng(eng);
+		test.setTestKor(kor);
+		test.setTestExno(testcount);
+		test.setTestNo(testcNo);
+		test.setTestTitle(title);
+		test.setcNo(testcNo);
+		System.out.println(test);
+		int result = cService.insertTest(test);
+		mv.addObject("cNo",testcNo);
+		mv.setViewName("classs/myClassView");
 		return mv;
 	}
 	
@@ -377,6 +445,14 @@ public class ClassController {
 		mv.setViewName("classs/classListView");
 		
 		return mv;
+	}
+	
+	
+	@RequestMapping("getClassSetName.do")
+	public List<String> getClassSetName(@RequestBody String cNo){
+		System.out.println(cNo);
+		List<String> titleList = cService.getClassSetName(cNo);
+		return null;
 	}
 
 }

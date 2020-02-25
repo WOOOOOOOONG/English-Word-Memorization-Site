@@ -1,12 +1,15 @@
 package com.kh.spring.classs.model.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.classs.model.dao.ClassDao;
+import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
 
@@ -70,5 +73,32 @@ public class ClassServiceImpl implements ClassService{
 	public ArrayList<Classs> searchClassList(String cateList) {
 		// TODO Auto-generated method stub
 		return cDao.searchClassList(cateList);
+	}
+
+	@Override
+	public List<String> getClassSetName(String cNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	// 테스트 만들기
+	@Override
+	public int insertTest(ClassTest test) {
+		// TODO Auto-generated method stub
+		return cDao.insertTest(test);
+	}
+
+	// 클래스에 소속된 테스트 가져옴
+	@Override
+	public ArrayList<ClassTest> selectTestList(String cNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectTestList(cNo);
+	}
+
+	// 테스트에 소속된 성적들 가져옴
+	@Override
+	public ArrayList<TestVoca> selectVocaList(String testNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectVocaList(testNo);
 	}
 }
