@@ -2,7 +2,7 @@ package com.kh.spring.classs.model.vo;
 
 public class ClassTest {
 	private String testNo;				// TEST_NO
-	private String testExno;			// TEST_EXNO
+	private int testExno;			// TEST_EXNO
 	private String testTitle;			// TEST_TITLE
 	private String testKor;				// TEST_KOR
 	private String testEng;				// TEST_ENG
@@ -10,7 +10,7 @@ public class ClassTest {
 	
 	public ClassTest() {}
 
-	public ClassTest(String testNo, String testExno, String testTitle, String testKor, String testEng, String cNo) {
+	public ClassTest(String testNo, int testExno, String testTitle, String testKor, String testEng, String cNo) {
 		super();
 		this.testNo = testNo;
 		this.testExno = testExno;
@@ -28,11 +28,11 @@ public class ClassTest {
 		this.testNo = testNo;
 	}
 
-	public String getTestExno() {
+	public int getTestExno() {
 		return testExno;
 	}
 
-	public void setTestExno(String testExno) {
+	public void setTestExno(int testExno) {
 		this.testExno = testExno;
 	}
 

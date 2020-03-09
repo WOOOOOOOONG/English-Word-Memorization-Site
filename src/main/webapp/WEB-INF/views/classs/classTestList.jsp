@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fnc" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,78 +33,65 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row">10</th>
-                <td>2020년 1월 4주차 테스트</td>
-                <td>2020-01-27</td>
-                <td>65</td>
-                <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">9</th>
-                <td>2020년 1월 3주차 테스트</td>
-                <td>2020-01-20</td>
-                <td>45</td>
-                <td><button type="button" class="btn btn-secondary" onclick="location.href='goTest.do'">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">8</th>
-                <td>2020년 1월 2주차 테스트</td>
-                <td>2020-01-13</td>
-                <td>70</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">7</th>
-                <td>2020년 1월 1주차 테스트</td>
-                <td>2020-01-06</td>
-                <td>90</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">6</th>
-                <td>2020년 1월 1주차 테스트</td>
-                <td>2020-01-06</td>
-                <td>90</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>2020년 1월 1주차 테스트</td>
-                <td>2020-01-06</td>
-                <td>90</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>2020년 1월 1주차 테스트</td>
-                <td>2020-01-06</td>
-                <td>90</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>2020년 1월 1주차 테스트</td>
-                <td>2020-01-06</td>
-                <td>90</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>2020년 1월 1주차 테스트</td>
-                <td>2020-01-06</td>
-                <td>90</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
-            <tr>
-                <th scope="row">1</th>
-                <td>2020년 1월 1주차 테스트</td>
-                <td>2020-01-06</td>
-                <td>90</td>
-                <td><button type="button" class="btn btn-secondary">확인</button></td>
-            </tr>
+        <c:set var="flag" value="false"/>
+        <c:set var="match" value="0"/>
+        	<c:choose>
+	        	<c:when test="${!empty testList }">
+	        		<!-- 클래스에 시험목록이 있다면. -->
+		        	<c:forEach var="i" begin="0" end="${testList.size()-1 }">
+			            <tr>
+			                <th scope="row">${ i+1 }</th>
+			                <td>${testList.get(i).testTitle }</td>
+			                <!-- 클래스에 누군가 한명이라도 시험본 목록이있다면. ... -->
+			                <c:set var="flag" value="false"/>
+			                <c:choose>
+			                	<c:when test="${ !empty vocaList }">
+			                		<c:forEach var="j" begin="0" end="${ vocaList.size()-1 }">
+			                			<c:if test="${ testList.get(i).testNo eq vocaList.get(j).testNo && loginMember.mId eq vocaList.get(j).id && !flag}">
+			                				<td>${ vocaList.get(j).testDate }</td>
+			                				<td>${ vocaList.get(j).score }</td>
+			                				<td><button type="button" class="btn btn-secondary" onclick="viewTest(${ match })">확인</button>
+			                					<button type="button" data-toggle="modal" data-target=".pre${ match }" id="pre${ match }" style="display:none;"></button>
+			                					<c:set var="match" value="${ match + 1 }"/>	
+			                				</td>
+			                				<c:set var="flag" value="true"/>
+			                			</c:if>
+			                		</c:forEach>
+			                		<c:if test="${ !flag }">
+			                			<td>미응시</td>
+		                				<td>미응시</td>
+		                				<td><input type="button" value="시험보기" class="btn btn-secondary" onclick="location.href='goTest.do?testNo=${ testList.get(i).testNo }'"></td>
+			                		</c:if>
+			                		<c:set var="flag" value="false"/>
+			                	</c:when>
+			                	
+			                	<c:when test="${ empty vocaList || !flag }">
+	                				<td>미응시</td>
+	                				<td>미응시</td>
+	                				<td><input type="button" value="시험보기" class="btn btn-secondary" onclick="location.href='goTest.do?testNo=${ testList.get(i).testNo }'"></td>
+	                			</c:when>
+	                			
+			                </c:choose>
+			               <!-- <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".bd-example-modal-lg">확인</button> -->
+		              	
+			            </tr>
+		            </c:forEach>
+	            </c:when>
+	            <c:otherwise>
+	            	<tr>
+	            		<td colspan="4"> 해당 클래스에 시험목록이 없습니다.</td>
+	            	</tr>
+	            </c:otherwise>
+            </c:choose>
         </tbody>
     </table>
+    
+    <!-- 모달 편집 -->
+    <script>
+    	function viewTest(index){
+    		$("#pre" + index).click();
+    	}
+    </script>
     
     <!-- 페이징 -->
     <div style="margin-top :1vh;  width:70%; height:50px; float: left;text-align: center; position:relative;">
@@ -126,13 +115,16 @@
         </div>
         
     </div>
-
-<!-- 버튼 클릭시 시험지 나옴 -->
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <!-- 모달 시작  -->
-          <div>
+	
+	<c:set var="match2" value="0"/>
+	<c:if test="${ !empty testList && !empty vocaList}">
+		<c:forEach var="i" begin="0" end="${testList.size()-1 }">
+			<c:forEach var="j" begin="0" end="${ vocaList.size()-1 }">
+				<c:if test="${ testList.get(i).testNo eq vocaList.get(j).testNo && loginMember.mId eq vocaList.get(j).id}">
+					<div class="modal fade pre${ match2 }" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-lg" role="document">
+							<div class="modal-content">
+								<div>
         <div style="display:flex; align-items:center; justify-content: center; overflow: hidden; z-index: 40;">
             <!-- 모달 백그라운드 -->
             <div style="bottom: 0; left: 0; position: absolute; right: 0; top: 0; background-color: rgba(10,10,10,0.86);"></div>
@@ -140,7 +132,7 @@
             <div style="width:800px; margin:0; display:flex; box-orient: vertical; box-direction:normal; flex-direction: column; overflow: hidden; background: white; z-index: 41; border-radius: 15px;">
                 <!-- 헤드부분 -->
                 <header class="modal-card-head" style="text-align:center;">
-                    <p style="font-size: 15pt;font-weight: 500; margin: auto;">2020년 1월 4주차 테스트!
+                    <p style="font-size: 15pt;font-weight: 500; margin: auto;">${ testList.get(i).testTitle }
                         <a style="float:right; position: absolute; top:10px; right: 60px; font-size:32px;" class="closebtn" href="#">x</a>
                     </p>
                 </header>
@@ -155,27 +147,31 @@
                                 <!-- 추가 필 -->
                                 <div class="blank-box-wrapper">
                                     <div class="blank-box">
-                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">ajoa2012</h3>
+                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">${ vocaList.get(j).id }</h3>
                                     </div>
                                     <div class="blank-box">
-                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">2020-02-13</h3>
+                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">${ vocaList.get(j).testDate }</h3>
                                     </div>
                                     <div class="blank-box">
-                                        <h3 style="color: red; font-size: 18pt; text-align: center;">80</h3>
+                                        <h3 style="color: red; font-size: 18pt; text-align: center;">${ vocaList.get(j).score }</h3>
                                     </div>
                                 </div>
                                 <div class="quiz-info-box-wrapper">
                                     <div class="quiz-info-box">
                                         <h5 style="font-size: 3mm; position:absolute; color:#7a7a7a;">총 문제수</h5>
-                                        <h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">10</h3>
+                                        <h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">${ testList.get(i).testExno }</h3>
                                     </div>
                                     <div class="quiz-info-box">
                                         <h5 style="font-size: 3mm; position:absolute; color:#7a7a7a;">맞은 문제</h5>
-                                        <h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">8</h3>
+                                        <c:set var="okCount" value="${fnc:split(vocaList.get(j).ok,',')}" />
+                                        <c:set var="okCount2" value="${fnc:length(okCount) }"/>
+                                        <h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">${ okCount2 }</h3>
                                     </div>
                                     <div class="quiz-info-box">
                                         <h5 style="font-size: 3mm; position:absolute; color:#7a7a7a;">틀린 문제</h5>
-                                        <h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">2</h3>
+                                        <c:set var="nokCount" value="${fnc:split(vocaList.get(j).nok,',')}" />
+                                        <c:set var="nokCount2" value="${fnc:length(nokCount) }"/>
+                                        <h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">${ nokCount2 }</h3>
                                     </div>
                                 </div>
                             </div>
@@ -185,236 +181,54 @@
                             <div class="quiz-contents">
                                 <div style="position: relative; ">
                                     <!-- 단어 넣기 for문 돌릴 예정 -->
+                                    <c:set var="testAnswer" value="${fnc:split(testList.get(i).testEng,',') }"/>
+                                    <c:set var="myAnswer" value="${fnc:split(vocaList.get(j).answer,',') }"/>
+                                    <c:set var="kor" value="${fnc:split(testList.get(i).testKor,',') }"/>
+                                    
+                                    <c:forEach var="o" begin="0" end="${ testList.get(i).testExno - 1}">
                                     <div class="word-box" style="float: left;">
-                                        <div class="word-number">1
-                                            <img src="${ contextPath }/resources/image//ok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
+                                        <div class="word-number">${ o + 1 }
+                                        	<c:if test="${ testAnswer[o] eq myAnswer[o] }">
+                                            	<img src="${ contextPath }/resources/image//ok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
+                                            </c:if>
+                                            <c:if test="${ testAnswer[o] ne myAnswer[o] }">
+                                            	<img src="${ contextPath }/resources/image//nok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
+                                            </c:if>
                                         </div>
                                         <div class="filled-box">
-                                            <div class="text-box">recently</div>
+                                            <div class="text-box">${ kor[o] }</div>
                                         </div>
                                         <div class="empty-box">
-                                            <div class="text-box">최에에에그으으은</div>
+                                        	<c:choose>
+                                        		<c:when test="${ myAnswer[o] eq 'otl' }">
+                                        				<div class="text-box"></div>	
+                                        		</c:when>
+                                        		<c:otherwise>
+                                        			<div class="text-box">${ myAnswer[o] }</div>
+                                        		</c:otherwise>
+                                        	</c:choose>
                                         </div>
                                     </div>
+                                    </c:forEach>
                                     <!-- for문 끝-->
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1
-                                            <img src="${ contextPath }/resources/image//nok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
-                                        </div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box">최근</div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1
-                                            <img src="${ contextPath }/resources/image//ok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
-                                        </div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1
-                                            <img src="${ contextPath }/resources/image//ok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
-                                        </div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1
-                                            <img src="${ contextPath }/resources/image//ok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
-                                        </div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1
-                                            <img src="${ contextPath }/resources/image//nok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
-                                        </div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-                                    <div class="word-box" style="float: left;">
-                                        <div class="word-number">1</div>
-                                        <div class="filled-box">
-                                            <div class="text-box">recently</div>
-                                        </div>
-                                        <div class="empty-box">
-                                            <div class="text-box"></div>
-                                        </div>
-                                    </div>
-
-
                                 </div>
                               </div>
                             <!-- 컨텐트 끝 -->
-
-
                         </section>
                     </div>
                 </section>
             </div>
-
         </div>
     </div>
-      
-      <!--  모달 끝 -->
-    </div>
-  </div>
-</div>
+							</div>
+						</div>
+					</div>
+					<c:set var="match2" value="${ match2 + 1 }"/>
+				</c:if>
+			</c:forEach>
+		</c:forEach>
+	</c:if>
+
  
 </body>
 </html>
