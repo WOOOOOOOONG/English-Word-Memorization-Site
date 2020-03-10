@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -19,19 +20,11 @@
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-<link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
 <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
   @import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
@@ -83,6 +76,7 @@ nav {
 	 padding: 0;
 	 list-style: none;
 	 border-top: 1px solid #e5e5e5;
+	 margin-top:-3px;
 }
  .accordion-item {
 	 border-bottom: 1px solid #e5e5e5;
@@ -142,9 +136,15 @@ nav {
    text-align:center;
    width:100%; height:40px; 
    background:skyblue;
-   margin-bottom: -15px;
+  
    line-height: 40px;
    cursor:pointer;
+}
+.friendmenu{
+   text-align:center;
+   width:100%; height:35px; 
+   margin-top: 5px;
+   line-height: 40px;
 }
  #chatting{
  	width:300px;
@@ -196,6 +196,7 @@ nav {
 }
 .myfriend{
 	text-decoration:none;
+	list-style:none;
 }
 .chattd{
 	vertical-align: top;
@@ -227,7 +228,65 @@ nav {
 	border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5;
 	margin: 5px 10px 0;
 }
-
+#searchfriendbtn{
+	background-image: url( "resources/images/검색.png" );
+	background-repeat: no-repeat;
+	float:left;margin-left:10px;
+	background-size: cover;
+	width:30px;
+	height:29px;
+}
+#insertfriendbtn{
+	background-image: url( "resources/images/플러스.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+	float:right;margin-right:10px;
+	width:30px;
+	height:29px;
+	margin-top:5px;
+}
+.friendfunc{
+	float:right;
+	font-size:0.8em;
+	margin-right:5px;
+}
+.friendnav{
+	width:33.3%; height:100%; float:left; text-align:center;
+	background:skyblue;	
+	border-bottom-right-radius: 20px 10px;
+	border-bottom-left-radius: 20px 10px;
+	overflow:hidden;
+}
+.friendbtn{
+	width:100%;
+	height:100%;
+	background:skyblue;
+	border:0px;
+}
+.cancelfri{
+	background-image: url( "resources/images/취소2.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+	width:30px;
+	height:30px; float:left; 
+	margin-top: 5px; margin-left:20%;
+}
+.acceptfri{
+	background-image: url( "resources/images/승인.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+	width:30px;
+	height:30px; float:left;
+	margin-top: 5px; margin-left:20%;
+}
+.acceptfrilist{
+	text-align:center;
+    width:75%; height:30px; 
+    margin-top: 15px;
+    line-height:20px;
+    float:left;
+    font-size:0.95em;
+}
 </style>
 
 </head>
@@ -247,7 +306,7 @@ nav {
     <!-- 로그인 유저 있을때 -->
     <c:if test="${ !empty loginMember }">
    		 <c:if test="${ loginMember.mId == 'admin' }">
-    		<a class="gonav" href="memberList.me">관리자페이지</a>
+    		<a class="gonav" href="#">관리자페이지</a>
     	</c:if>
     	<c:if test="${ loginMember.mId != 'admin' }">
     		<a class="gonav"href="mypage.me">마이페이지</a>
@@ -261,13 +320,11 @@ nav {
   <a class="link-1" href="#">Home</a>
   <a class="link-1" href="#">단어장</a>
   <a class="link-1" href="ClassList.do">클래스</a>
-  <c:url var="inqList" value="memberInquireList.ad">
-  	<c:param name="inquirerId" value="${sessionScope.loginMember.mId}" />
-  </c:url>
-  <a class="link-1" href="${inqList}">고객센터</a>
+  <a class="link-1" href="#">고객센터</a>
 </nav>
 <c:if test="${ !empty sessionScope.loginMember }">
-<div id="chatting"  >
+<div id="chatting">
+	<span id="chatlength" style="display:none;">0</span>
 	<div id="chatexit"> 
 		<span id="friendname"></span>
 		<input type="text" style="display:none;" id="friendId">
@@ -305,34 +362,256 @@ nav {
     </div>	
 </div>
 
-<c:if test="${sessionScope.loginMember.mId ne 'admin' }">
-	<div id="friendlist" >
-		<div id="friendlisttoggle" >
-			친구리스트
-		</div>
-		<ul class="accordion">
-		<c:forEach var="fl" items="${ friendList }">
-		<c:set var="group" value="${fl.groupName }"/>
-		<li class="accordion-item">
-			<h5 class="accordion-thumb">${fl.groupName }</h5>
-			<ul class="accordion-panel">
-			
-			<c:forEach var="fltwo" items="${ friendList }">
-				<c:if test="${ fl.groupName == fltwo.groupName }">
-					<li><a class="myfriend" href="#">${fltwo.nickname }</a>     
-					<span style="float:right; margin-right:10px;">${fltwo.comment }</span>
-					<input type="text" style="display:none;"value="${fltwo.fId }">
-					</li>
-				</c:if>
-			</c:forEach>
-			
-			</ul>
-		</li>
-		</c:forEach>
-	</ul>
+<div id="friendlist" >
+	<div id="friendlisttoggle" >
+		친구
 	</div>
+	<div style="width:100%; height:29px;">
+		<div class="friendnav" >
+			<button class="friendbtn" id="frilist">친구목록</button>
+		</div>
+		<div class="friendnav" >
+			<button class="friendbtn" id="frisearch">친구검색</button>
+		</div>
+		<div class="friendnav">
+			<button class="friendbtn" id="friaccept">승인요청</button>
+		</div>
+	</div>
+
+	
+	<table id="fri3" style="display:none; width:100%; text-align:center;"  >
+		<thead >
+			<tr>
+				<td>아이디</td>
+				<td>닉네임</td>
+				<td>승인 &nbsp;&nbsp;&nbsp;취소</td>
+			</tr>
+		</thead>
+		<tbody>
+		</tbody>
+	</table>
+	
+	<div id="fri2" class="friendmenu" style="display:none;">
+		<input id="searchfriendid" class="form-control" style="width:80%; height:29px; float:left; margin-left:10px;"
+		placeholder="친구의 아이디를 입력해주세요"> 
+		<button id="searchfriendbtn" class="btn btn-secondary"></button>
+		<div id="friendresult"style="display:none; width:100%; height:35px; float:left;">
+		닉네임 : <span id="searchnickname"></span> &nbsp; 이름 : <span id="searchname"></span>
+		<span id="searchfid" style="display:none;"></span>
+		<button id="insertfriendbtn" class="btn btn-secondary" ></button>
+		</div>
+		
+	</div>
+	<ul class="accordion" id="fri1">
+	<c:if test="${groupList.size() > 0 }">
+	<c:forEach var="i" begin="0" end="${groupList.size()-1}" step="1">
+	<li class="accordion-item">
+		<h5 class="accordion-thumb">${ groupList.get(i)}</h5>
+		
+		<ul class="accordion-panel">
+		
+		<c:forEach var="fltwo" items="${ friendList }" varStatus="status">
+			<c:if test="${ groupList.get(i) == fltwo.groupName }">
+				<li style="height:35px;"><a class="myfriend" href="#">${fltwo.nickname }</a>     
+				<span style="float:right; margin-right:10px;">${fltwo.comment }</span>
+				<input type="text" style="display:none;"value="${fltwo.fId }">
+				<br>
+				<a class="friendfunc" id="changecomment${status.count}" href="#">코멘트변경</a>
+				<a class="friendfunc" id="deletefriend${status.count}" href="#">친구삭제</a> 
+				<a class="friendfunc" id="changegroup${status.count}" href="#">그룹변경</a> 
+				</li>
+				
+				
+			</c:if>
+		</c:forEach>
+		
+		</ul>
+	</li>
+	</c:forEach>
+	</c:if>
+</ul>
+</div>
 </c:if>
-</c:if>
+<!-- 친구에 대한 설정 스크립트 -->
+<script>
+	$(function(){
+		$(".friendfunc").click(function(){
+			var fId= $($(this).parent().children()[2]).val();
+			var mId = '${loginMember.mId}';
+			var id = $(this).attr('id');
+			var count = id.charAt(id.length-1);
+			console.log();
+			if(id.includes("comment")){
+				// 코멘트변경
+				
+			}else if(id.includes("delete")){
+				// 친구삭제
+				if(confirm("정말로 친구해제하시겠습니까?")){
+					$.ajax({
+				        url:"deleteFriend.do",
+				        data:{fId:fId,mId:mId},
+				        type:"post",
+				   		success:function(data){
+				   			if(data=="good") {
+				   				alert("정상적으로 친구해제되었습니다.");
+				   				reupdatelist();
+				   			}
+				   			else alert("친구해제 실패");
+						},error:function(e){
+							alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+						}
+						
+					});		
+				}
+			}else{
+				// 그룹 변경
+			}
+		});
+	});
+</script>
+<!-- 친구찾기 친구추가 스크립트 -->
+<script>
+	$(function(){
+		// 친구요청리스트 가져오기
+		$("#friaccept").click(function(){
+			var id = '${loginMember.mId}';
+			$("#fri3 > tbody").html("");
+			$.ajax({
+		        url:"friendAccept.ck",
+		        data:{id:id},
+		        type:"post",
+		   		success:function(data){
+		   			
+		   			for(var i in data){
+					/* var $div = $("<div class='acceptfrilist' >");
+					$div.html("아이디 : "+data[i].fId+" 닉네임 : "+ data[i].nickname);
+					$("#fri3").append($div).append(btn1).append(btn2); */
+					var $tr = $("<tr>");
+					var $btn1 = $("<button class='acceptfri' onclick='acceptfriend("+i+")'> ");
+		   			var $btn2 = $("<button class='cancelfri'>");
+					var $idtd = $("<td>").html(data[i].fId);
+					var $nicktd = $("<td>").html(data[i].nickname);
+					var $acctd = $("<td>").append($btn1).append($btn2);
+					$tr.append($idtd).append($nicktd).append($acctd);
+					$("#fri3 > tbody").append($tr);
+		   			}
+				},error:function(e){
+					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+				}
+				
+			});	
+
+		});
+		
+		// 보이고 안보이고
+		$(".friendbtn").click(function(){
+			
+			var id = $(this).attr('id');
+			if(id=="frilist"){
+				$("#fri1").css("display","block");
+				$("#fri2").css("display","none");
+				$("#fri3").css("display","none");
+			}else if(id=="frisearch"){
+				$("#fri1").css("display","none");
+				$("#fri2").css("display","block");
+				$("#fri3").css("display","none");
+			}else{
+				$("#fri1").css("display","none");
+				$("#fri2").css("display","none");
+				$("#fri3").css("display","table");
+			}
+				
+		});
+		
+		
+		// 친구검색
+		$("#searchfriendbtn").click(function(){
+			
+			$("#searchfreind").css("height","70px");
+			var id= $("#searchfriendid").val();
+			$.ajax({
+		        url:"findfriend.ck",
+		        data:{id:id},
+		        type:"post",
+		   		success:function(data){
+		   			$("#friendresult").css("display","block");
+		   			$("#searchnickname").html(data.nickname);
+		   			$("#searchname").html(data.name);
+		   			$("#searchfid").html(id);
+				},error:function(e){
+					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+				}
+				
+			});	
+		});
+		// 친구요청하기
+		$("#insertfriendbtn").click(function(){
+			var fId = $("#searchfid").html();
+			var mId = '${ loginMember.mId}';
+			if(fId != mId){
+			$.ajax({
+		        url:"insertfriend.do",
+		        data:{fId:fId,mId:mId},
+		        type:"post",
+		   		success:function(data){
+		   			if(data == 'one'){
+		   				alert("친구요청되었습니다.");
+		   				reupdatelist();
+		   			}else if(data == 'two'){
+		   				// 중복일때 
+		   				alert("중복된 친구입니다.");
+		   			}else{
+		   				alert("친구추가 실패...");
+		   			}
+				},error:function(e){
+					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+				}
+				
+			});	
+			}else{
+				alert("자기 자신은 친구추가 할수 없습니다.");
+			}
+		});
+
+	})
+	function acceptfriend(i){
+		var x = $("#fri3 > tbody").children()[i];
+		var y = $(x).children()[0];
+		var fId = $(y).html();
+		var mId = '${loginMember.mId}';
+		$.ajax({
+	        url:"acceptfriend.do",
+	        data:{fId:fId,mId:mId},
+	        type:"post",
+	   		success:function(data){
+	   			if(data =='success'){
+	   				alert("친구수락되었습니다.");
+	   				$(x).css("display","none");
+	   				reupdatelist();
+	   			}
+	   			else alert("실패!!");
+			},error:function(e){
+				alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+			}
+			
+		});	
+	}
+	function reupdatelist(){
+		var mId = '${loginMember.mId}';
+			$.ajax({
+		        url:"updatingfriend.do",
+		        data:{mId:mId},
+		        type:"post",
+		   		success:function(data){
+		   			window.location.reload();
+				},error:function(e){
+					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+				}
+				
+			});	
+	}
+</script>
+<!-- 채팅스크립트 -->
 <script>
 var chatId =null;
 $(function() {
@@ -370,16 +649,29 @@ $(".myfriend").click(function(){
 	if($("#chatting").css("display")=="block"){
 		$("#chatting").css("display","none");
 		clearInterval(chatId);
+		$("#chattable tbody").html("");
 	}else{
 	// 에이작스 연결하기
+		$.ajax({
+        url:"chatuserimg.do",
+        data:{fId:fId},
+        type:"post",
+   		success:function(data){
+			
+		},error:function(e){
+			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+		}	
+	});	
 	    chatId = setInterval(chatloggo, 2500);
+		
 	 // 에이작스로 채팅로그 불러온 후 
 		$("#chatting").css("display","block");
 	}
 });
 $(".close").click(function(){
 	$(this).parent().parent().css("display","none");
-
+	clearInterval(chatId);
+	$("#chattable tbody").html("");
 });
 $("#chatsend").click(function(){
 	var content = $("#chatcontent").val();
@@ -398,7 +690,7 @@ $("#chatsend").click(function(){
    				// 채팅보낸거 출력하기
    	   		var $tr = $("<tr>");
 			var $tdimg = $(" <td class='chattd' width='50'>");
-			var $profileimg = $("<img class='chatprofileimg' src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/78060/jg-ava.jpg' width='50'>");
+			var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
 			$tdimg.append($profileimg);
 			var $chatContent = $(" <td class='chattd' colspan='11' >");
 			var $chat = $(" <p class='mychatp'>").text(content);
@@ -418,24 +710,26 @@ $("#chatsend").click(function(){
 	});	
 	
 });
-	function chatloggo(mId,fId){
+	function chatloggo(){
 		var fId = $("#friendId").val();
 		var mId = '${ loginMember.mId}';
+		var chatleng =$("#chatlength").html();
+		$tableBody = $("#chattable tbody");
+		
 		$.ajax({
 	        url:"chatlog.ck",
-	        data:{mId:mId,fId:fId},
+	        data:{mId:mId,fId:fId,chatleng:chatleng},
 	        dataType:"json",
 	        type:"post",
 	   		success:function(data){
-				$tableBody = $("#chattable tbody");
-				$tableBody.html("");
-				
+				if(data.msg != "none"){
+					$tableBody.html("");
 				for(var i in data.clist){
 
 					if(data.clist[i].writerId == mId){
 						var $tr = $("<tr>");
 						var $tdimg = $(" <td class='chattd' width='50'>");
-						var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/"+mId+"img.jpg' width='50'>");
+						var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
 						$tdimg.append($profileimg);
 						var $chatContent = $(" <td class='chattd' colspan='11' >");
 						var $chat = $(" <p class='mychatp'>").text(data.clist[i].content);
@@ -446,7 +740,7 @@ $("#chatsend").click(function(){
 					}else{
 						var $tr = $("<tr align='right'>");
 						var $tdimg = $(" <td class='chattd' width='50'>");
-						var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/"+fId+"img.png' width='50'>");
+						var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/${chatuser}' width='50'>");
 						$tdimg.append($profileimg);
 						var $chatContent = $(" <td class='chattd' colspan='11' >");
 						var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
@@ -458,6 +752,9 @@ $("#chatsend").click(function(){
 					
 					$tableBody.append($tr);
 				}
+				$("#chatlength").html(i);
+				
+	   			}
 				
 			},error:function(e){
 				alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
@@ -469,4 +766,5 @@ $("#chatsend").click(function(){
 </script>
 
 </body>
+
 </html>

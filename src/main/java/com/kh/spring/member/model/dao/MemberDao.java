@@ -49,7 +49,8 @@ public class MemberDao {
 
 
 	public String selectProfileImg(Member loginUser) {
-		return sqlSession.selectOne("memberMapper.selectProfileImg",loginUser);
+		String mId = loginUser.getmId();
+		return sqlSession.selectOne("memberMapper.selectProfileImg",mId);
 	}
 
 

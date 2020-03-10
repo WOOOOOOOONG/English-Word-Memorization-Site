@@ -76,4 +76,9 @@ public class MemberService {
 	public void insertVisit(Member loginMember) {
 		mDao.insertVisit(loginMember);
 	}
+	public String selectProfileImg(String mId) {
+		Member m = new Member();
+		m.setmId(mId);
+		return mDao.selectProfileImg(m);
+	}
 }

@@ -9,18 +9,32 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.spring.chatting.model.vo.Chatting;
+import com.kh.spring.member.model.service.MemberService;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+
+@SessionAttributes({"chatuser"})
 @Controller
 public class ChattingController {
-
+	@Autowired
+	private MemberService mService;
+	@RequestMapping("chatuserimg.do")
+	public void getChatUserImg(String fId, Model model, HttpServletResponse response) throws IOException {
+		model.addAttribute("chatuser", mService.selectProfileImg(fId) );
+		PrintWriter out = response.getWriter();
+		out.print("success");
+	}
+	
 	@RequestMapping(value = "chat.do", method = RequestMethod.POST)
 	public void doChat(String mId, String fId, String content, HttpServletResponse response) throws IOException {
 		// 순서 작성자,내용,받는이
@@ -32,6 +46,7 @@ public class ChattingController {
 			file = fId + mId + "chatlog.txt";
 			filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
 			f = new File(filepath);
+			f.createNewFile();
 		}
 		try {
 			FileReader fr = new FileReader(f);
@@ -51,8 +66,10 @@ public class ChattingController {
 
 			FileWriter fw = new FileWriter(f);
 			content = content.replaceAll("\n", "<br>");
-			fw.write(readcontent);
-			fw.append("\n");
+			if(readcontent.length() >0) {
+				fw.write(readcontent);
+				fw.append("\n");
+			}
 			fw.write(mId + "," + content + "," + fId);
 			fw.close();
 			PrintWriter out = response.getWriter();
@@ -64,8 +81,11 @@ public class ChattingController {
 	}
 
 	@RequestMapping("chatlog.ck")
-	public void getChat(String mId, String fId, HttpServletResponse response) throws IOException {
+	public void getChat(String mId, String fId,int chatleng, HttpServletResponse response) throws IOException {
 		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		JSONObject send = new JSONObject();
+		chatleng +=1;
 		String file = mId + fId + "chatlog.txt";
 		ArrayList<Chatting> clist = new ArrayList<Chatting>();
 		String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
@@ -74,6 +94,7 @@ public class ChattingController {
 			file = fId + mId + "chatlog.txt";
 			filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
 			f = new File(filepath);
+			f.createNewFile();
 		}
 		FileReader fr = new FileReader(f);
 		int a;
@@ -81,8 +102,8 @@ public class ChattingController {
 		while ((a = fr.read()) != -1) {
 			readcontent += (char) a;
 		}
-
 		String[] rc = readcontent.split("\n");
+		if(readcontent.length() > 0 && rc.length != chatleng) {
 		for (int i = 0; i < rc.length; i++) {
 			int sp1 = rc[i].indexOf(",");
 			int sp2 = rc[i].lastIndexOf(",");
@@ -104,11 +125,13 @@ public class ChattingController {
 			jarr.add(chat);
 		}
 		// 2. 전송을 하기 위해
-		JSONObject send = new JSONObject();
+		
 		send.put("clist", jarr);
-
-		PrintWriter out = response.getWriter();
 		out.print(send);
-
+		
+		}else {
+			send.put("msg", "none");
+			out.print(send);
+		}
 	}
 }

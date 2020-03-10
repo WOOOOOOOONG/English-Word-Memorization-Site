@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,7 +29,7 @@ import com.kh.spring.friend.model.vo.Friend;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
-@SessionAttributes({"loginMember","friendList"})
+@SessionAttributes({"loginMember","friendList","groupList"})
 @Controller
 public class MemberController {
 	@Autowired
@@ -157,9 +158,17 @@ public class MemberController {
 		}
 		
 		ArrayList<Friend> flist = fService.friendList(loginMember.getmId());
+		HashMap<Integer,String> glist = new HashMap<Integer,String>();
+		glist.put(0, "일반");
+		for(int i=1; i<flist.size();i++) {
+			if(!glist.containsValue(flist.get(i).getGroupName())){
+				glist.put(i, flist.get(i).getGroupName());
+			}
+		}
 		model.addAttribute("friendList",flist);
+		model.addAttribute("groupList",glist);
 		model.addAttribute("loginMember", loginMember);
-		return "mypage/mypage";
+		return "redirect:mypage.me";
 	}
 	// 로그아웃
 	@RequestMapping("Memberlogout.me")
