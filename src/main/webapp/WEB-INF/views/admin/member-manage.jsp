@@ -37,64 +37,72 @@
 </head>
 
 <body>
-	<jsp:include page="../common/menubar.jsp"/>
-    <jsp:include page="../common/left-menubar.jsp"/>
-
-	<div class="table">
-		<table id="table_id" class="display">
-			<thead>
-				<tr>
-					<td>ID</td>
-					<th>이름</th>
-					<th>닉네임</th>
-					<th>가입일</th>
-					<th>수정일</th>
-					<th>회원상태</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:if test="${ mList ne null }">
-					<c:forEach var="item" items="${ mList }">
-						<tr>
-							<td>${ item.mId }</td>
-							<td>${ item.name }</td>
-							<td>${ item.nickname }</td>
-							<td>${ item.enrollDate }</td>
-							<td>${ item.updateDate }</td>
-							<c:if test="${ item.userStatus eq 'Y'}">
-								<c:set var="selectedY" value="selected"/>
-							</c:if>
-							<c:if test="${ item.userStatus eq 'N'}">
-								<c:set var="selectedN" value="selected"/>
-							</c:if>
-							<td>
-								<c:url var="updateStatus" value="updateStatus.me">
-									<c:param name="mId" value="${ item.mId }"/>
-									<c:param name="userStatus" value="${ item.userStatus }"/>
-								</c:url>
-								<select id="statusSelected" onchange="changeStatus(this);">
-									<option value="Y" ${ selectedY }>Y</option>									
-									<option value="N" ${ selectedN }>N</option>
-								</select>
-							</td>
-						</tr>
-					</c:forEach>
-				</c:if>
-			</tbody>
-		</table>
-		<script>
-			// datatable
-            $(document).ready(function () {
-                $('#table_id').DataTable({
-                	"ordering":false
-                });
-            });  
-			
-			// 회원 탈퇴 상태 변경
-			function changeStatus(e) {
-				location.href="${ updateStatus }";
-			}
-        </script>
-	</div>
+	<%-- <c:if test="${sessionScope.loginMember.mId eq 'admin'}"> --%>
+		<jsp:include page="../common/menubar.jsp"/>
+	    <jsp:include page="../common/left-menubar.jsp"/>
+	
+		<div class="table">
+			<table id="table_id" class="display">
+				<thead>
+					<tr>
+						<td>ID</td>
+						<th>이름</th>
+						<th>닉네임</th>
+						<th>가입일</th>
+						<th>수정일</th>
+						<th>회원상태</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:if test="${ mList ne null }">
+						<c:forEach var="item" items="${ mList }">
+							<tr>
+								<td>${ item.mId }</td>
+								<td>${ item.name }</td>
+								<td>${ item.nickname }</td>
+								<td>${ item.enrollDate }</td>
+								<td>${ item.updateDate }</td>
+								<c:if test="${ item.userStatus eq 'Y'}">
+									<c:set var="selectedY" value="selected"/>
+								</c:if>
+								<c:if test="${ item.userStatus eq 'N'}">
+									<c:set var="selectedN" value="selected"/>
+								</c:if>
+								<td>
+									<c:url var="updateStatus" value="updateStatus.me">
+										<c:param name="mId" value="${ item.mId }"/>
+										<c:param name="userStatus" value="${ item.userStatus }"/>
+									</c:url>
+									<select id="statusSelected" onchange="changeStatus(this);">
+										<option value="Y" ${ selectedY }>Y</option>									
+										<option value="N" ${ selectedN }>N</option>
+									</select>
+								</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+				</tbody>
+			</table>
+			<script>
+				// datatable
+	            $(document).ready(function () {
+	                $('#table_id').DataTable({
+	                	"ordering":false,
+						"language" : {
+							"emptyTable" : "등록된 회원이 없습니다."
+						}
+	                });
+	            });  
+				
+				// 회원 탈퇴 상태 변경
+				function changeStatus(e) {
+					location.href="${ updateStatus }";
+				}
+	        </script>
+		</div>
+	<%-- </c:if>
+ 	<c:if test="${sessionScope.loginMember.mId ne 'admin'}">
+		<jsp:include page="../common/errorPage.jsp"/>
+	</c:if> --%>
 </body>
 </html>

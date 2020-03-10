@@ -27,6 +27,31 @@ body {
 .hide {
 	display: none;
 }
+
+.buttons a {
+  text-decoration: none;
+  display: inline-block;
+  padding: 8px 16px;
+}
+
+.buttons a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.buttons .previous {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.buttons .next {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.buttons .round {
+  border-radius: 50%;
+}
 </style>
 </head>
 
@@ -37,6 +62,8 @@ body {
 		<div id="chart_div" style="width: 1300px; height: 600px">
 			<script>
 				var arr = [];
+				var curMonth = 3;
+				
 				$(document).ready(function() {
 					// 값 초기화
 					for(var i = 0; i < 13; i++) {
@@ -50,6 +77,23 @@ body {
 						arr[${fn:substring(item.visitDate, 5, 7)}][${fn:substring(item.visitDate, 8, 10)}]
 						 = arr[${fn:substring(item.visitDate, 5, 7)}][${fn:substring(item.visitDate, 8, 10)}] + 1;
 					</c:forEach>
+					
+					$("#prev").click(function() {
+						console.log(curMonth);
+						if(curMonth > 1) {
+							curMonth = curMonth - 1;
+							console.log(curMonth);
+							drawAxisTickColors();
+						}
+					});
+					
+					$("#next").click(function() {
+						if(curMonth < 12) {
+							curMonth = curMonth + 1;
+							console.log(curMonth);
+							drawAxisTickColors();
+						}
+					});
 				});
 				
 				/* ${dateMap}.forEach(function(element) {
@@ -60,33 +104,36 @@ body {
 				});
 				google.charts.setOnLoadCallback(drawAxisTickColors);
 
+				
+				
+				
 				function drawAxisTickColors() {
 					var data = new google.visualization.DataTable();
 					var data = new google.visualization.DataTable();
 					data.addColumn('string', 'Element');
 					data.addColumn('number', 'Percentage');
 					
-					data.addRows([ [ '1일', arr[2][1] ], [ '2일', arr[2][2] ],
-						[ '3일', arr[2][3] ], [ '4일', arr[2][4] ], [ '5일', arr[2][5] ],
-						[ '6일', arr[2][6] ], [ '7일', arr[2][7] ], [ '8일', arr[2][8] ],
-						[ '9일', arr[2][9] ], [ '10일', arr[2][10] ], [ '11일', arr[2][11] ],
-						[ '12일', arr[2][12] ], [ '13일', arr[2][13] ], [ '14일', arr[2][14] ],
-						[ '15일', arr[2][15] ], [ '16일', arr[2][16] ], [ '17일', arr[2][17] ],
-						[ '18일', arr[2][18] ], [ '19일', arr[2][19] ], [ '20일', arr[2][20] ],
-						[ '21일', arr[2][21] ], [ '22일', arr[2][22] ], [ '23일', arr[2][23] ],
-						[ '24일', arr[2][24] ], [ '25일', arr[2][25] ], [ '26일', arr[2][26] ],
-						[ '27일', arr[2][27] ], [ '28일', arr[2][28] ], [ '29일', arr[2][29] ]]); 
-						/* [ '30일', arr[1][0] ], [ '31일', arr[1][0] ], ]; 2월은 29일까지만 있음 */
+					data.addRows([ [ '1일', arr[curMonth][1] ], [ '2일', arr[curMonth][curMonth] ],
+						[ '3일', arr[curMonth][curMonth] ], [ '4일', arr[curMonth][4] ], [ '5일', arr[curMonth][5] ],
+						[ '6일', arr[curMonth][6] ], [ '7일', arr[curMonth][7] ], [ '8일', arr[curMonth][8] ],
+						[ '9일', arr[curMonth][9] ], [ '10일', arr[curMonth][10] ], [ '11일', arr[curMonth][11] ],
+						[ '12일', arr[curMonth][12] ], [ '13일', arr[curMonth][13] ], [ '14일', arr[curMonth][14] ],
+						[ '15일', arr[curMonth][15] ], [ '16일', arr[curMonth][16] ], [ '17일', arr[curMonth][17] ],
+						[ '18일', arr[curMonth][18] ], [ '19일', arr[curMonth][19] ], [ '20일', arr[curMonth][20] ],
+						[ '21일', arr[curMonth][21] ], [ '22일', arr[curMonth][22] ], [ '23일', arr[curMonth][23] ],
+						[ '24일', arr[curMonth][24] ], [ '25일', arr[curMonth][25] ], [ '26일', arr[curMonth][26] ],
+						[ '27일', arr[curMonth][27] ], [ '28일', arr[curMonth][28] ], [ '29일', arr[curMonth][29] ], 
+						[ '30일', arr[curMonth][30] ], [ '31일', arr[curMonth][31] ] ]);
 					
 					var options = {
-						title : '일자별 방문내역',
+						title : '일자별 방문내역(' + curMonth + '월)',
 						backgroundColor : "whitesmoke",
 						focusTarget : 'category',
 						hAxis : {
 							title : '',
 							format : 'dd',
 							viewWindow : {
-							//   min: [7, 0, 0],
+							//   min: [0, 0, 0],
 							//   max: [37, 30, 30]
 							},
 							textStyle : {
@@ -127,7 +174,10 @@ body {
 				}
 			</script>
 		</div>
-
+		<div class="buttons" style="text-align:center">
+			<a href="#" class="previous round" id="prev">&#8249;</a>
+			<a href="#" class="next round" id="next">&#8250;</a>
+		</div>
 		<!-- <table class="fixed_headers">
 			<thead>
 				<tr>

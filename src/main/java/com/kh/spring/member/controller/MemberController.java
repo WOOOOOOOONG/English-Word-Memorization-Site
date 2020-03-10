@@ -52,15 +52,12 @@ public class MemberController {
 			ModelAndView mv,
 			@RequestParam(value="mId") String mId,
 			@RequestParam(value="userStatus") String status) {
-		System.out.println("mid : " + mId);
-		System.out.println("status: " + status);
 		
 		Member m = new Member();
 		m.setmId(mId);
 		m.setUserStatus(status);
 		
 		int result = mService.updateStatus(m);
-		System.out.println("오나");
 		if(result > 0) {
 			ArrayList<Member> memberList = mService.selectList();
 			
