@@ -18,6 +18,10 @@ public class AdminService {
 		return aDao.selectInquireList();
 	}
 
+	public ArrayList<Inquire> selectMemberInquireList(String inquirerId) {
+		return aDao.selectMemberInquireList(inquirerId);
+	}
+
 	public Inquire selectInquireOne(int iId) {
 		return aDao.selectInquireOne(iId);
 	}
@@ -32,5 +36,9 @@ public class AdminService {
 
 	public ArrayList<VisitRecord> selectLogList() {
 		return aDao.selectLogList();
+	}
+
+	public int insertInquire(Inquire inq) {
+		return aDao.insertInquire(inq);
 	}
 }

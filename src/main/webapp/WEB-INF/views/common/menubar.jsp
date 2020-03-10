@@ -19,11 +19,19 @@
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
   @import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
@@ -239,7 +247,7 @@ nav {
     <!-- 로그인 유저 있을때 -->
     <c:if test="${ !empty loginMember }">
    		 <c:if test="${ loginMember.mId == 'admin' }">
-    		<a class="gonav" href="#">관리자페이지</a>
+    		<a class="gonav" href="memberList.me">관리자페이지</a>
     	</c:if>
     	<c:if test="${ loginMember.mId != 'admin' }">
     		<a class="gonav"href="mypage.me">마이페이지</a>
@@ -253,7 +261,10 @@ nav {
   <a class="link-1" href="#">Home</a>
   <a class="link-1" href="#">단어장</a>
   <a class="link-1" href="ClassList.do">클래스</a>
-  <a class="link-1" href="#">고객센터</a>
+  <c:url var="inqList" value="memberInquireList.ad">
+  	<c:param name="inquirerId" value="${sessionScope.loginMember.mId}" />
+  </c:url>
+  <a class="link-1" href="${inqList}">고객센터</a>
 </nav>
 <c:if test="${ !empty sessionScope.loginMember }">
 <div id="chatting"  >
@@ -294,31 +305,33 @@ nav {
     </div>	
 </div>
 
-<div id="friendlist" >
-	<div id="friendlisttoggle" >
-		친구리스트
-	</div>
-	<ul class="accordion">
-	<c:forEach var="fl" items="${ friendList }">
-	<c:set var="group" value="${fl.groupName }"/>
-	<li class="accordion-item">
-		<h5 class="accordion-thumb">${fl.groupName }</h5>
-		<ul class="accordion-panel">
-		
-		<c:forEach var="fltwo" items="${ friendList }">
-			<c:if test="${ fl.groupName == fltwo.groupName }">
-				<li><a class="myfriend" href="#">${fltwo.nickname }</a>     
-				<span style="float:right; margin-right:10px;">${fltwo.comment }</span>
-				<input type="text" style="display:none;"value="${fltwo.fId }">
-				</li>
-			</c:if>
+<c:if test="${sessionScope.loginMember.mId ne 'admin' }">
+	<div id="friendlist" >
+		<div id="friendlisttoggle" >
+			친구리스트
+		</div>
+		<ul class="accordion">
+		<c:forEach var="fl" items="${ friendList }">
+		<c:set var="group" value="${fl.groupName }"/>
+		<li class="accordion-item">
+			<h5 class="accordion-thumb">${fl.groupName }</h5>
+			<ul class="accordion-panel">
+			
+			<c:forEach var="fltwo" items="${ friendList }">
+				<c:if test="${ fl.groupName == fltwo.groupName }">
+					<li><a class="myfriend" href="#">${fltwo.nickname }</a>     
+					<span style="float:right; margin-right:10px;">${fltwo.comment }</span>
+					<input type="text" style="display:none;"value="${fltwo.fId }">
+					</li>
+				</c:if>
+			</c:forEach>
+			
+			</ul>
+		</li>
 		</c:forEach>
-		
-		</ul>
-	</li>
-	</c:forEach>
-</ul>
-</div>
+	</ul>
+	</div>
+</c:if>
 </c:if>
 <script>
 var chatId =null;
