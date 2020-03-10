@@ -12,16 +12,25 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.classs.model.service.ClassService;
+import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
+import com.kh.spring.member.model.vo.Member;
 
+@SessionAttributes({"classs","friendList","cNo"})
 @Controller
 public class ClassController {
 	
@@ -77,6 +86,7 @@ public class ClassController {
 			img3 = fList.get(2).getChangeName();
 		}
 		
+	
 		mv.addObject("classs",classs);
 		mv.addObject("img1",img1);
 		mv.addObject("img2",img2);
@@ -97,7 +107,8 @@ public class ClassController {
 	
 	// 맞는 클래스 보러가기
 	@RequestMapping("myClass.do")
-	public ModelAndView classDetailView(ModelAndView mv,String cNo) {
+	public ModelAndView classDetailView(ModelAndView mv,String cNo,Model model) {
+		model.addAttribute("classs",cService.selectClassOneCount(cNo));
 		mv.addObject("cNo",cNo);
 		mv.setViewName("classs/myClassView");
 		return mv;
@@ -105,14 +116,38 @@ public class ClassController {
 	
 	// 클래스 시험목록 누르면 가는 메소드
 	@RequestMapping("classTestList.do")
-	public ModelAndView classTestList(ModelAndView mv) {
+	public ModelAndView classTestList(ModelAndView mv,String cNo) {
+		System.out.println(cNo);
+		
+		ArrayList<ClassTest> testList = cService.selectTestList(cNo);
+		ArrayList<TestVoca> vocaList = new ArrayList<>();
+		if(testList != null) {
+			for(int i = 0 ; i < testList.size(); i++) {
+				ArrayList<TestVoca> vocaList2 = cService.selectVocaList(testList.get(i).getTestNo());
+				
+				if(!vocaList2.isEmpty()) {
+					for(int j = 0; j < vocaList2.size(); j++) {
+						vocaList.add(vocaList2.get(j));
+					}
+				}
+			}
+		}
+		mv.addObject("cNo",cNo);
+		mv.addObject("testList",testList);
+		mv.addObject("vocaList",vocaList);
 		mv.setViewName("classs/classTestList");
 		return mv;
 	}
 	
 	// 클래스 멤버 권한 관리 사이트
 	@RequestMapping("classMemberRight.do")
-	public ModelAndView classMemberRight(ModelAndView mv) {
+	public ModelAndView classMemberRight(ModelAndView mv,String cNo) {
+		
+		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
+		
+		// 추후에 클래스 멤버들의 프로필사진을 따와야함 ;;;; 개귀찮;;;
+		
+		mv.addObject("cmList",cmList);
 		mv.setViewName("classs/classMemberRight");
 		return mv;
 	}
@@ -124,30 +159,90 @@ public class ClassController {
 		return mv;
 	}
 	
-	// 시험 만들기
+	// 시험 만들기로 이동
 	@RequestMapping("createTest.do")
-	public ModelAndView createTest(ModelAndView mv) {
+	public ModelAndView createTest(ModelAndView mv,
+			@RequestParam(value="chkkor", defaultValue="kkk") String kor,
+			@RequestParam(value="chkeng", defaultValue="eee") String eng,
+			@RequestParam(value="testCount", defaultValue="c10") String StringCount,String testcNo) {
+		
+		// 한글 리스트
+		String[] korListorg = kor.split(","); 
+		List<String> korList = new ArrayList<String>(); 
+		Collections.addAll(korList, korListorg); 
+		
+		// 영어 리스트
+		String[] engListorg = eng.split(","); 
+		List<String> engList = new ArrayList<String>();
+		for(int i = 0 ; i < engListorg.length; i++) {
+			engList.add(engListorg[i]);
+		}
+		//Collections.addAll(engList, engListorg);
+		
+		int count = 0;
+		if(StringCount.equals("c10")) {
+			count = 10;
+		}else if(StringCount.equals("c20")) {
+			count = 20;
+		}else {
+			count = 25;
+		}
+		
+		
+		mv.addObject("korList",korList);
+		mv.addObject("engList",engList);
+		mv.addObject("count",count);
+		mv.addObject("cNo",testcNo);
 		mv.setViewName("classs/createTest");
+		
+		return mv;
+	}
+	// 시험 만들기
+	@RequestMapping("insertTest.do")
+	public ModelAndView insertTest(ModelAndView mv,String title,String testcNo, String subKor, String subEng, int testcount) {
+		String kor = subKor.replaceFirst(",","");
+		String eng = subEng.replaceFirst(",","");
+		
+		ClassTest test = new ClassTest();
+		test.setTestEng(eng);
+		test.setTestKor(kor);
+		test.setTestExno(testcount);
+		test.setTestNo(testcNo);
+		test.setTestTitle(title);
+		test.setcNo(testcNo);
+		System.out.println(test);
+		int result = cService.insertTest(test);
+		mv.addObject("cNo",testcNo);
+		mv.setViewName("classs/myClassView");
 		return mv;
 	}
 	
 	// 시험 보러가기
 	@RequestMapping("goTest.do")
-	public ModelAndView goTest(ModelAndView mv) {
+	public ModelAndView goTest(ModelAndView mv,String testNo) {
+		
+		ClassTest test = cService.selectTestOne(testNo);
+		String[] kor = test.getTestKor().split(",");
+		System.out.println(kor);
+		System.out.println(kor[0]);
+		System.out.println(kor[1]);
+		
+		mv.addObject("kor",kor);
+		mv.addObject("test",test);
 		mv.setViewName("classs/test");
 		return mv;
 	}
 	
 	// 클래스 만들기
 	@RequestMapping("insertClass.do")
-	public ModelAndView insertClass(ModelAndView mv,HttpServletRequest request,
+	public String insertClass(ModelAndView mv,HttpServletRequest request,
 			 		@RequestParam(value="img1", required=false) MultipartFile file1,
 			 		@RequestParam(value="img2", required=false) MultipartFile file2,
 			 		@RequestParam(value="img3", required=false) MultipartFile file3,
 			 		Classs classs ) {
 		// String id = request.getSession().getAttribute("loginUser").getId();
-		String id = "ajoa2012";
-		classs.setOrnerId(id);
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+		classs.setOrnerId(m.getmId());
 		
 		
 		// 개행
@@ -204,9 +299,16 @@ public class ClassController {
 		
 		// 사진까지 넣었으면 해당 클래스로 이동해야하지만 아직 만든게없으므로 클래스목로긍로 이동함.
 		//mv.setViewName("myClass.do");
-		mv.setViewName("ClassList.do");
+		//mv.setViewName("ClassList.do");
 		
-		return mv;
+		// 클래스멤버
+		ClassMember cm = new ClassMember();
+		cm.setcNo(cNo);
+		cm.setId(m.getmId());
+		cm.setwRight("Y");
+		cm.setvRight("Y");
+		cService.insertClassMember(cm);
+		return "redirect:ClassList.do";
 	}
 	
 	// 파일 저장을 위한 메소드
@@ -379,4 +481,66 @@ public class ClassController {
 		return mv;
 	}
 
+	// 시험 체크 ㅎ
+	@RequestMapping("checkTest.do")
+	public  ModelAndView searchClass(String tNo, String output,HttpServletRequest request,ModelAndView mv) {
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+		ClassTest test = cService.selectTestOne(tNo);
+		TestVoca my = new TestVoca();
+		my.setTestNo(tNo);
+		my.setId(m.getmId());
+		my.setAnswer(output);
+		
+		String ok = "";
+		String nok = "";
+		int count = 0;
+		int score = 0;
+		
+		String[] outanswer = output.split(","); // 내가쓴답
+		String[] answer = test.getTestEng().split(","); // 정답
+		
+		for(int i = 0 ; i < test.getTestExno(); i++) {
+			if(outanswer[i].equals(answer[i])) {
+				ok = ok + "," + i;
+				count++;
+			}else {
+				nok = nok + "," + i;
+			}
+		}
+		
+		if(test.getTestExno() == 10) {
+			score = count * 10;
+		}else if(test.getTestExno() == 20) {
+			score = count * 5;
+		}else {
+			score = count * 4;
+		}
+		my.setOk(ok.substring(1));
+		my.setNok(nok.substring(1));
+		my.setScore(score);
+		
+		System.out.println(my);
+		cService.insertTestVoca(my);
+		
+		String cNo = test.getcNo();
+		ArrayList<ClassTest> testList = cService.selectTestList(cNo);
+		ArrayList<TestVoca> vocaList = new ArrayList<>();
+		if(testList != null) {
+			for(int i = 0 ; i < testList.size(); i++) {
+				ArrayList<TestVoca> vocaList2 = cService.selectVocaList(testList.get(i).getTestNo());
+				
+				if(!vocaList2.isEmpty()) {
+					for(int j = 0; j < vocaList2.size(); j++) {
+						vocaList.add(vocaList2.get(j));
+					}
+				}
+			}
+		}
+		mv.addObject("cNo",cNo);
+		mv.addObject("testList",testList);
+		mv.addObject("vocaList",vocaList);
+		mv.setViewName("classs/classTestList");
+		return mv;
+		
+	}
 }

@@ -7,7 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
 
@@ -67,6 +70,47 @@ public class ClassDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("ClasssMapper.searchClassList",cateList);
 		
+	}
+
+	// 시험 입력
+	public int insertTest(ClassTest test) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("ClassTestMapper.insertTest",test);
+	}
+
+	// 클래스에 소속된 테스트 가져옴
+	public ArrayList<ClassTest> selectTestList(String cNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClassTestMapper.selectTestList",cNo);
+	}
+
+	public ArrayList<TestVoca> selectVocaList(String testNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("TestVocaMapper.selectVocaList",testNo);
+	}
+
+	// 테스트 찾아오기
+	public ClassTest selectTestOne(String testNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ClassTestMapper.selectTestOne",testNo);
+	}
+
+	// 시험점수 입력
+	public void insertTestVoca(TestVoca my) {
+		// TODO Auto-generated method stub
+		sqlSession.insert("TestVocaMapper.insertTestVoca",my);
+		
+	}
+
+	// 클래스 멤버 입력
+	public void insertClassMember(ClassMember cm) {
+		sqlSession.insert("ClassMemberMapper.insertClassMember",cm);
+		
+	}
+
+	public ArrayList<ClassMember> selectClassMemberList(String cNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClassMemberMapper.selectClassMemberList",cNo);
 	}
 
 }

@@ -1,5 +1,13 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<% 
+	Date to = new Date();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	String today = sdf.format(to);
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,10 +38,11 @@
 			<!-- 헤드부분 -->
 			<header class="modal-card-head" style="text-align: center; background:white;">
 				<p style="font-size: 15pt; font-weight: 500; margin: auto;">
-					2020년 1월 2주차 시험
+					${ test.testTitle }
 				</p>
 			</header>
 			<section class="modal-card-body">
+			<form method="post" action="checkTest.do">
 				<div id="quiz-list-form">
 					<section style="color: #484848; margin: 0; padding: 0;">
 
@@ -44,10 +53,10 @@
 							<!-- 추가 필 -->
 							<div class="blank-box-wrapper">
 								<div class="blank-box">
-									<h3 style="color: #000; font-size: 14pt; text-align: center;">ajoa2012</h3>
+									<h3 style="color: #000; font-size: 14pt; text-align: center;">${ loginMember.mId }</h3>
 								</div>
 								<div class="blank-box">
-									<h3 style="color: #000; font-size: 14pt; text-align: center;">2020-02-13</h3>
+									<h3 style="color: #000; font-size: 14pt; text-align: center;"><%= today %></h3>
 								</div>
 								<div class="blank-box">
 									<h3 style="color: red; font-size: 18pt; text-align: center;"></h3>
@@ -56,7 +65,7 @@
 							<div class="quiz-info-box-wrapper">
 								<div class="quiz-info-box">
 									<h5 style="font-size: 3mm; position: absolute; color: #7a7a7a;">총 문제수</h5>
-									<h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">10</h3>
+									<h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">${ test.testExno }</h3>
 								</div>
 								
 							</div>
@@ -67,167 +76,67 @@
 						<div class="quiz-contents">
 							<div style="position: relative;">
 								<!-- 단어 넣기 for문 돌릴 예정 -->
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										1 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
+								<c:forEach var="i" begin="0" end="${ test.testExno - 1 }">
+									<div class="word-box" style="float: left;">
+										<div class="word-number">
+											${ i+1 }
+										</div>
+										<div class="filled-box">
+											<div class="text-box">
+												${ kor[i] }
+											</div>
+										</div>
+										<div class="empty-box">
+											<div class="text-box" id="korS1">
+												<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;" class="input" id="input${ i }">
+											</div>
 										</div>
 									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
+								</c:forEach>
 								<!-- for문 끝-->
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										2 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										3 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										4 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										5 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										6 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										7 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										8 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										9 
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								<div class="word-box" style="float: left;">
-									<div class="word-number">
-										10
-									</div>
-									<div class="filled-box">
-										<div class="text-box">
-											사과
-										</div>
-									</div>
-									<div class="empty-box">
-										<div class="text-box" id="korS1">
-											<input type="text" style="width:160px; height:30px; margin-left:-17px; border: 0px;">
-										</div>
-									</div>
-								</div>
-								
-									
 								
 							</div>
 						</div>
 						<!-- 컨텐트 끝 -->
-				
+						
+						<script>
+							$(function(){
+								$(".input").change(function(){
+									var id = $(this).prop('id');
+									var value = id.replace('input',''); // 번호
+									var output = $("#output"+value);
+									
+									output.val($(this).val());
+									console.log(output);
+									console.log(value);
+								});
+							});
+						</script>
+						<c:forEach var="i" begin="0" end="${ test.testExno - 1 }">
+							<input type="text" class="output" id="output${ i }" value="otl" style="display:none;">
+						</c:forEach>
+						<input type="text" name="output" id="output" style="display:none;">
+						<input type="text" name="tNo" id="tNo" value="${ test.testNo }" style="display:none;">
+						<input type="submit" id="gock" style="display:none;">
+						<!-- 확인 버튼 클릭시 -->
+						<script>
+							$(function(){
+								$("#testchk").click(function(){
+									var size0 = $(".output").last().prop('id').replace('output','');
+									var size = size0 * 1;
+									var value = $("#output0").val();
+									for(i = 1;  i < size+1 ; i++){
+										value = value + "," + $("#output"+[i]).val();
+									}
+									$("#output").val(value);
+									$("#gock").click();
+								});
+							});
+						</script>
 
 					</section>
 				</div>
+				</form>
 			</section>
 			
             <div style="margin:auto; text-align: center; float:left;">

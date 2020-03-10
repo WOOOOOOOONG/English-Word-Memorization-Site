@@ -274,15 +274,15 @@ main .helper span {
          </c:url>
          <!-- 시험 목록 -->
          <c:url var="classTestList" value="classTestList.do">
-         	
+         	<c:param name="cNo" value="${ cNo }"/>
          </c:url>
          <!-- 멤버 권한 -->
          <c:url var="classMemberRight" value="classMemberRight.do">
-         	
+         		<c:param name="cNo" value="${ cNo }"/>
          </c:url>
          <!--  멤버 시험 보기 -->
          <c:url var="classMemberTest" value="classMemberTest.do">
-         
+         	<c:param name="cNo" value="${ cNo }"/>
          </c:url>
          
          
@@ -294,6 +294,7 @@ main .helper span {
                <li class="homepage" onclick="goHomepage(this, 1);">유저 채팅창</li>
             </ul>
          </li>
+         <c:if test="${ loginMember.mId eq classs.ornerId }">
          <li tabindex="0" class="icon-users icon"><a><span>멤버 관리</span></a>
             <ul class="hide">
                <li class="homepage"><a href="${ classMemberRight }">멤버 권한 설정</a></li>
@@ -307,15 +308,15 @@ main .helper span {
                <li class="homepage" id="createTest" data-toggle="modal" data-target=".createTest" onclick="getAllData('${ cNo }')">시험 문제 만들기</li>
             </ul>
          </li>
+         </c:if>
       </ul>
       <script>
      	// 시험문제 만들기 클릭시
       	function getAllData(searchInput) {
+      		 var send = JSON.stringify({
+      	         'search' : searchInput
+      	      });
      		console.log(searchInput);
-     		var send = JSON.stringify({
-                'search' : searchInput
-             });
-
              $.ajax({
                 type : "POST",
                 dataType : "json",
@@ -323,7 +324,25 @@ main .helper span {
                 data : send,
                 url : 'http://localhost:1222/getAllData',
                 success : function(data) {
-                   console.log(data);
+                // vocaList 아래 인풋 
+                	var div = $("#vocaList");
+                	var i = 1;
+                	//console.log(data);
+                	//console.log($("#chkkor").val())
+                   	for (var key in data) {
+                   		div.append("<label><input type='checkbox' onchange='qwer(this);' id='chk" + i + "' value='" + key + "'>"+key+"</label><br>");
+                   		var obj = data[key];
+                   		for(var key in obj){
+                   			var obj2 = obj[key];
+                   			//console.log(obj[key]);
+                   			for(var key in obj[key]){
+                   				
+                   				//console.log(key); // 영어
+                   				//console.log(obj2[key]);// 한글
+                   			}
+                   		}
+                   		i++;
+                	}
                 },
                 error : function() {
                    console.log("error has occured retriving data from MongoServer")
@@ -331,9 +350,68 @@ main .helper span {
              });
          }
       </script>
+      <!-- 해당 클래스  -->
       <script>
+      	var i = 0;
+      	var strArr= new Array();
+      	
+      	function qwer(clickthis){
+      		var strArr2 = new Array(); // ㅇ
+      		strArr2.push(clickthis.value);
+      		goAjax(strArr2); // ㅇ
+      		
+      	}
+      	
+      	function goAjax(strArr2){
+      		console.log(strArr2);
+      		testvs(strArr2);
+      	}
+      </script>
+      <script>
+   // 체크박스 클릭할때마다 해당 단어장의 단어들이 추가됨
+      function testvs(titles)
+      {
+         var send =
+         JSON.stringify({
+            'search' : 'CSID_44',
+            'title' : titles
+         });
+         $.ajax({
+            type : "POST",
+            dataType : "json",
+            contentType : "application/json; charset=utf-8",
+            data : send,
+            url : 'http://localhost:1222/testURL',
+            success : function(data) {
+              	console.log(data);
+	           	var chkkor = $("#chkkor");
+	        	var chkeng = $("#chkeng");
+        	
+        		console.log("밸류" + chkkor.val());
+               for(var key in data){
+            	   var obj = data[key];
+            	   for(var key in obj){
+            		   chkkor.val(chkkor.val() + "," + obj[key]);
+            		   chkeng.val(chkeng.val() + "," + key);
+            		   //console.log(obj[key]);    // 한글
+            		   //console.log(key);		// 영어
+            	   }
+               }
+                console.log("한글 : " + chkkor.val());
+                console.log("영어 : " + chkeng.val());;
+            },
+            error : function() {
+               console.log("error has occured retriving data from MongoServer")
+            }
+         });
+         
+         
+      } 
+      </script>
+      
+      <script>
+      
             $(document).ready(function () {
-               
                
                 $(".icon>a").click(function () {
                     var submenu = $(this).nextAll("ul");
@@ -415,6 +493,7 @@ main .helper span {
 	</script>
 	
 	<!-- 시험 만들기 -->
+	<form action="createTest.do" method="post">
 	<div class="modal fade createTest" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content" style="width:550px;">
@@ -425,18 +504,7 @@ main .helper span {
                 <label style="display: block; font-weight: 700;">참고 단어장 선택</label>
             </div>
             <div style="margin-top:1rem; margin-bottom:.5rem; text-align: left; overflow: scroll; height:200px; width:400px;line-height: 40px;" id="vocaList">
-                <label><input type="checkbox" id="ck1">2020년 1월 1주차 단어장</label><br>
-                <label><input type="checkbox" id="ck2">2020년 1월 2주차 단어장</label><br>
-                <label><input type="checkbox" id="ck3">2020년 1월 3주차 단어장</label><br>
-                <label><input type="checkbox" id="ck4">2020년 1월 4주차 단어장</label><br>
-                <label><input type="checkbox" id="ck5">2020년 2월 1주차 단어장</label><br>
-                <label><input type="checkbox" id="ck6">2020년 2월 2주차 단어장</label><br>
-                <label><input type="checkbox" id="ck7">2020년 2월 3주차 단어장</label><br>
-                <label><input type="checkbox" id="ck8">2020년 2월 4주차 단어장</label><br>
-                <label><input type="checkbox" id="ck9">2020년 3월 1주차 단어장</label><br>
-                <label><input type="checkbox" id="ck10">2020년 3월 2주차 단어장</label><br>
-                <label><input type="checkbox" id="ck11">2020년 3월 3주차 단어장</label><br>
-                <label><input type="checkbox" id="ck12">2020년 3월 4주차 단어장</label><br>
+               
             </div>
 
 			<!-- 해당 클래스에 소속된 단어장 리스트를 불러오는 Function -->
@@ -446,29 +514,45 @@ main .helper span {
             </div>
 
             <div style="margin-top:1rem; margin-bottom:.5rem; text-align: left;">
-                <label><input type="radio" name="count" id="c10">10문제</label>
-                <label><input type="radio" name="count" id="c20">20문제</label>
-                <label><input type="radio" name="count" id="c25">25문제</label>
+                <label><input type="radio" name="count" id="c10" class="count">10문제</label>
+                <label><input type="radio" name="count" id="c20" class="count">20문제</label>
+                <label><input type="radio" name="count" id="c25" class="count">25문제</label>
             </div><br><br>
 
             <div style="margin:auto; text-align: center;">
-				<button style="width:100px; height:40px; border:0px; background:#e6e6eb" id="testcn">취소</button>
-				<button style="width:100px; height:40px; border:0px; background:#606060; color:white;" id="testchk">확인</button>
+				<input type="button" style="width:100px; height:40px; border:0px; background:#e6e6eb" id="testcn" value="취소">
+				<input type="submit" style="width:100px; height:40px; border:0px; background:#606060; color:white;" value="확인">
 			</div>
-
+				<!--  안보임  -->
+				<input type="text" name="chkkor" id="chkkor" value="" style="display:none;">
+				<input type="text" name="chkeng" id="chkeng" value="" style="display:none;">
+				<input type="text" name="testCount" id="testCount" value="" style="display:none;">
+				<input type="text" name="testcNo" id="testcNo" value="${ cNo }" style="display:none"> 
+				<input type="number" name="testcount" id="testcount" value="${ count }" style="display:none">
+				<script>
+					$(function(){
+						$(".count").change(function(){
+							
+							var value = $(this).prop('id');
+							$("#testCount").val(value);
+							console.log("input : " + $("#testCount").val());
+						});
+					});
+				</script>
+				<input type="submit" id="subtest" style="display:none;">
+				
         </div>
     </div>
 			</div>
 		</div>
 	</div>
+	</form>
+	
 	
 	<script>
 		$(function(){
 			$("#testcn").click(function(){
 				$("#createTest").click();
-			});
-			$("#testchk").click(function(){
-				location.href="createTest.do";
 			});
 		});
 	</script>
