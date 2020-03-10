@@ -90,7 +90,7 @@
 	                	"ordering":false,
 						"language" : {
 							"emptyTable" : "등록된 회원이 없습니다."
-						}
+						},
 	                });
 	            });  
 				

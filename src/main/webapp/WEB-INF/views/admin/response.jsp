@@ -36,7 +36,7 @@
 </head>
 
 <body>
-	<c:if test="${sessionScope.loginMember.mId eq 'admin'}">
+	<%-- <c:if test="${sessionScope.loginMember.mId eq 'admin'}"> --%>
 		<jsp:include page="../common/menubar.jsp" />
 		<jsp:include page="../common/left-menubar.jsp" />
 	
@@ -181,10 +181,10 @@
 	        	</script>
 			</div>
 		</form>
-	</c:if>
+	<%-- </c:if>
 	
 	<c:if test="${sessionScope.loginMember.mId ne 'admin'}">
 		<jsp:include page="../common/errorPage.jsp"/>
-	</c:if>
+	</c:if> --%>
 </body>
 </html>
