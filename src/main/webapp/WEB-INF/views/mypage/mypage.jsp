@@ -568,7 +568,7 @@ body {
             <div class="form-group row">
                 <label for="mynickname" class="col-form-label">닉네임</label>
                 <input type="text" class="form-control" id="mynickname" name="nickname"
-                 placeholder="${loginMember.nickname }" style="width:40%;  float: left;">
+                 value="${loginMember.nickname }" style="width:40%;  float: left;">
             </div>
             <!-- 관심분야 -->
             <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
