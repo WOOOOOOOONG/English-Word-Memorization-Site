@@ -300,7 +300,7 @@ textarea::placeholder {
 			<c:url var="voca1" value="classify.voca"/>
 			<c:url var="voca2" value="total.voca"/>
 			
-			<li tabindex="0" class="icon hilight" style=""><a><span><i class="fas fa-user"></i> 멤버
+			<li tabindex="0" class="icon hilight" style=""><a><span><i class="fas fa-user" style=""></i> 멤버
 						관리</span></a>
 				<ul class="hide">
 					<li class="homepage page1 light" onclick="goHomepage(this, 1);">멤버 전체</li>

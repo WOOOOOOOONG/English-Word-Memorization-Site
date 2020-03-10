@@ -14,16 +14,32 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.admin.model.vo.Inquire;
+import com.kh.spring.member.model.service.MemberService;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.member.model.vo.VisitRecord;
 
 @Controller
 public class AdminController {
 	@Autowired
 	private AdminService aService;
+	@Autowired
+	private MemberService mService;
 	
 	@RequestMapping("viewMain.ad")
 	public String viewMain() {
 		return "/common/mainPage";
+	}
+	
+	@RequestMapping("viewTotal.ad")
+	public ModelAndView viewTotal(ModelAndView mv) {
+		ArrayList<Member> memberList = mService.selectList();
+		ArrayList<Inquire> inqList = aService.selectInquireList();
+
+		mv.addObject("inquireList", inqList);
+		mv.addObject("mList", memberList);
+		mv.setViewName("admin/total");
+		
+		return mv; 
 	}
 	
 	// InquireList는 관리자 전용 menubar에 넣어야 함
