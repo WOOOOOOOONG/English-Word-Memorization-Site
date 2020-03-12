@@ -160,9 +160,9 @@ public class MemberController {
 		ArrayList<Friend> flist = fService.friendList(loginMember.getmId());
 		HashMap<Integer,String> glist = new HashMap<Integer,String>();
 		glist.put(0, "일반");
-		for(int i=1; i<flist.size();i++) {
+		for(int i=0; i<flist.size();i++) {
 			if(!glist.containsValue(flist.get(i).getGroupName())){
-				glist.put(i, flist.get(i).getGroupName());
+				glist.put(i+1, flist.get(i).getGroupName());
 			}
 		}
 		model.addAttribute("friendList",flist);

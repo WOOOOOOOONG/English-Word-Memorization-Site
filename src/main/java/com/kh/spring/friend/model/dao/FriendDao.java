@@ -55,4 +55,12 @@ public class FriendDao {
 		return result;
 	}
 
+	public int updateComment(Friend f) {
+		return sqlSession.update("friendMapper.updateComment",f);
+	}
+
+	public int updateGroup(Friend f) {
+		return sqlSession.update("friendMapper.updateGroup",f);
+	}
+
 }

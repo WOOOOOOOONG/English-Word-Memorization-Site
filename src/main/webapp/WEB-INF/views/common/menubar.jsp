@@ -286,6 +286,19 @@ nav {
     float:left;
     font-size:0.95em;
 }
+#searchfriimg{
+	float: left; margin-left: 10px; width: 80px;
+}
+#searchfriintro{
+	float:left; margin-left:10px; width:190px;
+	background:white; word-break:break-all;
+}
+.accordion-panel > li{
+	list-style: none;
+}
+.accordion-panel > li:before {
+	content: "ㄴ";
+}
 </style>
 
 </head>
@@ -315,13 +328,14 @@ nav {
     </c:if>
 </div>
 <nav id="nav-1">
-  <a class="link-2" href="#"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
-  <a class="link-1" href="#">Home</a>
+  <a class="link-2" href="viewMain.ad"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
+  <a class="link-1" href="viewMain.ad">Home</a>
   <a class="link-1" href="#">단어장</a>
   <a class="link-1" href="ClassList.do">클래스</a>
-  <a class="link-1" href="#">고객센터</a>
+  <a class="link-1" href="#">커뮤니티</a>
+  <a class="link-1" href="memberInquireList.ad">고객센터</a>
 </nav>
-<c:if test="${ !empty sessionScope.loginMember }">
+<c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">
 	<span id="chatlength" style="display:none;">0</span>
 	<div id="chatexit"> 
@@ -398,6 +412,9 @@ nav {
 		닉네임 : <span id="searchnickname"></span> &nbsp; 이름 : <span id="searchname"></span>
 		<span id="searchfid" style="display:none;"></span>
 		<button id="insertfriendbtn" class="btn btn-secondary" ></button>
+		<br>
+		<img id="searchfriimg">
+		<div id="searchfriintro"></div>
 		</div>
 		
 	</div>
@@ -406,7 +423,7 @@ nav {
 	<c:forEach var="i" begin="0" end="${groupList.size()-1}" step="1">
 	<li class="accordion-item">
 		<h5 class="accordion-thumb">${ groupList.get(i)}</h5>
-		
+
 		<ul class="accordion-panel">
 		
 		<c:forEach var="fltwo" items="${ friendList }" varStatus="status">
@@ -434,18 +451,36 @@ nav {
 <!-- 친구에 대한 설정 스크립트 -->
 <script>
 	$(function(){
-		$(".friendfunc").click(function(){
+		$(document).on('click', '.friendfunc', function(){
 			var fId= $($(this).parent().children()[2]).val();
 			var mId = '${loginMember.mId}';
 			var id = $(this).attr('id');
 			var count = id.charAt(id.length-1);
 			console.log();
 			if(id.includes("comment")){
+				var $comment= $($(this).parent().children()[1]);
 				// 코멘트변경
-				
+				var c = prompt("코멘트를 입력해주세요",$comment.html());
+				if(c != null && c!= $comment.html()){
+					$.ajax({
+				        url:"updateComment.do",
+				        data:{fId:fId,mId:mId,comment:c},
+				        type:"post",
+				   		success:function(data){
+				   			if(data=="good") {
+				   				alert("코멘트가 변경되었습니다.");
+				   				$comment.html(c);
+				   			}
+				   			else alert("친구해제 실패");
+						},error:function(e){
+							alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+						}
+						
+					});	
+				}
 			}else if(id.includes("delete")){
 				// 친구삭제
-				if(confirm("정말로 친구해제하시겠습니까?")){
+				if(confirm("정말로 친구해제하시겠습니까? \n해제시 그동안의 채팅기록이 사라집니다.")){
 					$.ajax({
 				        url:"deleteFriend.do",
 				        data:{fId:fId,mId:mId},
@@ -453,7 +488,7 @@ nav {
 				   		success:function(data){
 				   			if(data=="good") {
 				   				alert("정상적으로 친구해제되었습니다.");
-				   				reupdatelist();
+				   				$(this).parent().css("display","none");
 				   			}
 				   			else alert("친구해제 실패");
 						},error:function(e){
@@ -463,7 +498,23 @@ nav {
 					});		
 				}
 			}else{
-				// 그룹 변경
+				var groupName = prompt("바꿀 그룹명을 입력해주세요");
+				if(groupName != null){
+					$.ajax({
+				        url:"updateGroup.do",
+				        data:{fId:fId,mId:mId,groupName:groupName},
+				        type:"post",
+				   		success:function(data){
+				   			if(data=="good") {
+				   				reupdatelist();
+				   			}
+				   			else alert("그룹변경 실패");
+						},error:function(e){
+							alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+						}
+						
+					});	
+				}
 			}
 		});
 	});
@@ -537,6 +588,9 @@ nav {
 		   			$("#searchnickname").html(data.nickname);
 		   			$("#searchname").html(data.name);
 		   			$("#searchfid").html(id);
+		   			$("#searchfriimg").attr("src",'${ contextPath }/resources/profileimg/'+data.profileimg);
+		   			$("#searchfriintro").html(data.introduce).css("min-height",$("#searchfriimg").css("height"));
+		   			
 				},error:function(e){
 					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 				}
@@ -602,7 +656,9 @@ nav {
 		        data:{mId:mId},
 		        type:"post",
 		   		success:function(data){
-		   			window.location.reload();
+		   			var currentLocation = window.location;
+		   			$("#fri1").load(currentLocation + ' #fri1');
+		   			
 				},error:function(e){
 					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 				}
@@ -618,7 +674,7 @@ $(function() {
 	$("#chatcontent").val("");
 	// (Optional) Active an item if it has the class "is-active"	
 	$(".accordion > .accordion-item.is-active").children(".accordion-panel").slideDown();
-	$(".accordion-thumb").click(function() {
+	$(document).on('click', '.accordion-thumb', function(){
 		// 다른 애들 안보이게
 		$(this).parent().siblings(".accordion-item").removeClass("is-active").children(".accordion-panel").slideUp();
 		// 선택된건 보이게
@@ -641,7 +697,7 @@ $("#friendlisttoggle").click(function(){
 	}
 	
 });
-$(".myfriend").click(function(){
+$(document).on('click', '.myfriend', function(){
 	$("#friendname").html($(this).html());
 	var fId = $(this).next().next().val();
 	$("#friendId").val(fId);

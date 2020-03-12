@@ -37,4 +37,12 @@ public class FriendService {
 	public int deleteFriend(Friend f) {
 		return fDao.deleteFriend(f);
 	}
+
+	public int updateComment(Friend f) {
+		return fDao.updateComment(f);
+	}
+
+	public int updateGroup(Friend f) {
+		return fDao.updateGroup(f);
+	}
 }
