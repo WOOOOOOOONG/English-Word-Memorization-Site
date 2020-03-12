@@ -6,8 +6,8 @@
 	<resultMap id="friendResultSet" type="Friend">
 		<id property="mId" column="ID"/>
 		<result property="fId" column="FR_ID"/>
-		<result property="groupName" column="GROUP"/>
-		<result property="comment" column="COMMENT"/>
+		<result property="groupName" column="GROUPNAME"/>
+		<result property="comment" column="COMMENTS"/>
 		<result property="nickname" column="NICKNAME"/>
 		<result property="status" column="STATUS"/>
 	</resultMap>
@@ -15,12 +15,12 @@
 	<select id="friendList" parameterType="Friend" resultMap="friendResultSet">
 		SELECT f.* ,m.nickname 
 		FROM FRIEND f , Member m
-		where id=#{mId} and mid=f.fr_id and f.status='Y'
+		where f.id=#{mId} and mid=f.fr_id and f.status='Y'
 	</select>
 	
 	<select id="findFriend" parameterType="string" resultType="Member">
-		select name,nickname
-		from member where mid=#{id}
+		select name,nickname,introduce, s.CHANGE_NAME as profileimg
+		from member m,storage s where mid=#{id} and REFER_ID = #{id}
 	</select>
 	
 	<insert id="insertFriend" parameterType="Friend">
@@ -39,4 +39,10 @@
 	<delete id="deleteFriend" parameterType="Friend">
 		delete from friend where id=#{mId} and fr_id=#{fId}
 	</delete>
+	<update id="updateComment" parameterType="Friend">
+		update Friend set COMMENTS=#{comment} where id=#{mId} and fr_id=#{fId}
+	</update>
+	<update id="updateGroup" parameterType="Friend">
+		update Friend set GROUPNAME=#{groupName} where id=#{mId} and fr_id=#{fId}
+	</update>
 </mapper>
