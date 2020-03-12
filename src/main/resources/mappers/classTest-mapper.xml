@@ -25,5 +25,14 @@
 		FROM CLASS_TEST
 		WHERE TEST_NO = #{testNo}
 	</select>
+	<select id="selectLastTestTitle" resultType="string">
+		SELECT TEST_TITLE
+		FROM ( SELECT TEST_TITLE
+		        FROM CLASS_TEST
+		        WHERE CLASS_NO = #{cNo}
+		        ORDER BY TEST_NO DESC)
+		WHERE ROWNUM = 1
+
+	</select>
   
 </mapper>

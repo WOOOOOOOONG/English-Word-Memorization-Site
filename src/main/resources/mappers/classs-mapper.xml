@@ -61,4 +61,24 @@
 		WHERE CLASSS.C_ID = CATEGORY.C_ID
 		AND NAME = #{cateList}
 	</select>
+	<select id="selectOrnerId" resultType="string">
+		SELECT ORNER_ID
+		FROM CLASSS
+		WHERE CLASS_NO = #{cNo}
+	</select>
+	<update id="changeManager">
+		UPDATE CLASSS
+		SET ORNER_ID = #{id}
+		WHERE CLASS_NO = #{cNo}
+	</update>
+	<delete id="deleteClass">
+		DELETE
+		FROM CLASSS
+		WHERE CLASS_NO = #{cNo}
+	</delete>
+	<select id="selectChangeName" resultType="string">
+		SELECT CHANGE_NAME
+		FROM STORAGE
+		WHERE REFER_ID = #{id}
+	</select>
 </mapper>

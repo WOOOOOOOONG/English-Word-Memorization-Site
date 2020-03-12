@@ -59,6 +59,40 @@ public interface ClassService {
 	// 클래스 멤버 리스트 셀렉
 	ArrayList<ClassMember> selectClassMemberList(String cNo);
 
+	//  단어 권한 체크
+	int wRightTrue(ClassMember cm);
+	// 단어 권한 체크 해제
+	int wRightFalse(ClassMember cm);
+    // 단어장 권한 체크
+	int vRightTrue(ClassMember cm);
+    // 단어장 권한 체크 해제
+	int vRightFalse(ClassMember cm);
+
+	// 클래스 오너 아이디 찾아옴
+	String selectOrnerId(String cNo);
+
+	// 클래스 멤버 강퇴하기
+	int classMemberBan(ClassMember cm);
+
+	// 마지막 테스트 제목 가져옴
+	String selectLastTestTitle(String cNo);
+
+	// 시험 초기화시킴
+	void deleteTestVoca(TestVoca tv);
+
+	// 매니저 전환
+	int changeManager(ClassMember cm);
+
+	// 비밀번호 매치
+	int matchPwd(String pwd, String pwd2);
+
+	// 클래스 삭제
+	void deleteClass(String cNo);
+
+	// 유저아이디의 프로필사진 가져옴
+	String selectChangeName(String id);
+	
+
 	
 	
 }
