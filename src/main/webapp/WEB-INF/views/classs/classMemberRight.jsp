@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fnc" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,7 +28,7 @@
 	<jsp:include page="../common/classSideMenubar.jsp"/>
 	<!-- 컨텐트 부분-->
     <div style="margin-top :4vh; margin-left: 4vw; width:70%; height:800px; float: left; overflow: auto; position: relative;">
-        <h1>스터디 멤버 (5)</h1><br><br>
+        <h1>스터디 멤버 (${ cmList.size() })</h1><br><br>
     <table class="table table-hover" style="width:80%; text-align: center; margin:auto; margin-left:10%; ">
         <thead>
             <tr>
@@ -39,70 +41,32 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon1.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">ajoa2012</td>
-                <td style="line-height:4;">2020-01-27</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon2.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">jjang1</td>
-                <td style="line-height:4;">2020-01-28</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon3.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">sin0102</td>
-                <td style="line-height:4;">2020-01-27</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon1.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">ajoa2012</td>
-                <td style="line-height:4;">2020-01-27</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon2.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">ajoa2012</td>
-                <td style="line-height:4;">2020-01-27</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon3.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">ajoa2012</td>
-                <td style="line-height:4;">2020-01-27</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon1.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">ajoa2012</td>
-                <td style="line-height:4;">2020-01-27</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
-            <tr>
-                <th scope="row"><img src="${ contextPath }/resources/image//icon2.jpg"style="width:100%;"></th>
-                <td style="line-height:4;">ajoa2012</td>
-                <td style="line-height:4;">2020-01-27</td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;" ></td>
-                <td><input type="checkbox" name="" id="" style="height: 25px; width: 25px; margin-top:18px;"></td>
-                <td><span class="xbtn" style="line-height:2;">x</span></td>
-            </tr>
+        	<c:forEach var="i" begin="0" end="${ cmList.size()-1 }">
+	            <tr>
+	                <th scope="row"><img src="${ contextPath }/resources/image//icon1.jpg"style="width:100%;"></th>
+	                <td style="line-height:4;">${ cmList.get(i).id }</td>
+	                <td style="line-height:4;">${ cmList.get(i).lastday }</td>
+	                <c:choose>
+		                <c:when test="${ cmList.get(i).wRight eq 'Y' }">
+		                	<td><input type="checkbox" name="" id="wRight${ i }" class="wRight" style="height: 25px; width: 25px; margin-top:18px;" checked></td>
+		                </c:when>
+		                <c:otherwise>
+		                	<td><input type="checkbox" name="" id="wRight${ i }" class="wRight" style="height: 25px; width: 25px; margin-top:18px;"></td>
+		                </c:otherwise>
+	                </c:choose>
+	                
+	                <c:choose>
+		                <c:when test="${ cmList.get(i).vRight eq 'Y' }">
+		                	<td><input type="checkbox" name="" id="vRight${ i }" class="vRight" style="height: 25px; width: 25px; margin-top:18px;" checked></td>
+		                </c:when>
+		                <c:otherwise>
+		                	<td><input type="checkbox" name="" id="vRight${ i }" class="vRight" style="height: 25px; width: 25px; margin-top:18px;"></td>
+		                </c:otherwise>
+	                </c:choose>
+	                
+	                <td><span class="xbtn" style="line-height:2;">x</span></td>
+	            </tr>
+            </c:forEach>
             
             
         </tbody>

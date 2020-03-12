@@ -1,5 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ClassTestMapper">
+	<resultMap id="classTestResultSet" type="ClassTest">
+		<id property="testNo" column="TEST_NO"/>
+		<result property="testExno" column="TEST_EXNO"/>
+		<result property="testTitle" column="TEST_TITLE"/>
+		<result property="testKor" column="TEST_KOR"/>
+		<result property="testEng" column="TEST_ENG"/>
+		<result property="cNo" column="CLASS_NO"/>
+	</resultMap>
+
+	<insert id="insertTest">
+		INSERT INTO CLASS_TEST
+		VALUES(TNO_SEQ.NEXTVAL, #{testExno}, #{testTitle}, #{testKor}, 
+				#{testEng}, #{cNo})
+	</insert>
+	<select id="selectTestList" resultMap="classTestResultSet">
+		SELECT *
+		FROM CLASS_TEST
+		WHERE CLASS_NO = #{cNo}
+	</select>
+	<select id="selectTestOne" resultMap="classTestResultSet">
+		SELECT *
+		FROM CLASS_TEST
+		WHERE TEST_NO = #{testNo}
+	</select>
   
 </mapper>

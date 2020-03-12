@@ -18,6 +18,10 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectInquireList");
 	}
 
+	public ArrayList<Inquire> selectMemberInquireList(String inquirerId) {
+		return (ArrayList)sqlSession.selectList("adminMapper.selectMemberInquireList", inquirerId);
+	}
+
 	public Inquire selectInquireOne(int iId) {
 		return sqlSession.selectOne("adminMapper.selectInquireOne", iId);
 	}
@@ -32,5 +36,9 @@ public class AdminDao {
 
 	public ArrayList<VisitRecord> selectLogList() {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectLogList");
+	}
+
+	public int insertInquire(Inquire inq) {
+		return sqlSession.insert("adminMapper.insertInquire", inq);
 	}
 }
