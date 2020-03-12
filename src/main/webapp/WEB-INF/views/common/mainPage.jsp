@@ -176,7 +176,7 @@ footer p {
 }
 
 /* Navbar Styles */
-nav {
+/* nav {
 	height: 3rem;
 	position: relative;
 	width: 100%;
@@ -221,7 +221,7 @@ nav ul li.action-item:hover {
 
 nav ul.right {
 	float: right;
-}
+} */
 </style>
 <script>
 	$(function() {
@@ -285,11 +285,12 @@ nav ul.right {
 </script>
 </head>
 <body>
+	<jsp:include page="../common/menubar.jsp"/>
 	<div class="hero" id="top">
 		<div class="hero-image"></div>
 		<h1>Study with 'SEW'</h1>
 	</div>
-	<div class="navbar-wrapper">
+	<%-- <div class="navbar-wrapper">
 		<nav>
 			<div class="content">
 				<ul>
@@ -300,16 +301,16 @@ nav ul.right {
 				</ul>
 				<ul class="right">
 					<c:if test="${loginMember ne null}">
-						<li class="action-item"><a href=""><p>마이페이지</p></a></li>
+						<li class="action-item"><a href="mypage.me"><p>마이페이지</p></a></li>
 					</c:if>
 					<c:if test="${loginMember eq null}">
-						<li><a href="#"><p>Log in</p></a></li>
-						<li class="action-item"><a href="#"><p>Sign up</p></a></li>
+						<li><a href="login.me"><p>Log in</p></a></li>
+						<li class="action-item"><a href="login.me"><p>Sign up</p></a></li>
 					</c:if>
 				</ul>
 			</div>
 		</nav>
-	</div>
+	</div> --%>
 	<section id="vision">
 		<div class="content">
 			<h1>We Have a Vision</h1>

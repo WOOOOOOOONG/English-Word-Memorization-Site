@@ -67,7 +67,7 @@ body {
 							[ '9월', arr[9] ], [ '10월', arr[10] ], [ '11월', arr[11] ],
 							[ '12월', arr[12] ], ]);
 					var options = {
-						title : '일자별 방문내역',
+						title : '월별 방문내역',
 						backgroundColor : "whitesmoke",
 						focusTarget : 'category',
 						hAxis : {

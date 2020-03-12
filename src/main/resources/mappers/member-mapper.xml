@@ -71,7 +71,7 @@
 		AND STATUS='Y'
 	</select>
 	<!-- 프로필 이미지 찾기 -->
-	<select id="selectProfileImg" parameterType="Member" resultType="string">
+	<select id="selectProfileImg" parameterType="string" resultType="string">
 		select change_name from storage where refer_id=#{mId}
 	</select>
 	<!-- 프로필 업데이트 -->
