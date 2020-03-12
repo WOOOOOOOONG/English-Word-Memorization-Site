@@ -17,4 +17,34 @@
  		FROM CLASS_MEMBER
  		WHERE CLASS_NO = #{cNo}
  	</select>
+ 	<update id="wRightTrue">
+		UPDATE CLASS_MEMBER
+		SET WORD_RIGHT = 'Y'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="wRightFalse">
+		UPDATE CLASS_MEMBER
+		SET WORD_RIGHT = 'N'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="vRightTrue">
+		UPDATE CLASS_MEMBER
+		SET VOCA_RIGHT = 'Y'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="vRightFalse">
+		UPDATE CLASS_MEMBER
+		SET VOCA_RIGHT = 'N'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<delete id="classMemberBan">
+		DELETE
+		FROM CLASS_MEMBER
+		WHERE CLASS_NO = #{cNo} AND ID = #{id}
+	</delete>
+	<delete id="deleteClassMember">
+		DELETE
+		FROM CLASS_MEMBER
+		WHERE CLASS_NO = #{cNo}
+	</delete>
 </mapper>

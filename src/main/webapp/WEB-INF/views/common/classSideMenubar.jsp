@@ -12,6 +12,13 @@
    href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
    src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+   
+   <!-- 폰트 모음 -->
+   <link href="https://fonts.googleapis.com/css?family=Cinzel&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet"> <!--  font-family: 'Nanum Gothic', sans-serif; -->
+   <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet"> <!--  font-family: 'Indie Flower', cursive; -->
+   
+   <!--  폰트 모음 끝 -->
 <style>
 body {
    height: 1050px;
@@ -246,15 +253,54 @@ main .helper span {
 .bold-weight {
    font-weight: bold;
 }
+.closeMenu:hover{
+	color: rgb(0,154,200);
+	display: block;
+	transition: 0.2s ease-in-out;
+}
+.menu{
+	overflow-x: hidden;
+	transition:0.5s ease-in-out;
+}
 </style>
 </head>
 <body>
-   <nav class="menu" id="menu" tabindex="0">
+	<jsp:include page="../classs/fontStore.jsp"/>
+	<script>
+		function closeNav() {
+			document.getElementById('menu').style.width = '0';
+		}
+	</script>
+   <nav class="menu" id="menu" tabindex="0" style="font-family: 'Nanum Gothic', sans-serif;">
       <div class="smartphone-menu-trigger"></div>
       <header class="avatar">
-         <img
-            src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
-         <h2>John D.</h2>
+      		
+	     <!-- <a style="margin-left:160px; margin-top:-30px; position:absolute; font-size:32px;" class="closeMenu" onclick='closeNav()' href="#">x</a> -->
+      		
+      	<!--  아이콘 시작 -->
+      	<c:set var="imgFlag2" value="true"/>
+			<c:forEach var="q" begin="0" end="${ userList.size() - 1 }" >
+				 
+				<c:if test="${ loginMember.mId eq userList.get(q).refId && imgFlag2 }">
+					 <th scope="row">
+					 	<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }">
+					 </th>
+					<c:set var="imgFlag2" value="false"/>
+				</c:if>
+			</c:forEach>
+			<c:if test="${ imgFlag2 }">
+				<th scope="row">
+					<img src="${ contextPath }/resources/profileimg/defaultimg.png">
+				</th>										
+				<c:set var="imgFlag2" value="false"/>
+			</c:if>
+						
+         <!-- <img
+            src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" /> -->
+         <h2>${ loginMember.mId }</h2>
+         
+         
+         <!--  아이콘 끝 -->
       </header>
       <ul class="manage">
          <%-- <c:url var="admin1" value="memberManage.ad"/>
@@ -270,7 +316,7 @@ main .helper span {
          
          <!-- 스터디 단어장 -->
          <c:url var="myClass" value="myClass.do">
-         	
+         	<c:param name="cNo" value="${ cNo }"/>
          </c:url>
          <!-- 시험 목록 -->
          <c:url var="classTestList" value="classTestList.do">
@@ -437,30 +483,63 @@ main .helper span {
    </nav>
    
    <!-- 매니저 전환 모달 -->
-	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+	<div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="managermodal">
 		<div class="modal-dialog modal-sm" role="document">
 			<div class="modal-content" style="width:350px; height:200px;">
 				<span style=" margin:auto; text-align:center; padding:10px; width:280px; height:100px; font-weight:700; margin-top:30px;">매니저 권한 양도</span>
 				<div style="margin:auto; margin-top:-60px;">
-					<select class="custom-select" style="width:200px; margin:auto;" id="ckid">
-						<option>user01</option>
-						<option>user02</option>
-						<option>user03</option>
-						<option>user04</option>
+					<select class="custom-select" style="width:200px; margin:auto;" id="managerChangeSelect">
+						<c:if test="${ !empty cmList }">
+							<c:forEach var="i" begin="0" end="${ cmList.size() - 1 }">
+								<c:if test="${ cmList.get(i).id ne classs.ornerId }">
+									<option value="${ cmList.get(i).id }">${ cmList.get(i).id }</option>
+								</c:if>
+							</c:forEach>
+						</c:if>
 					</select>
 				</div>
 				
 				<div style="margin:auto;">
 					<button style="width:100px; height:40px; border:0px; background:#e6e6eb" id="managercn">취소</button>
-					<button style="width:100px; height:40px; border:0px; background:#606060; color:white;" id="managerchk">확인</button>
+					<button style="width:100px; height:40px; border:0px; background:#606060; color:white;" id="managerChangeBtn">확인</button>
+					<button id="mangerChangeBtnHide" value="${ cNo }" style="display:none;"></button>
 				</div>
-				
 			</div>
 		</div>
 	</div>
 	<button id="qwe" style="display:none;"></button>
 	<!-- 매니저 확인 -->
-
+	<script>
+		$(function(){
+			$("#managerChangeBtn").click(function(){
+				var id = $("#managerChangeSelect option:selected").val();
+				var obj = new Object(); // json에 보내기위한 객체
+				var cNo = $("#managerChangeBtnHide").val();
+				if(confirm(id + "님에게 클래스 매니저의 권한을 양도하시겠습니까?")){
+					obj.id = id;
+					obj.cNo = cNo;
+					$.ajax({
+						url:"ManagerChange.do",
+						data : JSON.stringify(obj),
+						type:"post",
+						contentType:"application/json; charset=utf-8",
+						success:function(data){
+							if(data >= 1){
+								alert(id + "님에게 매니저 권한을 양도하였습니다.");
+								location.href="myClass.do?cNo=${ cNo }";	
+							}
+						},
+						error:function(e){
+							alert(e);
+						}
+					});
+				}
+			});
+			$("#managercn").click(function(){
+				$("#managermodal").click();
+			});
+		});
+	</script>
 	
 	
 	<!-- 스터디 폐강 모달-->
@@ -469,7 +548,8 @@ main .helper span {
 			<div class="modal-content" style="width:350px; height:200px;">
 				<span style=" margin:auto; text-align:center; padding:10px; width:280px; height:100px; font-weight:700; margin-top:30px;">회원 비밀번호를 입력해주세요.</span>
 				<div style="margin:auto; margin-top:-60px;">
-					<input type="password"  style="width:200px; margin:auto;">
+					<input type="password"  style="width:200px; margin:auto;" id="myPwd">
+					<input type="text" value="${ loginMember.pwd }" id="ckPwd" style="display:none;">
 				</div>
 				
 				<div style="margin:auto;">
@@ -486,8 +566,32 @@ main .helper span {
 			});
 			
 			$("#studychk").click(function(){
-				alert("클래스가 폐강되었습니다.");
-				location.href="ClassList.do";
+				var obj = new Object(); // json에 보내기위한 객체
+				var cNo = $("#managerChangeBtnHide").val();
+				var pwd = $("#myPwd").val();
+				var pwd2 = $("#ckPwd").val();
+				if(confirm("정말 클래스를 폐강하시겠습니까?")){
+					obj.pwd = pwd;
+					obj.cNo = cNo;
+					obj.pwd2 = pwd2;
+					$.ajax({
+						url:"EndClass.do",
+						data : JSON.stringify(obj),
+						type:"post",
+						contentType:"application/json; charset=utf-8",
+						success:function(data){
+							if(data >= 1){
+								alert("클래스가 폐강되었습니다.");
+								location.href="ClassList.do";
+							}else{
+								alert("비밀번호가 일치하지 않습니다.");
+							}
+						},
+						error:function(e){
+							alert(e);
+						}
+					});
+				}
 			});
 		});
 	</script>

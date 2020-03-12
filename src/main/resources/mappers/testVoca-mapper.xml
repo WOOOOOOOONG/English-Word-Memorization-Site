@@ -20,4 +20,9 @@
 		INSERT INTO TEST_VOCA
 		VALUES(#{testNo}, #{id}, SYSDATE, #{score}, #{ok}, #{nok}, #{answer})
 	</insert>
+	<delete id="deleteTestVoca">
+		DELETE
+		FROM TEST_VOCA
+		WHERE ID = #{id} AND TEST_NO = #{testNo}
+	</delete>
 </mapper>

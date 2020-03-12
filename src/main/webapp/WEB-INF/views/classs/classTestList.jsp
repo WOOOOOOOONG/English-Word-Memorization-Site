@@ -20,11 +20,13 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../common/classSideMenubar.jsp"/>
 <!-- 컨텐트 부분-->
-    <div style="margin-top :4vh; margin-left: 4vw; width:70%; float: left;">
-        <h1>시험 목록</h1>
-    <table class="table table-hover" style="width:80%; text-align: center;">
+    <div style="margin-top :4vh; margin-left: 4vw; width:70%; height:800px; float: left; overflow: auto; position: relative;">
+    	<div style="margin:auto; width:50%; text-align:center; border-bottom:1px solid gray; font-family:cinzel;">
+        	<h1>TEST LIST</h1>
+        </div><br>
+    <table class="table table-hover" style="width:80%; margin:auto; text-align: center;  margin-left:10%; margin-top:20px;">
         <thead>
-            <tr>
+            <tr style="font-family: 'Nanum Gothic', sans-serif;">
                 <th scope="col" style="width:5%;">No</th>
                 <th scope="col" style="width:59%;">시험 제목</th>
                 <th scope="col" style="width:20%;">응시일</th>
@@ -32,7 +34,7 @@
                 <th scope="col" style="width:8%;">확인</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody style="font-family: 'Nanum Gothic', sans-serif;">
         <c:set var="flag" value="false"/>
         <c:set var="match" value="0"/>
         	<c:choose>
@@ -76,6 +78,7 @@
 		              	
 			            </tr>
 		            </c:forEach>
+		            
 	            </c:when>
 	            <c:otherwise>
 	            	<tr>
@@ -93,26 +96,6 @@
     	}
     </script>
     
-    <!-- 페이징 -->
-    <div style="margin-top :1vh;  width:70%; height:50px; float: left;text-align: center; position:relative;">
-            <nav aria-label="Page navigation example" style="position:absolute; box-shadow:0px 0px 0px; left:60%;">
-                <ul class="pagination">
-                    <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
         
     </div>
 	
@@ -132,7 +115,7 @@
             <div style="width:800px; margin:0; display:flex; box-orient: vertical; box-direction:normal; flex-direction: column; overflow: hidden; background: white; z-index: 41; border-radius: 15px;">
                 <!-- 헤드부분 -->
                 <header class="modal-card-head" style="text-align:center;">
-                    <p style="font-size: 15pt;font-weight: 500; margin: auto;">${ testList.get(i).testTitle }
+                    <p style="font-size: 15pt;font-weight: 500; margin: auto; font-family: 'Nanum Gothic', sans-serif;">${ testList.get(i).testTitle }
                         <a style="float:right; position: absolute; top:10px; right: 60px; font-size:32px;" class="closebtn" href="#">x</a>
                     </p>
                 </header>
@@ -156,7 +139,7 @@
                                         <h3 style="color: red; font-size: 18pt; text-align: center;">${ vocaList.get(j).score }</h3>
                                     </div>
                                 </div>
-                                <div class="quiz-info-box-wrapper">
+                                <div class="quiz-info-box-wrapper" style="font-family: 'Nanum Gothic', sans-serif;">
                                     <div class="quiz-info-box">
                                         <h5 style="font-size: 3mm; position:absolute; color:#7a7a7a;">총 문제수</h5>
                                         <h3 style="text-align: center; font-size: 3mm; font-weight: 700; position: absolute; left: 30mm;">${ testList.get(i).testExno }</h3>
@@ -196,7 +179,7 @@
                                             </c:if>
                                         </div>
                                         <div class="filled-box">
-                                            <div class="text-box">${ kor[o] }</div>
+                                            <div class="text-box" style="font-family: 'Nanum Gothic', sans-serif;">${ kor[o] }</div>
                                         </div>
                                         <div class="empty-box">
                                         	<c:choose>
@@ -204,7 +187,7 @@
                                         				<div class="text-box"></div>	
                                         		</c:when>
                                         		<c:otherwise>
-                                        			<div class="text-box">${ myAnswer[o] }</div>
+                                        			<div class="text-box" style="font-family: 'Indie Flower', cursive;">${ myAnswer[o] }</div>
                                         		</c:otherwise>
                                         	</c:choose>
                                         </div>
