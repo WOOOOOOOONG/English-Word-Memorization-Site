@@ -36,6 +36,7 @@
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
+	<jsp:include page="../classs/summerNote.jsp" />
 	<!-- 전체 -->
     <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 408px; margin-top: 0px; background: #ebebeb; display: block;">
         <div style="margin-top: 0px;">
@@ -137,10 +138,13 @@
 	                                        <dd style="width:355px; display: inline-block;">${ classs.time }</dd>
 	
 	                                        <dt style="width:100px; color:#787878;">문의 아이디:</dt>
-	                                        <dd style="width:280px; display: inline-block;">ajoa2012</dd>
+	                                        <dd style="width:280px; display: inline-block;">${ classs.ornerId }</dd>
 	
-	                                        <dt style="width:100px; color:#787878;">핸드폰 번호:</dt>
-	                                        <dd style="width:280px; display: inline-block;">010-4187-1160</dd>
+	                                        <dt style="width:100px; color:#787878;">이메일 :</dt>
+	                                        <dd style="width:280px; display: inline-block;">${ email }</dd>
+	                                        
+	                                        <dt style="width:100px; color:#787878;">현재 인원 :</dt>
+	                                        <dd style="width:280px; display: inline-block;">${ classs.nowMemberCount } 명</dd>
                                        	</c:when>
                                        	<c:otherwise>
                                        		<dt style="color:#787878; width: 55px;">과목:</dt>
@@ -156,10 +160,13 @@
 	                                        <dd style="width:145px; display: inline-block;">${ classs.level }</dd>
 	                                        
                                        		<dt style="width:100px; color:#787878;">문의 아이디:</dt>
-	                                        <dd style="width:280px; display: inline-block;">ajoa2012</dd>
+	                                        <dd style="width:280px; display: inline-block;">${ classs.ornerId }</dd>
 	
-	                                        <dt style="width:100px; color:#787878;">핸드폰 번호:</dt>
-	                                        <dd style="width:280px; display: inline-block;">010-4187-1160</dd>
+	                                        <dt style="width:100px; color:#787878;">이메일 :</dt>
+	                                        <dd style="width:280px; display: inline-block;">${ email }</dd>
+	                                        
+	                                        <dt style="width:100px; color:#787878;">현재 인원 :</dt>
+	                                        <dd style="width:280px; display: inline-block;">${ classs.nowMemberCount } 명</dd>
                                        	</c:otherwise>
                                     </c:choose>
                                     </dl>
@@ -168,8 +175,11 @@
 
                             <!-- 버튼 -->
                             <div>
-                                <input type="button" id="sinchenog" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
-                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto;" value="참여 하기">
+                                <%-- <input type="button" class="sinchenog" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
+                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto" value="참여 하기"> --%>
+                                <input type="button" class="sinchenog" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
+                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto" value="참여 하기"
+                                    data-toggle="modal" data-target=".sincheong">
                             </div>
                         </section>
                     </div>
@@ -179,6 +189,35 @@
             </div>
         </div>
     </div>
+    	<!-- 가입 -->
+    	<script>
+    		$(function(){
+    			$(".sinchenog").click(function(){
+    				var obj = new Object();
+    				var cNo = $(this).prop('id');
+    				obj.cNo = cNo;
+    				$.ajax({
+						url:"joinClass.do",
+						data : JSON.stringify(obj),
+						type:"post",
+						contentType:"application/json; charset=utf-8",
+						success:function(data){
+							if(data == 2){
+								alert("가입이 완료되었습니다.");
+								location.href="ClassList.do";
+							}else if(data == 1){
+								alert("로그인 후에 이용하실수 있습니다.");
+							}else{
+								alert("이미 가입되어있는 클래스입니다.");
+							}
+						},
+						error:function(e){
+							alert(e);
+						}
+					});
+    			})
+    		});
+    	</script>
        <!-- 스와이퍼 부분 -->
         <!-- 스크립트 -->
         <script>
@@ -196,5 +235,32 @@
                 });
             });
         </script>
+       
+        
+        
+        
+   <!--       가입 
+	<div class="modal fade sincheong" tabindex="-1" role="dialog"
+		aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg" role="document">
+			<div class="modal-content">
+				<div>
+					<div style="display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 40;">
+						모달 백그라운드
+						<div style="bottom: 0; left: 0; position: absolute; right: 0; top: 0; background-color: rgba(10, 10, 10, 0.86);"></div>
+
+						<div style="width: 100%; height:500px; margin: 0; display: flex; box-orient: vertical; box-direction: normal; flex-direction: column; overflow: hidden; background: white; z-index: 41; border-radius: 15px;">
+								<textarea name="comment" id="summernote" style="margin-top:20px; margin:50px;"></textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div> -->
+	<script>
+        
+	
+    </script>
+	
 </body>
 </html>
