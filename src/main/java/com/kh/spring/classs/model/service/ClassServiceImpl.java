@@ -80,6 +80,12 @@ public class ClassServiceImpl implements ClassService{
 		return cDao.searchClassList(cateList);
 	}
 
+	// 내클래스 가져오기
+	@Override
+	public ArrayList<Classs> getClassnVoca(String mId) {
+		return cDao.getClassnVoca(mId);
+}
+
 	@Override
 	public List<String> getClassSetName(String cNo) {
 		// TODO Auto-generated method stub
@@ -223,5 +229,6 @@ public class ClassServiceImpl implements ClassService{
 	@Override
 	public String selectChangeName(String id) {
 		return cDao.selectChangeName(id);
+
 	}
 }

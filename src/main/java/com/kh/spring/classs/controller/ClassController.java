@@ -1,6 +1,8 @@
 package com.kh.spring.classs.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,7 +35,14 @@ import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
+
+import com.kh.spring.friend.model.vo.Friend;
+
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import com.kh.spring.member.model.vo.Member;
+
 
 @SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList"})
 @Controller
@@ -546,6 +555,27 @@ public class ClassController {
 		
 		return mv;
 	}
+	// 내클래스 가져오기 - ssh
+	@RequestMapping("getClassnVoca.ck")
+	public void getClassnVoca(String mId,HttpServletResponse response) throws IOException {
+		ArrayList<Classs> clist = cService.getClassnVoca(mId);
+		System.out.println(clist);
+		
+		response.setContentType("application/json; charset=utf-8");
+
+		JSONArray jarr = new JSONArray();
+		for (Classs c : clist) {
+
+
+			JSONObject jo = new JSONObject();
+			jo.put("class_no", c.getcNo());
+			jo.put("class_title", c.getTitle());
+
+			jarr.add(jo);
+		}
+		PrintWriter out = response.getWriter();
+		out.print(jarr);
+	}
 
 	// 시험 체크 ㅎ
 	@RequestMapping("checkTest.do")
@@ -749,6 +779,7 @@ public class ClassController {
 		
 	}
 	
+
 }
 
 

@@ -72,6 +72,11 @@ public class ClassDao {
 		
 	}
 
+
+	public ArrayList<Classs> getClassnVoca(String mId) {
+		
+		return (ArrayList)sqlSession.selectList("ClasssMapper.getClassnVoca",mId);
+}
 	// 시험 입력
 	public int insertTest(ClassTest test) {
 		// TODO Auto-generated method stub
@@ -180,6 +185,7 @@ public class ClassDao {
 	// 유저아이디에 맞는 Storage 가져옴
 	public String selectChangeName(String id) {
 		return sqlSession.selectOne("ClasssMapper.selectChangeName",id);
+
 	}
 
 }

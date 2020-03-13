@@ -95,4 +95,6 @@ public interface ClassService {
 
 	
 	
+	// 내 클래스 가져오기
+	ArrayList<Classs> getClassnVoca(String mId);
 }
