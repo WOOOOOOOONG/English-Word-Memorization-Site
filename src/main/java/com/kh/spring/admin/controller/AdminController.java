@@ -7,22 +7,39 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.admin.model.vo.Inquire;
+import com.kh.spring.member.model.service.MemberService;
+import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.member.model.vo.VisitRecord;
 
 @Controller
 public class AdminController {
 	@Autowired
 	private AdminService aService;
+	@Autowired
+	private MemberService mService;
 	
 	@RequestMapping("viewMain.ad")
 	public String viewMain() {
 		return "/common/mainPage";
+	}
+	
+	@RequestMapping("viewTotal.ad")
+	public ModelAndView viewTotal(ModelAndView mv) {
+		ArrayList<Member> memberList = mService.selectList();
+		ArrayList<Inquire> inqList = aService.selectInquireList();
+
+		mv.addObject("inquireList", inqList);
+		mv.addObject("mList", memberList);
+		mv.setViewName("admin/total");
+		
+		return mv; 
 	}
 	
 	// InquireList는 관리자 전용 menubar에 넣어야 함
@@ -36,10 +53,36 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("memberInquireList.ad")
+	public ModelAndView memberInquireList(ModelAndView mv, String inquirerId) {
+		ArrayList<Inquire> inqList = aService.selectMemberInquireList(inquirerId);
+		
+		if(inqList != null) {
+			mv.addObject("mInquireList", inqList);
+		}
+		mv.setViewName("/admin/inquire-list");
+		return mv;
+	}
+	
+	@RequestMapping("insertInquireView.ad")
+	public String insertInquireView() {		
+		return "admin/inquire";
+	}
+	
 	@RequestMapping("insertInquire.ad")
 	public ModelAndView insertInquire(
 			ModelAndView mv,
-			HttpServletRequest request) {
+			Inquire inq) {
+		int result = aService.insertInquire(inq);
+		
+		if(result > 0) {
+			mv.addObject("msg", "문의가 성공적으로 등록되었습니다");
+			
+			ArrayList<Inquire> inqList = aService.selectMemberInquireList(inq.getInquirerId());
+			mv.addObject("mInquireList", inqList);
+		}
+		
+		mv.setViewName("admin/inquire-list");
 		return mv;
 	}
 	

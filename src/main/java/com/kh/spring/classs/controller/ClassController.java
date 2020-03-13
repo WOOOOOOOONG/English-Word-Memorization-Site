@@ -10,25 +10,41 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.classs.model.service.ClassService;
+import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
+
 import com.kh.spring.friend.model.vo.Friend;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
+import com.kh.spring.member.model.vo.Member;
+
+
+@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList"})
 @Controller
 public class ClassController {
 	
@@ -41,6 +57,7 @@ public class ClassController {
 		ArrayList<Classs> cList = cService.selectClassList();
 		ArrayList<Category> cateList = cService.selectCateList();
 		ArrayList<Storage> fList = new ArrayList<>();
+		ArrayList<Storage> userList = new ArrayList<>();
 		
 		for(int i = 0 ; i < cList.size(); i++) {
 			
@@ -50,6 +67,15 @@ public class ClassController {
 			}
 		}
 		
+		for(int i = 0; i < cList.size(); i++) {
+			Storage User = new Storage();
+			User.setRefId(cList.get(i).getOrnerId()); // 유저아이디
+			User.setChangeName(cService.selectChangeName(User.getRefId()));
+			userList.add(User);
+		}
+		
+		
+		mv.addObject("userList",userList);
 		mv.addObject("cList", cList);
 		mv.addObject("cateList",cateList);
 		mv.addObject("fList",fList);
@@ -84,6 +110,7 @@ public class ClassController {
 			img3 = fList.get(2).getChangeName();
 		}
 		
+	
 		mv.addObject("classs",classs);
 		mv.addObject("img1",img1);
 		mv.addObject("img2",img2);
@@ -104,7 +131,24 @@ public class ClassController {
 	
 	// 맞는 클래스 보러가기
 	@RequestMapping("myClass.do")
-	public ModelAndView classDetailView(ModelAndView mv,String cNo) {
+	public ModelAndView classDetailView(ModelAndView mv,String cNo,Model model) {
+		
+		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
+		ArrayList<Storage> userList = new ArrayList<>();
+		
+		for(int i = 0; i < cmList.size(); i++) {
+			Storage User = new Storage();
+			User.setRefId(cmList.get(i).getId()); // 유저아이디
+			User.setChangeName(cService.selectChangeName(User.getRefId()));
+			userList.add(User);
+		}
+		System.out.println(userList);
+		
+		mv.addObject("userList",userList);
+		
+		
+		model.addAttribute("cmList",cmList);
+		model.addAttribute("classs",cService.selectClassOneCount(cNo));
 		mv.addObject("cNo",cNo);
 		mv.setViewName("classs/myClassView");
 		return mv;
@@ -112,49 +156,168 @@ public class ClassController {
 	
 	// 클래스 시험목록 누르면 가는 메소드
 	@RequestMapping("classTestList.do")
-	public ModelAndView classTestList(ModelAndView mv) {
+	public ModelAndView classTestList(ModelAndView mv,String cNo) {
+		System.out.println(cNo);
+		
+		ArrayList<ClassTest> testList = cService.selectTestList(cNo);
+		ArrayList<TestVoca> vocaList = new ArrayList<>();
+		if(testList != null) {
+			for(int i = 0 ; i < testList.size(); i++) {
+				ArrayList<TestVoca> vocaList2 = cService.selectVocaList(testList.get(i).getTestNo());
+				
+				if(!vocaList2.isEmpty()) {
+					for(int j = 0; j < vocaList2.size(); j++) {
+						vocaList.add(vocaList2.get(j));
+					}
+				}
+			}
+		}
+		mv.addObject("cNo",cNo);
+		mv.addObject("testList",testList);
+		mv.addObject("vocaList",vocaList);
 		mv.setViewName("classs/classTestList");
 		return mv;
 	}
 	
 	// 클래스 멤버 권한 관리 사이트
 	@RequestMapping("classMemberRight.do")
-	public ModelAndView classMemberRight(ModelAndView mv) {
+	public ModelAndView classMemberRight(ModelAndView mv,String cNo,HttpServletRequest request) {
+		
+		ArrayList<ClassMember> cmList = new ArrayList<>(); 
+		
+		
+		if (cNo != null && cNo.length() != 0) {
+			cmList = cService.selectClassMemberList(cNo);
+		}else {
+			cNo = (String) request.getSession().getAttribute("cNo");
+			cmList = cService.selectClassMemberList(cNo);
+		}
+
+		
+		
+		// 추후에 클래스 멤버들의 프로필사진을 따와야함 ;;;; 개귀찮;;;
+		
+		mv.addObject("cmList",cmList);
 		mv.setViewName("classs/classMemberRight");
 		return mv;
 	}
 	
 	// 클래스 멤버 시험 보기
 	@RequestMapping("classMemberTest.do")
-	public ModelAndView classMemberTest(ModelAndView mv) {
+	public ModelAndView classMemberTest(ModelAndView mv,String cNo,String LastTestTitle) {
+		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
+		ArrayList<ClassTest> ctList = cService.selectTestList(cNo);
+		ArrayList<TestVoca> tvList = new ArrayList<>();
+		// 클래스 테스트안에 테스트보카 주키있음
+		
+		if(!ctList.isEmpty()) {
+			for(int i = 0 ; i < ctList.size(); i++) {
+				ArrayList<TestVoca> vocaList2 = cService.selectVocaList(ctList.get(i).getTestNo());
+				
+				if(!vocaList2.isEmpty()) {
+					for(int j = 0; j < vocaList2.size(); j++) {
+						tvList.add(vocaList2.get(j));
+					}
+				}
+			}
+		}
+		if(LastTestTitle != null && LastTestTitle.length() != 0) {
+			
+		}else {
+			LastTestTitle = cService.selectLastTestTitle(cNo);
+		}
+		mv.addObject("cmList",cmList);
+		mv.addObject("ctList",ctList);
+		mv.addObject("tvList",tvList);
+		mv.addObject("LastTestTitle",LastTestTitle);
 		mv.setViewName("classs/classMemberTest");
 		return mv;
 	}
 	
-	// 시험 만들기
+	// 시험 만들기로 이동
 	@RequestMapping("createTest.do")
-	public ModelAndView createTest(ModelAndView mv) {
+	public ModelAndView createTest(ModelAndView mv,
+			@RequestParam(value="chkkor", defaultValue="kkk") String kor,
+			@RequestParam(value="chkeng", defaultValue="eee") String eng,
+			@RequestParam(value="testCount", defaultValue="c10") String StringCount,String testcNo) {
+		
+		// 한글 리스트
+		String[] korListorg = kor.split(","); 
+		List<String> korList = new ArrayList<String>(); 
+		Collections.addAll(korList, korListorg); 
+		
+		// 영어 리스트
+		String[] engListorg = eng.split(","); 
+		List<String> engList = new ArrayList<String>();
+		for(int i = 0 ; i < engListorg.length; i++) {
+			engList.add(engListorg[i]);
+		}
+		//Collections.addAll(engList, engListorg);
+		
+		int count = 0;
+		if(StringCount.equals("c10")) {
+			count = 10;
+		}else if(StringCount.equals("c20")) {
+			count = 20;
+		}else {
+			count = 25;
+		}
+		
+		
+		mv.addObject("korList",korList);
+		mv.addObject("engList",engList);
+		mv.addObject("count",count);
+		mv.addObject("cNo",testcNo);
 		mv.setViewName("classs/createTest");
+		
+		return mv;
+	}
+	// 시험 만들기
+	@RequestMapping("insertTest.do")
+	public ModelAndView insertTest(ModelAndView mv,String title,String testcNo, String subKor, String subEng, int testcount) {
+		String kor = subKor.replaceFirst(",","");
+		String eng = subEng.replaceFirst(",","");
+		
+		ClassTest test = new ClassTest();
+		test.setTestEng(eng);
+		test.setTestKor(kor);
+		test.setTestExno(testcount);
+		test.setTestNo(testcNo);
+		test.setTestTitle(title);
+		test.setcNo(testcNo);
+		System.out.println(test);
+		int result = cService.insertTest(test);
+		mv.addObject("cNo",testcNo);
+		mv.setViewName("classs/myClassView");
 		return mv;
 	}
 	
 	// 시험 보러가기
 	@RequestMapping("goTest.do")
-	public ModelAndView goTest(ModelAndView mv) {
+	public ModelAndView goTest(ModelAndView mv,String testNo) {
+		
+		ClassTest test = cService.selectTestOne(testNo);
+		String[] kor = test.getTestKor().split(",");
+		System.out.println(kor);
+		System.out.println(kor[0]);
+		System.out.println(kor[1]);
+		
+		mv.addObject("kor",kor);
+		mv.addObject("test",test);
 		mv.setViewName("classs/test");
 		return mv;
 	}
 	
 	// 클래스 만들기
 	@RequestMapping("insertClass.do")
-	public ModelAndView insertClass(ModelAndView mv,HttpServletRequest request,
+	public String insertClass(ModelAndView mv,HttpServletRequest request,
 			 		@RequestParam(value="img1", required=false) MultipartFile file1,
 			 		@RequestParam(value="img2", required=false) MultipartFile file2,
 			 		@RequestParam(value="img3", required=false) MultipartFile file3,
 			 		Classs classs ) {
 		// String id = request.getSession().getAttribute("loginUser").getId();
-		String id = "ajoa2012";
-		classs.setOrnerId(id);
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+		classs.setOrnerId(m.getmId());
 		
 		
 		// 개행
@@ -211,9 +374,16 @@ public class ClassController {
 		
 		// 사진까지 넣었으면 해당 클래스로 이동해야하지만 아직 만든게없으므로 클래스목로긍로 이동함.
 		//mv.setViewName("myClass.do");
-		mv.setViewName("ClassList.do");
+		//mv.setViewName("ClassList.do");
 		
-		return mv;
+		// 클래스멤버
+		ClassMember cm = new ClassMember();
+		cm.setcNo(cNo);
+		cm.setId(m.getmId());
+		cm.setwRight("Y");
+		cm.setvRight("Y");
+		cService.insertClassMember(cm);
+		return "redirect:ClassList.do";
 	}
 	
 	// 파일 저장을 위한 메소드
@@ -396,6 +566,7 @@ public class ClassController {
 		JSONArray jarr = new JSONArray();
 		for (Classs c : clist) {
 
+
 			JSONObject jo = new JSONObject();
 			jo.put("class_no", c.getcNo());
 			jo.put("class_title", c.getTitle());
@@ -405,4 +576,210 @@ public class ClassController {
 		PrintWriter out = response.getWriter();
 		out.print(jarr);
 	}
+
+	// 시험 체크 ㅎ
+	@RequestMapping("checkTest.do")
+	public  ModelAndView searchClass(String tNo, String output,HttpServletRequest request,ModelAndView mv) {
+		Member m = (Member) request.getSession().getAttribute("loginMember");
+		ClassTest test = cService.selectTestOne(tNo);
+		TestVoca my = new TestVoca();
+		my.setTestNo(tNo);
+		my.setId(m.getmId());
+		my.setAnswer(output);
+		
+		String ok = "";
+		String nok = "";
+		int count = 0;
+		int score = 0;
+		
+		String[] outanswer = output.split(","); // 내가쓴답
+		String[] answer = test.getTestEng().split(","); // 정답
+		
+		for(int i = 0 ; i < test.getTestExno(); i++) {
+			if(outanswer[i].equals(answer[i])) {
+				ok = ok + "," + i;
+				count++;
+			}else {
+				nok = nok + "," + i;
+			}
+		}
+		
+		if(test.getTestExno() == 10) {
+			score = count * 10;
+		}else if(test.getTestExno() == 20) {
+			score = count * 5;
+		}else {
+			score = count * 4;
+		}
+		my.setOk(ok.substring(1));
+		my.setNok(nok.substring(1));
+		my.setScore(score);
+		
+		System.out.println(my);
+		cService.insertTestVoca(my);
+		
+		String cNo = test.getcNo();
+		ArrayList<ClassTest> testList = cService.selectTestList(cNo);
+		ArrayList<TestVoca> vocaList = new ArrayList<>();
+		if(testList != null) {
+			for(int i = 0 ; i < testList.size(); i++) {
+				ArrayList<TestVoca> vocaList2 = cService.selectVocaList(testList.get(i).getTestNo());
+				
+				if(!vocaList2.isEmpty()) {
+					for(int j = 0; j < vocaList2.size(); j++) {
+						vocaList.add(vocaList2.get(j));
+					}
+				}
+			}
+		}
+		mv.addObject("cNo",cNo);
+		mv.addObject("testList",testList);
+		mv.addObject("vocaList",vocaList);
+		mv.setViewName("classs/classTestList");
+		return mv;
+		
+	}
+	
+	//  단어 추가 권한부여 메소드
+	@RequestMapping(value="wRightTrue.do", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public int wRightTrue(HttpServletResponse response,@RequestBody String param,HttpServletRequest request) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jObj = (JSONObject)parser.parse(param);
+		
+		String id = (String)jObj.get("id");
+		boolean flag = (boolean)jObj.get("flag");
+		String cNo = (String) request.getSession().getAttribute("cNo");
+		String ornerId = cService.selectOrnerId(cNo);
+		
+		int result = 0;
+		ClassMember cm = new ClassMember();
+		cm.setId(id);
+		cm.setcNo(cNo);
+		
+		if(!ornerId.equals(id)) {
+			if(flag) {
+				result = cService.wRightTrue(cm);
+			}else {
+				result = cService.wRightFalse(cm);
+			}
+		}
+		
+		return result;
+	}
+	
+	//  단어장추가 권한부여 메소드
+	@RequestMapping(value="vRightTrue.do", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public int vRightTrue(HttpServletResponse response,@RequestBody String param,HttpServletRequest request) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jObj = (JSONObject)parser.parse(param);
+		
+		String id = (String)jObj.get("id");
+		boolean flag = (boolean)jObj.get("flag");
+		String cNo = (String) request.getSession().getAttribute("cNo");
+		String ornerId = cService.selectOrnerId(cNo);
+		
+		int result = 0;
+		ClassMember cm = new ClassMember();
+		cm.setId(id);
+		cm.setcNo(cNo);
+		
+		if(!ornerId.equals(id)) {
+			if(flag) {
+				result = cService.vRightTrue(cm);
+			}else {
+				result = cService.vRightFalse(cm);
+			}
+		}
+		
+		return result;
+	}
+	
+	// 클래스 소속 멤버 강퇴하기
+	@RequestMapping(value="classMemberBan.do", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public int classMemberBan(HttpServletResponse response,@RequestBody String param,HttpServletRequest request) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jObj = (JSONObject)parser.parse(param);
+		
+		String id = (String)jObj.get("id");
+		String cNo = (String) request.getSession().getAttribute("cNo");
+		String ornerId = cService.selectOrnerId(cNo);
+		
+		int result = 0;
+		ClassMember cm = new ClassMember();
+		cm.setId(id);
+		cm.setcNo(cNo);
+		
+		if(!ornerId.equals(id)) {
+			result = cService.classMemberBan(cm);
+		}
+		
+		return result;
+	}
+	
+	// 시험 초기화 시키는거
+	@RequestMapping("reTest.do")
+	public ModelAndView reTest(ModelAndView mv, String cNo, String testNo, String id,String LastTestTitle) {
+		TestVoca tv = new TestVoca();
+		tv.setId(id);
+		tv.setTestNo(testNo);
+		
+		
+		cService.deleteTestVoca(tv);
+		
+		mv.addObject("cNo",cNo);
+		mv.addObject("LastTestTitle",LastTestTitle);
+		mv.setViewName("redirect:classMemberTest.do");
+		return mv;
+	}
+	
+	@RequestMapping("ManagerChange.do")
+	@ResponseBody
+	public int ManagerChange(HttpServletResponse response,@RequestBody String param,HttpServletRequest request) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jObj = (JSONObject)parser.parse(param);
+		
+		String id = (String)jObj.get("id");
+		String cNo = (String) request.getSession().getAttribute("cNo");
+		
+		System.out.println(id);
+		System.out.println(cNo);
+		int result = 0;
+		ClassMember cm = new ClassMember();
+		cm.setId(id);
+		cm.setcNo(cNo);
+		
+		result = cService.changeManager(cm);
+		
+		return result;
+	}
+	
+	@RequestMapping("EndClass.do")
+	@ResponseBody
+	public int EndClass(HttpServletResponse response,@RequestBody String param,HttpServletRequest request) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jObj = (JSONObject)parser.parse(param);
+		
+		String pwd = (String)jObj.get("pwd");
+		String pwd2 = (String)jObj.get("pwd2");
+		String cNo = (String) request.getSession().getAttribute("cNo");
+		
+		
+		System.out.println(pwd);
+		System.out.println(pwd2);
+		int result2 = cService.matchPwd(pwd,pwd2);
+		if(result2 == 1) {
+			cService.deleteClass(cNo);
+			return result2;
+		}else {
+			return result2;
+		}
+		
+	}
+	
+
 }
+
+

@@ -45,6 +45,14 @@
 		ON m.MID = i.INQUIRER_ID
 	</select>
 	
+	<select id="selectMemberInquireList" parameterType="Inquire" resultMap="inquireResultSet">
+		SELECT *
+		FROM INQUIRE i
+		JOIN MEMBER m
+		ON m.MID = i.INQUIRER_ID
+		WHERE INQUIRER_ID=#{inquirerId}
+	</select>
+	
 	<select id="selectInquireOne" parameterType="Inquire" resultMap="inquireResultSet">
 		SELECT *
 		FROM INQUIRE
@@ -56,6 +64,11 @@
 		VALUES(#{iId}, #{inquirerId}, #{type}, #{title}, #{content}, #{registDate},
 			#{isAnswer}, #{answer}, #{reportedId})
 	</insert> -->
+	
+	<insert id="insertInquire" parameterType="Inquire">
+		INSERT INTO INQUIRE
+		VALUES(IID_SEQ.NEXTVAL, #{inquirerId}, #{type}, #{title}, #{content}, DEFAULT, DEFAULT, NULL, #{reportedId})
+	</insert>
 	
 	<insert id="insertResponse" parameterType="Inquire">
 		UPDATE INQUIRE

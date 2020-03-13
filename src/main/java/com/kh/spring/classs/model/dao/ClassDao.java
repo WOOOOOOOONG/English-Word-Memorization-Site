@@ -7,7 +7,10 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
 
@@ -69,9 +72,120 @@ public class ClassDao {
 		
 	}
 
+
 	public ArrayList<Classs> getClassnVoca(String mId) {
 		
 		return (ArrayList)sqlSession.selectList("ClasssMapper.getClassnVoca",mId);
+}
+	// 시험 입력
+	public int insertTest(ClassTest test) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("ClassTestMapper.insertTest",test);
+	}
+
+	// 클래스에 소속된 테스트 가져옴
+	public ArrayList<ClassTest> selectTestList(String cNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClassTestMapper.selectTestList",cNo);
+	}
+
+	public ArrayList<TestVoca> selectVocaList(String testNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("TestVocaMapper.selectVocaList",testNo);
+	}
+
+	// 테스트 찾아오기
+	public ClassTest selectTestOne(String testNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ClassTestMapper.selectTestOne",testNo);
+	}
+
+	// 시험점수 입력
+	public void insertTestVoca(TestVoca my) {
+		// TODO Auto-generated method stub
+		sqlSession.insert("TestVocaMapper.insertTestVoca",my);
+		
+	}
+
+	// 클래스 멤버 입력
+	public void insertClassMember(ClassMember cm) {
+		sqlSession.insert("ClassMemberMapper.insertClassMember",cm);
+		
+	}
+
+	public ArrayList<ClassMember> selectClassMemberList(String cNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClassMemberMapper.selectClassMemberList",cNo);
+	}
+
+	// 단어 추가 권한 부여
+	public int wRightTrue(ClassMember cm) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ClassMemberMapper.wRightTrue",cm);
+	}
+
+	// 단어 추가 권한 해제
+	public int wRightFalse(ClassMember cm) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ClassMemberMapper.wRightFalse",cm);
+	}
+
+	public int vRightTrue(ClassMember cm) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ClassMemberMapper.vRightTrue",cm);
+	}
+
+	public int vRightFalse(ClassMember cm) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ClassMemberMapper.vRightFalse",cm);
+	}
+
+	// 클래스 오너 아이디 찾아옴
+	public String selectOrnerId(String cNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ClasssMapper.selectOrnerId",cNo);
+	}
+
+	// 클래스 멤버 강퇴
+	public int classMemberBan(ClassMember cm) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("ClassMemberMapper.classMemberBan",cm);
+	}
+
+	// 마지막 테스트 제목 가져옴
+	public String selectLastTestTitle(String cNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ClassTestMapper.selectLastTestTitle",cNo);
+	}
+
+	// 테스트 초기화시킴
+	public void deleteTestVoca(TestVoca tv) {
+		sqlSession.delete("TestVocaMapper.deleteTestVoca",tv);
+		
+	}
+	
+	// 매니저 전환
+	public int changeManager(ClassMember cm) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("ClasssMapper.changeManager",cm);
+	}
+
+	// 클래스 소속된 멤버 제거
+	public void deleteClassMember(String cNo) {
+		sqlSession.delete("ClassMemberMapper.deleteClassMember",cNo);
+		
+	}
+	// 클래스삭제
+	public void deleteClass(String cNo) {
+		sqlSession.delete("ClasssMapper.deleteClass",cNo);
+		
+	}
+
+	
+	// 유저아이디에 맞는 Storage 가져옴
+	public String selectChangeName(String id) {
+		return sqlSession.selectOne("ClasssMapper.selectChangeName",id);
+
 	}
 
 }

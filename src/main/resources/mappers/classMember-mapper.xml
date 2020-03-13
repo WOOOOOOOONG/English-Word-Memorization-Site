@@ -1,5 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="ClassMemberMapper">
- 
+	<resultMap id="classMemberResultSet" type="ClassMember">
+		<id property="cNo" column="CLASS_NO"/>
+		<result property="id" column="ID"/>
+		<result property="lastday" column="LASTDAY"/>
+		<result property="wRight" column="WORD_RIGHT"/>
+		<result property="vRight" column="VOCA_RIGHT"/>
+	</resultMap>
+
+ 	<insert id="insertClassMember">
+ 		INSERT INTO CLASS_MEMBER VALUES(#{cNo}, #{id}, SYSDATE, #{wRight}, #{vRight})
+ 	</insert>
+ 	<select id="selectClassMemberList" resultMap="classMemberResultSet">
+ 		SELECT *
+ 		FROM CLASS_MEMBER
+ 		WHERE CLASS_NO = #{cNo}
+ 	</select>
+ 	<update id="wRightTrue">
+		UPDATE CLASS_MEMBER
+		SET WORD_RIGHT = 'Y'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="wRightFalse">
+		UPDATE CLASS_MEMBER
+		SET WORD_RIGHT = 'N'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="vRightTrue">
+		UPDATE CLASS_MEMBER
+		SET VOCA_RIGHT = 'Y'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="vRightFalse">
+		UPDATE CLASS_MEMBER
+		SET VOCA_RIGHT = 'N'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<delete id="classMemberBan">
+		DELETE
+		FROM CLASS_MEMBER
+		WHERE CLASS_NO = #{cNo} AND ID = #{id}
+	</delete>
+	<delete id="deleteClassMember">
+		DELETE
+		FROM CLASS_MEMBER
+		WHERE CLASS_NO = #{cNo}
+	</delete>
 </mapper>
