@@ -110,7 +110,7 @@ nav {
 }
 #friendlist{
 	width:300px; 
-	height:40px; position:absolute; 
+	height:40px; position:fixed; 
 	bottom:0;right:0;
 	border:1px solid #e5e5e5;
 	border-top-left-radius: 10px;
@@ -148,7 +148,7 @@ nav {
  #chatting{
  	width:300px;
  	height:350px;
- 	position:absolute;
+ 	position:fixed; 
  	bottom:0;display:none;
  	border:1px solid #e5e5e5;
  	z-index:10;
@@ -157,6 +157,7 @@ nav {
  	overflow-x:hidden;
  	overflow-y:auto;
  	background:whitesmoke;
+ 	
  }
  #chatexit{
  	position:fixed;

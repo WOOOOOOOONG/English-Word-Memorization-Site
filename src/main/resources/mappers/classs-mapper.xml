@@ -61,4 +61,10 @@
 		WHERE CLASSS.C_ID = CATEGORY.C_ID
 		AND NAME = #{cateList}
 	</select>
+	<select id="getClassnVoca" parameterType="string" resultMap="classResultSet">
+		select distinct cs.CLASS_NO,cs.CLASS_TITLE from classs cs, class_member cm
+		where cs.CLASS_NO = cm.CLASS_NO and (ORNER_ID = #{mId} or cm.ID = #{mId}) 
+	</select>
+	
+	
 </mapper>

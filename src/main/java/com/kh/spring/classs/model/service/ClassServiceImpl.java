@@ -71,4 +71,9 @@ public class ClassServiceImpl implements ClassService{
 		// TODO Auto-generated method stub
 		return cDao.searchClassList(cateList);
 	}
+	// 내클래스 가져오기
+	@Override
+	public ArrayList<Classs> getClassnVoca(String mId) {
+		return cDao.getClassnVoca(mId);
+	}
 }

@@ -69,4 +69,9 @@ public class ClassDao {
 		
 	}
 
+	public ArrayList<Classs> getClassnVoca(String mId) {
+		
+		return (ArrayList)sqlSession.selectList("ClasssMapper.getClassnVoca",mId);
+	}
+
 }

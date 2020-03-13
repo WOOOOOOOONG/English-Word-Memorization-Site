@@ -32,4 +32,6 @@ public interface ClassService {
 	// 카테고리로 클래스 찾기
 	ArrayList<Classs> searchClassList(String cateList);
 	
+	// 내 클래스 가져오기
+	ArrayList<Classs> getClassnVoca(String mId);
 }
