@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.friend.model.service.FriendService;
 import com.kh.spring.friend.model.vo.Friend;
 import com.kh.spring.member.model.service.MemberService;
@@ -148,7 +149,7 @@ public class MemberController {
 		Member mem = new Member();
 		mem.setmId(loginmId);
 		mem.setPwd(loginpwd);
-		
+		System.out.println("멤" + mem);
 		Member loginMember = mService.loginMember(mem);
 		
 		if(loginMember != null) {
@@ -157,14 +158,20 @@ public class MemberController {
 			System.out.println(loginMember);
 		}
 		
+		
 		ArrayList<Friend> flist = fService.friendList(loginMember.getmId());
 		HashMap<Integer,String> glist = new HashMap<Integer,String>();
 		glist.put(0, "일반");
-		for(int i=0; i<flist.size();i++) {
-			if(!glist.containsValue(flist.get(i).getGroupName())){
-				glist.put(i+1, flist.get(i).getGroupName());
+		
+		if(!flist.isEmpty()) {
+			for(int i=0; i<flist.size();i++) {
+				if(!glist.containsValue(flist.get(i).getGroupName())){
+					glist.put(i+1, flist.get(i).getGroupName());
+				}
 			}
+			System.out.println("들옴");
 		}
+		System.out.println("이건무조건");
 		model.addAttribute("friendList",flist);
 		model.addAttribute("groupList",glist);
 		model.addAttribute("loginMember", loginMember);

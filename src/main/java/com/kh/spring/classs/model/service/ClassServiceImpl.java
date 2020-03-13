@@ -231,4 +231,24 @@ public class ClassServiceImpl implements ClassService{
 		return cDao.selectChangeName(id);
 
 	}
+
+	@Override
+	public ArrayList<ClassMember> selectMyClassList(String getmId) {
+		// TODO Auto-generated method stub
+		return cDao.selectMyClassList(getmId);
+	}
+
+	// 클래스 번호에 맞는 클래스하남나가졍모
+	@Override
+	public Classs selectClassOne(String getcNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectClassOne(getcNo);
+	}
+
+	// 클래스 주인 전홥너호
+	@Override
+	public String selectTell(String ornerId) {
+		// TODO Auto-generated method stub
+		return cDao.selectTell(ornerId);	
+	}
 }

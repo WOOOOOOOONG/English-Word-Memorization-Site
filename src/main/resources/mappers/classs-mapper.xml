@@ -89,5 +89,9 @@
 		FROM STORAGE
 		WHERE REFER_ID = #{id}
 	</select>
-
+	<select id="selectTell" resultType="string">
+		SELECT EMAIL
+		FROM MEMBER
+		WHERE MID = #{id}
+	</select>
 </mapper>
