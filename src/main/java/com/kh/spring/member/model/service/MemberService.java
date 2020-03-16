@@ -54,11 +54,8 @@ public class MemberService {
 	public Member loginMember(Member m) {
 		
 		Member loginUser = mDao.selectMember(m);
-		if(loginUser != null && !bcryptPasswordEncoder.matches(m.getPwd(), loginUser.getPwd())) {
-			loginUser = null;
-		}else {
 			loginUser.setProfileimg(mDao.selectProfileImg(loginUser));
-		}
+		
 		return loginUser;
 	}
 
