@@ -24,9 +24,6 @@
 <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
-<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
-
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 <style>
   @import url(https://fonts.googleapis.com/css?family=Raleway);
@@ -323,7 +320,7 @@ nav {
     <!-- 로그인 유저 있을때 -->
     <c:if test="${ !empty loginMember }">
    		 <c:if test="${ loginMember.mId == 'admin' }">
-    		<a class="gonav" href="viewTotal.ad">관리자페이지</a>
+    		<a class="gonav" href="#">관리자페이지</a>
     	</c:if>
     	<c:if test="${ loginMember.mId != 'admin' }">
     		<a class="gonav"href="mypage.me">마이페이지</a>
@@ -337,47 +334,6 @@ nav {
   <a class="link-1" href="viewMain.ad">Home</a>
   <a class="link-1" href="#">단어장</a>
   <a class="link-1" href="ClassList.do">클래스</a>
-  <a class="link-1" href="memberInquireList.ad">고객센터</a>
-</nav>
-
-<c:if test="${ !empty sessionScope.loginMember}">
-	<div id="chatting">
-		<span id="chatlength" style="display:none;">0</span>
-		<div id="chatexit"> 
-			<span id="friendname"></span>
-			<input type="text" style="display:none;" id="friendId">
-			<button type="button" class="close" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
-		<br>
-	  <table id="chattable" style="width:100%; height:80%;" cellspacing="0" cellpadding="0">
-	  <thead >
-	    <tr style="height:10px;">
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	      <th width="50"></th>
-	    </tr>
-		</thead>
-	    <tbody>
-	     </tbody>
-	    
-	  </table>
-	  <br>
-		<div style="width:300px; height:30px;position:fixed; background:whitesmoke; bottom:0;" >
-	    	 <textarea id="chatcontent" style="width:220px; height:30px; margin:0px; resize: none;">
-	    	 </textarea>
-	    	 <input id="chatsend" type="button" value="전송">
-	    </div>	
   <a class="link-1" href="#">커뮤니티</a>
   <a class="link-1" href="memberInquireList.ad">고객센터</a>
 </nav>
@@ -391,9 +347,36 @@ nav {
 				<span aria-hidden="true">&times;</span>
 		</button>
 	</div>
-</c:if>
+	<br>
+  <table id="chattable" style="width:100%; height:80%;" cellspacing="0" cellpadding="0">
+  <thead >
+    <tr style="height:10px;">
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+      <th width="50"></th>
+    </tr>
+	</thead>
+    <tbody>
+     </tbody>
+    
+  </table>
+  <br>
+	<div style="width:300px; height:30px;position:fixed; background:whitesmoke; bottom:0;" >
+    	 <textarea id="chatcontent" style="width:220px; height:30px; margin:0px; resize: none;">
+    	 </textarea>
+    	 <input id="chatsend" type="button" value="전송">
+    </div>	
+</div>
 
-<c:if test="${sessionScope.loginMember.mId ne 'admin' && !empty sessionScope.loginMember}">
 <div id="friendlist" >
 	<div id="friendlisttoggle" >
 		친구
