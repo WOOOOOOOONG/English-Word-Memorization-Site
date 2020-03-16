@@ -9,6 +9,11 @@
 		<result property="vRight" column="VOCA_RIGHT"/>
 	</resultMap>
 
+	<update id="increaseCount">
+		UPDATE CLASSS
+		SET MEMBER_COUNT_NOW = MEMBER_COUNT_NOW + 1
+		WHERE CLASS_NO = #{cNo}
+	</update>
  	<insert id="insertClassMember">
  		INSERT INTO CLASS_MEMBER VALUES(#{cNo}, #{id}, SYSDATE, #{wRight}, #{vRight})
  	</insert>
@@ -17,4 +22,39 @@
  		FROM CLASS_MEMBER
  		WHERE CLASS_NO = #{cNo}
  	</select>
+ 	<update id="wRightTrue">
+		UPDATE CLASS_MEMBER
+		SET WORD_RIGHT = 'Y'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="wRightFalse">
+		UPDATE CLASS_MEMBER
+		SET WORD_RIGHT = 'N'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="vRightTrue">
+		UPDATE CLASS_MEMBER
+		SET VOCA_RIGHT = 'Y'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<update id="vRightFalse">
+		UPDATE CLASS_MEMBER
+		SET VOCA_RIGHT = 'N'
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</update>
+	<delete id="classMemberBan">
+		DELETE
+		FROM CLASS_MEMBER
+		WHERE CLASS_NO = #{cNo} AND ID = #{id}
+	</delete>
+	<delete id="deleteClassMember">
+		DELETE
+		FROM CLASS_MEMBER
+		WHERE CLASS_NO = #{cNo}
+	</delete>
+	<select id="selectMyClassList" resultMap="classMemberResultSet">
+		SELECT *
+		FROM CLASS_MEMBER
+		WHERE ID = #{id}
+	</select>
 </mapper>

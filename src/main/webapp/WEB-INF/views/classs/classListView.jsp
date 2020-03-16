@@ -39,6 +39,7 @@
     </style>
 </head>
 <body>
+	<jsp:include page="../classs/fontStore.jsp"/>
 	<jsp:include page="../common/menubar.jsp"/>
 	
 	<script>
@@ -75,12 +76,12 @@
 
 	<!-- 검색란 -->
 	<form action="searchClass.do" method="POST">
-	<div style="background: #fff; display: block;">
+	<div style="background: #fff; display: block; font-family: 'Nanum Gothic', sans-serif;">
 		<div
 			style="margin: 0 auto; padding: 30px 0 36px; width: 960px; height: 234px;">
 			<!-- 캡션 -->
 			<div
-				style="color: #505050; font-size: 16pt; width: 960px; height: 29px;">
+				style="color: #505050; font-size: 16pt; width: 960px; height: 29px; font-family:cinzel;">
 				Search</div>
 
 			<!-- 셀렉 전체 wrap -->
@@ -218,8 +219,6 @@
 		
 	
 	</form>
-	<button onclick="location.href='myClass.do'">임시</button>
-	<button onclick="location.href='classPorm.do'">클래스 만들러가기 임시</button>
 
 		<!-- 갯수  -->
 		<c:set var="size" value="${ fnc:length(cList) }"/>
@@ -233,12 +232,12 @@
 	
 	<!-- 여기부터 리스트 -->
 	<div class="outer"
-		style="width: 100%; background: #ebebeb; position: relative;">
+		style="width: 100%; background: #ebebeb; position: relative; font-family: 'Nanum Gothic', sans-serif;">
 
 		<div style="width: 1000px; margin: auto; border: 1px solid #ebebeb;">
 			<div
 				style="margin: 60px auto 30px; padding-left: 5px; font-size: 16pt; color: #505050">
-				<span style="font-weight: 600;">${ size }개의 스터디</span>
+				<span style="font-weight: 600; font-family: 'Nanum Gothic', sans-serif;">${ size }개의 스터디</span>
 			</div>
 		</div>
 
@@ -252,7 +251,7 @@
 				<c:if test="${ size != lasize }"> 
 						<!-- 객체 하나 !! -->
 						<%-- <a style="display: inline-block; text-decoration: none; margin: auto;" href="classdetail.do?cNo=${ cList.get(lasize).cNo }"> --%>
-						<a style="display: inline-block; text-decoration: none; margin: auto;" href="myClass.do?cNo=${ cList.get(lasize).cNo }">
+						<a style="display: inline-block; text-decoration: none; margin: auto;" href="classdetail.do?cNo=${ cList.get(lasize).cNo }">
 							<div style="position: relative; overflow: hidden; font-size: 14pt; width: 300px; height: 520px; border: 1px solid white;">
 								<div style="position: relative; overflow: hidden; text-align: center; padding-bottom: 4pc; background: #fff">
 			
@@ -303,13 +302,24 @@
 			
 			
 								<!-- 아이콘 부분 -->
-								<img src="${ contextPath }/resources/image/icon1.jpg"
-									style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
-			
+								<c:set var="imgFlag2" value="true"/>
+								<c:forEach var="q" begin="0" end="${ userList.size() - 1 }" >	
+									<c:if test="${ cList.get(lasize).ornerId eq userList.get(q).refId && imgFlag2 }">
+										<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }" style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">
+										<c:set var="imgFlag2" value="false"/>
+									</c:if>
+								</c:forEach>
+								<c:if test="${ imgFlag2 }">
+									<img src="${ contextPath }/resources/profileimg/defaultimg.png" style="position: absolute; display: inline-block; width: 6pc; height: 6pc; left: 50%; margin: -40px 0 0 -51px; border-radius: 50%; background: #fff; border: 3px solid #fff; z-index: 100;">										
+									<c:set var="imgFlag2" value="false"/>
+								</c:if>
+								
+								
 								<!--  배경 -->
 								
 								<!-- 밑에 사진 -->
 								
+								<c:if test="${ !empty fList }">
 								<c:forEach var="file" begin="0" end="${ fnc:length(fList) - 1 }">
 									<c:choose>
 										<c:when test="${ cList.get(lasize).cNo eq fList.get(file).refId }">
@@ -320,6 +330,8 @@
 										</c:when>		
 									</c:choose>
 								</c:forEach>
+								</c:if>
+								
 								
 								<c:if test="${ imgFlag }">
 									<div style="position: static; width: 100%; height: 15pc; background-size: cover; background-position: 50% 50%; background-image: url('${ contextPath }/resources/classImage//main1.jpg');"></div>

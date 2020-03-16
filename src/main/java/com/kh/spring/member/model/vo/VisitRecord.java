@@ -47,3 +47,4 @@ public class VisitRecord {
 		return "VisitRecord [vId=" + vId + ", visitorId=" + visitorId + ", visitDate=" + visitDate + "]";
 	}
 }
+

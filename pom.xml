@@ -139,6 +139,8 @@
 		</dependency>
 				
 		<!-- 4_1. json 관련 라이브러리 -->
+		<!-- 1. json 관련 라이브러리  -->
+		<!-- https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
 		<dependency>
 		    <groupId>com.googlecode.json-simple</groupId>
 		    <artifactId>json-simple</artifactId>
@@ -146,10 +148,20 @@
 		</dependency>
 		
 		<!-- 4_2. JsonView 관련 라이브러리 -->
+		<!-- 2. JsonView 관련 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/net.sf.json-lib/json-lib-ext-spring -->
 		<dependency>
 		    <groupId>net.sf.json-lib</groupId>
 		    <artifactId>json-lib-ext-spring</artifactId>
 		    <version>1.0.2</version>
+		</dependency>
+		
+		<!-- 3. Jackson 관련 라이브러리 -->
+		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-databind</artifactId>
+		    <version>2.10.0</version>
 		</dependency>
 		
 		<!-- 4_3. gson 라이브러리 -->

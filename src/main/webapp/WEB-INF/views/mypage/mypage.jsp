@@ -486,16 +486,40 @@ body {
   to { opacity: 0; padding: 0px; height: 0px; }
 }
 .scbtn{
-    
-    
+    text-align: center;
+    width:38px;
     position:absolute;
     right:5%;
-    top:33%;
+    top:30%;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
+.modal-backdrop {
+    /* bug fix - no overlay */    
+    display: none;    
+}
+.createBtn{
+	text-decoration:none; 
+	color:red; 
+	margin-left:550px; 
+	font-family:cinzel;
+}
+.createBtn:hover{
+	text-decoration:none; 
+	color: rgb(0,154,200);
+	transition: 0.2s ease-in-out;
+}
+
+
 </style>
 </head>
 
 <body>
+	<jsp:include page="../classs/fontStore.jsp"/>
     <script>
         window.onload = function () {
 
@@ -634,16 +658,67 @@ body {
         });
 
     </script>
+    
+    
+    
 	<!-- 클래스 리스트 페이지 -->
-    <div id="classcontent" class="mypagecontent" style="background:rgba(243, 156, 17)">
-
-		클래스리스트
+    <div id="classcontent" class="mypagecontent">
+    <div style="padding:4px 4px 4px; border-bottom:1px solid black;  width:50%; margin:auto;font-family:cinzel; font-size:32px; text-align:center;">CLASS LIST</div>
+    	<c:choose>
+		<c:when test="${ !empty cmList }">
+			<div>
+				<a href="classPorm.do" id="createBtn" class="createBtn">Creat Class</a>
+			</div>
+			<div style="overflow:scroll; width:100%; height:650px; padding:10px;">
+				<c:choose>
+					<c:when test="${ !empty cList }">
+						<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
+							<div id="goClass${ cList.get(i).cNo }" class="goClass" style="border:1px solid black; width:80%; margin:auto; height:150px; margin-top:15px; border-radius:15px; font-family: 'Nanum Gothic', sans-serif; cursor:pointer; box-shadow:3px 3px 3px gray;">
+								<div style="width:100%; text-align:center;">
+									<c:if test="${cList.get(i).local eq null  }">	
+										<br>
+									</c:if>
+									<c:if test="${cList.get(i).local ne null  }">
+										<span style="font-size:12px; text-align:center; color:orange;">${cList.get(i).local }</span>
+									</c:if>
+								</div>
+								<div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
+									${cList.get(i).title }
+								</div>
+								<div style="width:100%; text-align:center;">
+									<c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
+										<c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
+											<span style="font-family:cinzel;">${ cateList.get(j).name }</span>
+										</c:if>
+									</c:forEach>
+									<span style="font-family:cinzel;"> | ${ cList.get(i).level }</span>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
+		</c:otherwise>
+		</c:choose>
     </div>
+    
+    <script>
+    	$(function(){
+    		$(".goClass").click(function(){
+    			var cNo = $(this).prop('id').replace("goClass","");
+    			location.href='myClass.do?cNo=' + cNo;
+    		});
+    	});
+    </script>
+    <!--  클래스 리스트 끝 -->
 
 
     <!-- 단어장 리스트 페이지 -->
     <div id="dancontent" class="mypagecontent" style="background:rgba(243, 156, 17)">
-
+	<button class="btn btn-light">햐</button>
 
     </div>
 
@@ -652,6 +727,57 @@ body {
         <div id="calendar"></div>
         <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
     </div>
+
+    <!-- 스케쥴 일정추가 모달 -->
+	<!-- Modal -->
+	<div class="modal fade" id="scModal" tabindex="-1" role="dialog" aria-labelledby="scModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalLabel">일정추가</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body" style="text-align:center;">
+	      	<input id="selectedyear" type="text" style="display:none;" > 
+	        <input id="selectedday" type="date"> ~ <input id="selectedday2" type="date" >
+	        <br><br>
+	        <input type="text" value="참조할 단어장">
+	        <select id="ref" style="width:150px;">
+	        	<!-- <option	value="단어장">어느 단어장</option>
+	        	<option	value="단어장3">어느 단어장2</option>
+	        	<option	value="단어장4">어느 단어장2</option> -->
+	        </select>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-primary">추가</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+    <!-- 일정추가 스크립트 -->
+    <script>
+    	function scbtnclick(){
+    		var mId = '${loginMember.mId}';
+    		$.ajax({
+		        url:"getClassnVoca.ck",
+		        data:{mId:mId},
+		        type:"post",
+		   		success:function(data){
+		   			
+				},error:function(e){
+					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+				}
+				
+			});	
+    		
+    		
+    	}
+    </script>
+    
+    
     <!-- 정보 수정 페이지 -->
     <div id="fixcontent" class="mypagecontent" style="background:rgb(241, 196, 15)">
         <div class="modal-body" style="width: 90%; margin-left:5%; height:750px; ">
@@ -784,6 +910,9 @@ body {
                 }
 
                 this.title.innerHTML = this.current.format('MMMM YYYY');
+                
+                $("#selectedyear").val(this.current.format('YYYY-MM'));
+            
             }
             // 월그리기
             Calendar.prototype.drawMonth = function () {
@@ -922,7 +1051,10 @@ body {
                 var details, arrow;
                 var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
                 var day = this.current.clone().date(dayNumber);
-
+                var str = $("#selectedyear").val();
+				$("#selectedday").val(str+"-"+dayNumber);
+				$("#selectedday2").val(str+"-"+dayNumber);
+				
                 var currentOpened = document.querySelector('.details');
 
                 //Check to see if there is an open detais box on the current row
@@ -996,6 +1128,9 @@ body {
                 }
                 // 일정 추가 버튼
                 var btn = createElement("button", "scbtn", '+');
+                btn.setAttribute('data-toggle', 'modal');
+                btn.setAttribute('data-target', '#scModal');
+                btn.setAttribute("onclick","scbtnclick();");
                 wrapper.appendChild(btn);
                 if (currentWrapper) {
                     currentWrapper.className = 'events out';

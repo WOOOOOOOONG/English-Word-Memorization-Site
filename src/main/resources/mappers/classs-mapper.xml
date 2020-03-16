@@ -61,4 +61,37 @@
 		WHERE CLASSS.C_ID = CATEGORY.C_ID
 		AND NAME = #{cateList}
 	</select>
+
+	<select id="getClassnVoca" parameterType="string" resultMap="classResultSet">
+		select distinct cs.CLASS_NO,cs.CLASS_TITLE from classs cs, class_member cm
+		where cs.CLASS_NO = cm.CLASS_NO and (ORNER_ID = #{mId} or cm.ID = #{mId}) 
+	</select>
+	
+	
+
+	<select id="selectOrnerId" resultType="string">
+		SELECT ORNER_ID
+		FROM CLASSS
+		WHERE CLASS_NO = #{cNo}
+	</select>
+	<update id="changeManager">
+		UPDATE CLASSS
+		SET ORNER_ID = #{id}
+		WHERE CLASS_NO = #{cNo}
+	</update>
+	<delete id="deleteClass">
+		DELETE
+		FROM CLASSS
+		WHERE CLASS_NO = #{cNo}
+	</delete>
+	<select id="selectChangeName" resultType="string">
+		SELECT CHANGE_NAME
+		FROM STORAGE
+		WHERE REFER_ID = #{id}
+	</select>
+	<select id="selectTell" resultType="string">
+		SELECT EMAIL
+		FROM MEMBER
+		WHERE MID = #{id}
+	</select>
 </mapper>
