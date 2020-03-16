@@ -19,6 +19,9 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
+body {
+	background: whitesmoke;
+}
 @media screen and (min-width: 400px, min-height:400px)
 body {
 	height: 110vh;
@@ -33,26 +36,26 @@ main .helper span {
 }
 
 .menu {
-	/* background: #88dba3; 초록색*/
-	background:white;
-	height: 100%;
-	/* width: 240px; */
-	width: 280px;
-	z-index: 5;
-	outline: none;
-	font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
-	/* color: #fff; 흰색 */
-	color: #424242;
-	float: left;
+   /* background: #5bc995; */
+   background: #88dba3;
+   height: 100%;
+   /* width: 240px; */
+   width: 240px;
+   z-index: 5;
+   outline: none;
+   font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
+   color: #fff;
+   float: left;
+   
 }
 
 .menu .avatar {
-	width: 280px;
+	width: 240px;
 	background: rgba(0, 0, 0, 0.3);
 	padding: 2em 0.5em;
 	text-align: center;
-	margin-left: -24px;
-	margin-top: -24px;
+	margin-left: -9px;
+	margin-top: -9px;
 }
 
 .menu .avatar img {
@@ -61,6 +64,18 @@ main .helper span {
 	overflow: hidden;
 	border: 4px solid #ffea92;
 	box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
+}
+
+nav {
+  margin-top: 0px;
+  padding: 24px;
+  text-align: center;
+  font-family: Raleway;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+#nav-1 {
+  background: #cff0da;
 }
 
 .menu .avatar h2 {
@@ -73,7 +88,6 @@ main .helper span {
 	padding: 0.5em 0;
 	text-align:left;
 	margin: 0;
-	background:whitesmoke;
 }
 
 .menu ul li {

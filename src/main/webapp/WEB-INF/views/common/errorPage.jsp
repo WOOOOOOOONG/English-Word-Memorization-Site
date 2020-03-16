@@ -96,7 +96,7 @@ body{display: block; align-items: center; justify-content: center; background-im
 <body>
 	<!-- 글씨 -->
 	<div class="code_box">
-    	<a href="index.jsp" style="text-decoration:none;"><p class="text_ani">메인 화면으로 돌아가기</p></a>
+    	<a href="viewMain.ad" style="text-decoration:none;"><p class="text_ani">메인 화면으로 돌아가기</p></a>
 	</div>
 	<svg id="error" version="1.1" xmlns="http://www.w3.org/2000/svg"
 		xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"

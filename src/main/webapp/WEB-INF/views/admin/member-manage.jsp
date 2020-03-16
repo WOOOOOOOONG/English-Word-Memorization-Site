@@ -38,7 +38,6 @@
 
 <body>
 	<%-- <c:if test="${sessionScope.loginMember.mId eq 'admin'}"> --%>
-		<jsp:include page="../common/menubar.jsp"/>
 	    <jsp:include page="../common/left-menubar.jsp"/>
 	
 		<div class="table">
@@ -92,6 +91,10 @@
 							"emptyTable" : "등록된 회원이 없습니다."
 						},
 	                });
+	                
+	                var curPage = document.getElementsByClassName("page1");
+	                var bTag = document.createElement("b");
+	                curPage[0].style.fontWeight = "bold";
 	            });  
 				
 				// 회원 탈퇴 상태 변경

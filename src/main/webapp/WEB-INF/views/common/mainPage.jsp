@@ -345,7 +345,7 @@ nav ul.right {
 	</section>
 	<footer>
 		<p>
-			<a href="#">built with ❤ in NYC </a>
+			<a href="#">built with SEW in KH Academy </a>
 		</p>
 	</footer>
 	<!-- jQuery -->
