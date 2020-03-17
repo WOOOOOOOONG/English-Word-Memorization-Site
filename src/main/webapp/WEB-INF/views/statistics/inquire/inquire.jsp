@@ -29,7 +29,6 @@ body {
 </head>
 
 <body>
-	<jsp:include page="../../common/menubar.jsp" />
 	<jsp:include page="../../common/left-menubar.jsp" />
 
 	<c:set var="type0" value="0" />

@@ -31,7 +31,6 @@ body {
 </style>
 </head>
 <body>
-	<jsp:include page="../../common/menubar.jsp" />
 	<jsp:include page="../../common/left-menubar.jsp" />
 
 	<div class="table">

@@ -507,6 +507,7 @@ body {
     /* bug fix - no overlay */    
     display: none;    
 }
+
 .modal-body > .form-control{
 	width:48%;
 	float:left;
@@ -543,10 +544,24 @@ body {
 	margin-right:100px;
 	display:none;
 }
+
+.createBtn{
+	text-decoration:none; 
+	color:red; 
+	margin-left:550px; 
+	font-family:cinzel;
+}
+.createBtn:hover{
+	text-decoration:none; 
+	color: rgb(0,154,200);
+	transition: 0.2s ease-in-out;
+}
+
 </style>
 </head>
 
 <body>
+	<jsp:include page="../classs/fontStore.jsp"/>
     <script>
         window.onload = function () {
         	scdraw();
@@ -685,11 +700,62 @@ body {
         });
 
     </script>
+    
+    
+    
 	<!-- 클래스 리스트 페이지 -->
-    <div id="classcontent" class="mypagecontent" style="background:rgba(243, 156, 17)">
-
-		클래스리스트
+    <div id="classcontent" class="mypagecontent">
+    <div style="padding:4px 4px 4px; border-bottom:1px solid black;  width:50%; margin:auto;font-family:cinzel; font-size:32px; text-align:center;">CLASS LIST</div>
+    	<c:choose>
+		<c:when test="${ !empty cmList }">
+			<div>
+				<a href="classPorm.do" id="createBtn" class="createBtn">Creat Class</a>
+			</div>
+			<div style="overflow:scroll; width:100%; height:650px; padding:10px;">
+				<c:choose>
+					<c:when test="${ !empty cList }">
+						<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
+							<div id="goClass${ cList.get(i).cNo }" class="goClass" style="border:1px solid black; width:80%; margin:auto; height:150px; margin-top:15px; border-radius:15px; font-family: 'Nanum Gothic', sans-serif; cursor:pointer; box-shadow:3px 3px 3px gray;">
+								<div style="width:100%; text-align:center;">
+									<c:if test="${cList.get(i).local eq null  }">	
+										<br>
+									</c:if>
+									<c:if test="${cList.get(i).local ne null  }">
+										<span style="font-size:12px; text-align:center; color:orange;">${cList.get(i).local }</span>
+									</c:if>
+								</div>
+								<div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
+									${cList.get(i).title }
+								</div>
+								<div style="width:100%; text-align:center;">
+									<c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
+										<c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
+											<span style="font-family:cinzel;">${ cateList.get(j).name }</span>
+										</c:if>
+									</c:forEach>
+									<span style="font-family:cinzel;"> | ${ cList.get(i).level }</span>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+				</c:choose>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
+		</c:otherwise>
+		</c:choose>
     </div>
+    
+    <script>
+    	$(function(){
+    		$(".goClass").click(function(){
+    			var cNo = $(this).prop('id').replace("goClass","");
+    			location.href='myClass.do?cNo=' + cNo;
+    		});
+    	});
+    </script>
+    <!--  클래스 리스트 끝 -->
 
 
     <!-- 단어장 리스트 페이지 -->

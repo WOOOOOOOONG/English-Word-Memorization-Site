@@ -20,26 +20,28 @@
 }
 
 .insertForm {
-	background: #FAFAFA;
+	/* background: #FAFAFA; */
 	width: 1300px;
 	margin: 0 auto;
 	margin-top: 50px;
-}}
+}
 </style>
 </head>
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 
-	<form action="insertInquire.ad" method="post" class="insertForm">
+	<form action="insertBoard.bo" method="post" class="insertForm">
 		<div id="content" class="row">
 			<div class="col-md-10">
 				<div class="box box-info">
 					<div class="box-body">
 						<fieldset id="w4">
-							<!-- inquirerId 보내기 위함 -->
-							<input type="text" style="display: none;" name="inquirerId"
+							<!-- referId, nickname 보내기 위함 -->
+							<input type="text" style="display: none;" name="referId"
 								value="${sessionScope.loginMember.mId}" />
+							<input type="text" style="display: none;" name="referNickname"
+								value="${sessionScope.loginMember.nickname}" />
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group field-job-title required">
@@ -67,10 +69,10 @@
 										<div class="col-md-10">
 											<select name="type" class="form-control" id="job-tipe" style="width:100px;"
 												name="type">
-												<option value="0">계정</option>
-												<option value="1">시스템</option>
-												<option value="2">사용자</option>
-												<option value="3">기타</option>
+												<option value="1">공지</option>
+												<option value="2">단어장</option>
+												<option value="3">클래스</option>
+												<option value="4">잡담</option>
 											</select>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
@@ -98,9 +100,9 @@
 						</fieldset>
 					</div>
 				</div>
-			<div>
+				<div>
 					<button class="btn btn-outline-success" id="submitBtn"
-						style="margin-left: 532px"
+						style="margin-left: 553px"
 						onmouseover="inquire();">작성</button>
 					<button type="button" class="btn btn-outline-danger"
 						style="margin: 0 auto;" onclick="cancel();">취소</button>
@@ -109,6 +111,16 @@
 				
 				</div>
 			</div>
+		</div>
+		<!-- <div>
+			<button class="btn btn-outline-success" id="submitBtn"
+				style="position: absolute; margin-left: 580px;"
+				onmouseover="inquire();">Success</button>
+			<button type="button" class="btn btn-outline-danger"
+				style="position: absolute; margin-left: 700px;">Danger</button>
+		</div> -->
+		<div id="saveText" style="display:none;">
+		
 		</div>
 		<script>
 			$("#summernote").summernote(

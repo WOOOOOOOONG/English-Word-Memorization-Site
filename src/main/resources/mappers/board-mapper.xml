@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="boardMapper">
+	<resultMap id="boardResultMap" type="Board">
+		<id property="bId" column="BID"/>
+		<result property="referId" column="REFER_ID"/>
+		<result property="referNickname" column="REFER_NICKNAME"/>
+		<result property="title" column="TITLE"/>
+		<result property="type" column="TYPE"/>
+		<result property="content" column="CONTENT"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="views" column="VIEWS"/>
+	</resultMap>
+	
+	<resultMap id="replyResultMap" type="Reply">
+		<id property="rId" column="RID"/>
+		<result property="writerId" column="WRITER_ID"/>
+		<result property="writerNickname" column="WRITER_NICKNAME"/>
+		<result property="content" column="CONTENT"/>
+		<result property="createDate" column="CREATE_DATE"/>
+	</resultMap> 
+	
+	<select id="getListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM BOARD
+	</select>
+	
+	<update id="updateCount">
+		UPDATE BOARD
+		SET VIEWS = VIEWS + 1
+		WHERE BID = #{bId}
+	</update>
+	
+	<select id="selectBoardOne" resultMap="boardResultMap">
+		SELECT *
+		FROM BOARD
+		WHERE BID=#{bId}
+	</select>
+	
+	<select id="selectBoardList" resultMap="boardResultMap">
+		SELECT *
+		FROM BOARD
+		ORDER BY BID DESC
+	</select>
+	
+	<select id="boardAllList" resultMap="boardResultMap">
+		SELECT *
+		FROM BOARD
+		ORDER BY BID DESC
+	</select>
+	
+	<insert id="insertBoard">
+		INSERT INTO BOARD(BID, REFER_ID, REFER_NICKNAME, TITLE, TYPE, CONTENT, CREATE_DATE, VIEWS)
+		VALUES(BID_SEQ.NEXTVAL, #{referId}, #{referNickname}, #{title}, #{type},
+			#{content}, DEFAULT, DEFAULT)
+	</insert>
+	
+	<update id="updateBoard">
+		UPDATE BOARD
+		SET TITLE=#{title}, TYPE=#{type}, CONTENT=#{content}
+		WHERE BID=#{bId}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM BOARD
+		WHERE BID=#{bId}
+	</delete>
+	
+	
+	<insert id="insertBoardReply">
+		INSERT INTO REPLY
+		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT)
+	</insert>
+	
+	<select id="selectBoardReplyList" resultMap="replyResultMap">
+		SELECT *
+		FROM REPLY
+		WHERE BID=#{bId}
+	</select>
+</mapper>

@@ -19,34 +19,36 @@
 	padding-bottom: 10px;
 }
 
-.insertForm {
-	background: #FAFAFA;
+.updateForm {
+	/* background: #FAFAFA; */
 	width: 1300px;
 	margin: 0 auto;
 	margin-top: 50px;
-}}
+}
 </style>
 </head>
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
 
-	<form action="insertInquire.ad" method="post" class="insertForm">
+	<form action="updateBoard.bo" method="post" class="updateForm">
 		<div id="content" class="row">
 			<div class="col-md-10">
 				<div class="box box-info">
 					<div class="box-body">
 						<fieldset id="w4">
-							<!-- inquirerId 보내기 위함 -->
-							<input type="text" style="display: none;" name="inquirerId"
+							<!-- referId, nickname 보내기 위함 -->
+							<input type="text" style="display: none;" name="referId"
 								value="${sessionScope.loginMember.mId}" />
+							<input type="text" style="display: none;" name="referNickname"
+								value="${sessionScope.loginMember.nickname}" />
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group field-job-title required">
 										<label for="job-title" class="control-label col-md-2"
 											style="font-weight: bold; display: inline; float: left; width: 100px; margin-top: 5px;">제목</label>
 										<div class="col-md-10">
-											<input type="text" autocomplete="off" placeholder="제목을 입력하세요"
+											<input type="text" autocomplete="off" value="${ detailBoard.title }"
 												name="title" class="form-control" id="input-title" style="width:600px; display: inline;">
 										</div>
 										<div class="col-md-offset-2 col-md-10">
@@ -67,10 +69,24 @@
 										<div class="col-md-10">
 											<select name="type" class="form-control" id="job-tipe" style="width:100px;"
 												name="type">
-												<option value="0">계정</option>
-												<option value="1">시스템</option>
-												<option value="2">사용자</option>
-												<option value="3">기타</option>
+												<c:choose>
+													<c:when test="${ detailBoard.type eq 1 }">
+														<c:set var="selected1" value="selected"/>
+													</c:when>
+													<c:when test="${ detailBoard.type eq 2 }">
+														<c:set var="selected2" value="selected"/>
+													</c:when>
+													<c:when test="${ detailBoard.type eq 3 }">
+														<c:set var="selected3" value="selected"/>
+													</c:when>
+													<c:when test="${ detailBoard.type eq 4 }">
+														<c:set var="selected4" value="selected"/>
+													</c:when>
+												</c:choose>
+												<option value="1" ${ selected1 }>공지</option>
+												<option value="2" ${ selected2 }>단어장</option>
+												<option value="3" ${ selected3 }>클래스</option>
+												<option value="4" ${ selected4 }>잡담</option>
 											</select>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
@@ -98,10 +114,13 @@
 						</fieldset>
 					</div>
 				</div>
-			<div>
+				<div>
+					<c:url var="update" value="updateBoard.bo">
+						<c:param name="board" value="${ detailBoard }" />
+					</c:url>
 					<button class="btn btn-outline-success" id="submitBtn"
-						style="margin-left: 532px"
-						onmouseover="inquire();">작성</button>
+						style="margin-left: 553px"
+						onmouseover="update();" onclick="${update}">수정</button>
 					<button type="button" class="btn btn-outline-danger"
 						style="margin: 0 auto;" onclick="cancel();">취소</button>
 				</div>
@@ -110,50 +129,65 @@
 				</div>
 			</div>
 		</div>
+		<!-- <div>
+			<button class="btn btn-outline-success" id="submitBtn"
+				style="position: absolute; margin-left: 580px;"
+				onmouseover="inquire();">Success</button>
+			<button type="button" class="btn btn-outline-danger"
+				style="position: absolute; margin-left: 700px;">Danger</button>
+		</div> -->
+		<div id="saveText" style="display:none;">
+		
+		</div>
 		<script>
-			$("#summernote").summernote(
-					{
-						"height" : 400,
-						"width" : "1200px",
-						"dialogsInBody" : true,
-						"prettifyHtml" : true,
-						"codemirror" : {
-							"mode" : "text/html",
-							"htmlMode" : true,
-							"lineNumbers" : true,
-							"theme" : "monokai",
-							"width" : "100px",
-							"textWrapping" : true
-						},
-						"disableDragAndDrop" : true,
-						"toolbar" : [
-								[ "paragraph", [ "style" ] ],
-								[ "fontsize",
-										[ "fontname", "fontsize", "color" ] ],
-								[
-										"style",
-										[ "bold", "italic", "underline",
-												"strikethrough", "clear" ] ],
-								[ "paragraph", [ "ol", "ul", "paragraph" ] ],
-								[
-										"insert",
-										[ "table", "link", "picture", "video",
-												"hr" ] ],
-								[ "misc", [ "codeview" ] ] ],
-						"placeholder" : "문의 내용을 입력하세요"
-					});
+			window.onload = function() {
+				$("#summernote").summernote(
+						{
+							"height" : 400,
+							"width" : "1200px",
+							"dialogsInBody" : true,
+							"prettifyHtml" : true,
+							"codemirror" : {
+								"mode" : "text/html",
+								"htmlMode" : true,
+								"lineNumbers" : true,
+								"theme" : "monokai",
+								"width" : "100px",
+								"textWrapping" : true
+							},
+							"disableDragAndDrop" : true,
+							"toolbar" : [
+									[ "paragraph", [ "style" ] ],
+									[ "fontsize",
+											[ "fontname", "fontsize", "color" ] ],
+									[
+											"style",
+											[ "bold", "italic", "underline",
+													"strikethrough", "clear" ] ],
+									[ "paragraph", [ "ol", "ul", "paragraph" ] ],
+									[
+											"insert",
+											[ "table", "link", "picture", "video",
+													"hr" ] ],
+									[ "misc", [ "codeview" ] ] ]
+						});
+				$(".note-editable").html("<p>${detailBoard.content}</p>");
+			}
+			
+			
 
 			var submit = $("#submitBtn");
-			function inquire() {
+			function update() {
 				var text = $($("#summernote").summernote("code")).text();
 
 				var content = $("#saveText");
-				content.html("<input type='text' name='content' value='" + text + "'/>");
+				content.html("<input type='text' name='content' value='" + text + "'/>"
+						+ "<input type='text' id='bId' name='bId' value='${detailBoard.bId}'/>");
 			};
 			
 			function cancel() {
-				if(window.confirm("작성을 취소하고 목록으로 이동하시겠습니까?")) {
-					location.href = "boardList.bo";
+				if(window.confirm("게시판 수정을 취소하고 상세보기로 이동하시겠습니까?")) {
+					location.href = "detailBoard.bo?bId"+${detailBoard.bId};
 				}
 			}
 		</script>

@@ -52,7 +52,7 @@
 							<!-- 추가 필 -->
 							<div class="blank-box-wrapper">
 								<div class="blank-box">
-									<h3 style="color: #000; font-size: 14pt; text-align: center;">ajoa2012</h3>
+									<h3 style="color: #000; font-size: 14pt; text-align: center;">${ loginMember.mId }</h3>
 								</div>
 								<div class="blank-box">
 									<h3 style="color: #000; font-size: 14pt; text-align: center;"><%= today %></h3>

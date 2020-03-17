@@ -42,7 +42,7 @@ body {
 
 nav.sidebar {
 	float: left;
-	z-index: 99;
+	z-index: 40;
 }
 
 nav.sidebar-menu-collapsed {
@@ -54,7 +54,8 @@ nav.sidebar-menu-expanded {
 }
 
 nav.sidebar {
-	height: 100rem;
+	position: fixed;
+	height: 60vh;
 	background: none repeat scroll 0 0 #09f;
 	color: white;
 	padding: 20px 10px;
@@ -133,6 +134,8 @@ nav.sidebar ul li.active a.expandable:hover {
 	margin-left: auto;
 	margin-right: auto;
 	background: white;
+	border-radius: 10px;
+	box-shadow: 0 3px 10px #000;
 }
 
 @media screen and (max-width: 1500px) {
@@ -148,7 +151,7 @@ nav.sidebar ul li.active a.expandable:hover {
 
 .title2 {
 	margin-left: 30px;
-	margin-bottom: -15px;
+	margin-top: -20px;
 }
 
 .subtitle {
@@ -165,14 +168,16 @@ nav.sidebar ul li.active a.expandable:hover {
 }
 
 .moreBtn {
-	margin-top: -130px;
-	margin-left: 1280px;
+	margin-top: -140px;
+	margin-left: 1300px;
 }
 
 .moreBtn2 {
-	margin-top: -40px;
-	margin-left: 1280px;
+	margin-top: 5px;
+	margin-left: 570px;
 	font-size: 9px;
+	z-index: 9;
+	position: absolute;
 }
 
 #btn {
@@ -223,7 +228,7 @@ nav.sidebar ul li.active a.expandable:hover {
 	width: 800px;
 	height: 200px;
 	margin-top: -90px;
-	margin-left: 300px;
+	margin-left: 400px;
 	position: absolute;
 }
 
@@ -232,13 +237,13 @@ nav.sidebar ul li.active a.expandable:hover {
 	width: 800px;
 	height: 200px;
 	margin-top: -85px;
-	margin-left: 300px;
+	margin-left: 360px;
 	position: absolute;
 }
 
 /* section4 */
 .sec4 {
-	height: 1550px;
+	height: 1500px;
 }
 
 .chart {
@@ -257,48 +262,53 @@ nav.sidebar ul li.active a.expandable:hover {
 .left {
 	float: left;
 }
+
+.chart-table {
+	z-index: 4;
+}
 </style>
 </head>
 <body>
-	<jsp:include page="../common/menubar.jsp" />
+	<c:if test="${sessionScope.loginMember.mId eq 'admin'}">
+		<jsp:include page="../common/menubar.jsp" />
 
-	<nav class='sidebar sidebar-menu-collapsed'>
-		<c:url var="admin1" value="memberList.me" />
-		<c:url var="admin2" value="selectInquireList.ad" />
-		<c:url var="class1" value="classify.cl" />
-		<c:url var="class2" value="total.cl" />
-		<c:url var="inquire" value="inquireStat.ad" />
-		<c:url var="visit1" value="visitTime.ad" />
-		<c:url var="visit2" value="visitDay.ad" />
-		<c:url var="visit3" value="visitMonth.ad" />
-		<c:url var="voca1" value="classify.voca" />
-		<c:url var="voca2" value="total.voca" />
-		<a href='#' id='justify-icon'> <span
-			class='glyphicon glyphicon-align-justify'></span>
-		</a>
-		<ul>
-			<li class='active'><a class='expandable' href='#'
-				title='Dashboard'> <span
-					class='glyphicon glyphicon-home collapsed-element'></span> <span
-					class='expanded-element'>Dashboard</span>
-			</a></li>
-			<li><a class='expandable' href='#' title='Account'> <span
-					class='glyphicon glyphicon-user collapsed-element'></span> <span
-					class='expanded-element'>Account</span>
-			</a></li>
-			<li><a class='expandable' href='#' title='APIs'> <span
-					class='glyphicon glyphicon-wrench collapsed-element'></span> <span
-					class='expanded-element'>APIs</span>
-			</a></li>
-			<li><a class='expandable' href='#' title='Settings'> <span
-					class='glyphicon glyphicon-cog collapsed-element'></span> <span
-					class='expanded-element'>Settings</span>
-			</a></li>
-		</ul>
-		<a href='#' id='logout-icon' title='Logout'> <span
-			class='glyphicon glyphicon-off'></span>
-		</a>
-		<script>
+		<nav class='sidebar sidebar-menu-collapsed'>
+			<c:url var="admin1" value="memberList.me" />
+			<c:url var="admin2" value="selectInquireList.ad" />
+			<c:url var="class1" value="classify.cl" />
+			<c:url var="class2" value="total.cl" />
+			<c:url var="inquire" value="inquireStat.ad" />
+			<c:url var="visit1" value="visitTime.ad" />
+			<c:url var="visit2" value="visitDay.ad" />
+			<c:url var="visit3" value="visitMonth.ad" />
+			<c:url var="voca1" value="classify.voca" />
+			<c:url var="voca2" value="total.voca" />
+			<a href='#' id='justify-icon'> <span
+				class='glyphicon glyphicon-align-justify'></span>
+			</a>
+			<ul>
+				<li class='active'><a class='expandable' href='#sec1'
+					title='Dashboard'> <span
+						class='glyphicon glyphicon-home collapsed-element'></span> <span
+						class='expanded-element'>HOME</span>
+				</a></li>
+				<li><a class='expandable' href='#sec2' title='Account'> <span
+						class='glyphicon glyphicon-user collapsed-element'></span> <span
+						class='expanded-element'>Account</span>
+				</a></li>
+				<li><a class='expandable' href='#sec3' title='APIs'> <span
+						class='glyphicon glyphicon-wrench collapsed-element'></span> <span
+						class='expanded-element'>Inquire</span>
+				</a></li>
+				<li><a class='expandable' href='#sec4' title='Settings'> <span
+						class='glyphicon glyphicon-cog collapsed-element'></span> <span
+						class='expanded-element'>Settings</span>
+				</a></li>
+			</ul>
+			<a href='#' id='logout-icon' title='Logout'> <span
+				class='glyphicon glyphicon-off'></span>
+			</a>
+			<script>
 			(function() {
 				$(function() {
 					var collapseMyMenu, expandMyMenu, hideMenuTexts, showMenuTexts;
@@ -343,71 +353,66 @@ nav.sidebar ul li.active a.expandable:hover {
 
 			}).call(this);
 		</script>
-	</nav>
+		</nav>
 
-	<section>
-		<div class="section sec1">
-			<h4 class="title">관리자정보</h4>
-			<p class="subtitle">관리자 정보에요</p>
-			<div class="avatar">
-				<img
-					src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
-				<h2>홍길동</h2>
-				<p>자기소개</p>
+		<section>
+			<div class="section sec1" id="sec1">
+				<h4 class="title">관리자정보</h4>
+				<p class="subtitle">관리자 정보에요</p>
+				<div class="avatar">
+					<img
+						src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
+					<h2>홍길동</h2>
+					<p>자기소개</p>
+				</div>
+				<p class="profile">방문자 수 : ${fn:length(logList)}</p>
+				<p class="profile">보유 회원 수 : ${fn:length(mList)}</p>
+				<p class="profile">등록된 단어장 수 :</p>
+				<p class="profile">등록된 클래스 수 :</p>
+				<div style="margin-top: 20px; border: 1px solid black;"></div>
 			</div>
-			<p class="profile">방문자 수 :</p>
-			<p class="profile">보유 회원 수 :</p>
-			<p class="profile">등록된 단어장 수 :</p>
-			<p class="profile">등록된 클래스 수 :</p>
-			<div style="margin-top: 20px; border: 1px solid black;"></div>
-		</div>
-	</section>
+		</section>
 
-	<section>
-		<div class="section sec2">
-			<h4 class="title">회원 정보</h4>
-			<p class="subtitle">회원 관련 정보입니다</p>
-			<button type="button" class="btn btn-outline-secondary moreBtn">자세히</button>
-			<div class="table" id="t1" style="">
-				<table id="table1" class="display table_id">
-					<thead>
-						<tr>
-							<td>ID</td>
-							<th>이름</th>
-							<th>닉네임</th>
-							<th>가입일</th>
-							<th>수정일</th>
-							<th>회원상태</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:if test="${ mList ne null }">
-							<c:forEach var="item" items="${ mList }">
-								<tr>
-									<td>${ item.mId }</td>
-									<td>${ item.name }</td>
-									<td>${ item.nickname }</td>
-									<td>${ item.enrollDate }</td>
-									<td>${ item.updateDate }</td>
-									<c:if test="${ item.userStatus eq 'Y'}">
-										<c:set var="selectedY" value="selected" />
-									</c:if>
-									<c:if test="${ item.userStatus eq 'N'}">
-										<c:set var="selectedN" value="selected" />
-									</c:if>
-									<td><c:url var="updateStatus" value="updateStatus.me">
-											<c:param name="mId" value="${ item.mId }" />
-											<c:param name="userStatus" value="${ item.userStatus }" />
-										</c:url> <select id="statusSelected" onchange="changeStatus(this);">
-											<option value="Y" ${ selectedY }>Y</option>
-											<option value="N" ${ selectedN }>N</option>
-									</select></td>
-								</tr>
-							</c:forEach>
-						</c:if>
-					</tbody>
-				</table>
-				<script>
+		<section>
+			<div class="section sec2" id="sec2">
+				<h4 class="title">회원 정보</h4>
+				<p class="subtitle">회원 관련 정보입니다</p>
+				<button type="button" class="btn btn-outline-secondary moreBtn"
+					onclick="goHomePage(1)">자세히</button>
+				<div class="table" id="t1" style="">
+					<table id="table1" class="display table_id">
+						<thead>
+							<tr>
+								<td>ID</td>
+								<th>이름</th>
+								<th>닉네임</th>
+								<th>가입일</th>
+								<th>수정일</th>
+								<th>회원상태</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:if test="${ mList ne null }">
+								<c:forEach var="item" items="${ mList }">
+									<tr>
+										<td>${ item.mId }</td>
+										<td>${ item.name }</td>
+										<td>${ item.nickname }</td>
+										<td>${ item.enrollDate }</td>
+										<td>${ item.updateDate }</td>
+										<c:if test="${ item.userStatus eq 'Y'}">
+											<c:set var="selectedY" value="selected" />
+										</c:if>
+										<c:if test="${ item.userStatus eq 'N'}">
+											<c:set var="selectedN" value="selected" />
+										</c:if>
+										<td>${item.userStatus}</td>
+									</tr>
+								</c:forEach>
+							</c:if>
+						</tbody>
+					</table>
+					<script>
 					// datatable
 		            $(document).ready(function () {
 		                $('#table1').DataTable({
@@ -424,61 +429,48 @@ nav.sidebar ul li.active a.expandable:hover {
 						location.href="${ updateStatus }";
 					}
 		        </script>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section>
-		<div class="section sec3">
-			<h4 class="title">문의 정보</h4>
-			<p class="subtitle">문의 관련 정보입니다</p>
-			<button type="button" class="btn btn-outline-secondary moreBtn">자세히</button>
-			<div class="table" id="t2">
-				<table id="table2" class="display table_id">
-					<thead>
-						<tr>
-							<th>NO</th>
-							<th>신고자</th>
-							<th>이름</th>
-							<th>유형</th>
-							<th>문의 제목</th>
-							<th>등록일</th>
-							<th>답변여부</th>
-							<th>신고된 아이디</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:set var="i" value="0" />
-						<c:forEach var="item" items="${ inquireList }">
-							<c:set var="i" value="${i+1}" />
-							<tr class="view">
-								<td>${item.iId}</td>
-								<td>${item.inquirerId}</td>
-								<td>${item.name}</td>
-								<td>${item.type}</td>
-								<td>${item.title}</td>
-								<td>${item.registDate}</td>
-								<td>${item.isAnswer}</td>
-								<td>${item.reportedId}</td>
+		<section>
+			<div class="section sec3" id="sec3">
+				<h4 class="title">문의 정보</h4>
+				<p class="subtitle">문의 관련 정보입니다</p>
+				<button type="button" class="btn btn-outline-secondary moreBtn"
+					onclick="goHomePage(2);">자세히</button>
+				<div class="table" id="t2">
+					<table id="table2" class="display table_id">
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>신고자</th>
+								<th>이름</th>
+								<th>유형</th>
+								<th>문의 제목</th>
+								<th>등록일</th>
+								<th>답변여부</th>
+								<th>신고된 아이디</th>
 							</tr>
-							<tr class="inquire">
-								<td colspan="8"><textarea
-										style="width: 100%; height: 200px"
-										placeholder="${item.content}" readonly></textarea></td>
-								<td style="display: none;"></td>
-								<td style="display: none;"></td>
-								<td style="display: none;"></td>
-								<td style="display: none;"></td>
-								<td style="display: none;"></td>
-								<td style="display: none;"></td>
-								<td style="display: none;"></td>
-							</tr>
-							<!-- 답변이 이미 작성되었으면 보여주기만 하고, 버튼을 '작성' 대신 '삭제'로 바꾼다. -->
-							<c:if test="${item.isAnswer eq 'Y'}">
-								<tr class="answer">
+						</thead>
+						<tbody>
+							<c:set var="i" value="0" />
+							<c:forEach var="item" items="${ inquireList }">
+								<c:set var="i" value="${i+1}" />
+								<tr class="view">
+									<td>${item.iId}</td>
+									<td>${item.inquirerId}</td>
+									<td>${item.name}</td>
+									<td>${item.type}</td>
+									<td>${item.title}</td>
+									<td>${item.registDate}</td>
+									<td>${item.isAnswer}</td>
+									<td>${item.reportedId}</td>
+								</tr>
+								<tr class="inquire">
 									<td colspan="8"><textarea
 											style="width: 100%; height: 200px"
-											placeholder="${item.answer}" readonly></textarea></td>
+											placeholder="${item.content}" readonly></textarea></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
@@ -487,51 +479,65 @@ nav.sidebar ul li.active a.expandable:hover {
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
 								</tr>
-								<tr class="answer-button" style="background: none">
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<c:url var="responseDelete" value="responseDelete.ad">
-										<c:param name="iId" value="${item.iId}" />
-									</c:url>
-									<td><button type="button"
-											onclick="location.href='${responseDelete}'">답변 삭제</button></td>
-								</tr>
-							</c:if>
-							<c:if test="${item.isAnswer eq 'N' }">
-								<tr class="answer">
-									<td colspan="8">
-										<div class="summernote" name="note${i}"></div>
-									</td>
-									<td style="display: none;"></td>
-									<td style="display: none;"></td>
-									<td style="display: none;"></td>
-									<td style="display: none;"></td>
-									<td style="display: none;"></td>
-									<td style="display: none;"></td>
-									<td style="display: none;"></td>
-								</tr>
-								<tr class="answer-button" style="background: none">
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td></td>
-									<td><button type="button"
-											onclick="response(${item.iId}, ${i});">답변 등록</button></td>
-								</tr>
-							</c:if>
-						</c:forEach>
-					</tbody>
-				</table>
+								<!-- 답변이 이미 작성되었으면 보여주기만 하고, 버튼을 '작성' 대신 '삭제'로 바꾼다. -->
+								<c:if test="${item.isAnswer eq 'Y'}">
+									<tr class="answer">
+										<td colspan="8"><textarea
+												style="width: 100%; height: 200px"
+												placeholder="${item.answer}" readonly></textarea></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+									</tr>
+									<tr class="answer-button" style="background: none">
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<c:url var="responseDelete" value="responseDelete.ad">
+											<c:param name="iId" value="${item.iId}" />
+										</c:url>
+										<td><button type="button"
+												onclick="location.href='${responseDelete}'">답변 삭제</button></td>
+									</tr>
+								</c:if>
+								<c:if test="${item.isAnswer eq 'N' }">
+									<tr class="answer">
+										<td colspan="8">
+											<div class="summernote" name="note${i}"></div>
+										</td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+									</tr>
+									<tr class="answer-button" style="background: none">
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td><button type="button"
+												onclick="response(${item.iId}, ${i});">답변 등록</button></td>
+									</tr>
+								</c:if>
+							</c:forEach>
+						</tbody>
+					</table>
 
-				<script>
+					<script>
 		            $(document).ready(function () {
 		            	// DataTable 정의
 						$('#table2').DataTable({
@@ -548,52 +554,63 @@ nav.sidebar ul li.active a.expandable:hover {
 		                $(".answer-button").hide();
 		            });
 	        	</script>
+				</div>
 			</div>
-		</div>
-	</section>
+		</section>
 
-	<section>
-		<div class="section sec4">
-			<h4 class="title">통계 정보</h4>
-			<p class="subtitle2">통계 관련 정보입니다</p>
-			<!-- class -->
-			<h6 class="title2">클래스 통계</h6>
-			<button type="button" class="btn btn-outline-secondary btn-sm moreBtn2" onclick="goMomePage(1);">자세히</button>
-			<div class="chart">
-				<div class="chart2 left"></div>
-				<div class="chart2 left"></div>
-			</div>
-			<br>
+		<section>
+			<div class="section sec4" id="sec4">
+				<h4 class="title">통계 정보</h4>
+				<p class="subtitle2">통계 관련 정보입니다</p>
+				<br>
+				<!-- class -->
+				<h6 class="title2">클래스 통계</h6>
+				<div class="chart">
+					<div class="chart2 left">
+						<button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(3);">자세히</button>
+					</div>
+					<div class="chart2 left">
+						<button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(4);">자세히</button>
+					</div>
+				</div>
+				<br>
+				<br>
 
-			<!-- inquire -->
-			<h6 class="title2">문의 통계</h6>
-			<button type="button" class="btn btn-outline-secondary btn-sm moreBtn2">자세히</button>
-			<div class="chart">
-				<div class="chart2">
-					<c:set var="type0" value="0" />
-					<c:set var="type1" value="0" />
-					<c:set var="type2" value="0" />
-					<c:set var="type3" value="0" />
-					<c:forEach var="item" items="${inquireList}">
-						<c:choose>
-							<c:when test="${item.type eq 0}">
-								<c:set var="type0" value="${type0 + 1}" />
-							</c:when>
-							<c:when test="${item.type eq 1}">
-								<c:set var="type1" value="${type1 + 1}" />
-							</c:when>
-							<c:when test="${item.type eq 2}">
-								<c:set var="type2" value="${type2 + 1}" />
-							</c:when>
-							<c:when test="${item.type eq 3}">
-								<c:set var="type3" value="${type3 + 1}" />
-							</c:when>
-						</c:choose>
-					</c:forEach>
-				
-					<div class="table">
-						<div id="piechart_3d" style="width: 650px; height: 300px;">
-							<script type="text/javascript">
+				<!-- inquire -->
+				<h6 class="title2">문의 통계</h6>
+				<div class="chart">
+					<div class="chart2">
+						<button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(5);">자세히</button>
+						<c:set var="type0" value="0" />
+						<c:set var="type1" value="0" />
+						<c:set var="type2" value="0" />
+						<c:set var="type3" value="0" />
+						<c:forEach var="item" items="${inquireList}">
+							<c:choose>
+								<c:when test="${item.type eq 0}">
+									<c:set var="type0" value="${type0 + 1}" />
+								</c:when>
+								<c:when test="${item.type eq 1}">
+									<c:set var="type1" value="${type1 + 1}" />
+								</c:when>
+								<c:when test="${item.type eq 2}">
+									<c:set var="type2" value="${type2 + 1}" />
+								</c:when>
+								<c:when test="${item.type eq 3}">
+									<c:set var="type3" value="${type3 + 1}" />
+								</c:when>
+							</c:choose>
+						</c:forEach>
+
+						<div class="table chart-table">
+							<div id="piechart_3d" style="width: 650px; height: 300px;">
+								<script type="text/javascript">
 								var type = new Array();
 								type[0] = ${type0};
 								type[1] = ${type1};
@@ -624,31 +641,33 @@ nav.sidebar ul li.active a.expandable:hover {
 									console.log(data.wg[0].c[1].v); */
 								}
 							</script>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<br>
+				<br>
+				<br>
 
-			<!-- visit -->
-			<h6 class="title2">방문 통계</h6>
-			<button type="button" class="btn btn-outline-secondary btn-sm moreBtn2">자세히</button>
-			<div class="chart">
-				<div class="chart2 left">
-					<div class="table" id="t3">
-						<div id="chart_div1" style="width: 650px; height: 300px"></div>
-					</div>
-				</div>
-				<div class="chart2 left">
-					<div class="table" id="t4">
-						<div id="chart_div2" style="width: 650px; height: 300px"></div>
-						<div class="buttons" style="text-align: center">
-							<a href="#" class="previous round" id="prev">&#8249;</a> <a
-								href="#" class="next round" id="next">&#8250;</a>
+				<!-- visit -->
+				<h6 class="title2">방문 통계</h6>
+				<div class="chart">
+					<div class="chart2 left">
+						<button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(6);">자세히</button>
+						<div class="table chart-table" id="t3">
+							<div id="chart_div1" style="width: 650px; height: 300px"></div>
 						</div>
 					</div>
-				</div>
-				<script>
+					<div class="chart2 left">
+						<button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(7);">자세히</button>
+						<div class="table chart-table" id="t4">
+							<div id="chart_div2" style="width: 650px; height: 300px"></div>
+						</div>
+					</div>
+					<script>
 								var arr1 = [];
 								$(document).ready(function() {
 									// 값 초기화
@@ -832,58 +851,70 @@ nav.sidebar ul li.active a.expandable:hover {
 									chart2.draw(data, options);
 								}
 							</script>
-			</div>
-			<br>
+				</div>
+				<br>
+				<br>
 
-			<!-- voca -->
-			<h6 class="title2">단어장 통계</h6>
-			<button type="button" class="btn btn-outline-secondary btn-sm moreBtn2">자세히</button>
-			<div class="chart">
-				<div class="chart2 left"></div>
-				<div class="chart2 left"></div>
+				<!-- voca -->
+				<h6 class="title2">단어장 통계</h6>
+				<div class="chart">
+					<div class="chart2 left">
+						<button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(8);">자세히</button>
+					</div>
+					<div class="chart2 left">
+						<button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(9);">자세히</button>
+					</div>
+				</div>
 			</div>
-		
 			<script>
-				function goHomepage(value) {
+				function goHomePage(value) {
 	            	var url = "";
 	            	
 	            	switch(value) {
 	            	case 1:
 	            		url = "${ admin1 }";
 	            		break;
-	            	case 2:
+	            	case 2 :
 	            		url = "${ admin2 }";
 	            		break;
 	            	case 3:
-	            		url = "${ class1 }";
+	            		url = "${ class2 }";
 	            		break;
 	            	case 4:
-	            		url = "${ class2 }";
+	            		url = "${ class1 }";
 	            		break;
 	            	case 5:
 	            		url = "${ inquire }";
 	            		break;
 	            	case 6:
-	            		url = "${ visit1 }";
-	            		break;
-	            	case 7:
 	            		url = "${ visit2 }";
 	            		break;
-	            	case 8:
+	            	case 7:
 	            		url = "${ visit3 }";
+	            		break;
+	            	case 8:
+	            		url = "${ voca2 }";
 	            		break;
 	            	case 9:
 	            		url = "${ voca1 }";
-	            		break;
-	            	case 10:
-	            		url = "${ voca2 }";
+	            		break;	            		
+	            	default:
 	            		break;
 	            	}
-	            	
-	            	location.href = url;
+	            	console.log(url);
+	            	window.open(url, "_blank");           
 	            }
 			</script>
-		</div>
-	</section>
+		</section>
+
+		<div style="height: 30px;"></div>
+	</c:if>
+	<c:if test="${sessionScope.loginMember.mId ne 'admin'}">
+		<jsp:include page="../common/errorPage.jsp">
+	</c:if>
 </body>
 </html>

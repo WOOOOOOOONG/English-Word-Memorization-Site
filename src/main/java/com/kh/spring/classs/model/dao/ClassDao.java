@@ -109,6 +109,7 @@ public class ClassDao {
 
 	// 클래스 멤버 입력
 	public void insertClassMember(ClassMember cm) {
+		sqlSession.update("ClassMemberMapper.increaseCount",cm);
 		sqlSession.insert("ClassMemberMapper.insertClassMember",cm);
 		
 	}
@@ -186,6 +187,22 @@ public class ClassDao {
 	public String selectChangeName(String id) {
 		return sqlSession.selectOne("ClasssMapper.selectChangeName",id);
 
+	}
+
+	public ArrayList<ClassMember> selectMyClassList(String id) {
+		return (ArrayList)sqlSession.selectList("ClassMemberMapper.selectMyClassList",id);
+	}
+
+	// 클래스 번호에맞는 클래스하 나가져ㅑ옴
+	public Classs selectClassOne(String cNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ClasssMapper.selectClassOne",cNo);
+	}
+
+	// 셀렉트 전화번호
+	public String selectTell(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("ClasssMapper.selectTell",id);
 	}
 
 }

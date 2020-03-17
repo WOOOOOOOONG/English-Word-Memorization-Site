@@ -97,4 +97,13 @@ public interface ClassService {
 	
 	// 내 클래스 가져오기
 	ArrayList<Classs> getClassnVoca(String mId);
+
+	// 내 클래스 리스트 가져옴
+	ArrayList<ClassMember> selectMyClassList(String getmId);
+
+	// 클래스 번호에맞는 클래스 하나만 가져옴
+	Classs selectClassOne(String getcNo);
+
+	// 클래스 주인 전화번호
+	String selectTell(String ornerId);
 }
