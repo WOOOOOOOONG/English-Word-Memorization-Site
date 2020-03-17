@@ -18,13 +18,17 @@
 		SID_SEQ.nextval,#{mId},#{sTitle},#{startDate},#{endDate},#{refId},#{color}
 		)
 	</insert>
+	
 	<select id="selectScheduleList" parameterType="string" resultMap="scheduleResultSet">
 		select s.*, class_title from (select s.* from schedule s where mid = #{mId}) s,classs c where s.voca_id = c.class_no
 	</select>
+	
 	<delete id="deleteSchedule" parameterType="string">
 		delete from Schedule where SID=#{sId}
 	</delete>
+	
 	<select id="selectSchedule" parameterType="string" resultMap="scheduleResultSet">
 		select s.*,class_title from Schedule s,classs c where sid=#{sId} and s.voca_id = c.class_no
 	</select>
+	
 </mapper>

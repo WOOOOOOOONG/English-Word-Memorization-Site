@@ -102,7 +102,6 @@ public class ScheduleController {
 		// 일정변경
 		@RequestMapping("updateSchedule.do")
 		public void updateSchedule(Schedule sc,HttpServletResponse response) throws IOException {
-			
 			System.out.println(sc);
 			int result = 2;
 			if(result>0) {
