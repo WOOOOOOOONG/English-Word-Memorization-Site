@@ -114,8 +114,7 @@ type="text/css">
 								<c:if test="${ imgFlag2 }">
 									<th scope="row">
 										<img src="${ contextPath }/resources/profileimg/defaultimg.png" style="width:100%;">
-									</th>										
-									<c:set var="imgFlag2" value="false"/>
+									</th>
 								</c:if>
         							
 					                <td style="line-height:4;" id="id${ match }">${ tvList.get(j).id }</td>
