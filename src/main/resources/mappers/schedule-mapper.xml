@@ -31,4 +31,8 @@
 		select s.*,class_title from Schedule s,classs c where sid=#{sId} and s.voca_id = c.class_no
 	</select>
 	
+	<update id="updateSchedule" parameterType="Schedule">
+		update schedule set TITLE= #{sTitle},START_DATE=#{startDate},
+		END_DATE=#{endDate},VOCA_ID=#{refId},SCOLOR=#{color} where SID =#{sId}
+	</update>
 </mapper>

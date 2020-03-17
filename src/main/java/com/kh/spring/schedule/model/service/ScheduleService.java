@@ -28,5 +28,9 @@ public class ScheduleService {
 	public Schedule selectSchedule(String sId) {
 		return sDao.selectSchedule(sId);
 	}
+
+	public int updateSchedule(Schedule sc) {
+		return sDao.updateSchedule(sc);
+	}
 	
 }
