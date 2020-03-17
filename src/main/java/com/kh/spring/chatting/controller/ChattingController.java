@@ -30,9 +30,11 @@ public class ChattingController {
 	private MemberService mService;
 	@RequestMapping("chatuserimg.do")
 	public void getChatUserImg(String fId, Model model, HttpServletResponse response) throws IOException {
-		model.addAttribute("chatuser", mService.selectProfileImg(fId) );
+		String img = mService.selectProfileImg(fId);
+		System.out.println(img);
+		model.addAttribute("chatuser",  img);
 		PrintWriter out = response.getWriter();
-		out.print("success");
+		out.print(img);
 	}
 	
 	@RequestMapping(value = "chat.do", method = RequestMethod.POST)
@@ -85,7 +87,7 @@ public class ChattingController {
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		JSONObject send = new JSONObject();
-		chatleng +=1;
+		//chatleng +=1;
 		String file = mId + fId + "chatlog.txt";
 		ArrayList<Chatting> clist = new ArrayList<Chatting>();
 		String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;

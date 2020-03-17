@@ -102,8 +102,8 @@ public class ScheduleController {
 		// 일정변경
 		@RequestMapping("updateSchedule.do")
 		public void updateSchedule(Schedule sc,HttpServletResponse response) throws IOException {
-			System.out.println(sc);
-			int result = 2;
+		
+			int result = sService.updateSchedule(sc);
 			if(result>0) {
 				response.getWriter().print("good");
 			}else {

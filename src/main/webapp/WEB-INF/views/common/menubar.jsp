@@ -155,15 +155,19 @@ nav {
  	overflow:scroll;
  	overflow-x:hidden;
  	overflow-y:auto;
- 	background:whitesmoke;
- 	
+ 	background:white;
+ 	background-image: url( "resources/images/로딩.gif" );
+	background-repeat: no-repeat;
+	background-size: 50% 45% ;
+	background-position: center center;
  }
+
  #chatexit{
  	position:fixed;
  	height:30px;
  	bottom:319px;
  	width:280px;
- 	background:whitesmoke;
+ 	background:white;
  	boder-top:1px solid #e5e5e5;
  }
  #chatsend{
@@ -248,6 +252,7 @@ nav {
 	float:right;
 	font-size:0.8em;
 	margin-right:5px;
+	display:none;
 }
 .friendnav{
 	width:33.3%; height:100%; float:left; text-align:center;
@@ -299,11 +304,33 @@ nav {
 .accordion-panel > li:before {
 	content: "ㄴ";
 }
+.expandfr{
+	width:20px;
+	height:20px;
+	border:none;
+	background-image: url( "resources/images/dot.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.expandfr:focus{
+	outline:0px;
+}
+ a:hover { text-decoration: none;}
+
+
 </style>
 
 </head>
 
 <body>
+<c:if test="${ msg != null }">
+		<script>
+		$(function(){
+			alert('${msg}');
+		});
+			
+		</script>
+	</c:if>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="application"/>
 <c:set var="loginpage" value="login.me"/>
@@ -368,7 +395,7 @@ nav {
     
   </table>
   <br>
-	<div style="width:300px; height:30px;position:fixed; background:whitesmoke; bottom:0;" >
+	<div style="width:300px; height:30px;position:fixed; background:white; bottom:0;" >
     	 <textarea id="chatcontent" style="width:220px; height:30px; margin:0px; resize: none;">
     	 </textarea>
     	 <input id="chatsend" type="button" value="전송">
@@ -428,9 +455,10 @@ nav {
 		
 		<c:forEach var="fltwo" items="${ friendList }" varStatus="status">
 			<c:if test="${ groupList.get(i) == fltwo.groupName }">
-				<li style="height:35px;"><a class="myfriend" href="#">${fltwo.nickname }</a>     
+				<li style="height:25px; margin-bottom:5px;"><a class="myfriend" href="#">${fltwo.nickname }</a>     
 				<span style="float:right; margin-right:10px;">${fltwo.comment }</span>
 				<input type="text" style="display:none;"value="${fltwo.fId }">
+				<button class="expandfr"></button>
 				<br>
 				<a class="friendfunc" id="changecomment${status.count}" href="#">코멘트변경</a>
 				<a class="friendfunc" id="deletefriend${status.count}" href="#">친구삭제</a> 
@@ -448,6 +476,25 @@ nav {
 </ul>
 </div>
 </c:if>
+<!-- 친구기능 확장 -->
+<script>
+	$(function(){
+		$(document).on('click','.expandfr',function(){
+			var $li = $(this).parent();
+			if($li.children('.friendfunc').css("display") == "none"){
+				//$(this).parent().css("height","45px");
+				$li.height($li.height()).animate({height: "45px"}, 200);
+				$li.children('.friendfunc').css("display","block");	
+			}else{
+				$li.height($li.height()).animate({height: "25px"}, 200);
+				$li.children('.friendfunc').css("display","none");
+			}
+		
+			
+		});
+	});
+</script>
+
 <!-- 친구에 대한 설정 스크립트 -->
 <script>
 	$(function(){
@@ -460,8 +507,11 @@ nav {
 			if(id.includes("comment")){
 				var $comment= $($(this).parent().children()[1]);
 				// 코멘트변경
-				var c = prompt("코멘트를 입력해주세요",$comment.html());
-				if(c != null && c!= $comment.html()){
+				var c = prompt("코멘트를 입력해주세요 (6글자 이하)",$comment.html());
+				if(c.length >= 7){
+					alert("코멘트는 6글자 이하로 작성해주세요.");
+				}
+				if(c != null && c!= $comment.html()&& c.length <7){
 					$.ajax({
 				        url:"updateComment.do",
 				        data:{fId:fId,mId:mId,comment:c},
@@ -672,6 +722,7 @@ var chatId =null;
 $(function() {
 	// 로딩완료시 채팅입력창 초기화
 	$("#chatcontent").val("");
+	
 	// (Optional) Active an item if it has the class "is-active"	
 	$(".accordion > .accordion-item.is-active").children(".accordion-panel").slideDown();
 	$(document).on('click', '.accordion-thumb', function(){
@@ -700,11 +751,19 @@ $("#friendlisttoggle").click(function(){
 $(document).on('click', '.myfriend', function(){
 	$("#friendname").html($(this).html());
 	var fId = $(this).next().next().val();
-	$("#friendId").val(fId);
+	if($("#friendId").val() != fId){
+		$("#friendId").val(fId);
+		$("#chattable tbody").html("");
+		$("#chattable tbody").css("background-image","url( 'resources/images/로딩.gif' )");
+		$("#chattable tbody").css("background-repeat","no-repeat");
+		$("#chattable tbody").css("background-size","50% 45%");
+		$("#chattable tbody").css("background-position","center center");
+	}
+	
 	if($("#chatting").css("display")=="block"){
 		$("#chatting").css("display","none");
 		clearInterval(chatId);
-		$("#chattable tbody").html("");
+		
 	}else{
 	// 에이작스 연결하기
 		$.ajax({
@@ -712,21 +771,23 @@ $(document).on('click', '.myfriend', function(){
         data:{fId:fId},
         type:"post",
    		success:function(data){
-			
+   			console.log(data);
 		},error:function(e){
 			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 		}	
 	});	
+		
 	    chatId = setInterval(chatloggo, 2500);
 		
 	 // 에이작스로 채팅로그 불러온 후 
 		$("#chatting").css("display","block");
+	 
 	}
 });
 $(".close").click(function(){
 	$(this).parent().parent().css("display","none");
 	clearInterval(chatId);
-	$("#chattable tbody").html("");
+	//$("#chattable tbody").css("display","none");
 });
 $("#chatsend").click(function(){
 	var content = $("#chatcontent").val();
@@ -766,6 +827,7 @@ $("#chatsend").click(function(){
 	
 });
 	function chatloggo(){
+		
 		var fId = $("#friendId").val();
 		var mId = '${ loginMember.mId}';
 		var chatleng =$("#chatlength").html();
@@ -777,8 +839,11 @@ $("#chatsend").click(function(){
 	        dataType:"json",
 	        type:"post",
 	   		success:function(data){
+	   			
 				if(data.msg != "none"){
 					$tableBody.html("");
+					$tableBody.css("background","white");
+					
 				for(var i in data.clist){
 
 					if(data.clist[i].writerId == mId){
@@ -807,6 +872,7 @@ $("#chatsend").click(function(){
 					
 					$tableBody.append($tr);
 				}
+				
 				$("#chatlength").html(i);
 				
 	   			}
@@ -815,6 +881,7 @@ $("#chatsend").click(function(){
 				alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 			}
 		});
+		
 	} 
 	
 

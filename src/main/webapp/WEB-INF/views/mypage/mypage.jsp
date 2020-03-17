@@ -42,7 +42,7 @@ body {
   cursor: pointer;
 }
 .mypagecontent{
-   height:750px;
+   height:730px;
    margin-left:25%;
    margin-top:50px;
    width:700px;
@@ -133,7 +133,7 @@ body {
 .header {
   height: 50px;
   width: 100%;
-  background: rgb(95, 236, 59);
+  background: rgb(209, 158, 231);
   text-align: center;
   position:relative;
   z-index: 100;
@@ -221,7 +221,7 @@ body {
   text-align: center;
   vertical-align: top;
   cursor: pointer;
-  background: rgb(126, 224, 87);
+  background: rgb(217, 169, 238);
   position: relative;
   z-index: 100;
 }
@@ -282,7 +282,7 @@ body {
   position: relative;
   width: 100%;
   height: 80px;
-  background: rgb(182, 245, 146);
+  background: rgb(224, 180, 243);
   
 }
 
@@ -369,10 +369,10 @@ body {
 .legend {
   position: absolute;
   width: 100%;
-  
-  background: rgb(196, 219, 196);
+  <!-- 버전1  background: rgb(230, 193, 247);-->
+  backgroubd : rgb(184, 138, 203);
   line-height: 30px;
-  bottom:10%
+  bottom:5%;
 }
 
 .entry {
@@ -711,7 +711,7 @@ body {
 			<div>
 				<a href="classPorm.do" id="createBtn" class="createBtn">Creat Class</a>
 			</div>
-			<div style="overflow:scroll; width:100%; height:650px; padding:10px;">
+			<div style=" width:98%; height:630px; padding:10px;">
 				<c:choose>
 					<c:when test="${ !empty cList }">
 						<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
@@ -813,7 +813,7 @@ body {
 	        </script>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" id="closesc" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 	        <button type="button" id="insertsc" class="btn btn-primary">추가</button>
 	        <button type="button" id="updatesc" class="btn btn-primary" style="display:none;">변경</button>
 	      </div>
@@ -1075,7 +1075,6 @@ body {
                     }, []);
 
                     todaysEvents.forEach(function (ev) {
-
                         var evSpan = createElement('span');
                         evSpan.style.background=ev.color;
                         element.appendChild(evSpan);
@@ -1390,9 +1389,12 @@ body {
     		        	startDate:startDate,endDate:endDate,color:color},
     		        type:"post",
     		   		success:function(data){
-    		   			$("#closesc").click();
-    		   			$("#calendar").html("");	
-    		   			scdraw();
+    		   			
+    		   			if(data=="good"){
+	    		   			$(".changescbtn").click();
+	    		   			$("#calendar").html("");	
+	    		   			scdraw();
+    		   			}
     				},error:function(e){
     					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
     				}
@@ -1438,9 +1440,12 @@ body {
     		        	startDate:startDate,endDate:endDate,color:color},
     		        type:"post",
     		   		success:function(data){
-    		   			$("#closesc").click();
-    		   			$("#calendar").html("");	
-    		   			scdraw();
+    		   			if(data=="good"){
+    		   				$(".scbtn").click();
+        		   			$("#calendar").html("");	
+        		   			scdraw();
+    		   			}
+    		   			
     				},error:function(e){
     					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
     				}

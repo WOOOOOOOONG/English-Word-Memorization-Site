@@ -28,5 +28,9 @@ public class ScheduleDao {
 	public Schedule selectSchedule(String sId) {
 		return sqlSession.selectOne("scheduleMapper.selectSchedule",sId);
 	}
+
+	public int updateSchedule(Schedule sc) {
+		return sqlSession.update("scheduleMapper.updateSchedule",sc);
+	}
 	
 }
