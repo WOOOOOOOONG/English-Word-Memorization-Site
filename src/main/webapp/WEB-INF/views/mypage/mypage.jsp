@@ -126,7 +126,7 @@ body {
   transform: translate3d(0, 0, 0);
   width: 90%;
   margin: 3% auto;
-  height: 90%;
+ height:100%;
   
 }
 
@@ -269,10 +269,14 @@ body {
   margin: 0 1px;
 }
 
-.blue { background: rgba(156, 202, 235, 1); }
-.orange { background: rgba(247, 167, 0, 1); }
-.green { background: rgba(153, 198, 109, 1); }
-.yellow { background: rgba(249, 233, 0, 1); }
+.red { background: red; }
+.orange { background: orange; }
+.yellow { background: yellow; }
+.green { background: green; }
+.blue { background: blue; }
+.purple{background:purple;}
+.white{background:white;}
+.black{background:black;}
 
 .details {
   position: relative;
@@ -363,10 +367,9 @@ body {
 }
 
 .legend {
-  
   position: absolute;
   width: 100%;
-  height: 30px;
+  
   background: rgb(196, 219, 196);
   line-height: 30px;
   bottom:10%
@@ -389,12 +392,14 @@ body {
   top: 12px;
   left: 14px;
 }
-
-.entry.blue:after { background: rgba(156, 202, 235, 1); }
-.entry.orange:after { background: rgba(247, 167, 0, 1); }
-.entry.green:after { background: rgba(153, 198, 109, 1); }
-.entry.yellow:after { background: rgba(249, 233, 0, 1); }
-
+.entry.red:after { background: red; }
+.entry.orange:after { background: orange; }
+.entry.yellow:after { background: yellow; }
+.entry.green:after { background: green; }
+.entry.blue:after { background: blue; }
+.entry.purple:after{background:purple;}
+.entry.white:after {background:white;}
+.entry.black:after{background:black;}
 /* Animations are cool!  */
 @-webkit-keyframes moveFromTopFade {
   from { opacity: .3; height:0px; margin-top:0px; -webkit-transform: translateY(-100%); }
@@ -502,6 +507,44 @@ body {
     /* bug fix - no overlay */    
     display: none;    
 }
+
+.modal-body > .form-control{
+	width:48%;
+	float:left;
+	text-align:center;
+}
+.modal-body > label{
+	width:20%;
+	float:left;
+	line-height: 35px;
+    font-size: 1.1em;
+    margin-right:10px;
+    margin-left:16%;
+}
+.modal-content{
+	background:whitesmoke;
+}
+.changescbtn{
+	background-image: url( "resources/images/변경.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+	width:22px;
+	height:22px; 
+	float:right;
+	margin-right:20px;
+	display:none;
+}
+.deletescbtn{
+	background-image: url( "resources/images/삭제.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+	width:22px;
+	height:22px; 
+	float:right;
+	margin-right:100px;
+	display:none;
+}
+
 .createBtn{
 	text-decoration:none; 
 	color:red; 
@@ -514,7 +557,6 @@ body {
 	transition: 0.2s ease-in-out;
 }
 
-
 </style>
 </head>
 
@@ -522,7 +564,7 @@ body {
 	<jsp:include page="../classs/fontStore.jsp"/>
     <script>
         window.onload = function () {
-
+        	scdraw();
             var img = document.getElementById("myphoto");
             if (img.getAttribute("src") == null) {
                 img.style.width = '100%';
@@ -718,7 +760,7 @@ body {
 
     <!-- 단어장 리스트 페이지 -->
     <div id="dancontent" class="mypagecontent" style="background:rgba(243, 156, 17)">
-	<button class="btn btn-light">햐</button>
+	<button class="btn btn-info">햐</button>
 
     </div>
 
@@ -740,42 +782,45 @@ body {
 	        </button>
 	      </div>
 	      <div class="modal-body" style="text-align:center;">
-	      	<input id="selectedyear" type="text" style="display:none;" > 
-	        <input id="selectedday" type="date"> ~ <input id="selectedday2" type="date" >
+	      	<input id="selectedyear" class="form-control" type="text" style="display:none;" > 
+	        <input id="selectedday"class="form-control" type="date"> <span style="float:left; font-size:1.5em;"> ~ </span>
+	        <input class="form-control" id="selectedday2" type="date" >
 	        <br><br>
-	        <input type="text" value="참조할 단어장">
-	        <select id="ref" style="width:150px;">
-	        	<!-- <option	value="단어장">어느 단어장</option>
-	        	<option	value="단어장3">어느 단어장2</option>
-	        	<option	value="단어장4">어느 단어장2</option> -->
+	        <label for="refselect">참조 항목 :</label>
+	        <select id="refselect" class="form-control">    	
+	        </select><br><br>
+	        <label for="scTitle">일정 내용 :</label>
+	        <input class="form-control" type="text" id="scTitle">
+	       	<br><br>
+	        <label>일정 색깔 :</label> 
+	        <select id="sccolor" class="form-control" style="background:red;">
+				<option value="red" style="background:red;" selected></option>        	
+				<option value="orange" style="background:orange;"></option>
+				<option value="yellow" style="background:yellow;"></option>
+				<option value="green" style="background:green;"></option>
+				<option value="blue" style="background:blue;"></option>
+				<option value="purple" style="background:purple;"></option>
+				<option value="white" style="background:white;"></option>
+				<option value="black" style="background:black;"></option>
 	        </select>
+	        <script>
+	        	$(function(){
+	        		$("#sccolor").change(function(){
+	        			$(this).css("background",$(this).val());
+	        		});
+	        	});
+	        	
+	        </script>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	        <button type="button" class="btn btn-primary">추가</button>
+	        <button type="button" id="closesc" class="btn btn-secondary" data-dismiss="modal">취소</button>
+	        <button type="button" id="insertsc" class="btn btn-primary">추가</button>
+	        <button type="button" id="updatesc" class="btn btn-primary" style="display:none;">변경</button>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-    <!-- 일정추가 스크립트 -->
-    <script>
-    	function scbtnclick(){
-    		var mId = '${loginMember.mId}';
-    		$.ajax({
-		        url:"getClassnVoca.ck",
-		        data:{mId:mId},
-		        type:"post",
-		   		success:function(data){
-		   			
-				},error:function(e){
-					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-				}
-				
-			});	
-    		
-    		
-    	}
-    </script>
+    
     
     
     <!-- 정보 수정 페이지 -->
@@ -876,12 +921,12 @@ body {
                     }, 500);
                 }
             }
-
+            
+			// 캘린더 그리기 시작
             Calendar.prototype.draw = function () {
-                //Create Header
+				
                 this.drawHeader();
 
-                //Draw Month
                 this.drawMonth();
 
                 this.drawLegend();
@@ -1031,7 +1076,8 @@ body {
 
                     todaysEvents.forEach(function (ev) {
 
-                        var evSpan = createElement('span', ev.color);
+                        var evSpan = createElement('span');
+                        evSpan.style.background=ev.color;
                         element.appendChild(evSpan);
                     });
                 }
@@ -1108,14 +1154,26 @@ body {
                 //Remove any events in the current details element
                 var currentWrapper = ele.querySelector('.events');
                 var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
-
+				
                 events.forEach(function (ev) {
                     var div = createElement('div', 'event');
+                    //div.setAttribute("id",ev.refId);
+                    //div.setAttribute("onclick",'myeventclick(\''+ev.refId+'\')');
+                    //div.setAttribute("onclick",'myeventclick('+div+')');
                     var square = createElement('div', 'event-category ' + ev.color);
                     var span = createElement('span', '', ev.eventName);
-
+					var input = createElement('input');
+					input.value = ev.sId;
+					input.style.display = "none";
+					var btn1 = createElement("button",'changescbtn');
+	                btn1.setAttribute('data-toggle', 'modal');
+	                btn1.setAttribute('data-target', '#scModal');
+					var btn2 = createElement("button",'deletescbtn');
                     div.appendChild(square);
                     div.appendChild(span);
+                    div.appendChild(input);
+                    div.appendChild(btn2);
+                    div.appendChild(btn1);
                     wrapper.appendChild(div);
                 });
 
@@ -1176,7 +1234,8 @@ body {
                     var parts = e.split('|');
 
                     if (parts[2] - clone.format("MM") == 0) {
-                        var entry = createElement('span', 'entry ' + parts[1], parts[0]);
+                        var entry = createElement('span', 'entry '+ parts[1], parts[0]);
+                        
                         legend.appendChild(entry);
                     }
 
@@ -1210,26 +1269,185 @@ body {
             }
         }();
 
-        !function () {
-            var data = [
-                { eventName: '수능영어 외우기', calendar: '수능영단어100', color: 'orange', cday: 28, cmonth: 03 },
-                { eventName: '클래스에 참석하기', calendar: '실전회화클래스', color: 'blue', cday: 27, cmonth: 03 },
-                { eventName: '클래스에 참석하기', calendar: '실전회화클래스', color: 'blue', cday: 27, cmonth: 03 }
-                , { eventName: '클래스에 참석하기', calendar: '실전회화클래스', color: 'blue', cday: 27, cmonth: 03 }
-
-            ];
-
-
-
+        function scdraw() {
+        	var mId= '${loginMember.mId}';
+        	$.ajax({
+		        url:"mySchedule.ck",
+		        data:{mId:mId},
+		        dataType:"json",
+		        type:"post",
+		   		success:function(data){	
+		   			var calendar = new Calendar('#calendar', data);
+				},error:function(e){
+					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+				}
+				
+			});	
+  				/* 
             function addDate(ev) {
 
-            }
+            } */
 
-            var calendar = new Calendar('#calendar', data);
-
-        }();
+        };
 
 
+    </script>
+   <!-- 일정추가 스크립트 -->
+    <script>
+    	function scbtnclick(){
+    		$("#exampleModalLabel").html("일정 추가");
+    		$("#updatesc").css("display","none");
+			$("#insertsc").css("display","block");
+    		var mId = '${loginMember.mId}';
+    		$("#refselect").html("");
+    		$("#scTitle").val("");
+    		$("#selectedday2").val($("#selectedday").val());
+    		$.ajax({
+		        url:"getClassnVoca.ck",
+		        data:{mId:mId},
+		        type:"post",
+		   		success:function(data){
+		   			for(var i in data){
+		   				var $op = $(" <option value='"+data[i].class_no+"'>");
+			   			$op.html(data[i].class_title);
+			   			$("#refselect").append($op);
+		   			}
+				},error:function(e){
+					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+				}
+				
+			});	
+    	}
+    	// 일정 변경 / 삭제 버튼
+		var sId = 0;
+    	function changescbtnclick(e){
+    		 sId = $(e.target).parent().children()[2].value;
+    		 if($(e.target).attr("class")=="deletescbtn"){
+    			// 일정 삭제
+    			if(confirm("일정을 삭제하시겠습니까?")){
+	    			$.ajax({
+	    		        url:"deleteSchedule.do",
+	    		        data:{sId:sId},
+	    		        type:"post",
+	    		   		success:function(data){
+	    		   			$("#calendar").html("");	
+	    		   		   	scdraw();
+	    				},error:function(e){
+	    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+	    				}
+	    				
+	    			});
+    			}
+    		}else{
+				$("#updatesc").css("display","block");
+				$("#insertsc").css("display","none");
+    			$("#exampleModalLabel").html("일정 변경");
+    			
+    			$("#refselect").html("");
+    			$.ajax({
+    		        url:"getSchedule.do",
+    		        data:{sId:sId},
+    		        dataType: "json",
+    		        type:"post",
+    		   		success:function(data){
+    		   			$("#selectedday").val(data.startDate);
+    		   			$("#selectedday2").val(data.endDate);
+    		   			$("#scTitle").val(data.sTitle);
+    		   			var $op = $(" <option value='"+data.refId+"'>");
+			   			$op.html(data.refName);
+			   			$("#refselect").append($op);
+			   			
+			   			for(var i=0; i<$("#sccolor").children().length; i++){
+			   				
+			   				 if($("#sccolor").children()[i].value == data.color){
+			   					$("#sccolor").children()[i].setAttribute("selected", "selected");
+			   					$("#sccolor").css("background",data.color);
+			   				} 
+			   			}
+    		   			
+    		   			//$("#calendar").html("");	
+    		   		    //scdraw();
+    				},error:function(e){
+    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+    				}
+    				
+    			});
+    			
+    		} 
+    	}
+    	
+    	$(function(){
+    		$(document).on('click', '#updatesc', function(){
+    			var refId = $("#refselect").val();
+    			var mId = '${loginMember.mId}';
+    			var sTitle = $("#scTitle").val();
+    			var startDate = $("#selectedday").val();
+    			var endDate = $("#selectedday2").val();
+    			var color = $("#sccolor").val(); 
+    			$.ajax({
+    		        url:"updateSchedule.do",
+    		        data:{sId:sId,mId:mId,refId:refId,sTitle:sTitle,
+    		        	startDate:startDate,endDate:endDate,color:color},
+    		        type:"post",
+    		   		success:function(data){
+    		   			$("#closesc").click();
+    		   			$("#calendar").html("");	
+    		   			scdraw();
+    				},error:function(e){
+    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+    				}
+    				
+    			});	
+    			
+    		});
+
+    		
+    	
+    		// 일정 기능 보이고 안보이고
+    		$(document).on('click', '.event', function(e){
+    			if($(e.target).attr("class") == "deletescbtn" ||$(e.target).attr("class") == "changescbtn"){
+    				changescbtnclick(e);
+    				return 0;
+    			}
+    			var $et = null;
+    			if($(e.target).attr("class") != 'event'){
+    				$et = $(e.target).parent();
+    			}else{
+    				$et = $(e.target);
+    			}	
+    			if(	$et.children(".deletescbtn").css("display") =="none"){
+    				$et.children(".changescbtn").css("display","block");
+    				$et.children(".deletescbtn").css("display","block");
+    			}else{
+    				$et.children(".changescbtn").css("display","none");
+    				$et.children(".deletescbtn").css("display","none");
+    			}
+    		});
+    		
+    		
+    		$("#insertsc").click(function(){
+    			var refId = $("#refselect").val();
+    			var mId = '${loginMember.mId}';
+    			var sTitle = $("#scTitle").val();
+    			var startDate = $("#selectedday").val();
+    			var endDate = $("#selectedday2").val();
+    			var color = $("#sccolor").val(); 
+    			$.ajax({
+    		        url:"insertSchedule.do",
+    		        data:{mId:mId,refId:refId,sTitle:sTitle,
+    		        	startDate:startDate,endDate:endDate,color:color},
+    		        type:"post",
+    		   		success:function(data){
+    		   			$("#closesc").click();
+    		   			$("#calendar").html("");	
+    		   			scdraw();
+    				},error:function(e){
+    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+    				}
+    				
+    			});	
+    		});
+    	});
     </script>
 </body>
 
