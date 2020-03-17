@@ -128,7 +128,7 @@
 	                                        <dt style="color:#787878; width: 55px;">지역:</dt>
 	                                        <dd style="display: inline-block; width:155px;">${ classs.local }</dd>
 	
-	                                        <dt style="width:55px; color:#787878;">인원:</dt>
+	                                        <dt style="width:55px; color:#787878;">정원:</dt>
 	                                        <dd style="width:145px; display: inline-block;">${ classs.memberCount } 명</dd>
 	                                        
 	                                        <dt style="color:#787878; width: 55px;">일정:</dt>
