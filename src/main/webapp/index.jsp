@@ -8,6 +8,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet"
+   href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+   crossorigin="anonymous">
+   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>SEW</title>
     <style>
         /* 전체 틀 */
@@ -59,7 +68,7 @@
             border-radius: 0 20px 20px 0;
             top: 75%;
             right: -5vw;
-        }  */
+        }   */
         #tab2 {
             width: 90vw;
             background: #723147;
@@ -190,8 +199,9 @@
         #tab0 .container {
         max-width: 600px;
         margin: 0 auto;
+        margin-top: -40px;
         padding: 80px 0;
-        height: 400px;
+        height: 500px;
         text-align: center;
         }
         #tab0 .container h1 {
@@ -367,34 +377,34 @@
 
         /* tab1 */
         .tab1-img {
-            width: 35vw;
+            width: 50vw;
             height: 60vh;
             margin-top: 7vh;
         }
 
         /* tab3 */
         .tab1-img1 {
-            width: 35vw;
+            width: 50vw;
             height: 60vh;
             margin-top: 7vh;
         }
 
         /* tab2 */
         .tab2-img {
-            width: 35vw;
+            width: 50vw;
             height: 60vh;
             margin-top: 7vh;
         }
 
         /* tab3 */
         .tab3-img1 {
-            width: 35vw;
+            width: 50vw;
             height: 60vh;
             margin-top: 7vh;
         }
 
         .tab3-img2 {
-            width: 35vw;
+            width: 50vw;
             height: 60vh;
             margin-top: 7vh;
         }
@@ -413,59 +423,103 @@
             padding: 0;
             font-family: exo, sans-serif;
         }
+        
+        .logintest {
+		   opacity: 1;
+		}
     </style>
 </head>
 <body>
+	<c:set var="contextPath" value="${pageContext.request.contextPath}"
+   scope="application"/>
     <div id="tab0">
         <div class="wrapper wra0">
             <div class="container">
-                <h1>Welcome</h1>
+                <h1>시작하세요!</h1>
     
-                <form class="form">
-                    <input type="text" placeholder="Username">
-                    <input type="password" placeholder="Password">
-                    <button type="submit" id="login-button">Login</button>
-                    <p><a href="viewMain.ad">다음에 할게요</a></p>
-                </form>
+                <form id="loginform" class="form" method="post" 
+               action='${contextPath}/Memberlogin.me'>
+               <input type="text" name="loginmId" placeholder="Username"> 
+               <input type="password" name="loginpwd" placeholder="Password">
+               <button type="submit" id="login-button" style="margin-bottom: -15px;">Login</button>
+               <br><br><p><a href="login.me" style="margin-bottom: -15px;">회원가입</a>
+               <br><a href="viewMain.ad">다음에 할게요</a>
+               </p>
+               
+            </form>
             </div>
+            <ul class="bg-bubbles">
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+               <li></li>
+              </ul>
         </div>
         <script>
-            $("#login-button").click(function (event) {
-                event.preventDefault();
-
-                $('form').fadeOut(500);
-                $('.wrapper').addClass('form-success');
-            });
-        </script>
+      $(function(){
+         $("#loginform > input").focus(function(){
+            $(".tab ~ div").css("transform"," translateX(-80vw)");
+            $("#tab0 ~ div").css("transform"," translateX(-80vw)");
+            $("#tab1 ~ div").css("transform"," translateX(-80vw)");
+            $("#tab2 ~ div").css("transform"," translateX(-80vw)");
+            $("#tab3 ~ div").css("transform"," translateX(-80vw)");
+            $("#tab4 ~ div").css("transform"," translateX(-80vw)");
+            $(".sidemenu").css('pointer-events','none');
+            $(".wrapper").addClass("logintest");
+         });
+          $("#loginform > input").focusout(function(){
+             $(".tab ~ div").css("transform","");
+             $("#tab0 ~ div").css("transform","");
+             $("#tab1 ~ div").css("transform","");
+             $("#tab2 ~ div").css("transform","");
+             $("#tab3 ~ div").css("transform","");
+             $("#tab4 ~ div").css("transform","");
+            $(".sidemenu").css('pointer-events','');
+            $(".wrapper").removeClass("logintest");
+            
+         }); 
+      });
+   </script>
     </div>
 
     <div id="tab1">
-        <img src="img/3.PNG" class="img-base tab1-img"><!-- 클래스와 시험 사진 -->
+        <img src="resources/images/시험.jpg" class="img-base tab1-img"><!-- 클래스와 시험 사진 -->
         <div class="wrapper wra1">
             <div class="message msg1">
-                <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
-                <p>저희 '외웟' 홈페이지에서는 자신의 단어장을 만들고, 그로 인해 재밌는 게임으로 공부를 할 수 있으며, 클래스를 꾸려 함께 공부할 수 있게 해놓았습니다.</p>
+                <h1>틈틈히 자신이 외운 영단어를 시험해보세요!</h1>    
+                <p>매일 암기만 하는 것은 효율적인 학습 방법이 아닙니다. 인풋(input)과 아웃풋(output)의 비율을 3:7로 유지하여 공부하는 것이 바람직하다고 합니다.<br>
+                	영단어 암기의 꽃은 '외운 단어 테스트'입니다. 바로 자신의 실력을 확인하세요!</p>
             </div>
         </div>
     </div>
 
     <div id="tab2">
-        <img src="img/2-2.PNG" class="img-base tab2-img"><!-- 단어 활용 게임 사진 -->
+        <img src="resources/images/클래스.jpg" class="img-base tab2-img"><!-- 단어 활용 게임 사진 -->
         <div class="wrapper wra2">
             <div class="message">
-                <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
-                <p>저희 '외웟' 홈페이지에서는 자신의 단어장을 만들고, 그로 인해 재밌는 게임으로 공부를 할 수 있으며, 클래스를 꾸려 함께 공부할 수 있게 해놓았습니다.</p>
+                <h1>더이상 혼자 지루하게 공부하지 마세요!</h1>    
+                <p>일반적으로 혼자 공부하는 것보다 같은 목표를 가진 사람들과 협동하여 재밌게 공부하는게 더 성공 확률이 높다는 것을 알고 계신가요?<br>
+                	우리 홈페이지에서는 함께 공부하실 수 있도록 스터디를 만들어 클래스 멤버들과 함께 목표를 달성할 수 있는 기능이 있답니다!</p>
             </div>
         </div>
     </div>
 
     <div id="tab3">
         <!-- <img src="img/1.PNG" alt="" class="img-base tab3-img1"> -->
-        <img src="img/2-1.PNG" class="img-base tab3-img2"><!-- 단어 추가 사진 -->
+        <img src="resources/images/단어추가.png" class="img-base tab3-img2"><!-- 단어 추가 사진 -->
         <div class="wrapper wra3">
             <div class="message">
-                <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
-                <p>저희 '외웟' 홈페이지에서는 자신의 단어장을 만들고, 그로 인해 재밌는 게임으로 공부를 할 수 있으며, 클래스를 꾸려 함께 공부할 수 있게 해놓았습니다.</p>
+                <h1>자신만의 영어 단어장을 만들고, 공부하세요!</h1>    
+                <p>
+                	각자 외우고 싶거나, 외워야 할 영단어의 목록이 다르실 겁니다.<br>
+                	자신에게 필요한 영단어만 추가해 공부를 더 효율적으로 하세요!
+                </p>
             </div>
         </div>
     </div>
@@ -479,10 +533,9 @@
 
         <div class="wrapper wra4">
        		<c:url var="admin2" value="selectInquireList.ad"/>
-			<button onclick="location.href='${ admin2 }'">문의사항</button>
             <div class="message">
                 <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
-                <p>저희 '외웟' 홈페이지에서는 자신의 단어장을 만들고, 그로 인해 재밌는 게임으로 공부를 할 수 있으며, 클래스를 꾸려 함께 공부할 수 있게 해놓았습니다.</p>
+                <p>저희 '외웟' 홈페이지에서는 자신의 단어장을 만들고, 단어를 쉽게 외우게 하기 위한 재밌는 게임으로 공부를 할 수 있으며, 클래스를 꾸려 함께 공부할 수 있는 홈페이지입니다.</p>
             </div>
         </div>
     </div>

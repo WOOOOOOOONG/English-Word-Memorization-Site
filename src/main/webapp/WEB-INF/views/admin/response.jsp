@@ -38,7 +38,6 @@
 <body>
 	<%-- <c:if test="${sessionScope.loginMember.mId eq 'admin'}"> --%>
 		<jsp:include page="../common/left-menubar.jsp" />
-	
 		<form action="response.ad" method="POST">
 			<div class="table">
 				<table id="table_id" class="display">

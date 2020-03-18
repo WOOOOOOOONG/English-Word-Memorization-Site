@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.spring.friend.model.vo.Friend" alias="Friend"/>
 		<typeAlias type="com.kh.spring.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.spring.board.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.spring.board.model.vo.Search" alias="Search"/>
 	</typeAliases>
 	
 	<mappers>

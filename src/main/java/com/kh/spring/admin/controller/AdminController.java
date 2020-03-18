@@ -1,13 +1,10 @@
 package com.kh.spring.admin.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -54,18 +51,25 @@ public class AdminController {
 	}
 	
 	@RequestMapping("memberInquireList.ad")
-	public ModelAndView memberInquireList(ModelAndView mv, String inquirerId) {
-		ArrayList<Inquire> inqList = aService.selectMemberInquireList(inquirerId);
+	public ModelAndView memberInquireList(
+			ModelAndView mv,
+			HttpServletRequest request) {
+		mv.addObject("msg", "문의가 성공적으로 등록되었습니다");
+			
+		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
+		System.out.println(loginMember);
+		ArrayList<Inquire> inqList = aService.selectMemberInquireList(loginMember.getmId());
 		
-		if(inqList != null) {
+		if(!inqList.isEmpty()) {
 			mv.addObject("mInquireList", inqList);
 		}
-		mv.setViewName("/admin/inquire-list");
+		
+		mv.setViewName("admin/inquire-list");
 		return mv;
 	}
 	
 	@RequestMapping("insertInquireView.ad")
-	public String insertInquireView() {		
+	public String insertInquireView() {	
 		return "admin/inquire";
 	}
 	

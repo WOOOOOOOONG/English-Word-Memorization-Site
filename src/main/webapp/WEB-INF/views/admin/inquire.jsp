@@ -24,7 +24,24 @@
 	width: 1300px;
 	margin: 0 auto;
 	margin-top: 50px;
-}}
+}
+
+.pTag {
+	 float: left;
+	 font-weight: bold;
+	 margin-top: 5px;
+	 margin-left: 30px;
+	 margin-right: 5px;
+}
+
+.textInput {
+	font-weight: bold;
+	float: left;
+	margin-top: 4px;
+	width: 100px;
+	height: 30px;
+	border-radius: 3px;
+}
 </style>
 </head>
 
@@ -64,13 +81,14 @@
 									<div class="form-group field-job-tipe">
 										<label for="job-tipe" class="control-label col-md-2"
 											style="font-weight: bold; float: left; width: 100px; margin-top: 5px;">유형</label>
-										<div class="col-md-10">
-											<select name="type" class="form-control" id="job-tipe" style="width:100px;"
-												name="type">
-												<option value="0">계정</option>
+										<div class="col-md-10" id="typeDiv">
+											<select name="type" class="form-control" id="job-tipe" style="width:100px;">
+												<option value="0" selected>계정</option>
 												<option value="1">시스템</option>
 												<option value="2">사용자</option>
-												<option value="3">기타</option>
+												<option value="3">단어장</option>
+												<option value="4">클래스</option>
+												<option value="5">기타</option>
 											</select>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
@@ -78,6 +96,47 @@
 											<div class="help-block"></div>
 										</div>
 									</div>
+									<script>
+										var type = document.getElementById("job-tipe");
+										if(type.addEventListener('change', function() {
+											var $typeDiv = $("#typeDiv");
+											switch(type.value) {
+											case "2":
+												$typeDiv.children('input').remove();
+												$typeDiv.children('p').remove();
+												type.style.float = "left";
+												var $str = $("<p class='pTag'>신고할 유저명 </p>");
+												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");
+												$typeDiv.append($str);
+												$typeDiv.append($textInput);
+												break;
+											case "3":
+												$typeDiv.children('input').remove();
+												$typeDiv.children('p').remove();
+												type.style.float = "left";
+												var $str = $("<p class='pTag'>신고할 게시글 번호 </p>");
+												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");
+												var $typeDiv = $("#typeDiv");
+												$typeDiv.append($str);
+												$typeDiv.append($textInput);
+												break;
+											case "4":
+												$typeDiv.children('input').remove();
+												$typeDiv.children('p').remove();
+												type.style.float = "left";
+												var $str = $("<p class='pTag'>신고할 클래스 번호 </p>");
+												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");
+												var $typeDiv = $("#typeDiv");
+												$typeDiv.append($str);
+												$typeDiv.append($textInput);
+												break;
+											default:
+												$typeDiv.children('input').remove();
+												$typeDiv.children('p').remove();
+												break;
+											}
+										}));
+									</script>
 								</div>
 							</div>
 							<div class="row">
@@ -149,6 +208,7 @@
 
 				var content = $("#saveText");
 				content.html("<input type='text' name='content' value='" + text + "'/>");
+				
 			};
 			
 			function cancel() {

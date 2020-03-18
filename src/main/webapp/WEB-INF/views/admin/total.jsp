@@ -913,8 +913,13 @@ nav.sidebar ul li.active a.expandable:hover {
 
 		<div style="height: 30px;"></div>
 	</c:if>
+	
 	<c:if test="${sessionScope.loginMember.mId ne 'admin'}">
-		<jsp:include page="../common/errorPage.jsp">
+		<script>
+			window.onload = function() {
+				location.href="viewMain.ad";
+			}
+		</script>
 	</c:if>
 </body>
 </html>

@@ -152,6 +152,13 @@
 			</thead>
 			<tbody>
 				<c:set var="i" value="1"/>
+				<c:if test="${empty boardList}">
+					<tr>
+						<td colspan="6">
+						<h6>등록된 게시글이 존재하지 않습니다.</h6>
+						</td>
+					</tr>
+				</c:if>
 				<c:if test="${!empty boardList}">
 					<c:forEach var="item" items="${boardList}">
 						<c:url var="selectedBoard" value="detailBoard.bo">
@@ -189,14 +196,36 @@
 		</table>
 		
 		<div class="search">
-			<select>
-				<option value="1" selected>공지</option>
-				<option value="2" selected>단어장</option>
-				<option value="3" selected>클래스</option>
-				<option value="3" selected>잡담</option>
-			</select>
-			<input class="searchData" type="text">
-			<button type="button" class="btn btn-light">검색</button>
+			<form action="searchBoard.bo" method="GET">
+				<select name="searchCondition">
+					<c:choose>
+						<c:when test="${ empty search.searchCondition }">
+							<c:set var="selected0" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 1 }">
+							<c:set var="selected1" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 2 }">
+							<c:set var="selected2" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 3 }">
+							<c:set var="selected3" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 4 }">
+							<c:set var="selected4" value="selected"/>
+						</c:when>
+					</c:choose>
+					<option value="0" ${selected0}>전체</option>
+					<option value="1" ${selected1}>제목</option>
+					<option value="2" ${selected2}>글쓴이</option>
+					<option value="3" ${selected3}>타입</option>
+				</select>
+				<input type="search" name="searchContent" class="searchData" value="${search.searchContent}">
+				<button class="btn btn-light">검색</button>
+				<script>
+					
+				</script>
+			</form>
 		</div>
 		
 		<!-- paging -->
