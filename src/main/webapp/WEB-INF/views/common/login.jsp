@@ -75,7 +75,7 @@ body :-ms-input-placeholder {
 	background: -webkit-linear-gradient(top left, #3ac569 0%, #cff0da 100%);
 	background: -moz-linear-gradient(top left, #3ac569 0%, #cff0da 100%);
 	background: -o-linear-gradient(top left, #3ac569 0%, #cff0da 100%);
-	background: linear-gradient(to bottom right, #3ac569 0%, #cff0da 100%);
+	background: linear-gradient(to top right, #3ac569 0%, #cff0da 100%);
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -357,14 +357,7 @@ div>button {
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	<c:if test="${ msg != null }">
-		<script>
-		$(function(){
-			alert('${msg}');
-		});
-			
-		</script>
-	</c:if>
+	
 	<div class="wrapper">
 		<div class="container">
 			<h1 style="color: white;">Welcome</h1>
@@ -929,9 +922,7 @@ $(function(){
 		</div>
 	</div>
 	<script>
-        /* $("#login-button").click(function (event) {
-            event.preventDefault();
-        }); */
+        
         $(function() {
 
 			$("#changePwdCk").focusin(

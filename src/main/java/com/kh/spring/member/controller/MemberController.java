@@ -144,38 +144,45 @@ public class MemberController {
 	@RequestMapping(value="Memberlogin.me", method=RequestMethod.POST)
 	public String memberLogin(
 			String loginmId, String loginpwd,
-			Model model) {
-		
+			Model model,RedirectAttributes rd, HttpServletRequest request) {
 		Member mem = new Member();
 		mem.setmId(loginmId);
 		mem.setPwd(loginpwd);
-		System.out.println("멤" + mem);
+
 		Member loginMember = mService.loginMember(mem);
 		
 		if(loginMember != null) {
 			mService.insertVisit(loginMember);	
-		}else {
-			System.out.println(loginMember);
-		}
-		
-		
-		ArrayList<Friend> flist = fService.friendList(loginMember.getmId());
-		HashMap<Integer,String> glist = new HashMap<Integer,String>();
-		glist.put(0, "일반");
-		
-		if(!flist.isEmpty()) {
-			for(int i=0; i<flist.size();i++) {
-				if(!glist.containsValue(flist.get(i).getGroupName())){
-					glist.put(i+1, flist.get(i).getGroupName());
+			ArrayList<Friend> flist = fService.friendList(loginMember.getmId());
+			HashMap<Integer,String> glist = new HashMap<Integer,String>();
+			glist.put(0, "일반");
+			
+			if(!flist.isEmpty()) {
+				for(int i=0; i<flist.size();i++) {
+					if(!glist.containsValue(flist.get(i).getGroupName())){
+						glist.put(i+1, flist.get(i).getGroupName());
+					}
 				}
+				
 			}
-			System.out.println("들옴");
+			
+			model.addAttribute("friendList",flist);
+			model.addAttribute("groupList",glist);
+			model.addAttribute("loginMember", loginMember);
+			return "redirect:mypage.me";
+		}else {
+			rd.addFlashAttribute("msg", "사용자 정보가 일치하지 않습니다.");
+			
+			String referer = request.getHeader("Referer");
+			System.out.println();
+			if(referer.length() == 29) {
+				referer = "viewMain.ad";
+			}
+			   return "redirect:"+ referer;
 		}
-		System.out.println("이건무조건");
-		model.addAttribute("friendList",flist);
-		model.addAttribute("groupList",glist);
-		model.addAttribute("loginMember", loginMember);
-		return "redirect:mypage.me";
+		
+		
+		
 	}
 	// 로그아웃
 	@RequestMapping("Memberlogout.me")

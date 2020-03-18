@@ -24,6 +24,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../classs/summerNote.jsp" />
+	<jsp:include page="../classs/fontStore.jsp"/>
 	
 	<form action="insertClass.do" method="post" enctype="multipart/form-data">
 	<div style="background: #ebebeb;" style="height:100vhs">
@@ -31,17 +32,27 @@
 
         <!-- Insert 부분 1 -->
 
-        <div style="color:#505050; font-size: 16pt; border-bottom: 1px solid #dcdcdc;font-weight: 600; padding:15px;" id="page1_title">
-            1. 스터디 사진
+        <div style="color:#505050; font-size: 16pt;font-weight: 600; padding:15px;" id="page1_title">
+        	<div style="display:table; border-radius:50px;  width:100px; height:100px; background:#5CD1E5;text-align:center; float:left;">
+        		<p style="display:table-cell; vertical-align:middle; font-family: 'Staatliches', cursive; color:white; font-size:50px;">1</p>
+        	</div>
+        	<div style="border:1px solid #D4F4FA; float:left; width:30px; margin-top:50px;">
+        	</div>
+        	<div style="display:table; border-radius:50px;; width:100px; height:100px; background:#D4F4FA;text-align:center; float:left;">
+        		<p style="display:table-cell; vertical-align:middle; font-family: 'Staatliches', cursive; color:white; font-size:50px;">2</p>
+        	</div>
+        	<div style="border:1px solid #D4F4FA; float:left; width:30px; margin-top:50px;"></div>
+        	<div style="display:table; border-radius:50px;  width:100px; height:100px; background:#D4F4FA;text-align:center; float:left;">
+        		<p style="display:table-cell; vertical-align:middle; font-family: 'Staatliches', cursive; color:white; font-size:50px;">3</p>
+        	</div>
+            <div style="width:100%; float:left; text-align:center; margin-top:15px;">
+            	<p style="font-family:cinzel; font-size:30px;">STUDY IMAGE</p>
+            </div>
         </div>
 
-        <div style="text-align: center; position: relative; margin-top: 20px;" id="page1">
+        <div style="text-align: center; position: relative; margin-top: 10px;" id="page1">
 
-        
-
-           
-
-        <div style="text-align: center; position: relative; margin-top: 20px;">
+        <div style="text-align: center; position: relative; margin-top: 10px;">
                 <div class="swiper-container swiper1" style="width:700px; height:360px; position: relative; top:30px; border: 1px solid gray; cursor: pointer;">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide" id="swiper1">
@@ -70,12 +81,12 @@
                 <input type="file" name="img2" id="img2" style="display:none;" onchange="inputimg(this,2);">
                 <input type="file" name="img3" id="img3" style="display:none;" onchange="inputimg(this,3);">
         
-                <div style="text-align: center;  position: relative; padding:40px;">이미지를 넣을곳을 클릭하여 이미지를 넣어주세요! <br> 이미지를 넣지 않으면 사이트에서 제공하는 이미지로 대체됩니다.</div>
+                <div style="text-align: center;  position: relative; padding:40px; font-family: 'Nanum Gothic', sans-serif;">이미지를 넣을곳을 클릭하여 이미지를 넣어주세요! <br> 이미지를 넣지 않으면 사이트에서 제공하는 이미지로 대체됩니다.</div>
         
         </div>
 
         
-        <div style="float:left; position: absolute; width:800px; top:600px; left:200px;">
+        <div style="float:left; position: absolute; width:800px; top:700px; left:300px;">
             <button type="button" class="btn btn-secondary" id="btn1">NEXT</button>
         </div>
         <!-- 혹시몰라1 -->
@@ -84,18 +95,31 @@
         
     <!-- Insert 부분 2 -->
     
-    <div style="color:#505050; font-size: 16pt; border-bottom: 1px solid #dcdcdc;font-weight: 600; padding:15px; display: none;" id="page2_title">
-            2. 스터디 상세정보 입력
-        </div>
-    <div style="text-align: center; position: relative; margin-top: 20px; display: none;" id="page2">
-        
-        <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative;">
-            <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">스터디 제목</span>
-            <input type="text" name="title" id="title" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
+  <div style="color:#505050; font-size: 16pt;font-weight: 600;  height:180px; padding:15px; display: none;" id="page2_title">
+		<div style="display: table; border-radius: 50px; width: 100px; height: 100px; background: #D4F4FA; text-align: center; float: left;">
+			<p style="display: table-cell; vertical-align: middle; font-family: 'Staatliches', cursive; color: white; font-size: 50px;">1</p>
+		</div>
+		<div style="border: 1px solid #D4F4FA; float: left; width: 30px; margin-top: 50px;">
+		</div>
+		<div style="display: table; border-radius: 50px;; width: 100px; height: 100px; background: #5CD1E5; text-align: center; float: left;">
+			<p style="display: table-cell; vertical-align: middle; font-family: 'Staatliches', cursive; color: white; font-size: 50px;">2</p>
+		</div>
+		<div style="border: 1px solid #D4F4FA; float: left; width: 30px; margin-top: 50px;"></div>
+		<div style="display: table; border-radius: 50px; width: 100px; height: 100px; background: #D4F4FA; text-align: center; float: left;">
+			<p style="display: table-cell; vertical-align: middle; font-family: 'Staatliches', cursive; color: white; font-size: 50px;">3</p>
+		</div>
+		<div style="width: 100%; float: left; text-align: center; margin-top: 15px;">
+			<p style="font-family: cinzel; font-size: 30px;">STUDY DETAIL</p>
+		</div>
+	</div>
+    <div style="width:100%; text-align: center; position: relative; margin-top: 20px; display: none;" id="page2"> 
+        <div style=" font-size: 22pt; width: 800px; height:50px;position: relative;">
+            <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">TITLE</span>
+            <input type="text" name="title" id="title" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 500px; height: 30px; font-size:12px;">
         </div>
 
-        <div style="float:left; font-size: 22pt; width: 800px; height:50px; position: relative;">
-            <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">목적</span>
+        <div style=" font-size: 22pt; width: 800px; height:50px; position: relative;">
+            <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">TYPE</span>
             <!-- <input type="text" name="" id="" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 15px; font-size:16pt;"> -->
             <input type="text" name="cateId" id="cateId" style="display:none;" value="no">
             
@@ -130,8 +154,8 @@
             </div>
         </div>
 
-        <div style="float:left; font-size: 22pt; width: 800px; height:50px; position: relative;">
-            <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">레벨</span>
+        <div style=" font-size: 22pt; width: 800px; height:50px; position: relative;">
+            <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">LEVEL</span>
             <!-- <input type="text" name="" id="" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 15px; font-size:16pt;"> -->
             <div class="input-group mb-3" style="width:200px; position: absolute; top:20px; left:200px;">
             	
@@ -157,32 +181,32 @@
         </div>
            <!-- 오프라인 메뉴 -->
 
-            <div style="float:left; font-size: 22pt; width: 800px; height:50px; position: relative;">
-                <label style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;" for="online">온라인</label>
+            <div style=" font-size: 22pt; width: 600px; height:70px; position: relative; border-bottom:1px solid #dcdcdc; margin:auto; text-align:center;">
+                <label style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;" for="online">ONLINE</label>
                 <input type="radio" name="onoff" id="online" value="온라인" style="position: absolute; left: 150px; top:35px;">
 
-                <label style="position:absolute; left:250px; top:30px; font-size:11pt; color:#787878;" for="offline">오프라인</label>
+                <label style="position:absolute; left:250px; top:30px; font-size:11pt; color:#787878;" for="offline">OFFLINE</label>
                 <input type="radio" name="onoff" id="offline" value="오프라인" style="position: absolute; left: 340px; top:35px;">
             </div> 
 
 
         <div id="off" style="display:none;">
-            <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative; border-top:1px solid #dcdcdc; margin-top:15px;">
-                <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">지역</span>
-                <input type="text" name="local" value="" id="local" placeholder="ex) 강남" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
+            <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative;  margin-top:15px;">
+                <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">AREA</span>
+                <input type="text" name="local" value="" id="local" placeholder="ex) 강남" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px; font-size:12px;">
 
-                <span style="position:absolute; left:450px; top:30px; font-size:11pt; color:#787878;">인원</span>
-                <input type="number" value="1000" name="memberCount" id="memberCount" min="0" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:16pt; width: 50px; height: 30px;">
+                <span style="position:absolute; left:450px; top:30px; font-size:11pt; color:#787878;">정원</span>
+                <input type="number" value="1000" name="memberCount" id="memberCount" min="0" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:16pt; width: 50px; height: 30px; font-size:12px;">
             </div>
 
             
 
             <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative;">
                 <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시작일</span>
-                <input type="date" name="startday" id="startday" min="<%= realday %>"  style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:14pt; width: 200px; height: 30px;">
+                <input type="date" name="startday" id="startday" min="<%= realday %>"  style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:14pt; width: 200px; height: 30px; font-size:12px;">
                 <span style="position:absolute; left:450px; top:30px; font-size:11pt; color:#787878;">종료일</span>
-                <input type="date" name="endday" id="endday" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:14pt; width: 200px; height: 30px;" disabled>
-                <input type="text" name="schedule" id="schedule" style="display:none;" value="">
+                <input type="date" name="endday" id="endday" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:14pt; width: 200px; height: 30px; font-size:12px;" disabled>
+                <input type="text" name="schedule" id="schedule" style="display:none;" value="" >
                  
                 <!-- 시작일 끝나는일  스트링 합치기-->
                 <script>
@@ -215,15 +239,15 @@
                 
             </div>
 
-            <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative; border-bottom: 1px solid #dcdcdc; padding : 40px;">
+            <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative; padding : 40px;">
                 <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시간</span>
-                <input type="text" name="time" id="time" value="" placeholder="ex)16:00 - 18:00" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 200px; height: 30px;">
+                <input type="text" name="time" id="time" value="" placeholder="ex)16:00 - 18:00" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:12px; width: 200px; height: 30px;">
             </div>
         </div>
 
 
         <!--<div style="float:left; position: relative; width:800px; margin-top:100px;">-->
-        <div style="float:left; position: absolute; width:800px; top:600px; left:200px;">
+        <div style="float:left; position: absolute;  width:800px; top:540px; left:250px;">
             <button type="button" class="btn btn-secondary" id="btn2">PREVIOUS</button>
             <button type="button" class="btn btn-secondary" id="btn3">NEXT</button>
         </div>
@@ -232,8 +256,22 @@
 
 
     <!-- Insert 부분 3 -->
-    <div style="color:#505050; font-size: 16pt; border-bottom: 1px solid #dcdcdc;font-weight: 600; padding:15px; display: none;" id="page3_title">
-            3. 스터디 소개
+    <div style="color:#505050; font-size: 16pt; font-weight: 600; padding:15px; display: none;" id="page3_title">
+		<div style="display: table; border-radius: 50px; width: 100px; height: 100px; background: #D4F4FA; text-align: center; float: left;">
+			<p style="display: table-cell; vertical-align: middle; font-family: 'Staatliches', cursive; color: white; font-size: 50px;">1</p>
+		</div>
+		<div style="border: 1px solid #D4F4FA; float: left; width: 30px; margin-top: 50px;">
+		</div>
+		<div style="display: table; border-radius: 50px;; width: 100px; height: 100px; background: #D4F4FA; text-align: center; float: left;">
+			<p style="display: table-cell; vertical-align: middle; font-family: 'Staatliches', cursive; color: white; font-size: 50px;">2</p>
+		</div>
+		<div style="border: 1px solid #D4F4FA; float: left; width: 30px; margin-top: 50px;"></div>
+		<div style="display: table; border-radius: 50px; width: 100px; height: 100px; background: #5CD1E5; text-align: center; float: left;">
+			<p style="display: table-cell; vertical-align: middle; font-family: 'Staatliches', cursive; color: white; font-size: 50px;">3</p>
+		</div>
+		<div style="width: 100%; float: left; text-align: center; margin-top: 15px;">
+			<p style="font-family: cinzel; font-size: 30px;">STUDY INTRODUCE</p>
+		</div>
     </div>
     <div style="text-align: center; position: relative; margin-top: 20px; display: none;" id="page3">
         
@@ -247,7 +285,7 @@
         </div>
 
         <!-- <div style="float:left; position: relative; width:800px; margin-top:100px;"> -->
-        <div style="float:left; position: absolute; width:800px; top:600px; left:200px;">
+        <div style="float:left; position: absolute;  width:800px; top:690px; left:250px;">
             <button type="button" class="btn btn-secondary" id="btn4">PREVIOUS</button>
             <button type="submit" class="btn btn-secondary" id="btn5">완료</button>
         </div>

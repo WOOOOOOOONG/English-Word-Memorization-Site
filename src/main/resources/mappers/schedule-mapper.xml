@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+"-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scheduleMapper">
+	<resultMap id="scheduleResultSet" type="Schedule">
+		<id property="sId" column="SID"/>
+		<result property="mId" column="MID"/>
+		<result property="sTitle" column="TITLE"/>
+		<result property="startDate" column="START_DATE"/>
+		<result property="endDate" column="END_DATE"/>
+		<result property="refId" column="VOCA_ID"/>
+		<result property="color" column="SCOLOR"/>
+		<result property="refName" column="CLASS_TITLE"/>
+	</resultMap>
+	<insert id="insertSchedule" parameterType="Schedule">
+		insert into schedule values(
+		SID_SEQ.nextval,#{mId},#{sTitle},#{startDate},#{endDate},#{refId},#{color}
+		)
+	</insert>
+	
+	<select id="selectScheduleList" parameterType="string" resultMap="scheduleResultSet">
+		select s.*, class_title from (select s.* from schedule s where mid = #{mId}) s,classs c where s.voca_id = c.class_no
+	</select>
+	
+	<delete id="deleteSchedule" parameterType="string">
+		delete from Schedule where SID=#{sId}
+	</delete>
+	
+	<select id="selectSchedule" parameterType="string" resultMap="scheduleResultSet">
+		select s.*,class_title from Schedule s,classs c where sid=#{sId} and s.voca_id = c.class_no
+	</select>
+	
+	<update id="updateSchedule" parameterType="Schedule">
+		update schedule set TITLE= #{sTitle},START_DATE=#{startDate},
+		END_DATE=#{endDate},VOCA_ID=#{refId},SCOLOR=#{color} where SID =#{sId}
+	</update>
+</mapper>

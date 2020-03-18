@@ -18,48 +18,62 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <title>SEW</title>
+    <!-- Bootstrap CSS -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <style>
-        /* 전체 틀 */
-        html, body {
-            height: 100%;
-            margin: 0;
-        }
-        .tab, #tab0, #tab1, #tab2, #tab3, #tab4 {
-            height: 100%;
-            position: absolute;
-            box-shadow: 6px 0px 6px rgba(0, 0, 0, 0.3);
-            transition: all 0.5s ease;
-            text-align: center;
-        }
-        .tab:hover ~ div, #tab0:hover ~ div, #tab1:hover ~ div, #tab2:hover ~ div, #tab3:hover ~ div, #tab4:hover ~ div {
-            transform: translateX(-80vw);
-        }
+/* 전체 틀 */
+html, body {
+	height: 100%;
+	margin: 0;
+}
 
-        #tab3:hover .wra3 {
-            opacity: 1;
-        }
+.tab, #tab0, #tab1, #tab2, #tab3, #tab4 {
+	height: 100%;
+	position: absolute;
+	box-shadow: 6px 0px 6px rgba(0, 0, 0, 0.3);
+	transition: all 0.5s ease;
+	text-align: center;
+}
 
-        #tab2:hover .wra2 {
-            opacity: 1;
-        }
+.tab:hover ~ div, #tab0:hover ~ div, #tab1:hover ~ div, #tab2:hover ~
+	div, #tab3:hover ~ div, #tab4:hover ~ div {
+	transform: translateX(-80vw);
+}
 
-        #tab1:hover .wra1 {
-            opacity: 1;
-        }
+#tab3:hover .wra3 {
+	opacity: 1;
+}
 
-        #tab0:hover .wra0 {
-            opacity: 1;
-        }
+#tab2:hover .wra2 {
+	opacity: 1;
+}
 
-        #tab0 {
-            width: 100vw;
-            background: black;
-        }
-        #tab1 {
-            width: 95vw;
-            background: #31152b;
-        }
-        /* #tab1::after {
+#tab1:hover .wra1 {
+	opacity: 1;
+}
+
+#tab0:hover .wra0 {
+	opacity: 1;
+}
+
+#tab0 {
+	width: 100vw;
+	background: black;
+}
+
+#tab1 {
+	width: 95vw;
+	background: #31152b;
+}
+/* #tab1::after {
             content: '';
             position: absolute;
             width: 5vw;
@@ -113,8 +127,36 @@
             right: -5vw;
         }
 
-        .wrapper {
-            /* height: 100%; 
+#tab3::after {
+	content: '';
+	position: absolute;
+	width: 5vw;
+	height: 25vh;
+	background: #cc4452;
+	border-radius: 0 20px 20px 0;
+	top: 25%;
+	right: -5vw;
+}
+
+#tab4 {
+	width: 80vw;
+	/* background: #e6b098; */
+	background: #8A4B08;
+}
+
+#tab4::after {
+	content: '';
+	position: absolute;
+	width: 5vw;
+	height: 25vh;
+	background-image: url(resources/images/메인책갈피.jpg);
+	border-radius: 0 20px 20px 0;
+	top: 0;
+	right: -5vw;
+}
+
+.wrapper {
+	/* height: 100%; 
             width: 100%;  */
         }
 
@@ -432,6 +474,39 @@
 <body>
 	<c:set var="contextPath" value="${pageContext.request.contextPath}"
    scope="application"/>
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</head>
+<body>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"
+	scope="application"/>
     <div id="tab0">
         <div class="wrapper wra0">
             <div class="container">
@@ -501,6 +576,7 @@
 
     <div id="tab2">
         <img src="resources/images/클래스.jpg" class="img-base tab2-img"><!-- 단어 활용 게임 사진 -->
+
         <div class="wrapper wra2">
             <div class="message">
                 <h1>더이상 혼자 지루하게 공부하지 마세요!</h1>    
@@ -510,7 +586,7 @@
         </div>
     </div>
 
-    <div id="tab3">
+    <div id="tab3" class="sidemenu">
         <!-- <img src="img/1.PNG" alt="" class="img-base tab3-img1"> -->
         <img src="resources/images/단어추가.png" class="img-base tab3-img2"><!-- 단어 추가 사진 -->
         <div class="wrapper wra3">
@@ -524,7 +600,7 @@
         </div>
     </div>
 
-    <div id="tab4">
+    <div id="tab4" class="sidemenu">
         <!-- <img src="img/1대1.jpg" class="img-base">
         <div class="font">
         <h1 class="h1-base">온라인으로 단어를 함께 공부해 나가는 선생님을 만나보세요!</h1>

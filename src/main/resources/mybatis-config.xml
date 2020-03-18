@@ -22,6 +22,7 @@
 		<typeAlias type="com.kh.spring.board.model.vo.Board" alias="Board"/>
 		<typeAlias type="com.kh.spring.board.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.spring.board.model.vo.Search" alias="Search"/>
+		<typeAlias type="com.kh.spring.schedule.model.vo.Schedule" alias="Schedule"/>
 	</typeAliases>
 	
 	<mappers>
@@ -34,6 +35,7 @@
 		<mapper resource="mappers/member-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
 		<mapper resource="mappers/board-mapper.xml"/>
+		<mapper resource="mappers/schedule-mapper.xml"/>
 	</mappers>
 
 </configuration>
