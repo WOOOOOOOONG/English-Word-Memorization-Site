@@ -39,7 +39,7 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../classs/summerNote.jsp" />
 	<!-- 전체 -->
-	<i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="insertInquireView.ad" style="color:orange; text-decoration:none;">신고하기</a></i>
+	<i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="insertInquireView.ad?cNo=${ classs.cNo }" style="color:orange; text-decoration:none;">신고하기</a></i>
 	
     <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 408px; margin-top: 0px; background: #ebebeb; display: block;">
         <div style="margin-top: 0px;">
