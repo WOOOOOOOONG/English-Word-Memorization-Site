@@ -313,13 +313,13 @@ type="text/css">
                                 <!-- 추가 필 -->
                                 <div class="blank-box-wrapper">
                                     <div class="blank-box">
-                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">${ tvList.get(j).id }</h3>
+                                        <h3 style="color: #000; font-size: 14pt; text-align: center;  margin-top:15px;">${ tvList.get(j).id }</h3>
                                     </div>
                                     <div class="blank-box">
-                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">${ tvList.get(j).testDate }</h3>
+                                        <h3 style="color: #000; font-size: 14pt; text-align: center;  margin-top:15px;">${ tvList.get(j).testDate }</h3>
                                     </div>
                                     <div class="blank-box">
-                                        <h3 style="color: red; font-size: 18pt; text-align: center;">${ tvList.get(j).score }</h3>
+                                        <h3 style="color: red; font-size: 18pt; text-align: center;  margin-top:15px;">${ tvList.get(j).score }</h3>
                                     </div>
                                 </div>
                                 <div class="quiz-info-box-wrapper">
@@ -370,7 +370,7 @@ type="text/css">
                                         				<div class="text-box"></div>	
                                         		</c:when>
                                         		<c:otherwise>
-                                        			<div class="text-box" style="font-family: 'Indie Flower', cursive;">${ myAnswer[o] }</div>
+                                        			<div class="text-box" style="font-family: 'Indie Flower', cursive; font-size:20px;">${ myAnswer[o] }</div>
                                         		</c:otherwise>
                                         	</c:choose>
                                         </div>
