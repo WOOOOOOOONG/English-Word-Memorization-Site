@@ -451,7 +451,6 @@ main .helper span {
             }
          });
          
-         
       } 
       </script>
       
