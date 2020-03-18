@@ -10,6 +10,7 @@ import com.kh.spring.board.model.vo.Board;
 import com.kh.spring.board.model.vo.PageInfo;
 import com.kh.spring.board.model.vo.Pagination;
 import com.kh.spring.board.model.vo.Reply;
+import com.kh.spring.board.model.vo.Search;
 
 @Service("bService")
 public class BoardService {
@@ -68,5 +69,13 @@ public class BoardService {
 
 	public ArrayList<Reply> selectBoardReplyList(int bId) {
 		return bDao.selectBoardReplyList(bId);
+	}
+
+	public ArrayList<Board> searchList(Search search) {
+		return bDao.searchList(search);
+	}
+
+	public int deleteBoardReply(int rId) {
+		return bDao.deleteBoardReply(rId);
 	}
 }

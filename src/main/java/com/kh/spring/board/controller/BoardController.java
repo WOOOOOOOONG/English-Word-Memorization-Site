@@ -20,6 +20,7 @@ import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.board.model.vo.Board;
 import com.kh.spring.board.model.vo.Pagination;
 import com.kh.spring.board.model.vo.Reply;
+import com.kh.spring.board.model.vo.Search;
 
 @Controller
 public class BoardController {
@@ -196,7 +197,50 @@ public class BoardController {
 	@RequestMapping("deleteBoardReply.bo")
 	public ModelAndView deleteBoardReply (
 			ModelAndView mv,
-			Board board) {
+			int rId, int bId) {
+		int result = bService.deleteBoardReply(rId);
+	
+		Board b = bService.selectBoardOne(bId, false);
+		ArrayList<Board> boardList = bService.BoardAllList();
+		mv.addObject("boardList", boardList);
+		mv.addObject("detailBoard", b);
+		mv.setViewName("board/detail");
+		
+		return mv;
+	}
+	
+	@RequestMapping("searchBoard.bo")
+	public ModelAndView searchBoard(
+			ModelAndView mv,
+			Search search) {
+		if(search.getSearchContent().equals("공지")
+				|| search.getSearchContent().equals("단어장")
+				|| search.getSearchContent().equals("클래스")
+				|| search.getSearchContent().equals("잡담")
+				|| search.getSearchContent().equals("전체")) {
+			switch(search.getSearchContent()) {
+			case "공지" :
+				search.setType(1);
+				break;
+			case "단어장" :
+				search.setType(2);
+				break;
+			case "클래스" :
+				search.setType(3);
+				break;
+			case "잡담" :
+				search.setType(4);
+				break;
+				default:
+					break;
+			}
+		}
+		ArrayList<Board> searchList = bService.searchList(search);
+
+		mv.addObject("boardList", searchList);
+		mv.addObject("search", search);			
+		
+		mv.setViewName("board/list");
 		return mv;
 	}
 }

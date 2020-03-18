@@ -241,15 +241,6 @@
 			
 			<!-- 댓글 리스트 -->
 			<table id="replyTable">
-				<%-- <tr>
-					<td id="tContent">
-						${ item.content } &nbsp; ${ item.createDate }
-					</td>
-					<td id="tWriter">
-						${ item.writerNickname }<br>
-						${ item.writerId }
-					</td>
-				</tr> --%>
 			</table>
 			
 			<script type="text/javascript">
@@ -298,15 +289,30 @@
 							if(data.length > 0){
 								for(var i in data){
 									var $tr = $("<tr>");
-									var $tWriter = $("<td width='70'>").html("<div class='tdContent2'>" + data[i].writerNickname + "</div>");
+									var $form = $("<form action='deleteBoardReply.bo' method='POST'>");
+									var $tWriter = $("<td width='50'>").html("<div class='tdContent2'>" + data[i].writerNickname + "</div>");
 									var $tContent = $("<td width='1130'>").html("<div class='tdContent1'>" + data[i].content + "</div> " + 
 											"<div class='tdContent2'>" + data[i].createDate + "</div>");
-									var $hr = document.createElement("hr");
+									<c:set var="memberId" value="${sessionScope.loginMember.mId}"/>
+									<c:if test="${memberId eq null}">
+										<c:set var="memberId" value="0"/>
+									</c:if>
+									if(${!empty sessionScope.loginMember}) { 
+											if(data[i].writerId == "${memberId}" || "${memberId eq 'admin'}") {
+												var $deleteBtn = $("<td width='10'>").html("<div class='tdContent2'><button class='button" + i + "' onclick='deleteReply(" + data[i].rId + ", " + '"' + data[i].writerId + '"' + ");'>X</button></div>");
+											}
+									}
+									var $hr = document.createElement("hr");			
+									var rId = $();
 									
 									$hr.className = "line4";
-	
+									
 									$tr.append($tContent);
 									$tr.append($tWriter);
+									if(data[i].writerId == "${memberId}" || "${memberId eq 'admin'}") {
+										$tr.append($deleteBtn);
+									}
+									$tr.append(rId);
 	
 									$tableBody.append($tr);
 									$tableBody.append($hr);
@@ -314,7 +320,7 @@
 							}else{
 								// 댓글이 등록되지 않았을 때
 								var $tr = $("<tr>");
-								var $rContent = $("<td colspan='2'>").text("등록 된 댓글이 없습니다.");
+								var $rContent = $("<td colspan='3'>").text("등록 된 댓글이 없습니다.");
 								$tr.append($tContent);
 								$tableBody.append($tr);
 							}
@@ -323,6 +329,18 @@
 							console.log("실패!");
 						}
 					});
+				}
+				
+				function deleteReply(i, referId) {
+					var bId = ${detailBoard.bId};
+					console.log(referId);
+					
+					if("${memberId}" == referId || "${memberId eq 'admin'}") {
+						location.href="deleteBoardReply.bo?rId="+i+"&bId="+bId;	
+					}else {
+						
+					}
+					
 				}
 			</script>
 		</div>
