@@ -52,7 +52,7 @@
 			                			<c:if test="${ testList.get(i).testNo eq vocaList.get(j).testNo && loginMember.mId eq vocaList.get(j).id && !flag}">
 			                				<td>${ vocaList.get(j).testDate }</td>
 			                				<td>${ vocaList.get(j).score }</td>
-			                				<td><button type="button" class="btn btn-secondary" onclick="viewTest(${ match })">확인</button>
+			                				<td><button type="button" class="btn btn-secondary" style="width:90px; "onclick="viewTest(${ match })">확인</button>
 			                					<button type="button" data-toggle="modal" data-target=".pre${ match }" id="pre${ match }" style="display:none;"></button>
 			                					<c:set var="match" value="${ match + 1 }"/>	
 			                				</td>
@@ -62,7 +62,7 @@
 			                		<c:if test="${ !flag }">
 			                			<td>미응시</td>
 		                				<td>미응시</td>
-		                				<td><input type="button" value="시험보기" class="btn btn-secondary" onclick="location.href='goTest.do?testNo=${ testList.get(i).testNo }'"></td>
+		                				<td><input type="button" value="시험보기" class="btn btn-secondary" style="text-align:center; margin:auto; width:90px;" onclick="location.href='goTest.do?testNo=${ testList.get(i).testNo }'"></td>
 			                		</c:if>
 			                		<c:set var="flag" value="false"/>
 			                	</c:when>
@@ -70,7 +70,7 @@
 			                	<c:when test="${ empty vocaList || !flag }">
 	                				<td>미응시</td>
 	                				<td>미응시</td>
-	                				<td><input type="button" value="시험보기" class="btn btn-secondary" onclick="location.href='goTest.do?testNo=${ testList.get(i).testNo }'"></td>
+	                				<td><input type="button" value="시험보기" class="btn btn-secondary" style="text-align:center; margin:auto; width:90px;" onclick="location.href='goTest.do?testNo=${ testList.get(i).testNo }'"></td>
 	                			</c:when>
 	                			
 			                </c:choose>
@@ -129,14 +129,14 @@
                                 <div class="doc-sub-title">시험</div>
                                 <!-- 추가 필 -->
                                 <div class="blank-box-wrapper">
-                                    <div class="blank-box">
-                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">${ vocaList.get(j).id }</h3>
+                                    <div class="blank-box" style="vertical-align: middle;">
+                                        <h3 style="color: #000; font-size: 14pt; text-align: center; margin-top:15px;">${ vocaList.get(j).id }</h3>
                                     </div>
                                     <div class="blank-box">
-                                        <h3 style="color: #000; font-size: 14pt; text-align: center;">${ vocaList.get(j).testDate }</h3>
+                                        <h3 style="color: #000; font-size: 14pt; text-align: center;  margin-top:15px;">${ vocaList.get(j).testDate }</h3>
                                     </div>
                                     <div class="blank-box">
-                                        <h3 style="color: red; font-size: 18pt; text-align: center;">${ vocaList.get(j).score }</h3>
+                                        <h3 style="color: red; font-size: 18pt; text-align: center;  margin-top:15px;">${ vocaList.get(j).score }</h3>
                                     </div>
                                 </div>
                                 <div class="quiz-info-box-wrapper" style="font-family: 'Nanum Gothic', sans-serif;">
@@ -187,7 +187,7 @@
                                         				<div class="text-box"></div>	
                                         		</c:when>
                                         		<c:otherwise>
-                                        			<div class="text-box" style="font-family: 'Indie Flower', cursive;">${ myAnswer[o] }</div>
+                                        			<div class="text-box" style="font-family: 'Indie Flower', cursive; font-size:20px;">${ myAnswer[o] }</div>
                                         		</c:otherwise>
                                         	</c:choose>
                                         </div>
