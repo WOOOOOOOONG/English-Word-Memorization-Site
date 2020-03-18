@@ -31,7 +31,9 @@ public class AdminController {
 	public ModelAndView viewTotal(ModelAndView mv) {
 		ArrayList<Member> memberList = mService.selectList();
 		ArrayList<Inquire> inqList = aService.selectInquireList();
-
+		ArrayList<VisitRecord> vr = aService.selectLogList();
+		
+		mv.addObject("logList", vr);
 		mv.addObject("inquireList", inqList);
 		mv.addObject("mList", memberList);
 		mv.setViewName("admin/total");

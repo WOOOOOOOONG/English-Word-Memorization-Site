@@ -196,12 +196,12 @@
 	
 			<!-- 다음글, 이전글 -->
 			<c:forEach var="item" items="${ boardList }" varStatus="status">
-				<c:if test="${item.bId eq detailBoard.bId && boardList[status.index].bId ne 1}">
+				<c:if test="${item.bId eq detailBoard.bId && item.bId ne boardList[fn:length(boardList)-1].bId}">
 					<hr class="line3" style="margin-bottom: -1px;">
 					<c:url var="prevBoard" value="detailBoard.bo">
 						<c:param name="bId" value="${item.bId-1}"/>
 					</c:url>
-					<a href="${prevBoard}">이전글 : ${boardList[status.index-1].title}</a>
+					<a href="${prevBoard}">다음글 : ${boardList[status.index+1].title}</a>
 					<hr class="line3" style="margin-top: -1px; margin-bottom: -1px;">
 				</c:if>
 					
@@ -209,7 +209,7 @@
 					<c:url var="nextBoard" value="detailBoard.bo">
 						<c:param name="bId" value="${item.bId+1}"/>
 					</c:url>
-					<a href="${nextBoard}">다음글 : ${boardList[status.index+1].title}</a>
+					<a href="${nextBoard}">이전글 : ${boardList[status.index-1].title}</a>
 					<hr class="line3" style="margin-top: -1px;">
 				</c:if>
 			</c:forEach>
