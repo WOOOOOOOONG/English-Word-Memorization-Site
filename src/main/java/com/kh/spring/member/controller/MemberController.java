@@ -180,9 +180,6 @@ public class MemberController {
 			}
 			   return "redirect:"+ referer;
 		}
-		
-		
-		
 	}
 	// 로그아웃
 	@RequestMapping("Memberlogout.me")
@@ -223,6 +220,37 @@ public class MemberController {
 		
 		return "redirect:mypage.me";
 	}
+	// 개인정보 수정
+	@RequestMapping("update.me")
+	public String updateMember(RedirectAttributes rd,Member m ,@RequestParam(value="add1") String add1,
+			@RequestParam(value="add2") String add2,SessionStatus status,
+			@RequestParam(value="add3") String add3,Model model) {
+		String address = add1+"/"+add2+"/"+add3;
+		m.setAddress(address);
+		int result = mService.updateMember(m);
+		Member loginMember = (Member) model.getAttribute("loginMember");
+		
+		if(result < 1) {
+			rd.addFlashAttribute("msg", "변경에 실패하였습니다.");
+		}else {
+			rd.addFlashAttribute("msg", "개인정보 수정 완료.");
+			
+			loginMember.setAddress(address);
+			loginMember.setBirthDate(m.getBirthDate());
+			loginMember.setName(m.getName());
+			model.addAttribute("loginMember", loginMember);
+		}
+		if(m.getPwd() != null) {
+			result = mService.changeMemberPwd(m);
+			if(result >0) {
+				status.setComplete();
+				rd.addFlashAttribute("msg", "비밀번호 변경시에는 다시 로그인하셔야 합니다.");
+				return "redirect:login.me";
+			}
+		}
+		return "redirect:mypage.me";
+	}
+	
 	// 파일 삭제
 	private void deleteFile(HttpServletRequest request, String img) {
 		String root = request.getSession().getServletContext().getRealPath("resources");

@@ -81,4 +81,9 @@ public class MemberService {
 		m.setmId(mId);
 		return mDao.selectProfileImg(m);
 	}
+
+
+	public int updateMember(Member m) {
+		return mDao.updateMember(m);
+	}
 }

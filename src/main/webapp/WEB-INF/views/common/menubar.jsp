@@ -771,14 +771,13 @@ $(document).on('click', '.myfriend', function(){
         data:{fId:fId},
         type:"post",
    		success:function(data){
-   			console.log(data);
+   			chatId = setInterval(function(){
+   				chatloggo(data);
+   				}, 3500);
 		},error:function(e){
 			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 		}	
-	});	
-		
-	    chatId = setInterval(chatloggo, 2500);
-		
+	});		
 	 // 에이작스로 채팅로그 불러온 후 
 		$("#chatting").css("display","block");
 	 
@@ -804,6 +803,9 @@ $("#chatsend").click(function(){
    				// 마지막에 보낸 글자 없애기
    	   			$("#chatcontent").val("");
    				// 채팅보낸거 출력하기
+   				if($("#chatlength").html() == -1){
+   					$tableBody.html("");
+   				}
    	   		var $tr = $("<tr>");
 			var $tdimg = $(" <td class='chattd' width='50'>");
 			var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
@@ -815,6 +817,9 @@ $("#chatsend").click(function(){
 			$tr.append($tdimg);
 			$tr.append($chatContent);
 			$tableBody.append($tr);
+			$("#chatlength").html($("#chatlength").html()+1);
+			 var objDiv = document.getElementById("chatting");
+			 objDiv.scrollTop = objDiv.scrollHeight;
    			}else{
    				alert("채팅 오류!! 관리자에게 문의하세요");
    			}
@@ -826,13 +831,11 @@ $("#chatsend").click(function(){
 	});	
 	
 });
-	function chatloggo(){
-		
+	function chatloggo(img){
 		var fId = $("#friendId").val();
 		var mId = '${ loginMember.mId}';
 		var chatleng =$("#chatlength").html();
 		$tableBody = $("#chattable tbody");
-		
 		$.ajax({
 	        url:"chatlog.ck",
 	        data:{mId:mId,fId:fId,chatleng:chatleng},
@@ -840,41 +843,50 @@ $("#chatsend").click(function(){
 	        type:"post",
 	   		success:function(data){
 	   			
-				if(data.msg != "none"){
+				if(data.msg != "none" && data.msg !="nothing"){
 					$tableBody.html("");
 					$tableBody.css("background","white");
 					
-				for(var i in data.clist){
-
-					if(data.clist[i].writerId == mId){
-						var $tr = $("<tr>");
-						var $tdimg = $(" <td class='chattd' width='50'>");
-						var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
-						$tdimg.append($profileimg);
-						var $chatContent = $(" <td class='chattd' colspan='11' >");
-						var $chat = $(" <p class='mychatp'>").text(data.clist[i].content);
-						$chatContent.append($chat);
+					for(var i in data.clist){
+	
+						if(data.clist[i].writerId == mId){
+							var $tr = $("<tr>");
+							var $tdimg = $(" <td class='chattd' width='50'>");
+							var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
+							$tdimg.append($profileimg);
+							var $chatContent = $(" <td class='chattd' colspan='11' >");
+							var $chat = $(" <p class='mychatp'>").text(data.clist[i].content);
+							$chatContent.append($chat);
+							
+							$tr.append($tdimg);
+							$tr.append($chatContent);
+						}else{
+							var $tr = $("<tr align='right'>");
+							var $tdimg = $(" <td class='chattd' width='50'>");
+							var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/"+img+"' width='50'>");
+							$tdimg.append($profileimg);
+							var $chatContent = $(" <td class='chattd' colspan='11' >");
+							var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
+							$chatContent.append($chat);
+							
+							$tr.append($chatContent);
+							$tr.append($tdimg);
+						}
 						
-						$tr.append($tdimg);
-						$tr.append($chatContent);
-					}else{
-						var $tr = $("<tr align='right'>");
-						var $tdimg = $(" <td class='chattd' width='50'>");
-						var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/${chatuser}' width='50'>");
-						$tdimg.append($profileimg);
-						var $chatContent = $(" <td class='chattd' colspan='11' >");
-						var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
-						$chatContent.append($chat);
-						
-						$tr.append($chatContent);
-						$tr.append($tdimg);
+						$tableBody.append($tr);
 					}
-					
+				
+					$("#chatlength").html(i);
+					var objDiv = document.getElementById("chatting");
+					 objDiv.scrollTop = objDiv.scrollHeight;			
+	   			}else if(data.msg =="nothing"){
+	   				$tableBody.html("");
+					$tableBody.css("background","white");
+					var $tr = $("<tr>");
+					var $chatContent = $(" <td colspan='12' style='text-align:center;' >").html("친구와의 채팅기록이 없습니다.");
+					$tr.append($chatContent);
 					$tableBody.append($tr);
-				}
-				
-				$("#chatlength").html(i);
-				
+					$("#chatlength").html(-1);
 	   			}
 				
 			},error:function(e){

@@ -88,10 +88,13 @@
 		FNO_SEQ.nextval,#{mId},default,'profileimg',default,#{profileimg},default
 		)
 	</insert>
-	
 	<!-- Log -->
 	<insert id="insertVisit" parameterType="Member">
 		INSERT INTO VISIT_RECORD
 		VALUES(VID_SEQ.NEXTVAL, #{mId}, SYSDATE)
 	</insert>
+	<update id="updateMember" parameterType="Member">
+		update member set name = #{name},BIRTH_DATE=#{birthDate},
+		ADDRESS=#{address},UPDATE_DATE=sysdate where MID = #{mId}
+	</update>
 </mapper>
