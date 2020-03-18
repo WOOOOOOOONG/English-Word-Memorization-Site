@@ -37,6 +37,9 @@ public class commonController {
 	public String gomyPage(Model mv,HttpServletRequest request) {
 		// 20200313 Hyeok
 		Member user = (Member) request.getSession().getAttribute("loginMember");
+		if(user == null) {
+			return "redirect:viewMain.ad";
+		}
 		ArrayList<ClassMember> cmList = cService.selectMyClassList(user.getmId());
 		ArrayList<Classs> cList = new ArrayList<>();
 		ArrayList<Category> cateList = new ArrayList<>();
