@@ -14,63 +14,27 @@
 <title>Insert title here</title>
 
 <style>
-        .setdiv
-        {
-            height:125px;
-            width: 250px;
-            background-color: aqua;
-            margin:20px;
-            display: inline-block;
-        }
-        .setdiv p
-        {
-            margin: 0;
         
+        .voca{
+        	width:300px;
+        	height:100px;
+        	cursor:pointer;
+        	padding:4px;
+        	margin:10px;
+        	background:white;
+        	float:left;
+        	font-family: 'Nanum Gothic', sans-serif;
+        	border-radius:5px;
         }
-
-        .settitle
-        {
-            font-size:1.7em;
-        }
-        .setwordCount
-        {
-           
-            margin-top: 3px;
-            font-size: 0.7em;
-        }
-        .setuserid
-        {
-        
-            margin-top: 27px;
-            font-size: 1.1em;
-        }
-
-        .setcontainer
-        {
-            
-            width:50%;
-            height: 100%;
-            display: inline-block;
-        }
-        .setimage
-        {
-            width:40%;
-            height: 60%;
-            float:right;
-            display: none;
-        }
-
-        .setdiv:hover .hightlight
-        {
-            height:10px;
-            background-color: rgb(251, 255, 0);
-            position: relative;
-        }
-        .containertext
-        {
-            width:1500px;
-            height:300px;
-
+        .titleSpan{
+        	width:30px;
+        	border:1px solid red;
+        	padding:10px;
+        	font-size:22px;
+        	font-weight:bold;
+        	overflow:hidden;
+        	white-space:nowrap;
+        	text-overflow: ellipsis;
         }
     </style>
 
@@ -90,7 +54,7 @@
        <div style=" width:100%; margin:auto; text-align:center;"><br>
        	<div class="spinner-border text-center" role="status"><span class="sr-only">Loading...</span></div>
 	</div>
-	<div id="vocalist" style="width: 100%; ">
+	<div id="vocalist" style="width: 100%; display:none;">
 	
 	</div>
 	<div id="list" style="width:100%;">
@@ -105,16 +69,19 @@
 			var count2 = $("#title" + (listCount-1)).attr('id').replace('title','');
 			var count = count2 * 1;
 			
-			for(var i = 0; i <= count; i++){
-				
-			}
-			
-/* 			for(int i = count ; i == 0; i-- ){
+		
+/* 			for(var i = 1; i <= count ; i++){
 				alert(i);
 			} */
+			for(var i = count; i >= 1 ; i--){
+				var title = $("#title" + i).val(); // 제목
+				var vocaCount = $("#voca"+ i).val(); // 사이즈갯수
+				
+				div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><br><span>" + vocaCount +" 단어</span></div>");
+			}
 			
-			alert($(".titleCount").last().attr('id'));
-			alert(lastTitle);
+			//alert($(".titleCount").last().attr('id'));
+			//alert(lastTitle);
 			
 		});
 	});
@@ -152,27 +119,30 @@
                 data : send,
                 url : 'http://localhost:1222/getAllData',
                 success : function(data) { 
-                	console.log(data);
+                	//console.log(data);
                 	var div = $("#vocalist");
                 	
                 	
                 	var i = 1;
                 	console.log("왔음");
+                	console.log(data);
                    	for (var key in data) {
+                   		
                    		//console.log("키 : " + key);
                    		var input2 = "<input type='text' class='titleCount' value='"+key + "' id='title" + (listCount++) + "'>";
                    		div.append(input2);
                    		lastTitle = input2;
                    		//div.append("<label><input type='checkbox' onchange='qwer(this);' id='chk" + i + "' value='" + key + "'>"+key+"</label><br>");
                    		var obj = data[key];
+                   		
                    		for(var key in obj){
                    			
                    			var obj2 = obj[key];
                    			//console.log(obj[key]);
                    			for(var key in obj[key]){
                    				vocaItemCount++;
-                   				console.log(key); // 영어
-                   				console.log(obj2[key]);// 한글
+                   				//console.log(key); // 영어
+                   				//console.log(obj2[key]);// 한글
                    			}
                    			var input = "<input type='text' value='"+vocaItemCount + "' id='voca" + (vocaCount++) + "'>";
                    			div.append(input);
