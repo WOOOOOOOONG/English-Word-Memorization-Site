@@ -26,9 +26,9 @@
 
 	<insert id="insertClass">
 		INSERT INTO CLASSS VALUES(
-			'cNo' || cno_seq.nextval, #{ornerId}, #{title}, #{comment},
+			'cNo' || cno_seq.nextval, #{ornerId}, #{title},
 			#{memberCount}, 1, #{level}, #{local}, #{schedule}, #{time},
-			'abc', DEFAULT, #{cateId}, SYSDATE
+			'abc', DEFAULT, #{cateId}, SYSDATE , #{comment}
 		)
 	</insert>
 	<select id="selectcNoOne" resultType="string">

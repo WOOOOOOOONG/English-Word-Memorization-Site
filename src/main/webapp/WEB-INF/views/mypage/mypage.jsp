@@ -762,11 +762,11 @@ body {
 	<!-- 클래스 리스트 페이지 -->
     <div id="classcontent" class="mypagecontent" style="background:rgb(247,151,156)">
     <div style="padding:4px 4px 4px; border-bottom:1px solid black;  width:50%; margin:auto;font-family:cinzel; font-size:32px; text-align:center;">CLASS LIST</div>
-    	<c:choose>
-		<c:when test="${ !empty cmList }">
-			<div>
+    <div>
 				<a href="classPorm.do" id="createBtn" class="createBtn">Creat Class</a>
 			</div>
+    	<c:choose>
+		<c:when test="${ !empty cmList }">
 			<div style=" width:98%; height:630px; padding:10px;">
 				<c:choose>
 					<c:when test="${ !empty cList }">
@@ -814,11 +814,34 @@ body {
     <!--  클래스 리스트 끝 -->
 
     <!-- 단어장 리스트 페이지 -->
+    <!-- 단어장 리스트 페이지 -->
     <div id="dancontent" class="mypagecontent" style="background:rgba(245, 182, 75)">
-	<button class="btn btn-info">햐</button>
+   <button id="mydanlist"class="btn btn-info">햐</button>
 
     </div>
+   <script>
+      $(function(){
+         $("#mydanlist").click(function(){
+             var send = JSON.stringify({
+                     'search' : '${loginMember.mId}'
+                  });
+                $.ajax({
+                   type : "POST",
+                   dataType : "json",
+                   contentType : "application/json; charset=utf-8",
+                   data : send,
+                   url : 'http://localhost:1222/getMyList',
+                   success : function(data) { 
+                      console.log(data);
+                   },
+                   error : function() {
+                      console.log("error has occured retriving data from MongoServer")
+                   }
+                });
+         });
+      });
 
+	</script>
     <!-- 스케쥴 페이지 -->
     <div id="tmzpcontent" class="mypagecontent" style="background:rgb(233, 218,239)">
         <div id="calendar"></div>
@@ -1385,7 +1408,9 @@ body {
 		        dataType:"json",
 		        type:"post",
 		   		success:function(data){	
+		   			console.log(data);
 		   			var calendar = new Calendar('#calendar', data);
+		   			
 				},error:function(e){
 					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 				}

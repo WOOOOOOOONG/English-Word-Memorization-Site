@@ -173,7 +173,7 @@
 		            	if(text == "") {
 		            		alert("답변 내용을 입력하세요");
 		            	}else {
-		            		location.href = "http://localhost:8800/spring/response.ad?text="+text+"&iId="+iId;
+		            		location.href = "response.ad?text="+text+"&iId="+iId;
 		            	}
 		            }
 	        	</script>
