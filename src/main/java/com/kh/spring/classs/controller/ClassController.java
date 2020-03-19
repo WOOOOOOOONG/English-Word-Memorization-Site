@@ -32,6 +32,7 @@ import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.classs.model.vo.ClassMember;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.Joinwait;
 import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
@@ -43,7 +44,7 @@ import net.sf.json.JSONArray;
 import com.kh.spring.member.model.vo.Member;
 
 
-@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList"})
+@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList"})
 @Controller
 public class ClassController {
 	
@@ -151,12 +152,13 @@ public class ClassController {
 			userList.add(User);
 		}
 		
-		
+		ArrayList<Joinwait> jwList = cService.selectJoinWait(cNo);
 		mv.addObject("userList",userList);
 		
 		
 		model.addAttribute("cmList",cmList);
 		model.addAttribute("classs",cService.selectClassOneCount(cNo));
+		model.addAttribute("jwList",jwList);
 		mv.addObject("cNo",cNo);
 		mv.setViewName("classs/myClassView");
 		return mv;
@@ -812,12 +814,20 @@ public class ClassController {
 		ClassMember cm = new ClassMember();
 		cm.setcNo(cNo);
 		cm.setId(member.getmId());
-		cm.setvRight("N");
-		cm.setwRight("N");
-		cService.insertClassMember(cm);
+		cm.setvRight(member.getIntroduce());
+		//cService.insertClassMember(cm);
+		cService.joinClassMember(cm);
 		
 		return 2;
 		
+	}
+	
+	@RequestMapping("classWaitjoin.do")
+	public ModelAndView classWaitjoin(ModelAndView mv,String cNo) {
+		
+		mv.addObject("cNo",cNo);
+		mv.setViewName("classs/classWaitjoin");
+		return mv;
 	}
 	
 

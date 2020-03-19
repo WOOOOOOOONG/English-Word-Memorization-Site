@@ -6,6 +6,7 @@ import java.util.List;
 import com.kh.spring.classs.model.vo.ClassMember;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.Joinwait;
 import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
@@ -106,4 +107,10 @@ public interface ClassService {
 
 	// 클래스 주인 전화번호
 	String selectTell(String ornerId);
+
+	// 가입신청하기
+	void joinClassMember(ClassMember cm);
+
+	// 신청대기중인애들 가져옴
+	ArrayList<Joinwait> selectJoinWait(String cNo);
 }
