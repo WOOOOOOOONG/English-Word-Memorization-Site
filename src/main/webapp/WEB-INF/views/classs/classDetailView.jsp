@@ -39,7 +39,10 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../classs/summerNote.jsp" />
 	<!-- 전체 -->
-	<i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="insertInquireView.ad?cNo=${ classs.cNo }" style="color:orange; text-decoration:none;">신고하기</a></i>
+	<c:url var="inquireView" value="insertInquireView.ad">
+      <c:param name="reportedClass" value="${classs.cNo}"/>
+   </c:url>
+   <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a></i>
 	
     <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 408px; margin-top: 0px; background: #ebebeb; display: block;">
         <div style="margin-top: 0px;">
@@ -179,11 +182,11 @@
 
                             <!-- 버튼 -->
                             <div>
-                                <%-- <input type="button" class="sinchenog" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
-                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto" value="참여 하기"> --%>
                                 <input type="button" class="sinchenog" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
+                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt;  margin:auto" value="신청 하기"> 
+                               <%--  <input type="button" class="sinchenog2" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
                                     display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto" value="참여 하기"
-                                    data-toggle="modal" data-target=".sincheong">
+                                    data-toggle="modal" data-target=".sincheong"> --%>
                             </div>
                         </section>
                     </div>
@@ -207,7 +210,7 @@
 						contentType:"application/json; charset=utf-8",
 						success:function(data){
 							if(data == 2){
-								alert("가입이 완료되었습니다.");
+								alert("신청이 완료되었습니다.");
 								location.href="ClassList.do";
 							}else if(data == 1){
 								alert("로그인 후에 이용하실수 있습니다.");
@@ -241,7 +244,8 @@
         </script>
        
    <!-- 오른쪽 fixed -->
-   <%-- <div style="position:fixed; width:240px; top:190px; left:1330px;  border:1px solid orange; background:white; padding: 24px 9pt 9pt; font-family: 'Nanum Gothic', sans-serif;">
+   <%-- 
+   	<div style="position:fixed; width:240px; top:190px; left:1330px;  border:1px solid orange; background:white; padding: 24px 9pt 9pt; font-family: 'Nanum Gothic', sans-serif;">
    		<div style=" width:80%; text-align:center; margin:auto;">
    			<h1 style="margin:0 9pt 35px; font-size:13pt; font-weight:bold; color:#333; word-break: keep-all; lien-height:1.5em;">${ classs.title }</h1>
    		</div>
@@ -264,7 +268,8 @@
    		<div style="width:80%; border-top:1px solid #f2f2f2; text-align:center; margin:auto;">
    				<i class="far fa-angry" style="color:orange;"><a href="#" style="color:orange; text-decoration:none;">신고하기</a></i>
    		</div>
-   </div>      --%>
+   </div>      
+   --%>
         
         
    
@@ -272,6 +277,9 @@
         
 	
     </script>
+	
+	
+
 	
 </body>
 </html>

@@ -18,6 +18,12 @@
 		<result property="classCreateDate" column="CLASS_CREATE_DATE"/>
 	</resultMap>
 
+	<resultMap id="JoinwaitResultSet" type="Joinwait">
+		<id property="cNo" column="CLASS_NO"/>
+		<result property="mId" column="MID"/>
+		<result property="introduce" column="INTRODUCE"/>
+		<result property="joindate" column="JOINDATE"/>
+	</resultMap>
 	<resultMap id="cateResultSet" type="Category">
 		<id property="cId" column="C_ID"/>
 		<result property="name" column="NAME"/>
@@ -93,5 +99,13 @@
 		SELECT EMAIL
 		FROM MEMBER
 		WHERE MID = #{id}
+	</select>
+	<insert id="joinClassMember">
+		INSERT INTO JOINWAIT VALUES(#{cNo},#{id},#{vRight},SYSDATE)
+	</insert>
+	<select id="selectJoinWait" resultMap="JoinwaitResultSet">
+		SELECT *
+		FROM JOINWAIT
+		WHERE CLASS_NO = #{cNo}
 	</select>
 </mapper>

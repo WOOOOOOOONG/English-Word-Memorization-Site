@@ -11,6 +11,7 @@ import com.kh.spring.classs.model.dao.ClassDao;
 import com.kh.spring.classs.model.vo.ClassMember;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.Joinwait;
 import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
@@ -250,5 +251,19 @@ public class ClassServiceImpl implements ClassService{
 	public String selectTell(String ornerId) {
 		// TODO Auto-generated method stub
 		return cDao.selectTell(ornerId);	
+	}
+
+	// 가입신청
+	@Override
+	public void joinClassMember(ClassMember cm) {
+		cDao.joinClassMember(cm);
+		
+	}
+
+	// 신청대기중인애들 가져옴
+	@Override
+	public ArrayList<Joinwait> selectJoinWait(String cNo) {
+		// TODO Auto-generated method stub
+		return cDao.selectJoinWait(cNo);
 	}
 }

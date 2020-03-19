@@ -330,14 +330,16 @@ main .helper span {
          <c:url var="classMemberTest" value="classMemberTest.do">
          	<c:param name="cNo" value="${ cNo }"/>
          </c:url>
-         
+         <!-- 가입 대기  -->
+         <c:url var="classWaitjoin" value="classWaitjoin.do">
+         	<c:param name="cNo" value="${ cNo }"/>
+         </c:url>
          
          
          <li tabindex="0" class="icon-books icon"><a><span>스터디</span></a>
             <ul class="hide">
                <li class="homepage"><a href="${ myClass }">스터디 단어장</a></li>
                <li class="homepage"><a href="${ classTestList }">시험 목록</a></li>
-               <li class="homepage" onclick="goHomepage(this, 1);">유저 채팅창</li>
             </ul>
          </li>
          <c:if test="${ loginMember.mId eq classs.ornerId }">
@@ -345,6 +347,7 @@ main .helper span {
             <ul class="hide">
                <li class="homepage"><a href="${ classMemberRight }">멤버 권한 설정</a></li>
                <li class="homepage"><a href="${ classMemberTest }">시험 정보 보기</a></li>
+               <li class="homepage"><a href="${ classWaitjoin }">가입 요청</a></li>
             </ul>
          </li>
          <li tabindex="0" class="icon-settings icon"><a><span>스터디 관리</span></a>
