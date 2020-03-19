@@ -17,7 +17,7 @@
         
         .voca{
         	width:300px;
-        	height:100px;
+        	height:140px;
         	cursor:pointer;
         	padding:4px;
         	margin:10px;
@@ -27,15 +27,29 @@
         	border-radius:5px;
         }
         .titleSpan{
-        	width:30px;
-        	border:1px solid red;
-        	padding:10px;
+        	width:290px;
+        	padding:0px 0px 0px 10px;
         	font-size:22px;
         	font-weight:bold;
         	overflow:hidden;
         	white-space:nowrap;
         	text-overflow: ellipsis;
         }
+        .vocaSpan{
+        	color:#d9d9d9;
+        	padding: 0px 0px 0px 10px;
+        	width:290px;
+        	border-bottom:1px solid gray;
+        	border:1px solid red;
+        	margin-top:10px;
+        }
+        .novoca{
+        	text-align:center;
+        	font-family: 'Nanum Gothic', sans-serif;
+        	margin:auto;
+        }
+    
+
     </style>
 
 </head>
@@ -43,6 +57,7 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../common/classSideMenubar.jsp"/>
 	<jsp:include page="../classs/fontStore.jsp"/>
+	<jsp:include page="../classs/emoticion.jsp"/>
 	
 	<input type="text" value="${ classs.cNo }" id="cNo" style="display:none;">
 	
@@ -52,13 +67,21 @@
        	<h1>VOCA LIST</h1>
        </div><br>
        <div style=" width:100%; margin:auto; text-align:center;"><br>
-       	<div class="spinner-border text-center" role="status"><span class="sr-only">Loading...</span></div>
+       
+       	<!-- <div class="spinner-border text-center" role="status"><span class="sr-only">Loading...</span></div> -->
+       	<div class="b">
+			(<span class="b-arm">╯</span>°□°）<span class="b-arm">╯</span> <span class="b-table">┻━┻</span> <span class="b-table">┻━┻</span> <span class="b-table">┻━┻</span> <span class="b-table">┻━┻</span>
+			<br>
+			┳━┳ &nbsp;&nbsp;&nbsp;&lt;<span class="b-wheel">⊗</span><span class="b-belt"><span class="b-realbelt">===============</span></span><span class="b-wheel">⊗</span>&gt;
+		</div>
+			
+			
 	</div>
 	<div id="vocalist" style="width: 100%; display:none;">
 	
 	</div>
 	<div id="list" style="width:100%;">
-		
+			
 	</div>
 	<button id="asd" style="display:none;"></button>
 </div>
@@ -66,22 +89,24 @@
 	$(function(){
 		$("#asd").click(function(){
 			var div = $("#list");
-			var count2 = $("#title" + (listCount-1)).attr('id').replace('title','');
-			var count = count2 * 1;
-			
-		
-/* 			for(var i = 1; i <= count ; i++){
-				alert(i);
-			} */
-			for(var i = count; i >= 1 ; i--){
-				var title = $("#title" + i).val(); // 제목
-				var vocaCount = $("#voca"+ i).val(); // 사이즈갯수
+			if(turnturn){
+				$('.b').hide();
+				var count2 = $("#title" + (listCount-1)).attr('id').replace('title','');
+				var count = count2 * 1;
 				
-				div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><br><span>" + vocaCount +" 단어</span></div>");
+				for(var i = count; i >= 1 ; i--){
+					var title = $("#title" + i).val(); // 제목
+					var vocaCount = $("#voca"+ i).val(); // 사이즈갯수
+					
+					div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><span class='vocaSpan'>" + vocaCount +" 단어</span></div>");
+				}
+			}else{
+				div.append("<div class='novoca'>아직 존재하는 단어장이 없습니다.</div>");
+				/* $('.spinner-border').hide(); */
+				$('.b').hide();
 			}
 			
-			//alert($(".titleCount").last().attr('id'));
-			//alert(lastTitle);
+			
 			
 		});
 	});
@@ -97,6 +122,7 @@
 	var vocaCount = 1; // 단어 갯수 번호 
 	var vocaItemCount = 0; // 단어  갯수
 	var lastTitle;
+	var turnturn = false;
 	
 	$(function(){
 		var searchInput = $("#cNo").val();
@@ -120,6 +146,7 @@
                 url : 'http://localhost:1222/getAllData',
                 success : function(data) { 
                 	//console.log(data);
+                	turnturn = true;
                 	var div = $("#vocalist");
                 	
                 	
@@ -150,7 +177,8 @@
                    		}
                    		i++;
                 	}
-                   	$('.spinner-border').hide();
+                   	/* $('.spinner-border').hide(); */
+                   	
                 },
                 error : function() {
                    console.log("error has occured retriving data from MongoServer")

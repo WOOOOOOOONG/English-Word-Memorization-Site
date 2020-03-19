@@ -28,6 +28,9 @@
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 <style>
   @import url(https://fonts.googleapis.com/css?family=Raleway);
@@ -333,6 +336,7 @@ nav {
 		<script>
 		$(function(){
 			alert('${msg}');
+			${msg = null}
 		});
 			
 		</script>
@@ -354,9 +358,9 @@ nav {
     		<a class="gonav" href="viewTotal.ad">관리자페이지</a>
     	</c:if>
     	<c:if test="${ loginMember.mId != 'admin' }">
-    		<a class="gonav"href="mypage.me">마이페이지</a>
+    		<a class="gonav"href="mypage.me" style="color:blue;">마이페이지</a>
     	</c:if>
-    	<a class="gonav" href="Memberlogout.me">로그아웃</a>
+    	<a class="gonav" href="Memberlogout.me" style="color:blue;">로그아웃</a>
     	<span class="gonav">${ loginMember.nickname }님 환영합니다.</span>
     </c:if>
 </div>

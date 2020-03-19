@@ -10,7 +10,7 @@
 <style>
 /* table css */
 .board {
-	width: 90vw;
+	width: 1200px;
 	margin: 0 auto;
 	margin-top: 50px;
 }

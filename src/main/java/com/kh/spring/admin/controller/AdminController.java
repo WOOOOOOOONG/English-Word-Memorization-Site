@@ -56,8 +56,6 @@ public class AdminController {
 	public ModelAndView memberInquireList(
 			ModelAndView mv,
 			HttpServletRequest request) {
-		mv.addObject("msg", "문의가 성공적으로 등록되었습니다");
-			
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
 		System.out.println(loginMember);
 		ArrayList<Inquire> inqList = aService.selectMemberInquireList(loginMember.getmId());
@@ -99,12 +97,13 @@ public class AdminController {
 		String text = request.getParameter("text");
 		String iId = request.getParameter("iId");
 		
-		
 		Inquire inq = new Inquire();
 		inq.setiId(Integer.parseInt(iId));
 		inq.setAnswer(text);
 		
 		int result = aService.insertResponse(inq);
+		
+		
 		if(result > 0) {
 			ArrayList<Inquire> inqList = aService.selectInquireList();
 			mv.addObject("inquireList", inqList);

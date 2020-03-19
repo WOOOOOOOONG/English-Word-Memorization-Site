@@ -56,7 +56,7 @@ nav.sidebar-menu-expanded {
 nav.sidebar {
 	position: fixed;
 	height: 60vh;
-	background: none repeat scroll 0 0 #09f;
+	background: green;
 	color: white;
 	padding: 20px 10px;
 }
@@ -225,19 +225,21 @@ nav.sidebar ul li.active a.expandable:hover {
 }
 
 #t1 {
-	width: 800px;
+	width: 1000px;
 	height: 200px;
 	margin-top: -90px;
-	margin-left: 400px;
+	margin-left: 200px;
 	position: absolute;
 }
 
 /* section3 */
+.sec3 {
+}
 #t2 {
-	width: 800px;
+	width: 1100px;
 	height: 200px;
 	margin-top: -85px;
-	margin-left: 360px;
+	margin-left: 170px;
 	position: absolute;
 }
 

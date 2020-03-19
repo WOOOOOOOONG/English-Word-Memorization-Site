@@ -39,7 +39,7 @@
 }
 
 #table {
-	width: 800px;
+	width:1100px;
 	margin: 0 auto;
 }
 </style>
@@ -66,9 +66,12 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="item" items="${ mInquireList }">
+					<c:set var="index" value="1"/>
+					<c:forEach var="item" items="${ mInquireList }">						
 						<tr class="view">
-							<td>${item.iId}</td>
+							<td>${index}
+								<c:set var="index" value="${index+1}"/>
+							</td>
 							<td>${item.inquirerId}</td>
 							<td>${item.name}</td>
 							<td>${item.type}</td>

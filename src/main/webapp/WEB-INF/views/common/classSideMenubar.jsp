@@ -419,7 +419,7 @@ main .helper span {
       {
          var send =
          JSON.stringify({
-            'search' : 'CSID_44',
+            'search' : 'CSID_54', // 이거 문제있내;;
             'title' : titles
          });
          $.ajax({
