@@ -67,6 +67,10 @@ public class BoardService {
 		return bDao.insertBoardReply(reply);
 	}
 
+	public ArrayList<Reply> allBoardReplyList() {
+		return bDao.allBoardReplyList();
+	}
+	
 	public ArrayList<Reply> selectBoardReplyList(int bId) {
 		return bDao.selectBoardReplyList(bId);
 	}

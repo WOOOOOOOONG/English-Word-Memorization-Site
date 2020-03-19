@@ -169,12 +169,12 @@
 								${i}
 								<c:set var="i" value="${i+1}"/>
 							</td>
-							<td class="title"><a href="#">${item.title}</a></td>
+							<td class="title"><a href="#">${item.title}(${rLength[item.bId]})</a></td>
 							<td class="writer">${item.referNickname}</td>
 							<td class="type"><a href="#">
 								<c:choose>
 									<c:when test="${item.type eq 1}">
-										공지
+										<b>공지</b>
 									</c:when>
 									<c:when test="${item.type eq 2}">
 										단어장

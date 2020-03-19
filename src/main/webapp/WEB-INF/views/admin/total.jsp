@@ -129,7 +129,7 @@ nav.sidebar ul li.active a.expandable:hover {
 /* section */
 .section {
 	width: 1400px;
-	height: 300px;
+	/* height: 300px; */
 	margin-top: 50px;
 	margin-left: auto;
 	margin-right: auto;
@@ -226,10 +226,11 @@ nav.sidebar ul li.active a.expandable:hover {
 
 #t1 {
 	width: 1000px;
-	height: 200px;
+	/* height: 200px; */
 	margin-top: -90px;
 	margin-left: 200px;
-	position: absolute;
+	padding-bottom: 50px;
+	/* position: absolute; */
 }
 
 /* section3 */
@@ -237,10 +238,11 @@ nav.sidebar ul li.active a.expandable:hover {
 }
 #t2 {
 	width: 1100px;
-	height: 200px;
+	/* height: 200px; */
 	margin-top: -85px;
 	margin-left: 170px;
-	position: absolute;
+	padding-bottom: 50px;
+	/* position: absolute; */
 }
 
 /* section4 */

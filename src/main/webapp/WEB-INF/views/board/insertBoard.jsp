@@ -69,7 +69,9 @@
 										<div class="col-md-10">
 											<select name="type" class="form-control" id="job-tipe" style="width:100px;"
 												name="type">
-												<option value="1">공지</option>
+												<c:if test="sessionScope.loginMember.mId eq 'admin'">
+													<option value="1">공지</option>
+												</c:if>
 												<option value="2">단어장</option>
 												<option value="3">클래스</option>
 												<option value="4">잡담</option>
