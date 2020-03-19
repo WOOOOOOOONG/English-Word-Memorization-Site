@@ -69,7 +69,9 @@ public class AdminController {
 	}
 	
 	@RequestMapping("insertInquireView.ad")
-	public String insertInquireView() {	
+	public String insertInquireView(HttpServletRequest request) {	
+		ArrayList<Member> mList = mService.selectList();
+		request.setAttribute("mList", mList);
 		return "admin/inquire";
 	}
 	

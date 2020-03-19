@@ -42,12 +42,18 @@
 	height: 30px;
 	border-radius: 3px;
 }
+
+.selectForm {
+	margin-top: 4px;
+	width: 100px;
+	height: 30px;
+	border-radius: 3px;
+}
 </style>
 </head>
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-
 	<form action="insertInquire.ad" method="post" class="insertForm">
 		<div id="content" class="row">
 			<div class="col-md-10">
@@ -87,7 +93,12 @@
 												<option value="1">시스템</option>
 												<option value="2">사용자</option>
 												<option value="3">단어장</option>
-												<option value="4">클래스</option>
+												<%-- <c:if test="${!empty cNo}">
+													<option value="4" selected>클래스</option>
+												</c:if>
+												<c:if test="${empty cNo }"> --%>
+													<option value="4">클래스</option>
+												<%-- </c:if> --%>
 												<option value="5">기타</option>
 											</select>
 										</div>
@@ -106,16 +117,23 @@
 												$typeDiv.children('p').remove();
 												type.style.float = "left";
 												var $str = $("<p class='pTag'>신고할 유저명 </p>");
+												var $memberSelect = 
+													"<select class='form-control' id='job-tipe' style='width:100px;'>"
+														+ '<c:forEach var="item" items="${mList}">'
+														+ '<option value="${item.mId}">${item.nickname}</option>'
+														+ '</c:forEach>'
+													+ "</select>";
+												console.log($memberSelect);
 												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");
 												$typeDiv.append($str);
-												$typeDiv.append($textInput);
+												$typeDiv.append($memberSelect);
 												break;
 											case "3":
 												$typeDiv.children('input').remove();
 												$typeDiv.children('p').remove();
 												type.style.float = "left";
 												var $str = $("<p class='pTag'>신고할 게시글 번호 </p>");
-												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");
+												var $textInput = $("<input type='text' value='${reportedBoard}' class='textInput' name='reportedId'>");
 												var $typeDiv = $("#typeDiv");
 												$typeDiv.append($str);
 												$typeDiv.append($textInput);
@@ -125,7 +143,7 @@
 												$typeDiv.children('p').remove();
 												type.style.float = "left";
 												var $str = $("<p class='pTag'>신고할 클래스 번호 </p>");
-												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");
+												var $textInput = $("<input type='text' value='${reportedClass}' class='textInput' name='reportedId'>");
 												var $typeDiv = $("#typeDiv");
 												$typeDiv.append($str);
 												$typeDiv.append($textInput);

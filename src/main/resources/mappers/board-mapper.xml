@@ -79,6 +79,11 @@
 		WHERE RID = #{rId}
 	</delete>
 	
+	<select id="allBoardReplyList" resultMap="replyResultMap">
+		SELECT *
+		FROM REPLY
+	</select>
+	
 	<select id="selectBoardReplyList" resultMap="replyResultMap">
 		SELECT *
 		FROM REPLY
