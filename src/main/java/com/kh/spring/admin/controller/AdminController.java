@@ -14,6 +14,7 @@ import com.kh.spring.admin.model.vo.Inquire;
 import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.board.model.vo.Board;
 import com.kh.spring.classs.model.service.ClassService;
+import com.kh.spring.classs.model.vo.ClassMember;
 import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
@@ -208,6 +209,30 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("/total.cl")
+	public ModelAndView classTotal(ModelAndView mv) {
+		ArrayList<Classs> cList = cService.selectClassList();
+		ArrayList<Classs> cvList = cService.classViewList();
+		
+		mv.addObject("cList", cList);
+		mv.addObject("cvList", cvList);
+		mv.setViewName("statistics/class/total");
+		
+		return mv;
+	}
+	
+	@RequestMapping("/classify.cl")
+	public ModelAndView classify(ModelAndView mv) {
+		ArrayList<Classs> cList = cService.selectClassList();
+		ArrayList<Classs> cvList = cService.classViewList();
+		
+		mv.addObject("cList", cList);
+		mv.addObject("cvList", cvList);
+		mv.setViewName("statistics/class/classify");
+		
+		return mv;
+	}
+	
 	@RequestMapping("/inquireStat.ad")
 	public ModelAndView inquireStatistics(
 			ModelAndView mv) {
@@ -215,6 +240,35 @@ public class AdminController {
 		
 		mv.addObject("inquireList", inq);
 		mv.setViewName("statistics/inquire/inquire");
+		return mv;
+	}
+	
+	@RequestMapping("/detailMember.ad")
+	public ModelAndView detailMember(ModelAndView mv, String mId) {
+		Member mem = mService.selectOne(mId);
+		ArrayList<Inquire> inq = aService.selectInquireList();
+		ArrayList<ClassMember> classList = cService.selectMyClassList(mId);
+		ArrayList<Classs> cList = new ArrayList<>();
+		ArrayList<Inquire> iList = new ArrayList<>();
+		
+		for(ClassMember c : classList) {
+			cList.add(cService.selectClassOne(c.getcNo()));
+		}
+		
+		for(Inquire i : inq) {
+			if(i.getReportedId() != null) {
+				if(i.getReportedId().equals(mId)) {
+					iList.add(i);
+				}
+			}
+		}
+		
+		mv.addObject("detailMember", mem);
+		mv.addObject("iList", iList);
+		mv.addObject("cList", cList);
+		
+		mv.setViewName("admin/detailMember");
+		
 		return mv;
 	}
 }

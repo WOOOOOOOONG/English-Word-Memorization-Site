@@ -265,14 +265,14 @@ nav.sidebar ul li.active a.expandable:hover {
 }
 
 .chart {
-	background: whitesmoke;
+	/* background: whitesmoke; */
 	width: 1350px;
 	height: 300px;
 	margin: 0 auto;
 }
 
 .chart2 {
-	background: whitesmoke;
+	/* background: whitesmoke; */
 	width: 650px;
 	height: 300px;
 }
@@ -377,17 +377,17 @@ nav.sidebar ul li.active a.expandable:hover {
 			<div class="section sec1" id="sec1">
 				<h4 class="title">관리자정보</h4>
 				<p class="subtitle">관리자 정보에요</p>
-				<div class="avatar" style="width: 350px;">
+				<div class="avatar" style="width: 350px; margin-left: 250px;">
 					<img id="myphoto"
 						src="${ pageContext.request.contextPath }/resources/profileimg/${loginMember.profileimg}" />
 					<h2>${sessionScope.loginMember.nickname}</h2>
 					<p>${sessionScope.loginMember.introduce}</p>
 				</div>
-				<p class="profile">방문자 수 : ${fn:length(logList)}</p>
+				<p class="profile" style="">방문자 수 : ${fn:length(logList)}</p>
 				<p class="profile">보유 회원 수 : ${fn:length(mList)}</p>
 				<p class="profile">등록된 단어장 수 :</p>
 				<p class="profile">등록된 클래스 수 : ${fn:length(cList)}</p>
-				<div style="margin-top: 20px; border: 1px solid black;"></div>
+				<div style="margin-top: 0px; width:100; height:30px;"></div>
 			</div>
 		</section>
 
@@ -395,8 +395,8 @@ nav.sidebar ul li.active a.expandable:hover {
 			<div class="section sec2" id="sec2">
 				<h4 class="title">회원 정보</h4>
 				<p class="subtitle">회원 관련 정보입니다</p>
-				<button type="button" class="btn btn-outline-secondary moreBtn"
-					onclick="goHomePage(1)">자세히</button>
+				<!-- <button type="button" class="btn btn-outline-secondary moreBtn"
+					onclick="goHomePage(1)">크게 보기</button> -->
 				<div class="table" id="t1" style="">
 					<table id="table1" class="display table_id">
 						<thead>
@@ -412,7 +412,7 @@ nav.sidebar ul li.active a.expandable:hover {
 						<tbody>
 							<c:if test="${ mList ne null }">
 								<c:forEach var="item" items="${ mList }">
-									<tr class="view">
+									<tr onclick="detailMember('${item.mId}');">
 										<td>${ item.mId }</td>
 										<td>${ item.name }</td>
 										<td>${ item.nickname }</td>
@@ -433,6 +433,18 @@ nav.sidebar ul li.active a.expandable:hover {
 										</select></td>
 									</tr>
 								</c:forEach>
+								<script>
+									function detailMember(mId) {
+										console.log("hi?");
+										var width = 920;
+										var height = 620;
+										
+										var popupX = (window.screen.width / 2) - (width / 2);
+										var popupY = (window.screen.height / 2) - (height / 2);
+										window.open('detailMember.ad?mId='+mId, '', 'status=no, height=' + height  
+											+ ', width=' + width  + ', left='+ popupX + ', top='+ popupY);
+									}
+								</script>
 							</c:if>
 						</tbody>
 					</table>
@@ -461,8 +473,8 @@ nav.sidebar ul li.active a.expandable:hover {
 			<div class="section sec3" id="sec3">
 				<h4 class="title">문의 정보</h4>
 				<p class="subtitle">문의 관련 정보입니다</p>
-				<button type="button" class="btn btn-outline-secondary moreBtn"
-					onclick="goHomePage(2);">자세히</button>
+				<!-- <button type="button" class="btn btn-outline-secondary moreBtn"
+					onclick="goHomePage(2);">크게 보기</button> -->
 				<div class="table" id="t2">
 					<table id="table2" class="display table_id">
 						<thead>
@@ -626,9 +638,9 @@ nav.sidebar ul li.active a.expandable:hover {
 				<h6 class="title2">클래스 통계</h6>
 				<div class="chart">
 					<div class="chart2 left">
-						<button type="button"
+						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(3);">자세히</button>
+							onclick="goHomePage(3);">크게 보기</button> -->
 						<div class="table chart-table">
 							<div id="chart_divC" style="width: 650px; height: 300px">
 								<script>
@@ -649,7 +661,7 @@ nav.sidebar ul li.active a.expandable:hover {
 										]);
 										var options = {
 											title : '인기 클래스',
-											backgroundColor : "whitesmoke",
+											backgroundColor : "",
 											focusTarget : 'category',
 											hAxis : {
 												title : '',
@@ -699,9 +711,9 @@ nav.sidebar ul li.active a.expandable:hover {
 						</div>
 					</div>
 					<div class="chart2 left">
-						<button type="button"
+						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(4);">자세히</button>
+							onclick="goHomePage(4);">크게 보기</button> -->
 						<div class="table chart-table">
 							<div id="piechart_4d" style="width: 650px; height: 300px;">
 								<c:set var="cType0" value="0" />
@@ -766,7 +778,7 @@ nav.sidebar ul li.active a.expandable:hover {
 											titleFontSize : 18,
 											fontSize : 18,
 											is3D : true,
-											backgroundColor : "whitesmoke"
+											backgroundColor : ""
 										};
 					
 										var chart = new google.visualization.PieChart(document
@@ -784,9 +796,9 @@ nav.sidebar ul li.active a.expandable:hover {
 				<h6 class="title2">문의 통계</h6>
 				<div class="chart">
 					<div class="chart2">
-						<button type="button"
+						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(5);">자세히</button>
+							onclick="goHomePage(5);">크게 보기</button> -->
 						<c:set var="type0" value="0" />
 						<c:set var="type1" value="0" />
 						<c:set var="type2" value="0" />
@@ -831,7 +843,7 @@ nav.sidebar ul li.active a.expandable:hover {
 										titleFontSize : 18,
 										fontSize : 20,
 										is3D : true,
-										backgroundColor : "whitesmoke"
+										backgroundColor : ""
 									};
 				
 									var chart = new google.visualization.PieChart(document
@@ -849,17 +861,17 @@ nav.sidebar ul li.active a.expandable:hover {
 				<h6 class="title2">방문 통계</h6>
 				<div class="chart">
 					<div class="chart2 left">
-						<button type="button"
+						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(6);">자세히</button>
+							onclick="goHomePage(6);">크게 보기</button> -->
 						<div class="table chart-table" id="t3">
 							<div id="chart_div1" style="width: 650px; height: 300px"></div>
 						</div>
 					</div>
 					<div class="chart2 left">
-						<button type="button"
+						<!-- button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(7);">자세히</button>
+							onclick="goHomePage(7);">크게 보기</button> -->
 						<div class="table chart-table" id="t4">
 							<div id="chart_div2" style="width: 650px; height: 300px"></div>
 						</div>
@@ -896,7 +908,7 @@ nav.sidebar ul li.active a.expandable:hover {
 											[ '12월', arr1[12] ], ]);
 									var options = {
 										title : '월별 방문내역',
-										backgroundColor : "whitesmoke",
+										backgroundColor : "",
 										focusTarget : 'category',
 										hAxis : {
 											title : 'Time of Day',
@@ -999,7 +1011,7 @@ nav.sidebar ul li.active a.expandable:hover {
 									
 									var options = {
 										title : '일자별 방문내역(' + curMonth + '월)',
-										backgroundColor : "whitesmoke",
+										backgroundColor : "",
 										focusTarget : 'category',
 										hAxis : {
 											title : '',
@@ -1046,20 +1058,20 @@ nav.sidebar ul li.active a.expandable:hover {
 								}
 							</script>
 				</div>
-				<br> <br>
+				<br><br>
 
 				<!-- voca -->
 				<h6 class="title2">단어장 통계</h6>
 				<div class="chart">
 					<div class="chart2 left">
-						<button type="button"
+						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(8);">자세히</button>
+							onclick="goHomePage(8);">크게 보기</button> -->
 					</div>
 					<div class="chart2 left">
-						<button type="button"
+						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(9);">자세히</button>
+							onclick="goHomePage(9);">크게 보기</button> -->
 					</div>
 				</div>
 			</div>
