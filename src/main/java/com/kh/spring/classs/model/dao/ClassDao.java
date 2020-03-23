@@ -42,6 +42,12 @@ public class ClassDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("ClasssMapper.selectClassList");
 	}
+	
+	// 클래스 view 가져오기
+	public ArrayList<Classs> classViewList() {
+	   // TODO Auto-generated method stub
+	   return (ArrayList)sqlSession.selectList("ClasssMapper.classViewList");
+	}
 
 	// 카테고리 리스트
 	public ArrayList<Category> selectCateList() {

@@ -52,6 +52,11 @@ public class ClassServiceImpl implements ClassService{
 		// TODO Auto-generated method stub
 		return cDao.selectClassList();
 	}
+	
+	// 클래스 view 가져오기
+	public ArrayList<Classs> classViewList() {
+	   return cDao.classViewList();
+	}
 
 	// 카테고리 리스트
 	@Override

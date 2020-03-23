@@ -24,6 +24,9 @@ public interface ClassService {
 
 	// 클래스 전체 리스트 가져오기
 	ArrayList<Classs> selectClassList();
+	
+	// 클래스 view 가져오기
+	ArrayList<Classs> classViewList();
 
 	// 카테고리 리스트
 	ArrayList<Category> selectCateList();
