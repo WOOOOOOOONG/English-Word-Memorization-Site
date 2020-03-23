@@ -47,6 +47,11 @@
 		SELECT *
 		FROM CLASSS
 	</select>
+	<select id="classViewList" resultMap="classResultSet">
+	   SELECT *
+	   FROM CLASSS
+	   ORDER BY MEMBER_COUNT_NOW DESC
+	</select>
 	<select id="selectCateList" resultMap="cateResultSet">
 		SELECT *
 		FROM CATEGORY
