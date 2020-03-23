@@ -97,4 +97,11 @@
 		update member set name = #{name},BIRTH_DATE=#{birthDate},
 		ADDRESS=#{address},UPDATE_DATE=sysdate where MID = #{mId}
 	</update>
+	<select id="getNickname" parameterType="string" resultType="string">
+		select NICKNAME from member where MID=#{fId}
+	</select>
+	
+	<select id="checkEmail" parameterType="string" resultType="int">
+		select Count(*) from Member where EMAIL=#{email}
+	</select>
 </mapper>

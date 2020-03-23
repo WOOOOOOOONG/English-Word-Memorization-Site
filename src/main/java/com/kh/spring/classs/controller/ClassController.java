@@ -322,7 +322,7 @@ public class ClassController {
 			 		@RequestParam(value="img1", required=false) MultipartFile file1,
 			 		@RequestParam(value="img2", required=false) MultipartFile file2,
 			 		@RequestParam(value="img3", required=false) MultipartFile file3,
-			 		Classs classs ) {
+			 		Classs classs ) throws IOException {
 		// String id = request.getSession().getAttribute("loginUser").getId();
 		Member m = (Member) request.getSession().getAttribute("loginMember");
 		classs.setOrnerId(m.getmId());
@@ -383,6 +383,19 @@ public class ClassController {
 		// 사진까지 넣었으면 해당 클래스로 이동해야하지만 아직 만든게없으므로 클래스목로긍로 이동함.
 		//mv.setViewName("myClass.do");
 		//mv.setViewName("ClassList.do");
+		
+		// 클래스용 채팅로그 만들기 ssh
+	      String file = cNo + "chatlog.txt";
+	      String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
+	      File f = new File(filepath);
+	      f.createNewFile();
+	     /* // 대화를위한 친구리스트에 추가
+	      Friend fr = new Friend();
+	      fr.setmId(m.getmId());
+	      fr.setGroupName("클래스");
+	      fr.setfId(cNo);
+	      fService.insertFriend(fr);*/
+		
 		
 		// 클래스멤버
 		ClassMember cm = new ClassMember();

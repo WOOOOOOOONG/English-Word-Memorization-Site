@@ -19,16 +19,18 @@ import com.kh.spring.classs.model.vo.ClassMember;
 import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.mail.MailSender;
+import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
 
 
-@SessionAttributes({"classs","cNo","cList","cmList","cateList"})
+@SessionAttributes({"classs","cNo","cList","cmList","cateList","mycList"})
 @Controller
 public class commonController {
 	@Autowired
 	private ClassService cService;
-	
+	@Autowired
+	private MemberService mService;
 	@RequestMapping(value="/login.me")
 	public String gologin() {
 		return "common/login";
@@ -53,6 +55,7 @@ public class commonController {
 			}
 			mv.addAttribute("cmList",cmList);
 			mv.addAttribute("cList",cList);
+			mv.addAttribute("mycList",cList);
 			mv.addAttribute("cateList",cateList);
 		}
 				
@@ -62,14 +65,18 @@ public class commonController {
 	// 이메일 인증코드 발송 메소드
 	@RequestMapping(value="/email.ck")
 	public void checkEmail(HttpServletResponse response,String email, String code) throws IOException {
-		
-		//Member result = new MemberService().checkEmail(findEmail,findPhone);
-		
-		
-		String content = "이메일 인증코드는 "+code+"입니다.";
-		MailSender mailSender = new MailSender();
-		mailSender.sendMail(email,"테스트","[SEW] 이메일 인증코드입니다.",content);
 		PrintWriter out = response.getWriter();
-		out.write("success");
+		int result = mService.checkEmail(email);
+		if (result < 1) {
+			String content = "이메일 인증코드는 "+code+"입니다.";
+			MailSender mailSender = new MailSender();
+			mailSender.sendMail(email,"테스트","[SEW] 이메일 인증코드입니다.",content);
+			
+			out.write("success");
+		}else {
+			
+			out.write("중복된 이메일입니다.");
+		}
+		
 	}
 }
