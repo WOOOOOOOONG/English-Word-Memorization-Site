@@ -42,13 +42,13 @@
 	<select id="selectBoardList" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
-		ORDER BY BID DESC
+		ORDER BY CREATE_DATE DESC
 	</select>
 	
 	<select id="boardAllList" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
-		ORDER BY BID DESC
+		ORDER BY CREATE_DATE DESC
 	</select>
 	
 	<insert id="insertBoard">

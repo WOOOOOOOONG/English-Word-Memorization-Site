@@ -144,6 +144,16 @@ nav.sidebar ul li.active a.expandable:hover {
 	}
 }
 
+.view {
+	cursor: pointer;
+}
+
+.textarea {
+	width: 1200px;
+	height: 250px;
+	border-radius: 3px;
+}
+
 .title {
 	padding-top: 20px;
 	padding-left: 30px;
@@ -189,12 +199,14 @@ nav.sidebar ul li.active a.expandable:hover {
 	width: 280px;
 	padding: 2em 0.5em;
 	text-align: center;
-	margin-left: 30px;
+	margin-top: -30px;
+	margin-left: 80px;
 	float: left;
 }
 
 .avatar img {
 	width: 110px;
+	height: 110px;
 	border-radius: 50%;
 	overflow: hidden;
 	border: 4px solid #ffea92;
@@ -235,7 +247,9 @@ nav.sidebar ul li.active a.expandable:hover {
 
 /* section3 */
 .sec3 {
+	
 }
+
 #t2 {
 	width: 1100px;
 	/* height: 200px; */
@@ -363,16 +377,16 @@ nav.sidebar ul li.active a.expandable:hover {
 			<div class="section sec1" id="sec1">
 				<h4 class="title">관리자정보</h4>
 				<p class="subtitle">관리자 정보에요</p>
-				<div class="avatar">
-					<img
-						src="https://s3.amazonaws.com/uifaces/faces/twitter/kolage/128.jpg" />
-					<h2>홍길동</h2>
-					<p>자기소개</p>
+				<div class="avatar" style="width: 350px;">
+					<img id="myphoto"
+						src="${ pageContext.request.contextPath }/resources/profileimg/${loginMember.profileimg}" />
+					<h2>${sessionScope.loginMember.nickname}</h2>
+					<p>${sessionScope.loginMember.introduce}</p>
 				</div>
 				<p class="profile">방문자 수 : ${fn:length(logList)}</p>
 				<p class="profile">보유 회원 수 : ${fn:length(mList)}</p>
 				<p class="profile">등록된 단어장 수 :</p>
-				<p class="profile">등록된 클래스 수 :</p>
+				<p class="profile">등록된 클래스 수 : ${fn:length(cList)}</p>
 				<div style="margin-top: 20px; border: 1px solid black;"></div>
 			</div>
 		</section>
@@ -398,7 +412,7 @@ nav.sidebar ul li.active a.expandable:hover {
 						<tbody>
 							<c:if test="${ mList ne null }">
 								<c:forEach var="item" items="${ mList }">
-									<tr>
+									<tr class="view">
 										<td>${ item.mId }</td>
 										<td>${ item.name }</td>
 										<td>${ item.nickname }</td>
@@ -410,7 +424,13 @@ nav.sidebar ul li.active a.expandable:hover {
 										<c:if test="${ item.userStatus eq 'N'}">
 											<c:set var="selectedN" value="selected" />
 										</c:if>
-										<td>${item.userStatus}</td>
+										<td><c:url var="updateStatus" value="updateStatus.me">
+												<c:param name="mId" value="${ item.mId }" />
+												<c:param name="userStatus" value="${ item.userStatus }" />
+											</c:url> <select id="statusSelected" onchange="changeStatus(this);">
+												<option value="Y" ${ selectedY }>Y</option>
+												<option value="N" ${ selectedN }>N</option>
+										</select></td>
 									</tr>
 								</c:forEach>
 							</c:if>
@@ -424,7 +444,7 @@ nav.sidebar ul li.active a.expandable:hover {
 							"language" : {
 								"emptyTable" : "등록된 회원이 없습니다."
 							},
-							"pageLength": 3,
+							"pageLength": 10,
 		                });
 		            });  
 					
@@ -454,7 +474,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								<th>문의 제목</th>
 								<th>등록일</th>
 								<th>답변여부</th>
-								<th>신고된 아이디</th>
+								<th>신고된 번호</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -462,36 +482,137 @@ nav.sidebar ul li.active a.expandable:hover {
 							<c:forEach var="item" items="${ inquireList }">
 								<c:set var="i" value="${i+1}" />
 								<tr class="view">
-									<td>${item.iId}</td>
+									<td>${i}</td>
 									<td>${item.inquirerId}</td>
 									<td>${item.name}</td>
-									<td>${item.type}</td>
+									<td><c:if test="${item.type eq 0}">
+											시스템
+										</c:if> <c:if test="${item.type eq 1}">
+											사용자
+										</c:if> <c:if test="${item.type eq 2}">
+											단어장
+										</c:if> <c:if test="${item.type eq 3}">
+											클래스
+										</c:if> <c:if test="${item.type eq 4}">
+											게시판
+										</c:if> <c:if test="${item.type eq 5}">
+											기타
+										</c:if></td>
 									<td>${item.title}</td>
 									<td>${item.registDate}</td>
 									<td>${item.isAnswer}</td>
 									<td>${item.reportedId}</td>
 								</tr>
+								<tr class="inquire">
+									<td colspan="8"><textarea
+											style="width: 100%; height: 200px"
+											placeholder="${item.content}" readonly></textarea></td>
+									<td style="display: none;"></td>
+									<td style="display: none;"></td>
+									<td style="display: none;"></td>
+									<td style="display: none;"></td>
+									<td style="display: none;"></td>
+									<td style="display: none;"></td>
+									<td style="display: none;"></td>
+								</tr>
+								<!-- 답변이 이미 작성되었으면 보여주기만 하고, 버튼을 '작성' 대신 '삭제'로 바꾼다. -->
+								<c:if test="${item.isAnswer eq 'Y'}">
+									<tr class="answer">
+										<td colspan="8"><textarea
+												style="width: 100%; height: 200px"
+												placeholder="${item.answer}" readonly></textarea></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+									</tr>
+									<tr class="answer-button" style="background: none">
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<c:url var="responseDelete" value="responseDelete.ad">
+											<c:param name="iId" value="${item.iId}" />
+										</c:url>
+										<td><button type="button" onclick="responseDelete();">답변
+												삭제</button></td>
+									</tr>
+								</c:if>
+								<c:if test="${item.isAnswer eq 'N' }">
+									<tr class="answer">
+										<td colspan="8"><textarea class="textarea" id="textarea${item.iId}"></textarea></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+										<td style="display: none;"></td>
+									</tr>
+									<tr class="answer-button" style="background: none">
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td>
+											<form action="response.ad" method="post">
+												<textarea name="text" class="resText" id="resText${item.iId}" style="display:none;"></textarea>
+												<input type="text" name="iId" value="${item.iId}" id="iId${item.iId}" style="display:none;">
+												<script>
+													var textarea = $('#textarea${item.iId}');
+													textarea.change(function() {
+														var resText = $('#resText${item.iId}');
+														resText.val(this.value);
+													});
+												</script> 
+												<button>답변 등록</button>
+											</form>
+										</td>
+									</tr>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
 
 					<script>
-		            $(document).ready(function () {
-		            	// DataTable 정의
-						$('#table2').DataTable({
-			            	"ordering":false,
-			            	"pageLength": 3,
-							"language" : {
-								"emptyTable" : "등록된 문의가 없습니다."
-							}
+			            $(document).ready(function () {
+			            	// DataTable 정의
+							$('#table2').DataTable({
+				            	"ordering":false,
+				            	"pageLength": 40,
+								"language" : {
+									"emptyTable" : "등록된 문의가 없습니다."
+								}
+				            });
+			            	
+			            	// 문의/답변란 토글 기능
+			                $(".inquire").hide();
+			                $(".answer").hide();
+			                $(".answer-button").hide();
+			                
+			              //content 클래스를 가진 div를 표시/숨김(토글)
+				            $(".view").click(function() {
+				             	$(this).next(".inquire").slideToggle();
+				             	$(this).next(".inquire").next(".answer").slideToggle();
+				             	$(this).next(".inquire").next(".answer").next(".answer-button").slideToggle();
+				            });
 			            });
-		            	
-		            	// 문의/답변란 토글 기능
-		                $(".inquire").hide();
-		                $(".answer").hide();
-		                $(".answer-button").hide();
-		            });
-	        	</script>
+			            
+			            function responseDelete() {
+			            	if(window.confirm('답변을 삭제하시겠습니까?')) {
+			            		location.href='${responseDelete}';
+			            	}
+			            }
+	        		</script>
 				</div>
 			</div>
 		</section>
@@ -508,15 +629,156 @@ nav.sidebar ul li.active a.expandable:hover {
 						<button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(3);">자세히</button>
+						<div class="table chart-table">
+							<div id="chart_divC" style="width: 650px; height: 300px">
+								<script>
+									google.charts.load('current', {
+										packages : [ 'corechart', 'bar' ]
+									});
+									google.charts.setOnLoadCallback(drawAxisTickColors);
+					
+									function drawAxisTickColors() {
+										var data = new google.visualization.DataTable();
+										var data = new google.visualization.DataTable();
+										data.addColumn('string', 'Element');
+										data.addColumn('number', 'Percentage');
+										data.addRows([
+											<c:forEach var="item" items="${cvList}">
+												['${item.title}', ${item.nowMemberCount}], 
+											</c:forEach>
+										]);
+										var options = {
+											title : '인기 클래스',
+											backgroundColor : "whitesmoke",
+											focusTarget : 'category',
+											hAxis : {
+												title : '',
+												format : 'dd',
+												viewWindow : {
+												//   min: [7, 0, 0],
+												//   max: [37, 30, 30]
+												},
+												textStyle : {
+													fontSize : 14,
+													color : '#053061',
+													bold : true,
+													italic : false,
+												},
+												titleTextStyle : {
+													fontSize : 18,
+													color : '#053061',
+													bold : true,
+													italic : false
+												},
+												gridlines : {
+													count : 24
+												}
+											},
+											vAxis : {
+												textStyle : {
+													fontSize : 18,
+													color : '#67055f',
+													bold : false,
+													italic : false
+												},
+												titleTextStyle : {
+													fontSize : 18,
+													color : '#67055f',
+													bold : true,
+													italic : false
+												}
+											}
+										};
+					
+										var chart = new google.visualization.ColumnChart(document
+												.getElementById('chart_divC'));
+										chart.draw(data, options);
+									}
+								</script>
+							</div>
+						</div>
 					</div>
 					<div class="chart2 left">
 						<button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(4);">자세히</button>
+						<div class="table chart-table">
+							<div id="piechart_4d" style="width: 650px; height: 300px;">
+								<c:set var="cType0" value="0" />
+								<c:set var="cType1" value="0" />
+								<c:set var="cType2" value="0" />
+								<c:set var="cType3" value="0" />
+								<c:set var="cType4" value="0" />
+								<c:set var="cType5" value="0" />
+								<c:set var="cType6" value="0" />
+								<c:set var="cType7" value="0" />
+								<c:forEach var="item" items="${cvList}">
+									<c:choose>
+										<c:when test="${item.cateId eq 0}">
+											<c:set var="cType0" value="${cType0 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 1}">
+											<c:set var="cType1" value="${cType1 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 2}">
+											<c:set var="cType2" value="${cType2 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 3}">
+											<c:set var="cType3" value="${cType3 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 4}">
+											<c:set var="cType4" value="${cType4 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 5}">
+											<c:set var="cType5" value="${cType5 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 6}">
+											<c:set var="cType6" value="${cType6 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 7}">
+											<c:set var="cType7" value="${cType7 + 1}" />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<script type="text/javascript">
+									var type = new Array();
+									type[0] = ${cType0};
+									type[1] = ${cType1};
+									type[2] = ${cType2};
+									type[3] = ${cType3};
+									type[4] = ${cType4};
+									type[5] = ${cType5};
+									type[6] = ${cType6};
+									type[7] = ${cType7};
+									
+									google.charts.load("current", {
+										packages : [ "corechart" ]
+									});
+									google.charts.setOnLoadCallback(drawChart);
+									function drawChart() {
+										var data = google.visualization.arrayToDataTable([
+												[ 'Task', 'Hours per Day' ], [ '토익', type[0] ],
+												[ '9급 공무원', type[1] ], [ '경찰', type[2] ], [ '수능', type[3] ],
+												[ '기타', type[4] ], [ 'ㄴㄴ', type[5] ], [ 'ㅇㅇ', type[6] ], [ 'ㄹㄹ', type[7] ] ]);
+										 
+										var options = {
+											title : '클래스 분포',
+											titleFontSize : 18,
+											fontSize : 18,
+											is3D : true,
+											backgroundColor : "whitesmoke"
+										};
+					
+										var chart = new google.visualization.PieChart(document
+												.getElementById('piechart_4d'));
+										chart.draw(data, options);
+									}
+								</script>
+							</div>
+						</div>
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 
 				<!-- inquire -->
 				<h6 class="title2">문의 통계</h6>
@@ -575,16 +837,13 @@ nav.sidebar ul li.active a.expandable:hover {
 									var chart = new google.visualization.PieChart(document
 											.getElementById('piechart_3d'));
 									chart.draw(data, options);
-									/* console.log(data.wg[0].c[0].v); // 나중에 이용
-									console.log(data.wg[0].c[1].v); */
 								}
 							</script>
 							</div>
 						</div>
 					</div>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 
 				<!-- visit -->
 				<h6 class="title2">방문 통계</h6>
@@ -702,10 +961,8 @@ nav.sidebar ul li.active a.expandable:hover {
 									</c:forEach>
 									
 									$("#prev").click(function() {
-										/* console.log(curMonth); */
 										if(curMonth > 1) {
 											curMonth = curMonth - 1;
-											/* console.log(curMonth); */
 											drawAxisTickColors2();
 										}
 									});
@@ -713,7 +970,6 @@ nav.sidebar ul li.active a.expandable:hover {
 									$("#next").click(function() {
 										if(curMonth < 12) {
 											curMonth = curMonth + 1;
-											/* console.log(curMonth); */
 											drawAxisTickColors2();
 										}
 									});
@@ -790,8 +1046,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								}
 							</script>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 
 				<!-- voca -->
 				<h6 class="title2">단어장 통계</h6>
@@ -851,7 +1106,7 @@ nav.sidebar ul li.active a.expandable:hover {
 
 		<div style="height: 30px;"></div>
 	</c:if>
-	
+
 	<c:if test="${sessionScope.loginMember.mId ne 'admin'}">
 		<script>
 			window.onload = function() {
