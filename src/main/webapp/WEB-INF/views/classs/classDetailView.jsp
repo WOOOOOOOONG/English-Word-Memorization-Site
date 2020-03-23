@@ -10,6 +10,7 @@
 <!-- 스와이프 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script> 
+    <script src="https://kit.fontawesome.com/97134254f3.js" crossorigin="anonymous"></script>
     
     
 <style>
@@ -38,6 +39,11 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../classs/summerNote.jsp" />
 	<!-- 전체 -->
+	<c:url var="inquireView" value="insertInquireView.ad">
+      <c:param name="reportedClass" value="${classs.cNo}"/>
+   </c:url>
+   <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a></i>
+	
     <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 408px; margin-top: 0px; background: #ebebeb; display: block;">
         <div style="margin-top: 0px;">
 
@@ -45,11 +51,12 @@
             <div style="width:60pc; margin:0 auto; overflow:hidden; position:relative;">
                 <!-- 찐 내용 시작-->
                 <div style=" margin-bottom:60px; width:700px; overflow:hidden; background-color:#fff; margin:auto;">
-
                     <!-- 사진, 지역 , 제목-->
                     <header>
+                    	
                         <!-- 사진 -->
-                        <div style="position:relative; height:360px;">
+                        
+                        <div style="position:relative; height:360px;" >
                         	  <div class="swiper-container swiper1" style="width:700px; height:360px; position: relative; top:30px; border: 1px solid gray; cursor: pointer;">
 			                    <div class="swiper-wrapper">
 			                        <div class="swiper-slide">
@@ -175,11 +182,11 @@
 
                             <!-- 버튼 -->
                             <div>
-                                <%-- <input type="button" class="sinchenog" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
-                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto" value="참여 하기"> --%>
                                 <input type="button" class="sinchenog" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
+                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt;  margin:auto" value="신청 하기"> 
+                               <%--  <input type="button" class="sinchenog2" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
                                     display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto" value="참여 하기"
-                                    data-toggle="modal" data-target=".sincheong">
+                                    data-toggle="modal" data-target=".sincheong"> --%>
                             </div>
                         </section>
                     </div>
@@ -203,7 +210,7 @@
 						contentType:"application/json; charset=utf-8",
 						success:function(data){
 							if(data == 2){
-								alert("가입이 완료되었습니다.");
+								alert("신청이 완료되었습니다.");
 								location.href="ClassList.do";
 							}else if(data == 1){
 								alert("로그인 후에 이용하실수 있습니다.");
@@ -236,31 +243,43 @@
             });
         </script>
        
+   <!-- 오른쪽 fixed -->
+   <%-- 
+   	<div style="position:fixed; width:240px; top:190px; left:1330px;  border:1px solid orange; background:white; padding: 24px 9pt 9pt; font-family: 'Nanum Gothic', sans-serif;">
+   		<div style=" width:80%; text-align:center; margin:auto;">
+   			<h1 style="margin:0 9pt 35px; font-size:13pt; font-weight:bold; color:#333; word-break: keep-all; lien-height:1.5em;">${ classs.title }</h1>
+   		</div>
+   		<div style="width:80%; border-top:1px solid #f2f2f2; text-align:center; margin:auto;">
+   			<ul style="padding: 24px 9pt; list-style:none;">
+   				<li style="display:list-item;">
+   				<c:choose>
+		   			<c:when test="${ !empty classs.schedule  }">
+		   				<b style="line-height:1.6em;">${ classs.schedule }</b><br><br>
+		   				<h1 style="margin:0 9pt 35px; font-size:13pt; color:#333; word-break: keep-all; lien-height:1.5em;">${ classs.nowMemberCount }명이 함께하고 있습니다.</h1>	
+		   			</c:when>
+		   			<c:otherwise>
+		   				<b style="line-height:1.6em;">언제든지 참여 가능!</b><br><br>
+		   				<h1 style="margin:0 9pt 35px; font-size:14px; color:#333; word-break: keep-all; lien-height:1.5em;">${ classs.nowMemberCount }명이 함께하고 있습니다.</h1>
+		   			</c:otherwise>
+   				</c:choose>
+   				</li>
+   			</ul>
+   		</div>
+   		<div style="width:80%; border-top:1px solid #f2f2f2; text-align:center; margin:auto;">
+   				<i class="far fa-angry" style="color:orange;"><a href="#" style="color:orange; text-decoration:none;">신고하기</a></i>
+   		</div>
+   </div>      
+   --%>
         
         
-        
-   <!--       가입 
-	<div class="modal fade sincheong" tabindex="-1" role="dialog"
-		aria-labelledby="myLargeModalLabel" aria-hidden="true">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<div>
-					<div style="display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 40;">
-						모달 백그라운드
-						<div style="bottom: 0; left: 0; position: absolute; right: 0; top: 0; background-color: rgba(10, 10, 10, 0.86);"></div>
-
-						<div style="width: 100%; height:500px; margin: 0; display: flex; box-orient: vertical; box-direction: normal; flex-direction: column; overflow: hidden; background: white; z-index: 41; border-radius: 15px;">
-								<textarea name="comment" id="summernote" style="margin-top:20px; margin:50px;"></textarea>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
+   
 	<script>
         
 	
     </script>
+	
+	
+
 	
 </body>
 </html>

@@ -38,7 +38,6 @@
 <body>
 	<%-- <c:if test="${sessionScope.loginMember.mId eq 'admin'}"> --%>
 		<jsp:include page="../common/left-menubar.jsp" />
-	
 		<form action="response.ad" method="POST">
 			<div class="table">
 				<table id="table_id" class="display">
@@ -174,7 +173,7 @@
 		            	if(text == "") {
 		            		alert("답변 내용을 입력하세요");
 		            	}else {
-		            		location.href = "http://localhost:8800/spring/response.ad?text="+text+"&iId="+iId;
+		            		location.href = "response.ad?text="+text+"&iId="+iId;
 		            	}
 		            }
 	        	</script>

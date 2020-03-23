@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring.classs.model.vo.ClassMember;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.classs.model.vo.Joinwait;
 import com.kh.spring.classs.model.vo.TestVoca;
 import com.kh.spring.common.model.vo.Category;
 import com.kh.spring.common.model.vo.Storage;
@@ -204,5 +205,18 @@ public class ClassDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("ClasssMapper.selectTell",id);
 	}
+
+	public void joinClassMember(ClassMember cm) {
+		// TODO Auto-generated method stub
+		sqlSession.insert("ClasssMapper.joinClassMember",cm);
+	}
+
+	// 신청대기중인애들 가져옴
+	public ArrayList<Joinwait> selectJoinWait(String cNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("ClasssMapper.selectJoinWait",cNo);
+	}
+	
+	
 
 }

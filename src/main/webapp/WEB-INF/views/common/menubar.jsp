@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -10,10 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>SEW</title>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
   integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
@@ -23,6 +22,16 @@
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 <style>
   @import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
@@ -326,6 +335,7 @@ nav {
 		<script>
 		$(function(){
 			alert('${msg}');
+			${msg = null}
 		});
 			
 		</script>
@@ -352,22 +362,22 @@ nav {
    </script>
 </c:if>
    		 <c:if test="${ loginMember.mId == 'admin' }">
-    		<a class="gonav" href="#">관리자페이지</a>
+    		<a class="gonav" href="viewTotal.ad">관리자페이지</a>
     	</c:if>
     	<c:if test="${ loginMember.mId != 'admin' }">
     		<a class="gonav" href="mypage.me">마이페이지</a>
     	</c:if>
-    	<a class="gonav" href="Memberlogout.me">로그아웃</a>
+    	<a class="gonav" href="Memberlogout.me" style="color:blue;">로그아웃</a>
     	<span class="gonav">${ loginMember.nickname }님 환영합니다.</span>
     </c:if>
 </div>
 <nav id="nav-1">
   <a class="link-2" href="viewMain.ad"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
-  <a class="link-1" href="memberInquireList.ad">고객센터</a>
-  <a class="link-1" href="#">커뮤니티</a>
-  <a class="link-1" href="ClassList.do">클래스</a>
-  <a class="link-1" href="#">단어장</a>
   <a class="link-1" href="viewMain.ad">Home</a>
+  <a class="link-1" href="#">단어장</a>
+  <a class="link-1" href="ClassList.do">클래스</a>
+  <a class="link-1" href="boardList.bo">커뮤니티</a>
+  <a class="link-1" href="memberInquireList.ad">고객센터</a>
 </nav>
 <c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">

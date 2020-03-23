@@ -1,6 +1,8 @@
 package com.kh.spring.board.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +22,16 @@ import com.kh.spring.board.model.service.BoardService;
 import com.kh.spring.board.model.vo.Board;
 import com.kh.spring.board.model.vo.Pagination;
 import com.kh.spring.board.model.vo.Reply;
+import com.kh.spring.board.model.vo.Search;
+import com.kh.spring.member.model.service.MemberService;
+import com.kh.spring.member.model.vo.Member;
 
 @Controller
 public class BoardController {
 	@Autowired
 	private BoardService bService;
+	@Autowired
+	private MemberService mService;
 	
 	@RequestMapping("boardList.bo")
 	public ModelAndView viewBoardList(
@@ -34,6 +41,12 @@ public class BoardController {
 		ArrayList<Board> boardList = bService.selectBoardList(currentPage);
 		
 		if(boardList != null) {
+			Map<Integer, Integer> rLength = new HashMap<>();
+			for(Board boa : boardList) {
+				rLength.put(boa.getbId(), bService.selectBoardReplyList(boa.getbId()).size());
+			}
+
+			mv.addObject("rLength", rLength);
 			mv.addObject("boardList", boardList);
 			mv.addObject("pi", Pagination.getPageInfo());
 			mv.setViewName("board/list");			
@@ -45,7 +58,7 @@ public class BoardController {
 	}
 	
 	@RequestMapping("viewBoardInsert.bo")
-	public String viewBoardInsert() {
+	public String viewBoardInsert(HttpServletRequest request) {
 		return "board/insertBoard";
 	}
 	
@@ -58,7 +71,8 @@ public class BoardController {
 		if(result > 0) {
 			ArrayList<Board> boardList = bService.BoardAllList();
 			Board b = bService.selectBoardOne(boardList.get(0).getbId(), false);
-
+			
+			mv.addObject("msg", "게시글이 성공적으로 등록되었습니다");
 			mv.addObject("boardList", boardList);
 			mv.addObject("detailBoard", b);
 			mv.setViewName("board/detail");
@@ -89,8 +103,10 @@ public class BoardController {
 		if(result > 0) {
 			Board b = bService.selectBoardOne(board.getbId(), false);
 			ArrayList<Board> bList = bService.selectBoardList(1);
+			mv.addObject("msg", "게시판 수정이 완료되었습니다");
 			mv.addObject("boardList", bList);
 			mv.addObject("detailBoard", b);
+			
 			mv.setViewName("board/detail");
 		}else {
 			mv.setViewName("common/errorPage");
@@ -142,8 +158,9 @@ public class BoardController {
 			b = bService.selectBoardOne(bId, flag);
 		}
 		
-		if(b != null) {
+		if(b != null) {	
 			ArrayList<Board> boardList = bService.BoardAllList();
+			
 			mv.addObject("boardList", boardList);
 			mv.addObject("detailBoard", b);
 			mv.addObject("currentPage", currentPage);
@@ -182,7 +199,7 @@ public class BoardController {
 	public String selectBoardReplyList (int bId) {
 		ArrayList<Reply> rList = bService.selectBoardReplyList(bId);
 		
-		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(rList);
 	}
 	
@@ -196,7 +213,58 @@ public class BoardController {
 	@RequestMapping("deleteBoardReply.bo")
 	public ModelAndView deleteBoardReply (
 			ModelAndView mv,
-			Board board) {
+			int rId, int bId) {
+		int result = bService.deleteBoardReply(rId);
+	
+		Board b = bService.selectBoardOne(bId, false);
+		ArrayList<Board> boardList = bService.BoardAllList();
+		mv.addObject("boardList", boardList);
+		mv.addObject("detailBoard", b);
+		mv.setViewName("board/detail");
+		
+		return mv;
+	}
+	
+	@RequestMapping("searchBoard.bo")
+	public ModelAndView searchBoard(
+			ModelAndView mv,
+			Search search) {
+		if(search.getSearchContent().equals("공지")
+				|| search.getSearchContent().equals("단어장")
+				|| search.getSearchContent().equals("클래스")
+				|| search.getSearchContent().equals("잡담")
+				|| search.getSearchContent().equals("전체")) {
+			switch(search.getSearchContent()) {
+			case "공지" :
+				search.setType(1);
+				break;
+			case "단어장" :
+				search.setType(2);
+				break;
+			case "클래스" :
+				search.setType(3);
+				break;
+			case "잡담" :
+				search.setType(4);
+				break;
+				default:
+					break;
+			}
+		}
+		ArrayList<Board> searchList = bService.searchList(search);
+		if(searchList != null) {
+			Map<Integer, Integer> rLength = new HashMap<>();
+			for(Board boa : searchList) {
+				rLength.put(boa.getbId(), bService.selectBoardReplyList(boa.getbId()).size());
+			}
+			mv.addObject("rLength", rLength);
+		}
+
+
+		mv.addObject("boardList", searchList);
+		mv.addObject("search", search);			
+		
+		mv.setViewName("board/list");
 		return mv;
 	}
 }

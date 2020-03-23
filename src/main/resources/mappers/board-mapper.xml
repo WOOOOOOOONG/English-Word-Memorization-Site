@@ -20,7 +20,7 @@
 		<result property="writerNickname" column="WRITER_NICKNAME"/>
 		<result property="content" column="CONTENT"/>
 		<result property="createDate" column="CREATE_DATE"/>
-	</resultMap> 
+	</resultMap>
 	
 	<select id="getListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -42,13 +42,13 @@
 	<select id="selectBoardList" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
-		ORDER BY BID DESC
+		ORDER BY CREATE_DATE DESC
 	</select>
 	
 	<select id="boardAllList" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
-		ORDER BY BID DESC
+		ORDER BY CREATE_DATE DESC
 	</select>
 	
 	<insert id="insertBoard">
@@ -74,9 +74,45 @@
 		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT)
 	</insert>
 	
+	<delete id="deleteBoardReply">
+		DELETE FROM REPLY
+		WHERE RID = #{rId}
+	</delete>
+	
+	<select id="allBoardReplyList" resultMap="replyResultMap">
+		SELECT *
+		FROM REPLY
+	</select>
+	
 	<select id="selectBoardReplyList" resultMap="replyResultMap">
 		SELECT *
 		FROM REPLY
 		WHERE BID=#{bId}
+	</select>
+	
+	<select id="searchList" parameterType="Search" resultMap="boardResultMap">
+		<bind name="sv" value="'%' + _parameter.getSearchContent() + '%'"/>
+		SELECT *
+		FROM BOARD
+		<where>
+			<choose>
+				<when test="searchCondition == 0">
+					AND (TITLE LIKE #{sv}
+						OR REFER_NICKNAME LIKE #{sv}
+						OR TYPE = ${type}
+					)
+				</when>
+				<when test="searchCondition == 1">
+					AND TITLE LIKE #{sv}
+				</when>
+				<when test="searchCondition == 2">
+					AND REFER_NICKNAME LIKE #{sv}
+				</when>
+				<when test="searchCondition == 3">
+					AND TYPE = #{type}
+				</when>
+			</choose>
+		</where>
+		ORDER BY BID DESC
 	</select>
 </mapper>

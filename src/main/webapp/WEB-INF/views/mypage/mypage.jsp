@@ -1137,8 +1137,6 @@ body {
         });
         
     </script>
- 
-    
 
     <!-- 스케쥴 일정추가 모달 -->
 	<!-- Modal -->
@@ -1629,7 +1627,9 @@ body {
 		        dataType:"json",
 		        type:"post",
 		   		success:function(data){	
+		   			console.log(data);
 		   			var calendar = new Calendar('#calendar', data);
+		   			
 				},error:function(e){
 					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 				}

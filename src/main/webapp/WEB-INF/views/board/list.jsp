@@ -10,7 +10,7 @@
 <style>
 /* table css */
 .board {
-	width: 90vw;
+	width: 1200px;
 	margin: 0 auto;
 	margin-top: 50px;
 }
@@ -152,6 +152,13 @@
 			</thead>
 			<tbody>
 				<c:set var="i" value="1"/>
+				<c:if test="${empty boardList}">
+					<tr>
+						<td colspan="6">
+						<h6>등록된 게시글이 존재하지 않습니다.</h6>
+						</td>
+					</tr>
+				</c:if>
 				<c:if test="${!empty boardList}">
 					<c:forEach var="item" items="${boardList}">
 						<c:url var="selectedBoard" value="detailBoard.bo">
@@ -162,12 +169,12 @@
 								${i}
 								<c:set var="i" value="${i+1}"/>
 							</td>
-							<td class="title"><a href="#">${item.title}</a></td>
+							<td class="title"><a href="#">${item.title}(${rLength[item.bId]})</a></td>
 							<td class="writer">${item.referNickname}</td>
 							<td class="type"><a href="#">
 								<c:choose>
 									<c:when test="${item.type eq 1}">
-										공지
+										<b>공지</b>
 									</c:when>
 									<c:when test="${item.type eq 2}">
 										단어장
@@ -189,14 +196,61 @@
 		</table>
 		
 		<div class="search">
-			<select>
-				<option value="1" selected>공지</option>
-				<option value="2" selected>단어장</option>
-				<option value="3" selected>클래스</option>
-				<option value="3" selected>잡담</option>
-			</select>
-			<input class="searchData" type="text">
-			<button type="button" class="btn btn-light">검색</button>
+			<form action="searchBoard.bo" method="GET">
+				<select name="searchCondition">
+					<c:choose>
+						<c:when test="${ empty search.searchCondition }">
+							<c:set var="selected0" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 1 }">
+							<c:set var="selected1" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 2 }">
+							<c:set var="selected2" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 3 }">
+							<c:set var="selected3" value="selected"/>
+						</c:when>
+						<c:when test="${ search.searchCondition eq 4 }">
+							<c:set var="selected4" value="selected"/>
+						</c:when>
+					</c:choose>
+					<option value="0" ${selected0}>전체</option>
+					<option value="1" ${selected1}>제목</option>
+					<option value="2" ${selected2}>글쓴이</option>
+					<option value="3" ${selected3}>타입</option>
+				</select>
+				<input type="search" name="searchContent" class="searchData" value="${search.searchContent}">
+				<select class='selectCondition' style='display:none; width:200px;'>
+					<option value='공지' selected>공지</option>
+					<option value='단어장'>단어장</option>
+					<option value='클래스'>클래스</option>
+					<option value='잡담'>잡담</option>
+				</select>
+				<button class="btn btn-light searchBtn">검색</button>
+				<script>
+					var searchCondition = document.getElementsByName('searchCondition');
+					var searchData = document.getElementsByClassName('searchData');
+					var selectCondition = $('.selectCondition');
+					searchCondition = searchCondition[0];
+					searchData = searchData[0];
+					
+					searchCondition.addEventListener('change', function() {
+						if(searchCondition.value == 3) {
+							searchData.style.display = 'none';
+							searchData.value = selectCondition.val();
+							selectCondition.css('display', 'inline');
+						}else {
+							selectCondition.css('display', 'none');
+							searchData.style.display = 'inline';
+						}
+					});
+					
+					selectCondition.change(function() {
+						searchData.value = selectCondition.val();
+					});
+				</script>
+			</form>
 		</div>
 		
 		<!-- paging -->

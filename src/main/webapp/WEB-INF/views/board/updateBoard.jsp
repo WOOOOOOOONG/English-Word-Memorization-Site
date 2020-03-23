@@ -25,6 +25,13 @@
 	margin: 0 auto;
 	margin-top: 50px;
 }
+
+.textarea {
+	width: 1200px;
+	height: 400px;
+	border-radius: 3px;
+}
+
 </style>
 </head>
 
@@ -102,7 +109,7 @@
 										<label for="job-desc" class="control-label col-md-3"
 											style="font-weight: bold">문의 내용</label>
 										<div class="col-md-10">
-											<div id="summernote"></div>
+											<textarea name="content" class="textarea"></textarea>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
 										<div class="col-md-offset-2 col-md-10">
@@ -140,51 +147,6 @@
 		
 		</div>
 		<script>
-			window.onload = function() {
-				$("#summernote").summernote(
-						{
-							"height" : 400,
-							"width" : "1200px",
-							"dialogsInBody" : true,
-							"prettifyHtml" : true,
-							"codemirror" : {
-								"mode" : "text/html",
-								"htmlMode" : true,
-								"lineNumbers" : true,
-								"theme" : "monokai",
-								"width" : "100px",
-								"textWrapping" : true
-							},
-							"disableDragAndDrop" : true,
-							"toolbar" : [
-									[ "paragraph", [ "style" ] ],
-									[ "fontsize",
-											[ "fontname", "fontsize", "color" ] ],
-									[
-											"style",
-											[ "bold", "italic", "underline",
-													"strikethrough", "clear" ] ],
-									[ "paragraph", [ "ol", "ul", "paragraph" ] ],
-									[
-											"insert",
-											[ "table", "link", "picture", "video",
-													"hr" ] ],
-									[ "misc", [ "codeview" ] ] ]
-						});
-				$(".note-editable").html("<p>${detailBoard.content}</p>");
-			}
-			
-			
-
-			var submit = $("#submitBtn");
-			function update() {
-				var text = $($("#summernote").summernote("code")).text();
-
-				var content = $("#saveText");
-				content.html("<input type='text' name='content' value='" + text + "'/>"
-						+ "<input type='text' id='bId' name='bId' value='${detailBoard.bId}'/>");
-			};
-			
 			function cancel() {
 				if(window.confirm("게시판 수정을 취소하고 상세보기로 이동하시겠습니까?")) {
 					location.href = "detailBoard.bo?bId"+${detailBoard.bId};
