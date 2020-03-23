@@ -18,8 +18,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossorigin="anonymous">
     <style>
-
-        .mypageicon{ 
+.mypageicon{ 
    float:left; 
    border-top-left-radius: 10%;
    border-top-right-radius: 10%;
@@ -42,23 +41,15 @@ body {
 .mypageicon >img:hover{
   cursor: pointer;
 }
-.mypagecontent{
-   height:730px;
-   margin-left:25%;
-   margin-top:50px;
-   width:700px;
+ .mypagecontent{
   display:none;
-    border:1px solid black;
-  border-top-left-radius: 3%;
-   border-top-right-radius: 3%;
-   border-bottom-left-radius: 3%;
-   border-bottom-right-radius: 3%;
-   
-}
+  width:100%;
+  height:100%;
+} 
 #myintroduce{
     width:100%;
-    height:90%;
-    margin-left:5%;
+    height:80%;
+    margin-left:2%;
     resize: none;
 }
 .myicon{
@@ -70,21 +61,17 @@ body {
    border-bottom-left-radius: 10%;
    border-bottom-right-radius: 10%;
 }
-#profilecontent{
-    
-    background:rgb(43, 235, 196);
-}
-#profilephoto{
-  width:40%; 
-  height:300px;
-  background:rgb(43, 235, 196); 
+
+ #profilephoto{
+  width:50%; 
+  height:40%;
   margin:2.5%;
-  border-top-left-radius: 3%;
-  border-top-right-radius: 3%;
-  border-bottom-left-radius: 3%;
-  border-bottom-right-radius: 3%;
   text-align: center;
-  float:left;
+} 
+#profilecontent{
+	width:95%;
+	height:95%;
+	margin:2.5%;
 }
 .profilespan{
   width:15%; 
@@ -94,8 +81,8 @@ body {
 #profilechangebtn{
   width:30%;
   height:40px;
-  margin-left:35%;
-  margin-bottom: 20px;
+  margin-right:35%;
+  margin-top:20px;
 }
 #photoinput{
   height: 100%; width:100%;
@@ -114,11 +101,13 @@ body {
   cursor: pointer;
 }
 
-.col-form-label{
- width:20%;
+.profilelabel{
+  width:20%;
   margin-left:10%;
   float: left;
   margin-right: 15%;
+  font-size: 2em;
+  line-height:40px;
 }
 *, *:before, *:after {
 -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
@@ -164,17 +153,16 @@ body {
   margin-top: -7.5px;
   cursor: pointer;
 }
-
 .left {
   border-width: 7.5px 10px 7.5px 0;
   border-color: transparent rgba(160, 159, 160, 1) transparent transparent;
-  left: 20px;
+  left:10px;
 }
 
 .right {
   border-width: 7.5px 0 7.5px 10px;
   border-color: transparent transparent transparent rgba(160, 159, 160, 1);
-  right: 20px;
+  right:10px;
 }
 
 .month {
@@ -354,6 +342,8 @@ body {
   letter-spacing: .5px;
   padding: 2px 16px;
   vertical-align: top;
+  text-align: left;
+  widtH: 100%;
 }
 
 .event.empty {
@@ -376,10 +366,10 @@ body {
 .legend {
   position: absolute;
   width: 100%;
-  <!-- 버전1  background: rgb(230, 193, 247);-->
-  backgroubd : rgb(184, 138, 203);
+  background: rgb(230, 193, 247);
+  <!--버전1 background : rgb(184, 138, 203);-->
   line-height: 30px;
-  bottom:5%;
+  bottom:4.1%;
 }
 
 .entry {
@@ -389,6 +379,7 @@ body {
   display: inline-block;
   line-height: 30px;
   background: transparent;
+  float: left;
 }
 
 .entry:after {
@@ -555,7 +546,7 @@ body {
 .createBtn{
 	text-decoration:none; 
 	color:red; 
-	margin-left:550px; 
+	float:right;
 	font-family:cinzel;
 }
 .createBtn:hover{
@@ -568,7 +559,9 @@ body {
 	padding-left:10px;
 	width: 60%;
 	height: 100%;
-	font-size:1.15em;
+	font-size:1.8em;
+	float: left;
+    margin-left: 20%;
 	border-bottom-color: rgb(206, 212, 218);
 	border-bottom-left-radius: 4px;
 	border-bottom-right-radius: 4px;
@@ -590,7 +583,7 @@ body {
 	border-top-right-radius: 4px;
 	border-top-style: solid;
 	border-top-width: 1px;
-	margin-left:15%;
+	
 }
 #updateArea{
 	width:100%;
@@ -606,13 +599,253 @@ body {
 	margin:5%;
 }
 .textdivarea{
-	margin-left:15%;
-	font-size:1.05em;
+	margin-left:20%;
+	font-size:1.55em;
+	text-align:left;
 }
 .inputdivarea{
 	height:35px;
 }
+#updateMemberbtn{
+	float: left;
+    width: 60%;
+    margin-left: 20%;
+}
+ ul.shelf {
+	 list-style: none;
+	 border: 20px solid #82430c;
+	 background:#92531c;
+	 border-top: 0px;
+	 height: 250px;
+	 width: 850px;
+	 margin: 80px auto 0;
+	 padding: 0;
+	 -webkit-perspective: 2500;
+	 -webkit-transform-origin: center top 0;
+	 -webkit-transform: translateY(250px);
+	 
+}
+ ul.shelf li {
+	 width: 80px;
+	 height: 500px;
+	 float: left;
+	 padding: 0;
+	 position: relative;
+	 cursor: pointer;
+	 -webkit-transform: rotateX(0deg) translateY(-250px);
+	 -webkit-transform-style: preserve-3d;
+	 -webkit-transition-property: transform;
+	 -webkit-transition-duration: 100ms;
+}
+ ul.shelf h2 {
+	 -webkit-transform-origin: 0 0 0;
+	 -webkit-transform: rotateZ(90deg) translateY(-80px);
+	 margin: 0;
+	 position: absolute;
+	 line-height: 80px;
+	 width: 500px;
+	 height: 80px;
+	 padding: 0 40px;
+	 box-sizing: border-box;
+}
+ ul.shelf li span {
+	 position: absolute;
+	 display: block;
+	 -webkit-backface-visibility: visible;
+}
+ ul.shelf li span.booklabel {
+	 opacity: 1;
+	 width: 80px;
+	 height: 500px;
+	 color: #fff;
+	 -webkit-transform: rotateX(0deg);
+}
+ ul.shelf li span.booktop {
+	 opacity: 1;
+	 width: 80px;
+	 height: 300px;
+	 -webkit-transform: translateY(-150px) translateZ(-150px) rotateX(90deg);
+}
+ ul.shelf li span.bookleft {
+	 opacity: 1;
+	 width: 300px;
+	 height: 500px;
+	 -webkit-transform: translateX(-150px) translateZ(-150px) rotateY(90deg);
+}
+ ul.shelf li span.bookright {
+	 opacity: 1;
+	 width: 300px;
+	 height: 500px;
+	 -webkit-transform: translateX(-70px) translateZ(-150px) rotateY(-90deg);
+}
+ ul.shelf li:hover {
+	 -webkit-transform: rotateX(-15deg) translateY(-250px);
+}
+ ul.shelf li:active {
+	 -webkit-transform: rotateX(-20deg) translateY(-250px);
+}
+ ul.shelf li:nth-child(1) {
+	 z-index: 1;
+}
+ ul.shelf li:nth-child(1) span {
+	 background-color: rgb(29, 161, 135);
+}
+ ul.shelf li:nth-child(1) .booklabel {
+	 background-color:rgb(43, 235, 196);
+}
+ ul.shelf li:nth-child(2) {
+	 z-index: 2;
+}
+ ul.shelf li:nth-child(2) span {
+	 background-color: rgb(185, 114, 117);
+}
+ ul.shelf li:nth-child(2) .booklabel {
+	 background-color:rgb(247,151,156);
+}
+ ul.shelf li:nth-child(3) {
+	 z-index: 3;
+}
+ ul.shelf li:nth-child(3) span {
+	 background-color: rgb(179, 133, 55);
+}
+ ul.shelf li:nth-child(3) .booklabel {
+	 background-color: rgba(245, 182, 75);
+}
+ ul.shelf li:nth-child(4) {
+	 z-index: 4;
+}
+ ul.shelf li:nth-child(4) span {
+	 background-color: rgb(159, 149, 163);
+}
+ ul.shelf li:nth-child(4) .booklabel {
+	 background-color: rgb(233, 218,239);
+}
+ ul.shelf li:nth-child(5) {
+	 z-index: 5;
+}
+ ul.shelf li:nth-child(5) span {
+	 background-color: rgb(192, 168, 72);
+}
+ ul.shelf li:nth-child(5) .booklabel {
+	 background-color: rgb(245, 215, 92);
+}
+.bookmain{
+     margin-left:5%;
+     margin-right:5%;
+}
+ .label > h2{
+    width:20px; word-wrap: break-word; text-align:center;
+ }
 
+ .book {
+  margin: auto;
+  margin-top:3%;
+  width: 1200px;
+  height: 700px;
+  perspective: 70rem;
+}
+
+.cover {
+  width:50.5%;
+  height:102%;
+  right: 0.27rem;
+  margin-right: 250px;
+}
+.page {
+  top: 0.25rem;
+  right: 0.27rem;
+  margin-right: 255px;
+  background-color: #e9e6c4;
+  width:50%;
+  height:100%;
+  text-align: right;
+  font-size: 8px;
+  color: #777;
+  font-family: monospace;
+  
+}
+
+.cover, .page {
+  position: absolute;
+  padding: 1rem;
+  transform-origin: 100% 0;
+  border-radius: 5px 0 0 5px;
+  box-shadow: inset 3px 0px 20px rgba(0, 0, 0, 0.2),
+    0px 0px 15px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.cover.turn {
+  animation: bookCover 1.01s forwards;
+}
+.page.turn {
+  animation: bookOpen 2s forwards;
+}
+.page:nth-of-type(1) {
+  animation-delay: 0.05s;
+}
+.page:nth-of-type(2) {
+  animation-delay: 0.22s
+}
+.page:nth-of-type(3) {
+  animation-delay: 0.44s;
+}
+.page:nth-of-type(4) {
+  animation-delay: 0.66s;
+}
+.page:nth-of-type(5) {
+  animation-delay: 0.88s;
+}
+
+
+@keyframes bookOpen {
+  10% { transform-origin:left;  z-index: 10 }
+  30%{z-index: 30 }
+  50% { z-index: 50 }
+  60% { z-index: 100 }
+  100% {  transform-origin:left; 
+  transform: rotateY(-180deg);
+    z-index: 10;}
+}
+@keyframes bookCover {
+  10% {   transform-origin:left; z-index: 900 }
+  50% {   z-index: 40 }
+  100% {  transform-origin:left; 
+  	      transform: rotateY(-180deg);
+          z-index: 1;}
+}
+#backicon{
+	float:right;
+	width:100px;
+	height:100px;
+}
+#backicon:hover{
+	cursor:pointer;
+}
+.goClass{
+	background:rgb(247,151,156);
+	border:1px solid black;
+	width:80%;
+	margin:auto;
+	height:150px;
+	margin-top:15px;
+	border-radius:15px;
+	font-family: 'Nanum Gothic', sans-serif;
+	cursor:pointer;
+	box-shadow:3px 3px 3px gray;
+	overflow:scroll;
+ 	overflow-x:hidden;
+ 	overflow-y:auto;
+}
+.contenttitle{
+	padding:4px 4px 4px;
+	border-bottom:1px solid black;
+	width:50%;
+	margin:auto;
+	font-family:cinzel;
+	font-size:32px;
+	text-align:center;
+}
 </style>
 </head>
 
@@ -639,7 +872,7 @@ body {
     <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="application"/>
     <jsp:include page="../common/menubar.jsp"/>
-    <div id="profile" class="mypageicon">
+    <%-- <div id="profile" class="mypageicon">
 		<figure>
 		    <img src="${ contextPath }/resources/images/user.png" class="myicon">
 		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">프로필 관리</figcaption>
@@ -668,162 +901,244 @@ body {
 		    <img src="${ contextPath }/resources/images/수정.png" class="myicon">
 		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">개인정보 관리</figcaption>
 	   </figure>
+    </div> --%>
+    <br><br>
+    <div id="shelfwrapper" style=" width:100%; height:800px; overflow: hidden;
+      ">
+    <ul class="shelf">
+        <li class="bookmain" id="profile"><span class="booklabel"><h2>Profile</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" id="class"><span class="booklabel"><h2>Class</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" id="dan"><span class="booklabel"><h2>Word</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" id="schedule"><span class="booklabel"><h2>Schedule</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" id="info"><span class="booklabel"><h2>Infomation</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+    
+    </ul> 
     </div>
-    <!-- 프로필 수정 페이지 -->
-    <div id="profilecontent" class="mypagecontent">
-        <!-- 프로필 사진 -->
-        <form method="post" action="profile.me" enctype="multipart/form-data">
-        <input type="text"name="mId" style="display:none;" value="${loginMember.mId }">
-        <figure id="profilephoto">
-            <input type="file" id="photoinput" name="photoinput" accept=".jpg,.jpeg,.png,.gif">
-            <img id="myphoto" src="${contextPath }/resources/profileimg/${loginMember.profileimg}" onclick="$('#photoinput').click();" />
-            <!-- <figcaption>학생</figcaption> 회원  등급 -->
-        </figure>
-        <div style="background: rgb(43, 235, 196); width:50%; margin:2.5%; height:300px; float:left;">
-            <!-- 이름 -->
-            <div class="form-group row" style="margin-top:10%;">
-                <label for="username" class="col-form-label">이름</label>
-                <input type="text" readonly class="form-control" id="username" value="${loginMember.name }"
-                 style="width:40%;  float: left;">
-            </div>
-            <!-- 닉네임 -->
-            <div class="form-group row">
-                <label for="mynickname" class="col-form-label">닉네임</label>
-                <input type="text" class="form-control" id="mynickname" name="nickname"
-                 value="${loginMember.nickname }" style="width:40%;  float: left;">
-            </div>
-            <!-- 관심분야 -->
-            <!-- <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" id="inter1">
-                    </div>
-                </div>
-                <label for="inter1" type="text" class="form-control">토익</label>
-            </div>
-
-            <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" id="inter2" >
-                    </div>
-                </div>
-                <label for="inter2" type="text" class="form-control">수능</label>
-            </div>
-
-            <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
-                <div class="input-group-prepend">
-                    <div class="input-group-text">
-                        <input type="checkbox" id="inter3" >
-                    </div>
-                </div>
-                <label for="inter3" type="text" class="form-control">스피킹</label>
-            </div>
-
-            <div class="input-group mb-3" style="width:120px; margin-left:8%; float: left; ">
-                    <div class="input-group-prepend">
-                        <div class="input-group-text">
-                            <input type="checkbox" id="inter4" >
-                        </div>
-                    </div>
-                    <label for="inter4" type="text" class="form-control">공부</label>
-                </div> -->
-        </div>
-
-        <div style="background: rgb(43, 235, 196); width:95%; height:40%; margin:2.5%; float:left;">
+    <div id="deskwrapper" style="background-image: url( 'resources/images/desk.png'); background-repeat: no-repeat;
+     background-size: cover; width:100%; height:0px; overflow: hidden;">
+       <img id="backicon" src="${contextPath }/resources/images/리턴.png" >
+       <div class="book">
+            <div class="page "></div>
+            <div class="page "></div>
+            <div class="page "></div>
+            <div class="page "></div>
+            <!-- 왼쪽 페이지 -->
+            <div class="page "></div>
             
-                <br>
-                <div class="form-group row" style="float:left; width:100%; height:250px;">
-                    <textarea class="form-control" id="myintroduce"name="introduce"
-                     placeholder="자기소개" rows="3">${loginMember.introduce}</textarea>
-                </div>
-            
-            <!-- 자기 소개 -->
-
-            <button class="btn btn-success" id="profilechangebtn">프로필 수정</button>
-           
-        </div>
-		 </form>
-    </div>
-    <script>
-        // 사진 미리보기 함수 
-        $("#photoinput").change(function () {
-            readURL(this);
-            $("#myphoto").css("width", "auto");
-            //var d = $("#photoinput").val();
-            //var file = d.substring(d.lastIndexOf("\\")+1, );
-            //$("#myphoto").attr("src",file);
-        });
-
-    </script>
-    
-    
-    
-	<!-- 클래스 리스트 페이지 -->
-    <div id="classcontent" class="mypagecontent" style="background:rgb(247,151,156)">
-    <div style="padding:4px 4px 4px; border-bottom:1px solid black;  width:50%; margin:auto;font-family:cinzel; font-size:32px; text-align:center;">CLASS LIST</div>
-    	<c:choose>
-		<c:when test="${ !empty cmList }">
-			<div>
-				<a href="classPorm.do" id="createBtn" class="createBtn">Creat Class</a>
-			</div>
-			<div style=" width:98%; height:630px; padding:10px;">
-				<c:choose>
-					<c:when test="${ !empty cList }">
-						<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
-							<div id="goClass${ cList.get(i).cNo }" class="goClass" style="border:1px solid black; width:80%; margin:auto; height:150px; margin-top:15px; border-radius:15px; font-family: 'Nanum Gothic', sans-serif; cursor:pointer; box-shadow:3px 3px 3px gray;">
-								<div style="width:100%; text-align:center;">
-									<c:if test="${cList.get(i).local eq null  }">	
-										<br>
-									</c:if>
-									<c:if test="${cList.get(i).local ne null  }">
-										<span style="font-size:12px; text-align:center; color:orange;">${cList.get(i).local }</span>
-									</c:if>
-								</div>
-								<div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
-									${cList.get(i).title }
-								</div>
-								<div style="width:100%; text-align:center;">
-									<c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
-										<c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
-											<span style="font-family:cinzel;">${ cateList.get(j).name }</span>
-										</c:if>
+             <!-- 오른쪽 페이지 -->
+            <div class="page" style="z-index:10;">
+            	<!-- 프로필 수정 -->
+            	<form class="mypagecontent" id="profilecontent"
+            	 method="post" action="profile.me" enctype="multipart/form-data">
+            	 	<div class="contenttitle">My Profile</div>
+        			<input type="text"name="mId" style="display:none;" value="${loginMember.mId }">
+        			<div id="profilephoto" style="float:left;">
+			        <input type="file" id="photoinput" name="photoinput" accept=".jpg,.jpeg,.png,.gif">
+			        <img id="myphoto" src="${contextPath }/resources/profileimg/${loginMember.profileimg}" onclick="$('#photoinput').click();" />
+					</div>
+			        <div style=" width:40%; margin:2.5%; height:40%; float:left;">
+			            <!-- 이름 -->
+			            <div class="form-group row" style="margin-top:40%;">
+			                <label for="username" class="profilelabel">이름</label>
+			                <input type="text" readonly class="form-control" id="username" value="${loginMember.name }"
+			                 style="width:40%;  float: left;">
+			            </div>
+			            <!-- 닉네임 -->
+			            <div class="form-group row">
+			                <label for="mynickname" class="profilelabel">닉네임</label>
+			                <input type="text" class="form-control" id="mynickname" name="nickname"
+			                 value="${loginMember.nickname }" style="width:40%;  float: left;">
+			            </div>
+			        </div>
+		  			<!-- 자기 소개 -->
+			        <div style=" width:95%; height:30%; margin:2.5%; float:left;">      
+			                <div class="form-group row" style="float:left; width:100%; height:250px;">
+			                    <textarea class="form-control" id="myintroduce"name="introduce"
+			                     placeholder="자기소개" rows="3">${loginMember.introduce}</textarea>
+			                </div>
+			        </div> 
+			        <button class="btn btn-success" id="profilechangebtn">프로필 수정</button>
+		    	</form>
+            	<!-- 클래스 리스트  -->
+			    <div id="classcontent" class="mypagecontent" >
+			    <div class="contenttitle">CLASS LIST</div>
+			    	<c:choose>
+					<c:when test="${ !empty cmList }">
+						<div>
+							<a href="classPorm.do" id="createBtn" class="createBtn">Creat Class</a>
+						</div>
+						<div style=" width:98%; height:630px; padding:10px;">
+							<c:choose>
+								<c:when test="${ !empty cList }">
+									<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
+										<div id="goClass${ cList.get(i).cNo }" class="goClass">
+											<div style="width:100%; text-align:center;">
+												<c:if test="${cList.get(i).local eq null  }">	
+													<br>
+												</c:if>
+												<c:if test="${cList.get(i).local ne null  }">
+													<span style="font-size:12px; text-align:center; color:orange;">${cList.get(i).local }</span>
+												</c:if>
+											</div>
+											<div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
+												${cList.get(i).title }
+											</div>
+											<div style="width:100%; text-align:center;">
+												<c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
+													<c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
+														<span style="font-family:cinzel;">${ cateList.get(j).name }</span>
+													</c:if>
+												</c:forEach>
+												<span style="font-family:cinzel;"> | ${ cList.get(i).level }</span>
+											</div>
+										</div>
 									</c:forEach>
-									<span style="font-family:cinzel;"> | ${ cList.get(i).level }</span>
-								</div>
-							</div>
-						</c:forEach>
+								</c:when>
+							</c:choose>
+						</div>
 					</c:when>
-				</c:choose>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
-		</c:otherwise>
-		</c:choose>
+					<c:otherwise>
+						<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
+					</c:otherwise>
+					</c:choose>
+					 
+				    <script>
+				    	// 클래스 이동 함수
+				    	$(function(){
+				    		$(".goClass").click(function(){
+				    			var cNo = $(this).prop('id').replace("goClass","");
+				    			location.href='myClass.do?cNo=' + cNo;
+				    		});
+				    	});
+				    </script>
+			    </div>
+            	<!-- 단어장 리스트(미완성) -->
+            	<div id="dancontent" class="mypagecontent" >
+            	<div class="contenttitle">Dan List</div>
+					<button id="mydanlist"class="btn btn-info">햐</button>
+			    </div>
+            	<!-- 스케쥴  -->
+			    <div id="schedulecontent" class="mypagecontent">
+			        <div id="calendar"></div>
+			        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+			    </div>
+			    <!-- 개인정보 수정 -->
+			    <div id="infocontent" class="mypagecontent" >
+            <form id="updateMemberForm" method="post" onsubmit="return insertcheck();" action='${contextPath}/update.me'>
+                <div class="contenttitle">My Info</div>
+                <div id="updateArea" style="float:left;">
+                    <div class="textdivarea">아이디</div>
+                    <div class="inputdivarea">
+                        <input type="text" name="mId" readonly value="${loginMember.mId }" >
+                    </div>
+                    <div class="commentarea"></div>
+
+                    <div class="textdivarea">비밀번호</div>
+                    <div class="inputdivarea">
+                        <input type="password" name="pwd" placeholder="변경 시에만 적어주세요.">
+                    </div>
+                    <div class="commentarea"></div>
+
+                    <div class="textdivarea">이름</div>
+                    <div class="inputdivarea">
+                        <input type="text" name="name" required value="${loginMember.name }" >
+                    </div>
+                    <div class="commentarea"></div>
+
+                    <div class="textdivarea">이메일</div>
+                    <div class="inputdivarea">
+                        <input type="email" name="email"readonly value="${loginMember.email }">
+                    </div>
+                    <div class="commentarea"></div>
+
+                    <div class="textdivarea">생년월일</div>
+                    <div class="inputdivarea">
+                        <input type="text" name="birthDate" required >
+                    </div>
+                    <div class="commentarea"></div>
+                    <div class="textdivarea">주소</div>
+                    <div class="inputdivarea" style="width:100%;">
+                        <input type="text" id="postcode" name="add1" placeholder="우편번호" style="width: 32%;">
+                        <input type="button" class="btn btn-success btn-sm"
+                         style="width:135px; height:35px; margin-left:10px; margin-bottom: 6px;"
+                            onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+                        <input type="text" id="address" name="add2" style="margin-top: 3px; margin-bottom:6px;" placeholder="주소"><br>
+                        <input type="text" id="detailAddress" name="add3" placeholder="상세주소">
+                    </div>
+                </div>
+                <button type="submit"  class="btn btn-warning" id="updateMemberbtn">변경하기</button>
+            </form>
+        </div>
+            </div>
+            <!-- 뒷 커버 -->
+            <div class="cover" style="z-index:1;">
+            	
+            </div>
+            <!-- 앞 커버 -->
+            <div class="cover" style="z-index:999;">
+            <div id="bookcover" class="contenttitle"></div>
+            </div>
+          </div>
+
     </div>
-    
+   	
     <script>
-    	$(function(){
-    		$(".goClass").click(function(){
-    			var cNo = $(this).prop('id').replace("goClass","");
-    			location.href='myClass.do?cNo=' + cNo;
-    		});
-    	});
+        $(function(){
+        	// 책 오픈
+            $("ul.shelf li").click(function(){
+                $sh = $("#shelfwrapper");
+                $sh.height($sh.height()).animate({height: "0px"}, 1000);
+                $desk = $("#deskwrapper");
+                $desk.height($desk.height()).animate({height: "800px"}, 1000);
+               
+                var id = $(this).attr('id') + "content";
+                $("#bookcover").html($("#"+$(this).attr('id')+" > .booklabel > h2").html());
+                $("#"+id).css("display","block");
+                
+                $(".cover").css("background",$(this).children(".booklabel").css("background"));
+                setTimeout(function() {
+                    $($(".book").children(".cover")[1]).addClass("turn");
+                    var page = $(".book").children(".page");
+                    for(var i=0; i<5; i++){
+                      $(page[i]).addClass("turn");
+                     }
+                }, 1500);  
+            });
+            // 책 닫음
+            $("#backicon").click(function(){
+            	
+            	$desk = $("#deskwrapper");
+                $desk.height($desk.height()).animate({height: "0px"}, 1000);
+            	$sh = $("#shelfwrapper");
+                $sh.height($sh.height()).animate({height: "800px"}, 1000);
+                setTimeout(function() {
+                	$(".page").removeClass("turn");
+                    $(".cover").removeClass("turn");
+                    $('.mypagecontent').css("display","none");
+                }, 1000);  
+                
+            });
+            
+           	// 사진입력시 미리보기  
+            $("#photoinput").change(function () {
+                readURL(this);
+                $("#myphoto").css("width", "auto");
+            });
+            function readURL(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#myphoto').attr('src', e.target.result);
+                    }
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+            
+        });
+        
     </script>
-    <!--  클래스 리스트 끝 -->
-
-    <!-- 단어장 리스트 페이지 -->
-    <div id="dancontent" class="mypagecontent" style="background:rgba(245, 182, 75)">
-	<button class="btn btn-info">햐</button>
-
-    </div>
-
-    <!-- 스케쥴 페이지 -->
-    <div id="tmzpcontent" class="mypagecontent" style="background:rgb(233, 218,239)">
-        <div id="calendar"></div>
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
-    </div>
+ 
+    
 
     <!-- 스케쥴 일정추가 모달 -->
 	<!-- Modal -->
@@ -875,56 +1190,9 @@ body {
 	    </div>
 	  </div>
 	</div>
+
     
-    <!-- 정보 수정 페이지 -->
-    <div id="fixcontent" class="mypagecontent" style="background:rgb(245, 215, 92)">
-            <form id="updateMemberForm" method="post" onsubmit="return insertcheck();" action='${contextPath}/update.me'>
-                <div id="updateArea" style="float:left;">
-                    <div class="textdivarea">아이디</div>
-                    <div class="inputdivarea">
-                        <input type="text" name="mId" readonly value="${loginMember.mId }" >
-                    </div>
-                    <div class="commentarea"></div>
-
-                    <div class="textdivarea">비밀번호</div>
-                    <div class="inputdivarea">
-                        <input type="password" name="pwd" placeholder="변경 시에만 적어주세요.">
-                    </div>
-                    <div class="commentarea"></div>
-
-                    <div class="textdivarea">이름</div>
-                    <div class="inputdivarea">
-                        <input type="text" name="name" required value="${loginMember.name }" >
-                    </div>
-                    <div class="commentarea"></div>
-
-                    <div class="textdivarea">이메일</div>
-                    <div class="inputdivarea">
-                        <input type="email" name="email"readonly value="${loginMember.email }">
-                    </div>
-                    <div class="commentarea"></div>
-
-                    <div class="textdivarea">생년월일</div>
-                    <div class="inputdivarea">
-                        <input type="text" name="birthDate" required >
-                    </div>
-                    <div class="commentarea"></div>
-                    <div class="textdivarea">주소</div>
-                    <div class="inputdivarea" style="width:100%;">
-                        <input type="text" id="postcode" name="add1" placeholder="우편번호" >
-                        <input type="button" class="btn btn-success btn-sm"
-                         style="width:135px; height:35px; margin-left:10px; margin-bottom: 6px;"
-                            onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-                        <input type="text" id="address" name="add2" style="margin-top: 3px; margin-bottom:6px;" placeholder="주소"><br>
-                        <input type="text" id="detailAddress" name="add3" placeholder="상세주소">
-                    </div>
-                </div>
-                <button type="submit"  class="btn btn-warning" id="updateMemberbtn"
-                 style="float:left;width: 60%;  margin-left: 15%;">변경하기</button>
-            </form>
-        </div>
-        <script
-			src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+        <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 		
 	<script>
 	function execDaumPostcode() {
@@ -986,32 +1254,8 @@ body {
 		})
 	</script>
   
-
+<!-- 캘린더 스크립 -->
     <script>
-        $('.mypageicon').click(function () {
-            if ($(this).siblings('.mypageicon').css("display") != 'none') {
-                $(this).siblings('.mypageicon').css("display", "none");
-                var id = $(this).attr('id') + "content";
-                $("#"+id).fadeIn(500);
-            } else {
-                $('.mypagecontent').fadeOut(500);
-                setTimeout(function () {
-                    $('.mypageicon').css("display", "block");
-                }, 500);
-            }
-
-        });
-
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#myphoto').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
         !function () {
 
             var today = moment();
@@ -1063,7 +1307,7 @@ body {
                     this.el.appendChild(this.header);
                 }
 
-                this.title.innerHTML = this.current.format('MMMM YYYY');
+                this.title.innerHTML = this.current.format('YYYY MMMM');
                 
                 $("#selectedyear").val(this.current.format('YYYY-MM'));
             
