@@ -1,0 +1,27 @@
+{
+  "name": "final",
+  "version": "1.0.0",
+  "description": "",
+  "main": "mFunc.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "connect": "^3.7.0",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "http": "^0.0.0",
+    "maxlength-contenteditable": "^1.0.1",
+    "mongodb": "^3.5.2",
+    "mongoose": "^5.8.11",
+    "oracledb": "^4.2.0",
+    "save": "^2.4.0",
+    "simple-oracledb": "^1.4.2",
+    "vanilla-picker": "^2.10.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
