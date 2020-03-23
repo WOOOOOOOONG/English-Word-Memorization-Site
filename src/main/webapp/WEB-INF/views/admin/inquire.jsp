@@ -49,6 +49,16 @@
 	height: 30px;
 	border-radius: 3px;
 }
+
+#hi {
+	width: 300px;
+}
+
+.textarea {
+	width: 1200px;
+	height: 400px;
+	border-radius: 3px;
+}
 </style>
 </head>
 
@@ -88,16 +98,16 @@
 										<label for="job-tipe" class="control-label col-md-2"
 											style="font-weight: bold; float: left; width: 100px; margin-top: 5px;">유형</label>
 										<div class="col-md-10" id="typeDiv">
-											<select name="type" class="form-control" id="job-tipe" style="width:100px;">
-												<option value="0" selected>계정</option>
-												<option value="1">시스템</option>
-												<option value="2">사용자</option>
-												<option value="3">단어장</option>
+											<select name="type" class="form-control type" id="job-tipe" style="width:100px;">
+												<option value="0" selected>시스템</option>
+												<option value="1">사용자</option>
+												<option value="2">단어장</option>
+												<option value="3">클래스</option>
 												<%-- <c:if test="${!empty cNo}">
 													<option value="4" selected>클래스</option>
 												</c:if>
 												<c:if test="${empty cNo }"> --%>
-													<option value="4">클래스</option>
+													<option value="4">게시판</option>
 												<%-- </c:if> --%>
 												<option value="5">기타</option>
 											</select>
@@ -108,48 +118,105 @@
 										</div>
 									</div>
 									<script>
+										var reportId; 
+										window.onload = function() {
+											var selectType = $('.type');
+											<c:if test="${reportedId ne null}">
+												reportId = ${reportedId};
+												<c:choose>
+													<c:when test="${reportType eq 1}">
+														selectType.val(1);
+														var selectData = $('.report');
+														selectData.val(reportId);
+													</c:when>
+													<c:when test="${reportType eq 2}">
+														selectType.val(2);
+														var selectData = $('.report');
+														selectData.val(reportId);
+													</c:when>
+													<c:when test="${reportType eq 3}">
+														selectType.val(3);
+														var selectData = $('.report');
+														selectData.val(reportId);
+													</c:when>
+													<c:when test="${reportType eq 4}">
+														selectType.val(4);
+														var selectData = $('.report');
+														selectData.val(reportId);
+													</c:when>
+												</c:choose>
+											</c:if>
+										}
+									
 										var type = document.getElementById("job-tipe");
 										if(type.addEventListener('change', function() {
 											var $typeDiv = $("#typeDiv");
 											switch(type.value) {
-											case "2":
-												$typeDiv.children('input').remove();
+											case "1":
+												$typeDiv.children('.report').remove();
 												$typeDiv.children('p').remove();
 												type.style.float = "left";
-												var $str = $("<p class='pTag'>신고할 유저명 </p>");
+												var $str = $("<p class='pTag'>신고할 유저명 &nbsp;</p>");
 												var $memberSelect = 
-													"<select class='form-control' id='job-tipe' style='width:100px;'>"
+													"<select class='form-control report' id='report' style='width:100px;' name='reportedId'>"
 														+ '<c:forEach var="item" items="${mList}">'
 														+ '<option value="${item.mId}">${item.nickname}</option>'
 														+ '</c:forEach>'
 													+ "</select>";
-												console.log($memberSelect);
 												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");
 												$typeDiv.append($str);
 												$typeDiv.append($memberSelect);
 												break;
-											case "3":
-												$typeDiv.children('input').remove();
+											case "2":
+												$typeDiv.children('.report').remove();
 												$typeDiv.children('p').remove();
 												type.style.float = "left";
-												var $str = $("<p class='pTag'>신고할 게시글 번호 </p>");
+												var $str = $("<p class='pTag'>신고할 단어장 &nbsp;</p>");
+												var $memberSelect = 
+													"<select class='form-control report' id='report' style='width:100px;' name='reportedId'>"
+														+ '<c:forEach var="item" items="${bList}">'
+														+ '<option value="${item.bId}">${item.title}</option>'
+														+ '</c:forEach>'
+													+ "</select>";
 												var $textInput = $("<input type='text' value='${reportedBoard}' class='textInput' name='reportedId'>");
 												var $typeDiv = $("#typeDiv");
 												$typeDiv.append($str);
-												$typeDiv.append($textInput);
+												$typeDiv.append($memberSelect);
 												break;
-											case "4":
-												$typeDiv.children('input').remove();
+											case "3":
+												$typeDiv.children('.report').remove();
 												$typeDiv.children('p').remove();
 												type.style.float = "left";
-												var $str = $("<p class='pTag'>신고할 클래스 번호 </p>");
+												var $str = $("<p class='pTag'>신고할 클래스 &nbsp;</p>");
+												var $memberSelect = 
+													"<select class='form-control report' id='report' style='width:100px;' name='reportedId'>"
+														+ '<c:forEach var="item" items="${cList}">'
+														+ '<option value="${item.cNo}">${item.title} | ${item.ornerId}</option>'
+														+ '</c:forEach>'
+													+ "</select>";
 												var $textInput = $("<input type='text' value='${reportedClass}' class='textInput' name='reportedId'>");
 												var $typeDiv = $("#typeDiv");
 												$typeDiv.append($str);
-												$typeDiv.append($textInput);
+												$typeDiv.append($memberSelect);
+												break;
+											case "4":
+												$typeDiv.children('.report').remove();
+												$typeDiv.children('p').remove();
+												type.style.float = "left";
+												var $str = $("<p class='pTag'>신고할 게시판 &nbsp;</p>");
+												var $memberSelect = 
+													"<select class='form-control report' id='report' style='width:100px;' name='reportedId'>"
+														+ '<c:forEach var="item" items="${bList}">'
+														+ '<option value="${item.bId}">${item.title} | ${item.referNickname}</option>'
+														+ '</c:forEach>'
+													+ "</select>";
+												var $textInput = $("<input type='text' value='${reportedClass}' class='textInput' name='reportedId'>");
+												var $typeDiv = $("#typeDiv");
+												$typeDiv.append($str);
+												$typeDiv.append($memberSelect);
 												break;
 											default:
-												$typeDiv.children('input').remove();
+												$typeDiv.children('.report').remove();
 												$typeDiv.children('p').remove();
 												break;
 											}
@@ -163,7 +230,7 @@
 										<label for="job-desc" class="control-label col-md-3"
 											style="font-weight: bold">문의 내용</label>
 										<div class="col-md-10">
-											<div id="summernote"></div>
+											<textarea name="content" class="textarea"></textarea>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
 										<div class="col-md-offset-2 col-md-10">
@@ -177,8 +244,7 @@
 				</div>
 			<div>
 					<button class="btn btn-outline-success" id="submitBtn"
-						style="margin-left: 532px"
-						onmouseover="inquire();">작성</button>
+						style="margin-left: 532px">작성</button>
 					<button type="button" class="btn btn-outline-danger"
 						style="margin: 0 auto;" onclick="cancel();">취소</button>
 				</div>
@@ -188,47 +254,6 @@
 			</div>
 		</div>
 		<script>
-			$("#summernote").summernote(
-					{
-						"height" : 400,
-						"width" : "1200px",
-						"dialogsInBody" : true,
-						"prettifyHtml" : true,
-						"codemirror" : {
-							"mode" : "text/html",
-							"htmlMode" : true,
-							"lineNumbers" : true,
-							"theme" : "monokai",
-							"width" : "100px",
-							"textWrapping" : true
-						},
-						"disableDragAndDrop" : true,
-						"toolbar" : [
-								[ "paragraph", [ "style" ] ],
-								[ "fontsize",
-										[ "fontname", "fontsize", "color" ] ],
-								[
-										"style",
-										[ "bold", "italic", "underline",
-												"strikethrough", "clear" ] ],
-								[ "paragraph", [ "ol", "ul", "paragraph" ] ],
-								[
-										"insert",
-										[ "table", "link", "picture", "video",
-												"hr" ] ],
-								[ "misc", [ "codeview" ] ] ],
-						"placeholder" : "문의 내용을 입력하세요"
-					});
-
-			var submit = $("#submitBtn");
-			function inquire() {
-				var text = $($("#summernote").summernote("code")).text();
-
-				var content = $("#saveText");
-				content.html("<input type='text' name='content' value='" + text + "'/>");
-				
-			};
-			
 			function cancel() {
 				if(window.confirm("작성을 취소하고 목록으로 이동하시겠습니까?")) {
 					location.href = "boardList.bo";

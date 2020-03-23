@@ -221,9 +221,34 @@
 					<option value="3" ${selected3}>타입</option>
 				</select>
 				<input type="search" name="searchContent" class="searchData" value="${search.searchContent}">
-				<button class="btn btn-light">검색</button>
+				<select class='selectCondition' style='display:none; width:200px;'>
+					<option value='공지' selected>공지</option>
+					<option value='단어장'>단어장</option>
+					<option value='클래스'>클래스</option>
+					<option value='잡담'>잡담</option>
+				</select>
+				<button class="btn btn-light searchBtn">검색</button>
 				<script>
+					var searchCondition = document.getElementsByName('searchCondition');
+					var searchData = document.getElementsByClassName('searchData');
+					var selectCondition = $('.selectCondition');
+					searchCondition = searchCondition[0];
+					searchData = searchData[0];
 					
+					searchCondition.addEventListener('change', function() {
+						if(searchCondition.value == 3) {
+							searchData.style.display = 'none';
+							searchData.value = selectCondition.val();
+							selectCondition.css('display', 'inline');
+						}else {
+							selectCondition.css('display', 'none');
+							searchData.style.display = 'inline';
+						}
+					});
+					
+					selectCondition.change(function() {
+						searchData.value = selectCondition.val();
+					});
 				</script>
 			</form>
 		</div>

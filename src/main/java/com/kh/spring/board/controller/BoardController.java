@@ -71,7 +71,8 @@ public class BoardController {
 		if(result > 0) {
 			ArrayList<Board> boardList = bService.BoardAllList();
 			Board b = bService.selectBoardOne(boardList.get(0).getbId(), false);
-
+			
+			mv.addObject("msg", "게시글이 성공적으로 등록되었습니다");
 			mv.addObject("boardList", boardList);
 			mv.addObject("detailBoard", b);
 			mv.setViewName("board/detail");
@@ -102,6 +103,7 @@ public class BoardController {
 		if(result > 0) {
 			Board b = bService.selectBoardOne(board.getbId(), false);
 			ArrayList<Board> bList = bService.selectBoardList(1);
+			mv.addObject("msg", "게시판 수정이 완료되었습니다");
 			mv.addObject("boardList", bList);
 			mv.addObject("detailBoard", b);
 			
@@ -250,6 +252,14 @@ public class BoardController {
 			}
 		}
 		ArrayList<Board> searchList = bService.searchList(search);
+		if(searchList != null) {
+			Map<Integer, Integer> rLength = new HashMap<>();
+			for(Board boa : searchList) {
+				rLength.put(boa.getbId(), bService.selectBoardReplyList(boa.getbId()).size());
+			}
+			mv.addObject("rLength", rLength);
+		}
+
 
 		mv.addObject("boardList", searchList);
 		mv.addObject("search", search);			

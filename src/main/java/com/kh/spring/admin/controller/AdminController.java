@@ -11,6 +11,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.admin.model.vo.Inquire;
+import com.kh.spring.board.model.service.BoardService;
+import com.kh.spring.board.model.vo.Board;
+import com.kh.spring.classs.model.service.ClassService;
+import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.member.model.vo.VisitRecord;
@@ -20,11 +24,26 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	@Autowired
+	private BoardService bService;
+	@Autowired
+	private ClassService cService;
+	@Autowired
 	private MemberService mService;
 	
 	@RequestMapping("viewMain.ad")
-	public String viewMain() {
-		return "/common/mainPage";
+	public ModelAndView viewMain(ModelAndView mv) {
+		ArrayList<Member> memberList = mService.selectList();
+		ArrayList<Inquire> inqList = aService.selectInquireList();
+		ArrayList<Classs> cList = cService.selectClassList();
+		ArrayList<Board> bList = bService.BoardAllList();
+		
+		mv.addObject("inquireList", inqList);
+		mv.addObject("mList", memberList);
+		mv.addObject("cList", cList);
+		mv.addObject("bList", bList);
+		mv.setViewName("/common/mainPage");
+		
+		return mv;
 	}
 	
 	@RequestMapping("viewTotal.ad")
@@ -32,10 +51,14 @@ public class AdminController {
 		ArrayList<Member> memberList = mService.selectList();
 		ArrayList<Inquire> inqList = aService.selectInquireList();
 		ArrayList<VisitRecord> vr = aService.selectLogList();
+		ArrayList<Classs> cList = cService.selectClassList();
+		ArrayList<Classs> cvList = cService.classViewList();
 		
 		mv.addObject("logList", vr);
 		mv.addObject("inquireList", inqList);
 		mv.addObject("mList", memberList);
+		mv.addObject("cList", cList);
+		mv.addObject("cvList", cvList);
 		mv.setViewName("admin/total");
 		
 		return mv; 
@@ -57,21 +80,26 @@ public class AdminController {
 			ModelAndView mv,
 			HttpServletRequest request) {
 		Member loginMember = (Member)request.getSession().getAttribute("loginMember");
-		System.out.println(loginMember);
-		ArrayList<Inquire> inqList = aService.selectMemberInquireList(loginMember.getmId());
-		
-		if(!inqList.isEmpty()) {
+		if(loginMember != null) {
+			ArrayList<Inquire> inqList = aService.selectMemberInquireList(loginMember.getmId());
 			mv.addObject("mInquireList", inqList);
+			mv.setViewName("admin/inquire-list");
+		}else {
+			mv.addObject("msg", "로그인 후 이용하실 수 있습니다");
+			mv.setViewName("common/mainPage");
 		}
 		
-		mv.setViewName("admin/inquire-list");
 		return mv;
 	}
 	
 	@RequestMapping("insertInquireView.ad")
 	public String insertInquireView(HttpServletRequest request) {	
 		ArrayList<Member> mList = mService.selectList();
+		ArrayList<Board> bList = bService.BoardAllList();
+		ArrayList<Classs> cList = cService.selectClassList(); 
 		request.setAttribute("mList", mList);
+		request.setAttribute("bList", bList);
+		request.setAttribute("cList", cList);
 		return "admin/inquire";
 	}
 	
@@ -82,6 +110,7 @@ public class AdminController {
 		int result = aService.insertInquire(inq);
 		
 		if(result > 0) {
+			
 			mv.addObject("msg", "문의가 성공적으로 등록되었습니다");
 			
 			ArrayList<Inquire> inqList = aService.selectMemberInquireList(inq.getInquirerId());
@@ -102,19 +131,25 @@ public class AdminController {
 		Inquire inq = new Inquire();
 		inq.setiId(Integer.parseInt(iId));
 		inq.setAnswer(text);
+		System.out.println(text);
 		
 		int result = aService.insertResponse(inq);
 		
 		
 		if(result > 0) {
 			ArrayList<Inquire> inqList = aService.selectInquireList();
+			ArrayList<Member> memberList = mService.selectList();
+			ArrayList<VisitRecord> vr = aService.selectLogList();
+			
+			mv.addObject("logList", vr);
+			mv.addObject("mList", memberList);
 			mv.addObject("inquireList", inqList);
 			mv.addObject("msg", "문의 응답 작성 완료!");
 		}else {
 			mv.addObject("msg", "문의 응답 작성 실패!");
 		}
 		
-		mv.setViewName("/admin/response");
+		mv.setViewName("redirect:/viewTotal.ad");
 		return mv;
 	}
 	
@@ -124,14 +159,18 @@ public class AdminController {
 		int result = aService.deleteResponse(iId);
 		if(result > 0) {
 			ArrayList<Inquire> inqList = aService.selectInquireList();
+			ArrayList<Member> memberList = mService.selectList();
+			ArrayList<VisitRecord> vr = aService.selectLogList();
 			
+			mv.addObject("logList", vr);
+			mv.addObject("mList", memberList);
 			mv.addObject("inquireList", inqList);
 			mv.addObject("msg", "문의 응답 삭제 완료!");
 		}else {
 			mv.addObject("msg", "문의 응답 삭제 실패!");
 		}
 		
-		mv.setViewName("/admin/response");
+		mv.setViewName("redirect:/viewTotal.ad");
 		return mv;
 	}
 	

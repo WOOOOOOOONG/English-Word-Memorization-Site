@@ -43,6 +43,7 @@
 		FROM INQUIRE i
 		JOIN MEMBER m
 		ON m.MID = i.INQUIRER_ID
+		ORDER BY REGIST_DATE DESC
 	</select>
 	
 	<select id="selectMemberInquireList" parameterType="Inquire" resultMap="inquireResultSet">
