@@ -28,11 +28,13 @@
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
   integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Jua|Roboto&display=swap" rel="stylesheet">
     <style>
 /* 전체 틀 */
 html, body {
 	height: 100%;
 	margin: 0;
+	font-family: 'Jua', sans-serif;
 }
 
 .tab, #tab0, #tab1, #tab2, #tab3, #tab4 {
@@ -187,21 +189,21 @@ html, body {
         font-weight: 300;
         }
         #tab0 {
-        font-family: 'Source Sans Pro', sans-serif;
+        /* font-family: 'Source Sans Pro', sans-serif; */
         color: white;
         font-weight: 300;
         }
         #tab0 ::-webkit-input-placeholder {
         /* WebKit browsers */
 
-        font-family: 'Source Sans Pro', sans-serif;
+        /* font-family: 'Source Sans Pro', sans-serif; */
         color: white;
         font-weight: 300;
         }
         #tab0 :-moz-placeholder {
         /* Mozilla Firefox 4 to 18 */
 
-        font-family: 'Source Sans Pro', sans-serif;
+        /* font-family: 'Source Sans Pro', sans-serif; */
         color: white;
         opacity: 1;
         font-weight: 300;
@@ -209,7 +211,7 @@ html, body {
         #tab0 ::-moz-placeholder {
         /* Mozilla Firefox 19+ */
 
-        font-family: 'Source Sans Pro', sans-serif;
+        /* font-family: 'Source Sans Pro', sans-serif; */
         color: white;
         opacity: 1;
         font-weight: 300;
@@ -217,7 +219,7 @@ html, body {
         #tab0 :-ms-input-placeholder {
         /* Internet Explorer 10+ */
 
-        font-family: 'Source Sans Pro', sans-serif;
+        /* font-family: 'Source Sans Pro', sans-serif; */
         color: white;
         font-weight: 300;
         }
@@ -404,7 +406,7 @@ html, body {
 
         .h1-base {
             /* margin-left: 11vw; */
-            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            /* font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
             font-weight: bold;
             font-size: 40px;
         }
@@ -463,7 +465,7 @@ html, body {
 
         #tab4{
             padding: 0;
-            font-family: exo, sans-serif;
+            /* font-family: exo, sans-serif; */
         }
         
         .logintest {

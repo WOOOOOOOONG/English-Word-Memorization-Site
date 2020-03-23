@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,10 +27,15 @@
 
 <link rel="stylesheet"
 	href="//okky.kr/assets/application-02720a4edf0f6edff35025d326624ba0.css" />
+
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <style>
 #top {
 	width: 100vw;
-	height: 580px;
+	height: 400px;
 }
 
 .hero-image {
@@ -69,11 +74,16 @@
     */
 }
 
-.hero h1 {
-	position: relative;
-	text-align: center;
+#vision {
+	width: 500px;
+	text-align: left;
+	float: left;
+	margin-left: 300px;
+}
+
+.hero p {
 	color: white;
-	padding-top: 15rem;
+	padding-top: 9rem;
 	z-index: 2;
 }
 
@@ -82,7 +92,7 @@
 }
 
 nav.pinned {
-	position: fixed;
+	/* position: fixed; */
 	top: 0;
 	background-color: #f5f5f5;
 	transition: 0.2s ease background-color;
@@ -193,9 +203,10 @@ p {
 }
 
 .content {
-	max-width: 60rem;
-	margin: 0 auto;
-	width: 100%;
+	margin-left: 300px;
+	margin-top: -220px;
+	padding-bottom: -400px;
+	float: left;
 }
 
 .hero {
@@ -205,7 +216,10 @@ p {
 }
 
 section {
-	padding: 6rem 0 3rem;
+	max-width: 75rem;
+	margin: 0 auto;
+	margin-top: 50px;
+	width: 100%;
 }
 
 footer {
@@ -219,54 +233,6 @@ footer {
 footer p {
 	margin: 0;
 }
-
-/* Navbar Styles */
-/* nav {
-	height: 3rem;
-	position: relative;
-	width: 100%;
-}
-
-nav ul {
-	height: 3rem;
-	margin: 0;
-	padding: 0;
-	display: inline-block;
-	font-size: 0;
-	list-style: none;
-}
-
-nav ul li {
-	font-size: 1rem;
-	padding: 0;
-	display: inline-block;
-}
-
-nav ul li p {
-	height: 1.5rem;
-	line-height: 1.5rem;
-	margin: 0;
-	padding: 0.75rem 1.5rem;
-}
-
-nav ul li:hover {
-	cursor: pointer;
-	background-color: #eee;
-}
-
-nav ul li.action-item {
-	color: white;
-	background-color: #4155E8;
-}
-
-nav ul li.action-item:hover {
-	color: white;
-	background-color: #3B4CD1;
-}
-
-nav ul.right {
-	float: right;
-} */
 </style>
 <script>
 	$(function() {
@@ -291,262 +257,227 @@ nav ul.right {
 
 	<div class="hero" id="top">
 		<div class="hero-image"></div>
-		<h1>Study with 'SEW'</h1>
+		<p style="font-size: 50px;">Study with 'SEW'
+		</p>
 	</div>
-	<section id="vision">
-		<div class="content">
-			<h1>We Have a Vision</h1>
-			<h2>지루하게 공부하는 단어는 의미가 없습니다.</h2>
-			<p>옥스퍼드 영어사전에 기재된 영단어는 75만개가 넘습니다. 또한, 수능 기출 어휘는 약 2,400개, 공무원 기출
-				영단어 중 직무 공통 영단어만 축소해 3600개입니다. 이렇게 많은 영단어를 외우기 위해서는 꿈에 대한 의지뿐만 아니라
-				가장 중요한 요소가 하나 있습니다. 바로 재미입니다. 재미있게 공부를 하면 시간가는 줄 모르고 꾸준하게 공부할 수
-				있습니다. 저희 'SEW'에서는 사용자분들이 '재미있게'공부할 수 있도록 초점을 맞추어 서비스를 제공합니다.</p>
-			<p>저희 SEW에서 영단어를 즐길 수 있는 방법은 크게 3가지입니다. 스스로 단어장을 만들고, 다른 사용자와
-				공유하고, 같은 목적을 가진 다른 사람과 함께 공부하는 방법입니다. 각각의 방법을 보좌하기 위해 단어장을 낱말카드로 학습할
-				수 있고, 다른 사용자가 만든 좋은 단어장을 공유받아 나의 단어장처럼 사용할 수 있고, 클래스에서 클래스장 하에 실행하는
-				시험으로 틈틈히 자신이 얼마나 외웠는지 테스트하고 나만의 단어 공부 진행표를 마이페이지에서 꼼꼼하게 진행하세요!</p>
-		</div>
-	</section>
-	<section id="product">
-		<div class="content">
-			<h1>인기 단어장 소개</h1>
-			<h2>가장 인기가 많은 단어장입니다</h2>
-			<div id="index" class="content scaffold-list clearfix" role="main">
-				<div class="col-sm-6 main-block-left">
-					<div class="main-block">
-						<h4 class="main-header">
-							<i class="fa fa-flag"></i> 공지사항
-						</h4>
-						<div class="panel panel-default">
-							<!-- Table -->
-							<ul class="list-group">
-								<c:set var="i" value="1"/>
-								<c:forEach var="item" items="${bList}">
-									<c:if test="${item.type eq 1 && i <= 5}">
-										<c:set var="i" value="${i + 1}"/>
-										<li
-											class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
-											<div class="list-title-wrapper">
-												<h5 class="list-group-item-heading list-group-item-evaluate">
-													<a href="detailBoard.bo?bId=${item.bId}">${item.title}</a>
-													<div class="list-group-item-author pull-right clearfix">
-														<div class='avatar avatar-x-small clearfix '>
-															<a href='/user/info/45597' class='avatar-photo'><img
-																src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
-															<div class="avatar-info">
-																<a class="nickname" href="/user/info/45597" title="OKKY">${item.referNickname}</a>
-																<div class="activity">
-																	<span class="fa fa-flash"></span> ${item.views}
-																</div>
-																<div class="date-created">
-																	<span class="timeago" title="2020-02-26 15:06:11.0">${item.createDate }</span>
+	<div id="content">
+		<section id="vision">
+			<!-- <div class="content"> -->
+			<!-- <p style="font-size: 40px; font-family: 'Roboto', sans-serif;">We Have a Vision</p> -->
+			<p style="font-size: 30px;">지루하게 공부하는 단어는 의미가 없습니다.</p>
+			<p>
+				<b style="font-size: 1.5em">옥</b>스퍼드 영어사전에 기재된 영단어는 75만개가 넘습니다. 또한,
+				수능 기출 어휘는 약 2,400개, 공무원 기출 영단어 중 직무 공통 영단어만 축소해 3600개입니다. 이렇게 많은
+				영단어를 외우기 위해서는 꿈에 대한 의지뿐만 아니라 가장 중요한 요소가 하나 있습니다. 바로 재미입니다. 재미있게 공부를
+				하면 시간가는 줄 모르고 꾸준하게 공부할 수 있습니다. 저희 'SEW'에서는 사용자분들이 '재미있게'공부할 수 있도록
+				초점을 맞추어 서비스를 제공합니다.
+			</p>
+			<p>
+				<b style="font-size: 1.5em">저</b>희 SEW에서 영단어를 즐길 수 있는 방법은 크게 3가지입니다.
+				스스로 단어장을 만들고, 다른 사용자와 공유하고, 같은 목적을 가진 다른 사람과 함께 공부하는 방법입니다. 각각의 방법을
+				보좌하기 위해 단어장을 낱말카드로 학습할 수 있고, 다른 사용자가 만든 좋은 단어장을 공유받아 나의 단어장처럼 사용할 수
+				있고, 클래스에서 클래스장 하에 실행하는 시험으로 틈틈히 자신이 얼마나 외웠는지 테스트하고 나만의 단어 공부 진행표를
+				마이페이지에서 꼼꼼하게 진행하세요!
+			</p>
+			<!-- </div> -->
+		</section>
+		<section id="product" style="height: 240px;">
+			<div class="content" id="content1">
+				<!-- <h1>인기 단어장 소개</h1>
+			<h2>가장 인기가 많은 단어장입니다</h2> -->
+				<div id="index" class="content scaffold-list clearfix" role="main">
+					<div class="col-sm-6 main-block-left">
+						<div class="main-block">
+							<h4 class="main-header">
+								<i class="fa fa-flag"></i> 공지사항
+							</h4>
+							<div class="panel panel-default" style="width: 420px;">
+								<!-- Table -->
+								<ul class="list-group">
+									<c:set var="i" value="1" />
+									<c:forEach var="item" items="${bList}">
+										<c:if test="${item.type eq 1 && i <= 5}">
+											<c:set var="i" value="${i + 1}" />
+											<li
+												class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
+												<div class="list-title-wrapper">
+													<h5
+														class="list-group-item-heading list-group-item-evaluate">
+														<a href="detailBoard.bo?bId=${item.bId}">${item.title}</a>
+														<div class="list-group-item-author pull-right clearfix">
+															<div class='avatar avatar-x-small clearfix '>
+																<a href='/user/info/45597' class='avatar-photo'><img
+																	src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+																<div class="avatar-info">
+																	<a class="nickname" href="/user/info/45597"
+																		title="OKKY">${item.referNickname}</a>
+																	<div class="activity">
+																		<span class="fa fa-flash"></span> ${item.views}
+																	</div>
+																	<div class="date-created">
+																		<span class="timeago" title="2020-02-26 15:06:11.0">${item.createDate }</span>
+																	</div>
 																</div>
 															</div>
 														</div>
-													</div>
-												</h5>
-											</div>
-										</li>
-									</c:if>
-								</c:forEach>
-							</ul>
+													</h5>
+												</div>
+											</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-6 main-block-right">
+						<div class="main-block">
+							<h4 class="main-header">
+								<i class="fa fa-star"></i> 인기 게시글
+							</h4>
+							<div class="panel panel-default" style="width: 420px;">
+								<ul class="list-group">
+									<c:set var="i" value="1" />
+									<c:forEach var="item" items="${bList}">
+										<c:if test="${item.type ne 1 && i <= 5}">
+											<c:set var="i" value="${i+1}" />
+											<li
+												class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
+												<div class="list-title-wrapper">
+													<h5
+														class="list-group-item-heading list-group-item-evaluate">
+														<a href="detailBoard.bo?bId=${item.bId}">${item.title}</a>
+														<div class="list-group-item-author pull-right clearfix">
+															<div class='avatar avatar-x-small clearfix '>
+																<a href='/user/info/45597' class='avatar-photo'><img
+																	src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+																<div class="avatar-info">
+																	<a class="nickname" href="/user/info/45597"
+																		title="OKKY">${item.referNickname}</a>
+																	<div class="activity">
+																		<span class="fa fa-flash"></span> ${item.views}
+																	</div>
+																	<div class="date-created">
+																		<span class="timeago" title="2020-02-26 15:06:11.0">${item.createDate }</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</h5>
+												</div>
+											</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</div>
+
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-6 main-block-right">
-					<div class="main-block">
-						<h4 class="main-header">
-							<i class="fa fa-star"></i> 인기 게시글
-						</h4>
-
-						<div class="panel panel-default">
-
-							<!-- Table -->
-
-							<ul class="list-group">
-
-
-
-
-
-
-
-
-								<li
-									class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
-									<div class="list-title-wrapper">
-										<h5 class="list-group-item-heading list-group-item-evaluate">
-											<a href="/article/690626">직장인에게 유용한 사이트 모음 - Ver2020</a>
-											<div class="list-group-item-author pull-right clearfix">
-												<div class='avatar avatar-x-small clearfix '>
-													<a href='/user/info/76792' class='avatar-photo'><img
-														src='//www.gravatar.com/avatar/b874173c946d30379733658897713610?d=identicon&s=10' /></a>
-													<div class="avatar-info">
-														<a class="nickname" href="/user/info/76792" title="함께행복">함께행복</a>
-														<div class="activity">
-															<span class="fa fa-flash"></span> 236
+		</section>
+		<section id="product2" style="height: 300px;">
+			<div class="content" style="height: 220px;">
+				<!-- <h1>인기 단어장 소개</h1>
+			<h2>가장 인기가 많은 단어장입니다</h2> -->
+				<div id="index" class="content scaffold-list clearfix" role="main"
+				style="margin-top: -460px;">
+					<div class="col-sm-6 main-block-left">
+						<div class="main-block">
+							<h4 class="main-header">
+								<i class="fa fa-flag"></i> 인기 단어장
+							</h4>
+							<div class="panel panel-default" style="width: 420px;">
+								<!-- Table -->
+								<ul class="list-group">
+									<c:set var="i" value="1" />
+									<c:forEach var="item" items="${bList}">
+										<c:if test="${item.type eq 1 && i <= 5}">
+											<c:set var="i" value="${i + 1}" />
+											<li
+												class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
+												<div class="list-title-wrapper">
+													<h5
+														class="list-group-item-heading list-group-item-evaluate">
+														<a href="detailBoard.bo?bId=${item.bId}">${item.title}</a>
+														<div class="list-group-item-author pull-right clearfix">
+															<div class='avatar avatar-x-small clearfix '>
+																<a href='/user/info/45597' class='avatar-photo'><img
+																	src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+																<div class="avatar-info">
+																	<a class="nickname" href="/user/info/45597"
+																		title="OKKY">${item.referNickname}</a>
+																	<div class="activity">
+																		<span class="fa fa-flash"></span> ${item.views}
+																	</div>
+																	<div class="date-created">
+																		<span class="timeago" title="2020-02-26 15:06:11.0">${item.createDate }</span>
+																	</div>
+																</div>
+															</div>
 														</div>
-														<div class="date-created">
-															<span class="timeago" title="2020-03-16 11:48:08.0">2020-03-16
-																11:48:08</span>
-														</div>
-													</div>
+													</h5>
 												</div>
-											</div>
-										</h5>
-									</div>
-								</li>
-
-
-
-
-
-
-
-								<li
-									class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
-									<div class="list-title-wrapper">
-										<h5 class="list-group-item-heading list-group-item-evaluate">
-											<a href="/article/691689">프론트엔드 취준생을 위한 기본 지식</a>
-											<div class="list-group-item-author pull-right clearfix">
-												<div class='avatar avatar-x-small clearfix '>
-													<a href='/user/info/61851' class='avatar-photo'><img
-														src='//www.gravatar.com/avatar/036479dee52751c0f96a83b3c145ee56?d=identicon&s=10' /></a>
-													<div class="avatar-info">
-														<a class="nickname" href="/user/info/61851" title="배하람">배하람</a>
-														<div class="activity">
-															<span class="fa fa-flash"></span> 518
-														</div>
-														<div class="date-created">
-															<span class="timeago" title="2020-03-18 12:32:18.0">2020-03-18
-																12:32:18</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</h5>
-									</div>
-								</li>
-
-
-
-
-
-
-
-								<li
-									class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
-									<div class="list-title-wrapper">
-										<h5 class="list-group-item-heading list-group-item-evaluate">
-											<a href="/article/692003">사이트 만들었는데 자랑하고 싶어요..</a>
-											<div class="list-group-item-author pull-right clearfix">
-												<div class='avatar avatar-x-small clearfix '>
-													<a href='/user/info/12067' class='avatar-photo'><img
-														src='//www.gravatar.com/avatar/7f9dff8ec5a1399f56d53f64ca90a030?d=identicon&s=10' /></a>
-													<div class="avatar-info">
-														<a class="nickname" href="/user/info/12067" title="개발자427">개발자427</a>
-														<div class="activity">
-															<span class="fa fa-flash"></span> 57
-														</div>
-														<div class="date-created">
-															<span class="timeago" title="2020-03-18 23:35:41.0">2020-03-18
-																23:35:41</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</h5>
-									</div>
-								</li>
-
-
-
-
-
-
-
-								<li
-									class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
-									<div class="list-title-wrapper">
-										<h5 class="list-group-item-heading list-group-item-evaluate">
-											<a href="/article/692190">이런 form은 css로 만드는 걸까요 js로 만드는
-												걸까요</a>
-											<div class="list-group-item-author pull-right clearfix">
-												<div class='avatar avatar-x-small clearfix '>
-													<a href='/user/info/91431' class='avatar-photo'><img
-														src='//www.gravatar.com/avatar/4ec9d02a5c35137f2deb82352edcbbf7?d=identicon&s=10' /></a>
-													<div class="avatar-info">
-														<a class="nickname" href="/user/info/91431" title="디자인패시브">디자인패시브</a>
-														<div class="activity">
-															<span class="fa fa-flash"></span> 1k
-														</div>
-														<div class="date-created">
-															<span class="timeago" title="2020-03-19 12:44:51.0">2020-03-19
-																12:44:51</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</h5>
-									</div>
-								</li>
-
-
-
-
-
-
-
-								<li
-									class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
-									<div class="list-title-wrapper">
-										<h5 class="list-group-item-heading list-group-item-evaluate">
-											<a href="/article/692821">어느 개발자의 넋두리</a>
-											<div class="list-group-item-author pull-right clearfix">
-												<div class='avatar avatar-x-small clearfix '>
-													<a href='/user/info/52651' class='avatar-photo'><img
-														src='//graph.facebook.com/1277917132275822/picture?width=10&height=10' /></a>
-													<div class="avatar-info">
-														<a class="nickname" href="/user/info/52651" title="이설란">이설란</a>
-														<div class="activity">
-															<span class="fa fa-flash"></span> 2k
-														</div>
-														<div class="date-created">
-															<span class="timeago" title="2020-03-20 15:10:55.0">2020-03-20
-																15:10:55</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</h5>
-									</div>
-								</li>
-
-							</ul>
+											</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</div>
 						</div>
+					</div>
+					<div class="col-sm-6 main-block-right">
+						<div class="main-block">
+							<h4 class="main-header">
+								<i class="fa fa-star"></i> 인기 클래스
+							</h4>
+							<div class="panel panel-default" style="width: 420px;">
+								<ul class="list-group">
+									<c:set var="i" value="1" />
+									<c:forEach var="item" items="${cList}">
+										<c:if test="${item.cateId ne 1 && i <= 5}">
+											<c:set var="i" value="${i+1}" />
+											<li
+												class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">
+												<div class="list-title-wrapper">
+													<h5
+														class="list-group-item-heading list-group-item-evaluate">
+														<a href="classdetail.do?cNo=${item.cNo}">${item.title}</a>
+														<div class="list-group-item-author pull-right clearfix">
+															<div class='avatar avatar-x-small clearfix '>
+																<a href='/user/info/45597' class='avatar-photo'><img
+																	src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+																<div class="avatar-info">
+																	<a class="nickname" href="/user/info/45597"
+																		title="OKKY">${item.ornerId}</a>
+																	<div class="activity">
+																		<span class="fa fa-flash"></span> ${item.classCount}
+																	</div>
+																	<div class="date-created">
+																		<span class="timeago" title="2020-02-26 15:06:11.0">${item.classCreateDate}</span>
+																	</div>
+																</div>
+															</div>
+														</div>
+													</h5>
+												</div>
+											</li>
+										</c:if>
+									</c:forEach>
+								</ul>
+							</div>
 
+						</div>
 					</div>
 				</div>
-			</div>
-	</section>
-	<section id="team">
-		<div class="content">
-			<h1>인기 클래스 소개</h1>
-			<h2>가장 인기가 많은 클래스입니다</h2>
-			<img src="resources/images/단어장캡처.PNG"> <img
-				src="resources/images/단어장캡처.PNG" style="margin-left: 60px;"> <img
-				src="resources/images/단어장캡처.PNG" style="margin-left: 60px;">
-		</div>
-	</section>
-	<footer>
-		<p>
-			<a href="#">built with SEW in KH Academy </a>
-		</p>
-	</footer>
-	<!-- jQuery -->
-	<script
-		src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-	<!-- User scripts -->
-	<script type="text/javascript" src="script.js"></script>
+		</section>
+		<footer>
+			<p>
+				<a href="#">built with SEW in KH Academy </a>
+			</p>
+		</footer>
+		<!-- jQuery -->
+		<script
+			src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<!-- User scripts -->
+		<script type="text/javascript" src="script.js"></script>
+	</div>
 </body>
 </html>

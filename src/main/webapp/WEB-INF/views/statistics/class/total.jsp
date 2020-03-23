@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,9 +12,35 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <title>외웟</title>
 <!--Load the AJAX API-->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<!-- <link rel="stylesheet" href=".../css/left-menubar.css"> -->
+<link rel="stylesheet" type="text/css"
+	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8"
+	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-<!-- <link rel="stylesheet" href="css/chart.css"> -->
+<title>Insert title here</title>
+<style>
+/* sidebar */
+@import "compass/css3";
+
+@import url('https://getbootstrap.com/dist/css/bootstrap.css');
+
+@import
+	url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css")
+	;
 <style>
 /* 전체 */
 body {
@@ -27,117 +55,77 @@ body {
 </head>
 
 <body>
-	<jsp:include page="../../common/left-menubar.jsp" />
-
-
-	<div class="table">
-		<div id="chart_div" style="width: 1300px; height: 600px">
-			<script>
-				google.charts.load('current', {
-					packages : [ 'corechart', 'bar' ]
-				});
-				google.charts.setOnLoadCallback(drawAxisTickColors);
-
-				function drawAxisTickColors() {
-					var data = new google.visualization.DataTable();
-					var data = new google.visualization.DataTable();
-					data.addColumn('string', 'Element');
-					data.addColumn('number', 'Percentage');
-					data.addRows([ [ '1\n시간', 78 ], [ '2\n시간', 21 ],
-							[ '3\n시간', 55 ], [ '4\n시간', 78 ], [ '5\n시간', 21 ],
-							[ '6\n시간', 55 ], [ '7\n시간', 78 ], [ '8\n시간', 21 ],
-							[ '9\n시간', 55 ], [ '10시간', 78 ], [ '11시간', 21 ],
-							[ '12시간', 55 ], [ '13시간', 78 ], [ '14시간', 21 ],
-							[ '15시간', 55 ], [ '16시간', 78 ], [ '17시간', 21 ],
-							[ '18시간', 55 ], [ '19시간', 78 ], [ '20시간', 21 ],
-							[ '21시간', 55 ], [ '22시간', 78 ], [ '23시간', 21 ],
-							[ '24시간', 55 ], ]);
-					var options = {
-						title : '단어 - 전체',
-						backgroundColor : "whitesmoke",
-						focusTarget : 'category',
-						hAxis : {
-							title : 'Time of Day',
-							format : 'dd',
-							viewWindow : {
-							//   min: [7, 0, 0],
-							//   max: [37, 30, 30]
-							},
-							textStyle : {
-								fontSize : 14,
-								color : '#053061',
-								bold : true,
-								italic : false,
-							},
-							titleTextStyle : {
-								fontSize : 18,
-								color : '#053061',
-								bold : true,
-								italic : false
-							},
-							gridlines : {
-								count : 24
-							}
-						},
-						vAxis : {
-							textStyle : {
-								fontSize : 18,
-								color : '#67055f',
-								bold : false,
-								italic : false
-							},
-							titleTextStyle : {
-								fontSize : 18,
-								color : '#67055f',
-								bold : true,
-								italic : false
-							}
-						}
-					};
-
-					var chart = new google.visualization.ColumnChart(document
-							.getElementById('chart_div'));
-					chart.draw(data, options);
-				}
-			</script>
+	<div class="chart">
+		<div class="chart2 left">
+			<div class="table chart-table">
+				<div id="chart_divC" style="width: 1200px; height: 600px">
+					<script>
+									google.charts.load('current', {
+										packages : [ 'corechart', 'bar' ]
+									});
+									google.charts.setOnLoadCallback(drawAxisTickColors);
+					
+									function drawAxisTickColors() {
+										var data = new google.visualization.DataTable();
+										var data = new google.visualization.DataTable();
+										data.addColumn('string', 'Element');
+										data.addColumn('number', 'Percentage');
+										data.addRows([
+											<c:forEach var="item" items="${cvList}">
+												['${item.title}', ${item.nowMemberCount}], 
+											</c:forEach>
+										]);
+										var options = {
+											title : '인기 클래스',
+											backgroundColor : "",
+											focusTarget : 'category',
+											hAxis : {
+												title : '',
+												format : 'dd',
+												viewWindow : {
+												//   min: [7, 0, 0],
+												//   max: [37, 30, 30]
+												},
+												textStyle : {
+													fontSize : 14,
+													color : '#053061',
+													bold : true,
+													italic : false,
+												},
+												titleTextStyle : {
+													fontSize : 18,
+													color : '#053061',
+													bold : true,
+													italic : false
+												},
+												gridlines : {
+													count : 24
+												}
+											},
+											vAxis : {
+												textStyle : {
+													fontSize : 18,
+													color : '#67055f',
+													bold : false,
+													italic : false
+												},
+												titleTextStyle : {
+													fontSize : 18,
+													color : '#67055f',
+													bold : true,
+													italic : false
+												}
+											}
+										};
+					
+										var chart = new google.visualization.ColumnChart(document
+												.getElementById('chart_divC'));
+										chart.draw(data, options);
+									}
+								</script>
+				</div>
+			</div>
 		</div>
-
-		<table class="fixed_headers">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Color</th>
-					<th>Description</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Apple</td>
-					<td>Red</td>
-					<td>These are red.</td>
-				</tr>
-				<tr>
-					<td>Pear</td>
-					<td>Green</td>
-					<td>These are green.</td>
-				</tr>
-				<tr>
-					<td>Grape</td>
-					<td>Purple / Green</td>
-					<td>These are purple and green.</td>
-				</tr>
-				<tr>
-					<td>Orange</td>
-					<td>Orange</td>
-					<td>These are orange.</td>
-				</tr>
-				<tr>
-					<td>Banana</td>
-					<td>Yellow</td>
-					<td>These are yellow.</td>
-				</tr>
-			</tbody>
-		</table>
 	</div>
 </body>
 
