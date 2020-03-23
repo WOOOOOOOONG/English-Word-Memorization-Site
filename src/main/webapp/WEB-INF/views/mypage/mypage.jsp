@@ -1627,9 +1627,7 @@ body {
 		        dataType:"json",
 		        type:"post",
 		   		success:function(data){	
-		   			console.log(data);
 		   			var calendar = new Calendar('#calendar', data);
-		   			
 				},error:function(e){
 					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 				}

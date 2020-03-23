@@ -493,10 +493,16 @@ div>button {
 	                    				data:{email:email,code:code},
 	                    				type:"post",
 	                    				success:function(data){
-	                    					$("#answercode").val(code);
-	                    					$("#hiddenemailbtn").click();
-	                    					StartClock();
-	                    					$("#newMembermodal").css("opacity",0.8);
+	                    					if(data == "success"){
+	                    						
+		                    					$("#answercode").val(code);
+		                    					$('#checkemailen').modal('show'); 
+		                    					$("#checkemailcode").attr('disabled',false);
+		                    					StartClock();
+		                    					$("#newMembermodal").css("opacity",0.8);
+	                    					}else{
+	                    						alert("중복된 이메일입니다.");
+	                    					}
 	                    				},error:function(e){
 	                    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 	                    				}
@@ -560,6 +566,7 @@ div>button {
                             var oldsec = 60;
                             var timerId = null;
                             function setTime(){
+                            	clearInterval(timerId);
                             	oldmin=4;
                             	oldsec=60;
                             }
@@ -584,10 +591,7 @@ div>button {
                                 timerId = setInterval(PrintTime, 1000);
                             }
                             
-                            $("#retryemailcode").click(function(){
-                            	setTime();
-                            	$("#checkemailbtn").click();
-                            });
+                           
                             
                         </script>
 
@@ -693,9 +697,9 @@ div>button {
 						maxlength="6">
 
 					<button id="checkemailcode" class="btn btn-outline-success"
-						style="width: 24%; margin-right: 0.5%; margin-left: 0.5%;">인증</button>
+						style="width: 20%; margin-right: 0.5%; margin-left: 1.5%;">인증</button>
 					<button id="retryemailcode" class="btn btn-outline-danger"
-						style="width: 24%;">재전송</button>
+						style="width: 20%;">재전송</button>
 					<br> <span style="color: red; width: 10%; margin-left: 3%;"
 						class="trymin">03</span>: <span style="color: red; width: 10%;"
 						class="trysec">00</span> 
@@ -716,6 +720,10 @@ div>button {
 				alert("인증번호가 일치하지않습니다.");
 			}
 		});
+		 $("#retryemailcode").click(function(){
+         	setTime();
+         	$("#checkemailbtn").click();
+         });
 		$("#emailclosebtn").click(function(){
 			$("#newMembermodal").css("opacity",1);
 		});

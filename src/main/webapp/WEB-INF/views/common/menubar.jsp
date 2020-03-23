@@ -122,7 +122,9 @@ nav {
 	border:1px solid #e5e5e5;
 	border-top-left-radius: 10px;
    border-top-right-radius: 10px;
-   overflow:hidden; 
+   overflow:scroll;
+ 	overflow-x:hidden;
+ 	overflow-y:auto;
    z-index:10;
    background:whitesmoke;
 }
@@ -262,6 +264,12 @@ nav {
 	margin-right:5px;
 	display:none;
 }
+.classfunc{
+	float:right;
+	font-size:0.8em;
+	margin-right:5px;
+	display:none;
+}
 .friendnav{
 	width:33.3%; height:100%; float:left; text-align:center;
 	background:skyblue;	
@@ -323,9 +331,24 @@ nav {
 .expandfr:focus{
 	outline:0px;
 }
+.expandclass{
+	width:20px;
+	height:20px;
+	border:none;
+	background-image: url( "resources/images/dot.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.expandclass:focus{
+	outline:0px;
+}
  a:hover { text-decoration: none;}
-
-
+.chatimgtag{
+	float: left;
+    font-size: 0.7em;
+    text-align: center;
+    width: 50px;
+}
 </style>
 
 </head>
@@ -372,12 +395,12 @@ nav {
     </c:if>
 </div>
 <nav id="nav-1">
-  <a class="link-2" href="viewMain.ad"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
-  <a class="link-1" href="viewMain.ad">Home</a>
-  <a class="link-1" href="#">단어장</a>
-  <a class="link-1" href="ClassList.do">클래스</a>
-  <a class="link-1" href="boardList.bo">커뮤니티</a>
-  <a class="link-1" href="memberInquireList.ad">고객센터</a>
+	<a class="link-2" href="viewMain.ad"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
+    <a class="link-1" href="memberInquireList.ad">고객센터</a>
+    <a class="link-1" href="boardList.bo">커뮤니티</a>
+    <a class="link-1" href="ClassList.do">클래스</a>
+    <a class="link-1" href="#">단어장</a>
+    <a class="link-1" href="viewMain.ad">Home</a>
 </nav>
 <c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">
@@ -490,6 +513,36 @@ nav {
 	</li>
 	</c:forEach>
 	</c:if>
+	<!-- 클래스 그룹채팅 -->
+	<c:if test="${mycList != null }">
+			<li class="accordion-item">
+				<h5 class="accordion-thumb">클래스</h5>
+				<ul class="accordion-panel">
+					<c:forEach var="ci" begin="0" end="${ mycList.size() - 1 }">
+					<li style="height:25px; margin-bottom:5px;"><a class="myclasschat" href="#">
+					<c:if test="${mycList.get(ci).title.length() > 8 }">
+						${mycList.get(ci).title.substring(0,8) }
+					</c:if>
+					<c:if test="${mycList.get(ci).title.length() < 8 }">
+						${mycList.get(ci).title }
+					</c:if>
+					</a>     
+					<span style="float:right; margin-right:10px;">코멘트</span>
+					<input type="text" style="display:none;"value="${mycList.get(ci).cNo }">
+					
+					<button class="expandclass"></button>
+					<br>
+					<a class="classfunc" href="#">코멘트변경</a>
+					<a class="classfunc" href="#">클래스로이동</a>
+					</li>
+					</c:forEach> 
+				
+				</ul>
+			</li>
+		</c:if>
+	
+	
+	
 </ul>
 </div>
 </c:if>
@@ -506,8 +559,17 @@ nav {
 				$li.height($li.height()).animate({height: "25px"}, 200);
 				$li.children('.friendfunc').css("display","none");
 			}
-		
-			
+		});
+		$(document).on('click','.expandclass',function(){
+			var $li = $(this).parent();
+			if($li.children('.classfunc').css("display") == "none"){
+				//$(this).parent().css("height","45px");
+				$li.height($li.height()).animate({height: "45px"}, 200);
+				$li.children('.classfunc').css("display","block");	
+			}else{
+				$li.height($li.height()).animate({height: "25px"}, 200);
+				$li.children('.classfunc').css("display","none");
+			}
 		});
 	});
 </script>
@@ -766,6 +828,42 @@ $("#friendlisttoggle").click(function(){
 	}
 	
 });
+// 클래스단체채팅
+$(document).on('click', '.myclasschat', function(){
+	$("#friendname").html($(this).html());
+	var cId = $(this).next().next().val();
+	if($("#friendId").val() != cId){
+		$("#friendId").val(cId);
+		$("#chattable tbody").html("");
+		$("#chattable tbody").css("background-image","url( 'resources/images/로딩.gif' )");
+		$("#chattable tbody").css("background-repeat","no-repeat");
+		$("#chattable tbody").css("background-size","50% 45%");
+		$("#chattable tbody").css("background-position","center center");
+	}
+	
+	if($("#chatting").css("display")=="block"){
+		$("#chatting").css("display","none");
+		clearInterval(chatId);
+	}else{
+		$.ajax({
+        url:"chatclassimg.do",
+        data:{cId:cId},
+        dataType:"json",
+        type:"post",
+   		success:function(data){
+   			 chatId = setInterval(function(){
+   				chatclassloggo(data);
+   				}, 3500);  
+		},error:function(e){
+			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+		}	
+	});		
+	 // 에이작스로 채팅로그 불러온 후 
+		$("#chatting").css("display","block"); 
+	}
+});
+
+// 유저와 채팅
 $(document).on('click', '.myfriend', function(){
 	$("#friendname").html($(this).html());
 	var fId = $(this).next().next().val();
@@ -849,6 +947,83 @@ $("#chatsend").click(function(){
 	});	
 	
 });
+
+function chatclassloggo(imgList){
+	var cId = $("#friendId").val();
+	var mId = '${ loginMember.mId}';
+	var chatleng =$("#chatlength").html();
+	$tableBody = $("#chattable tbody");
+	$.ajax({
+        url:"chatclasslog.ck",
+        data:{mId:mId,cId:cId,chatleng:chatleng},
+        dataType:"json",
+        type:"post",
+   		success:function(data){
+			if(data.msg != "none" && data.msg !="nothing"){
+				$tableBody.html("");
+				$tableBody.css("background","white");
+				
+				for(var i in data.clist){
+
+					if(data.clist[i].writerId == mId){
+						var $tr = $("<tr>");
+						var $tdimg = $(" <td class='chattd' width='50'>");
+						var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
+						$tdimg.append($profileimg);
+						var $chatContent = $(" <td class='chattd' colspan='11' >");
+						var $chat = $(" <p class='mychatp'>").text(data.clist[i].content);
+						$chatContent.append($chat);
+						
+						$tr.append($tdimg);
+						$tr.append($chatContent);
+					}else{
+						var asd = "";
+						var nickname="";
+						for(var j=0; j<Object.keys(imgList).length; j++){
+							if((data.clist[i].writerId).includes(Object.keys(imgList)[j])){
+								asd = Object.values(imgList)[j].profileimg;
+								nickname =Object.values(imgList)[j].nickname;
+							}
+						}
+						
+						var $tr = $("<tr align='right'>");
+						var $tdimg = $(" <td class='chattd' width='50'>");
+						var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/"+asd+"' width='50'>");
+						var $span = $("<span class='chatimgtag'>").html(nickname);
+						$tdimg.append($profileimg);
+						$tdimg.append($span);
+						var $chatContent = $(" <td class='chattd' colspan='11' >");
+						var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
+						$chatContent.append($chat);
+						
+						$tr.append($chatContent);
+						$tr.append($tdimg);
+					}
+					
+					$tableBody.append($tr);
+				}
+			
+				$("#chatlength").html(i);
+				var objDiv = document.getElementById("chatting");
+				 objDiv.scrollTop = objDiv.scrollHeight;			
+   			}else if(data.msg =="nothing"){
+   				$tableBody.html("");
+				$tableBody.css("background","white");
+				var $tr = $("<tr>");
+				var $chatContent = $(" <td colspan='12' style='text-align:center;' >").html("채팅기록이 없습니다.");
+				$tr.append($chatContent);
+				$tableBody.append($tr);
+				$("#chatlength").html(-1);
+   			}
+			
+		},error:function(e){
+			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+		}
+	});
+	
+} 
+
+
 	function chatloggo(img){
 		var fId = $("#friendId").val();
 		var mId = '${ loginMember.mId}';

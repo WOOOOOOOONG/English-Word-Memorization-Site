@@ -88,7 +88,6 @@ public class MemberController {
 			@RequestParam(value="add3") String add3) throws IOException {
 		
 		String address = add1+"/"+add2+"/"+add3;
-		
 		m.setAddress(address);
 		m.setProfileimg("defaultimg.png");
 		int result = mService.insertMember(m);

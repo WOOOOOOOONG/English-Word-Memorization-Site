@@ -86,4 +86,11 @@ public class MemberService {
 	public int updateMember(Member m) {
 		return mDao.updateMember(m);
 	}
+	public String getNickname(String fId) {
+		return mDao.getNickname(fId);
+	}
+
+	public int checkEmail(String email) {
+		return mDao.checkEmail(email);
+	}
 }

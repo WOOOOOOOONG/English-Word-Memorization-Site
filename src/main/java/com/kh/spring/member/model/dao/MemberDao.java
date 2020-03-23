@@ -73,4 +73,11 @@ public class MemberDao {
 	public int updateMember(Member m) {
 		return sqlSession.update("memberMapper.updateMember",m);
 	}
+	public String getNickname(String fId) {
+		return sqlSession.selectOne("memberMapper.getNickname", fId);
+	}
+
+	public int checkEmail(String email) {
+		return sqlSession.selectOne("memberMapper.checkEmail",email);
+	}
 }
