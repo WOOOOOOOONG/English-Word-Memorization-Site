@@ -52,7 +52,7 @@ public class FriendController {
 				glist.put(i + 1, flist.get(i).getGroupName());
 			}
 		}
-
+		
 		model.addAttribute("friendList", flist);
 		model.addAttribute("groupList", glist);
 		PrintWriter out = response.getWriter();

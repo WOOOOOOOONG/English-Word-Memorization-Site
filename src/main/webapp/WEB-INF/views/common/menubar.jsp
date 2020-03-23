@@ -39,44 +39,43 @@ body {
   background:whitesmoke;
 }
 nav {
-  margin-top: 0px;
-  padding: 24px;
+  margin-top: 1px;
   text-align: center;
   font-family: Raleway;
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  border-bottom:5px solid #cff0da;
+  height: 80px;
 }
-#nav-1 {
-  background: #cff0da;
-}
-
 
 .link-1 {
   transition: 0.3s ease;
-  background: #cff0da;
-  color: #88dba3;
+  color: black;
   font-size: 20px;
   text-decoration: none;
-  border-top: 4px solid #cff0da;
   border-bottom: 4px solid #cff0da;
-  padding: 20px 0;
-  margin: 0 20px;
+  padding: 22.5px 0;
+  margin: 0px 30px;
+  float:right;
+}
+.link-2{
+	float:left;
+	width: 130px;
+    height: 150%;
+    margin-left:70px;
+    margin-top:-35px;
 }
 .link-1:hover {
-  border-top: 4px solid #88dba3;
   border-bottom: 4px solid #88dba3;
-  padding: 6px 0; 
+  padding-bottom: 5px; 
+  color: #88dba3;
 }
 .gonav{
   font-size: 15px;
   text-decoration: none;
-  
   margin:9px;
   float:right;
 }
 #sewlogo{
-  width:70px; height: 70px;margin-top: -20px;
-  position:absolute;
-  left:100px;
+  width:100%; height: 100%;
 }
 .accordion {
 	 margin: 1rem 0;
@@ -354,11 +353,19 @@ nav {
     </c:if>
     <!-- 로그인 유저 있을때 -->
     <c:if test="${ !empty loginMember }">
+    	<c:if test="${warningMsg[sessionScope.loginMember.mId]}">
+   <script>
+      $(function(){
+         alert('${warningMsg[sessionScope.loginMember.mId]}');
+         ${warningMsg[sessionScope.loginMember.mId] = null}
+      });   
+   </script>
+</c:if>
    		 <c:if test="${ loginMember.mId == 'admin' }">
     		<a class="gonav" href="viewTotal.ad">관리자페이지</a>
     	</c:if>
     	<c:if test="${ loginMember.mId != 'admin' }">
-    		<a class="gonav"href="mypage.me" style="color:blue;">마이페이지</a>
+    		<a class="gonav" href="mypage.me">마이페이지</a>
     	</c:if>
     	<a class="gonav" href="Memberlogout.me" style="color:blue;">로그아웃</a>
     	<span class="gonav">${ loginMember.nickname }님 환영합니다.</span>
@@ -530,8 +537,9 @@ nav {
 				   			if(data=="good") {
 				   				alert("코멘트가 변경되었습니다.");
 				   				$comment.html(c);
+				   				reupdatelist();
 				   			}
-				   			else alert("친구해제 실패");
+				   			else alert("코멘트 변경 실패");
 						},error:function(e){
 							alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 						}
