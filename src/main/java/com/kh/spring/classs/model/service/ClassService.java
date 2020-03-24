@@ -3,7 +3,9 @@ package com.kh.spring.classs.model.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassNotice;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.classs.model.vo.Joinwait;
@@ -116,4 +118,28 @@ public interface ClassService {
 
 	// 신청대기중인애들 가져옴
 	ArrayList<Joinwait> selectJoinWait(String cNo);
+	
+	// 모든 유저 스토리지
+		ArrayList<Storage> selectAllStorage();
+
+		// 수락 또는 취소
+		int deleteJoin(ClassMember cm);
+
+		// 이미 가입대기중이닞 확인
+		int selectSameJoin(ClassMember cm);
+
+		// 클래스 공지사항 가져옴
+		ArrayList<ClassNotice> selectNoticeList(String cNo, Integer currentPage);
+
+		ClassNotice selectNoticeOne(String cnid, boolean flag);
+
+		ArrayList<ClassNotice> NoticeAllList(String cNo);
+
+		ArrayList<Reply> selectBoardReplyList(ClassNotice cn);
+
+		// 댓글입력
+		int insertBoardReply(Reply reply);
+
+		// 댓글삭제
+		int deleteNoticeReply(int rId);
 }

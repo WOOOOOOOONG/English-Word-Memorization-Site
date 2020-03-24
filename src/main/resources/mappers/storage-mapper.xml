@@ -23,4 +23,6 @@
 		FROM STORAGE
 		WHERE REFER_ID = #{cNo}
 	</select>
+	<select id="selectAllStorage" resultMap="storageResultSet">SELECT * FROM STORAGE</select> 
+	
 </mapper>

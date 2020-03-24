@@ -303,16 +303,6 @@ main .helper span {
          <!--  아이콘 끝 -->
       </header>
       <ul class="manage">
-         <%-- <c:url var="admin1" value="memberManage.ad"/>
-         <c:url var="admin2" value="inquire.ad"/>
-         <c:url var="class1" value="classify.cl"/>
-         <c:url var="class2" value="total.cl"/>
-         <c:url var="inquire" value="inquire.in"/>
-         <c:url var="visit1" value="day.vi"/>
-         <c:url var="visit2" value="month.vi"/>
-         <c:url var="visit3" value="time.vi"/>
-         <c:url var="voca1" value="classify.voca"/>
-         <c:url var="voca2" value="total.voca"/> --%>
          
          <!-- 스터디 단어장 -->
          <c:url var="myClass" value="myClass.do">
@@ -334,12 +324,17 @@ main .helper span {
          <c:url var="classWaitjoin" value="classWaitjoin.do">
          	<c:param name="cNo" value="${ cNo }"/>
          </c:url>
+         <!-- 공지사항으로 이동 -->
+         <c:url var="classNotice" value="classNoticeView.do">
+         	<c:param name="cNo" value="${ cNo }"/>
+         </c:url>
          
          
          <li tabindex="0" class="icon-books icon"><a><span>스터디</span></a>
             <ul class="hide">
                <li class="homepage"><a href="${ myClass }">스터디 단어장</a></li>
                <li class="homepage"><a href="${ classTestList }">시험 목록</a></li>
+               <li class="homepage"><a href="${ classNotice }">공지 사항</a></li>
             </ul>
          </li>
          <c:if test="${ loginMember.mId eq classs.ornerId }">

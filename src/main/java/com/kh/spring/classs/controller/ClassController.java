@@ -11,8 +11,10 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -28,8 +30,14 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.kh.spring.board.model.vo.Board;
+import com.kh.spring.board.model.vo.Pagination;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassNotice;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.classs.model.vo.Joinwait;
@@ -44,7 +52,7 @@ import net.sf.json.JSONArray;
 import com.kh.spring.member.model.vo.Member;
 
 
-@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList"})
+@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList","allUserList","cnList"})
 @Controller
 public class ClassController {
 	
@@ -144,6 +152,7 @@ public class ClassController {
 		
 		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
 		ArrayList<Storage> userList = new ArrayList<>();
+		ArrayList<Storage> allUserList = new ArrayList<>();
 		
 		for(int i = 0; i < cmList.size(); i++) {
 			Storage User = new Storage();
@@ -154,8 +163,9 @@ public class ClassController {
 		
 		ArrayList<Joinwait> jwList = cService.selectJoinWait(cNo);
 		mv.addObject("userList",userList);
+		allUserList = cService.selectAllStorage();
 		
-		
+		model.addAttribute("allUserList",allUserList);
 		model.addAttribute("cmList",cmList);
 		model.addAttribute("classs",cService.selectClassOneCount(cNo));
 		model.addAttribute("jwList",jwList);
@@ -389,12 +399,7 @@ public class ClassController {
 	      String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
 	      File f = new File(filepath);
 	      f.createNewFile();
-	     /* // 대화를위한 친구리스트에 추가
-	      Friend fr = new Friend();
-	      fr.setmId(m.getmId());
-	      fr.setGroupName("클래스");
-	      fr.setfId(cNo);
-	      fService.insertFriend(fr);*/
+	  
 		
 		
 		// 클래스멤버
@@ -836,14 +841,187 @@ public class ClassController {
 	}
 	
 	@RequestMapping("classWaitjoin.do")
-	public ModelAndView classWaitjoin(ModelAndView mv,String cNo) {
+	public ModelAndView classWaitjoin(ModelAndView mv,String cNo,Model model) {
+		ArrayList<Joinwait> jwList = cService.selectJoinWait(cNo);
+		model.addAttribute("jwList",jwList);
 		
 		mv.addObject("cNo",cNo);
 		mv.setViewName("classs/classWaitjoin");
 		return mv;
 	}
 	
+	// 클래스 가입
+	@RequestMapping("joinok.do")
+	@ResponseBody
+	public int joinok(HttpServletResponse response,@RequestBody String param,HttpServletRequest request, Model model) throws ParseException {
+		JSONParser parser = new JSONParser();
+		JSONObject jObj = (JSONObject)parser.parse(param);
+		Member member = (Member) request.getSession().getAttribute("loginMember");
+		
+		String cNo = (String)jObj.get("cNo");
+		String id = (String)jObj.get("id");
+		ClassMember cm = new ClassMember();
+		cm.setcNo(cNo);
+		cm.setId(id);
+		cm.setvRight("N");
+		cm.setwRight("N");
+		
+		
+		cService.insertClassMember(cm);
+		int result = cService.deleteJoin(cm);
+		ArrayList<Joinwait> jwList = cService.selectJoinWait(cNo);
+		model.addAttribute("jwList",jwList);
+		
+		
+		return result;
+		
+	}
+	
+	// 클래스 가입 거절
+		@RequestMapping("joinnok.do")
+		@ResponseBody
+		public int joinnok(HttpServletResponse response,@RequestBody String param,HttpServletRequest request, Model model) throws ParseException {
+			JSONParser parser = new JSONParser();
+			JSONObject jObj = (JSONObject)parser.parse(param);
+			Member member = (Member) request.getSession().getAttribute("loginMember");
+			
+			String cNo = (String)jObj.get("cNo");
+			String id = (String)jObj.get("id");
+			ClassMember cm = new ClassMember();
+			cm.setcNo(cNo);
+			cm.setId(id);
+			cm.setvRight("N");
+			cm.setwRight("N");
+			
+			
+			
+			int result = cService.deleteJoin(cm);
+			ArrayList<Joinwait> jwList = cService.selectJoinWait(cNo);
+			model.addAttribute("jwList",jwList);
+			
+			
+			return result;
+			
+		}
+		
+	// 공지사항 보러가기
+		@RequestMapping("classNoticeView.do")
+		public ModelAndView classNoticeView(ModelAndView mv, Model model,String cNo,
+				@RequestParam(value="page", required=false) Integer page) {
+			Integer currentPage = page != null ? page : 1;
+			
+			ArrayList<ClassNotice> cnList = cService.selectNoticeList(cNo,currentPage);
+			
+			model.addAttribute("cnList",cnList);
+			model.addAttribute("cNo",cNo);
+			
+		
+			mv.addObject("pi", Pagination.getPageInfo());
+			mv.setViewName("classs/classNoticeView");
+			return mv;
+		}
+		
+	// 공지사하 ㅇ상세
+	@RequestMapping("detailNotice.do")
+	public ModelAndView detailNotice(ModelAndView mv, String cnid, String cNo, @RequestParam(value="page", required=false) Integer page,
+			HttpServletRequest request, HttpServletResponse response) {
+		Integer currentPage = page != null ? page : 1;
+		
+		ClassNotice cn = null;
+		boolean flag = false;
+		Cookie[] cookies = request.getCookies();
+		if(cookies != null) {
+			for(Cookie c : cookies) {
+				if(c.getName().equals("cnid"+cnid)) {
+					flag = true;
+				}
+			}
+			
+			if(!flag) {
+				Cookie cookie = new Cookie("cnid"+cnid, String.valueOf(cnid));
+				cookie.setMaxAge(1 * 24 * 60 * 60);
+				response.addCookie(cookie);
+			}
+			
+			cn = cService.selectNoticeOne(cnid, flag);
+		}
+		
+		ArrayList<ClassNotice>	cnaList = cService.NoticeAllList(cNo);
+		mv.addObject("cnaList", cnaList);
+		mv.addObject("notice", cn);
+		mv.addObject("currentPage", currentPage);
+		mv.addObject("cNo",cNo);
+		mv.setViewName("classs/Noticedetail");
+		
+		return mv;
+	}
+	
+	// 댓글 리스트
+	@RequestMapping(value="selectClassNoticeReplyList.do", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public String selectBoardReplyList (String cnid, HttpServletRequest request) {
+		System.out.println("cnid : " + cnid);
+		
+		ClassNotice cn = new ClassNotice();
+		cn.setCnid(cnid);
+		
+		ArrayList<Reply> rList = cService.selectBoardReplyList(cn);
+		
+		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+		return gson.toJson(rList);
+	}
+	
+	// 댓글 입력
+	@RequestMapping("insertNoticeReply.do")
+	@ResponseBody
+	public String insertBoardReply(
+			String cnid,String referId, String referNickname,
+			String content,
+			HttpSession session) {
+		Reply reply = new Reply();
+		
+		
+		reply.setWriterId(referId);
+		reply.setWriterNickname(cnid);
+		reply.setContent(content);
+		
+		int result = cService.insertBoardReply(reply);
+		
+		if(result > 0) {
+			return "success";
+		}else {
+			return "error";
+		}
+	}
+	
+	// 댓글 삭제
+	@RequestMapping("deleteNoticeReply.do")
+	public ModelAndView deleteBoardReply (
+			ModelAndView mv,
+			int rId, String cnid,String cNo) {
+		
+		int result = cService.deleteNoticeReply(rId);
+		ClassNotice cn  = cService.selectNoticeOne(cnid, false);
+		
+		ArrayList<ClassNotice> cnaList = cService.NoticeAllList(cNo);
+		
+		mv.addObject("cnaList", cnaList);
+		mv.addObject("notice", cn);
+		mv.addObject("cNo",cNo);
+		mv.setViewName("classs/Noticedetail");
+		
+		return mv;
+	}
+	
+	// 공지사항 만들러 이동
+	@RequestMapping("goNoticeWrite.do")
+	public ModelAndView goNoticeWrite(ModelAndView mv,String cNo) {
+		
+		
+		mv.addObject("cNo",cNo);
+		mv.setViewName("classs/writeNotice");
+		return mv;
+	}
 
 }
-
 
