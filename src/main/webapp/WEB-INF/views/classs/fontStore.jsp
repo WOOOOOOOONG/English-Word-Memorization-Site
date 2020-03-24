@@ -10,6 +10,7 @@
    <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic&display=swap" rel="stylesheet"> <!--  font-family: 'Nanum Gothic', sans-serif;  정글자 -->
    <link href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap" rel="stylesheet"> <!--  font-family: 'Indie Flower', cursive;  필기체 -->
    <link href="https://fonts.googleapis.com/css?family=Staatliches&display=swap" rel="stylesheet"> <!-- font-family: 'Staatliches', cursive; 숫자용 -->
+   <link href="https://fonts.googleapis.com/css?family=Jua|Roboto&display=swap" rel="stylesheet"> <!-- font-family: 'Jua', sans-serif; -->
    
    
 </head>

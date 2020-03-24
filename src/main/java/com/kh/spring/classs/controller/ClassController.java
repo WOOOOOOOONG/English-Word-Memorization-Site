@@ -1022,6 +1022,58 @@ public class ClassController {
 		mv.setViewName("classs/writeNotice");
 		return mv;
 	}
+	
+	// 공지사항 입력
+	@RequestMapping("classNoticeInsert.do")
+	public String classNoticeInsert(Model mv,ClassNotice cn,String cNo, HttpServletRequest request) {
+		Member me = (Member)request.getSession().getAttribute("loginMember");
+		
+		cn.setcNo(cNo);
+		cn.setId(me.getmId());
+		cn.setNick(me.getmId());
+		
+		cService.classNoticeInsert(cn);
+		
+		String cnid = cService.getCNID(cn);
+		mv.addAttribute("cNo",cNo);
+		mv.addAttribute("cnid",cnid);
+		
+		return "redirect:detailNotice.do";
+	}
+	
+	// 공지사항 삭제
+	@RequestMapping("deleteNotice.do")
+	public String deleteNotice(Model mv, String cnid, String cNo) {
+		
+		cService.deleteNotice(cnid);
+		
+		mv.addAttribute("cNo",cNo);
+		return "redirect:classNoticeView.do";
+	}
+	
+	// 공지사항 수정하는 폼으로 이동
+	@RequestMapping("goupdateNotice.do")
+	public ModelAndView goupdateNotice(ModelAndView mv,String cnid, String cNo) {
+		
+		ClassNotice cn = cService.selectNoticeOne(cnid, false);
+
+		mv.addObject("notice",cn);
+		mv.addObject("cnid",cnid);
+		mv.addObject("cNo",cNo);
+		mv.setViewName("classs/updateClassNotice");
+		return mv;
+	}
+	
+	@RequestMapping("classNoticeUpdate.do")
+	public String updateNotice(Model mv, String cnid, String cNo,ClassNotice cn) {
+		cn.setCnid(cnid);
+		cService.updateNotice(cn);
+		
+		mv.addAttribute("cNo",cNo);
+		mv.addAttribute("cnid",cnid);
+		
+		return "redirect:detailNotice.do";
+	}
 
 }
 

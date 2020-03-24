@@ -341,4 +341,33 @@ public class ClassServiceImpl implements ClassService{
 			// TODO Auto-generated method stub
 			return cDao.deleteNoticeReply(rId);
 		}
+
+		//공지사항 입력
+		@Override
+		public void classNoticeInsert(ClassNotice cn) {
+			 cDao.classNoticeInsert(cn);
+			
+		}
+
+		// cnid 가져옴
+		@Override
+		public String getCNID(ClassNotice cn) {
+			// TODO Auto-generated method stub
+			return cDao.getCNID(cn);
+		}
+
+		// 공지사항 삭제
+		@Override
+		public void deleteNotice(String cnid) {
+			// TODO Auto-generated method stub
+			cDao.deleteNotice(cnid);
+			
+		}
+
+		// 공지사항 수정
+		@Override
+		public void updateNotice(ClassNotice cn) {
+			// TODO Auto-generated method stub
+			cDao.updateNotice(cn);
+		}
 }

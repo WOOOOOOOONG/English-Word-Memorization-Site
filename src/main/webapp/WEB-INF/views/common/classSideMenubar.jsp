@@ -21,7 +21,7 @@
    <!--  폰트 모음 끝 -->
 <style>
 body {
-   height: 1050px;
+   height: 1080px;
    margin: 0;
    background: whitesmoke;
 }
@@ -42,10 +42,10 @@ main .helper span {
 
 .menu {
    /* background: #5bc995; */
-   background: #88dba3;
+   background: #6c757d;
    height: 100%;
    /* width: 240px; */
-   width: 280px;
+   width: 255px;
    z-index: 5;
    outline: none;
    font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
@@ -65,6 +65,7 @@ main .helper span {
 
 .menu .avatar img {
    width: 110px;
+   height:110px;
    border-radius: 50%;
    overflow: hidden;
    border: 4px solid #ffea92;
@@ -77,6 +78,7 @@ main .helper span {
 }
 
 .menu ul {
+	text-align:center;
    list-style: none;
    padding: 0.5em 0;
    margin: 0;
