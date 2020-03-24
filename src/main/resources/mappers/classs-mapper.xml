@@ -28,6 +28,25 @@
 		<id property="cId" column="C_ID"/>
 		<result property="name" column="NAME"/>
 	</resultMap>
+	
+	<resultMap id="ClassNoticeResultSet" type="ClassNotice">
+	  <id property="cnid" column="CNID" /> 
+	  <result property="cNo" column="REFER_CNO" /> 
+	  <result property="id" column="REFER_ID" /> 
+	  <result property="nick" column="REFER_NICK" /> 
+	  <result property="title" column="TITLE" /> 
+	  <result property="content" column="NOTICE_CONTENT" /> 
+	  <result property="createDate" column="CREATE_DATAE" /> 
+	  <result property="views" column="VIEWS" /> 
+  	</resultMap>
+ 	<resultMap id="replyResultMap" type="Reply">
+	  <id property="rId" column="RID" /> 
+	  <result property="writerId" column="MID" /> 
+	  <result property="writerNickname" column="NICK" /> 
+	  <result property="content" column="RE_CONTENT" /> 
+	  <result property="createDate" column="CREATE_DATE" /> 
+	</resultMap>
+	
 
 
 	<insert id="insertClass">
@@ -113,4 +132,17 @@
 		FROM JOINWAIT
 		WHERE CLASS_NO = #{cNo}
 	</select>
+	
+	
+	<delete id="deleteJoin">DELETE FROM JOINWAIT WHERE CLASS_NO = #{cNo} AND MID = #{id}</delete> 
+  <select id="selectSameJoin" resultType="_int">SELECT COUNT(*) FROM JOINWAIT WHERE CLASS_NO = #{cNo} AND MID = #{id}</select> 
+  <select id="selectNoticeList" resultMap="ClassNoticeResultSet">SELECT * FROM CLASS_NOTICE WHERE REFER_CNO = #{cNo} ORDER BY create_datae DESC</select> 
+  <select id="getListCount" resultType="_int">SELECT COUNT(*) FROM CLASS_NOTICE WHERE REFER_CNO = #{cNo}</select> 
+  <update id="addReadCount">UPDATE CLASS_NOTICE SET VIEWS = VIEWS + 1 WHERE CNID = #{cnid}</update> 
+  <select id="selectNoticeOne" resultMap="ClassNoticeResultSet">SELECT * FROM CLASS_NOTICE WHERE CNID = #{cnid}</select> 
+  <select id="noticeAllList" resultMap="ClassNoticeResultSet">SELECT * FROM CLASS_NOTICE WHERE REFER_CNO = #{cNo} ORDER BY create_datae DESC</select> 
+  <select id="selectBoardReplyList" resultMap="replyResultMap">SELECT * FROM CLASS_REPLY WHERE CNID=#{cnid}</select> 
+  <insert id="insertNoticeReply">INSERT INTO CLASS_REPLY VALUES(CR_SEQ.NEXTVAL,#{writerNickname},#{writerId},#{writerId},#{content},SYSDATE)</insert> 
+  <delete id="deleteNoticeReply">DELETE FROM CLASS_REPLY WHERE RID = #{rId}</delete> 
+	
 </mapper>

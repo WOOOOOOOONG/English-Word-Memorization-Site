@@ -40,9 +40,8 @@
 	<jsp:include page="../classs/summerNote.jsp" />
 	<!-- 전체 -->
 	<c:url var="inquireView" value="insertInquireView.ad">
-	    <c:param name="reportType" value="3"/>
-	    <c:param name="reportedId" value="${classs.cNo}"/>
-	</c:url>
+      <c:param name="reportedClass" value="${classs.cNo}"/>
+   </c:url>
    <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a></i>
 	
     <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 408px; margin-top: 0px; background: #ebebeb; display: block;">
@@ -215,7 +214,10 @@
 								location.href="ClassList.do";
 							}else if(data == 1){
 								alert("로그인 후에 이용하실수 있습니다.");
-							}else{
+							}else if(data == 3){
+								alert("이미 가입 신청중인 클래스입니다.");
+							}
+							else{
 								alert("이미 가입되어있는 클래스입니다.");
 							}
 						},

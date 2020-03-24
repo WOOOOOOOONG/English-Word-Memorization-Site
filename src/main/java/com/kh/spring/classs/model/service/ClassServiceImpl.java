@@ -7,8 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.board.model.vo.PageInfo;
+import com.kh.spring.board.model.vo.Pagination;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.classs.model.dao.ClassDao;
 import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassNotice;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.classs.model.vo.Joinwait;
@@ -271,4 +275,70 @@ public class ClassServiceImpl implements ClassService{
 		// TODO Auto-generated method stub
 		return cDao.selectJoinWait(cNo);
 	}
+	
+	// 모든 유저 스토리지
+		@Override
+		public ArrayList<Storage> selectAllStorage() {
+			// TODO Auto-generated method stub
+			return cDao.selectAllStorage();
+		}
+
+		// 수락 또는 취소
+		@Override
+		public int deleteJoin(ClassMember cm) {
+			// TODO Auto-generated method stub
+			return cDao.deleteJoin(cm);
+		}
+
+		// 이미 가입 대기중인지 확인
+		@Override
+		public int selectSameJoin(ClassMember cm) {
+			// TODO Auto-generated method stub
+			return cDao.selectSameJoin(cm);
+		}
+
+		
+		@Override
+		public ArrayList<ClassNotice> selectNoticeList(String cNo, Integer currentPage) {
+			// TODO Auto-generated method stub
+			int listCount = cDao.getListCount(cNo);
+			PageInfo pi = Pagination.getPageInfo(currentPage, listCount);
+			return cDao.selectNoticeList(pi,cNo);
+		}
+
+		@Override
+		public ClassNotice selectNoticeOne(String cnid, boolean flag) {
+			// 1. 조회수 증가
+				if(!flag) { // 해당 글을 읽지 않았다면(flag가 false)
+					cDao.addReadCount(cnid);
+				}
+			return cDao.selectNoticeOne(cnid);
+		}
+
+		@Override
+		public ArrayList<ClassNotice> NoticeAllList(String cNo) {
+			// TODO Auto-generated method stub
+			return cDao.NoticeAllList(cNo);
+		}
+
+		// 게시글 댓글
+		@Override
+		public ArrayList<Reply> selectBoardReplyList(ClassNotice cn) {
+			// TODO Auto-generated method stub
+			return cDao.selectBoardReplyList(cn);
+		}
+
+		// 댓글 입력
+		@Override
+		public int insertBoardReply(Reply reply) {
+			// TODO Auto-generated method stub
+			return cDao.insertNoticeReply(reply);
+		}
+
+		// 댓글삭제
+		@Override
+		public int deleteNoticeReply(int rId) {
+			// TODO Auto-generated method stub
+			return cDao.deleteNoticeReply(rId);
+		}
 }

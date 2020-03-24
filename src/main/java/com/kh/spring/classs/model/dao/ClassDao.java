@@ -3,11 +3,15 @@ package com.kh.spring.classs.model.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.board.model.vo.PageInfo;
+import com.kh.spring.board.model.vo.Reply;
 import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.ClassNotice;
 import com.kh.spring.classs.model.vo.ClassTest;
 import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.classs.model.vo.Joinwait;
@@ -222,6 +226,71 @@ public class ClassDao {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("ClasssMapper.selectJoinWait",cNo);
 	}
+	// 모든 유저 스토리지
+		public ArrayList<Storage> selectAllStorage() {
+			// TODO Auto-generated method stub
+			return (ArrayList)sqlSession.selectList("StorageMapper.selectAllStorage");
+		}
+
+		// 조인 딜리트
+		public int deleteJoin(ClassMember cm) {
+			// TODO Auto-generated method stub
+			return sqlSession.delete("ClasssMapper.deleteJoin",cm);
+		}
+
+		// 가입 대ㅣㄱ중
+		public int selectSameJoin(ClassMember cm) {
+			// TODO Auto-generated method stub
+			return sqlSession.selectOne("ClasssMapper.selectSameJoin",cm);
+		}
+
+		public ArrayList<ClassNotice> selectNoticeList(PageInfo pi,String cNo) {
+			// TODO Auto-generated method stub
+			int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+			RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+			return (ArrayList)sqlSession.selectList("ClasssMapper.selectNoticeList",cNo,rowBounds);
+		}
+
+		
+		public int getListCount(String cNo) {
+			// TODO Auto-generated method stub
+			return sqlSession.selectOne("ClasssMapper.getListCount",cNo);
+		}
+
+		// 조회수 증가
+		public void addReadCount(String cnid) {
+			// TODO Auto-generated method stub
+			sqlSession.update("ClasssMapper.addReadCount", cnid);
+		}
+
+		public ClassNotice selectNoticeOne(String cnid) {
+			// TODO Auto-generated method stub
+			return sqlSession.selectOne("ClasssMapper.selectNoticeOne",cnid);
+		}
+
+		public ArrayList<ClassNotice> NoticeAllList(String cNo) {
+			// TODO Auto-generated method stub
+			return (ArrayList)sqlSession.selectList("ClasssMapper.noticeAllList",cNo);
+		}
+
+		// 게시글 댓글 
+		public ArrayList<Reply> selectBoardReplyList(ClassNotice cn) {
+			// TODO Auto-generated method stub
+			
+			return (ArrayList)sqlSession.selectList("ClasssMapper.selectBoardReplyList", cn);
+		}
+
+		// 댓글 입력
+		public int insertNoticeReply(Reply reply) {
+			// TODO Auto-generated method stub
+			
+			return sqlSession.insert("ClasssMapper.insertNoticeReply",reply);
+		}
+
+		public int deleteNoticeReply(int rId) {
+			// TODO Auto-generated method stub
+			return sqlSession.delete("ClasssMapper.deleteNoticeReply",rId);
+		}
 	
 	
 
