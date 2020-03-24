@@ -121,8 +121,17 @@
 										var reportId; 
 										window.onload = function() {
 											var selectType = $('.type');
+											var $typeDiv = $("#typeDiv");
+											
+											$typeDiv.children('.report').remove();
+											$typeDiv.children('p').remove();
+											
 											<c:if test="${reportedId ne null}">
-												reportId = ${reportedId};
+												var $memberSelect;
+												var $str;
+												type.style.float = "left";
+												reportId = "${reportedId}";
+												
 												<c:choose>
 													<c:when test="${reportType eq 1}">
 														selectType.val(1);
@@ -135,16 +144,41 @@
 														selectData.val(reportId);
 													</c:when>
 													<c:when test="${reportType eq 3}">
+														$str = $("<p class='pTag'>신고할 클래스 &nbsp;</p>");
+														$memberSelect = 
+															$("<select class='form-control report' id='report' style='width:100px;' name='reportedId'>"
+																+ '<c:forEach var="item" items="${cList}">'
+																+ '<option value="${item.cNo}">${item.title} | ${item.ornerId}</option>'
+																+ '</c:forEach>'
+															+ "</select>");
+														
 														selectType.val(3);
+
+														$typeDiv.append($str);
+														$typeDiv.append($memberSelect);
+														
 														var selectData = $('.report');
 														selectData.val(reportId);
 													</c:when>
 													<c:when test="${reportType eq 4}">
+														var $str = $("<p class='pTag'>신고할 게시판 &nbsp;</p>");
+														var $memberSelect = 
+															"<select class='form-control report' id='report' style='width:100px;' name='reportedId'>"
+																+ '<c:forEach var="item" items="${bList}">'
+																+ '<option value="${item.bId}">${item.title} | ${item.referNickname}</option>'
+																+ '</c:forEach>'
+															+ "</select>";
+															
 														selectType.val(4);
+														
+														$typeDiv.append($str);
+														$typeDiv.append($memberSelect);
+														
 														var selectData = $('.report');
 														selectData.val(reportId);
 													</c:when>
 												</c:choose>
+
 											</c:if>
 										}
 									
