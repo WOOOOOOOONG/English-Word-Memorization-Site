@@ -65,7 +65,13 @@
         </div>       
         
       <div class="goList" style="width:70%; margin:auto;">
+      	<c:if test="${ notice.id eq loginMember.mId }">
+         	<button class="btn btn-secondary" id="deleteNotice" style="float:right; margin-left:10px;">삭제하기</button>	
+         	<button class="btn btn-secondary" id="updateNotice" style="float:right; margin-left:10px;">수정하기</button>
+         </c:if>
+         
          <button class="btn btn-secondary" onclick="location.href='classNoticeView.do?cNo=${ cNo }'" style="float:right;">목록으로</button>
+         
       </div><br><br>
       
       <div class="replyContent" style="width:70%; margin:auto;">
@@ -100,6 +106,26 @@
     </div>
     
     
+    <script>
+    	$(function(){
+    		$("#deleteNotice").click(function(){
+    			if(confirm("해당 게시글을 삭제하시겠습니까?")){
+    				var cnid = $("#cnid").val();
+    				var cNo = $("#cNo").val();
+    				location.href="deleteNotice.do?cnid="+cnid+"&cNo="+cNo;
+    			}
+    		});
+    		$("#updateNotice").click(function(){
+    			if(confirm("해당 게시글을 수정하시겠습니까?")){
+    				var cnid = $("#cnid").val();
+    				var cNo = $("#cNo").val();
+    				location.href="goupdateNotice.do?cnid="+cnid+"&cNo="+cNo;
+    			}
+    		});
+    	});
+    </script>
+    
+    
     <script type="text/javascript">
             window.onload = function() {
                getReplyList();
@@ -122,6 +148,7 @@
                      if(data == 'success') {
                         getReplyList();
                         replyInsert.value = "";
+                        $("#textarea").val("");
                      }
                   },
                   error: function(data) {

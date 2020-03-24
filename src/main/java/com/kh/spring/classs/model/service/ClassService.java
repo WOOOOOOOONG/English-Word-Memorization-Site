@@ -142,4 +142,16 @@ public interface ClassService {
 
 		// 댓글삭제
 		int deleteNoticeReply(int rId);
+
+		// 공지사항 입력
+		void classNoticeInsert(ClassNotice cn);
+
+		// cnid 가져옴
+		String getCNID(ClassNotice cn);
+
+		// 공지사항 삭제
+		void deleteNotice(String cnid);
+
+		// 공지사항 수정
+		void updateNotice(ClassNotice cn);
 }

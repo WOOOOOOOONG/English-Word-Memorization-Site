@@ -32,19 +32,22 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
 
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Jua|Roboto&display=swap" rel="stylesheet">
 <style>
   @import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
   margin: 0px;
   background:whitesmoke;
+  
+  
 }
-nav {
+/* nav {
   margin-top: 1px;
   text-align: center;
   font-family: Raleway;
   border-bottom:5px solid #cff0da;
   height: 80px;
-}
+} */
 
 .link-1 {
   transition: 0.3s ease;
@@ -342,18 +345,34 @@ nav {
 .expandclass:focus{
 	outline:0px;
 }
- a:hover { text-decoration: none;}
+
 .chatimgtag{
 	float: left;
     font-size: 0.7em;
     text-align: center;
     width: 50px;
 }
+.jha{
+	color:#505050;
+}
+.jha:hover{
+	text-decoration: none;
+	
+	color:orange;
+	
+}
+.logo:hover{
+	text-decoration:none;
+}
+section{
+	
+}
 </style>
 
 </head>
 
 <body>
+	<jsp:include page="../classs/fontStore.jsp"/>
 <c:if test="${ msg != null }">
 		<script>
 		$(function(){
@@ -366,13 +385,15 @@ nav {
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="application"/>
 <c:set var="loginpage" value="login.me"/>
-  <div style="width:100%; height:40px; text-align: right">
+
+
+<%--   <div style="width:100%; height:40px; text-align: right">
   	<c:url var="loginpage" value="login.me"/>
   	<!-- 로그인 유저가 없을시 -->
   	<c:if test="${ empty loginMember }">
-    <a class="gonav" href="${ loginpage }">아이디 비밀번호찾기</a>
-    <a class="gonav" href="${ loginpage }">회원가입</a> 
-    <a class="gonav" href="${ loginpage }">로그인</a> 
+	    <a class="gonav" href="${ loginpage }">아이디 비밀번호찾기</a>
+	    <a class="gonav" href="${ loginpage }">회원가입</a> 
+	    <a class="gonav" href="${ loginpage }">로그인</a> 
     </c:if>
     <!-- 로그인 유저 있을때 -->
     <c:if test="${ !empty loginMember }">
@@ -384,7 +405,7 @@ nav {
       });   
    </script>
 </c:if>
-   		 <c:if test="${ loginMember.mId == 'admin' }">
+   		<c:if test="${ loginMember.mId == 'admin' }">
     		<a class="gonav" href="viewTotal.ad">관리자페이지</a>
     	</c:if>
     	<c:if test="${ loginMember.mId != 'admin' }">
@@ -401,7 +422,51 @@ nav {
     <a class="link-1" href="ClassList.do">클래스</a>
     <a class="link-1" href="#">단어장</a>
     <a class="link-1" href="viewMain.ad">Home</a>
-</nav>
+</nav> --%>
+
+
+
+<div style=" background:white; position:relative; width:100%; height:70px; border-bottom:1px solid #dbdbdb;">
+	<div style="position:relative; margin: 0 auto; padding:9pt 0; width:75pc; height:3px;">
+		<h1 style="float:left; display:block; width:70px; height:100%; margin-right:36px; font-family:cinzel; font-weight:bold; color:orange;">
+			<a style="display:inline-block; width:56px; height:42px; font-size:36px; font-weight:600;" href="viewMain.ad" class="logo">SEW</a>
+		</h1>
+		<section style="float:left; margin-top:9px; display:block; width:550px; height:100%;">
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="viewMain.ad" class="jha">Home</a>
+			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" href="#" class="jha">단어장</a>
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">클래스</a>
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="boardList.bo" class="jha">커뮤니티</a>
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="memberInquireList.ad" class="jha">고객센터</a>
+		</section>
+		<section style="float:right; margin-top:9px; display:block; width:500px; height:100%;">
+				<c:if test="${ empty loginMember }">
+					<a style="float:right; margin:4px 36px 0 0; margin-top:-1px;  font-size:18px; font-weight:600;"  href="${ loginpage }" class="jha">회원가입</a>
+					<a style="float:right; margin:4px 36px 0 0; margin-top:-1px;  font-size:18px; font-weight:600;"  href="${ loginpage }" class="jha">로그인</a>
+				</c:if>
+				<c:if test="${ !empty loginMember }">
+		    		<c:if test="${warningMsg[sessionScope.loginMember.mId]}">
+					   <script>
+					      $(function(){
+					         alert('${warningMsg[sessionScope.loginMember.mId]}');
+					         ${warningMsg[sessionScope.loginMember.mId] = null}
+					      });   
+					   </script>
+					</c:if>
+					<a  href="Memberlogout.me" style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;" class="jha">로그아웃</a>
+					<c:if test="${ loginMember.mId == 'admin' }">
+			    		<a  href="viewTotal.ad" style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;" class="jha">관리자페이지</a>
+			    	</c:if>
+			    	<c:if test="${ loginMember.mId != 'admin' }">
+			    		<a  href="mypage.me" style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;" class="jha">마이페이지</a>
+			    	</c:if>
+			    	
+    				<span style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;">${ loginMember.nickname }님 환영합니다.</span>
+				</c:if>
+		</section>
+	</div> 
+</div>
+
+
 <c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">
 	<span id="chatlength" style="display:none;">0</span>
