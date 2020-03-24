@@ -56,7 +56,7 @@
 											style="font-weight: bold; display: inline; float: left; width: 100px; margin-top: 5px;">제목</label>
 										<div class="col-md-10">
 											<input type="text" autocomplete="off" placeholder="제목을 입력하세요"
-												name="title" class="form-control" id="input-title" style="width:600px; display: inline;">
+												name="title" class="form-control" id="input-title" style="width:600px; display: inline;" id="title">
 										</div>
 										<div class="col-md-offset-2 col-md-10">
 											<div class="hint-block" style="font-size: 12px; margin-left: 100px;">제목은 변경할
@@ -97,7 +97,7 @@
 										<label for="job-desc" class="control-label col-md-3"
 											style="font-weight: bold">문의 내용</label>
 										<div class="col-md-10">
-											<textarea name="content" class="textarea"></textarea>
+											<textarea name="content" class="textarea" id="textarea"></textarea>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
 										<div class="col-md-offset-2 col-md-10">
@@ -111,8 +111,7 @@
 				</div>
 				<div>
 					<button class="btn btn-outline-success" id="submitBtn"
-						style="margin-left: 553px"
-						onmouseover="inquire();">작성</button>
+						style="margin-left: 553px" >작성</button>
 					<button type="button" class="btn btn-outline-danger"
 						style="margin: 0 auto;" onclick="cancel();">취소</button>
 				</div>
@@ -137,6 +136,20 @@
 					location.href = "boardList.bo";
 				}
 			}
+			
+			$('#submitBtn').click(function() {
+				var text = $('#textarea').val();
+				var title = $('#title').val();
+				if(title == "") {
+					alert("제목을 입력하세요");
+					$('#submitBtn').prop("type", "button");
+				}else if(text == "") {
+					alert("문의 내용을 입력하세요");
+					$('#submitBtn').prop("type", "button");
+				}else {
+					$('#submitBtn').prop("type", "none");
+				}
+			});
 		</script>
 	</form>
 </body>

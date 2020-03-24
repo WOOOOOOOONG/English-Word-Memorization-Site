@@ -119,6 +119,12 @@ public class BoardController {
 	public ModelAndView deleteBoard(
 			ModelAndView mv,
 			int bId) {
+		if(!bService.selectBoardReplyList(bId).isEmpty()) {
+			ArrayList<Reply> deleteReplyList = bService.selectBoardReplyList(bId);
+			for(Reply r : deleteReplyList) {
+				bService.deleteBoardReply(r.getrId());
+			}
+		}
 		int result = bService.deleteBoard(bId);
 		
 		if(result > 0) {
@@ -225,6 +231,14 @@ public class BoardController {
 		return mv;
 	}
 	
+	@RequestMapping(value="reportReply.bo")
+	@ResponseBody
+	public String reportReply(int rId) {
+		bService.reportReply(rId);
+
+		return "success";
+	}
+	
 	@RequestMapping("searchBoard.bo")
 	public ModelAndView searchBoard(
 			ModelAndView mv,
@@ -251,6 +265,7 @@ public class BoardController {
 					break;
 			}
 		}
+		
 		ArrayList<Board> searchList = bService.searchList(search);
 		if(searchList != null) {
 			Map<Integer, Integer> rLength = new HashMap<>();

@@ -87,20 +87,27 @@ public class AdminController {
 			mv.setViewName("admin/inquire-list");
 		}else {
 			mv.addObject("msg", "로그인 후 이용하실 수 있습니다");
-			mv.setViewName("common/mainPage");
+			viewMain(mv);
 		}
 		
 		return mv;
 	}
 	
 	@RequestMapping("insertInquireView.ad")
-	public String insertInquireView(HttpServletRequest request) {	
+	public String insertInquireView(HttpServletRequest request, String reportedId, Integer reportType) {	
 		ArrayList<Member> mList = mService.selectList();
 		ArrayList<Board> bList = bService.BoardAllList();
 		ArrayList<Classs> cList = cService.selectClassList(); 
+		
 		request.setAttribute("mList", mList);
 		request.setAttribute("bList", bList);
 		request.setAttribute("cList", cList);
+		
+		if(reportedId != null && reportType != null) {
+			request.setAttribute("reportType", reportType);
+			request.setAttribute("reportedId", reportedId);			
+		}
+		
 		return "admin/inquire";
 	}
 	
