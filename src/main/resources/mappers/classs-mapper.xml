@@ -167,4 +167,10 @@
 		SET TITLE = #{title} , NOTICE_CONTENT = #{content}
 		WHERE CNID = #{cnid}
 	</update>
+	
+	<update id="updateRecentDay">
+		UPDATE CLASS_MEMBER
+		SET LASTDAY = SYSDATE
+		WHERE CLASS_NO = #{cNo} AND ID = #{id}
+	</update>
 </mapper>

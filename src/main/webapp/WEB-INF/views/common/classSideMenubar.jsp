@@ -25,14 +25,7 @@ body {
    margin: 0;
    background: whitesmoke;
 }
-a{
-	text-decoration:none;
-	color: #fff;
-}
-a:hover{
-	text-decoration:none;
-	color: #fff;
-}
+
 
 main .helper span {
    color: rgba(0, 0, 0, 0.2);
@@ -331,20 +324,20 @@ main .helper span {
          	<c:param name="cNo" value="${ cNo }"/>
          </c:url>
          
-         
+          
          <li tabindex="0" class="icon-books icon"><a><span>스터디</span></a>
             <ul class="hide">
-               <li class="homepage"><a href="${ myClass }">스터디 단어장</a></li>
-               <li class="homepage"><a href="${ classTestList }">시험 목록</a></li>
-               <li class="homepage"><a href="${ classNotice }">공지 사항</a></li>
+               <li class="homepage"><a href="${ myClass }" style="color:white; text-decoration:none;">스터디 단어장</a></li>
+               <li class="homepage"><a href="${ classTestList }" style="color:white; text-decoration:none;">시험 목록</a></li>
+               <li class="homepage"><a href="${ classNotice }" style="color:white; text-decoration:none;">공지 사항</a></li>
             </ul>
          </li>
          <c:if test="${ loginMember.mId eq classs.ornerId }">
          <li tabindex="0" class="icon-users icon"><a><span>멤버 관리</span></a>
             <ul class="hide">
-               <li class="homepage"><a href="${ classMemberRight }">멤버 권한 설정</a></li>
-               <li class="homepage"><a href="${ classMemberTest }">시험 정보 보기</a></li>
-               <li class="homepage"><a href="${ classWaitjoin }">가입 요청</a></li>
+               <li class="homepage"><a href="${ classMemberRight }" style="color:white; text-decoration:none;">멤버 권한 설정</a></li>
+               <li class="homepage"><a href="${ classMemberTest }" style="color:white; text-decoration:none;">시험 정보 보기</a></li>
+               <li class="homepage"><a href="${ classWaitjoin }" style="color:white; text-decoration:none;">가입 요청</a></li>
             </ul>
          </li>
          <li tabindex="0" class="icon-settings icon"><a><span>스터디 관리</span></a>
@@ -356,6 +349,8 @@ main .helper span {
          </li>
          </c:if>
       </ul>
+      
+   
       <script>
      	// 시험문제 만들기 클릭시
       	function getAllData(searchInput) {
@@ -417,9 +412,10 @@ main .helper span {
    // 체크박스 클릭할때마다 해당 단어장의 단어들이 추가됨
       function testvs(titles)
       {
+	   	 var csid = sessionStorage.getItem("csid");
          var send =
          JSON.stringify({
-            'search' : 'CSID_54', // 이거 문제있내;;
+            'search' : csid, 
             'title' : titles
          });
          $.ajax({

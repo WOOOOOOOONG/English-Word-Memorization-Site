@@ -16,6 +16,61 @@
 	.aa{
 		color:black;
 	}
+	
+	
+   .imotion {
+    background: #f3f3f3;
+    float: right;
+   }
+   
+   .imotion div {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #d8d8d8;
+    margin-right: 10px;
+}
+   
+   .arrow_box {
+  display: none;
+  position: absolute;
+  width: 100px;
+  padding: 8px;
+  left: 0;
+  top:40px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;  
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 14px;
+  text-align:center;
+  margin-left: -35px;
+  margin-top: 3px;
+}
+
+.arrow_box:after {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -10px;
+  border: solid transparent;
+  border-color: rgba(51, 51, 51, 0);
+  border-bottom-color: #333;
+  border-width: 10px;
+  pointer-events: none;
+  content: " ";
+}
+
+.imo {
+	display: block;
+	cursor: pointer;
+}
+
+.imo:hover + p.arrow_box {
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -64,13 +119,37 @@
          </c:forEach>
         </div>       
         
-      <div class="goList" style="width:70%; margin:auto;">
+      <div class="goList" style="width:70%; margin:auto; ">
+      <button class="btn btn-secondary" onclick="location.href='classNoticeView.do?cNo=${ cNo }'" style="float:right; margin-left:20px;">목록으로</button>
       	<c:if test="${ notice.id eq loginMember.mId }">
-         	<button class="btn btn-secondary" id="deleteNotice" style="float:right; margin-left:10px;">삭제하기</button>	
-         	<button class="btn btn-secondary" id="updateNotice" style="float:right; margin-left:10px;">수정하기</button>
+      		<div class="imotion">
+				<div>      		
+		      		<i class="fas fa-exchange-alt imo" style="font-size: 30px; float:right;" id="updateNotice"></i>
+			        <p class="arrow_box">수정하기</p>
+		        </div>
+		        
+		        <div>
+			        <i class="fas fa-trash-alt imo" style="font-size: 30px; float:right;" id="deleteNotice"></i>
+			        <p class="arrow_box">삭제하기</p>
+		        </div>
+	        </div>
+	    
+         	<!-- <button class="btn btn-secondary" id="deleteNotice" style="float:right; margin-left:10px;">삭제하기</button>	
+         	<button class="btn btn-secondary" id="updateNotice" style="float:right; margin-left:10px;">수정하기</button> -->
          </c:if>
+         <!-- <script>
+         	$(function(){
+         		$(".imo").click(function(){
+         			var div = $(this);
+         			var divX = div.offset().left;
+         			var divY = div.offset().top;
+         			
+         			alert(divX);
+         			alert(divY);
+         		});
+         	});
+         </script> -->
          
-         <button class="btn btn-secondary" onclick="location.href='classNoticeView.do?cNo=${ cNo }'" style="float:right;">목록으로</button>
          
       </div><br><br>
       

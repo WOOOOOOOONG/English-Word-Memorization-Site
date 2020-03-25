@@ -148,11 +148,13 @@ public class ClassController {
 	
 	// 맞는 클래스 보러가기
 	@RequestMapping("myClass.do")
-	public ModelAndView classDetailView(ModelAndView mv,String cNo,Model model) {
+	public ModelAndView classDetailView(ModelAndView mv,String cNo,Model model,HttpServletRequest request) {
 		
 		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
 		ArrayList<Storage> userList = new ArrayList<>();
 		ArrayList<Storage> allUserList = new ArrayList<>();
+		
+		Member me = (Member)request.getSession().getAttribute("loginMember");
 		
 		for(int i = 0; i < cmList.size(); i++) {
 			Storage User = new Storage();
@@ -164,6 +166,12 @@ public class ClassController {
 		ArrayList<Joinwait> jwList = cService.selectJoinWait(cNo);
 		mv.addObject("userList",userList);
 		allUserList = cService.selectAllStorage();
+		
+		// 마지막 방문날짜 업데이트
+		ClassMember cn = new ClassMember();
+		cn.setcNo(cNo);
+		cn.setId(me.getmId());
+		cService.updateRecentDay(cn);
 		
 		model.addAttribute("allUserList",allUserList);
 		model.addAttribute("cmList",cmList);
