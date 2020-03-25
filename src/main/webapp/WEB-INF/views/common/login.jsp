@@ -8,12 +8,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Document</title>
+<title>SEW LOGIN</title>
 <!-- Bootstrap CSS -->
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
 	crossorigin="anonymous">
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 
 <link
 	href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"
@@ -71,17 +74,19 @@ body :-ms-input-placeholder {
 }
 
 .wrapper {
-	background: #3ac569;
+	/* background: #3ac569;
 	background: -webkit-linear-gradient(top left, #3ac569 0%, #cff0da 100%);
 	background: -moz-linear-gradient(top left, #3ac569 0%, #cff0da 100%);
 	background: -o-linear-gradient(top left, #3ac569 0%, #cff0da 100%);
-	background: linear-gradient(to top right, #3ac569 0%, #cff0da 100%);
+	*/
+	background:rgba(154, 234, 247, 0.9);
 	position: absolute;
 	left: 0;
 	width: 100%;
-	height: 86%;
-	margin-top: 0px;
+	height: 55%;
+	margin-top:10%;
 	overflow: hidden;
+	
 }
 
 .wrapper.form-success .container h1 {
@@ -92,10 +97,11 @@ body :-ms-input-placeholder {
 	max-width: 600px;
 	margin: 0 auto;
 	padding: 80px 0;
-	height: 400px;
-	top: 50%;
+	height: 600px;
+	
 	text-align: center;
-	    margin-top: 6%;
+  
+	
 }
 
 .container h1 {
@@ -109,12 +115,13 @@ body :-ms-input-placeholder {
 	padding: 20px 0;
 	position: relative;
 	z-index: 2;
+	
 }
 
 #loginform input {
 	appearance: none;
 	outline: 0;
-	border: 1px solid rgba(255, 255, 255, 0.4);
+	border: 2px solid rgba(255, 255, 255, 0.4);
 	background-color: rgba(255, 255, 255, 0.2);
 	width: 250px;
 	border-radius: 3px;
@@ -125,17 +132,19 @@ body :-ms-input-placeholder {
 	font-size: 18px;
 	color: white;
 	transition-duration: 0.25s;
-	font-weight: 300;
+	font-weight: 400;
 }
 
 #loginform input:hover {
 	background-color: rgba(255, 255, 255, 0.4);
+	    font-weight: 400;
 }
 
 #loginform input:focus {
 	background-color: white;
 	width: 300px;
-	color: #3ac569;
+	color: rgba(154, 234, 247, 0.9);
+	    font-weight: 500;
 }
 
 #loginform button {
@@ -144,12 +153,13 @@ body :-ms-input-placeholder {
 	background-color: white;
 	border: 0;
 	padding: 10px 15px;
-	color: #3ac569;
+	color: rgba(154, 234, 247, 0.9);
 	border-radius: 3px;
 	width: 250px;
 	cursor: pointer;
-	font-size: 18px;
+	font-size: 20px;
 	transition-duration: 0.25s;
+	    font-weight: 400;
 }
 
 #loginform button:hover {
@@ -283,19 +293,20 @@ body :-ms-input-placeholder {
 	background-color: white;
 	border: 0;
 	padding: 5px 10px;
-	color: #3ac569;
+	color: rgba(154, 234, 247, 0.9);
 	border-radius: 3px;
 	cursor: pointer;
 	width: 120px;
 	transition-duration: 0.25s;
+	    font-weight: 400;
 }
 
 .textdivarea {
 	width: 100%;
 	margin: auto;
 	text-align: left;
-	font-size: 0.9em;
-	color: black;
+	font-size: 0.8em;
+	color: #525252;
 }
 
 .inputdivarea {
@@ -355,7 +366,7 @@ body :-ms-input-placeholder {
 }
 
 .modal-header {
-	    width: 99.88%;
+	width: 99.88%;
     margin-left: 0.12%;
 	background: #cff0da;
 }
@@ -368,16 +379,20 @@ body :-ms-input-placeholder {
 	width: 90%;
 	margin-left: 5%;
 }
-
+#dd >span {
+  font-size:16px;
+  color:white;
+      font-weight: 400;
+  }
 </style>
 </head>
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	
+
 	<div class="wrapper">
 		<div class="container">
-			<h1 style="color: white;">Welcome</h1>
+			<h1 style="color: white;    font-weight: 600;">Welcome</h1>
 
 			<form id="loginform" class="form" method="post" 
 			action='${contextPath}/Memberlogin.me'>
@@ -386,20 +401,29 @@ body :-ms-input-placeholder {
 				<button type="submit" id="login-button">Login</button>
 			</form>
 			<div id="dd"
-				style="position: relative; z-index: 2; width: 30%; margin-left: 32.5%; text-align: right;">
-				처음 방문하시는 건가요?
+				style="position: relative; z-index: 2; width: 33%; margin-left: 30.5%; text-align: right;">
+				<span>처음 방문하시는 건가요?</span>
 				<button type="button" id="newuserbtn" data-toggle="modal"
 					data-target="#newMembermodal">회원가입</button>
-				<br> <br> 아이디를 찾고계시는군요
+				<br> <br><span> 아이디를 찾고계시는군요</span>
 				<button type="button" id="idcheckbtn" data-toggle="modal"
 					data-target="#findmyiddiv">아이디찾기</button>
-				<br> <br> 비밀번호를 찾으시나봐요
+				<br> <br><span> 비밀번호를 찾으시나봐요</span>
 				<button type="button" id="pwddcheckbtn" data-toggle="modal"
 					data-target="#findmypwddiv">비밀번호찾기</button>
-
 			</div>
 
 		</div>
+		<script>
+			$(function(){
+				
+				$("#dd > button").hover(function(){
+					$(this).prev().css("font-size","20px");
+			    }, function() {
+			    	$(this).prev().css("font-size","16px");
+			    });
+			});
+		</script>
 	<!-- 버블이 방울방울 ㅎ -->
 		<ul class="bg-bubbles">
 			<li></li>
@@ -432,37 +456,37 @@ body :-ms-input-placeholder {
 					<form id="insertMemberForm" method="post"
 						onsubmit="return insertcheck();" action='${contextPath}/insert.me'>
 						<div id="signArea">
-							<div class="textdivarea">아이디</div>
+							<div class="textdivarea">*아이디</div>
 							<div class="inputdivarea">
 								<input type="text" name="mId" required>
 							</div>
 							<div class="commentarea"></div>
-							<div class="textdivarea">비밀번호</div>
+							<div class="textdivarea">*비밀번호</div>
 							<div class="inputdivarea">
 								<input type="password" name="pwd" required>
 							</div>
 							<div class="commentarea"></div>
-							<div class="textdivarea">비밀번호 확인</div>
+							<div class="textdivarea">*비밀번호 확인</div>
 							<div class="inputdivarea">
 								<input type="password" name="userPwdCk" required>
 							</div>
 							<div class="commentarea"></div>
-							<div class="textdivarea">이름</div>
+							<div class="textdivarea">*이름</div>
 							<div class="inputdivarea">
 								<input type="text" name="name" required>
 							</div>
 							<div class="commentarea"></div>
-							<div class="textdivarea">이메일</div>
+							<div class="textdivarea">*이메일</div>
 							<div class="inputdivarea">
 								<input type="email" id="userEmail" name="email" required
 									style="width: 68.9%;"> <input type="button"
 									id="checkemailbtn" class="btn btn-success btn-sm"
-									style="width: 29.5%;" value="인증">
+									style="width: 29.5%;margin-bottom: 4px;" value="인증">
 								<button id="hiddenemailbtn" type="button" data-toggle="modal"
 									data-target="#checkemailen" style="display: none;"></button>
 							</div>
 							<div class="commentarea"></div>
-							<div class="textdivarea">생년월일</div>
+							<div class="textdivarea">*생년월일</div>
 							<div class="inputdivarea">
 								<input type="text" name="birthDate" placeholder="ex:19750524"
 									required>
@@ -754,7 +778,7 @@ body :-ms-input-placeholder {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel"
-						style="margin-left: 45%;">ID찾기</h5>
+						style="margin-left: 40%;">아이디 찾기</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -785,7 +809,7 @@ body :-ms-input-placeholder {
 			<div class="modal-content" id="findpwdmodalcontent">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel"
-						style="margin-left: 38%;">비밀번호찾기</h5>
+						style="margin-left: 37%;">비밀번호 찾기</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close" id="closefindpwdbtn">
 						<span aria-hidden="true">&times;</span>
@@ -973,6 +997,8 @@ $(function(){
 			return true;
 		};
     </script>
+   
+    
 </body>
 
 

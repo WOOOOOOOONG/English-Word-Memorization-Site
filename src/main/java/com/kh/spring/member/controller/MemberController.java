@@ -41,8 +41,6 @@ public class MemberController {
 	@RequestMapping("memberList.me")
 	public ModelAndView memberList(ModelAndView mv) {
 		ArrayList<Member> memberList = mService.selectList();
-		System.out.println("mList : " + memberList);
-		
 		mv.addObject("mList", memberList);
 		mv.setViewName("admin/member-manage");
 		
@@ -172,7 +170,6 @@ public class MemberController {
 			rd.addFlashAttribute("msg", "사용자 정보가 일치하지 않습니다.");
 			
 			String referer = request.getHeader("Referer");
-			System.out.println();
 			if(referer.length() == 29) {
 				referer = "viewMain.ad";
 			}
@@ -195,13 +192,12 @@ public class MemberController {
 			String renameFileName = saveFile(file, request, m.getmId());
 			
 			if(renameFileName != null) {
+				m.setProfileimg(renameFileName);
 				deleteFile(request,((Member)model.getAttribute("loginMember")).getProfileimg());
 				result += mService.updateProfileImg(m);
-				changemember.setProfileimg(renameFileName);
+				changemember.setProfileimg(m.getProfileimg());
 			}
 		}
-		
-		System.out.println(changemember);
 		if(m.getNickname() == null) {
 			m.setNickname(changemember.getNickname());
 		}

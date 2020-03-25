@@ -8,12 +8,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Insert title here</title>
+<title>SEW</title>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-
+	
+	<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossorigin="anonymous">
@@ -701,15 +704,15 @@ body {
 
 
  ul.shelf li:nth-child(1) span {
-	 background-color: rgb(29, 161, 135);
+	 background-color: rgb(41, 204, 150);
 }
 ul.shelf li:nth-child(1) span.booktop{
 		 background-color:#e9e6c4;
-		 border:2px solid rgb(29, 161, 135);
+		 border:2px solid rgb(41, 204, 150);
 }
 
  ul.shelf li:nth-child(1) .booklabel {
-	 background-color:rgb(43, 235, 196);
+	 background-color:rgb(46, 231, 170);
 }
  ul.shelf li:nth-child(1) {
 	 z-index: 1;
@@ -819,26 +822,26 @@ ul.shelf li:nth-child(9) span.booktop{
 }
 
 .cover.turn {
-  animation: bookCover 1.01s forwards;
+  animation: bookCover 1.0s forwards;
 }
 .page.turn {
-  animation: bookOpen 2s forwards;
+  animation: bookOpen 1.5s forwards;
 }
 
 .page:nth-of-type(1) {
   animation-delay: 0.05s;
 }
 .page:nth-of-type(2) {
-  animation-delay: 0.22s
+  animation-delay: 0.2s
 }
 .page:nth-of-type(3) {
-  animation-delay: 0.44s;
+  animation-delay: 0.35s;
 }
 .page:nth-of-type(4) {
-  animation-delay: 0.66s;
+  animation-delay: 0.5s;
 }
 .page:nth-of-type(5) {
-  animation-delay: 0.88s;
+  animation-delay: 0.65s;
 }
 
 
@@ -925,7 +928,7 @@ ul.shelf li:nth-child(9) span.booktop{
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="class"><span class="booklabel"><h2>Class</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
-        <li class="bookmain" id="dan"><span class="booklabel"><h2>Word</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <!-- id="dan" --><li class="bookmain" ><span class="booklabel"><h2>Word</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="schedule"><span class="booklabel"><h2>Schedule</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
@@ -999,8 +1002,7 @@ ul.shelf li:nth-child(9) span.booktop{
 				    </script>
 			    </div>
             
-            </div>
-            
+            </div>   
              <!-- 오른쪽 페이지 -->
             <div class="page" style="z-index:10;">
             	<!-- 프로필 수정 -->
@@ -1064,6 +1066,7 @@ ul.shelf li:nth-child(9) span.booktop{
             	<div class="contenttitle">Dan List</div>
 					<button id="mydanlist"class="btn btn-info">햐</button>
 			    </div>
+			    
             	<!-- 스케쥴  -->
 			    <div id="schedulecontent" class="mypagecontent">
 			        <div id="calendar"></div>
@@ -1131,6 +1134,8 @@ ul.shelf li:nth-child(9) span.booktop{
    	
     <script>
         $(function(){
+        	//getAllMyDan('user9');
+        	
         	// 책 오픈
             $("ul.shelf li").click(function(){
             	var j = 5;
@@ -1138,10 +1143,11 @@ ul.shelf li:nth-child(9) span.booktop{
             		if($(this).attr('id')=="class"){
             			j=4;
             		}
+            		
                 $sh = $("#shelfwrapper");
-                $sh.height($sh.height()).animate({height: "0px"}, 1000);
+                $sh.height($sh.height()).animate({height: "0px"}, 500);
                 $desk = $("#deskwrapper");
-                $desk.height($desk.height()).animate({height: "900px"}, 1000);
+                $desk.height($desk.height()).animate({height: "900px"}, 500);
                
                 var id = $(this).attr('id') + "content";
                 $("#bookcover").html($("#"+$(this).attr('id')+" > .booklabel > h2").html());
@@ -1154,16 +1160,16 @@ ul.shelf li:nth-child(9) span.booktop{
                     for(var i=0; i<j; i++){
                       $(page[i]).addClass("turn");
                      }
-                }, 1500); 
+                }, 1000); 
             	}
             });
             // 책 닫음
             $("#backicon").click(function(){
             	
             	$desk = $("#deskwrapper");
-                $desk.height($desk.height()).animate({height: "0px"}, 1000);
+                $desk.height($desk.height()).animate({height: "0px"}, 500);
             	$sh = $("#shelfwrapper");
-                $sh.height($sh.height()).animate({height: "900px"}, 1000);
+                $sh.height($sh.height()).animate({height: "900px"}, 500);
                 setTimeout(function() {
                 	$(".page").removeClass("turn");
                     $(".cover").removeClass("turn");
@@ -1188,7 +1194,30 @@ ul.shelf li:nth-child(9) span.booktop{
             }
             
         });
-        
+        // 단어장 불러오기
+        function getAllMyDan(searchInput) {
+ 		   //192.168.10.13
+     		 var send = JSON.stringify({
+     	         'search' : searchInput
+     	      });
+    		console.log(searchInput);
+            $.ajax({
+               type : "POST",
+               dataType : "json",
+               contentType : "application/json; charset=utf-8",
+               data : send,
+               url : 'http://localhost:1222/getMyList',
+               success : function(data) { 
+               		console.log("에이작스로 몽고디비 데이터 가져오기")
+               		console.log(data);
+                  	
+                  	
+               },
+               error : function() {
+                  console.log("error has occured retriving data from MongoServer")
+               }
+            });
+        }
     </script>
 
     <!-- 스케쥴 일정추가 모달 -->
@@ -1875,6 +1904,9 @@ ul.shelf li:nth-child(9) span.booktop{
     		});
     	});
     </script>
+    
+    <!-- <jsp:include page="../common/footer.jsp"/> -->
+    
 </body>
 
 </html>
