@@ -291,7 +291,29 @@ public class ClassDao {
 			// TODO Auto-generated method stub
 			return sqlSession.delete("ClasssMapper.deleteNoticeReply",rId);
 		}
-	
+
+		// 공지사항 입력
+		public void classNoticeInsert(ClassNotice cn) {
+			// TODO Auto-generated method stub
+			sqlSession.insert("ClasssMapper.classNoticeInsert",cn);
+		}
+
+		public String getCNID(ClassNotice cn) {
+			// TODO Auto-generated method stub
+			return sqlSession.selectOne("ClasssMapper.getCNID",cn);
+		}
+
+		public void deleteNotice(String cnid) {
+			// TODO Auto-generated method stub
+			sqlSession.delete("ClasssMapper.deleteNotice",cnid);
+		}
+
+		// 공지사항 수정
+		public void updateNotice(ClassNotice cn) {
+			// TODO Auto-generated method stub
+			sqlSession.update("ClasssMapper.updateNotice",cn);
+		}
+
 	
 
 }

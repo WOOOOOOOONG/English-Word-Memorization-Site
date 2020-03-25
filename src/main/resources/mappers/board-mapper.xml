@@ -20,6 +20,7 @@
 		<result property="writerNickname" column="WRITER_NICKNAME"/>
 		<result property="content" column="CONTENT"/>
 		<result property="createDate" column="CREATE_DATE"/>
+		<result property="reportCount" column="REPORT_COUNT"/>
 	</resultMap>
 	
 	<select id="getListCount" resultType="_int">
@@ -71,7 +72,7 @@
 	
 	<insert id="insertBoardReply">
 		INSERT INTO REPLY
-		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT)
+		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT, DEFAULT)
 	</insert>
 	
 	<delete id="deleteBoardReply">
@@ -115,4 +116,10 @@
 		</where>
 		ORDER BY BID DESC
 	</select>
+	
+	<update id="reportCountUp">
+		UPDATE REPLY
+		SET REPORT_COUNT = REPORT_COUNT + 1
+		WHERE RID=#{rId}
+	</update>
 </mapper>

@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+ <script src="https://kit.fontawesome.com/89f82078c1.js" crossorigin="anonymous"></script>
 <style>
    /* 전체 */
    .whole {
@@ -123,6 +124,59 @@
       font-size: 12px;
       color: #848484;
    }
+   
+   .imotion {
+    background: #f3f3f3;
+    float: right;
+   }
+   
+   .imotion div {
+    position: relative;
+    display: inline-block;
+    border: 1px solid #d8d8d8;
+    margin-right: 10px;
+}
+   
+   .arrow_box {
+  display: none;
+  position: absolute;
+  width: 100px;
+  padding: 8px;
+  left: 0;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;  
+  border-radius: 8px;
+  background: #333;
+  color: #fff;
+  font-size: 14px;
+  text-align:center;
+  margin-left: -35px;
+  margin-top: 3px;
+}
+
+.arrow_box:after {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  margin-left: -10px;
+  border: solid transparent;
+  border-color: rgba(51, 51, 51, 0);
+  border-bottom-color: #333;
+  border-width: 10px;
+  pointer-events: none;
+  content: " ";
+}
+
+.imo {
+	display: block;
+	cursor: pointer;
+}
+
+.imo:hover + p.arrow_box {
+  display: block;
+}
 </style>
 </head>
 <body>
@@ -147,8 +201,24 @@
                </c:when>         
             </c:choose>
          </h4>
+     	
+	     <c:if test="${ !empty sessionScope.loginMember && !(sessionScope.loginMember.mId eq detailBoard.referId  || sessionScope.loginMember.mId eq 'admin')}">
+	     	 <div class="imoticon">
+		     	 <div>
+			         <i class="far fa-angry imo" style="font-size: 30px;" onclick="report('${detailBoard.bId}');"></i>
+			         <p class="arrow_box">신고하기</p>
+			         <script>
+			         	function report(bId) {
+			         		if(window.confirm("해당 게시글을 신고하시겠습니까?")) {
+			         			location.href="insertInquireView.ad?reportedId="+bId+"&reportType="+4;
+			         		}
+			         	}
+			         </script>
+			     </div>    
+	     	</div>
+	     </c:if>
          <!-- 수정, 삭제 버튼 -->
-         <c:if test="${ sessionScope.loginMember.mId eq detailBoard.referId }">
+         <c:if test="${ sessionScope.loginMember.mId eq detailBoard.referId  || sessionScope.loginMember.mId eq 'admin'}">
             <div class="modify-delete-btn" style="display: inline;">
                <c:url var="update" value="viewBoardUpdate.bo">
                   <c:param name="bId" value="${ detailBoard.bId }"/>
@@ -156,8 +226,17 @@
                <c:url var="delete" value="deleteBoard.bo">
                   <c:param name="bId" value="${ detailBoard.bId }" />
                </c:url>
-               <button type="button" class="button-list" style="font-size: 15px;" onclick="location.href='${update}'">수정</button>
-               <button type="button" class="button-list" style="font-size: 15px;" onclick="deleteBoard();">삭제</button>
+               
+               <div class="imotion">
+	               <div>
+	               		<i class="fas fa-exchange-alt imo" style="font-size: 30px;" onclick="location.href='${update}'"></i>
+	               		<p class="arrow_box">수정하기</p>
+	               </div>
+	               <div>
+	               		<i class="fas fa-trash-alt imo" style="font-size: 30px;" onclick="deleteBoard();"></i>
+	               		<p class="arrow_box">삭제하기</p>
+	               </div>
+               </div>
             </div>
             <script>
                function deleteBoard() {
@@ -192,8 +271,10 @@
                <div class="content">${detailBoard.views}</div>
             </div>
          </div>
-         <div class="boardContent">${detailBoard.content}</div>
-   
+         <div class="boardContent"><textarea id="#inputText" placeholder="${detailBoard.content }" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke"></textarea></div>
+         <script>
+         	$("#inputText").unbind("mouseover click");
+         </script>
          <!-- 다음글, 이전글 -->
          <c:forEach var="item" items="${ boardList }" varStatus="status">
          	<c:if test="${item.bId eq detailBoard.bId && item.bId ne boardList[0].bId}">
@@ -250,26 +331,48 @@
             }
             
             function replyInsertFunc() {
-               var bId = ${detailBoard.bId};
-               var referId = "${sessionScope.loginMember.mId}";
-               var referNickname = "${sessionScope.loginMember.nickname}";
-               var content = document.getElementById('textarea').value;
-               
-               $.ajax({
-                  url: "insertBoardReply.bo",
-                  data: {bId:bId, referId:referId, 
-                     referNickname:referNickname, content:content},
-                  type: "POST",
-                  success: function(data) {
-                     if(data == 'success') {
-                        getReplyList();
-                        replyInsert.value = "";
-                     }
-                  },
-                  error: function(data) {
-                     console.log("댓글 삽입 오류!");
-                  }
-               });
+            	var replyInsert = $('#textarea');
+            	if(replyInsert.val() != "") {
+	               var bId = ${detailBoard.bId};
+	               var referId = "${sessionScope.loginMember.mId}";
+	               var referNickname = "${sessionScope.loginMember.nickname}";
+	               var content = document.getElementById('textarea').value;
+	               
+	               $.ajax({
+	                  url: "insertBoardReply.bo",
+	                  data: {bId:bId, referId:referId, 
+	                     referNickname:referNickname, content:content},
+	                  type: "POST",
+	                  success: function(data) {
+	                     if(data == 'success') {
+	                        getReplyList();
+	                        replyInsert.val("");
+	                     }
+	                  },
+	                  error: function(data) {
+	                     console.log("댓글 삽입 오류!");
+	                  }
+	               });
+            	}else {
+            		alert("댓글 내용을 입력하세요");
+            	}
+            }
+            
+            function reportReply(rId) {
+            	if(confirm("해당 게시글을 신고하시겠습니까?")) {
+            		alert("댓글은 5회 신고 시 자동으로 삭제됩니다.");
+            		$.ajax({
+            			url: "reportReply.bo",
+            			data: {rId:rId},
+            			dataType: "json",
+            			success: function() {
+            				getReplyList();
+            			},
+            			error: function() {
+            				getReplyList();
+            			}
+            		});
+            	}
             }
             
             function getReplyList() {
@@ -287,14 +390,21 @@
                      
                      if(data.length > 0){
                         for(var i in data){
+                        	if(data[i].reportCount >= 5) {
+                        		deleteReply(data[i].rId, data[i].writerId);
+                        		getReplyList();
+                        	}
                            var $tr = $("<tr>");
                            var $form = $("<form action='deleteBoardReply.bo' method='POST'>");
                            var $tWriter = $("<td width='50'>").html("<div class='tdContent2'>" + data[i].writerNickname + "</div>");
                            var $tContent = $("<td width='1130'>").html("<div class='tdContent1'>" + data[i].content + "</div> " + 
                                  "<div class='tdContent2'>" + data[i].createDate + "</div>");
                            var memberId = "${sessionScope.loginMember.mId}";
-                           if(${!empty sessionScope.loginMember} && (data[i].writerId == memberId || memberId == 'admin')) { 
+                           
+                           if(${!empty sessionScope.loginMember} && (data[i].writerId == memberId || memberId == 'admin')) {                        	   
                               var $deleteBtn = $("<td width='10'>").html("<div class='tdContent2'><button class='button" + i + "' onclick='deleteReply(" + data[i].rId + ", " + '"' + data[i].writerId + '"' + ");'>X</button></div>");                              
+                           }else {
+                        	  var reportBtn = $('<td width="10"><div class="imotion"><div><i class="far fa-angry imo" style="font-size: 25px;" onclick="reportReply(' + data[i].rId + ');"></i><p class="arrow_box" style="margin-left:-36px;">신고하기</p></div></div></td>');
                            }
                            var $hr = document.createElement("hr");         
                            var rId = $();
@@ -303,6 +413,7 @@
                            
                            $tr.append($tContent);
                            $tr.append($tWriter);
+                           $tr.append(reportBtn);
                            if(data[i].writerId == memberId || memberId == 'admin') {
                               $tr.append($deleteBtn);
                            }
@@ -327,14 +438,9 @@
             
             function deleteReply(i, referId) {
                var bId = ${detailBoard.bId};
-               var memberId = "${sessionScope.loginMember.mId}";
-               console.log(referId);
                
-               if(memberId == referId || memberId == 'admin') {
-                  location.href="deleteBoardReply.bo?rId="+i+"&bId="+bId;   
-               }else {
-                  
-               }
+               location.href="deleteBoardReply.bo?rId="+i+"&bId="+bId;   
+               
                
             }
          </script>

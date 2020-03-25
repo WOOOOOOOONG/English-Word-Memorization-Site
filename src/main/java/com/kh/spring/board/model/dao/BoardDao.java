@@ -65,6 +65,10 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardReplyList", bId);
 	}
 
+	public void reportReply(int rId) {
+		sqlSession.update("boardMapper.reportCountUp", rId);
+	}
+
 	public ArrayList<Board> searchList(Search search) {
 		return (ArrayList)sqlSession.selectList("boardMapper.searchList", search);
 	}

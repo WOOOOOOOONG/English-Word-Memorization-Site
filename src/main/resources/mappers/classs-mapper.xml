@@ -143,6 +143,28 @@
   <select id="noticeAllList" resultMap="ClassNoticeResultSet">SELECT * FROM CLASS_NOTICE WHERE REFER_CNO = #{cNo} ORDER BY create_datae DESC</select> 
   <select id="selectBoardReplyList" resultMap="replyResultMap">SELECT * FROM CLASS_REPLY WHERE CNID=#{cnid}</select> 
   <insert id="insertNoticeReply">INSERT INTO CLASS_REPLY VALUES(CR_SEQ.NEXTVAL,#{writerNickname},#{writerId},#{writerId},#{content},SYSDATE)</insert> 
-  <delete id="deleteNoticeReply">DELETE FROM CLASS_REPLY WHERE RID = #{rId}</delete> 
-	
+  <delete id="deleteNoticeReply">DELETE FROM CLASS_REPLY WHERE RID = #{rId}</delete>
+  
+  <insert id="classNoticeInsert">
+  	INSERT INTO
+  	CLASS_NOTICE VALUES('CNID' || CNID_SEQ.NEXTVAL, #{cNo}, #{id}, #{id}, #{title},
+  						#{content}, sysdate, '1')
+  </insert> 
+  
+  <select id="getCNID" resultType="string">
+  	SELECT CNID
+  	FROM CLASS_NOTICE
+  	WHERE REFER_CNO = #{cNo} AND REFER_ID = #{id} AND TITLE = #{title}
+  </select>
+  
+  <delete id="deleteNotice">
+  	DELETE 
+  	FROM CLASS_NOTICE
+  	WHERE CNID = #{cnid}
+  </delete>
+	<update id="updateNotice">
+		UPDATE CLASS_NOTICE
+		SET TITLE = #{title} , NOTICE_CONTENT = #{content}
+		WHERE CNID = #{cnid}
+	</update>
 </mapper>

@@ -323,7 +323,7 @@ nav.sidebar ul li.active a.expandable:hover {
 						class='expanded-element'>Settings</span>
 				</a></li>
 			</ul>
-			<a href='#' id='logout-icon' title='Logout'> <span
+			<a href='Memberlogout.me' id='logout-icon' title='Logout'> <span
 				class='glyphicon glyphicon-off'></span>
 			</a>
 			<script>
@@ -412,12 +412,12 @@ nav.sidebar ul li.active a.expandable:hover {
 						<tbody>
 							<c:if test="${ mList ne null }">
 								<c:forEach var="item" items="${ mList }">
-									<tr onclick="detailMember('${item.mId}');">
-										<td>${ item.mId }</td>
-										<td>${ item.name }</td>
-										<td>${ item.nickname }</td>
-										<td>${ item.enrollDate }</td>
-										<td>${ item.updateDate }</td>
+									<tr>
+										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.mId }</td>
+										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.name }</td>
+										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.nickname }</td>
+										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.enrollDate }</td>
+										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.updateDate }</td>
 										<c:if test="${ item.userStatus eq 'Y'}">
 											<c:set var="selectedY" value="selected" />
 										</c:if>
@@ -558,7 +558,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								</c:if>
 								<c:if test="${item.isAnswer eq 'N' }">
 									<tr class="answer">
-										<td colspan="8"><textarea class="textarea" id="textarea${item.iId}"></textarea></td>
+										<td colspan="8"><textarea style="width: 100%; height: 200px" class="textarea" id="textarea${item.iId}"></textarea></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
@@ -675,12 +675,14 @@ nav.sidebar ul li.active a.expandable:hover {
 													color : '#053061',
 													bold : true,
 													italic : false,
+													fontName: "Roboto"
 												},
 												titleTextStyle : {
 													fontSize : 18,
 													color : '#053061',
 													bold : true,
-													italic : false
+													italic : false,
+													fontName: "Roboto"
 												},
 												gridlines : {
 													count : 24
@@ -688,16 +690,18 @@ nav.sidebar ul li.active a.expandable:hover {
 											},
 											vAxis : {
 												textStyle : {
-													fontSize : 18,
+													fontSize : 14,
 													color : '#67055f',
 													bold : false,
-													italic : false
+													italic : false,
+													fontName: "Roboto"
 												},
 												titleTextStyle : {
 													fontSize : 18,
 													color : '#67055f',
 													bold : true,
-													italic : false
+													italic : false,
+													fontName: "Roboto"
 												}
 											}
 										};
@@ -775,10 +779,11 @@ nav.sidebar ul li.active a.expandable:hover {
 										 
 										var options = {
 											title : '클래스 분포',
-											titleFontSize : 18,
+											titleFontSize : 14,
 											fontSize : 18,
 											is3D : true,
-											backgroundColor : ""
+											backgroundColor : "",
+											fontName: "Roboto"
 										};
 					
 										var chart = new google.visualization.PieChart(document
@@ -921,13 +926,15 @@ nav.sidebar ul li.active a.expandable:hover {
 												fontSize : 14,
 												color : '#053061',
 												bold : true,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											},
 											titleTextStyle : {
 												fontSize : 18,
 												color : '#053061',
 												bold : true,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											},
 											gridlines : {
 												count : 30
@@ -935,16 +942,18 @@ nav.sidebar ul li.active a.expandable:hover {
 										},
 										vAxis : {
 											textStyle : {
-												fontSize : 18,
+												fontSize : 14,
 												color : '#67001f',
 												bold : false,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											},
 											titleTextStyle : {
 												fontSize : 18,
 												color : '#67001f',
 												bold : true,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											}
 										}
 									};
@@ -1024,13 +1033,15 @@ nav.sidebar ul li.active a.expandable:hover {
 												fontSize : 14,
 												color : '#053061',
 												bold : true,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											},
 											titleTextStyle : {
 												fontSize : 18,
 												color : '#053061',
 												bold : true,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											},
 											gridlines : {
 												count : 30
@@ -1038,16 +1049,18 @@ nav.sidebar ul li.active a.expandable:hover {
 										},
 										vAxis : {
 											textStyle : {
-												fontSize : 18,
+												fontSize : 14,
 												color : '#67001f',
 												bold : false,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											},
 											titleTextStyle : {
 												fontSize : 18,
 												color : '#67001f',
 												bold : true,
-												italic : false
+												italic : false,
+												fontName: "Roboto"
 											}
 										}
 									};

@@ -19,6 +19,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="${ contextPath }/resources/css/test.css" type="text/css">
+
+
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
@@ -83,8 +85,8 @@
 											${ i }
 										</div>
 										<div class="filled-box">
-											<div class="text-box">
-												<select class="custom-select" style="width:130px;" id="engS${i}" onchange="writeKOR(${ i },this,this.value)">
+											<div class="text-box" >
+												<select class="custom-select"  size="1" style="width:130px;" id="engS${i}" onchange="writeKOR(${ i },this,this.value)">
 													<c:forEach var="j" begin="0" end="${ korList.size()-1 }">
 														<option id="${ j }" class="${ j }" value="${ j }">${ korList.get(j) }</option>
 													</c:forEach>
@@ -191,5 +193,6 @@
 			
 		});
 	</script>
+	
 </body>
 </html>

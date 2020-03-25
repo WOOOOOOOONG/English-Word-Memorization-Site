@@ -9,10 +9,12 @@ public class Reply {
 	private String writerNickname;
 	private String content;
 	private Date createDate;
+	private int reportCount;
 	
 	public Reply() {}
 
-	public Reply(int rId, int bId, String writerId, String writerNickname, String content, Date createDate) {
+	public Reply(int rId, int bId, String writerId, String writerNickname, String content, Date createDate,
+			int reportCount) {
 		super();
 		this.rId = rId;
 		this.bId = bId;
@@ -20,6 +22,7 @@ public class Reply {
 		this.writerNickname = writerNickname;
 		this.content = content;
 		this.createDate = createDate;
+		this.reportCount = reportCount;
 	}
 
 	public int getrId() {
@@ -70,9 +73,19 @@ public class Reply {
 		this.createDate = createDate;
 	}
 
+	public int getReportCount() {
+		return reportCount;
+	}
+
+	public void setReportCount(int reportCount) {
+		this.reportCount = reportCount;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [rId=" + rId + ", bId=" + bId + ", writerId=" + writerId + ", writerNickname=" + writerNickname
-				+ ", content=" + content + ", createDate=" + createDate + "]";
+				+ ", content=" + content + ", createDate=" + createDate + ", reportCount=" + reportCount + "]";
 	}
+
+	
 }

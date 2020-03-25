@@ -33,6 +33,9 @@
     .swiper-slide{
     	box-sizing:border-box;
     }
+    body{
+    	
+    }
     </style>
 </head>
 <body>
@@ -40,24 +43,25 @@
 	<jsp:include page="../classs/summerNote.jsp" />
 	<!-- 전체 -->
 	<c:url var="inquireView" value="insertInquireView.ad">
-      <c:param name="reportedClass" value="${classs.cNo}"/>
-   </c:url>
+    <c:param name="reportType" value="3"/>
+    <c:param name="reportedId" value="${classs.cNo}"/>
+</c:url>
    <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a></i>
 	
-    <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 408px; margin-top: 0px; background: #ebebeb; display: block;">
+    <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 20px; margin-top: 0px; background: #ebebeb; display: block; font-family: 'Jua', sans-serif;">
         <div style="margin-top: 0px;">
 
             <!-- 주 내용 시작-->
             <div style="width:60pc; margin:0 auto; overflow:hidden; position:relative;">
                 <!-- 찐 내용 시작-->
-                <div style=" margin-bottom:60px; width:700px; overflow:hidden; background-color:#fff; margin:auto;">
+                <div style=" margin-bottom:60px; width:700px; overflow:hidden; background-color:#fff; margin:auto; border-radius:25px;">
                     <!-- 사진, 지역 , 제목-->
                     <header>
                     	
                         <!-- 사진 -->
                         
-                        <div style="position:relative; height:360px;" >
-                        	  <div class="swiper-container swiper1" style="width:700px; height:360px; position: relative; top:30px; border: 1px solid gray; cursor: pointer;">
+                        <div style="position:relative; height:360px; border-radius:15px;" >
+                        	  <div class="swiper-container swiper1" style="width:700px;border-radius:15px; height:360px; position: relative; top:30px; border: 1px solid gray; cursor: pointer;">
 			                    <div class="swiper-wrapper">
 			                        <div class="swiper-slide">
 	                            		<img src="${ contextPath }/resources/classImage/${ img1 }" style="width: 700px; height: 360px; cursor: pointer;" id="img_swiper1">
