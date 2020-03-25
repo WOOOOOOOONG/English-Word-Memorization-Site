@@ -37,7 +37,8 @@ public class MemberController {
 	private MemberService mService;
 	@Autowired
 	private FriendService fService;
-	
+	@Autowired
+	private AdminController aController;
 	@RequestMapping("memberList.me")
 	public ModelAndView memberList(ModelAndView mv) {
 		ArrayList<Member> memberList = mService.selectList();
@@ -59,12 +60,12 @@ public class MemberController {
 		
 		int result = mService.updateStatus(m);
 		if(result > 0) {
-			ArrayList<Member> memberList = mService.selectList();
+			ArrayList<Member> memberList = mService.selectListAll();
 			
 			mv.addObject("mList", memberList);
 		}
 		
-		mv.setViewName("admin/member-manage");
+		aController.viewTotal(mv);
 		
 		return mv;
 	}
