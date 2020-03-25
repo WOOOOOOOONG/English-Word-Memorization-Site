@@ -104,4 +104,14 @@
 	<select id="checkEmail" parameterType="string" resultType="int">
 		select Count(*) from Member where EMAIL=#{email}
 	</select>
+	
+	<select id="selectOne" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM MEMBER
+		WHERE MID=#{mId}
+	</select>
+	
+	<select id="selectNickname" parameterType="string" resultType="int">
+		select count(*) from member where NICKNAME=#{nickname}
+	</select>
 </mapper>

@@ -95,6 +95,7 @@ body :-ms-input-placeholder {
 	height: 400px;
 	top: 50%;
 	text-align: center;
+	    margin-top: 6%;
 }
 
 .container h1 {
@@ -262,7 +263,21 @@ body :-ms-input-placeholder {
   }
 }
 
-div>button {
+.modalbtn {
+	text-align: center;
+    float: right;
+	appearance: none;
+	outline: 0;
+	background-color: white;
+	border: 0;
+	padding: 5px 10px;
+	color: #3ac569;
+	border-radius: 3px;
+	cursor: pointer;
+	width: 120px;
+	transition-duration: 0.25s;
+}
+#dd>button{
 	appearance: none;
 	outline: 0;
 	background-color: white;
@@ -340,7 +355,8 @@ div>button {
 }
 
 .modal-header {
-	width: 100%;
+	    width: 99.88%;
+    margin-left: 0.12%;
 	background: #cff0da;
 }
 
@@ -352,6 +368,7 @@ div>button {
 	width: 90%;
 	margin-left: 5%;
 }
+
 </style>
 </head>
 
@@ -369,7 +386,7 @@ div>button {
 				<button type="submit" id="login-button">Login</button>
 			</form>
 			<div id="dd"
-				style="position: relative; z-index: 2; width: 30%; margin-left: 34%; text-align: right;">
+				style="position: relative; z-index: 2; width: 30%; margin-left: 32.5%; text-align: right;">
 				처음 방문하시는 건가요?
 				<button type="button" id="newuserbtn" data-toggle="modal"
 					data-target="#newMembermodal">회원가입</button>
@@ -440,7 +457,7 @@ div>button {
 								<input type="email" id="userEmail" name="email" required
 									style="width: 68.9%;"> <input type="button"
 									id="checkemailbtn" class="btn btn-success btn-sm"
-									style="width: 30%;" value="인증">
+									style="width: 29.5%;" value="인증">
 								<button id="hiddenemailbtn" type="button" data-toggle="modal"
 									data-target="#checkemailen" style="display: none;"></button>
 							</div>
@@ -456,7 +473,7 @@ div>button {
 								<input type="text" id="postcode" name="add1"
 									style="width: 68.9%;" placeholder="우편번호"> <input
 									type="button" class="btn btn-success btn-sm"
-									style="width: 30%; margin-bottom: 3px;"
+									style="width: 29.5%; margin-bottom: 3px;"
 									onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 								<input type="text" id="address" name="add2"
 									style="margin-bottom: 3px;" placeholder="주소"><br>
@@ -685,7 +702,7 @@ div>button {
 			<div class="modal-content">
 				<div class="modal-header">
 					<h5 class="modal-title" id="staticBackdropLabel"
-						style="margin-left: 37%;">이메일 인증</h5>
+						style="margin-left: 40%;">이메일 인증</h5>
 					<button id="emailclosebtn" type="button" class="close"
 						data-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -700,7 +717,7 @@ div>button {
 						style="width: 20%; margin-right: 0.5%; margin-left: 1.5%;">인증</button>
 					<button id="retryemailcode" class="btn btn-outline-danger"
 						style="width: 20%;">재전송</button>
-					<br> <span style="color: red; width: 10%; margin-left: 3%;"
+					<br> <span style="color: red; width: 10%;float:left; margin-left: 3%;"
 						class="trymin">03</span>: <span style="color: red; width: 10%;"
 						class="trysec">00</span> 
 						<input id="answercode" type="text"style="display: none;">
@@ -753,7 +770,7 @@ div>button {
 							</div>
 							<div class="commentarea"></div>
 
-							<button type="submit" id="findmyidformbtn">아이디 찾기</button>
+							<button type="submit" id="findmyidformbtn" class="modalbtn">아이디 찾기</button>
 						</div>
 					</form>
 				</div>
@@ -783,7 +800,7 @@ div>button {
 						</div>
 						<div class="commentarea"></div>
 						<input type="button" id="checkemailbtn2"
-							class="btn btn-success btn-sm" style="width: 30%;" value="인증">
+							class="modalbtn" style="width: 30%;" value="인증">
 						
 						<div id="findpwdtoemail" style="display: none;">
 							<input type="text" class="form-control" id="emailcode2"

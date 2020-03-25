@@ -16,8 +16,6 @@ public class MemberDao {
 	public ArrayList<Member> selectList() {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectList");
 	}
-
-	
 	public int updateStatus(Member m) {
 		return sqlSession.update("memberMapper.updateStatus", m);
 	}
@@ -79,5 +77,11 @@ public class MemberDao {
 
 	public int checkEmail(String email) {
 		return sqlSession.selectOne("memberMapper.checkEmail",email);
+	}
+	public Member selectOne(String mId) {
+		return sqlSession.selectOne("memberMapper.selectOne", mId);
+	}
+	public int selectNickName(String nickname) {
+		return sqlSession.selectOne("memberMapper.selectNickname",nickname);
 	}
 }

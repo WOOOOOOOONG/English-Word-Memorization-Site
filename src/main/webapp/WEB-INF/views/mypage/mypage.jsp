@@ -548,6 +548,7 @@ body {
 	color:red; 
 	float:right;
 	font-family:cinzel;
+	font-size: 17px;
 }
 .createBtn:hover{
 	text-decoration:none; 
@@ -617,8 +618,8 @@ body {
 	 background:#92531c;
 	 border-top: 0px;
 	 height: 250px;
-	 width: 850px;
-	 margin: 80px auto 0;
+	 width: 760px;
+	 margin: 15% auto 0;
 	 padding: 0;
 	 -webkit-perspective: 2500;
 	 -webkit-transform-origin: center top 0;
@@ -649,6 +650,16 @@ body {
 	 box-sizing: border-box;
 }
  ul.shelf li span {
+	 background-color: rgb(186, 198, 219);
+}
+ ul.shelf li .booklabel {
+	 background-color:rgb(215, 229, 253);
+}
+ ul.shelf li {
+	 z-index: 1;
+}
+
+ ul.shelf li span {
 	 position: absolute;
 	 display: block;
 	 -webkit-backface-visibility: visible;
@@ -664,6 +675,8 @@ body {
 	 opacity: 1;
 	 width: 80px;
 	 height: 300px;
+	 background-color:#e9e6c4;
+	 border:2px solid rgb(186, 198, 219);
 	 -webkit-transform: translateY(-150px) translateZ(-150px) rotateX(90deg);
 }
  ul.shelf li span.bookleft {
@@ -684,62 +697,94 @@ body {
  ul.shelf li:active {
 	 -webkit-transform: rotateX(-20deg) translateY(-250px);
 }
- ul.shelf li:nth-child(1) {
-	 z-index: 1;
-}
+
+
+
  ul.shelf li:nth-child(1) span {
 	 background-color: rgb(29, 161, 135);
 }
+ul.shelf li:nth-child(1) span.booktop{
+		 background-color:#e9e6c4;
+		 border:2px solid rgb(29, 161, 135);
+}
+
  ul.shelf li:nth-child(1) .booklabel {
 	 background-color:rgb(43, 235, 196);
 }
- ul.shelf li:nth-child(2) {
-	 z-index: 2;
+ ul.shelf li:nth-child(1) {
+	 z-index: 1;
 }
- ul.shelf li:nth-child(2) span {
-	 background-color: rgb(185, 114, 117);
-}
- ul.shelf li:nth-child(2) .booklabel {
-	 background-color:rgb(247,151,156);
-}
- ul.shelf li:nth-child(3) {
-	 z-index: 3;
+
+ul.shelf li:nth-child(3) {
+	 z-index: 1;
 }
  ul.shelf li:nth-child(3) span {
-	 background-color: rgb(179, 133, 55);
+	 background-color: rgb(185, 114, 117);
 }
  ul.shelf li:nth-child(3) .booklabel {
-	 background-color: rgba(245, 182, 75);
+	 background-color:rgb(247,151,156);
 }
- ul.shelf li:nth-child(4) {
-	 z-index: 4;
+ul.shelf li:nth-child(3) span.booktop{
+		 background-color:#e9e6c4;
+		 border:2px solid rgb(185, 114, 117);
 }
- ul.shelf li:nth-child(4) span {
-	 background-color: rgb(159, 149, 163);
-}
- ul.shelf li:nth-child(4) .booklabel {
-	 background-color: rgb(233, 218,239);
-}
+
  ul.shelf li:nth-child(5) {
-	 z-index: 5;
+	 z-index: 20;
 }
  ul.shelf li:nth-child(5) span {
-	 background-color: rgb(192, 168, 72);
+	 background-color: rgb(179, 133, 55);
 }
  ul.shelf li:nth-child(5) .booklabel {
+	 background-color: rgba(245, 182, 75);
+}
+ul.shelf li:nth-child(5) span.booktop{
+		 background-color:#e9e6c4;
+		 border:2px solid rgb(179, 133, 55);
+}
+
+ul.shelf li:nth-child(6) {
+	 z-index: 15;
+}
+ ul.shelf li:nth-child(7) {
+	 z-index: 10;
+}
+ ul.shelf li:nth-child(7) span {
+	 background-color: rgb(159, 149, 163);
+}
+ ul.shelf li:nth-child(7) .booklabel {
+	 background-color: rgb(233, 218,239);
+}
+ul.shelf li:nth-child(7) span.booktop{
+		 background-color:#e9e6c4;
+		 border:2px solid rgb(159, 149, 163);
+}
+
+ul.shelf li:nth-child(8) {
+	 z-index: 8;
+}
+ ul.shelf li:nth-child(9) {
+	 z-index: 5;
+}
+ ul.shelf li:nth-child(9) span {
+	 background-color: rgb(192, 168, 72);
+	 z-index: 1;
+}
+ ul.shelf li:nth-child(9) .booklabel {
 	 background-color: rgb(245, 215, 92);
 }
-.bookmain{
-     margin-left:5%;
-     margin-right:5%;
+ul.shelf li:nth-child(9) span.booktop{
+		 background-color:#e9e6c4;
+		 border:2px solid rgb(192, 168, 72);
 }
+
  .label > h2{
     width:20px; word-wrap: break-word; text-align:center;
  }
 
  .book {
   margin: auto;
-  margin-top:3%;
+  margin-top:5%;
   width: 1200px;
   height: 700px;
   perspective: 70rem;
@@ -761,8 +806,6 @@ body {
   text-align: right;
   font-size: 8px;
   color: #777;
-  font-family: monospace;
-  
 }
 
 .cover, .page {
@@ -781,6 +824,7 @@ body {
 .page.turn {
   animation: bookOpen 2s forwards;
 }
+
 .page:nth-of-type(1) {
   animation-delay: 0.05s;
 }
@@ -814,6 +858,8 @@ body {
   	      transform: rotateY(-180deg);
           z-index: 1;}
 }
+
+
 #backicon{
 	float:right;
 	width:100px;
@@ -825,9 +871,9 @@ body {
 .goClass{
 	background:rgb(247,151,156);
 	border:1px solid black;
-	width:80%;
+	width:450px;
 	margin:auto;
-	height:150px;
+	height:130px;
 	margin-top:15px;
 	border-radius:15px;
 	font-family: 'Nanum Gothic', sans-serif;
@@ -843,7 +889,7 @@ body {
 	width:50%;
 	margin:auto;
 	font-family:cinzel;
-	font-size:32px;
+	font-size:40px;
 	text-align:center;
 }
 </style>
@@ -872,46 +918,18 @@ body {
     <c:set var="contextPath" value="${pageContext.request.contextPath}"
 	scope="application"/>
     <jsp:include page="../common/menubar.jsp"/>
-    <%-- <div id="profile" class="mypageicon">
-		<figure>
-		    <img src="${ contextPath }/resources/images/user.png" class="myicon">
-		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">프로필 관리</figcaption>
-	   </figure>
-    </div>
-	<div id="class" class="mypageicon">
-		<figure>
-		    <img src="${ contextPath }/resources/images/class.png" class="myicon">
-		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">내 클래스</figcaption>
-	   </figure>
-	</div>
-    <div id="dan" class="mypageicon">
-    	<figure>
-		    <img src="${ contextPath }/resources/images/word.png" class="myicon">
-		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">내 단어장</figcaption>
-	   </figure>
-	 </div>
-    <div id="tmzp" class="mypageicon">
-    	<figure>
-			<img src="${ contextPath }/resources/images/스케쥴.png" class="myicon">	
-		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">일정 관리</figcaption>
-	   </figure>
-    </div>
-    <div id="fix" class="mypageicon">
-    	<figure>
-		    <img src="${ contextPath }/resources/images/수정.png" class="myicon">
-		    <figcaption style="text-align:center; font-size:18px; margin-top:10px;">개인정보 관리</figcaption>
-	   </figure>
-    </div> --%>
-    <br><br>
-    <div id="shelfwrapper" style=" width:100%; height:800px; overflow: hidden;
-      ">
+    <div id="shelfwrapper" style="background-image: url( 'resources/images/벽.jpg');background-size: cover;
+    background-repeat: no-repeat; width:100%; height:900px; overflow: hidden;">
     <ul class="shelf">
         <li class="bookmain" id="profile"><span class="booklabel"><h2>Profile</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="class"><span class="booklabel"><h2>Class</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="dan"><span class="booklabel"><h2>Word</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="schedule"><span class="booklabel"><h2>Schedule</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="info"><span class="booklabel"><h2>Infomation</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
-    
     </ul> 
     </div>
     <div id="deskwrapper" style="background-image: url( 'resources/images/desk.png'); background-repeat: no-repeat;
@@ -923,7 +941,65 @@ body {
             <div class="page "></div>
             <div class="page "></div>
             <!-- 왼쪽 페이지 -->
-            <div class="page "></div>
+            <div class="page " style="z-index:15;">
+            	<!-- 클래스 리스트  -->
+			    <div id="classcontent" class="mypagecontent" style="overflow:hidden;" >
+			    	
+			    <div class="contenttitle">CLASS LIST</div>
+			    	<c:choose>
+					<c:when test="${ !empty cmList }">
+						<div>
+							<a href="classPorm.do" id="createBtn" class="createBtn">Create Class</a>
+						</div>
+						<div style=" width:104%; height: 85%; padding:10px; 
+						overflow:scroll;overflow-x:hidden;overflow-y:auto;">
+							<c:choose>
+								<c:when test="${ !empty cList }">
+									<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
+										<div id="goClass${ cList.get(i).cNo }" class="goClass">
+											<div style="width:100%; text-align:center;">
+												<c:if test="${cList.get(i).local eq null  }">	
+													<span style="font-size:12px; text-align:center; color:#fdcf7b;">OnLine</span>
+												</c:if>
+												<c:if test="${cList.get(i).local ne null  }">
+													<span style="font-size:12px; text-align:center; color:#fdcf7b;">${cList.get(i).local }</span>
+												</c:if>
+											</div>
+											<div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
+												${cList.get(i).title }
+											</div>
+											<div style="width:100%; text-align:center;">
+												<c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
+													<c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
+														<span style="font-family:cinzel; font-size:14px;">${ cateList.get(j).name }</span>
+													</c:if>
+												</c:forEach>
+												<span style="font-family:cinzel; font-size:14px;"> | ${ cList.get(i).level }</span>
+											</div>
+										</div>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
+					</c:otherwise>
+					</c:choose>
+					 
+				    <script>
+				    	// 클래스 이동 함수
+				    	$(function(){
+				    		$(".goClass").click(function(){
+				    			var cNo = $(this).prop('id').replace("goClass","");
+				    			location.href='myClass.do?cNo=' + cNo;
+				    		});
+				    		
+				    	});
+				    </script>
+			    </div>
+            
+            </div>
             
              <!-- 오른쪽 페이지 -->
             <div class="page" style="z-index:10;">
@@ -949,6 +1025,29 @@ body {
 			                <input type="text" class="form-control" id="mynickname" name="nickname"
 			                 value="${loginMember.nickname }" style="width:40%;  float: left;">
 			            </div>
+			            <script>
+			            	// 닉네임 중복체크
+			            	$(function(){
+			            		$("#mynickname").change(function(){
+			            			$.ajax({
+			            		        url:"mynickname.ck",
+			            		        data:{nickname:$(this).val()},
+			            		        type:"post",
+			            		   		success:function(data){	
+			            		   			if(data == "good"){
+			            		   				$("#profilechangebtn").attr("disabled",false);
+			            		   			}else{
+			            		   				alert("중복된 닉네임입니다.");
+			            		   				$("#profilechangebtn").attr("disabled",true);
+			            		   			}
+			            				},error:function(e){
+			            					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+			            				}
+			            				
+			            			});	
+			            		});
+			            	});
+			            </script>
 			        </div>
 		  			<!-- 자기 소개 -->
 			        <div style=" width:95%; height:30%; margin:2.5%; float:left;">      
@@ -959,59 +1058,7 @@ body {
 			        </div> 
 			        <button class="btn btn-success" id="profilechangebtn">프로필 수정</button>
 		    	</form>
-            	<!-- 클래스 리스트  -->
-			    <div id="classcontent" class="mypagecontent" >
-			    <div class="contenttitle">CLASS LIST</div>
-			    	<c:choose>
-					<c:when test="${ !empty cmList }">
-						<div>
-							<a href="classPorm.do" id="createBtn" class="createBtn">Creat Class</a>
-						</div>
-						<div style=" width:98%; height:630px; padding:10px;">
-							<c:choose>
-								<c:when test="${ !empty cList }">
-									<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
-										<div id="goClass${ cList.get(i).cNo }" class="goClass">
-											<div style="width:100%; text-align:center;">
-												<c:if test="${cList.get(i).local eq null  }">	
-													<br>
-												</c:if>
-												<c:if test="${cList.get(i).local ne null  }">
-													<span style="font-size:12px; text-align:center; color:orange;">${cList.get(i).local }</span>
-												</c:if>
-											</div>
-											<div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
-												${cList.get(i).title }
-											</div>
-											<div style="width:100%; text-align:center;">
-												<c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
-													<c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
-														<span style="font-family:cinzel;">${ cateList.get(j).name }</span>
-													</c:if>
-												</c:forEach>
-												<span style="font-family:cinzel;"> | ${ cList.get(i).level }</span>
-											</div>
-										</div>
-									</c:forEach>
-								</c:when>
-							</c:choose>
-						</div>
-					</c:when>
-					<c:otherwise>
-						<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
-					</c:otherwise>
-					</c:choose>
-					 
-				    <script>
-				    	// 클래스 이동 함수
-				    	$(function(){
-				    		$(".goClass").click(function(){
-				    			var cNo = $(this).prop('id').replace("goClass","");
-				    			location.href='myClass.do?cNo=' + cNo;
-				    		});
-				    	});
-				    </script>
-			    </div>
+            	
             	<!-- 단어장 리스트(미완성) -->
             	<div id="dancontent" class="mypagecontent" >
             	<div class="contenttitle">Dan List</div>
@@ -1086,10 +1133,15 @@ body {
         $(function(){
         	// 책 오픈
             $("ul.shelf li").click(function(){
+            	var j = 5;
+            	if($(this).attr('id') != null){
+            		if($(this).attr('id')=="class"){
+            			j=4;
+            		}
                 $sh = $("#shelfwrapper");
                 $sh.height($sh.height()).animate({height: "0px"}, 1000);
                 $desk = $("#deskwrapper");
-                $desk.height($desk.height()).animate({height: "800px"}, 1000);
+                $desk.height($desk.height()).animate({height: "900px"}, 1000);
                
                 var id = $(this).attr('id') + "content";
                 $("#bookcover").html($("#"+$(this).attr('id')+" > .booklabel > h2").html());
@@ -1099,10 +1151,11 @@ body {
                 setTimeout(function() {
                     $($(".book").children(".cover")[1]).addClass("turn");
                     var page = $(".book").children(".page");
-                    for(var i=0; i<5; i++){
+                    for(var i=0; i<j; i++){
                       $(page[i]).addClass("turn");
                      }
-                }, 1500);  
+                }, 1500); 
+            	}
             });
             // 책 닫음
             $("#backicon").click(function(){
@@ -1110,7 +1163,7 @@ body {
             	$desk = $("#deskwrapper");
                 $desk.height($desk.height()).animate({height: "0px"}, 1000);
             	$sh = $("#shelfwrapper");
-                $sh.height($sh.height()).animate({height: "800px"}, 1000);
+                $sh.height($sh.height()).animate({height: "900px"}, 1000);
                 setTimeout(function() {
                 	$(".page").removeClass("turn");
                     $(".cover").removeClass("turn");
@@ -1512,6 +1565,8 @@ body {
                     //div.setAttribute("onclick",'myeventclick('+div+')');
                     var square = createElement('div', 'event-category ' + ev.color);
                     var span = createElement('span', '', ev.eventName);
+                    span.id = ev.refId;
+                    //span.setAttribute('onClick', gomyClass(ev.refId), false);
 					var input = createElement('input');
 					input.value = ev.sId;
 					input.style.display = "none";
@@ -1571,7 +1626,7 @@ body {
 
                 var calendars = this.events.map(function (e) {
 
-                    return e.calendar + '|' + e.color + '|' + e.cmonth;
+                    return e.calendar + '|' + e.color + '|' + e.cmonth + '|' + e.refId;
 
 
                 }).reduce(function (memo, e) {
@@ -1584,8 +1639,13 @@ body {
                     var parts = e.split('|');
 
                     if (parts[2] - clone.format("MM") == 0) {
-                        var entry = createElement('span', 'entry '+ parts[1], parts[0]);
-                        
+                    	var strr = parts[0];
+                    	if(parts[0].length > 8){
+                    		strr = parts[0].substr(0,8);
+                    		strr += "..";
+                    	}
+                        var entry = createElement('span', 'entry '+ parts[1], strr);
+                        entry.id = parts[3];
                         legend.appendChild(entry);
                     }
 
@@ -1639,7 +1699,17 @@ body {
             } */
 
         };
-
+		$(function(){
+			
+			$(document).on('click', '.entry', function(){
+				
+				if($(this).attr("id").includes("cNo")){
+					location.href='myClass.do?cNo=' + $(this).attr("id");
+				}
+			});
+			
+		});
+		
 
     </script>
    <!-- 일정추가 스크립트 -->
