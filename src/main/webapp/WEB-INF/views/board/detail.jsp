@@ -203,7 +203,7 @@
          </h4>
      	
 	     <c:if test="${ !empty sessionScope.loginMember && !(sessionScope.loginMember.mId eq detailBoard.referId  || sessionScope.loginMember.mId eq 'admin')}">
-	     	 <div class="imoticon">
+	     	 <div class="imotion">
 		     	 <div>
 			         <i class="far fa-angry imo" style="font-size: 30px;" onclick="report('${detailBoard.bId}');"></i>
 			         <p class="arrow_box">신고하기</p>
@@ -250,9 +250,9 @@
          <hr class="line1">
          
          <div class="title-date">
-            <div class="title">
-               <div class="subtitle">TITLE&nbsp;</div>
-               <div class="content">${detailBoard.title}</div>
+            <div class="title" style="margin-top: -10px;">
+               <div class="subtitle" style="font-size: 30px;">TITLE&nbsp;</div>
+               <div class="content" style="font-size: 27px;">${detailBoard.title}</div>
             </div>
             <div class="date">
                <div class="subtitle">DATE&nbsp;</div>
@@ -271,10 +271,7 @@
                <div class="content">${detailBoard.views}</div>
             </div>
          </div>
-         <div class="boardContent"><textarea id="#inputText" placeholder="${detailBoard.content }" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke"></textarea></div>
-         <script>
-         	$("#inputText").unbind("mouseover click");
-         </script>
+         <div class="boardContent"><textarea id="#inputText" placeholder="${detailBoard.content }" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke;"></textarea></div>
          <!-- 다음글, 이전글 -->
          <c:forEach var="item" items="${ boardList }" varStatus="status">
          	<c:if test="${item.bId eq detailBoard.bId && item.bId ne boardList[0].bId}">
@@ -446,5 +443,6 @@
          </script>
       </div>
    </div>
+   <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

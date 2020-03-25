@@ -26,6 +26,10 @@ public class AdminService {
 		return aDao.selectInquireOne(iId);
 	}
 
+	public int deleteInquire(int iId) {
+		return aDao.deleteInquire(iId);
+	}
+
 	public int insertResponse(Inquire inq) {
 		return aDao.insertResponse(inq);
 	}

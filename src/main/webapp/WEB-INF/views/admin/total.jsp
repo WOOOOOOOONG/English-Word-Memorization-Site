@@ -10,6 +10,8 @@
 <!-- <link rel="stylesheet" href=".../css/left-menubar.css"> -->
 <link rel="stylesheet" type="text/css"
 	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 
@@ -25,6 +27,7 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+
 <title>Insert title here</title>
 <style>
 /* sidebar */
@@ -237,10 +240,9 @@ nav.sidebar ul li.active a.expandable:hover {
 }
 
 #t1 {
-	width: 1000px;
+	width: 1100px;
 	/* height: 200px; */
-	margin-top: -90px;
-	margin-left: 200px;
+	margin: 0 auto;
 	padding-bottom: 50px;
 	/* position: absolute; */
 }
@@ -254,7 +256,7 @@ nav.sidebar ul li.active a.expandable:hover {
 	width: 1100px;
 	/* height: 200px; */
 	margin-top: -85px;
-	margin-left: 170px;
+	margin: 0 auto;
 	padding-bottom: 50px;
 	/* position: absolute; */
 }
@@ -283,6 +285,58 @@ nav.sidebar ul li.active a.expandable:hover {
 
 .chart-table {
 	z-index: 4;
+}
+
+.imotion {
+	float: center;
+}
+
+.imotion div {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #d8d8d8;
+	margin-right: 10px;
+}
+
+.arrow_box {
+	display: none;
+	position: absolute;
+	width: 100px;
+	padding: 8px;
+	left: 0;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	background: #333;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	margin-left: -37px;
+	margin-top: 3px;
+}
+
+.arrow_box:after {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	margin-left: -10px;
+	border: solid transparent;
+	border-color: rgba(51, 51, 51, 0);
+	border-bottom-color: #333;
+	border-width: 10px;
+	pointer-events: none;
+	content: " ";
+}
+
+.imo {
+	display: block;
+	cursor: pointer;
+}
+
+.imo:hover+p.arrow_box {
+	display: block;
 }
 </style>
 </head>
@@ -380,14 +434,14 @@ nav.sidebar ul li.active a.expandable:hover {
 				<div class="avatar" style="width: 350px; margin-left: 250px;">
 					<img id="myphoto"
 						src="${ pageContext.request.contextPath }/resources/profileimg/${loginMember.profileimg}" />
-					<h2>${sessionScope.loginMember.nickname}</h2>
+					<h2 style="margin-top: 16px;">${sessionScope.loginMember.nickname}</h2>
 					<p>${sessionScope.loginMember.introduce}</p>
 				</div>
-				<p class="profile" style="">방문자 수 : ${fn:length(logList)}</p>
+				<p class="profile" style="margin-top: -15px;">방문자 수 : ${fn:length(logList)}</p>
 				<p class="profile">보유 회원 수 : ${fn:length(mList)}</p>
 				<p class="profile">등록된 단어장 수 :</p>
 				<p class="profile">등록된 클래스 수 : ${fn:length(cList)}</p>
-				<div style="margin-top: 0px; width:100; height:30px;"></div>
+				<div style="margin-top: 0px; width: 100; height: 30px;"></div>
 			</div>
 		</section>
 
@@ -406,31 +460,44 @@ nav.sidebar ul li.active a.expandable:hover {
 								<th>닉네임</th>
 								<th>가입일</th>
 								<th>수정일</th>
-								<th>회원상태</th>
+								<th style="width: 70px;">회원상태</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:if test="${ mList ne null }">
 								<c:forEach var="item" items="${ mList }">
 									<tr>
-										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.mId }</td>
-										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.name }</td>
-										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.nickname }</td>
-										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.enrollDate }</td>
-										<td onclick="detailMember('${item.mId}');" style="cursor: pointer;">${ item.updateDate }</td>
-										<c:if test="${ item.userStatus eq 'Y'}">
-											<c:set var="selectedY" value="selected" />
-										</c:if>
-										<c:if test="${ item.userStatus eq 'N'}">
-											<c:set var="selectedN" value="selected" />
-										</c:if>
-										<td><c:url var="updateStatus" value="updateStatus.me">
+										<td onclick="detailMember('${item.mId}');"
+											style="cursor: pointer;">${ item.mId }</td>
+										<td onclick="detailMember('${item.mId}');"
+											style="cursor: pointer;">${ item.name }</td>
+										<td onclick="detailMember('${item.mId}');"
+											style="cursor: pointer;">${ item.nickname }</td>
+										<td onclick="detailMember('${item.mId}');"
+											style="cursor: pointer;">${ item.enrollDate }</td>
+										<td onclick="detailMember('${item.mId}');"
+											style="cursor: pointer;">${ item.updateDate }</td>
+										<td style="width: 70px;"><c:url var="updateStatus"
+												value="updateStatus.me">
 												<c:param name="mId" value="${ item.mId }" />
 												<c:param name="userStatus" value="${ item.userStatus }" />
-											</c:url> <select id="statusSelected" onchange="changeStatus(this);">
-												<option value="Y" ${ selectedY }>Y</option>
-												<option value="N" ${ selectedN }>N</option>
-										</select></td>
+											</c:url> <c:if test="${ item.userStatus eq 'Y' }">
+												<div class="imotion" style="cursor: pointer;">
+													<div>
+														<i class="fas fa-user-alt imo" style="font-size: 24px;"
+															onclick="changeStatus(this);"></i>
+														<p class="arrow_box" style="z-index: 5;">정상</p>
+													</div>
+												</div>
+											</c:if> <c:if test="${ item.userStatus eq 'N' }">
+												<div class="imotion" style="cursor: pointer;">
+													<div style="">
+														<i class="fas fa-user-alt-slash imo"
+															style="font-size: 24px;" onclick="changeStatus(this);"></i>
+														<p class="arrow_box" style="z-index: 5;">탈퇴</p>
+													</div>
+												</div>
+											</c:if></td>
 									</tr>
 								</c:forEach>
 								<script>
@@ -462,7 +529,15 @@ nav.sidebar ul li.active a.expandable:hover {
 					
 					// 회원 탈퇴 상태 변경
 					function changeStatus(e) {
-						location.href="${ updateStatus }";
+						if($(e).hasClass("fa-user-alt")) {
+							if(confirm("해당 회원을 탈퇴시키겠습니까?")) {
+								location.href="${ updateStatus }";
+							}
+						}else if($(e).hasClass("fa-user-alt-slash")) {
+							if(confirm("해당 회원을 복구시키겠습니까?")) {
+								location.href="${ updateStatus }";
+							}
+						}
 					}
 		        </script>
 				</div>
@@ -482,11 +557,12 @@ nav.sidebar ul li.active a.expandable:hover {
 								<th>NO</th>
 								<th>신고자</th>
 								<th>이름</th>
-								<th>유형</th>
 								<th>문의 제목</th>
 								<th>등록일</th>
 								<th>답변여부</th>
+								<th>유형</th>
 								<th>신고된 번호</th>
+								<th>문의삭제</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -497,6 +573,9 @@ nav.sidebar ul li.active a.expandable:hover {
 									<td>${i}</td>
 									<td>${item.inquirerId}</td>
 									<td>${item.name}</td>
+									<td>${item.title}</td>
+									<td>${item.registDate}</td>
+									<td>${item.isAnswer}</td>
 									<td><c:if test="${item.type eq 0}">
 											시스템
 										</c:if> <c:if test="${item.type eq 1}">
@@ -509,16 +588,29 @@ nav.sidebar ul li.active a.expandable:hover {
 											게시판
 										</c:if> <c:if test="${item.type eq 5}">
 											기타
-										</c:if></td>
-									<td>${item.title}</td>
-									<td>${item.registDate}</td>
-									<td>${item.isAnswer}</td>
-									<td>${item.reportedId}</td>
+									</c:if></td>
+									<td>
+										<c:if test="${item.reportedId eq null}">
+											X
+										</c:if>
+										<c:if test="${item.reportedId ne null}">
+											${item.reportedId }
+										</c:if>
+									</td>
+									<td><i class="fa fa-archive" style="font-size: 28px;"
+										onclick="inquireDeleteBtn('${item.iId}');"></i> <script>
+											function inquireDeleteBtn(iId) {
+												if(confirm("해당 문의를 삭제하시겠습니까?")) {
+													location.href="deleteInquire.ad?iId="+iId;
+												}
+											}
+										</script></td>
 								</tr>
 								<tr class="inquire">
-									<td colspan="8"><textarea
+									<td colspan="9"><textarea
 											style="width: 100%; height: 200px"
 											placeholder="${item.content}" readonly></textarea></td>
+									<td style="display: none;"></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
@@ -530,7 +622,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								<!-- 답변이 이미 작성되었으면 보여주기만 하고, 버튼을 '작성' 대신 '삭제'로 바꾼다. -->
 								<c:if test="${item.isAnswer eq 'Y'}">
 									<tr class="answer">
-										<td colspan="8"><textarea
+										<td colspan="9"><textarea
 												style="width: 100%; height: 200px"
 												placeholder="${item.answer}" readonly></textarea></td>
 										<td style="display: none;"></td>
@@ -540,8 +632,10 @@ nav.sidebar ul li.active a.expandable:hover {
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
+										<td style="display: none;"></td>
 									</tr>
 									<tr class="answer-button" style="background: none">
+										<td></td>
 										<td></td>
 										<td></td>
 										<td></td>
@@ -558,7 +652,10 @@ nav.sidebar ul li.active a.expandable:hover {
 								</c:if>
 								<c:if test="${item.isAnswer eq 'N' }">
 									<tr class="answer">
-										<td colspan="8"><textarea style="width: 100%; height: 200px" class="textarea" id="textarea${item.iId}"></textarea></td>
+										<td colspan="9"><textarea
+												style="width: 100%; height: 200px" class="textarea"
+												id="textarea${item.iId}"></textarea></td>
+										<td style="display: none;"></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
@@ -575,17 +672,20 @@ nav.sidebar ul li.active a.expandable:hover {
 										<td></td>
 										<td></td>
 										<td></td>
+										<td></td>
 										<td>
 											<form action="response.ad" method="post">
-												<textarea name="text" class="resText" id="resText${item.iId}" style="display:none;"></textarea>
-												<input type="text" name="iId" value="${item.iId}" id="iId${item.iId}" style="display:none;">
+												<textarea name="text" class="resText"
+													id="resText${item.iId}" style="display: none;"></textarea>
+												<input type="text" name="iId" value="${item.iId}"
+													id="iId${item.iId}" style="display: none;">
 												<script>
 													var textarea = $('#textarea${item.iId}');
 													textarea.change(function() {
 														var resText = $('#resText${item.iId}');
 														resText.val(this.value);
 													});
-												</script> 
+												</script>
 												<button>답변 등록</button>
 											</form>
 										</td>
@@ -1071,7 +1171,8 @@ nav.sidebar ul li.active a.expandable:hover {
 								}
 							</script>
 				</div>
-				<br><br>
+				<br>
+				<br>
 
 				<!-- voca -->
 				<h6 class="title2">단어장 통계</h6>
@@ -1139,5 +1240,6 @@ nav.sidebar ul li.active a.expandable:hover {
 			}
 		</script>
 	</c:if>
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

@@ -26,6 +26,10 @@ public class AdminDao {
 		return sqlSession.selectOne("adminMapper.selectInquireOne", iId);
 	}
 
+	public int deleteInquire(int iId) {
+		return sqlSession.delete("adminMapper.deleteInquire", iId);
+	}
+
 	public int insertResponse(Inquire inq) {
 		return sqlSession.insert("adminMapper.insertResponse", inq);
 	}

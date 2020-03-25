@@ -71,6 +71,11 @@
 		VALUES(IID_SEQ.NEXTVAL, #{inquirerId}, #{type}, #{title}, #{content}, DEFAULT, DEFAULT, NULL, #{reportedId})
 	</insert>
 	
+	<delete id="deleteInquire">
+		DELETE FROM INQUIRE
+		WHERE I_ID=#{iId}
+	</delete>
+	
 	<insert id="insertResponse" parameterType="Inquire">
 		UPDATE INQUIRE
 		SET ANSWER=#{answer}, IS_ANSWER='Y'
