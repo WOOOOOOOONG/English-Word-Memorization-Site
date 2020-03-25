@@ -93,4 +93,12 @@ public class MemberService {
 	public int checkEmail(String email) {
 		return mDao.checkEmail(email);
 	}
+	public Member selectOne(String mId) {
+		return mDao.selectOne(mId);
+	}
+
+
+	public int selectNickName(String nickname) {
+		return mDao.selectNickName(nickname);
+	}
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+   pageEncoding="UTF-8"%>
+   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,9 +24,9 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
 <link rel="stylesheet" type="text/css"
-	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
+   href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
-	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+   src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.css" rel="stylesheet">
@@ -60,8 +60,8 @@ body {
   float:right;
 }
 .link-2{
-	float:left;
-	width: 130px;
+   float:left;
+   width: 130px;
     height: 150%;
     margin-left:70px;
     margin-top:-35px;
@@ -81,115 +81,115 @@ body {
   width:100%; height: 100%;
 }
 .accordion {
-	 margin: 1rem 0;
-	 padding: 0;
-	 list-style: none;
-	 border-top: 1px solid #e5e5e5;
-	 margin-top:-3px;
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid #e5e5e5;
+    margin-top:-3px;
+    width: 300px;
 }
  .accordion-item {
-	 border-bottom: 1px solid #e5e5e5;
+    border-bottom: 1px solid #e5e5e5;
 }
 /* Thumb */
  .accordion-thumb {
-	 margin: 0;
-	 padding: 0.8rem 0;
-	 cursor: pointer;
-	 font-weight: normal;
+    margin: 0;
+    padding: 0.8rem 0;
+    cursor: pointer;
+    font-weight: normal;
 }
  .accordion-thumb::before {
-	 content: '';
-	 display: inline-block;
-	 height: 7px;
-	 width: 7px;
-	 margin-right: 1rem;
-	 margin-left: 0.5rem;
-	 vertical-align: middle;
-	 border-right: 1px solid;
-	 border-bottom: 1px solid;
-	 transform: rotate(-45deg);
-	 transition: transform 0.2s ease-out;
+    content: '';
+    display: inline-block;
+    height: 7px;
+    width: 7px;
+    margin-right: 1rem;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+    transform: rotate(-45deg);
+    transition: transform 0.2s ease-out;
 }
  .accordion-panel {
-	 margin: 0;
-	 padding-bottom: 0.8rem;
-	 display: none;
+    margin: 0;
+    padding-bottom: 0.8rem;
+    display: none;
 }
  .accordion-item.is-active .accordion-thumb::before {
-	 transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 #friendlist{
-	width:300px; 
-	height:40px; position:fixed; 
-	bottom:0;right:0;
-	border:1px solid #e5e5e5;
-	border-top-left-radius: 10px;
+   width:320px; 
+   height:40px; position:fixed; 
+   bottom:0;right:-20px;
+   border:1px solid #e5e5e5;
+   border-top-left-radius: 10px;
    border-top-right-radius: 10px;
    overflow:scroll;
- 	overflow-x:hidden;
- 	overflow-y:auto;
+    overflow-x:hidden;
+    overflow-y:auto;
    z-index:10;
    background:whitesmoke;
 }
 .flno{
-	animation-name: flanino; 
+   animation-name: flanino; 
     animation-duration: 1s ;
     animation-timing-function: ease; 
 
 }
 .flyes{
-	animation-name: flaniyes; 
+   animation-name: flaniyes; 
     animation-duration: 1s ;
     animation-timing-function: ease; 
 }
 
 #friendlisttoggle{
    text-align:center;
-   width:100%; height:40px; 
+   width:300px; height:40px; 
    background:skyblue;
-  
    line-height: 40px;
    cursor:pointer;
 }
 .friendmenu{
    text-align:center;
-   width:100%; height:35px; 
+   width:300px; height:35px; 
    margin-top: 5px;
    line-height: 40px;
 }
  #chatting{
- 	width:300px;
- 	height:350px;
- 	position:fixed; 
- 	bottom:0;display:none;
- 	border:1px solid #e5e5e5;
- 	z-index:10;
- 	right:300px;
- 	overflow:scroll;
- 	overflow-x:hidden;
- 	overflow-y:auto;
- 	background:white;
- 	background-image: url( "resources/images/로딩.gif" );
-	background-repeat: no-repeat;
-	background-size: 50% 45% ;
-	background-position: center center;
+    width:300px;
+    height:350px;
+    position:fixed; 
+    bottom:0;display:none;
+    border:1px solid #e5e5e5;
+    z-index:10;
+    right:300px;
+    overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:auto;
+    background:white;
+    background-image: url( "resources/images/로딩.gif" );
+   background-repeat: no-repeat;
+   background-size: 50% 45% ;
+   background-position: center center;
  }
 
  #chatexit{
- 	position:fixed;
- 	height:30px;
- 	bottom:319px;
- 	width:280px;
- 	background:white;
- 	boder-top:1px solid #e5e5e5;
+    position:fixed;
+    height:30px;
+    bottom:319px;
+    width:280px;
+    background:white;
+    boder-top:1px solid #e5e5e5;
  }
  #chatsend{
- 	background:lightpink;
- 	height:30px;width:65px;
- 	position:absolute;
- 	bottom:0;
- 	right:15px;
- 	border:1px solid #e5e5e5;
+    background:lightpink;
+    height:30px;width:65px;
+    position:absolute;
+    bottom:0;
+    right:15px;
+    border:1px solid #e5e5e5;
  }
  
  @keyframes flaniyes {
@@ -211,99 +211,99 @@ body {
     }
 }
 .myfriend{
-	text-decoration:none;
-	list-style:none;
+   text-decoration:none;
+   list-style:none;
 }
 .chattd{
-	vertical-align: top;
-	padding-bottom: 5px;
+   vertical-align: top;
+   padding-bottom: 5px;
 }
 .chatprofileimg{
-	display: inline;
-	border-radius: 50%;
-	width:50px;
-	height: 50px;
-	margin-top: 7px;
-	
+   display: inline;
+   border-radius: 50%;
+   width:50px;
+   height: 50px;
+   margin-top: 7px;
+   
 }
 .mychatp{
-	font-family: 'Helvetica-Neue', Helvetica, Arial;
-	font-weight: 300;
-	display: inline-block;
-	min-height: 20px;
-	min-width: 70px;
-	margin: 0;
-	vertical-align: top;
-	line-height: 1.4;
-	font-size: 16px;
-	padding-top: 15px;
-	padding-bottom: 15px;
-	padding-left: 20px;
-	padding-right: 20px;
-	background-color: #EFF3F7;
-	border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5;
-	margin: 5px 10px 0;
+   font-family: 'Helvetica-Neue', Helvetica, Arial;
+   font-weight: 300;
+   display: inline-block;
+   min-height: 20px;
+   min-width: 70px;
+   margin: 0;
+   vertical-align: top;
+   line-height: 1.4;
+   font-size: 16px;
+   padding-top: 15px;
+   padding-bottom: 15px;
+   padding-left: 20px;
+   padding-right: 20px;
+   background-color: #EFF3F7;
+   border-radius: 5px; box-shadow: 0 1px 3px 0px #a7b6c5;
+   margin: 5px 10px 0;
 }
 #searchfriendbtn{
-	background-image: url( "resources/images/검색.png" );
-	background-repeat: no-repeat;
-	float:left;margin-left:10px;
-	background-size: cover;
-	width:30px;
-	height:29px;
+   background-image: url( "resources/images/검색.png" );
+   background-repeat: no-repeat;
+   float:left;margin-left:10px;
+   background-size: cover;
+   width:30px;
+   height:29px;
 }
 #insertfriendbtn{
-	background-image: url( "resources/images/플러스.png" );
-	background-repeat: no-repeat;
-	background-size: cover;
-	float:right;margin-right:10px;
-	width:30px;
-	height:29px;
-	margin-top:5px;
+   background-image: url( "resources/images/플러스.png" );
+   background-repeat: no-repeat;
+   background-size: cover;
+   float:right;margin-right:10px;
+   width:30px;
+   height:29px;
+   margin-top:5px;
 }
 .friendfunc{
-	float:right;
-	font-size:0.8em;
-	margin-right:5px;
-	display:none;
+   float:right;
+   font-size:0.8em;
+   margin-right:5px;
+   display:none;
 }
 .classfunc{
-	float:right;
-	font-size:0.8em;
-	margin-right:5px;
-	display:none;
+   float:right;
+   font-size:0.8em;
+   margin-right:5px;
+   display:none;
 }
 .friendnav{
-	width:33.3%; height:100%; float:left; text-align:center;
-	background:skyblue;	
-	border-bottom-right-radius: 20px 10px;
-	border-bottom-left-radius: 20px 10px;
-	overflow:hidden;
+   width:99.5px; height:100%; float:left; text-align:center;
+   background:skyblue;   
+   border-bottom-right-radius: 20px 10px;
+   border-bottom-left-radius: 20px 10px;
+   overflow:hidden;
 }
 .friendbtn{
-	width:100%;
-	height:100%;
-	background:skyblue;
-	border:0px;
+   width:100%;
+   height:100%;
+   background:skyblue;
+   border:0px;
 }
 .cancelfri{
-	background-image: url( "resources/images/취소2.png" );
-	background-repeat: no-repeat;
-	background-size: cover;
-	width:30px;
-	height:30px; float:left; 
-	margin-top: 5px; margin-left:20%;
+   background-image: url( "resources/images/취소2.png" );
+   background-repeat: no-repeat;
+   background-size: cover;
+   width:30px;
+   height:30px; float:left; 
+   margin-top: 5px; margin-left:20%;
 }
 .acceptfri{
-	background-image: url( "resources/images/승인.png" );
-	background-repeat: no-repeat;
-	background-size: cover;
-	width:30px;
-	height:30px; float:left;
-	margin-top: 5px; margin-left:20%;
+   background-image: url( "resources/images/승인.png" );
+   background-repeat: no-repeat;
+   background-size: cover;
+   width:30px;
+   height:30px; float:left;
+   margin-top: 5px; margin-left:20%;
 }
 .acceptfrilist{
-	text-align:center;
+   text-align:center;
     width:75%; height:30px; 
     margin-top: 15px;
     line-height:20px;
@@ -311,83 +311,93 @@ body {
     font-size:0.95em;
 }
 #searchfriimg{
-	float: left; margin-left: 10px; width: 80px;
+   float: left; margin-left: 10px; width: 80px;
+   height:auto;
 }
 #searchfriintro{
-	float:left; margin-left:10px; width:190px;
-	background:white; word-break:break-all;
+   float:left; margin-left:10px; width:190px;
+   background:white; word-break:break-all;
 }
 .accordion-panel > li{
-	list-style: none;
+   list-style: none;
 }
 .accordion-panel > li:before {
-	content: "ㄴ";
+   content: "ㄴ";
 }
 .expandfr{
-	width:20px;
-	height:20px;
-	border:none;
-	background-image: url( "resources/images/dot.png" );
-	background-repeat: no-repeat;
-	background-size: cover;
+   width:20px;
+   height:20px;
+   border:none;
+   background-image: url( "resources/images/dot.png" );
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 .expandfr:focus{
-	outline:0px;
+   outline:0px;
 }
 .expandclass{
-	width:20px;
-	height:20px;
-	border:none;
-	background-image: url( "resources/images/dot.png" );
-	background-repeat: no-repeat;
-	background-size: cover;
+   width:20px;
+   height:20px;
+   border:none;
+   background-image: url( "resources/images/dot.png" );
+   background-repeat: no-repeat;
+   background-size: cover;
 }
 .expandclass:focus{
-	outline:0px;
+   outline:0px;
 }
 
 .chatimgtag{
-	float: left;
+   float: left;
     font-size: 0.7em;
     text-align: center;
     width: 50px;
 }
 .jha{
-	color:#505050;
+
+   color:#505050;
 }
 .jha:hover{
-	text-decoration: none;
-	
-	color:orange;
-	
+   text-decoration: none;
+   color:orange;
 }
 .logo:hover{
-	text-decoration:none;
+   text-decoration:none;
 }
 section{
-	
+   
+
 }
 </style>
 
 </head>
 
 <body>
-	<jsp:include page="../classs/fontStore.jsp"/>
+
+<jsp:include page="../classs/fontStore.jsp"/>
 <c:if test="${ msg != null }">
-		<script>
-		$(function(){
-			alert('${msg}');
-			${msg = null}
-		});
-			
-		</script>
-	</c:if>
+      <script>
+      $(function(){
+         alert('${msg}');
+         ${msg = null}
+      });
+         
+      </script>
+   </c:if>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
-	scope="application"/>
+   scope="application"/>
 <c:set var="loginpage" value="login.me"/>
 
 
 <%--   <div style="width:100%; height:40px; text-align: right">
+
+     <c:url var="loginpage" value="login.me"/>
+     <!-- 로그인 유저가 없을시 -->
+     <c:if test="${ empty loginMember }">
+       <a class="gonav" href="${ loginpage }">아이디 비밀번호찾기</a>
+       <a class="gonav" href="${ loginpage }">회원가입</a> 
+       <a class="gonav" href="${ loginpage }">로그인</a> 
+
   	<c:url var="loginpage" value="login.me"/>
   	<!-- 로그인 유저가 없을시 -->
   	<c:if test="${ empty loginMember }">
@@ -397,7 +407,7 @@ section{
     </c:if>
     <!-- 로그인 유저 있을때 -->
     <c:if test="${ !empty loginMember }">
-    	<c:if test="${warningMsg[sessionScope.loginMember.mId]}">
+       <c:if test="${warningMsg[sessionScope.loginMember.mId]}">
    <script>
       $(function(){
          alert('${warningMsg[sessionScope.loginMember.mId]}');
@@ -405,6 +415,16 @@ section{
       });   
    </script>
 </c:if>
+
+         <c:if test="${ loginMember.mId == 'admin' }">
+          <a class="gonav" href="viewTotal.ad">관리자페이지</a>
+       </c:if>
+       <c:if test="${ loginMember.mId != 'admin' }">
+          <a class="gonav" href="mypage.me">마이페이지</a>
+       </c:if>
+       <a class="gonav" href="Memberlogout.me" style="color:blue;">로그아웃</a>
+       <span class="gonav">${ loginMember.nickname }님 환영합니다.</span>
+
    		<c:if test="${ loginMember.mId == 'admin' }">
     		<a class="gonav" href="viewTotal.ad">관리자페이지</a>
     	</c:if>
@@ -416,7 +436,7 @@ section{
     </c:if>
 </div>
 <nav id="nav-1">
-	<a class="link-2" href="viewMain.ad"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
+   <a class="link-2" href="viewMain.ad"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
     <a class="link-1" href="memberInquireList.ad">고객센터</a>
     <a class="link-1" href="boardList.bo">커뮤니티</a>
     <a class="link-1" href="ClassList.do">클래스</a>
@@ -427,6 +447,7 @@ section{
 
 
 <div style=" background:white; position:relative; width:100%; height:70px; border-bottom:1px solid #dbdbdb;">
+
 	<div style="position:relative; margin: 0 auto; padding:9pt 0; width:75pc; height:3px;">
 		<h1 style="float:left; display:block; width:70px; height:100%; margin-right:36px; font-family:cinzel; font-weight:bold; color:orange;">
 			<a style="display:inline-block; width:56px; height:42px; font-size:36px; font-weight:600;" href="viewMain.ad" class="logo">SEW</a>
@@ -465,7 +486,6 @@ section{
 		</section>
 	</div> 
 </div>
-
 
 <c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">
@@ -548,6 +568,7 @@ section{
 		<img id="searchfriimg">
 		<div id="searchfriintro"></div>
 		</div>
+		<span id="noresultfr" style="display:none;">검색된 결과가 없습니다.</span>
 		
 	</div>
 	<ul class="accordion" id="fri1">
@@ -586,26 +607,23 @@ section{
 					<c:forEach var="ci" begin="0" end="${ mycList.size() - 1 }">
 					<li style="height:25px; margin-bottom:5px;"><a class="myclasschat" href="#">
 					<c:if test="${mycList.get(ci).title.length() > 8 }">
-						${mycList.get(ci).title.substring(0,8) }
+						${mycList.get(ci).title.substring(0,8) }..
 					</c:if>
 					<c:if test="${mycList.get(ci).title.length() < 8 }">
 						${mycList.get(ci).title }
 					</c:if>
 					</a>     
-					<span style="float:right; margin-right:10px;">코멘트</span>
+					<span style="float:right; margin-right:10px;">${mycList.get(ci).level }</span>
 					<input type="text" style="display:none;"value="${mycList.get(ci).cNo }">
-					
 					<button class="expandclass"></button>
 					<br>
-					<a class="classfunc" href="#">코멘트변경</a>
-					<a class="classfunc" href="#">클래스로이동</a>
+					<a class="classfunc" href="myClass.do?cNo=${mycList.get(ci).cNo }">클래스로이동</a>
 					</li>
 					</c:forEach> 
 				
 				</ul>
 			</li>
 		</c:if>
-	
 	
 	
 </ul>
@@ -617,23 +635,21 @@ section{
 		$(document).on('click','.expandfr',function(){
 			var $li = $(this).parent();
 			if($li.children('.friendfunc').css("display") == "none"){
-				//$(this).parent().css("height","45px");
 				$li.height($li.height()).animate({height: "45px"}, 200);
 				$li.children('.friendfunc').css("display","block");	
 			}else{
-				$li.height($li.height()).animate({height: "25px"}, 200);
 				$li.children('.friendfunc').css("display","none");
+				$li.height($li.height()).animate({height: "25px"}, 200);
 			}
 		});
 		$(document).on('click','.expandclass',function(){
 			var $li = $(this).parent();
 			if($li.children('.classfunc').css("display") == "none"){
-				//$(this).parent().css("height","45px");
 				$li.height($li.height()).animate({height: "45px"}, 200);
 				$li.children('.classfunc').css("display","block");	
 			}else{
-				$li.height($li.height()).animate({height: "25px"}, 200);
 				$li.children('.classfunc').css("display","none");
+				$li.height($li.height()).animate({height: "25px"}, 200);
 			}
 		});
 	});
@@ -777,17 +793,19 @@ section{
 			$.ajax({
 		        url:"findfriend.ck",
 		        data:{id:id},
+		        dataType:"json",
 		        type:"post",
 		   		success:function(data){
+		   			$("#noresultfr").css("display","none");
 		   			$("#friendresult").css("display","block");
 		   			$("#searchnickname").html(data.nickname);
 		   			$("#searchname").html(data.name);
 		   			$("#searchfid").html(id);
 		   			$("#searchfriimg").attr("src",'${ contextPath }/resources/profileimg/'+data.profileimg);
 		   			$("#searchfriintro").html(data.introduce).css("min-height",$("#searchfriimg").css("height"));
-		   			
 				},error:function(e){
-					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+					$("#friendresult").css("display","none");
+					$("#noresultfr").css("display","block");
 				}
 				
 			});	

@@ -32,14 +32,20 @@ public class FriendController {
 	public void findFriend(String id, HttpServletResponse response) throws IOException {
 		Member m = fService.findFriend(id);
 		response.setContentType("application/json; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if(m != null) {
+			System.out.println(m);
 		JSONObject send = new JSONObject();
 		send.put("id", id);
 		send.put("name", m.getName());
 		send.put("nickname", m.getNickname());
 		send.put("introduce", m.getIntroduce());
 		send.put("profileimg", m.getProfileimg());
-		PrintWriter out = response.getWriter();
+		
 		out.print(send);
+		}else {
+			out.print("nothing");
+		}
 	}
 
 	@RequestMapping("updatingfriend.do")

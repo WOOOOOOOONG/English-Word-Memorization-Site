@@ -115,7 +115,6 @@ public class MemberController {
 	public void findEmail(String id,HttpServletResponse response) throws IOException {
 		String email= mService.findEmail(id);
 		PrintWriter out = response.getWriter();
-		System.out.println(email);
 		if(email.isEmpty()) {
 			out.print("fail");
 		}else {
@@ -191,17 +190,18 @@ public class MemberController {
 	public String updateProfile(RedirectAttributes rd,HttpServletRequest request,Member m,
 			@RequestParam(value="photoinput", required=false) MultipartFile file, Model model) {
 		int result = 0;
+		Member changemember = ((Member)model.getAttribute("loginMember"));
 		if(!file.getOriginalFilename().equals("")) {
 			String renameFileName = saveFile(file, request, m.getmId());
 			
 			if(renameFileName != null) {
 				deleteFile(request,((Member)model.getAttribute("loginMember")).getProfileimg());
-				m.setProfileimg(renameFileName);
 				result += mService.updateProfileImg(m);
-
+				changemember.setProfileimg(renameFileName);
 			}
 		}
-		Member changemember = ((Member)model.getAttribute("loginMember"));
+		
+		System.out.println(changemember);
 		if(m.getNickname() == null) {
 			m.setNickname(changemember.getNickname());
 		}
@@ -210,7 +210,7 @@ public class MemberController {
 		if(result >0) {
 			changemember.setIntroduce(m.getIntroduce());
 			changemember.setNickname(m.getNickname());
-			changemember.setProfileimg(m.getProfileimg());
+			
 			model.addAttribute("loginMember", changemember);
 			rd.addFlashAttribute("msg", "프로필 변경에 성공하였습니다.");
 		}else {
@@ -218,6 +218,18 @@ public class MemberController {
 		}
 		
 		return "redirect:mypage.me";
+	}
+	// 닉네임 중복체크
+	@RequestMapping("mynickname.ck")
+	public void checkNickname(String nickname,HttpServletResponse response) throws IOException {
+		int rr = mService.selectNickName(nickname);
+		PrintWriter out = response.getWriter();
+		
+		if(rr > 0) {
+			out.print("bad");
+		}else {
+			out.print("good");
+		}
 	}
 	// 개인정보 수정
 	@RequestMapping("update.me")
