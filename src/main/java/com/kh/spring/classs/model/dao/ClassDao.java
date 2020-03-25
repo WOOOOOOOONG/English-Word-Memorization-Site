@@ -314,6 +314,11 @@ public class ClassDao {
 			sqlSession.update("ClasssMapper.updateNotice",cn);
 		}
 
+		public void updateRecentDay(ClassMember cn) {
+			sqlSession.update("ClasssMapper.updateRecentDay",cn);
+			
+		}
+
 	
 
 }

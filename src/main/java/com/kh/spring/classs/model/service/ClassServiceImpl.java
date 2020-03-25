@@ -370,4 +370,10 @@ public class ClassServiceImpl implements ClassService{
 			// TODO Auto-generated method stub
 			cDao.updateNotice(cn);
 		}
+
+		@Override
+		public void updateRecentDay(ClassMember cn) {
+			cDao.updateRecentDay(cn);
+			
+		}
 }

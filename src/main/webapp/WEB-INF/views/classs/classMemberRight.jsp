@@ -37,7 +37,7 @@
                 <th scope="col" style="width:8%;"></th>
                 <th scope="col" style="width:20%;">아이디</th>
                 <th scope="col" style="width:12%;">최근 접속일</th>
-                <th scope="col" style="width:20%;">단어 추가 권한</th>
+                <th scope="col" style="width:20%;">공지사항 추가 권한</th>
                 <th scope="col" style="width:20%;">단어장 추가 권한</th>
                 <th scope="col" style="width:20%;">강퇴</th>
             </tr>

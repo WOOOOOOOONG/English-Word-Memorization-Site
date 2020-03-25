@@ -154,4 +154,7 @@ public interface ClassService {
 
 		// 공지사항 수정
 		void updateNotice(ClassNotice cn);
+
+		// 마지막 방문날짜 업데이트
+		void updateRecentDay(ClassMember cn);
 }

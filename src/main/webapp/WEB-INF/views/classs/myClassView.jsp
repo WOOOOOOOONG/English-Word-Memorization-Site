@@ -1,3 +1,8 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="com.kh.spring.classs.model.vo.ClassMember"%>
+<%@page import="java.util.Map"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fnc" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,11 +25,11 @@
         	height:140px;
         	cursor:pointer;
         	padding:4px;
-        	margin:10px;
         	background:white;
         	float:left;
         	font-family: 'Nanum Gothic', sans-serif;
         	border-radius:5px;
+        	margin: 20px 15px 20px 15px ;
         }
         .titleSpan{
         	width:290px;
@@ -34,21 +39,39 @@
         	overflow:hidden;
         	white-space:nowrap;
         	text-overflow: ellipsis;
+        	font-family: 'Jua', sans-serif;
         }
         .vocaSpan{
         	color:#d9d9d9;
         	padding: 0px 0px 0px 10px;
         	width:290px;
-        	border-bottom:1px solid gray;
-        	border:1px solid red;
         	margin-top:10px;
+        	font-family: 'Jua', sans-serif;
         }
         .novoca{
         	text-align:center;
         	font-family: 'Nanum Gothic', sans-serif;
         	margin:auto;
         }
-    
+        .row{
+        	margin:auto;
+        	width:100%;
+        	text-align:center;
+        	border-bottom:1px solid #dcdcdc;
+        }
+    	.name{
+    		float:right;
+    		margin-top:30px; 
+    		margin: 30px 30px 30px 0;
+    		font-family: 'Nanum Gothic', sans-serif;
+    	}
+    	.proimg{
+    		width:60px;
+    		height:60px;
+    		border-radius:50px;
+    		padding:5px;
+    		margin-left:5px;
+    	}
 
     </style>
 
@@ -59,6 +82,22 @@
 	<jsp:include page="../classs/fontStore.jsp"/>
 	<jsp:include page="../classs/emoticion.jsp"/>
 	
+	<%
+	    Map<String,ClassMember> list = new HashMap<String,ClassMember>();
+	    	
+		pageContext.setAttribute("list", list);
+	%>
+	<c:forEach var="i" begin="0" end="${ cmList.size() - 1 }">
+		<c:forEach var="j" begin="0" end="${ userList.size() - 1 }">
+			<c:if test="${ cmList.get(i).id eq userList.get(j).refId }">
+				<c:set target="${list}" property="${ cmList.get(i).id }" value="${ userList.get(j).changeName }"/>
+			</c:if>
+		</c:forEach>
+	</c:forEach> 
+	
+	
+
+	
 	<input type="text" value="${ classs.cNo }" id="cNo" style="display:none;">
 	
 		
@@ -66,44 +105,93 @@
    	<div style="margin:auto; width:50%; text-align:center; border-bottom:1px solid gray; font-family:cinzel;">
        	<h1>VOCA LIST</h1>
        </div><br>
-       <div style=" width:100%; margin:auto; text-align:center;"><br>
        
-       	<!-- <div class="spinner-border text-center" role="status"><span class="sr-only">Loading...</span></div> -->
-       	<div class="b">
-			(<span class="b-arm">╯</span>°□°）<span class="b-arm">╯</span> <span class="b-table">┻━┻</span> <span class="b-table">┻━┻</span> <span class="b-table">┻━┻</span> <span class="b-table">┻━┻</span>
-			<br>
-			┳━┳ &nbsp;&nbsp;&nbsp;&lt;<span class="b-wheel">⊗</span><span class="b-belt"><span class="b-realbelt">===============</span></span><span class="b-wheel">⊗</span>&gt;
+       <div style="width: 100%; margin:auto;text-align:center;">
+	       <div class="spinner-border text-center" role="status">
+			  <span class="sr-only">Loading...</span>
+			</div>
 		</div>
+       
+       
+       <div style="width:100%; height:50px; display:none;" id="createDiv">
+       		<c:forEach var="i" begin="0" end="${ cmList.size() - 1 }">
+       			<c:if test="${ loginMember.mId eq cmList.get(i).id && cmList.get(i).vRight eq 'Y'}">
+       				<button class="btn btn-secondary" style="float:right; margin:20px 30px 0 0;">단어장 만들기</button>
+       			</c:if>
+       		</c:forEach>
+       </div>
+    <!--  로딩창 -->
+    
+       	
+		       	
 			
-			
-	</div>
+	
 	<div id="vocalist" style="width: 100%; display:none;">
 	
 	</div>
+	
+	
+	<!--  단어장 나옴  -->
 	<div id="list" style="width:100%;">
 			
 	</div>
 	<button id="asd" style="display:none;"></button>
 </div>
+
+<% int row = 4;
+   int rowCount = 0;
+%>
 <script>
 	$(function(){
 		$("#asd").click(function(){
 			var div = $("#list");
+			$("#createDiv").css("display","block");
+			$('.spinner-border').hide();
 			if(turnturn){
 				$('.b').hide();
 				var count2 = $("#title" + (listCount-1)).attr('id').replace('title','');
 				var count = count2 * 1;
+				var rowCount = <%= rowCount %>;
+				var userName = $(".userName").val();
+		
+				var liss = "<%= list %>";
+				var lissSplit = liss.split(',');
+				var length = lissSplit.length;
+				var changeName;
+				
+				for(var c = 0 ; c <= length-1; c++){
+					if(lissSplit[c].search(userName) != -1){
+						console.log("이거 : " + lissSplit[c]);
+						console.log(lissSplit[c].indexOf(userName));
+						
+						var stringSize = userName.length; // 찾는 아이디의 사이즈
+						var startIndex = lissSplit[c].indexOf(userName); // 찾기시작하는부분
+						
+						if(startIndex == 1){
+							changeName = lissSplit[c].substring(stringSize+startIndex+1);
+						}else if(startIndex == 0){
+							changeName = lissSplit[c].substring(stringSize+startIndex);
+						}
+						
+					}
+				}
+				
 				
 				for(var i = count; i >= 1 ; i--){
 					var title = $("#title" + i).val(); // 제목
 					var vocaCount = $("#voca"+ i).val(); // 사이즈갯수
+					if( i % <%= row %> == 1 && rowCount != 0){
+						div.append("<div class='row'></div>");
+					}
 					
-					div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><span class='vocaSpan'>" + vocaCount +" 단어</span></div>");
+					div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><span class='vocaSpan'>" + vocaCount +" 단어</span><img class='proimg' src='${ contextPath }/resources/profileimg/" +
+							changeName  + "'><span class='name'>"+ userName + "</span></div>");
+					rowCount++;
 				}
 			}else{
 				div.append("<div class='novoca'>아직 존재하는 단어장이 없습니다.</div>");
-				/* $('.spinner-border').hide(); */
-				$('.b').hide();
+				$('.spinner-border').hide();
+				
 			}
 			
 			
@@ -113,7 +201,7 @@
 	
 	setTimeout(function() {
 		$("#asd").click();
-	}, 4000);
+	}, 3000);
 </script>
 
 <script>
@@ -143,7 +231,7 @@
                 dataType : "json",
                 contentType : "application/json; charset=utf-8",
                 data : send,
-                url : 'http://localhost:1222/getAllData',
+                url : 'http://localhost:1222/getAllDataPlusUserName',
                 success : function(data) { 
                 	//console.log(data);
                 	turnturn = true;
@@ -151,31 +239,34 @@
                 	
                 	
                 	var i = 1;
-                	console.log("왔음");
-                	console.log(data);
-                   	for (var key in data) {
-                   		
-                   		//console.log("키 : " + key);
-                   		var input2 = "<input type='text' class='titleCount' value='"+key + "' id='title" + (listCount++) + "'>";
-                   		div.append(input2);
-                   		lastTitle = input2;
-                   		//div.append("<label><input type='checkbox' onchange='qwer(this);' id='chk" + i + "' value='" + key + "'>"+key+"</label><br>");
-                   		var obj = data[key];
-                   		
-                   		for(var key in obj){
-                   			
-                   			var obj2 = obj[key];
-                   			//console.log(obj[key]);
-                   			for(var key in obj[key]){
-                   				vocaItemCount++;
-                   				//console.log(key); // 영어
-                   				//console.log(obj2[key]);// 한글
-                   			}
-                   			var input = "<input type='text' value='"+vocaItemCount + "' id='voca" + (vocaCount++) + "'>";
+                	// 여기는 단어장만든사람 리스트가져오는 부분
+                	
+                	console.log(data[0].username);
+                	var userInput = "<input type='text' class='userName' value ='" + data[0].username + "'>";
+                	div.append(userInput);
+                	
+                	// 여기는 단어장 제목이랑 , 단어갯수 가져오는 부분
+                	for(var key in data[1]){
+                		var obj = data[1][key];
+                		
+	                   	for (var key in obj) {
+	                   		
+	                   		var input2 = "<input type='text' class='titleCount' value='"+key + "' id='title" + (listCount++) + "'>";
+	                   		div.append(input2);
+	                   		lastTitle = input2;
+	                   		
+	                   		var obj2 = obj[key];
+	                   		var seCount = 0;
+	                   		for(var key in obj2[0]){
+	                   			// 여기는 단어 하나하나 나오는 부분임
+	                   			seCount++;
+	                   			
+	                   		}
+	                   		var input = "<input type='text' value='"+seCount + "' id='voca" + (vocaCount++) + "'>";
                    			div.append(input);
                    			vocaItemCount = 0;
-                   		}
-                   		i++;
+                   			seCount = 0;
+	                	}
                 	}
                    	/* $('.spinner-border').hide(); */
                    	
@@ -186,6 +277,34 @@
              });
          }
       </script>
+   <!--  csid 가져오기 -->
+      <script>
+      	$(function(){
+      		var searchInput = $("#cNo").val();
+      		var input = $("#csid");
+      		var send = JSON.stringify({
+   	         'search' : searchInput
+	   	    });
+      		$.ajax({
+                type : "POST",
+                dataType : "json",
+                contentType : "application/json; charset=utf-8",
+                data : send,
+                url : 'http://localhost:1222/getClassCSID',
+                success : function(data) {
+                	 // input.val(data);
+                	 var key = "csid";
+                     var value = data;
 
+                     sessionStorage.setItem(key, value);
+                     //printSessionStorage();
+                },
+                error : function() {
+                   console.log("error has occured retriving data from MongoServer")
+                }
+             });
+      	}); 
+      
+      </script>
 </body>
 </html>
