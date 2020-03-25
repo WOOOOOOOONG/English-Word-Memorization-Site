@@ -29,6 +29,13 @@
 		<!-- 관리자 페이지에서 탈퇴한 회원도 볼 수 있도록 하기 위해 WHERE STATUS='Y'는 안 넣음 -->
 	</select>
 	
+	<select id="selectListAll" parameterType="Member" resultMap="memberResultSet">
+		SELECT *
+		FROM Member
+		ORDER BY ENROLL_DATE ASC
+		<!-- 관리자 페이지에서 탈퇴한 회원도 볼 수 있도록 하기 위해 WHERE STATUS='Y'는 안 넣음 -->
+	</select>
+	
 	<update id="updateStatus" parameterType="Member">
 		UPDATE MEMBER
 		<if test='userStatus.equals("Y")'>
