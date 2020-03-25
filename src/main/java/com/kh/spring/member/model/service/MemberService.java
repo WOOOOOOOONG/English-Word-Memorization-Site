@@ -20,8 +20,9 @@ public class MemberService {
 	public ArrayList<Member> selectList() {
 		return mDao.selectList();
 	}
-
-	
+	public ArrayList<Member> selectListAll() {
+		return mDao.selectListAll();
+	}
 	public int updateStatus(Member m) {
 		return mDao.updateStatus(m);
 	}
