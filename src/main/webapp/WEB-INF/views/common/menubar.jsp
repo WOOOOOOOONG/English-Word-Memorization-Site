@@ -20,6 +20,10 @@
 
 <link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" rel="stylesheet">
 <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
+
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 
@@ -34,12 +38,10 @@
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.15/dist/summernote.min.js"></script>
 <link href="https://fonts.googleapis.com/css?family=Jua|Roboto&display=swap" rel="stylesheet">
 <style>
-  @import url(https://fonts.googleapis.com/css?family=Raleway);
 body {
   margin: 0px;
   background:whitesmoke;
-  
-  
+  font-family: 'Jua', sans-serif;
 }
 /* nav {
   margin-top: 1px;
@@ -354,7 +356,6 @@ body {
     width: 50px;
 }
 .jha{
-
    color:#505050;
 }
 .jha:hover{
@@ -364,10 +365,17 @@ body {
 .logo:hover{
    text-decoration:none;
 }
-section{
-   
-
-}
+.menu-fixed {
+	position: fixed;
+	top: 0px;
+	z-index:900;
+	}
+	#menubar{
+	background:white; 
+	width:100%;
+	height:70px;
+	border-bottom:1px solid #dbdbdb;
+	}
 </style>
 
 </head>
@@ -446,7 +454,7 @@ section{
 
 
 
-<div style=" background:white; position:relative; width:100%; height:70px; border-bottom:1px solid #dbdbdb;">
+<div id="menubar" >
 
 	<div style="position:relative; margin: 0 auto; padding:9pt 0; width:75pc; height:3px;">
 		<h1 style="float:left; display:block; width:70px; height:100%; margin-right:36px; font-family:cinzel; font-weight:bold; color:orange;">
@@ -486,6 +494,20 @@ section{
 		</section>
 	</div> 
 </div>
+ <script>
+	$(function(){
+		var menu_offset = $('#menubar').offset();
+
+   		$(window).scroll(function() {
+     		if ($(document).scrollTop() > 0) {
+     			$('#menubar').addClass('menu-fixed');
+     		}else {
+     			$('#menubar').removeClass('menu-fixed');
+     		}
+
+   		});
+	});
+</script> 
 
 <c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">

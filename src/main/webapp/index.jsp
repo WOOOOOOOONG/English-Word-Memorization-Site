@@ -11,6 +11,11 @@
    href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
    crossorigin="anonymous">
+   
+   <link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
+   
    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
   integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
@@ -223,11 +228,7 @@ html, body {
         font-weight: 300;
         }
         #tab0 .wrapper {
-        background: #50a3a2;
-        background: -webkit-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-        background: -moz-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-        background: -o-linear-gradient(top left, #50a3a2 0%, #53e3a6 100%);
-        background: linear-gradient(to bottom right, #50a3a2 0%, #53e3a6 100%);
+        background:rgba(154, 234, 247, 0.9);
         position: absolute;
         top: 50%;
         left: 0;
@@ -280,7 +281,7 @@ html, body {
         #tab0 form input:focus {
         background-color: white;
         width: 300px;
-        color: #53e3a6;
+        color: rgba(154, 234, 247, 0.9);
         }
         #tab0 form button {
         appearance: none;
@@ -288,7 +289,7 @@ html, body {
         background-color: white;
         border: 0;
         padding: 10px 15px;
-        color: #53e3a6;
+        color: rgba(154, 234, 247, 0.9);
         border-radius: 3px;
         width: 250px;
         cursor: pointer;
@@ -469,6 +470,9 @@ html, body {
         
         .logintest {
 		   opacity: 1;
+		}
+		a:hover{
+			text-decoration:none;
 		}
     </style>
 </head>
