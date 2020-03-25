@@ -42,6 +42,58 @@
 	width:1100px;
 	margin: 0 auto;
 }
+
+.imotion {
+	float: center;
+}
+
+.imotion div {
+	position: relative;
+	display: inline-block;
+	border: 1px solid #d8d8d8;
+	margin-right: 10px;
+}
+
+.arrow_box {
+	display: none;
+	position: absolute;
+	width: 100px;
+	padding: 8px;
+	left: 0;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	background: #333;
+	color: #fff;
+	font-size: 14px;
+	text-align: center;
+	margin-left: -37px;
+	margin-top: 3px;
+}
+
+.arrow_box:after {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	margin-left: -10px;
+	border: solid transparent;
+	border-color: rgba(51, 51, 51, 0);
+	border-bottom-color: #333;
+	border-width: 10px;
+	pointer-events: none;
+	content: " ";
+}
+
+.imo {
+	display: block;
+	cursor: pointer;
+}
+
+.imo:hover+p.arrow_box {
+	display: block;
+}
 </style>
 </head>
 
@@ -58,11 +110,12 @@
 						<th>NO</th>
 						<th>신고자</th>
 						<th>이름</th>
-						<th>유형</th>
 						<th>문의 제목</th>
 						<th>등록일</th>
 						<th>답변여부</th>
-						<th>신고된 아이디</th>
+						<th>유형</th>
+						<th>신고된 번호</th>
+						<th>문의삭제</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -74,15 +127,38 @@
 							</td>
 							<td>${item.inquirerId}</td>
 							<td>${item.name}</td>
-							<td>${item.type}</td>
 							<td>${item.title}</td>
 							<td>${item.registDate}</td>
 							<td>${item.isAnswer}</td>
+							<td><c:if test="${item.type eq 0}">
+											시스템
+										</c:if> <c:if test="${item.type eq 1}">
+											사용자
+										</c:if> <c:if test="${item.type eq 2}">
+											단어장
+										</c:if> <c:if test="${item.type eq 3}">
+											클래스
+										</c:if> <c:if test="${item.type eq 4}">
+											게시판
+										</c:if> <c:if test="${item.type eq 5}">
+											기타
+							</c:if></td>
 							<td>${item.reportedId}</td>
+							<td>
+								<i class="fa fa-archive" style="font-size:28px;" onclick="deleteBtn('${item.iId}');"></i>
+								<script>
+									function deleteBtn(iId) {
+										if(confirm("해당 문의를 삭제하시겠습니까?")) {
+											location.href="deleteInquire.ad?iId="+iId;
+										}
+									}
+								</script>
+							</td>
 						</tr>
 						<tr class="inquire">
-							<td colspan="8"><textarea style="width: 100%; height: 200px"
+							<td colspan="9"><textarea style="width: 100%; height: 200px"
 									placeholder="${item.content}" readonly></textarea></td>
+							<td style="display: none;"></td>
 							<td style="display: none;"></td>
 							<td style="display: none;"></td>
 							<td style="display: none;"></td>
@@ -94,9 +170,10 @@
 						<!-- 답변이 이미 작성되었으면 보여주기만 하고, 버튼을 '작성' 대신 '삭제'로 바꾼다. -->
 						<c:if test="${item.isAnswer eq 'Y'}">
 							<tr class="answer">
-								<td colspan="8"><textarea
+								<td colspan="9"><textarea
 										style="width: 100%; height: 200px"
 										placeholder="${item.answer}" readonly></textarea></td>
+								<td style="display: none;"></td>
 								<td style="display: none;"></td>
 								<td style="display: none;"></td>
 								<td style="display: none;"></td>
@@ -108,9 +185,10 @@
 						</c:if>
 						<c:if test="${item.isAnswer eq 'N' }">
 							<tr class="answer">
-								<td colspan="8"><textarea
+								<td colspan="9"><textarea
 										style="width: 100%; height: 200px"
 										placeholder="답변이 아직 작성되지 않았습니다. 잠시만 기다려 주십시오." readonly></textarea></td>
+								<td style="display: none;"></td>
 								<td style="display: none;"></td>
 								<td style="display: none;"></td>
 								<td style="display: none;"></td>
@@ -159,6 +237,7 @@
 			</script>
 		</div>
 	</form>
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 
 </html>

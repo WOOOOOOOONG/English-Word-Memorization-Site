@@ -12,9 +12,6 @@
 <link rel="stylesheet" type="text/css" href="base.css">
 <!-- User styling -->
 <link rel="stylesheet" type="text/css" href="style.css">
-<link rel="shortcut icon"
-	href="//okky.kr/assets/favicon-4ddd8035b72404da5a8c298cbaacad86.ico"
-	type="image/x-icon">
 <link rel="apple-touch-icon"
 	href="//okky.kr/assets/icon_57x57-5611bd33d9f2b2d84c22219e248455b6.png">
 <link rel="apple-touch-icon" sizes="114x114"
@@ -34,7 +31,7 @@
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
 <style>
 #top {
-	width: 100vw;
+	width: 99vw;
 	height: 400px;
 }
 
@@ -58,7 +55,7 @@
 		url('https://ugc.futurelearn.com/uploads/images/f6/de/f6de1c1d-7ee4-4713-ba07-93502a7eb1a4.jpg')
 		no-repeat center center fixed; */
 	background:
-	url('resources/images/logo1.png')
+	url('resources/images/logo2.png')
 		no-repeat center center;/*  fixed */
 	/* background-size: cover; */
 	position: absolute;
@@ -483,10 +480,7 @@ footer p {
 			</div>
 		</div>
 	</section>
-	<footer style="display: block; float:left; width: 100%; margin-top: 120px;">
-		<p>
-			<a href="#">built with SEW in KH Academy </a>
-		</p>
-	</footer>
+	
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

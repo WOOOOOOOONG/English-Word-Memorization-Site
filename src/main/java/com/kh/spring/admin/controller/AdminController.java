@@ -20,7 +20,7 @@ import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.member.model.vo.VisitRecord;
 
-@Controller
+@Controller("aController")
 public class AdminController {
 	@Autowired
 	private AdminService aService;
@@ -49,7 +49,7 @@ public class AdminController {
 	
 	@RequestMapping("viewTotal.ad")
 	public ModelAndView viewTotal(ModelAndView mv) {
-		ArrayList<Member> memberList = mService.selectList();
+		ArrayList<Member> memberList = mService.selectListAll();
 		ArrayList<Inquire> inqList = aService.selectInquireList();
 		ArrayList<VisitRecord> vr = aService.selectLogList();
 		ArrayList<Classs> cList = cService.selectClassList();
@@ -94,7 +94,8 @@ public class AdminController {
 	}
 	
 	@RequestMapping("insertInquireView.ad")
-	public String insertInquireView(HttpServletRequest request, String reportedId, Integer reportType) {	
+	public String insertInquireView(HttpServletRequest request, String reportedId, Integer reportType) {
+		
 		ArrayList<Member> mList = mService.selectList();
 		ArrayList<Board> bList = bService.BoardAllList();
 		ArrayList<Classs> cList = cService.selectClassList(); 
@@ -126,6 +127,28 @@ public class AdminController {
 		}
 		
 		mv.setViewName("admin/inquire-list");
+		return mv;
+	}
+	
+	@RequestMapping("deleteInquire.ad")
+	public ModelAndView deleteInquire(ModelAndView mv, int iId, HttpServletRequest request) {
+		int result = aService.deleteInquire(iId);
+		if(result >= 0) {
+			mv.addObject("msg", "문의 삭제가 완료되었습니다");
+		}
+		
+		memberInquireList(mv, request);
+		return mv;
+	}
+	
+	@RequestMapping("deleteInquireAdmin.ad")
+	public ModelAndView deleteInquireAdmin(ModelAndView mv, int iId, HttpServletRequest request) {
+		int result = aService.deleteInquire(iId);
+		if(result >= 0) {
+			mv.addObject("msg", "문의 삭제가 완료되었습니다");
+		}
+		
+		viewTotal(mv);
 		return mv;
 	}
 	
