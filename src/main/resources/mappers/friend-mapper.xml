@@ -19,8 +19,13 @@
 	</select>
 	
 	<select id="findFriend" parameterType="string" resultType="Member">
-		select name,nickname,introduce, s.CHANGE_NAME as profileimg
+		select MID,name,nickname,introduce, s.CHANGE_NAME as profileimg
 		from member m,storage s where mid=#{id} and REFER_ID = #{id}
+	</select>
+	
+	<select id="findFriend2" parameterType="string" resultType="Member">
+		select *
+		from member m where nickname=#{nickname}
 	</select>
 	
 	<insert id="insertFriend" parameterType="Friend">

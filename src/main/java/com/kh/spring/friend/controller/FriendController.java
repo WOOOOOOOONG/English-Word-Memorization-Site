@@ -29,14 +29,19 @@ public class FriendController {
 	private FriendService fService;
 
 	@RequestMapping("findfriend.ck")
-	public void findFriend(String id, HttpServletResponse response) throws IOException {
-		Member m = fService.findFriend(id);
+	public void findFriend(String id,String sea, HttpServletResponse response) throws IOException {
+		Member m = new Member();
+		if(sea.equals("아이디")) {
+			m = fService.findFriend(id);
+		}else {
+			m = fService.findFriend2(id);
+		}
 		response.setContentType("application/json; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if(m != null) {
 			System.out.println(m);
 		JSONObject send = new JSONObject();
-		send.put("id", id);
+		send.put("id", m.getmId());
 		send.put("name", m.getName());
 		send.put("nickname", m.getNickname());
 		send.put("introduce", m.getIntroduce());

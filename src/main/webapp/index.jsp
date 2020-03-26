@@ -220,9 +220,13 @@ html, body {
         opacity: 1;
         font-weight: 300;
         }
+        #tab0 > * {
+        	font-family: 'Nanum Gothic', sans-serif;
+  			font-weight: 700;
+        }
         #tab0 :-ms-input-placeholder {
         /* Internet Explorer 10+ */
-
+		
         /* font-family: 'Source Sans Pro', sans-serif; */
         color: white;
         font-weight: 300;

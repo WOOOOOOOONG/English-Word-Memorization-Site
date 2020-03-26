@@ -10,7 +10,16 @@ public class Reply {
 	private String content;
 	private Date createDate;
 	private int reportCount;
+	private String profileimg;
 	
+	public String getProfileimg() {
+		return profileimg;
+	}
+
+	public void setProfileimg(String profileimg) {
+		this.profileimg = profileimg;
+	}
+
 	public Reply() {}
 
 	public Reply(int rId, int bId, String writerId, String writerNickname, String content, Date createDate,
@@ -84,8 +93,11 @@ public class Reply {
 	@Override
 	public String toString() {
 		return "Reply [rId=" + rId + ", bId=" + bId + ", writerId=" + writerId + ", writerNickname=" + writerNickname
-				+ ", content=" + content + ", createDate=" + createDate + ", reportCount=" + reportCount + "]";
+				+ ", content=" + content + ", createDate=" + createDate + ", reportCount=" + reportCount
+				+ ", profileimg=" + profileimg + "]";
 	}
+
+	
 
 	
 }

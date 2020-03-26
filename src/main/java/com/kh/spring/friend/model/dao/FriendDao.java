@@ -63,4 +63,9 @@ public class FriendDao {
 		return sqlSession.update("friendMapper.updateGroup",f);
 	}
 
+	public Member findFriend2(String nickname) {
+		Member m = sqlSession.selectOne("friendMapper.findFriend2",nickname);
+		return sqlSession.selectOne("friendMapper.findFriend",m.getmId());
+	}
+
 }

@@ -45,4 +45,8 @@ public class FriendService {
 	public int updateGroup(Friend f) {
 		return fDao.updateGroup(f);
 	}
+
+	public Member findFriend2(String nickname) {
+		return fDao.findFriend2(nickname);
+	}
 }

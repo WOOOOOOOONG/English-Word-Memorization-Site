@@ -84,7 +84,7 @@ body :-ms-input-placeholder {
 	left: 0;
 	width: 100%;
 	height: 55%;
-	margin-top:10%;
+	margin-top:8%;
 	overflow: hidden;
 	
 }
@@ -98,7 +98,7 @@ body :-ms-input-placeholder {
 	margin: 0 auto;
 	padding: 80px 0;
 	height: 600px;
-	
+	margin-top: -40px;
 	text-align: center;
   
 	
@@ -358,7 +358,7 @@ body :-ms-input-placeholder {
 	position: absolute;
 	width: 93%;
 	height: 40px;
-	background: #cff0da;
+	background: rgb(154, 234, 247);
 	border: 0.5px double whitesmoke;
 	text-align: center;
 	border-radius: 5px;
@@ -368,7 +368,7 @@ body :-ms-input-placeholder {
 .modal-header {
 	width: 99.88%;
     margin-left: 0.12%;
-	background: #cff0da;
+	background: rgb(154, 234, 247);
 }
 
 .close {
@@ -480,7 +480,7 @@ body :-ms-input-placeholder {
 							<div class="inputdivarea">
 								<input type="email" id="userEmail" name="email" required
 									style="width: 68.9%;"> <input type="button"
-									id="checkemailbtn" class="btn btn-success btn-sm"
+									id="checkemailbtn" class="btn btn-primary btn-sm"
 									style="width: 29.5%;margin-bottom: 4px;" value="인증">
 								<button id="hiddenemailbtn" type="button" data-toggle="modal"
 									data-target="#checkemailen" style="display: none;"></button>
@@ -496,7 +496,7 @@ body :-ms-input-placeholder {
 							<div class="inputdivarea">
 								<input type="text" id="postcode" name="add1"
 									style="width: 68.9%;" placeholder="우편번호"> <input
-									type="button" class="btn btn-success btn-sm"
+									type="button" class="btn btn-primary btn-sm"
 									style="width: 29.5%; margin-bottom: 3px;"
 									onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 								<input type="text" id="address" name="add2"
@@ -737,7 +737,7 @@ body :-ms-input-placeholder {
 						style="width: 49%; float: left;" placeholder="인증코드를 입력해주세요"
 						maxlength="6">
 
-					<button id="checkemailcode" class="btn btn-outline-success"
+					<button id="checkemailcode" class="btn btn-outline-primary"
 						style="width: 20%; margin-right: 0.5%; margin-left: 1.5%;">인증</button>
 					<button id="retryemailcode" class="btn btn-outline-danger"
 						style="width: 20%;">재전송</button>
@@ -831,7 +831,7 @@ body :-ms-input-placeholder {
 								style="width: 49%; float: left;" placeholder="인증코드를 입력해주세요"
 								maxlength="6">
 
-							<button id="checkemailcode2" class="btn btn-outline-success"
+							<button id="checkemailcode2" class="btn btn-outline-primary"
 								style="width: 24%; margin-right: 0.5%; margin-left: 0.5%;">인증</button>
 							<button id="retryemailcode2" class="btn btn-outline-danger"
 								style="width: 24%;">재전송</button>

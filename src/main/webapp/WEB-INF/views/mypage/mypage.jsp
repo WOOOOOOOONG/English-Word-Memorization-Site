@@ -106,9 +106,9 @@ body {
 
 .profilelabel{
   width:20%;
-  margin-left:10%;
+  margin-left:5%;
   float: left;
-  margin-right: 15%;
+  margin-right: 5%;
   font-size: 2em;
   line-height:40px;
 }
@@ -894,6 +894,27 @@ ul.shelf li:nth-child(9) span.booktop{
 	font-family:cinzel;
 	font-size:40px;
 	text-align:center;
+	color: #777;
+}
+#deleteMemberbtn{
+	float: left;
+    border: 0px;
+    background: none;
+    margin-left: 70%;
+    font-size: 12px;
+    color: red;
+}
+#deleteMemberbtn:hover{
+	text-decoration:none; 
+	color: red;
+	cursor:pointer;
+}
+.outClass{
+	margin-right: 70px;
+    margin-top: -20px;
+    float: right;
+    color: #977e80;
+    position: relative;
 }
 </style>
 </head>
@@ -909,6 +930,9 @@ ul.shelf li:nth-child(9) span.booktop{
             }
 
         };
+       function outclasss(cNo){
+    	   location.href="outClass.do?cNo="+cNo;
+		}
     </script>
     <c:if test="${ loginMember.profileimg =='defaultimg.png' }">
     	<script>
@@ -922,7 +946,7 @@ ul.shelf li:nth-child(9) span.booktop{
 	scope="application"/>
     <jsp:include page="../common/menubar.jsp"/>
     <div id="shelfwrapper" style="background-image: url( 'resources/images/벽.jpg');background-size: cover;
-    background-repeat: no-repeat; width:100%; height:900px; overflow: hidden;">
+    background-repeat: no-repeat; width:100%; height:850px; overflow: hidden;">
     <ul class="shelf">
         <li class="bookmain" id="profile"><span class="booklabel"><h2>Profile</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
@@ -934,6 +958,7 @@ ul.shelf li:nth-child(9) span.booktop{
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="info"><span class="booklabel"><h2>Infomation</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
     </ul> 
+    	
     </div>
     <div id="deskwrapper" style="background-image: url( 'resources/images/desk.png'); background-repeat: no-repeat;
      background-size: cover; width:100%; height:0px; overflow: hidden;">
@@ -978,8 +1003,10 @@ ul.shelf li:nth-child(9) span.booktop{
 													</c:if>
 												</c:forEach>
 												<span style="font-family:cinzel; font-size:14px;"> | ${ cList.get(i).level }</span>
+												
 											</div>
 										</div>
+										<span class="outClass" onclick="outclasss('${ cList.get(i).cNo }')">탈퇴하기</span>
 									</c:forEach>
 								</c:when>
 							</c:choose>
@@ -996,8 +1023,7 @@ ul.shelf li:nth-child(9) span.booktop{
 				    		$(".goClass").click(function(){
 				    			var cNo = $(this).prop('id').replace("goClass","");
 				    			location.href='myClass.do?cNo=' + cNo;
-				    		});
-				    		
+				    		});		
 				    	});
 				    </script>
 			    </div>
@@ -1019,13 +1045,14 @@ ul.shelf li:nth-child(9) span.booktop{
 			            <div class="form-group row" style="margin-top:40%;">
 			                <label for="username" class="profilelabel">이름</label>
 			                <input type="text" readonly class="form-control" id="username" value="${loginMember.name }"
-			                 style="width:40%;  float: left;">
+			                 style="width:55%;  float: left;">
 			            </div>
 			            <!-- 닉네임 -->
 			            <div class="form-group row">
 			                <label for="mynickname" class="profilelabel">닉네임</label>
 			                <input type="text" class="form-control" id="mynickname" name="nickname"
-			                 value="${loginMember.nickname }" style="width:40%;  float: left;">
+			                maxlength="8"
+			                 value="${loginMember.nickname }" style="width:55%;  float: left;">
 			            </div>
 			            <script>
 			            	// 닉네임 중복체크
@@ -1117,6 +1144,8 @@ ul.shelf li:nth-child(9) span.booktop{
                     </div>
                 </div>
                 <button type="submit"  class="btn btn-warning" id="updateMemberbtn">변경하기</button>
+                <br>
+                <button type="button" id="deleteMemberbtn">탈퇴하기</button>
             </form>
         </div>
             </div>
@@ -1147,7 +1176,7 @@ ul.shelf li:nth-child(9) span.booktop{
                 $sh = $("#shelfwrapper");
                 $sh.height($sh.height()).animate({height: "0px"}, 500);
                 $desk = $("#deskwrapper");
-                $desk.height($desk.height()).animate({height: "900px"}, 500);
+                $desk.height($desk.height()).animate({height: "850px"}, 500);
                
                 var id = $(this).attr('id') + "content";
                 $("#bookcover").html($("#"+$(this).attr('id')+" > .booklabel > h2").html());
@@ -1169,15 +1198,20 @@ ul.shelf li:nth-child(9) span.booktop{
             	$desk = $("#deskwrapper");
                 $desk.height($desk.height()).animate({height: "0px"}, 500);
             	$sh = $("#shelfwrapper");
-                $sh.height($sh.height()).animate({height: "900px"}, 500);
+                $sh.height($sh.height()).animate({height: "850px"}, 500);
                 setTimeout(function() {
                 	$(".page").removeClass("turn");
                     $(".cover").removeClass("turn");
                     $('.mypagecontent').css("display","none");
-                }, 1000);  
+                }, 100);  
                 
             });
-            
+            $("#deleteMemberbtn").click(function(){
+            	
+            	if(confirm("정말로 탈퇴하시겠습니까?")){
+            		location.href="deleteMember.do";
+            	}
+            });
            	// 사진입력시 미리보기  
             $("#photoinput").change(function () {
                 readURL(this);

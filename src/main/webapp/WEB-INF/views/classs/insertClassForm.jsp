@@ -68,9 +68,9 @@
                     </div>
                 
                     <!-- 네비게이션 버튼 -->
-                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-next" style="margin-top:0; right:0; width:40px; top:0; height:100%;"></div>
                     <!-- 다음 버튼 (오른쪽에 있는 버튼) -->
-                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-prev" style="margin-top:0; left:0; width:40px; top:0; height:100%;"></div>
                     <!-- 이전 버튼 -->
                 
                     <!-- 페이징 -->
@@ -81,7 +81,7 @@
                 <input type="file" name="img2" id="img2" style="display:none;" onchange="inputimg(this,2);">
                 <input type="file" name="img3" id="img3" style="display:none;" onchange="inputimg(this,3);">
         
-                <div style="text-align: center;  position: relative; padding:40px; font-family: 'Nanum Gothic', sans-serif;">이미지를 넣을곳을 클릭하여 이미지를 넣어주세요! <br> 이미지를 넣지 않으면 사이트에서 제공하는 이미지로 대체됩니다.</div>
+                <div style="text-align: center;  position: relative; padding:40px; font-family: 'Nanum Gothic', sans-serif;">이미지를 넣을곳을 클릭하여 이미지를 넣어주세요! <br> 이미지가 없으면 사이트에서 제공하는 이미지로 대체됩니다.</div>
         
         </div>
 
