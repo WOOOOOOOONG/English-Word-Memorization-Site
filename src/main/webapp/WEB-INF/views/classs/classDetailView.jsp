@@ -46,7 +46,11 @@
     <c:param name="reportType" value="3"/>
     <c:param name="reportedId" value="${classs.cNo}"/>
 </c:url>
-   <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:195px; left:1200px; z-index:100;"><a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a></i>
+
+	<!--  신고하기 -->
+   <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:145px; left:1200px; z-index:100;">
+   	<a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a>
+   </i>
 	
     <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 20px; margin-top: 0px; background: #ebebeb; display: block; font-family: 'Jua', sans-serif;">
         <div style="margin-top: 0px;">
@@ -54,22 +58,22 @@
             <!-- 주 내용 시작-->
             <div style="width:60pc; margin:0 auto; overflow:hidden; position:relative;">
                 <!-- 찐 내용 시작-->
-                <div style=" margin-bottom:60px; width:700px; overflow:hidden; background-color:#fff; margin:auto; border-radius:25px;">
+                <div style=" margin-bottom:60px; width:900px; overflow:hidden; background-color:#fff; margin:auto; border-radius:25px;">
                     <!-- 사진, 지역 , 제목-->
                     <header>
                     	
                         <!-- 사진 -->
                         
                         <div style="position:relative; height:360px; border-radius:15px;" >
-                        	  <div class="swiper-container swiper1" style="width:700px;border-radius:15px; height:360px; position: relative; top:30px; border: 1px solid gray; cursor: pointer;">
+                        	  <div class="swiper-container swiper1" style="width:800px;border-radius:15px; height:360px; position: relative; top:30px;  cursor: pointer;">
 			                    <div class="swiper-wrapper">
-			                        <div class="swiper-slide">
+			                        <div class="swiper-slide" style="margin:auto; text-align:center;">
 	                            		<img src="${ contextPath }/resources/classImage/${ img1 }" style="width: 700px; height: 360px; cursor: pointer;" id="img_swiper1">
 			                      	</div>
-			                        <div class="swiper-slide">
+			                        <div class="swiper-slide" style="margin:auto; text-align:center;">
 			                            <img src="${ contextPath }/resources/classImage/${ img2 }" style="width: 700px; height: 360px; cursor: pointer;" id="img_swiper2">
 			                        </div>
-			                        <div class="swiper-slide">
+			                        <div class="swiper-slide" style="margin:auto; text-align:center;">
 			                           	<img src="${ contextPath }/resources/classImage/${ img3 }" style="width: 700px; height: 360px; cursor: pointer;" id="img_swiper3">
 			                        </div>
 			                    </div>
@@ -89,7 +93,7 @@
                         </div>
                         <!-- 제목 -->
                         <div style="position: relative; padding: 36px 30px;">
-                            <div style="position: absolute; top:-54px; z-index: 1; width:81pt; height: 81pt; overflow: hidden; text-align: center; background: #ef6c00; line-height: normal;">
+                            <div style="position: absolute; top:-35px; z-index: 1; width:81pt; height: 81pt; overflow: hidden; text-align: center; background: #ef6c00; line-height: normal;">
                                 <!-- 레벨 -->
                                 <div style="margin-top: 26px; color:#ffeb3b; font-weight: 700; font-size: 1pc;">
                                     LEVEL
@@ -107,12 +111,12 @@
                     </header>
                     
                     <!-- 스터디 소개 시작 -->
-                    <div style="line-height: 1.75em; padding: 0 35px;">
+                    <div style="line-height: 1.75em; padding: 0 35px;width:700px; margin:auto;">
                         <section style="border-top: 1px solid #e6e6e6;">
                             <div style="overflow: hidden;">
                                 <h1 style="float:left; clear:right; padding:60px 0 3pc 9pt; width:120px; font-size:14pt; color:#333;">스터디 소개</h1>
                                 <!-- 내용 -->
-                                <div style="float:right; padding:60px 0; width:455px;">
+                                <div style="float:right; padding:60px 0; width:455px;  text-align:center;">
                                     ${ classs.comment }
                                 </div>
                             </div>
@@ -287,6 +291,6 @@
 	
 	
 
-	
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

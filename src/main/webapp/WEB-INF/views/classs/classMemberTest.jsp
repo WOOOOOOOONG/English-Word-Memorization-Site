@@ -394,5 +394,7 @@ type="text/css">
 			</c:forEach>
 		</c:forEach>
 	</c:if>
+	
+	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

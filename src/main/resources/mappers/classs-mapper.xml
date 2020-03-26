@@ -173,4 +173,9 @@
 		SET LASTDAY = SYSDATE
 		WHERE CLASS_NO = #{cNo} AND ID = #{id}
 	</update>
+	<delete id="outClass">
+		DELETE
+		FROM CLASS_MEMBER
+		WHERE ID = #{id} AND CLASS_NO = #{cNo}
+	</delete>
 </mapper>
