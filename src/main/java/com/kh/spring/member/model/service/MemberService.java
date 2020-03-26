@@ -100,4 +100,7 @@ public class MemberService {
 	public int selectNickName(String nickname) {
 		return mDao.selectNickName(nickname);
 	}
+	public int deleteMember(String mId) {
+		return mDao.deleteMember(mId);
+	}
 }

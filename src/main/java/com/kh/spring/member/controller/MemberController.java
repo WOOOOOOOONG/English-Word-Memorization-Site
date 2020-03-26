@@ -186,6 +186,21 @@ public class MemberController {
 		status.setComplete();
 		return "redirect:login.me";
 	}
+	// 회원탈퇴
+	@RequestMapping("deleteMember.do")
+	public String deleteMember(RedirectAttributes rd,Model model,SessionStatus status) {
+		Member member = ((Member)model.getAttribute("loginMember"));
+		int result = mService.deleteMember(member.getmId());
+		
+		if(result > 0 ) {
+			status.setComplete();
+			rd.addFlashAttribute("msg", "언젠가 다시 방문해주세요!");
+		}else {
+			rd.addFlashAttribute("msg", "회원 탈퇴 실패");
+		}
+		
+		return "redirect:viewMain.ad";
+	}
 	// 프로필 수정
 	@RequestMapping("profile.me")
 	public String updateProfile(RedirectAttributes rd,HttpServletRequest request,Member m,

@@ -41,7 +41,9 @@
 body {
   margin: 0px;
   background:whitesmoke;
-  font-family: 'Jua', sans-serif;
+  font-family: 'Nanum Gothic', sans-serif;
+  font-weight: 700;
+  color:#474747;
 }
 /* nav {
   margin-top: 1px;
@@ -126,12 +128,12 @@ body {
    height:40px; position:fixed; 
    bottom:0;right:-20px;
    border:1px solid #e5e5e5;
-   border-top-left-radius: 10px;
-   border-top-right-radius: 10px;
+   border-top-left-radius: 10px 10px;
+   border-top-right-radius: 10px 10px;
    overflow:scroll;
     overflow-x:hidden;
     overflow-y:auto;
-   z-index:10;
+   z-index:900;
    background:whitesmoke;
 }
 .flno{
@@ -165,16 +167,18 @@ body {
     position:fixed; 
     bottom:0;display:none;
     border:1px solid #e5e5e5;
-    z-index:10;
+    z-index:900;
     right:300px;
     overflow:scroll;
     overflow-x:hidden;
     overflow-y:auto;
     background:white;
     background-image: url( "resources/images/로딩.gif" );
-   background-repeat: no-repeat;
-   background-size: 50% 45% ;
-   background-position: center center;
+  	background-repeat: no-repeat;
+  	background-size: 50% 45% ;
+  	background-position: center center;
+  	border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
  }
 
  #chatexit{
@@ -215,6 +219,8 @@ body {
 .myfriend{
    text-decoration:none;
    list-style:none;
+   font-size:15px;
+   font-weight:400;
 }
 .chattd{
    vertical-align: top;
@@ -267,12 +273,14 @@ body {
    float:right;
    font-size:0.8em;
    margin-right:5px;
+   font-weight:400;
    display:none;
 }
 .classfunc{
    float:right;
    font-size:0.8em;
    margin-right:5px;
+   font-weight:400;
    display:none;
 }
 .friendnav{
@@ -376,6 +384,30 @@ body {
 	height:70px;
 	border-bottom:1px solid #dbdbdb;
 	}
+	.myclasschat{
+		text-decoration:none;
+   list-style:none;
+   font-size:15px;
+   font-weight:400;
+	}
+	.mycomments{
+		font-weight:400;
+		float:right;
+		margin-right:10px;
+		font-size:15px;
+	}
+	a:hover{
+		text-decoration:none;
+   list-style:none;
+	}
+	#fritogglebtn{
+	width: 15%;
+    float: left;
+    height: 29px;
+    margin-left: 10px;
+    padding: 0px;
+    font-size: 15px;
+	}
 </style>
 
 </head>
@@ -460,7 +492,7 @@ body {
 		<h1 style="float:left; display:block; width:70px; height:100%; margin-right:36px; font-family:cinzel; font-weight:bold; color:orange;">
 			<a style="display:inline-block; width:56px; height:42px; font-size:36px; font-weight:600;" href="viewMain.ad" class="logo">SEW</a>
 		</h1>
-		<section style="float:left; margin-top:9px; display:block; width:550px; height:100%;">
+		<section style="float:left; margin-top:7.5px; display:block; width:550px; height:100%;">
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="viewMain.ad" class="jha">Home</a>
 			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" href="#" class="jha">단어장</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">클래스</a>
@@ -499,7 +531,7 @@ body {
 		var menu_offset = $('#menubar').offset();
 
    		$(window).scroll(function() {
-     		if ($(document).scrollTop() > 0) {
+     		if ($(document).scrollTop() > 70) {
      			$('#menubar').addClass('menu-fixed');
      		}else {
      			$('#menubar').removeClass('menu-fixed');
@@ -513,7 +545,7 @@ body {
 <div id="chatting">
 	<span id="chatlength" style="display:none;">0</span>
 	<div id="chatexit"> 
-		<span id="friendname"></span>
+		<span id="friendname" style="padding-left:5px;"></span>
 		<input type="text" style="display:none;" id="friendId">
 		<button type="button" class="close" aria-label="Close">
 				<span aria-hidden="true">&times;</span>
@@ -579,8 +611,9 @@ body {
 	</table>
 	
 	<div id="fri2" class="friendmenu" style="display:none;">
-		<input id="searchfriendid" class="form-control" style="width:80%; height:29px; float:left; margin-left:10px;"
-		placeholder="친구의 아이디를 입력해주세요"> 
+		<button id="fritogglebtn" class="btn btn-light">아이디</button>
+		<input id="searchfriendid" class="form-control" style="width:65%; height:29px; float:left; margin-left:1px;"
+		placeholder="아이디를 입력해주세요"> 
 		<button id="searchfriendbtn" class="btn btn-secondary"></button>
 		<div id="friendresult"style="display:none; width:100%; height:35px; float:left;">
 		닉네임 : <span id="searchnickname"></span> &nbsp; 이름 : <span id="searchname"></span>
@@ -591,8 +624,8 @@ body {
 		<div id="searchfriintro"></div>
 		</div>
 		<span id="noresultfr" style="display:none;">검색된 결과가 없습니다.</span>
-		
 	</div>
+	
 	<ul class="accordion" id="fri1">
 	<c:if test="${groupList.size() > 0 }">
 	<c:forEach var="i" begin="0" end="${groupList.size()-1}" step="1">
@@ -604,7 +637,7 @@ body {
 		<c:forEach var="fltwo" items="${ friendList }" varStatus="status">
 			<c:if test="${ groupList.get(i) == fltwo.groupName }">
 				<li style="height:25px; margin-bottom:5px;"><a class="myfriend" href="#">${fltwo.nickname }</a>     
-				<span style="float:right; margin-right:10px;">${fltwo.comment }</span>
+				<span class="mycomments">${fltwo.comment }</span>
 				<input type="text" style="display:none;"value="${fltwo.fId }">
 				<button class="expandfr"></button>
 				<br>
@@ -635,7 +668,7 @@ body {
 						${mycList.get(ci).title }
 					</c:if>
 					</a>     
-					<span style="float:right; margin-right:10px;">${mycList.get(ci).level }</span>
+					<span class="mycomments">${mycList.get(ci).level }</span>
 					<input type="text" style="display:none;"value="${mycList.get(ci).cNo }">
 					<button class="expandclass"></button>
 					<br>
@@ -673,6 +706,17 @@ body {
 				$li.children('.classfunc').css("display","none");
 				$li.height($li.height()).animate({height: "25px"}, 200);
 			}
+		});
+		$(document).on('click','#fritogglebtn',function(){
+			var ht = $(this).html();
+			if(ht == "아이디"){
+				$(this).html("닉네임");
+				$("#searchfriendid").attr("placeholder","닉네임를 입력해주세요.");
+			}else{
+				$(this).html("아이디");
+				$("#searchfriendid").attr("placeholder","아이디를 입력해주세요.");
+			}
+			
 		});
 	});
 </script>
@@ -811,10 +855,11 @@ body {
 		$("#searchfriendbtn").click(function(){
 			
 			$("#searchfreind").css("height","70px");
+			var sea = $("#fritogglebtn").html();
 			var id= $("#searchfriendid").val();
 			$.ajax({
 		        url:"findfriend.ck",
-		        data:{id:id},
+		        data:{id:id,sea:sea},
 		        dataType:"json",
 		        type:"post",
 		   		success:function(data){
@@ -822,7 +867,7 @@ body {
 		   			$("#friendresult").css("display","block");
 		   			$("#searchnickname").html(data.nickname);
 		   			$("#searchname").html(data.name);
-		   			$("#searchfid").html(id);
+		   			$("#searchfid").html(data.id);
 		   			$("#searchfriimg").attr("src",'${ contextPath }/resources/profileimg/'+data.profileimg);
 		   			$("#searchfriintro").html(data.introduce).css("min-height",$("#searchfriimg").css("height"));
 				},error:function(e){

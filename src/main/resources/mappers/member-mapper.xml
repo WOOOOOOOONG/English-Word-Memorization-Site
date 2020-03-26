@@ -121,4 +121,9 @@
 	<select id="selectNickname" parameterType="string" resultType="int">
 		select count(*) from member where NICKNAME=#{nickname}
 	</select>
+	
+	<update id="deleteMember" parameterType="string">
+		update Member set STATUS = 'N' where MID = #{mId}
+	</update>
+	
 </mapper>

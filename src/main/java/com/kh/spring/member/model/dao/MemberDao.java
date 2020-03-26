@@ -87,4 +87,7 @@ public class MemberDao {
 	public int selectNickName(String nickname) {
 		return sqlSession.selectOne("memberMapper.selectNickname",nickname);
 	}
+	public int deleteMember(String mId) {
+		return sqlSession.update("memberMapper.deleteMember",mId);
+	}
 }

@@ -202,7 +202,10 @@ public class BoardController {
 	@ResponseBody
 	public String selectBoardReplyList (int bId) {
 		ArrayList<Reply> rList = bService.selectBoardReplyList(bId);
-		
+		System.out.println(rList);
+		for(int i=0; i< rList.size(); i++) {
+			rList.get(i).setProfileimg(mService.selectProfileImg(rList.get(i).getWriterId()));
+		}
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(rList);
 	}

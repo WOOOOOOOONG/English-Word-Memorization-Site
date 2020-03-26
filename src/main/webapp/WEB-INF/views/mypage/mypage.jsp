@@ -106,9 +106,9 @@ body {
 
 .profilelabel{
   width:20%;
-  margin-left:10%;
+  margin-left:5%;
   float: left;
-  margin-right: 15%;
+  margin-right: 5%;
   font-size: 2em;
   line-height:40px;
 }
@@ -887,16 +887,18 @@ ul.shelf li:nth-child(9) span.booktop{
     overflow-y:auto;
 }
 .contenttitle{
-   padding:4px 4px 4px;
-   border-bottom:1px solid black;
-   width:50%;
-   margin:auto;
-   font-family:cinzel;
-   font-size:40px;
-   text-align:center;
+
+	padding:4px 4px 4px;
+	border-bottom:1px solid black;
+	width:50%;
+	margin:auto;
+	font-family:cinzel;
+	font-size:40px;
+	text-align:center;
+	color: #777;
 }
 #deleteMemberbtn{
-   float: left;
+	float: left;
     border: 0px;
     background: none;
     margin-left: 70%;
@@ -904,12 +906,12 @@ ul.shelf li:nth-child(9) span.booktop{
     color: red;
 }
 #deleteMemberbtn:hover{
-   text-decoration:none; 
-   color: red;
-   cursor:pointer;
+	text-decoration:none; 
+	color: red;
+	cursor:pointer;
 }
 .outClass{
-   margin-right: 70px;
+	margin-right: 70px;
     margin-top: -20px;
     float: right;
     color: #977e80;
@@ -930,8 +932,10 @@ ul.shelf li:nth-child(9) span.booktop{
 
         };
        function outclasss(cNo){
+
           location.href="outClass.do?cNo="+cNo;
       }
+
     </script>
     <c:if test="${ loginMember.profileimg =='defaultimg.png' }">
        <script>
@@ -957,6 +961,7 @@ ul.shelf li:nth-child(9) span.booktop{
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="info"><span class="booklabel"><h2>Infomation</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
     </ul> 
+    	
     </div>
     <div id="deskwrapper" style="background-image: url( 'resources/images/desk.png'); background-repeat: no-repeat;
      background-size: cover; width:100%; height:0px; overflow: hidden;">
@@ -968,136 +973,141 @@ ul.shelf li:nth-child(9) span.booktop{
             <div class="page "></div>
             <!-- 왼쪽 페이지 -->
             <div class="page " style="z-index:15;">
-               <!-- 클래스 리스트  -->
-             <div id="classcontent" class="mypagecontent" style="overflow:hidden;" >
-                
-             <div class="contenttitle">CLASS LIST</div>
-                <c:choose>
-               <c:when test="${ !empty cmList }">
-                  <div>
-                     <a href="classPorm.do" id="createBtn" class="createBtn">Create Class</a>
-                  </div>
-                  <div style=" width:104%; height: 85%; padding:10px; 
-                  overflow:scroll;overflow-x:hidden;overflow-y:auto;">
-                     <c:choose>
-                        <c:when test="${ !empty cList }">
-                           <c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
-                              <div id="goClass${ cList.get(i).cNo }" class="goClass">
-                                 <div style="width:100%; text-align:center;">
-                                    <c:if test="${cList.get(i).local eq null  }">   
-                                       <span style="font-size:12px; text-align:center; color:#fdcf7b;">OnLine</span>
-                                    </c:if>
-                                    <c:if test="${cList.get(i).local ne null  }">
-                                       <span style="font-size:12px; text-align:center; color:#fdcf7b;">${cList.get(i).local }</span>
-                                    </c:if>
-                                 </div>
-                                 <div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
-                                    ${cList.get(i).title }
-                                 </div>
-                                 <div style="width:100%; text-align:center;">
-                                    <c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
-                                       <c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
-                                          <span style="font-family:cinzel; font-size:14px;">${ cateList.get(j).name }</span>
-                                       </c:if>
-                                    </c:forEach>
-                                    <span style="font-family:cinzel; font-size:14px;"> | ${ cList.get(i).level }</span>
-                                    
-                                 </div>
-                              </div>
-                              <span class="outClass" onclick="outclasss('${ cList.get(i).cNo }')">탈퇴하기</span>
-                           </c:forEach>
-                        </c:when>
-                     </c:choose>
-                  </div>
-               </c:when>
-               <c:otherwise>
-                  <div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
-               </c:otherwise>
-               </c:choose>
-                
-                <script>
-                   // 클래스 이동 함수
-                   $(function(){
-                      $(".goClass").click(function(){
-                         var cNo = $(this).prop('id').replace("goClass","");
-                         location.href='myClass.do?cNo=' + cNo;
-                      });      
-                   });
-                </script>
-             </div>
+
+            	<!-- 클래스 리스트  -->
+			    <div id="classcontent" class="mypagecontent" style="overflow:hidden;" >
+			    	
+			    <div class="contenttitle">CLASS LIST</div>
+			    	<c:choose>
+					<c:when test="${ !empty cmList }">
+						<div>
+							<a href="classPorm.do" id="createBtn" class="createBtn">Create Class</a>
+						</div>
+						<div style=" width:104%; height: 85%; padding:10px; 
+						overflow:scroll;overflow-x:hidden;overflow-y:auto;">
+							<c:choose>
+								<c:when test="${ !empty cList }">
+									<c:forEach var="i" begin="0" end="${ cList.size() - 1 }">
+										<div id="goClass${ cList.get(i).cNo }" class="goClass">
+											<div style="width:100%; text-align:center;">
+												<c:if test="${cList.get(i).local eq null  }">	
+													<span style="font-size:12px; text-align:center; color:#fdcf7b;">OnLine</span>
+												</c:if>
+												<c:if test="${cList.get(i).local ne null  }">
+													<span style="font-size:12px; text-align:center; color:#fdcf7b;">${cList.get(i).local }</span>
+												</c:if>
+											</div>
+											<div style="width:80%; text-align:center; font-size:24px; margin:auto; height:80px; overflow:hidden;">
+												${cList.get(i).title }
+											</div>
+											<div style="width:100%; text-align:center;">
+												<c:forEach var="j" begin="0" end="${ cateList.size() - 1 }">
+													<c:if test="${ cList.get(i).cateId eq cateList.get(j).cId }">
+														<span style="font-family:cinzel; font-size:14px;">${ cateList.get(j).name }</span>
+													</c:if>
+												</c:forEach>
+												<span style="font-family:cinzel; font-size:14px;"> | ${ cList.get(i).level }</span>
+												
+											</div>
+										</div>
+										<span class="outClass" onclick="outclasss('${ cList.get(i).cNo }')">탈퇴하기</span>
+									</c:forEach>
+								</c:when>
+							</c:choose>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
+					</c:otherwise>
+					</c:choose>
+					 
+				    <script>
+				    	// 클래스 이동 함수
+				    	$(function(){
+				    		$(".goClass").click(function(){
+				    			var cNo = $(this).prop('id').replace("goClass","");
+				    			location.href='myClass.do?cNo=' + cNo;
+				    		});		
+				    	});
+				    </script>
+			    </div>
+
             
             </div>   
              <!-- 오른쪽 페이지 -->
             <div class="page" style="z-index:10;">
-               <!-- 프로필 수정 -->
-               <form class="mypagecontent" id="profilecontent"
-                method="post" action="profile.me" enctype="multipart/form-data">
-                   <div class="contenttitle">My Profile</div>
-                 <input type="text"name="mId" style="display:none;" value="${loginMember.mId }">
-                 <div id="profilephoto" style="float:left;">
-                 <input type="file" id="photoinput" name="photoinput" accept=".jpg,.jpeg,.png,.gif">
-                 <img id="myphoto" src="${contextPath }/resources/profileimg/${loginMember.profileimg}" onclick="$('#photoinput').click();" />
-               </div>
-                 <div style=" width:40%; margin:2.5%; height:40%; float:left;">
-                     <!-- 이름 -->
-                     <div class="form-group row" style="margin-top:40%;">
-                         <label for="username" class="profilelabel">이름</label>
-                         <input type="text" readonly class="form-control" id="username" value="${loginMember.name }"
-                          style="width:40%;  float: left;">
-                     </div>
-                     <!-- 닉네임 -->
-                     <div class="form-group row">
-                         <label for="mynickname" class="profilelabel">닉네임</label>
-                         <input type="text" class="form-control" id="mynickname" name="nickname"
-                          value="${loginMember.nickname }" style="width:40%;  float: left;">
-                     </div>
-                     <script>
-                        // 닉네임 중복체크
-                        $(function(){
-                           $("#mynickname").change(function(){
-                              $.ajax({
-                                   url:"mynickname.ck",
-                                   data:{nickname:$(this).val()},
-                                   type:"post",
-                                    success:function(data){   
-                                       if(data == "good"){
-                                          $("#profilechangebtn").attr("disabled",false);
-                                       }else{
-                                          alert("중복된 닉네임입니다.");
-                                          $("#profilechangebtn").attr("disabled",true);
-                                       }
-                                 },error:function(e){
-                                    alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-                                 }
-                                 
-                              });   
-                           });
-                        });
-                     </script>
-                 </div>
-                 <!-- 자기 소개 -->
-                 <div style=" width:95%; height:30%; margin:2.5%; float:left;">      
-                         <div class="form-group row" style="float:left; width:100%; height:250px;">
-                             <textarea class="form-control" id="myintroduce"name="introduce"
-                              placeholder="자기소개" rows="3">${loginMember.introduce}</textarea>
-                         </div>
-                 </div> 
-                 <button class="btn btn-success" id="profilechangebtn">프로필 수정</button>
-             </form>
-               
-               <!-- 단어장 리스트(미완성) -->
-               <div id="dancontent" class="mypagecontent" >
-               <div class="contenttitle">Dan List</div>
-               <button id="mydanlist"class="btn btn-info">햐</button>
-             </div>
-             
-               <!-- 스케쥴  -->
-             <div id="schedulecontent" class="mypagecontent">
-                 <div id="calendar"></div>
-                 <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
-             </div>
-             <!-- 개인정보 수정 -->
-             <div id="infocontent" class="mypagecontent" >
+
+            	<!-- 프로필 수정 -->
+            	<form class="mypagecontent" id="profilecontent"
+            	 method="post" action="profile.me" enctype="multipart/form-data">
+            	 	<div class="contenttitle">My Profile</div>
+        			<input type="text"name="mId" style="display:none;" value="${loginMember.mId }">
+        			<div id="profilephoto" style="float:left;">
+			        <input type="file" id="photoinput" name="photoinput" accept=".jpg,.jpeg,.png,.gif">
+			        <img id="myphoto" src="${contextPath }/resources/profileimg/${loginMember.profileimg}" onclick="$('#photoinput').click();" />
+					</div>
+			        <div style=" width:40%; margin:2.5%; height:40%; float:left;">
+			            <!-- 이름 -->
+			            <div class="form-group row" style="margin-top:40%;">
+			                <label for="username" class="profilelabel">이름</label>
+			                <input type="text" readonly class="form-control" id="username" value="${loginMember.name }"
+			                 style="width:55%;  float: left;">
+			            </div>
+			            <!-- 닉네임 -->
+			            <div class="form-group row">
+			                <label for="mynickname" class="profilelabel">닉네임</label>
+			                <input type="text" class="form-control" id="mynickname" name="nickname"
+			                maxlength="8"
+			                 value="${loginMember.nickname }" style="width:55%;  float: left;">
+			            </div>
+			            <script>
+			            	// 닉네임 중복체크
+			            	$(function(){
+			            		$("#mynickname").change(function(){
+			            			$.ajax({
+			            		        url:"mynickname.ck",
+			            		        data:{nickname:$(this).val()},
+			            		        type:"post",
+			            		   		success:function(data){	
+			            		   			if(data == "good"){
+			            		   				$("#profilechangebtn").attr("disabled",false);
+			            		   			}else{
+			            		   				alert("중복된 닉네임입니다.");
+			            		   				$("#profilechangebtn").attr("disabled",true);
+			            		   			}
+			            				},error:function(e){
+			            					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+			            				}
+			            				
+			            			});	
+			            		});
+			            	});
+			            </script>
+			        </div>
+		  			<!-- 자기 소개 -->
+			        <div style=" width:95%; height:30%; margin:2.5%; float:left;">      
+			                <div class="form-group row" style="float:left; width:100%; height:250px;">
+			                    <textarea class="form-control" id="myintroduce"name="introduce"
+			                     placeholder="자기소개" rows="3">${loginMember.introduce}</textarea>
+			                </div>
+			        </div> 
+			        <button class="btn btn-success" id="profilechangebtn">프로필 수정</button>
+		    	</form>
+            	
+            	<!-- 단어장 리스트(미완성) -->
+            	<div id="dancontent" class="mypagecontent" >
+            	<div class="contenttitle">Dan List</div>
+					<button id="mydanlist"class="btn btn-info">햐</button>
+			    </div>
+			    
+            	<!-- 스케쥴  -->
+			    <div id="schedulecontent" class="mypagecontent">
+			        <div id="calendar"></div>
+			        <script src="http://cdnjs.cloudflare.com/ajax/libs/moment.js/2.5.1/moment.min.js"></script>
+			    </div>
+			    <!-- 개인정보 수정 -->
+			    <div id="infocontent" class="mypagecontent" >
+
             <form id="updateMemberForm" method="post" onsubmit="return insertcheck();" action='${contextPath}/update.me'>
                 <div class="contenttitle">My Info</div>
                 <div id="updateArea" style="float:left;">
@@ -1194,22 +1204,26 @@ ul.shelf li:nth-child(9) span.booktop{
                
                $desk = $("#deskwrapper");
                 $desk.height($desk.height()).animate({height: "0px"}, 500);
-               $sh = $("#shelfwrapper");
+
+            	$sh = $("#shelfwrapper");
+
                 $sh.height($sh.height()).animate({height: "850px"}, 500);
                 setTimeout(function() {
                    $(".page").removeClass("turn");
                     $(".cover").removeClass("turn");
                     $('.mypagecontent').css("display","none");
-                }, 1000);  
+                }, 100);  
                 
             });
             $("#deleteMemberbtn").click(function(){
-               
-               if(confirm("정말로 탈퇴하시겠습니까?")){
-                  location.href="deleteMember.do";
-               }
+
+            	
+            	if(confirm("정말로 탈퇴하시겠습니까?")){
+            		location.href="deleteMember.do";
+            	}
             });
-              // 사진입력시 미리보기  
+           	// 사진입력시 미리보기  
+
             $("#photoinput").change(function () {
                 readURL(this);
                 $("#myphoto").css("width", "auto");

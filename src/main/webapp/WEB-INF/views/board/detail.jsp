@@ -177,6 +177,14 @@
 .imo:hover + p.arrow_box {
   display: block;
 }
+.line4{
+	width: 118%;
+}
+.userreplyimg{
+	height:30px;
+	max-width:30px;
+	border-radius:50%;
+}
 </style>
 </head>
 <body>
@@ -271,7 +279,7 @@
                <div class="content">${detailBoard.views}</div>
             </div>
          </div>
-         <div class="boardContent"><textarea id="#inputText" placeholder="${detailBoard.content }" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke;"></textarea></div>
+         <div class="boardContent"><textarea id="inputText" onload="resize(this)" onkeydown="resize(this)" onkeyup="resize(this)" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke; border:none; outline:none;" readonly>${detailBoard.content}</textarea></div>
          <!-- 다음글, 이전글 -->
          <c:forEach var="item" items="${ boardList }" varStatus="status">
          	<c:if test="${item.bId eq detailBoard.bId && item.bId ne boardList[0].bId}">
@@ -393,11 +401,13 @@
                         	}
                            var $tr = $("<tr>");
                            var $form = $("<form action='deleteBoardReply.bo' method='POST'>");
-                           var $tWriter = $("<td width='50'>").html("<div class='tdContent2'>" + data[i].writerNickname + "</div>");
-                           var $tContent = $("<td width='1130'>").html("<div class='tdContent1'>" + data[i].content + "</div> " + 
+                           var $tWriter = $("<td width='110'>").html("<div class='tdContent2'>" + data[i].writerNickname + "</div>");
+                           var $tContent = $("<td width='1040'>").html("<div class='tdContent1'>" + data[i].content + "</div> " + 
                                  "<div class='tdContent2'>" + data[i].createDate + "</div>");
                            var memberId = "${sessionScope.loginMember.mId}";
-                           
+                           var $memberimg = $("<td width='30'>");
+                           var $img = $("<img class='userreplyimg' src='${contextPath}/resources/profileimg/"+data[i].profileimg+"' >");
+                           $memberimg.append($img);
                            if(${!empty sessionScope.loginMember} && (data[i].writerId == memberId || memberId == 'admin')) {                        	   
                               var $deleteBtn = $("<td width='10'>").html("<div class='tdContent2'><button class='button" + i + "' onclick='deleteReply(" + data[i].rId + ", " + '"' + data[i].writerId + '"' + ");'>X</button></div>");                              
                            }else {
@@ -409,6 +419,8 @@
                            $hr.className = "line4";
                            
                            $tr.append($tContent);
+                           // 이미지 추가하기.
+                           $tr.append($memberimg);
                            $tr.append($tWriter);
                            $tr.append(reportBtn);
                            if(data[i].writerId == memberId || memberId == 'admin') {
