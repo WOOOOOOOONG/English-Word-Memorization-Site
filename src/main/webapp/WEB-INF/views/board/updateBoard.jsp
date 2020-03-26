@@ -17,6 +17,7 @@
 	padding-top: 50px;
 	padding-left: 50px;
 	padding-bottom: 10px;
+	margin-bottom: -100px;
 }
 
 .updateForm {
@@ -44,11 +45,13 @@
 				<div class="box box-info">
 					<div class="box-body">
 						<fieldset id="w4">
-							<!-- referId, nickname 보내기 위함 -->
+							<!-- referId, nickname, bId 보내기 위함 -->
 							<input type="text" style="display: none;" name="referId"
 								value="${sessionScope.loginMember.mId}" />
 							<input type="text" style="display: none;" name="referNickname"
 								value="${sessionScope.loginMember.nickname}" />
+							<input type="text" style="display: none;" name="bId"
+								value="${ detailBoard.bId }" />
 							<div class="row">
 								<div class="col-sm-12">
 									<div class="form-group field-job-title required">
@@ -109,7 +112,7 @@
 										<label for="job-desc" class="control-label col-md-3"
 											style="font-weight: bold">문의 내용</label>
 										<div class="col-md-10">
-											<textarea name="content" class="textarea"></textarea>
+											<textarea name="content" class="textarea">${detailBoard.content}</textarea>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
 										<div class="col-md-offset-2 col-md-10">
@@ -122,12 +125,8 @@
 					</div>
 				</div>
 				<div>
-					<c:url var="update" value="updateBoard.bo">
-						<c:param name="board" value="${ detailBoard }" />
-					</c:url>
 					<button class="btn btn-outline-success" id="submitBtn"
-						style="margin-left: 553px"
-						onmouseover="update();" onclick="${update}">수정</button>
+						style="margin-left: 553px">수정</button>
 					<button type="button" class="btn btn-outline-danger"
 						style="margin: 0 auto;" onclick="cancel();">취소</button>
 				</div>

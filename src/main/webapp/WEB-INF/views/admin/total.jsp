@@ -437,9 +437,10 @@ nav.sidebar ul li.active a.expandable:hover {
 					<h2 style="margin-top: 16px;">${sessionScope.loginMember.nickname}</h2>
 					<p>${sessionScope.loginMember.introduce}</p>
 				</div>
-				<p class="profile" style="margin-top: -15px;">방문자 수 : ${fn:length(logList)}</p>
+				<p class="profile" style="margin-top: -15px;">방문자 수 :
+					${fn:length(logList)}</p>
 				<p class="profile">보유 회원 수 : ${fn:length(mList)}</p>
-				<p class="profile">등록된 단어장 수 :</p>
+				<p class="profile" id="vocaLength">등록된 단어장 수 :</p>
 				<p class="profile">등록된 클래스 수 : ${fn:length(cList)}</p>
 				<div style="margin-top: 0px; width: 100; height: 30px;"></div>
 			</div>
@@ -589,14 +590,11 @@ nav.sidebar ul li.active a.expandable:hover {
 										</c:if> <c:if test="${item.type eq 5}">
 											기타
 									</c:if></td>
-									<td>
-										<c:if test="${item.reportedId eq null}">
+									<td><c:if test="${item.reportedId eq null}">
 											X
-										</c:if>
-										<c:if test="${item.reportedId ne null}">
+										</c:if> <c:if test="${item.reportedId ne null}">
 											${item.reportedId }
-										</c:if>
-									</td>
+										</c:if></td>
 									<td><i class="fa fa-archive" style="font-size: 28px;"
 										onclick="inquireDeleteBtn('${item.iId}');"></i> <script>
 											function inquireDeleteBtn(iId) {
@@ -1016,7 +1014,7 @@ nav.sidebar ul li.active a.expandable:hover {
 										backgroundColor : "",
 										focusTarget : 'category',
 										hAxis : {
-											title : 'Time of Day',
+											title : '',
 											format : 'dd',
 											viewWindow : {
 											//   min: [7, 0, 0],
@@ -1171,25 +1169,169 @@ nav.sidebar ul li.active a.expandable:hover {
 								}
 							</script>
 				</div>
-				<br>
-				<br>
+				<br> <br>
 
 				<!-- voca -->
 				<h6 class="title2">단어장 통계</h6>
 				<div class="chart">
 					<div class="chart2 left">
-						<!-- <button type="button"
-							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(8);">크게 보기</button> -->
+						<div class="table">
+							<div id="chart_div4" style="width: 650px; height: 300px">
+								<script>
+								var vocaList = Array();
+								var vocaLength = 0;
+								
+								
+								$.ajax(
+							            {
+							                type: "POST",
+							                dataType: "json",
+							                contentType: "application/json; charset=utf-8",
+							                data: JSON.stringify({_id:"CSID_45"}),
+							                url: 'http://localhost:1222/total',
+							                success: function (data) {
+							                        var vocaLengthText = $("#vocaLength");
+							                        vocaLength = data.length;
+							                        
+							                        // 관리자 정보에서 등록된 단어장 수 수정
+							                        vocaLengthText.text("등록된 단어장 수 : " + vocaLength);
+													
+													// 2차원 배열화
+													for(var i = 0; i < vocaLength; i++) {
+														vocaList[i] = new Array();
+													}
+							                        
+													// 단어 데이터 추출
+							                        for(var i = 0; i < vocaLength; i++) {
+							                        	vocaList[i][0] = data[i].title;
+							                        	vocaList[i][1] = data[i].privilege.length;
+							                        }
+							                        console.log(vocaList);
+							                        
+							                        // 전체 통계를 위한 배열 생성
+							                        for(var i = 0; i < 13; i++) {
+														arr1[i] = new Array();
+														arr1[i] = 0;
+													}
+													// arr[월][일] = 해당값   으로 구분지을 것. 일단 이번년도만 포함하기로 함
+													<c:forEach var="item" items="${logList}">
+														arr1[${fn:substring(item.visitDate, 5, 7)}]
+														 = arr1[${fn:substring(item.visitDate, 5, 7)}] + 1;
+													</c:forEach>
+							                },
+							                error: function () {
+							                    alert("데이타베이스 연결에 실패하여씁니다!");
+							                    console.log("error has occured retriving data from MongoServer")
+							                }
+							            });
+				setTimeout(function() {
+					google.charts.load('current', {
+						packages : [ 'corechart', 'bar' ]
+					});
+					google.charts.setOnLoadCallback(drawAxisTickColors4);	
+				}, 3000);	            
+				
+
+				function drawAxisTickColors4() {
+					var data4 = new google.visualization.DataTable();
+					data4.addColumn('string', 'Element');
+					data4.addColumn('number', 'Percentage');
+					for(var i = 0; i < vocaLength; i++) {
+						
+						console.log(i);
+						data4.addRows([[ vocaList[i][0], vocaList[i][1] ]]);
+					}
+					var options = {
+						title : '단어 - 전체',
+						backgroundColor : "",
+						focusTarget : 'category',
+						hAxis : {
+							title : '',
+							format : 'dd',
+							viewWindow : {
+							//   min: [7, 0, 0],
+							//   max: [37, 30, 30]
+							},
+							textStyle : {
+								fontSize : 14,
+								color : '#053061',
+								bold : true,
+								italic : false,
+							},
+							titleTextStyle : {
+								fontSize : 18,
+								color : '#053061',
+								bold : true,
+								italic : false
+							},
+							gridlines : {
+								count : 24
+							}
+						},
+						vAxis : {
+							textStyle : {
+								fontSize : 18,
+								color : '#67055f',
+								bold : false,
+								italic : false
+							},
+							titleTextStyle : {
+								fontSize : 18,
+								color : '#67055f',
+								bold : true,
+								italic : false
+							}
+						}
+					};
+
+					var chart = new google.visualization.ColumnChart(document
+							.getElementById('chart_div4'));
+					chart.draw(data4, options);
+					
+					// 유형별 단어장
+					var type = new Array();
+					type[0] = ${type0};
+					type[1] = ${type1};
+					type[2] = ${type2};
+					type[3] = ${type3};
+					
+					google.charts.load("current", {
+						packages : [ "corechart" ]
+					});
+					google.charts.setOnLoadCallback(drawChart4);
+					function drawChart4() {
+						var data = google.visualization.arrayToDataTable([
+								[ 'Task', 'Hours per Day' ], [ '수능', type[0] ],
+								[ 'TOEIC', type[1] ], [ '공무원 9급', type[2] ], [ '기타', type[3] ]]);
+	
+						var options = {
+							title : '유형별',
+							titleFontSize : 18,
+							fontSize : 18,
+							is3D : true,
+							backgroundColor : ""
+						};
+	
+						var chart = new google.visualization.PieChart(document
+								.getElementById('piechart_3d4'));
+						chart.draw(data, options);
+					}
+				}
+			</script>
+							</div>
+						</div>
 					</div>
 					<div class="chart2 left">
 						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(9);">크게 보기</button> -->
+							onclick="goHomePage(5);">크게 보기</button> -->
+						<div class="table chart-table">
+							<div id="piechart_3d4" style="width: 650px; height: 300px;">
+						</div>
 					</div>
 				</div>
-			</div>
-			<script>
+				</div>
+				<script>
 				function goHomePage(value) {
 	            	var url = "";
 	            	
@@ -1240,6 +1382,7 @@ nav.sidebar ul li.active a.expandable:hover {
 			}
 		</script>
 	</c:if>
-	<jsp:include page="../common/footer.jsp"/>
+
+	<jsp:include page="../common/footer.jsp" />
 </body>
 </html>
