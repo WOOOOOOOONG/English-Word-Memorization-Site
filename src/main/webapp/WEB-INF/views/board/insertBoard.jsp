@@ -17,6 +17,7 @@
 	padding-top: 50px;
 	padding-left: 50px;
 	padding-bottom: 10px;
+	margin-bottom: -100px;
 }
 
 .insertForm {

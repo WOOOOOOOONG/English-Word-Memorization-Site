@@ -52,7 +52,7 @@ import net.sf.json.JSONArray;
 import com.kh.spring.member.model.vo.Member;
 
 
-@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList","allUserList","cnList"})
+@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList","allUserList","cnList","msg"})
 @Controller
 public class ClassController {
 	
@@ -1081,6 +1081,37 @@ public class ClassController {
 		mv.addAttribute("cnid",cnid);
 		
 		return "redirect:detailNotice.do";
+	}
+	
+	@RequestMapping("outClass.do")
+	public String outClass(HttpServletRequest request,String cNo,Model mv) {
+		Member me = (Member) request.getSession().getAttribute("loginMember");
+		ClassMember cm = new ClassMember();
+		cm.setId(me.getmId());
+		cm.setcNo(cNo);
+		String ornerId = cService.selectOrnerId(cNo);
+		
+		if(ornerId.equals(me.getmId())) {
+			mv.addAttribute("msg","클래스 마스터는 탈퇴하실수가 없습니다.");
+		}else {
+			int result = cService.outClass(cm);
+			if(result > 0) {
+				mv.addAttribute("msg","클래스 탈퇴가 완료되었습니다..");
+			}
+		}
+		
+		return "redirect:/mypage.me";
+	}
+	
+	@RequestMapping("InsertClassVocaForm.do")
+	public ModelAndView InsertClassVocaForm(String cNo,ModelAndView mv,HttpServletRequest request) {
+		Member me = (Member) request.getSession().getAttribute("loginMember");
+		String id = me.getmId();
+		
+		mv.addObject("cNo",cNo);
+		mv.addObject("id",id);
+		mv.setViewName("flashcard/InsertClassVoca");
+		return mv;
 	}
 
 }

@@ -40,6 +40,8 @@ public class MemberController {
 	private FriendService fService;
 	@Autowired
 	private AdminController aController;
+	
+	
 	@RequestMapping("memberList.me")
 	public ModelAndView memberList(ModelAndView mv) {
 		ArrayList<Member> memberList = mService.selectList();

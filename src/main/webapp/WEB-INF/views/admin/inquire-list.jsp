@@ -16,6 +16,9 @@
 <title>외웟</title>
 
 <style>
+form {
+}
+
 .hide {
 	display: none;
 }
@@ -202,7 +205,7 @@
 				</tbody>
 			</table>
 
-			<input type="button" value="글쓰기" style="margin-top: -40px; position: fixed;" 
+			<input type="button" value="글쓰기" style="margin-top: -40px; position: absolute;" 
 				onclick="location.href='insertInquireView.ad'" />
 		
 			<script>

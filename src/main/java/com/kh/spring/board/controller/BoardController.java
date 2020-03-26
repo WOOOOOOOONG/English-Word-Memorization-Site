@@ -99,14 +99,12 @@ public class BoardController {
 			ModelAndView mv,
 			Board board) {
 		int result = bService.updateBoard(board);
-		
-		if(result > 0) {
+		if(result >= 0) {
 			Board b = bService.selectBoardOne(board.getbId(), false);
 			ArrayList<Board> bList = bService.selectBoardList(1);
 			mv.addObject("msg", "게시판 수정이 완료되었습니다");
 			mv.addObject("boardList", bList);
 			mv.addObject("detailBoard", b);
-			
 			mv.setViewName("board/detail");
 		}else {
 			mv.setViewName("common/errorPage");

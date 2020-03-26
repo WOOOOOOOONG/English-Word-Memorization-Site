@@ -101,7 +101,7 @@
 	<input type="text" value="${ classs.cNo }" id="cNo" style="display:none;">
 	
 		
-<div style="margin-top :4vh; margin-left: 4vw; width:70%; height:800px; float: left; overflow: auto; position: relative;">
+<div style="margin-top :4vh; margin-left: 4vw; width:70%; height:800px; float: left;  position: relative;">
    	<div style="margin:auto; width:50%; text-align:center; border-bottom:1px solid gray; font-family:cinzel;">
        	<h1>VOCA LIST</h1>
        </div><br>
@@ -116,7 +116,11 @@
        <div style="width:100%; height:50px; display:none;" id="createDiv">
        		<c:forEach var="i" begin="0" end="${ cmList.size() - 1 }">
        			<c:if test="${ loginMember.mId eq cmList.get(i).id && cmList.get(i).vRight eq 'Y'}">
-       				<button class="btn btn-secondary" style="float:right; margin:20px 30px 0 0;">단어장 만들기</button>
+       			   
+       				<c:url var="goInsert" value="InsertClassVocaForm.do">
+       					<c:param name="cNo" value="${ cNo }"/>
+       				</c:url>
+       				<button class="btn btn-secondary" style="float:right; margin:20px 30px 0 0;" onclick="location.href='${ goInsert}'">단어장 만들기</button>
        			</c:if>
        		</c:forEach>
        </div>
@@ -126,7 +130,7 @@
 		       	
 			
 	
-	<div id="vocalist" style="width: 100%; display:none;">
+	<div id="vocalist" style="width: 100%; display:none; ">
 	
 	</div>
 	
@@ -138,7 +142,8 @@
 	<button id="asd" style="display:none;"></button>
 </div>
 
-<% int row = 4;
+<% 
+	int row = 4;
    int rowCount = 0;
 %>
 <script>
@@ -151,7 +156,7 @@
 				$('.b').hide();
 				var count2 = $("#title" + (listCount-1)).attr('id').replace('title','');
 				var count = count2 * 1;
-				var rowCount = <%= rowCount %>;
+				var rowCount = 0;
 				var userName = $(".userName").val();
 		
 				var liss = "<%= list %>";
@@ -159,33 +164,41 @@
 				var length = lissSplit.length;
 				var changeName;
 				
-				for(var c = 0 ; c <= length-1; c++){
-					if(lissSplit[c].search(userName) != -1){
-						console.log("이거 : " + lissSplit[c]);
-						console.log(lissSplit[c].indexOf(userName));
-						
-						var stringSize = userName.length; // 찾는 아이디의 사이즈
-						var startIndex = lissSplit[c].indexOf(userName); // 찾기시작하는부분
-						
-						if(startIndex == 1){
-							changeName = lissSplit[c].substring(stringSize+startIndex+1);
-						}else if(startIndex == 0){
-							changeName = lissSplit[c].substring(stringSize+startIndex);
-						}
-						
-					}
-				}
+				var lastIndex = lissSplit[length-1];
+				var InsertLast = lastIndex.substring(0,lastIndex.length - 1);
 				
+				lissSplit.pop(); // 마지막값 제거
+				lissSplit.push(InsertLast);
 				
 				for(var i = count; i >= 1 ; i--){
 					var title = $("#title" + i).val(); // 제목
 					var vocaCount = $("#voca"+ i).val(); // 사이즈갯수
-					if( i % <%= row %> == 1 && rowCount != 0){
+					var cid = $("#creator" + i).val(); // 만든사람
+					
+					if( rowCount % 4  == 0 && rowCount != 0 ){
 						div.append("<div class='row'></div>");
 					}
 					
-					div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><span class='vocaSpan'>" + vocaCount +" 단어</span><img class='proimg' src='${ contextPath }/resources/profileimg/" +
-							changeName  + "'><span class='name'>"+ userName + "</span></div>");
+					// 체인지 사진
+					for(var c = 0 ; c <= length-1; c++){
+						if(lissSplit[c].search(cid) != -1){
+							//console.log("이거 : " + lissSplit[c]);
+							//console.log(lissSplit[c].indexOf(cid));
+							
+							var stringSize = cid.length; // 찾는 아이디의 사이즈
+							var startIndex = lissSplit[c].indexOf(cid); // 찾기시작하는부분
+							
+							if(startIndex == 1){
+								changeName = lissSplit[c].substring(stringSize+startIndex+1);
+							}else if(startIndex == 0){
+								changeName = lissSplit[c].substring(stringSize+startIndex);
+							}
+							
+						}
+					}
+					
+					div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><span class='vocaSpan'>" + (vocaCount - 1) +" 단어</span><img class='proimg' src='${ contextPath }/resources/profileimg/" +
+							changeName  + "'><span class='name'>"+ cid + "</span></div>");
 					rowCount++;
 				}
 			}else{
@@ -211,6 +224,7 @@
 	var vocaItemCount = 0; // 단어  갯수
 	var lastTitle;
 	var turnturn = false;
+	var creatorCount = 1;
 	
 	$(function(){
 		var searchInput = $("#cNo").val();
@@ -241,7 +255,7 @@
                 	var i = 1;
                 	// 여기는 단어장만든사람 리스트가져오는 부분
                 	
-                	console.log(data[0].username);
+                	
                 	var userInput = "<input type='text' class='userName' value ='" + data[0].username + "'>";
                 	div.append(userInput);
                 	
@@ -250,6 +264,7 @@
                 		var obj = data[1][key];
                 		
 	                   	for (var key in obj) {
+	                   			
 	                   		
 	                   		var input2 = "<input type='text' class='titleCount' value='"+key + "' id='title" + (listCount++) + "'>";
 	                   		div.append(input2);
@@ -257,11 +272,19 @@
 	                   		
 	                   		var obj2 = obj[key];
 	                   		var seCount = 0;
+	                   		
+	                   		var creatorId = obj2[0]["creatorId"]; 
+	                   		 //console.log(obj2[0]["creatorId"]); 얘가 아이디가져옴
+	                   		 //console.log(creatorId);
+                   			var input3 = "<input type='text' class='creatorId' value='"+ creatorId + "' id='creator" + (creatorCount++) + "'>";
+                   			div.append(input3);
 	                   		for(var key in obj2[0]){
 	                   			// 여기는 단어 하나하나 나오는 부분임
 	                   			seCount++;
 	                   			
+	                   			
 	                   		}
+	                   		
 	                   		var input = "<input type='text' value='"+seCount + "' id='voca" + (vocaCount++) + "'>";
                    			div.append(input);
                    			vocaItemCount = 0;
@@ -306,5 +329,6 @@
       	}); 
       
       </script>
+      <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

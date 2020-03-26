@@ -376,4 +376,11 @@ public class ClassServiceImpl implements ClassService{
 			cDao.updateRecentDay(cn);
 			
 		}
+
+		// 탈퇴
+		@Override
+		public int outClass(ClassMember cm) {
+			// TODO Auto-generated method stub
+			return cDao.outClass(cm);
+		}
 }

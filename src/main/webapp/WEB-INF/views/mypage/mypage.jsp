@@ -13,10 +13,10 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
-	
-	<link rel="shortcut icon"
-	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
-	type="image/x-icon">
+   
+   <link rel="shortcut icon"
+   href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+   type="image/x-icon">
 <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
         crossorigin="anonymous">
@@ -72,9 +72,9 @@ body {
   text-align: center;
 } 
 #profilecontent{
-	width:95%;
-	height:95%;
-	margin:2.5%;
+   width:95%;
+   height:95%;
+   margin:2.5%;
 }
 .profilespan{
   width:15%; 
@@ -510,275 +510,275 @@ body {
 }
 
 .modal-body > .form-control{
-	width:48%;
-	float:left;
-	text-align:center;
+   width:48%;
+   float:left;
+   text-align:center;
 }
 .modal-body > label{
-	width:20%;
-	float:left;
-	line-height: 35px;
+   width:20%;
+   float:left;
+   line-height: 35px;
     font-size: 1.1em;
     margin-right:10px;
     margin-left:16%;
 }
 .modal-content{
-	background:whitesmoke;
+   background:whitesmoke;
 }
 .changescbtn{
-	background-image: url( "resources/images/변경.png" );
-	background-repeat: no-repeat;
-	background-size: cover;
-	width:22px;
-	height:22px; 
-	float:right;
-	margin-right:20px;
-	display:none;
+   background-image: url( "resources/images/변경.png" );
+   background-repeat: no-repeat;
+   background-size: cover;
+   width:22px;
+   height:22px; 
+   float:right;
+   margin-right:20px;
+   display:none;
 }
 .deletescbtn{
-	background-image: url( "resources/images/삭제.png" );
-	background-repeat: no-repeat;
-	background-size: cover;
-	width:22px;
-	height:22px; 
-	float:right;
-	margin-right:100px;
-	display:none;
+   background-image: url( "resources/images/삭제.png" );
+   background-repeat: no-repeat;
+   background-size: cover;
+   width:22px;
+   height:22px; 
+   float:right;
+   margin-right:100px;
+   display:none;
 }
 
 .createBtn{
-	text-decoration:none; 
-	color:red; 
-	float:right;
-	font-family:cinzel;
-	font-size: 17px;
+   text-decoration:none; 
+   color:red; 
+   float:right;
+   font-family:cinzel;
+   font-size: 17px;
 }
 .createBtn:hover{
-	text-decoration:none; 
-	color: rgb(0,154,200);
-	transition: 0.2s ease-in-out;
+   text-decoration:none; 
+   color: rgb(0,154,200);
+   transition: 0.2s ease-in-out;
 }
 
 .inputdivarea > input {
-	padding-left:10px;
-	width: 60%;
-	height: 100%;
-	font-size:1.8em;
-	float: left;
+   padding-left:10px;
+   width: 60%;
+   height: 100%;
+   font-size:1.8em;
+   float: left;
     margin-left: 20%;
-	border-bottom-color: rgb(206, 212, 218);
-	border-bottom-left-radius: 4px;
-	border-bottom-right-radius: 4px;
-	border-bottom-style: solid;
-	border-bottom-width: 1px;
-	border-image-outset: 0px;
-	border-image-repeat: stretch;
-	border-image-slice: 100%;
-	border-image-source: none;
-	border-image-width: 1;
-	border-left-color: rgb(206, 212, 218);
-	border-left-style: solid;
-	border-left-width: 1px;
-	border-right-color: rgb(206, 212, 218);
-	border-right-style: solid;
-	border-right-width: 1px;
-	border-top-color: rgb(206, 212, 218);
-	border-top-left-radius: 4px;
-	border-top-right-radius: 4px;
-	border-top-style: solid;
-	border-top-width: 1px;
-	
+   border-bottom-color: rgb(206, 212, 218);
+   border-bottom-left-radius: 4px;
+   border-bottom-right-radius: 4px;
+   border-bottom-style: solid;
+   border-bottom-width: 1px;
+   border-image-outset: 0px;
+   border-image-repeat: stretch;
+   border-image-slice: 100%;
+   border-image-source: none;
+   border-image-width: 1;
+   border-left-color: rgb(206, 212, 218);
+   border-left-style: solid;
+   border-left-width: 1px;
+   border-right-color: rgb(206, 212, 218);
+   border-right-style: solid;
+   border-right-width: 1px;
+   border-top-color: rgb(206, 212, 218);
+   border-top-left-radius: 4px;
+   border-top-right-radius: 4px;
+   border-top-style: solid;
+   border-top-width: 1px;
+   
 }
 #updateArea{
-	width:100%;
-	height:80%;
-	margin-bottom:20px;
+   width:100%;
+   height:80%;
+   margin-bottom:20px;
 }
 #updateArea > div{
-	margin-top:6px;
+   margin-top:6px;
 }
 #updateMemberForm{
-	width:90%;
-	height:90%;
-	margin:5%;
+   width:90%;
+   height:90%;
+   margin:5%;
 }
 .textdivarea{
-	margin-left:20%;
-	font-size:1.55em;
-	text-align:left;
+   margin-left:20%;
+   font-size:1.55em;
+   text-align:left;
 }
 .inputdivarea{
-	height:35px;
+   height:35px;
 }
 #updateMemberbtn{
-	float: left;
+   float: left;
     width: 60%;
     margin-left: 20%;
 }
  ul.shelf {
-	 list-style: none;
-	 border: 20px solid #82430c;
-	 background:#92531c;
-	 border-top: 0px;
-	 height: 250px;
-	 width: 760px;
-	 margin: 15% auto 0;
-	 padding: 0;
-	 -webkit-perspective: 2500;
-	 -webkit-transform-origin: center top 0;
-	 -webkit-transform: translateY(250px);
-	 
+    list-style: none;
+    border: 20px solid #82430c;
+    background:#92531c;
+    border-top: 0px;
+    height: 250px;
+    width: 760px;
+    margin: 15% auto 0;
+    padding: 0;
+    -webkit-perspective: 2500;
+    -webkit-transform-origin: center top 0;
+    -webkit-transform: translateY(250px);
+    
 }
  ul.shelf li {
-	 width: 80px;
-	 height: 500px;
-	 float: left;
-	 padding: 0;
-	 position: relative;
-	 cursor: pointer;
-	 -webkit-transform: rotateX(0deg) translateY(-250px);
-	 -webkit-transform-style: preserve-3d;
-	 -webkit-transition-property: transform;
-	 -webkit-transition-duration: 100ms;
+    width: 80px;
+    height: 500px;
+    float: left;
+    padding: 0;
+    position: relative;
+    cursor: pointer;
+    -webkit-transform: rotateX(0deg) translateY(-250px);
+    -webkit-transform-style: preserve-3d;
+    -webkit-transition-property: transform;
+    -webkit-transition-duration: 100ms;
 }
  ul.shelf h2 {
-	 -webkit-transform-origin: 0 0 0;
-	 -webkit-transform: rotateZ(90deg) translateY(-80px);
-	 margin: 0;
-	 position: absolute;
-	 line-height: 80px;
-	 width: 500px;
-	 height: 80px;
-	 padding: 0 40px;
-	 box-sizing: border-box;
+    -webkit-transform-origin: 0 0 0;
+    -webkit-transform: rotateZ(90deg) translateY(-80px);
+    margin: 0;
+    position: absolute;
+    line-height: 80px;
+    width: 500px;
+    height: 80px;
+    padding: 0 40px;
+    box-sizing: border-box;
 }
  ul.shelf li span {
-	 background-color: rgb(186, 198, 219);
+    background-color: rgb(186, 198, 219);
 }
  ul.shelf li .booklabel {
-	 background-color:rgb(215, 229, 253);
+    background-color:rgb(215, 229, 253);
 }
  ul.shelf li {
-	 z-index: 1;
+    z-index: 1;
 }
 
  ul.shelf li span {
-	 position: absolute;
-	 display: block;
-	 -webkit-backface-visibility: visible;
+    position: absolute;
+    display: block;
+    -webkit-backface-visibility: visible;
 }
  ul.shelf li span.booklabel {
-	 opacity: 1;
-	 width: 80px;
-	 height: 500px;
-	 color: #fff;
-	 -webkit-transform: rotateX(0deg);
+    opacity: 1;
+    width: 80px;
+    height: 500px;
+    color: #fff;
+    -webkit-transform: rotateX(0deg);
 }
  ul.shelf li span.booktop {
-	 opacity: 1;
-	 width: 80px;
-	 height: 300px;
-	 background-color:#e9e6c4;
-	 border:2px solid rgb(186, 198, 219);
-	 -webkit-transform: translateY(-150px) translateZ(-150px) rotateX(90deg);
+    opacity: 1;
+    width: 80px;
+    height: 300px;
+    background-color:#e9e6c4;
+    border:2px solid rgb(186, 198, 219);
+    -webkit-transform: translateY(-150px) translateZ(-150px) rotateX(90deg);
 }
  ul.shelf li span.bookleft {
-	 opacity: 1;
-	 width: 300px;
-	 height: 500px;
-	 -webkit-transform: translateX(-150px) translateZ(-150px) rotateY(90deg);
+    opacity: 1;
+    width: 300px;
+    height: 500px;
+    -webkit-transform: translateX(-150px) translateZ(-150px) rotateY(90deg);
 }
  ul.shelf li span.bookright {
-	 opacity: 1;
-	 width: 300px;
-	 height: 500px;
-	 -webkit-transform: translateX(-70px) translateZ(-150px) rotateY(-90deg);
+    opacity: 1;
+    width: 300px;
+    height: 500px;
+    -webkit-transform: translateX(-70px) translateZ(-150px) rotateY(-90deg);
 }
  ul.shelf li:hover {
-	 -webkit-transform: rotateX(-15deg) translateY(-250px);
+    -webkit-transform: rotateX(-15deg) translateY(-250px);
 }
  ul.shelf li:active {
-	 -webkit-transform: rotateX(-20deg) translateY(-250px);
+    -webkit-transform: rotateX(-20deg) translateY(-250px);
 }
 
 
 
  ul.shelf li:nth-child(1) span {
-	 background-color: rgb(41, 204, 150);
+    background-color: rgb(41, 204, 150);
 }
 ul.shelf li:nth-child(1) span.booktop{
-		 background-color:#e9e6c4;
-		 border:2px solid rgb(41, 204, 150);
+       background-color:#e9e6c4;
+       border:2px solid rgb(41, 204, 150);
 }
 
  ul.shelf li:nth-child(1) .booklabel {
-	 background-color:rgb(46, 231, 170);
+    background-color:rgb(46, 231, 170);
 }
  ul.shelf li:nth-child(1) {
-	 z-index: 1;
+    z-index: 1;
 }
 
 ul.shelf li:nth-child(3) {
-	 z-index: 1;
+    z-index: 1;
 }
  ul.shelf li:nth-child(3) span {
-	 background-color: rgb(185, 114, 117);
+    background-color: rgb(185, 114, 117);
 }
  ul.shelf li:nth-child(3) .booklabel {
-	 background-color:rgb(247,151,156);
+    background-color:rgb(247,151,156);
 }
 ul.shelf li:nth-child(3) span.booktop{
-		 background-color:#e9e6c4;
-		 border:2px solid rgb(185, 114, 117);
+       background-color:#e9e6c4;
+       border:2px solid rgb(185, 114, 117);
 }
 
  ul.shelf li:nth-child(5) {
-	 z-index: 20;
+    z-index: 20;
 }
  ul.shelf li:nth-child(5) span {
-	 background-color: rgb(179, 133, 55);
+    background-color: rgb(179, 133, 55);
 }
  ul.shelf li:nth-child(5) .booklabel {
-	 background-color: rgba(245, 182, 75);
+    background-color: rgba(245, 182, 75);
 }
 ul.shelf li:nth-child(5) span.booktop{
-		 background-color:#e9e6c4;
-		 border:2px solid rgb(179, 133, 55);
+       background-color:#e9e6c4;
+       border:2px solid rgb(179, 133, 55);
 }
 
 ul.shelf li:nth-child(6) {
-	 z-index: 15;
+    z-index: 15;
 }
  ul.shelf li:nth-child(7) {
-	 z-index: 10;
+    z-index: 10;
 }
  ul.shelf li:nth-child(7) span {
-	 background-color: rgb(159, 149, 163);
+    background-color: rgb(159, 149, 163);
 }
  ul.shelf li:nth-child(7) .booklabel {
-	 background-color: rgb(233, 218,239);
+    background-color: rgb(233, 218,239);
 }
 ul.shelf li:nth-child(7) span.booktop{
-		 background-color:#e9e6c4;
-		 border:2px solid rgb(159, 149, 163);
+       background-color:#e9e6c4;
+       border:2px solid rgb(159, 149, 163);
 }
 
 ul.shelf li:nth-child(8) {
-	 z-index: 8;
+    z-index: 8;
 }
  ul.shelf li:nth-child(9) {
-	 z-index: 5;
+    z-index: 5;
 }
  ul.shelf li:nth-child(9) span {
-	 background-color: rgb(192, 168, 72);
-	 z-index: 1;
+    background-color: rgb(192, 168, 72);
+    z-index: 1;
 }
  ul.shelf li:nth-child(9) .booklabel {
-	 background-color: rgb(245, 215, 92);
+    background-color: rgb(245, 215, 92);
 }
 ul.shelf li:nth-child(9) span.booktop{
-		 background-color:#e9e6c4;
-		 border:2px solid rgb(192, 168, 72);
+       background-color:#e9e6c4;
+       border:2px solid rgb(192, 168, 72);
 }
 
  .label > h2{
@@ -858,35 +858,36 @@ ul.shelf li:nth-child(9) span.booktop{
   10% {   transform-origin:left; z-index: 900 }
   50% {   z-index: 40 }
   100% {  transform-origin:left; 
-  	      transform: rotateY(-180deg);
+           transform: rotateY(-180deg);
           z-index: 1;}
 }
 
 
 #backicon{
-	float:right;
-	width:100px;
-	height:100px;
+   float:right;
+   width:100px;
+   height:100px;
 }
 #backicon:hover{
-	cursor:pointer;
+   cursor:pointer;
 }
 .goClass{
-	background:rgb(247,151,156);
-	border:1px solid black;
-	width:450px;
-	margin:auto;
-	height:130px;
-	margin-top:15px;
-	border-radius:15px;
-	font-family: 'Nanum Gothic', sans-serif;
-	cursor:pointer;
-	box-shadow:3px 3px 3px gray;
-	overflow:scroll;
- 	overflow-x:hidden;
- 	overflow-y:auto;
+   background:rgb(247,151,156);
+   border:1px solid black;
+   width:450px;
+   margin:auto;
+   height:130px;
+   margin-top:15px;
+   border-radius:15px;
+   font-family: 'Nanum Gothic', sans-serif;
+   cursor:pointer;
+   box-shadow:3px 3px 3px gray;
+   overflow:scroll;
+    overflow-x:hidden;
+    overflow-y:auto;
 }
 .contenttitle{
+
 	padding:4px 4px 4px;
 	border-bottom:1px solid black;
 	width:50%;
@@ -920,10 +921,10 @@ ul.shelf li:nth-child(9) span.booktop{
 </head>
 
 <body>
-	<jsp:include page="../classs/fontStore.jsp"/>
+   <jsp:include page="../classs/fontStore.jsp"/>
     <script>
         window.onload = function () {
-        	scdraw();
+           scdraw();
             var img = document.getElementById("myphoto");
             if (img.getAttribute("src") == null) {
                 img.style.width = '100%';
@@ -931,19 +932,21 @@ ul.shelf li:nth-child(9) span.booktop{
 
         };
        function outclasss(cNo){
-    	   location.href="outClass.do?cNo="+cNo;
-		}
+
+          location.href="outClass.do?cNo="+cNo;
+      }
+
     </script>
     <c:if test="${ loginMember.profileimg =='defaultimg.png' }">
-    	<script>
-    		$(function(){
-    			alert("처음 오셨습니다. 프로필을 작성해주세요 ^^");
-    			$("#profile").click();
-    		});
-    	</script>
-    </c:if>	
+       <script>
+          $(function(){
+             alert("처음 오셨습니다. 프로필을 작성해주세요 ^^");
+             $("#profile").click();
+          });
+       </script>
+    </c:if>   
     <c:set var="contextPath" value="${pageContext.request.contextPath}"
-	scope="application"/>
+   scope="application"/>
     <jsp:include page="../common/menubar.jsp"/>
     <div id="shelfwrapper" style="background-image: url( 'resources/images/벽.jpg');background-size: cover;
     background-repeat: no-repeat; width:100%; height:850px; overflow: hidden;">
@@ -970,6 +973,7 @@ ul.shelf li:nth-child(9) span.booktop{
             <div class="page "></div>
             <!-- 왼쪽 페이지 -->
             <div class="page " style="z-index:15;">
+
             	<!-- 클래스 리스트  -->
 			    <div id="classcontent" class="mypagecontent" style="overflow:hidden;" >
 			    	
@@ -1027,10 +1031,12 @@ ul.shelf li:nth-child(9) span.booktop{
 				    	});
 				    </script>
 			    </div>
+
             
             </div>   
              <!-- 오른쪽 페이지 -->
             <div class="page" style="z-index:10;">
+
             	<!-- 프로필 수정 -->
             	<form class="mypagecontent" id="profilecontent"
             	 method="post" action="profile.me" enctype="multipart/form-data">
@@ -1101,6 +1107,7 @@ ul.shelf li:nth-child(9) span.booktop{
 			    </div>
 			    <!-- 개인정보 수정 -->
 			    <div id="infocontent" class="mypagecontent" >
+
             <form id="updateMemberForm" method="post" onsubmit="return insertcheck();" action='${contextPath}/update.me'>
                 <div class="contenttitle">My Info</div>
                 <div id="updateArea" style="float:left;">
@@ -1151,7 +1158,7 @@ ul.shelf li:nth-child(9) span.booktop{
             </div>
             <!-- 뒷 커버 -->
             <div class="cover" style="z-index:1;">
-            	
+               
             </div>
             <!-- 앞 커버 -->
             <div class="cover" style="z-index:999;">
@@ -1160,19 +1167,19 @@ ul.shelf li:nth-child(9) span.booktop{
           </div>
 
     </div>
-   	
+      
     <script>
         $(function(){
-        	//getAllMyDan('user9');
-        	
-        	// 책 오픈
+           //getAllMyDan('user9');
+           
+           // 책 오픈
             $("ul.shelf li").click(function(){
-            	var j = 5;
-            	if($(this).attr('id') != null){
-            		if($(this).attr('id')=="class"){
-            			j=4;
-            		}
-            		
+               var j = 5;
+               if($(this).attr('id') != null){
+                  if($(this).attr('id')=="class"){
+                     j=4;
+                  }
+                  
                 $sh = $("#shelfwrapper");
                 $sh.height($sh.height()).animate({height: "0px"}, 500);
                 $desk = $("#deskwrapper");
@@ -1190,29 +1197,33 @@ ul.shelf li:nth-child(9) span.booktop{
                       $(page[i]).addClass("turn");
                      }
                 }, 1000); 
-            	}
+               }
             });
             // 책 닫음
             $("#backicon").click(function(){
-            	
-            	$desk = $("#deskwrapper");
+               
+               $desk = $("#deskwrapper");
                 $desk.height($desk.height()).animate({height: "0px"}, 500);
+
             	$sh = $("#shelfwrapper");
+
                 $sh.height($sh.height()).animate({height: "850px"}, 500);
                 setTimeout(function() {
-                	$(".page").removeClass("turn");
+                   $(".page").removeClass("turn");
                     $(".cover").removeClass("turn");
                     $('.mypagecontent').css("display","none");
                 }, 100);  
                 
             });
             $("#deleteMemberbtn").click(function(){
+
             	
             	if(confirm("정말로 탈퇴하시겠습니까?")){
             		location.href="deleteMember.do";
             	}
             });
            	// 사진입력시 미리보기  
+
             $("#photoinput").change(function () {
                 readURL(this);
                 $("#myphoto").css("width", "auto");
@@ -1230,11 +1241,11 @@ ul.shelf li:nth-child(9) span.booktop{
         });
         // 단어장 불러오기
         function getAllMyDan(searchInput) {
- 		   //192.168.10.13
-     		 var send = JSON.stringify({
-     	         'search' : searchInput
-     	      });
-    		console.log(searchInput);
+          //192.168.10.13
+            var send = JSON.stringify({
+                 'search' : searchInput
+              });
+          console.log(searchInput);
             $.ajax({
                type : "POST",
                dataType : "json",
@@ -1242,10 +1253,10 @@ ul.shelf li:nth-child(9) span.booktop{
                data : send,
                url : 'http://localhost:1222/getMyList',
                success : function(data) { 
-               		console.log("에이작스로 몽고디비 데이터 가져오기")
-               		console.log(data);
-                  	
-                  	
+                     console.log("에이작스로 몽고디비 데이터 가져오기")
+                     console.log(data);
+                     
+                     
                },
                error : function() {
                   console.log("error has occured retriving data from MongoServer")
@@ -1255,61 +1266,61 @@ ul.shelf li:nth-child(9) span.booktop{
     </script>
 
     <!-- 스케쥴 일정추가 모달 -->
-	<!-- Modal -->
-	<div class="modal fade" id="scModal" tabindex="-1" role="dialog" aria-labelledby="scModalLabel" aria-hidden="true">
-	  <div class="modal-dialog" role="document">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">일정추가</h5>
-	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-	          <span aria-hidden="true">&times;</span>
-	        </button>
-	      </div>
-	      <div class="modal-body" style="text-align:center;">
-	      	<input id="selectedyear" class="form-control" type="text" style="display:none;" > 
-	        <input id="selectedday"class="form-control" type="date"> <span style="float:left; font-size:1.5em;"> ~ </span>
-	        <input class="form-control" id="selectedday2" type="date" >
-	        <br><br>
-	        <label for="refselect">참조 항목 :</label>
-	        <select id="refselect" class="form-control">    	
-	        </select><br><br>
-	        <label for="scTitle">일정 내용 :</label>
-	        <input class="form-control" type="text" id="scTitle">
-	       	<br><br>
-	        <label>일정 색깔 :</label> 
-	        <select id="sccolor" class="form-control" style="background:red;">
-				<option value="red" style="background:red;" selected></option>        	
-				<option value="orange" style="background:orange;"></option>
-				<option value="yellow" style="background:yellow;"></option>
-				<option value="green" style="background:green;"></option>
-				<option value="blue" style="background:blue;"></option>
-				<option value="purple" style="background:purple;"></option>
-				<option value="white" style="background:white;"></option>
-				<option value="black" style="background:black;"></option>
-	        </select>
-	        <script>
-	        	$(function(){
-	        		$("#sccolor").change(function(){
-	        			$(this).css("background",$(this).val());
-	        		});
-	        	});
-	        	
-	        </script>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-	        <button type="button" id="insertsc" class="btn btn-primary">추가</button>
-	        <button type="button" id="updatesc" class="btn btn-primary" style="display:none;">변경</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
+   <!-- Modal -->
+   <div class="modal fade" id="scModal" tabindex="-1" role="dialog" aria-labelledby="scModalLabel" aria-hidden="true">
+     <div class="modal-dialog" role="document">
+       <div class="modal-content">
+         <div class="modal-header">
+           <h5 class="modal-title" id="exampleModalLabel">일정추가</h5>
+           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         <div class="modal-body" style="text-align:center;">
+            <input id="selectedyear" class="form-control" type="text" style="display:none;" > 
+           <input id="selectedday"class="form-control" type="date"> <span style="float:left; font-size:1.5em;"> ~ </span>
+           <input class="form-control" id="selectedday2" type="date" >
+           <br><br>
+           <label for="refselect">참조 항목 :</label>
+           <select id="refselect" class="form-control">       
+           </select><br><br>
+           <label for="scTitle">일정 내용 :</label>
+           <input class="form-control" type="text" id="scTitle">
+             <br><br>
+           <label>일정 색깔 :</label> 
+           <select id="sccolor" class="form-control" style="background:red;">
+            <option value="red" style="background:red;" selected></option>           
+            <option value="orange" style="background:orange;"></option>
+            <option value="yellow" style="background:yellow;"></option>
+            <option value="green" style="background:green;"></option>
+            <option value="blue" style="background:blue;"></option>
+            <option value="purple" style="background:purple;"></option>
+            <option value="white" style="background:white;"></option>
+            <option value="black" style="background:black;"></option>
+           </select>
+           <script>
+              $(function(){
+                 $("#sccolor").change(function(){
+                    $(this).css("background",$(this).val());
+                 });
+              });
+              
+           </script>
+         </div>
+         <div class="modal-footer">
+           <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+           <button type="button" id="insertsc" class="btn btn-primary">추가</button>
+           <button type="button" id="updatesc" class="btn btn-primary" style="display:none;">변경</button>
+         </div>
+       </div>
+     </div>
+   </div>
 
     
         <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-		
-	<script>
-	function execDaumPostcode() {
+      
+   <script>
+   function execDaumPostcode() {
         new daum.Postcode({
             oncomplete: function(data) {
                
@@ -1357,16 +1368,16 @@ ul.shelf li:nth-child(9) span.booktop{
             }
         }).open();
     }
-		$(function(){
-			var y = " ${loginMember.birthDate }";
-			y= y.substr(0,5)+y.substr(6,2)+y.substr(9,2);
-			$("input[name=birthDate]").val(y);
-			var add = "${loginMember.address}".split('/');
-			$("#postcode").val(add[0]);
-			$("#address").val(add[1]);
-			$("#detailAddress").val(add[2]);
-		})
-	</script>
+      $(function(){
+         var y = " ${loginMember.birthDate }";
+         y= y.substr(0,5)+y.substr(6,2)+y.substr(9,2);
+         $("input[name=birthDate]").val(y);
+         var add = "${loginMember.address}".split('/');
+         $("#postcode").val(add[0]);
+         $("#address").val(add[1]);
+         $("#detailAddress").val(add[2]);
+      })
+   </script>
   
 <!-- 캘린더 스크립 -->
     <script>
@@ -1389,9 +1400,9 @@ ul.shelf li:nth-child(9) span.booktop{
                 }
             }
             
-			// 캘린더 그리기 시작
+         // 캘린더 그리기 시작
             Calendar.prototype.draw = function () {
-				
+            
                 this.drawHeader();
 
                 this.drawMonth();
@@ -1564,9 +1575,9 @@ ul.shelf li:nth-child(9) span.booktop{
                 var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
                 var day = this.current.clone().date(dayNumber);
                 var str = $("#selectedyear").val();
-				$("#selectedday").val(str+"-"+dayNumber);
-				$("#selectedday2").val(str+"-"+dayNumber);
-				
+            $("#selectedday").val(str+"-"+dayNumber);
+            $("#selectedday2").val(str+"-"+dayNumber);
+            
                 var currentOpened = document.querySelector('.details');
 
                 //Check to see if there is an open detais box on the current row
@@ -1620,7 +1631,7 @@ ul.shelf li:nth-child(9) span.booktop{
                 //Remove any events in the current details element
                 var currentWrapper = ele.querySelector('.events');
                 var wrapper = createElement('div', 'events in' + (currentWrapper ? ' new' : ''));
-				
+            
                 events.forEach(function (ev) {
                     var div = createElement('div', 'event');
                     //div.setAttribute("id",ev.refId);
@@ -1630,13 +1641,13 @@ ul.shelf li:nth-child(9) span.booktop{
                     var span = createElement('span', '', ev.eventName);
                     span.id = ev.refId;
                     //span.setAttribute('onClick', gomyClass(ev.refId), false);
-					var input = createElement('input');
-					input.value = ev.sId;
-					input.style.display = "none";
-					var btn1 = createElement("button",'changescbtn');
-	                btn1.setAttribute('data-toggle', 'modal');
-	                btn1.setAttribute('data-target', '#scModal');
-					var btn2 = createElement("button",'deletescbtn');
+               var input = createElement('input');
+               input.value = ev.sId;
+               input.style.display = "none";
+               var btn1 = createElement("button",'changescbtn');
+                   btn1.setAttribute('data-toggle', 'modal');
+                   btn1.setAttribute('data-target', '#scModal');
+               var btn2 = createElement("button",'deletescbtn');
                     div.appendChild(square);
                     div.appendChild(span);
                     div.appendChild(input);
@@ -1702,11 +1713,11 @@ ul.shelf li:nth-child(9) span.booktop{
                     var parts = e.split('|');
 
                     if (parts[2] - clone.format("MM") == 0) {
-                    	var strr = parts[0];
-                    	if(parts[0].length > 8){
-                    		strr = parts[0].substr(0,8);
-                    		strr += "..";
-                    	}
+                       var strr = parts[0];
+                       if(parts[0].length > 8){
+                          strr = parts[0].substr(0,8);
+                          strr += "..";
+                       }
                         var entry = createElement('span', 'entry '+ parts[1], strr);
                         entry.id = parts[3];
                         legend.appendChild(entry);
@@ -1743,200 +1754,200 @@ ul.shelf li:nth-child(9) span.booktop{
         }();
 
         function scdraw() {
-        	var mId= '${loginMember.mId}';
-        	$.ajax({
-		        url:"mySchedule.ck",
-		        data:{mId:mId},
-		        dataType:"json",
-		        type:"post",
-		   		success:function(data){	
-		   			var calendar = new Calendar('#calendar', data);
-				},error:function(e){
-					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-				}
-				
-			});	
-  				/* 
+           var mId= '${loginMember.mId}';
+           $.ajax({
+              url:"mySchedule.ck",
+              data:{mId:mId},
+              dataType:"json",
+              type:"post",
+               success:function(data){   
+                  var calendar = new Calendar('#calendar', data);
+            },error:function(e){
+               alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+            }
+            
+         });   
+              /* 
             function addDate(ev) {
 
             } */
 
         };
-		$(function(){
-			
-			$(document).on('click', '.entry', function(){
-				
-				if($(this).attr("id").includes("cNo")){
-					location.href='myClass.do?cNo=' + $(this).attr("id");
-				}
-			});
-			
-		});
-		
+      $(function(){
+         
+         $(document).on('click', '.entry', function(){
+            
+            if($(this).attr("id").includes("cNo")){
+               location.href='myClass.do?cNo=' + $(this).attr("id");
+            }
+         });
+         
+      });
+      
 
     </script>
    <!-- 일정추가 스크립트 -->
     <script>
-    	function scbtnclick(){
-    		$("#exampleModalLabel").html("일정 추가");
-    		$("#updatesc").css("display","none");
-			$("#insertsc").css("display","block");
-    		var mId = '${loginMember.mId}';
-    		$("#refselect").html("");
-    		$("#scTitle").val("");
-    		$("#selectedday2").val($("#selectedday").val());
-    		$.ajax({
-		        url:"getClassnVoca.ck",
-		        data:{mId:mId},
-		        type:"post",
-		   		success:function(data){
-		   			for(var i in data){
-		   				var $op = $(" <option value='"+data[i].class_no+"'>");
-			   			$op.html(data[i].class_title);
-			   			$("#refselect").append($op);
-		   			}
-				},error:function(e){
-					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-				}
-				
-			});	
-    	}
-    	// 일정 변경 / 삭제 버튼
-		var sId = 0;
-    	function changescbtnclick(e){
-    		 sId = $(e.target).parent().children()[2].value;
-    		 if($(e.target).attr("class")=="deletescbtn"){
-    			// 일정 삭제
-    			if(confirm("일정을 삭제하시겠습니까?")){
-	    			$.ajax({
-	    		        url:"deleteSchedule.do",
-	    		        data:{sId:sId},
-	    		        type:"post",
-	    		   		success:function(data){
-	    		   			$("#calendar").html("");	
-	    		   		   	scdraw();
-	    				},error:function(e){
-	    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-	    				}
-	    				
-	    			});
-    			}
-    		}else{
-				$("#updatesc").css("display","block");
-				$("#insertsc").css("display","none");
-    			$("#exampleModalLabel").html("일정 변경");
-    			
-    			$("#refselect").html("");
-    			$.ajax({
-    		        url:"getSchedule.do",
-    		        data:{sId:sId},
-    		        dataType: "json",
-    		        type:"post",
-    		   		success:function(data){
-    		   			$("#selectedday").val(data.startDate);
-    		   			$("#selectedday2").val(data.endDate);
-    		   			$("#scTitle").val(data.sTitle);
-    		   			var $op = $(" <option value='"+data.refId+"'>");
-			   			$op.html(data.refName);
-			   			$("#refselect").append($op);
-			   			
-			   			for(var i=0; i<$("#sccolor").children().length; i++){
-			   				
-			   				 if($("#sccolor").children()[i].value == data.color){
-			   					$("#sccolor").children()[i].setAttribute("selected", "selected");
-			   					$("#sccolor").css("background",data.color);
-			   				} 
-			   			}
-    		   			
-    		   			//$("#calendar").html("");	
-    		   		    //scdraw();
-    				},error:function(e){
-    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-    				}
-    				
-    			});
-    			
-    		} 
-    	}
-    	
-    	$(function(){
-    		$(document).on('click', '#updatesc', function(){
-    			var refId = $("#refselect").val();
-    			var mId = '${loginMember.mId}';
-    			var sTitle = $("#scTitle").val();
-    			var startDate = $("#selectedday").val();
-    			var endDate = $("#selectedday2").val();
-    			var color = $("#sccolor").val(); 
-    			$.ajax({
-    		        url:"updateSchedule.do",
-    		        data:{sId:sId,mId:mId,refId:refId,sTitle:sTitle,
-    		        	startDate:startDate,endDate:endDate,color:color},
-    		        type:"post",
-    		   		success:function(data){
-    		   			
-    		   			if(data=="good"){
-	    		   			$(".changescbtn").click();
-	    		   			$("#calendar").html("");	
-	    		   			scdraw();
-    		   			}
-    				},error:function(e){
-    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-    				}
-    				
-    			});	
-    			
-    		});
+       function scbtnclick(){
+          $("#exampleModalLabel").html("일정 추가");
+          $("#updatesc").css("display","none");
+         $("#insertsc").css("display","block");
+          var mId = '${loginMember.mId}';
+          $("#refselect").html("");
+          $("#scTitle").val("");
+          $("#selectedday2").val($("#selectedday").val());
+          $.ajax({
+              url:"getClassnVoca.ck",
+              data:{mId:mId},
+              type:"post",
+               success:function(data){
+                  for(var i in data){
+                     var $op = $(" <option value='"+data[i].class_no+"'>");
+                     $op.html(data[i].class_title);
+                     $("#refselect").append($op);
+                  }
+            },error:function(e){
+               alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+            }
+            
+         });   
+       }
+       // 일정 변경 / 삭제 버튼
+      var sId = 0;
+       function changescbtnclick(e){
+           sId = $(e.target).parent().children()[2].value;
+           if($(e.target).attr("class")=="deletescbtn"){
+             // 일정 삭제
+             if(confirm("일정을 삭제하시겠습니까?")){
+                $.ajax({
+                     url:"deleteSchedule.do",
+                     data:{sId:sId},
+                     type:"post",
+                      success:function(data){
+                         $("#calendar").html("");   
+                            scdraw();
+                   },error:function(e){
+                      alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+                   }
+                   
+                });
+             }
+          }else{
+            $("#updatesc").css("display","block");
+            $("#insertsc").css("display","none");
+             $("#exampleModalLabel").html("일정 변경");
+             
+             $("#refselect").html("");
+             $.ajax({
+                  url:"getSchedule.do",
+                  data:{sId:sId},
+                  dataType: "json",
+                  type:"post",
+                   success:function(data){
+                      $("#selectedday").val(data.startDate);
+                      $("#selectedday2").val(data.endDate);
+                      $("#scTitle").val(data.sTitle);
+                      var $op = $(" <option value='"+data.refId+"'>");
+                     $op.html(data.refName);
+                     $("#refselect").append($op);
+                     
+                     for(var i=0; i<$("#sccolor").children().length; i++){
+                        
+                         if($("#sccolor").children()[i].value == data.color){
+                           $("#sccolor").children()[i].setAttribute("selected", "selected");
+                           $("#sccolor").css("background",data.color);
+                        } 
+                     }
+                      
+                      //$("#calendar").html("");   
+                       //scdraw();
+                },error:function(e){
+                   alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+                }
+                
+             });
+             
+          } 
+       }
+       
+       $(function(){
+          $(document).on('click', '#updatesc', function(){
+             var refId = $("#refselect").val();
+             var mId = '${loginMember.mId}';
+             var sTitle = $("#scTitle").val();
+             var startDate = $("#selectedday").val();
+             var endDate = $("#selectedday2").val();
+             var color = $("#sccolor").val(); 
+             $.ajax({
+                  url:"updateSchedule.do",
+                  data:{sId:sId,mId:mId,refId:refId,sTitle:sTitle,
+                     startDate:startDate,endDate:endDate,color:color},
+                  type:"post",
+                   success:function(data){
+                      
+                      if(data=="good"){
+                         $(".changescbtn").click();
+                         $("#calendar").html("");   
+                         scdraw();
+                      }
+                },error:function(e){
+                   alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+                }
+                
+             });   
+             
+          });
 
-    		
-    	
-    		// 일정 기능 보이고 안보이고
-    		$(document).on('click', '.event', function(e){
-    			if($(e.target).attr("class") == "deletescbtn" ||$(e.target).attr("class") == "changescbtn"){
-    				changescbtnclick(e);
-    				return 0;
-    			}
-    			var $et = null;
-    			if($(e.target).attr("class") != 'event'){
-    				$et = $(e.target).parent();
-    			}else{
-    				$et = $(e.target);
-    			}	
-    			if(	$et.children(".deletescbtn").css("display") =="none"){
-    				$et.children(".changescbtn").css("display","block");
-    				$et.children(".deletescbtn").css("display","block");
-    			}else{
-    				$et.children(".changescbtn").css("display","none");
-    				$et.children(".deletescbtn").css("display","none");
-    			}
-    		});
-    		
-    		
-    		$("#insertsc").click(function(){
-    			var refId = $("#refselect").val();
-    			var mId = '${loginMember.mId}';
-    			var sTitle = $("#scTitle").val();
-    			var startDate = $("#selectedday").val();
-    			var endDate = $("#selectedday2").val();
-    			var color = $("#sccolor").val(); 
-    			$.ajax({
-    		        url:"insertSchedule.do",
-    		        data:{mId:mId,refId:refId,sTitle:sTitle,
-    		        	startDate:startDate,endDate:endDate,color:color},
-    		        type:"post",
-    		   		success:function(data){
-    		   			if(data=="good"){
-    		   				$(".scbtn").click();
-        		   			$("#calendar").html("");	
-        		   			scdraw();
-    		   			}
-    		   			
-    				},error:function(e){
-    					alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
-    				}
-    				
-    			});	
-    		});
-    	});
+          
+       
+          // 일정 기능 보이고 안보이고
+          $(document).on('click', '.event', function(e){
+             if($(e.target).attr("class") == "deletescbtn" ||$(e.target).attr("class") == "changescbtn"){
+                changescbtnclick(e);
+                return 0;
+             }
+             var $et = null;
+             if($(e.target).attr("class") != 'event'){
+                $et = $(e.target).parent();
+             }else{
+                $et = $(e.target);
+             }   
+             if(   $et.children(".deletescbtn").css("display") =="none"){
+                $et.children(".changescbtn").css("display","block");
+                $et.children(".deletescbtn").css("display","block");
+             }else{
+                $et.children(".changescbtn").css("display","none");
+                $et.children(".deletescbtn").css("display","none");
+             }
+          });
+          
+          
+          $("#insertsc").click(function(){
+             var refId = $("#refselect").val();
+             var mId = '${loginMember.mId}';
+             var sTitle = $("#scTitle").val();
+             var startDate = $("#selectedday").val();
+             var endDate = $("#selectedday2").val();
+             var color = $("#sccolor").val(); 
+             $.ajax({
+                  url:"insertSchedule.do",
+                  data:{mId:mId,refId:refId,sTitle:sTitle,
+                     startDate:startDate,endDate:endDate,color:color},
+                  type:"post",
+                   success:function(data){
+                      if(data=="good"){
+                         $(".scbtn").click();
+                          $("#calendar").html("");   
+                          scdraw();
+                      }
+                      
+                },error:function(e){
+                   alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+                }
+                
+             });   
+          });
+       });
     </script>
     
     <!-- <jsp:include page="../common/footer.jsp"/> -->
