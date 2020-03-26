@@ -123,6 +123,9 @@
 	margin-top: 10px;
 	text-align: right;
 }
+
+.board {
+}
 </style>
 </head>
 <body>
@@ -197,7 +200,7 @@
 		
 		<div class="search">
 			<form action="searchBoard.bo" method="GET">
-				<select name="searchCondition">
+				<select name="searchCondition" class="searchCondition">
 					<c:choose>
 						<c:when test="${ empty search.searchCondition }">
 							<c:set var="selected0" value="selected"/>
@@ -220,13 +223,37 @@
 					<option value="2" ${selected2}>글쓴이</option>
 					<option value="3" ${selected3}>타입</option>
 				</select>
-				<input type="search" name="searchContent" class="searchData" value="${search.searchContent}">
-				<select class='selectCondition' style='display:none; width:200px;'>
-					<option value='공지' selected>공지</option>
-					<option value='단어장'>단어장</option>
-					<option value='클래스'>클래스</option>
-					<option value='잡담'>잡담</option>
-				</select>
+				<c:if test="${search.searchCondition eq 3}">
+					<c:if test="${ search.searchContent eq '공지'}">
+						<c:set var="getContent1" value="selected"/>
+					</c:if>
+					<c:if test="${ search.searchContent eq '단어장'}">
+						<c:set var="getContent2" value="selected"/>
+					</c:if>
+					<c:if test="${ search.searchContent eq '클래스'}">
+						<c:set var="getContent3" value="selected"/>
+					</c:if>
+					<c:if test="${ search.searchContent eq '잡담'}">
+						<c:set var="getContent4" value="selected"/>
+					</c:if>
+					<select class='selectCondition' style='width:200px;'>					
+						<option value='공지' ${getContent1}>공지</option>
+						<option value='단어장' ${getContent2}>단어장</option>
+						<option value='클래스' ${getContent3}>클래스</option>
+						<option value='잡담' ${getContent4}>잡담</option>
+					</select>
+					<input type="search" name="searchContent" style="display: none;" class="searchData" value="${search.searchContent}">
+				</c:if>
+				<c:if test="${search.searchCondition ne 3}">						
+					<select class='selectCondition' style='display:none; width:200px;'>
+						<option value='공지'>공지</option>
+						<option value='단어장'>단어장</option>
+						<option value='클래스'>클래스</option>
+						<option value='잡담'>잡담</option>
+					</select>
+					<input type="search" name="searchContent" class="searchData" value="${search.searchContent}">
+				</c:if>
+				
 				<button class="btn btn-light searchBtn">검색</button>
 				<script>
 					var searchCondition = document.getElementsByName('searchCondition');
@@ -246,7 +273,7 @@
 						}
 					});
 					
-					selectCondition.change(function() {
+					$('.selectCondition').change(function() {
 						searchData.value = selectCondition.val();
 					});
 				</script>

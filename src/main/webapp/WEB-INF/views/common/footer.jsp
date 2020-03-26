@@ -7,38 +7,44 @@
 <title>Insert title here</title>
 <style>
 footer {
+	width: 100%;
+	height: 170px;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	vertical-align: baseline;
-	margin: 0;
-	padding: 0;
-	display: block;
-	margin-top: 3rem;
-	padding: 5rem;
+	padding: 4rem;
 	background-color: #222;
 	color: white;
 	text-align: center;
+	margin: 0;
 }
 
 footer p {
 	margin: 0;
 }
+
+.push {
+	min-height: calc(100vh - 360px);
+}
 </style>
 </head>
 <body>
-	<footer
-		style="display: block; float: left; width: 100%; margin-top: 120px;">
-		<p>
-			<a href="#">built with SEW in KH Academy </a>
-		</p>
-		<p><a href="#" onclick="sendMail();">Email: sterme9@naver.com</a></p>
-		<script>
-			function sendMail() {
-				window.open("mailto:sterme9@naver.com", "_blank");
-			}
-		</script>
-	</footer>
-	
+	<div class="wrapper">
+		<div class="push"></div>
+		<footer>
+			<p>
+				<a href="#">built with SEW in KH Academy </a>
+			</p>
+			<p>
+				<a href="#" onclick="sendMail();">Email: sterme9@naver.com</a>
+			</p>
+			<script>
+				function sendMail() {
+					window.open("mailto:sterme9@naver.com", "_blank");
+				}
+			</script>
+		</footer>
+	</div>
+
 </body>
 </html>
