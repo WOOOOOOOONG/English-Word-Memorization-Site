@@ -319,6 +319,12 @@ public class ClassDao {
 			
 		}
 
+		// 클래스 탈퇴
+		public int outClass(ClassMember cm) {
+			// TODO Auto-generated method stub
+			return sqlSession.delete("ClasssMapper.outClass",cm);
+		}
+
 	
 
 }

@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.kh.spring.admin.controller.AdminController;
 import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.friend.model.service.FriendService;
 import com.kh.spring.friend.model.vo.Friend;
@@ -39,6 +40,8 @@ public class MemberController {
 	private FriendService fService;
 	@Autowired
 	private AdminController aController;
+	
+	
 	@RequestMapping("memberList.me")
 	public ModelAndView memberList(ModelAndView mv) {
 		ArrayList<Member> memberList = mService.selectList();

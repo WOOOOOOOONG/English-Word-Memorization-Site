@@ -157,4 +157,7 @@ public interface ClassService {
 
 		// 마지막 방문날짜 업데이트
 		void updateRecentDay(ClassMember cn);
+
+		// 탈퇴
+		int outClass(ClassMember cm);
 }

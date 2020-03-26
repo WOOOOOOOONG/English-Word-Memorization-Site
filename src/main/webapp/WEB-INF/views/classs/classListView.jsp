@@ -357,6 +357,6 @@
 	</div>
 	
 	<!-- 스크롤 로딩 -->
-
+<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
