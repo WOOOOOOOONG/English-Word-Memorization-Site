@@ -25,12 +25,14 @@
 	width: 1300px;
 	margin: 0 auto;
 	margin-top: 50px;
+	min-height:700px;
 }
 
 .textarea {
 	width: 1200px;
 	height: 400px;
 	border-radius: 3px;
+	resize:none;
 }
 
 </style>
@@ -59,7 +61,7 @@
 											style="font-weight: bold; display: inline; float: left; width: 100px; margin-top: 5px;">제목</label>
 										<div class="col-md-10">
 											<input type="text" autocomplete="off" value="${ detailBoard.title }"
-												name="title" class="form-control" id="input-title" style="width:600px; display: inline;">
+												name="title" class="form-control" id="input-title" style="width:600px; display: inline;" readonly>
 										</div>
 										<div class="col-md-offset-2 col-md-10">
 											<div class="hint-block" style="font-size: 12px; margin-left: 100px;">제목은 변경할
@@ -110,7 +112,7 @@
 								<div class="col-sm-12">
 									<div class="form-group">
 										<label for="job-desc" class="control-label col-md-3"
-											style="font-weight: bold">문의 내용</label>
+											style="font-weight: bold">내용</label>
 										<div class="col-md-10">
 											<textarea name="content" class="textarea">${detailBoard.content}</textarea>
 										</div>
@@ -148,7 +150,7 @@
 		<script>
 			function cancel() {
 				if(window.confirm("게시판 수정을 취소하고 상세보기로 이동하시겠습니까?")) {
-					location.href = "detailBoard.bo?bId"+${detailBoard.bId};
+					location.href = "detailBoard.bo?bId="+${detailBoard.bId};
 				}
 			}
 		</script>

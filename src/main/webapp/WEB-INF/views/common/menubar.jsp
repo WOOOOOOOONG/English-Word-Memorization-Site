@@ -45,47 +45,16 @@ body {
   font-weight: 700;
   color:#474747;
 }
-/* nav {
-  margin-top: 1px;
-  text-align: center;
-  font-family: Raleway;
-  border-bottom:5px solid #cff0da;
-  height: 80px;
-} */
 
-.link-1 {
-  transition: 0.3s ease;
-  color: black;
-  font-size: 20px;
-  text-decoration: none;
-  border-bottom: 4px solid #cff0da;
-  padding: 22.5px 0;
-  margin: 0px 30px;
-  float:right;
-}
-.link-2{
-   float:left;
-   width: 130px;
-    height: 150%;
-    margin-left:70px;
-    margin-top:-35px;
-}
-.link-1:hover {
-  border-bottom: 4px solid #88dba3;
-  padding-bottom: 5px; 
-  color: #88dba3;
-}
-.gonav{
-  font-size: 15px;
-  text-decoration: none;
-  margin:9px;
-  float:right;
-}
 #sewlogo{
-  width:100%; height: 100%;
+  display:inline-block;
+  width:56px;
+  height:42px;
+  font-size:36px;
+  font-weight:600;
 }
 .accordion {
-    margin: 1rem 0;
+    margin: 15px 0;
     padding: 0;
     list-style: none;
     border-top: 1px solid #e5e5e5;
@@ -98,17 +67,18 @@ body {
 /* Thumb */
  .accordion-thumb {
     margin: 0;
-    padding: 0.8rem 0;
+    padding: 15px 0;
     cursor: pointer;
     font-weight: normal;
+    font-size: 16px;
 }
  .accordion-thumb::before {
     content: '';
     display: inline-block;
     height: 7px;
     width: 7px;
-    margin-right: 1rem;
-    margin-left: 0.5rem;
+    margin-right: 15px;
+    margin-left: 10px;
     vertical-align: middle;
     border-right: 1px solid;
     border-bottom: 1px solid;
@@ -117,11 +87,13 @@ body {
 }
  .accordion-panel {
     margin: 0;
-    padding-bottom: 0.8rem;
+    padding-bottom: 5px;
+    margin-top: -15px;
     display: none;
 }
  .accordion-item.is-active .accordion-thumb::before {
     transform: rotate(45deg);
+    padding-bottom:5px;
 }
 #friendlist{
    width:320px; 
@@ -154,6 +126,7 @@ body {
    background:skyblue;
    line-height: 40px;
    cursor:pointer;
+   font-size: 16px;
 }
 .friendmenu{
    text-align:center;
@@ -219,7 +192,7 @@ body {
 .myfriend{
    text-decoration:none;
    list-style:none;
-   font-size:15px;
+   font-size:14px;
    font-weight:400;
 }
 .chattd{
@@ -271,14 +244,14 @@ body {
 }
 .friendfunc{
    float:right;
-   font-size:0.8em;
+   font-size: 12px;
    margin-right:5px;
    font-weight:400;
    display:none;
 }
 .classfunc{
    float:right;
-   font-size:0.8em;
+   font-size: 12px;
    margin-right:5px;
    font-weight:400;
    display:none;
@@ -295,6 +268,7 @@ body {
    height:100%;
    background:skyblue;
    border:0px;
+   font-size:14px;
 }
 .cancelfri{
    background-image: url( "resources/images/취소2.png" );
@@ -318,7 +292,7 @@ body {
     margin-top: 15px;
     line-height:20px;
     float:left;
-    font-size:0.95em;
+    font-size:15px;
 }
 #searchfriimg{
    float: left; margin-left: 10px; width: 80px;
@@ -359,25 +333,24 @@ body {
 
 .chatimgtag{
    float: left;
-    font-size: 0.7em;
+    font-size: 9px;
     text-align: center;
     width: 50px;
 }
 .jha{
-   color:#505050;
+    color:#505050;
+    margin:4px 36px 0 0;
+	font-size: 18px;
+	font-weight: 600;
 }
 .jha:hover{
    text-decoration: none;
    color:orange;
 }
-.logo:hover{
+#sewlogo:hover{
    text-decoration:none;
 }
-.menu-fixed {
-	position: fixed;
-	top: 0px;
-	z-index:900;
-	}
+
 	#menubar{
 	background:white; 
 	width:100%;
@@ -391,10 +364,11 @@ body {
    font-weight:400;
 	}
 	.mycomments{
-		font-weight:400;
-		float:right;
-		margin-right:10px;
-		font-size:15px;
+	font-weight: 400;
+    float: right;
+    margin-right: 10px;
+    font-size: 14px;
+    margin-top: 4px;
 	}
 	a:hover{
 		text-decoration:none;
@@ -407,6 +381,42 @@ body {
     margin-left: 10px;
     padding: 0px;
     font-size: 15px;
+	}
+	#fri3{
+		display: none;
+    	width: 100%;
+    	text-align: center;
+    	font-size: 14px;
+    	font-weight: 500;
+	}
+	#navsection1{
+		float:left;
+		margin-top:7.5px;
+		display:block;
+		width:550px;
+		height:100%;
+	}
+	#navsection2{
+		float:right;
+		margin-top:6px;
+		display:block;
+		width:500px;
+		height:100%;
+	}
+	#navsection2 > a{
+		float:right;
+	}
+	#searchfriendid{
+		width:65%;
+		height:29px; 
+		float:left;
+		margin-left:1px;
+	}
+	#friendresult{
+		display:none;
+		width:100%;
+		height:35px;
+		float:left;
 	}
 </style>
 
@@ -427,82 +437,23 @@ body {
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
    scope="application"/>
 <c:set var="loginpage" value="login.me"/>
-
-
-<%--   <div style="width:100%; height:40px; text-align: right">
-
-     <c:url var="loginpage" value="login.me"/>
-     <!-- 로그인 유저가 없을시 -->
-     <c:if test="${ empty loginMember }">
-       <a class="gonav" href="${ loginpage }">아이디 비밀번호찾기</a>
-       <a class="gonav" href="${ loginpage }">회원가입</a> 
-       <a class="gonav" href="${ loginpage }">로그인</a> 
-
-  	<c:url var="loginpage" value="login.me"/>
-  	<!-- 로그인 유저가 없을시 -->
-  	<c:if test="${ empty loginMember }">
-	    <a class="gonav" href="${ loginpage }">아이디 비밀번호찾기</a>
-	    <a class="gonav" href="${ loginpage }">회원가입</a> 
-	    <a class="gonav" href="${ loginpage }">로그인</a> 
-    </c:if>
-    <!-- 로그인 유저 있을때 -->
-    <c:if test="${ !empty loginMember }">
-       <c:if test="${warningMsg[sessionScope.loginMember.mId]}">
-   <script>
-      $(function(){
-         alert('${warningMsg[sessionScope.loginMember.mId]}');
-         ${warningMsg[sessionScope.loginMember.mId] = null}
-      });   
-   </script>
-</c:if>
-
-         <c:if test="${ loginMember.mId == 'admin' }">
-          <a class="gonav" href="viewTotal.ad">관리자페이지</a>
-       </c:if>
-       <c:if test="${ loginMember.mId != 'admin' }">
-          <a class="gonav" href="mypage.me">마이페이지</a>
-       </c:if>
-       <a class="gonav" href="Memberlogout.me" style="color:blue;">로그아웃</a>
-       <span class="gonav">${ loginMember.nickname }님 환영합니다.</span>
-
-   		<c:if test="${ loginMember.mId == 'admin' }">
-    		<a class="gonav" href="viewTotal.ad">관리자페이지</a>
-    	</c:if>
-    	<c:if test="${ loginMember.mId != 'admin' }">
-    		<a class="gonav" href="mypage.me">마이페이지</a>
-    	</c:if>
-    	<a class="gonav" href="Memberlogout.me" style="color:blue;">로그아웃</a>
-    	<span class="gonav">${ loginMember.nickname }님 환영합니다.</span>
-    </c:if>
-</div>
-<nav id="nav-1">
-   <a class="link-2" href="viewMain.ad"><img id="sewlogo"src="${contextPath}/resources/images/로고.jpg"></a>
-    <a class="link-1" href="memberInquireList.ad">고객센터</a>
-    <a class="link-1" href="boardList.bo">커뮤니티</a>
-    <a class="link-1" href="ClassList.do">클래스</a>
-    <a class="link-1" href="#">단어장</a>
-    <a class="link-1" href="viewMain.ad">Home</a>
-</nav> --%>
-
-
-
-<div id="menubar" >
+<div id="menubar" class="sticky-top">
 
 	<div style="position:relative; margin: 0 auto; padding:9pt 0; width:75pc; height:3px;">
 		<h1 style="float:left; display:block; width:70px; height:100%; margin-right:36px; font-family:cinzel; font-weight:bold; color:orange;">
-			<a style="display:inline-block; width:56px; height:42px; font-size:36px; font-weight:600;" href="viewMain.ad" class="logo">SEW</a>
+			<a href="viewMain.ad" id="sewlogo">SEW</a>
 		</h1>
-		<section style="float:left; margin-top:7.5px; display:block; width:550px; height:100%;">
-			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="viewMain.ad" class="jha">Home</a>
-			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" href="#" class="jha">단어장</a>
-			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">클래스</a>
-			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="boardList.bo" class="jha">커뮤니티</a>
-			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="memberInquireList.ad" class="jha">고객센터</a>
+		<section id="navsection1">
+			<a href="viewMain.ad" class="jha">Home</a>
+			<a href="#" class="jha">단어장</a>
+			<a href="ClassList.do" class="jha">클래스</a>
+			<a href="boardList.bo" class="jha">커뮤니티</a>
+			<a href="memberInquireList.ad" class="jha">고객센터</a>
 		</section>
-		<section style="float:right; margin-top:9px; display:block; width:500px; height:100%;">
+		<section id="navsection2">
 				<c:if test="${ empty loginMember }">
-					<a style="float:right; margin:4px 36px 0 0; margin-top:-1px;  font-size:18px; font-weight:600;"  href="${ loginpage }" class="jha">회원가입</a>
-					<a style="float:right; margin:4px 36px 0 0; margin-top:-1px;  font-size:18px; font-weight:600;"  href="${ loginpage }" class="jha">로그인</a>
+					<a href="${ loginpage }" class="jha">회원가입</a>
+					<a href="${ loginpage }" class="jha">로그인</a>
 				</c:if>
 				<c:if test="${ !empty loginMember }">
 		    		<c:if test="${warningMsg[sessionScope.loginMember.mId]}">
@@ -513,33 +464,20 @@ body {
 					      });   
 					   </script>
 					</c:if>
-					<a  href="Memberlogout.me" style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;" class="jha">로그아웃</a>
+					<a  href="Memberlogout.me" class="jha">로그아웃</a>
 					<c:if test="${ loginMember.mId == 'admin' }">
-			    		<a  href="viewTotal.ad" style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;" class="jha">관리자페이지</a>
+			    		<a  href="viewTotal.ad" class="jha">관리자페이지</a>
 			    	</c:if>
 			    	<c:if test="${ loginMember.mId != 'admin' }">
-			    		<a  href="mypage.me" style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;" class="jha">마이페이지</a>
+			    		<a  href="mypage.me" class="jha">마이페이지</a>
 			    	</c:if>
 			    	
-    				<span style="float:right; margin:4px 36px 0 0; font-size: 18px;  font-weight: 600;">${ loginMember.nickname }님 환영합니다.</span>
+    				<span class="jha" style="float:right; color: #474747;">${ loginMember.nickname }님 환영합니다.</span>
 				</c:if>
 		</section>
 	</div> 
 </div>
- <script>
-	$(function(){
-		var menu_offset = $('#menubar').offset();
-
-   		$(window).scroll(function() {
-     		if ($(document).scrollTop() > 70) {
-     			$('#menubar').addClass('menu-fixed');
-     		}else {
-     			$('#menubar').removeClass('menu-fixed');
-     		}
-
-   		});
-	});
-</script> 
+ 
 
 <c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">
@@ -552,33 +490,33 @@ body {
 		</button>
 	</div>
 	<br>
-  <table id="chattable" style="width:100%; height:80%;" cellspacing="0" cellpadding="0">
-  <thead >
-    <tr style="height:10px;">
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-      <th width="50"></th>
-    </tr>
-	</thead>
-    <tbody>
-     </tbody>
-    
-  </table>
-  <br>
+	<table id="chattable" style="width:100%; height:80%;" cellspacing="0" cellpadding="0">
+	  	<thead>
+		    <tr style="height:10px;">
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+				<th width="50"></th>
+		    </tr>
+		</thead>
+		
+    	<tbody>
+		</tbody>
+	</table>
+	<br>
 	<div style="width:300px; height:30px;position:fixed; background:white; bottom:0;" >
-    	 <textarea id="chatcontent" style="width:220px; height:30px; margin:0px; resize: none;">
-    	 </textarea>
-    	 <input id="chatsend" type="button" value="전송">
-    </div>	
+		<textarea id="chatcontent" style="width:220px; height:30px; margin:0px; resize: none;">
+		</textarea>
+		<input id="chatsend" type="button" value="전송">
+	</div>	
 </div>
 
 <div id="friendlist" >
@@ -597,8 +535,7 @@ body {
 		</div>
 	</div>
 
-	
-	<table id="fri3" style="display:none; width:100%; text-align:center;"  >
+	<table id="fri3" >
 		<thead >
 			<tr>
 				<td>아이디</td>
@@ -612,16 +549,15 @@ body {
 	
 	<div id="fri2" class="friendmenu" style="display:none;">
 		<button id="fritogglebtn" class="btn btn-light">아이디</button>
-		<input id="searchfriendid" class="form-control" style="width:65%; height:29px; float:left; margin-left:1px;"
-		placeholder="아이디를 입력해주세요"> 
+		<input class="form-control" id="searchfriendid" placeholder="아이디를 입력해주세요"> 
 		<button id="searchfriendbtn" class="btn btn-secondary"></button>
-		<div id="friendresult"style="display:none; width:100%; height:35px; float:left;">
-		닉네임 : <span id="searchnickname"></span> &nbsp; 이름 : <span id="searchname"></span>
-		<span id="searchfid" style="display:none;"></span>
-		<button id="insertfriendbtn" class="btn btn-secondary" ></button>
-		<br>
-		<img id="searchfriimg">
-		<div id="searchfriintro"></div>
+		<div id="friendresult">
+			닉네임 : <span id="searchnickname"></span> &nbsp; 이름 : <span id="searchname"></span>
+			<span id="searchfid" style="display:none;"></span>
+			<button id="insertfriendbtn" class="btn btn-secondary"></button>
+			<br>
+			<img id="searchfriimg">
+			<div id="searchfriintro"></div>
 		</div>
 		<span id="noresultfr" style="display:none;">검색된 결과가 없습니다.</span>
 	</div>

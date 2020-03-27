@@ -28,7 +28,7 @@
 	width: 100%;
 	border-bottom: 1px solid #999;
 	color: #666;
-	font-size: 12px;
+	font-size: 15px;
 	table-layout: fixed
 }
 
@@ -43,8 +43,7 @@
 	background-color: #f1f1f4;
 	color: #333;
 	font-weight: bold;
-	line-height: 18px;
-	vertical-align: top
+	
 }
 
 .tbl_type td {
@@ -57,13 +56,15 @@
 	margin: 0
 }
 
-.tbl_type .num, .tbl_type .date, .tbl_type .hit, .tbl_type .writer, .tbl_type .type {
+.tbl_type .num, .tbl_type .date, .tbl_type .hit, .tbl_type .writer, .tbl_type .type, .tbl_type .title>a {
 	padding: 0;
 	font-family: Tahoma;
-	font-size: 11px;
+	font-size: 12px;
 	line-height: normal
 }
-
+.tbl_type .title>a{
+	font-size:14px;
+}
 .tbl_type th {
 	text-align:center;
 }
@@ -74,6 +75,7 @@
 
 .tbl_type .title {
 	text-align: left;
+	padding: 6px 0 5px;
 }
 
 /* .tbl_type tr.reply .title a {
@@ -100,19 +102,38 @@
 }
 
 .searchData {
-	height: 25px;
+	display: block;
+    width: 175px;
+    height: 30px;
+    padding-left:5px;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    float:left;
+    margin-right:5px;
 }
 
 .search button {
-	margin-top: -6px;
-	font-size: 10px;
+	font-size: 15px;
+	height:30px;
+	padding: 0 10px 0 10px;
+	border: 1px solid #ced4da;
+    border-radius: .25rem;
 }
 
 
 /* paging */
 .paging {
 	margin-top: 20px;
-	text-align: right;
+	width: 40%;
+    margin-left: 6%;
+    float:left;
 }
 
 .paging button {
@@ -120,17 +141,51 @@
 }
 
 .regist {
-	margin-top: 10px;
-	text-align: right;
+	margin-top: 20px;
+    float: right;
 }
 
-.board {
+tr{
+	height:46px;
+}
+tbody > tr:hover{
+	background:rgb(191, 191, 191);
+}
+#registbtn{
+	background-image: url( "resources/images/writeicon.png" );
+  	background-repeat: no-repeat;
+  	background-size: cover ;
+  	width:30px;
+  	height:30px;
+  	border: 1px solid #ced4da;
+    border-radius: .25rem;
+}
+.paging > button{
+	float:left;
+}
+#searchCon1{
+    float: left;height: 30px;
+    font-size: 15px;width: 80px;
+    padding: 0 0 0 10px;
+    margin-right: 5px;"
+}
+#searchCon2{
+    float: left;height: 30px;
+    font-size: 15px;width: 175px;
+    padding: 0 0 0 10px;
+    margin-right: 5px;
+    display:none; 
+}
+.noticeb{
+	background: red;
+    padding: 5px 10px;
+    color: white;
 }
 </style>
 </head>
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-
+	<div class="boardwrapper" style="height:650px;">
 	<div class="board">
 		<table cellspacing="0" border="1" summary="게시판의 글제목 리스트"
 			class="tbl_type">
@@ -177,7 +232,7 @@
 							<td class="type"><a href="#">
 								<c:choose>
 									<c:when test="${item.type eq 1}">
-										<b>공지</b>
+										<b class="noticeb">공지</b>
 									</c:when>
 									<c:when test="${item.type eq 2}">
 										단어장
@@ -200,7 +255,7 @@
 		
 		<div class="search">
 			<form action="searchBoard.bo" method="GET">
-				<select name="searchCondition" class="searchCondition">
+				<select id="searchCon1" name="searchCondition" class="searchCondition custom-select">
 					<c:choose>
 						<c:when test="${ empty search.searchCondition }">
 							<c:set var="selected0" value="selected"/>
@@ -236,7 +291,7 @@
 					<c:if test="${ search.searchContent eq '잡담'}">
 						<c:set var="getContent4" value="selected"/>
 					</c:if>
-					<select class='selectCondition' style='width:200px;'>					
+					<select class='selectCondition' >					
 						<option value='공지' ${getContent1}>공지</option>
 						<option value='단어장' ${getContent2}>단어장</option>
 						<option value='클래스' ${getContent3}>클래스</option>
@@ -245,7 +300,7 @@
 					<input type="search" name="searchContent" style="display: none;" class="searchData" value="${search.searchContent}">
 				</c:if>
 				<c:if test="${search.searchCondition ne 3}">						
-					<select class='selectCondition' style='display:none; width:200px;'>
+					<select class='selectCondition  custom-select' id="searchCon2">
 						<option value='공지'>공지</option>
 						<option value='단어장'>단어장</option>
 						<option value='클래스'>클래스</option>
@@ -254,7 +309,7 @@
 					<input type="search" name="searchContent" class="searchData" value="${search.searchContent}">
 				</c:if>
 				
-				<button class="btn btn-light searchBtn">검색</button>
+				<button class="btn btn-light searchBtn" style="height:30px;">검색</button>
 				<script>
 					var searchCondition = document.getElementsByName('searchCondition');
 					var searchData = document.getElementsByClassName('searchData');
@@ -270,6 +325,7 @@
 						}else {
 							selectCondition.css('display', 'none');
 							searchData.style.display = 'inline';
+							searchData.value="";
 						}
 					});
 					
@@ -283,6 +339,7 @@
 		<!-- paging -->
 		<c:if test="${!empty pi}">
 			<div class="paging">
+				<center>
 				<!-- 이전(<) -->
 				<c:if test="${pi.currentPage <= 1}">
 					<button type="button" class="btn btn-light">&lt;</button>	
@@ -317,15 +374,22 @@
 					</c:url>
 					<button type="button" onclick="location.href='${next}'" class="btn btn-light">&gt;</button>
 				</c:if>
+				</center>
 			</div>
 		</c:if>
 		
 		<!-- 게시판 등록 버튼 -->
 		<c:if test="${!empty sessionScope.loginMember}">
-			<div class="regist">
-				<button type="button" onclick="location.href='viewBoardInsert.bo'">새 게시글</button>
+			<div class="regist" >
+				 <button type="button"  id="registbtn"
+				 data-toggle="tooltip" data-placement="bottom" 
+				 onclick="location.href='viewBoardInsert.bo'" title="글 작성">
+  					
+				</button> 
+
 			</div>
 		</c:if>
+	</div>
 	</div>
 	<jsp:include page="../common/footer.jsp"/>
 	
