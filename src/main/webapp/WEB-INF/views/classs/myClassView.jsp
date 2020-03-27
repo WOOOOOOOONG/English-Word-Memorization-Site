@@ -207,14 +207,12 @@
 				
 			}
 			
-			
-			
 		});
 	});
 	
 	setTimeout(function() {
 		$("#asd").click();
-	}, 3000);
+	}, 4000);
 </script>
 
 <script>
@@ -228,13 +226,68 @@
 	
 	$(function(){
 		var searchInput = $("#cNo").val();
-		getAllData(searchInput);
+		//getAllData(searchInput);
 		
+		// 클래스에 단어장이 있는지 없는지 확인
+		var cflag = "true";
+		var userID = $("#cNo").val();
+	    var userName = "${ loginMember.mId }";
+	    
+
+	   
+	      console.log("hello"); 
+	      $.ajax(
+	        {
+	          type: "POST",
+	          dataType: "json",
+	          contentType: "application/json; charset=utf-8",
+	          data: JSON.stringify( {userID : userID}),
+	          url: 'http://localhost:1222/checkClass',
+	          success: function (data) {
+	            if(data.taco == "taco")
+	            {
+	            	// 단어장이 없으면 새로운 단어장을 생성한다.
+	            	 $.ajax(
+	           		      {
+	           		        type: "POST",
+	           		        dataType: "json",
+	           		        contentType: "application/json; charset=utf-8",
+	           		        data: JSON.stringify({
+	                               userID: userID,
+	                               userName: userName,
+	                           }),
+	           		        url: 'http://localhost:1222/createNewClass',
+	           		        success: function (data) {
+	           		        	
+	           		        	// 단어장 리스트를 불러온다
+	           		        	getAllData(searchInput);
+	           		        },
+	           		        error: function () {
+	           		          alert("데이타베이스 연결에 실패하여씁니다!");
+	           		          console.log("error has occured retriving data from MongoServer");
+	           		        }
+	           		      });
+	            }
+	            else
+	            {	
+	            	// 단어장이 이미 있으면..
+	            	// 단어장 리스트를 불러온다.
+	            	getAllData(searchInput);
+	            }
+	          },
+	          error: function () {
+	            alert("데이타베이스 연결에 실패하여씁니다!");
+	            console.log("error has occured retriving data from MongoServer");
+	          }
+	        });
+	    
+	    
+
 		var div = $("#list");
 		// 여기서 부터 div
 		
 	});
-     	// 시험문제 만들기 클릭시
+     	
       	function getAllData(searchInput) {
       		 var send = JSON.stringify({
       	         'search' : searchInput
@@ -248,7 +301,7 @@
                 url : 'http://localhost:1222/getAllDataPlusUserName',
                 success : function(data) { 
                 	//console.log(data);
-                	turnturn = true;
+                	
                 	var div = $("#vocalist");
                 	
                 	
@@ -281,7 +334,7 @@
 	                   		for(var key in obj2[0]){
 	                   			// 여기는 단어 하나하나 나오는 부분임
 	                   			seCount++;
-	                   			
+	                   			turnturn = true;
 	                   			
 	                   		}
 	                   		
@@ -292,6 +345,7 @@
 	                	}
                 	}
                    	/* $('.spinner-border').hide(); */
+                   	 getCsid()
                    	
                 },
                 error : function() {
@@ -302,9 +356,10 @@
       </script>
    <!--  csid 가져오기 -->
       <script>
-      	$(function(){
+      		function getCsid(){
+      	
       		var searchInput = $("#cNo").val();
-      		var input = $("#csid");
+      		//var input = $("#csid");
       		var send = JSON.stringify({
    	         'search' : searchInput
 	   	    });
@@ -326,7 +381,7 @@
                    console.log("error has occured retriving data from MongoServer")
                 }
              });
-      	}); 
+      		}      	
       
       </script>
       <jsp:include page="../common/footer.jsp"/>

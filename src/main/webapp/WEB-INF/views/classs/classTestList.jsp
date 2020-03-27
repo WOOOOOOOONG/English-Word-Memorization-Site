@@ -171,10 +171,10 @@
                                     <c:forEach var="o" begin="0" end="${ testList.get(i).testExno - 1}">
                                     <div class="word-box" style="float: left;">
                                         <div class="word-number">${ o + 1 }
-                                        	<c:if test="${ testAnswer[o] eq myAnswer[o] }">
+                                        	<c:if test="${ fnc:toUpperCase(testAnswer[o]) eq fnc:toUpperCase(myAnswer[o]) }">
                                             	<img src="${ contextPath }/resources/image//ok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
                                             </c:if>
-                                            <c:if test="${ testAnswer[o] ne myAnswer[o] }">
+                                            <c:if test="${ fnc:toUpperCase(testAnswer[o]) ne fnc:toUpperCase(myAnswer[o]) }">
                                             	<img src="${ contextPath }/resources/image//nok.png" style="z-index: 50; width:70px; height: 70px; position: absolute; top: -5px; right:-30px;">
                                             </c:if>
                                         </div>

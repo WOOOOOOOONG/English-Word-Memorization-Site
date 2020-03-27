@@ -25,8 +25,8 @@
 		            <tr>
 		                <th scope="col" style="width:8%;"></th>
 		                <th scope="col" style="width:20%;">아이디</th>
-		                <th scope="col" style="width:48%;">자기소개</th>
-		                <th scope="col" style="width:10%;">요청일</th>
+		                <th scope="col" style="width:43%;">자기소개</th>
+		                <th scope="col" style="width:15%;">요청일</th>
 		                <th scope="col" style="width:7%;">승인</th>
 		                <th scope="col" style="width:7%;">거절</th>
 		            </tr>

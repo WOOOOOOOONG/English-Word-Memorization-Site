@@ -408,11 +408,18 @@ body {
     padding: 0px;
     font-size: 15px;
 	}
+	
+	#vooooq{
+		cursor:pointer;
+	}
+	#vooooq:hover{
+		background:red;
+	}
 </style>
 
 </head>
 
-<body>
+<body id="warning">
 
 <jsp:include page="../classs/fontStore.jsp"/>
 <c:if test="${ msg != null }">
@@ -484,7 +491,18 @@ body {
     <a class="link-1" href="viewMain.ad">Home</a>
 </nav> --%>
 
-
+<script>
+	$(function(){
+		
+		/* $("#vooooq").hover(function(){
+			$("#warning").css("background","red");
+		});
+		
+		$("#vooooq").click(function(){
+			alert("공사중입니다 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!. by jc")
+		}); */
+	});
+</script>
 
 <div id="menubar" >
 
@@ -494,7 +512,7 @@ body {
 		</h1>
 		<section style="float:left; margin-top:7.5px; display:block; width:550px; height:100%;">
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="viewMain.ad" class="jha">Home</a>
-			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" href="#" class="jha">단어장</a>
+			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" id="vooooq" class="jha" data-toggle="modal" data-target=".warning2">단어장</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">클래스</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="boardList.bo" class="jha">커뮤니티</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="memberInquireList.ad" class="jha">고객센터</a>
@@ -1241,6 +1259,20 @@ function chatclassloggo(imgList){
 	
 
 </script>
+
+
+<!--  워닝 모달 -->
+<!-- Extra large modal -->
+
+
+<div class="modal fade warning2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <img src="${ contextPath }/resources/profileimg/warning.png" style="height:900px; z-index:1000;">
+    </div>
+  </div>
+</div>
+
 
 </body>
 

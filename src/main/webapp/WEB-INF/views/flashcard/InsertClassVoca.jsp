@@ -349,43 +349,42 @@
 </style>
 
 <body>
- <!--  <script>
+ <script>
 
     var userID = $("#cNo").val();
     var userName = "${ loginMember.name }";
-    
+    var newClas = false;
+    /* 
     $(function () {
-      console.log("hello")
+      console.log("hello"); 
       $.ajax(
-
         {
           type: "POST",
           dataType: "json",
           contentType: "application/json; charset=utf-8",
           data: JSON.stringify( {userID : "taco"}),
-          url: 'http://localhost:1222/checkUser',
+          url: 'http://localhost:1222/checkClass',
           success: function (data) {
             if(data.taco == "taco")
             {
-				
+            	newClas = true;
             }
             else
-            {
-              //getSetList()
+            {	
+            	newClas = false;
             }
-
           },
           error: function () {
             alert("데이타베이스 연결에 실패하여씁니다!");
             console.log("error has occured retriving data from MongoServer")
           }
         })
-    })
+    }) */
 
 
 
 
-    function getSetList() {
+   /*  function getSetList() {
       $.ajax(
 
         {
@@ -403,9 +402,9 @@
             console.log("error has occured retriving data from MongoServer")
           }
         })
-    }
+    } */
 
-  </script> -->
+  </script>
 
 
 <!--  cNo -->
@@ -832,12 +831,15 @@
   // 저장
   function save() {
 	  
-    var user_id = $("#cNo").val();
-    var crea = $("#mId").val();
+    var user_id = $("#cNo").val(); // 
+    var crea = $("#mId").val(); //현재로그인된 아이디
     var card = $(".card_word_wrapper");
     var title = $('.title_placeholder').text().trim();
     var list = {};
-    list["creatorId"] = crea;
+
+    
+   list["creatorId"] = crea;
+
     if (card.length >= 6) {
       card.each(
         function () {
@@ -846,14 +848,14 @@
           list[[def]] = mean; 
         }
       )
-      console.log(list);
-      var newlist = []
+ 
+      var newlist = [];
       newlist.push(list);
       var send = JSON.stringify({
         userID: user_id,
         [title]: newlist
-      })
-	console.log(send);
+      });
+      
       request(send);
 
 
@@ -886,23 +888,27 @@
 
 
   function request(send) {
-    $.ajax(
+	  
+	 
+		  $.ajax(
 
-      {
-        type: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: send,
-        url: 'http://localhost:1222/findAndUpdateClass',
-        success: function (data) {
-			console.log(data);
+			      {
+			        type: "POST",
+			        dataType: "json",
+			        contentType: "application/json; charset=utf-8",
+			        data: send,
+			        url: 'http://localhost:1222/findAndUpdateClass',
+			        success: function (data) {
+						console.log(data);
 
-        },
-        error: function () {
-          alert("데이타베이스 연결에 실패하여씁니다!");
-          console.log("error has occured retriving data from MongoServer")
-        }
-      })
+			        },
+			        error: function () {
+			          alert("데이타베이스 연결에 실패하여씁니다!");
+			          console.log("error has occured retriving data from MongoServer");
+			        }
+			      })
+	  
+  
 
   }
 </script>

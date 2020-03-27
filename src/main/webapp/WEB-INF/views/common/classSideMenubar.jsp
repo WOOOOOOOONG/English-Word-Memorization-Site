@@ -21,7 +21,7 @@
    <!--  폰트 모음 끝 -->
 <style>
 body {
-   height: 1080px;
+   height:1080px;
    margin: 0;
    background: whitesmoke;
 }
@@ -266,6 +266,9 @@ main .helper span {
 			document.getElementById('menu').style.width = '0';
 		}
 	</script>
+	
+	
+	
    <nav class="menu" id="menu" tabindex="0" style="font-family: 'Nanum Gothic', sans-serif;">
       <div class="smartphone-menu-trigger"></div>
       <header class="avatar">
@@ -297,6 +300,7 @@ main .helper span {
          
          <!--  아이콘 끝 -->
       </header>
+     
       <ul class="manage">
          
          <!-- 스터디 단어장 -->
@@ -323,6 +327,12 @@ main .helper span {
          <c:url var="classNotice" value="classNoticeView.do">
          	<c:param name="cNo" value="${ cNo }"/>
          </c:url>
+         <c:url var="classIntroduce" value="classIntroduce.do">
+         	<c:param name="cNo" value="${ cNo }"/>
+         </c:url>
+         <c:url var="classPerson" value="classPerson.do">
+         	<c:param name="cNo" value="${ cNo }"/>
+         </c:url>
          
           
          <li tabindex="0" class="icon-books icon"><a><span>스터디</span></a>
@@ -330,6 +340,8 @@ main .helper span {
                <li class="homepage"><a href="${ myClass }" style="color:white; text-decoration:none;">스터디 단어장</a></li>
                <li class="homepage"><a href="${ classTestList }" style="color:white; text-decoration:none;">시험 목록</a></li>
                <li class="homepage"><a href="${ classNotice }" style="color:white; text-decoration:none;">공지 사항</a></li>
+               <li class="homepage"><a href="${ classIntroduce }" style="color:white; text-decoration:none;">클래스 소개보기</a></li>
+               <li class="homepage"><a href="${ classPerson }" style="color:white; text-decoration:none;">클래스 구성원</a></li>
             </ul>
          </li>
          <c:if test="${ loginMember.mId eq classs.ornerId }">
@@ -349,7 +361,35 @@ main .helper span {
          </li>
          </c:if>
       </ul>
+       <script>
+      		function getCsid(){
+      	
+      		var searchInput = "${ cNo }";
+      		//var input = $("#csid");
+      		var send = JSON.stringify({
+   	         'search' : searchInput
+	   	    });
+      		$.ajax({
+                type : "POST",
+                dataType : "json",
+                contentType : "application/json; charset=utf-8",
+                data : send,
+                url : 'http://localhost:1222/getClassCSID',
+                success : function(data) {
+                	 // input.val(data);
+                	 var key = "csid";
+                     var value = data;
+
+                     sessionStorage.setItem(key, value);
+                     //printSessionStorage();
+                },
+                error : function() {
+                   console.log("error has occured retriving data from MongoServer")
+                }
+             });
+      		}      	
       
+      </script>
    
       <script>
      	// 시험문제 만들기 클릭시
@@ -365,6 +405,7 @@ main .helper span {
                 data : send,
                 url : 'http://localhost:1222/getAllData',
                 success : function(data) {
+                	 getCsid()
                 // vocaList 아래 인풋 
                 	var div = $("#vocaList");
                 	var i = 1;
@@ -433,6 +474,7 @@ main .helper span {
                for(var key in data){
             	   var obj = data[key];
             	   for(var key in obj){
+            		   console.log(key);
             		   chkkor.val(chkkor.val() + "," + obj[key]);
             		   chkeng.val(chkeng.val() + "," + key);
             		   //console.log(obj[key]);    // 한글
