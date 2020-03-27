@@ -382,6 +382,14 @@ body {
     padding: 0px;
     font-size: 15px;
 	}
+
+	
+	#vooooq{
+		cursor:pointer;
+	}
+	#vooooq:hover{
+		background:red;
+
 	#fri3{
 		display: none;
     	width: 100%;
@@ -417,12 +425,13 @@ body {
 		width:100%;
 		height:35px;
 		float:left;
+
 	}
 </style>
 
 </head>
 
-<body>
+<body id="warning">
 
 <jsp:include page="../classs/fontStore.jsp"/>
 <c:if test="${ msg != null }">
@@ -437,18 +446,23 @@ body {
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
    scope="application"/>
 <c:set var="loginpage" value="login.me"/>
+
+
 <div id="menubar" class="sticky-top">
+
 
 	<div style="position:relative; margin: 0 auto; padding:9pt 0; width:75pc; height:3px;">
 		<h1 style="float:left; display:block; width:70px; height:100%; margin-right:36px; font-family:cinzel; font-weight:bold; color:orange;">
 			<a href="viewMain.ad" id="sewlogo">SEW</a>
 		</h1>
-		<section id="navsection1">
-			<a href="viewMain.ad" class="jha">Home</a>
-			<a href="#" class="jha">단어장</a>
-			<a href="ClassList.do" class="jha">클래스</a>
-			<a href="boardList.bo" class="jha">커뮤니티</a>
-			<a href="memberInquireList.ad" class="jha">고객센터</a>
+
+		<section style="float:left; margin-top:7.5px; display:block; width:550px; height:100%;">
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="viewMain.ad" class="jha">Home</a>
+			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" id="vooooq" class="jha" data-toggle="modal" data-target=".warning2">단어장</a>
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">클래스</a>
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="boardList.bo" class="jha">커뮤니티</a>
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="memberInquireList.ad" class="jha">고객센터</a>
+
 		</section>
 		<section id="navsection2">
 				<c:if test="${ empty loginMember }">
@@ -1177,6 +1191,20 @@ function chatclassloggo(imgList){
 	
 
 </script>
+
+
+<!--  워닝 모달 -->
+<!-- Extra large modal -->
+
+
+<div class="modal fade warning2" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <img src="${ contextPath }/resources/profileimg/warning.png" style="height:900px; z-index:1000;">
+    </div>
+  </div>
+</div>
+
 
 </body>
 

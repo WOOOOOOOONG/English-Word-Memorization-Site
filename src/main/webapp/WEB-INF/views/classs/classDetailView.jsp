@@ -41,6 +41,7 @@
 <body>
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../classs/summerNote.jsp" />
+	<jsp:include page="../classs/fontStore.jsp"/>
 	<!-- 전체 -->
 	<c:url var="inquireView" value="insertInquireView.ad">
     <c:param name="reportType" value="3"/>
@@ -114,9 +115,9 @@
                     <div style="line-height: 1.75em; padding: 0 35px;width:700px; margin:auto;">
                         <section style="border-top: 1px solid #e6e6e6;">
                             <div style="overflow: hidden;">
-                                <h1 style="float:left; clear:right; padding:60px 0 3pc 9pt; width:120px; font-size:14pt; color:#333;">스터디 소개</h1>
+                                <h1 style="float:left; clear:right; padding:60px 0 3pc 9pt; width:120px; font-size:14pt; color:#333; ">스터디 소개</h1>
                                 <!-- 내용 -->
-                                <div style="float:right; padding:60px 0; width:455px;  text-align:center;">
+                                <div style="float:right; padding:60px 0; width:455px;  text-align:center;  font-family: 'Nanum Gothic', sans-serif;">
                                     ${ classs.comment }
                                 </div>
                             </div>
@@ -124,7 +125,7 @@
                             <!-- 아래 상세정보 -->
                             <div style="overflow:hidden; display: block;">
                                 <h2 style="padding:3pc 0 3pc 9pt; font-size:11pt; color:#787878; float:left; clear:right; width: 110px;">상세 정보</h2>
-                                <div style="padding:3pc 0; border-top: 1px solid #e6e6e6; float: right; width: 455px;">
+                                <div style="padding:3pc 0; border-top: 1px solid #e6e6e6; float: right; width: 455px;  font-family: 'Nanum Gothic', sans-serif;">
                                     <dl style="float:left; width:430px;">
 									<c:choose>
 										<c:when test="${ not empty classs.local }">
@@ -191,10 +192,12 @@
                             <!-- 버튼 -->
                             <div>
                                 <input type="button" class="sinchenog" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
-                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt;  margin:auto" value="신청 하기"> 
-                               <%--  <input type="button" class="sinchenog2" id="${ classs.cNo }" style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
-                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt; margin:auto" value="참여 하기"
-                                    data-toggle="modal" data-target=".sincheong"> --%>
+                                    display:block; width:200px; height:56px; display:none; line-height: 56px; text-align: center; font-size: 11pt;  margin:auto" value="신청 하기">
+                                    
+                                     
+                               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#pobu"
+                               		style="margin-top: 24px; background-color: #ef6c00; color:#fff; border:none;
+                                    display:block; width:200px; height:56px; line-height: 56px; text-align: center; font-size: 11pt;  margin:auto">신청하기</button>
                             </div>
                         </section>
                     </div>
@@ -207,9 +210,16 @@
     	<!-- 가입 -->
     	<script>
     		$(function(){
+    			
+    			$("#subgo").click(function(){
+    				$(".sinchenog").click();
+    			});
+    			
     			$(".sinchenog").click(function(){
     				var obj = new Object();
     				var cNo = $(this).prop('id');
+    				var pobu = $(".pobu").val();
+    				obj.pobu = pobu;
     				obj.cNo = cNo;
     				$.ajax({
 						url:"joinClass.do",
@@ -282,6 +292,29 @@
    </div>      
    --%>
         
+        <!-- 모달  -->
+        <!-- Modal -->
+<div class="modal fade" id="pobu" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle" style="text-align:center; color:#474747; font-size:18px; margin:auto; font-weight:600;  font-family: 'Nanum Gothic', sans-serif;">간단한 포부를 적어주세요!</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <textarea style="width:100%; text-align:center; height:60px;" class="pobu">
+        
+        </textarea>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-primary" id="subgo" style="background-color: #ef6c00; border:0px;">신청하기</button>
+      </div>
+    </div>
+  </div>
+</div>
         
    
 	<script>

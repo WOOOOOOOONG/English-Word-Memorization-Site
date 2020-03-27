@@ -155,13 +155,13 @@
 					<!-- 아래 나오는거 -->
 					<ul style="width: 45pc; margin: 0 auto;">
 						<!-- 과목 -->
-						<li style="display: inline-block; vertical-align: top; margin-right: 15px; box-sizing: border-box; width: 200px; border-top: 1px solid #dcdcdc;">
+						<li style="display: inline-block; vertical-align: top; margin-right: 15px; box-sizing: border-box; width: 200px; border-top: 1px solid #dcdcdc; ">
 							<ul style="padding: 36px 14px;">
 								<c:forEach var="i" begin="0" end="${ fnc:length(cateList)-1 }">
 									<li style="margin-bottom: 1pc; user-select: none;">
 										<label style="display: block; cursor: pointer;"> 
 										<input type="checkbox" name="${ cateList.get(i).name }" id="${ cateList.get(i).name }" class="cate" style="display: inline-block; vertical-align: top; width: 1pc; height: 1pc;">
-											<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 400;">
+											<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 600;  font-family: 'Nanum Gothic', sans-serif;">
 											${ cateList.get(i).name }</span>
 										</label>
 									</li>
@@ -174,19 +174,19 @@
 								<li style="margin-bottom: 1pc; user-select: none;">
 									<label style="display: block; cursor: pointer;"> 
 										<input type="checkbox" name="" id="Beginner" class="cLevel" style="display: inline-block; vertical-align: top; width: 1pc; height: 1pc;">
-										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 400;">Beginner</span>
+										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 600;  font-family: 'Nanum Gothic', sans-serif;">Beginner</span>
 									</label>
 								</li>
 								<li style="margin-bottom: 1pc; user-select: none;">
 									<label style="display: block; cursor: pointer;"> 
 										<input type="checkbox" name="" id="Normal" class="cLevel" style="display: inline-block; vertical-align: top; width: 1pc; height: 1pc;">
-										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 400;">Normal</span>
+										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 600;  font-family: 'Nanum Gothic', sans-serif;">Normal</span>
 									</label>
 								</li>
 								<li style="margin-bottom: 1pc; user-select: none;">
 									<label style="display: block; cursor: pointer;"> 
 										<input type="checkbox" name="" id="Expert" class="cLevel" style="display: inline-block; vertical-align: top; width: 1pc; height: 1pc;">
-										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 400;">Expert</span>
+										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 600;  font-family: 'Nanum Gothic', sans-serif;">Expert</span>
 									</label>
 								</li>
 							</ul>
@@ -198,13 +198,13 @@
 								<li style="margin-bottom: 1pc; user-select: none;">
 									<label style="display: block; cursor: pointer;"> 
 										<input type="checkbox" name="" id="on" class="conoff" style="display: inline-block; vertical-align: top; width: 1pc; height: 1pc;">
-										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 400;">온라인</span>
+										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 600;  font-family: 'Nanum Gothic', sans-serif;">온라인</span>
 									</label>
 								</li>
 								<li style="margin-bottom: 1pc; user-select: none;">
 									<label style="display: block; cursor: pointer;"> 
 										<input type="checkbox" name="" id="off" class="conoff" style="display: inline-block; vertical-align: top; width: 1pc; height: 1pc;">
-										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 400;">오프라인</span>
+										<span style="display: inline-block; margin-left: 10px; vertical-align: top; height: 1pc; line-height: 18px; font-size: 10pt; color: #787878; font-weight: 600;  font-family: 'Nanum Gothic', sans-serif;">오프라인</span>
 									</label>
 								</li>
 							</ul>

@@ -273,6 +273,7 @@ public class ClassController {
 		String[] korListorg = kor.split(","); 
 		List<String> korList = new ArrayList<String>(); 
 		Collections.addAll(korList, korListorg); 
+		System.out.println("작업전 : " + korList);
 		
 		// 영어 리스트
 		String[] engListorg = eng.split(","); 
@@ -280,8 +281,29 @@ public class ClassController {
 		for(int i = 0 ; i < engListorg.length; i++) {
 			engList.add(engListorg[i]);
 		}
+		
+		//System.out.println("작업 전 : " + engList);
+		for(int i = 0 ; i < engList.size() ; i++) {
+			if(engList.get(i).equals("creatorId")) {
+				engList.remove(i);
+			}
+		}
 		//Collections.addAll(engList, engListorg);
 		
+		ArrayList<ClassMember> tcmList = cService.selectClassMemberList(testcNo);
+		for(int i = 0 ; i < tcmList.size(); i++) {
+			for(int j = 0; j < korList.size(); j++ ) {
+				if(tcmList.get(i).getId().equals(korList.get(j))) {
+					korList.remove(j);
+				}
+			}
+		}
+		System.out.println("작업 후 : " + korList);
+		
+		
+		
+		
+		// 문제 갯수
 		int count = 0;
 		if(StringCount.equals("c10")) {
 			count = 10;
@@ -630,7 +652,7 @@ public class ClassController {
 		String[] answer = test.getTestEng().split(","); // 정답
 		
 		for(int i = 0 ; i < test.getTestExno(); i++) {
-			if(outanswer[i].equals(answer[i])) {
+			if(outanswer[i].equalsIgnoreCase(answer[i])) {
 				ok = ok + "," + i;
 				count++;
 			}else {
@@ -823,6 +845,7 @@ public class ClassController {
 		}
 		
 		String cNo = (String)jObj.get("cNo");
+		String pobu = (String)jObj.get("pobu");
 		
 		int result = 0;
 		String ornerId = cService.selectOrnerId(cNo);
@@ -840,7 +863,7 @@ public class ClassController {
 		ClassMember cm = new ClassMember();
 		cm.setcNo(cNo);
 		cm.setId(member.getmId());
-		cm.setvRight(member.getIntroduce());
+		cm.setvRight(pobu);
 		//cService.insertClassMember(cm);
 		cService.joinClassMember(cm);
 		
@@ -1113,6 +1136,66 @@ public class ClassController {
 		mv.setViewName("flashcard/InsertClassVoca");
 		return mv;
 	}
+	
+	// 클래스 소개보기
+	@RequestMapping("classIntroduce.do")
+	public ModelAndView classIntroduce(String cNo, ModelAndView mv) {
+		
+		Classs classs = cService.selectClassOneCount(cNo);
+		ArrayList<Storage> fList = new ArrayList<>();
+		ArrayList<Category> cateList = cService.selectCateList();
+		
+		String img1 = "main1.jpg";
+		String img2 = "main1.jpg";
+		String img3 = "main1.jpg";
+		
+		ArrayList<Storage> s = cService.selectFileList(cNo);
+		if(!s.isEmpty()) {
+			for(int j = 0 ; j < s.size(); j++) {
+				fList.add(s.get(j));
+			}
+		}
+		
+		if(!fList.isEmpty()) {
+			if(fList.size() == 1 ) {
+				img1 = fList.get(0).getChangeName();
+			}else if(fList.size() == 2) {
+				img1 = fList.get(0).getChangeName();
+				img2 = fList.get(1).getChangeName();
+			}else if(fList.size() == 3) {
+				img1 = fList.get(0).getChangeName();
+				img2 = fList.get(1).getChangeName();
+				img3 = fList.get(2).getChangeName();
+			}
+		
+		}
+		
+		String tel = cService.selectTell(classs.getOrnerId());
+		
+		mv.addObject("classs",classs);
+		mv.addObject("img1",img1);
+		mv.addObject("img2",img2);
+		mv.addObject("img3",img3);
+		mv.addObject("cateList",cateList);
+		mv.addObject("email",tel);
+		
+		mv.addObject("cNo",cNo);
+		mv.setViewName("classs/classIntroduce");
+		return mv;
+	}
 
+	
+	@RequestMapping("classPerson")
+	public ModelAndView classPerson(String cNo, ModelAndView mv) {
+		
+		
+		String ornerId = cService.selectOrnerId(cNo);
+		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
+		
+		mv.addObject("ornerId",ornerId);
+		mv.addObject("cmList",cmList);
+		mv.setViewName("classs/classPerson");
+		return mv;
+	}
 }
 

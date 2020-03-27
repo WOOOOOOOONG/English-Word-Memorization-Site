@@ -916,6 +916,7 @@ ul.shelf li:nth-child(9) span.booktop{
     float: right;
     color: #977e80;
     position: relative;
+    cursor:pointer;
 }
 </style>
 </head>
@@ -932,8 +933,10 @@ ul.shelf li:nth-child(9) span.booktop{
 
         };
        function outclasss(cNo){
-
-          location.href="outClass.do?cNo="+cNo;
+			if(confirm("선택 클래스를 정말 탈퇴하시겠습니까 ? ")){
+				location.href="outClass.do?cNo="+cNo;				
+			}
+         
       }
 
     </script>
