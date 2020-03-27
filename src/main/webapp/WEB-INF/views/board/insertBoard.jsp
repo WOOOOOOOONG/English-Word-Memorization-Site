@@ -25,12 +25,14 @@
 	width: 1300px;
 	margin: 0 auto;
 	margin-top: 50px;
+	min-height:700px;
 }
 
 .textarea {
 	width: 1200px;
 	height: 400px;
 	border-radius: 3px;
+	resize:none;
 }
 
 </style>
@@ -96,7 +98,7 @@
 								<div class="col-sm-12">
 									<div class="form-group">
 										<label for="job-desc" class="control-label col-md-3"
-											style="font-weight: bold">문의 내용</label>
+											style="font-weight: bold">내용</label>
 										<div class="col-md-10">
 											<textarea name="content" class="textarea" id="textarea"></textarea>
 										</div>

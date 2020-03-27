@@ -480,7 +480,7 @@ footer p {
 			</div>
 		</div>
 	</section>
-	
+	<div style="min-height: calc(100vh - 360px);"></div>
 	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
