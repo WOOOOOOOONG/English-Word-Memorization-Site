@@ -10,9 +10,8 @@ footer {
 	width: 100%;
 	height: 170px;
 	border: 0;
-	font-size: 100%;
 	font: inherit;
-	padding: 4rem;
+	padding: 60px;
 	background-color: #222;
 	color: white;
 	text-align: center;
@@ -23,20 +22,17 @@ footer p {
 	margin: 0;
 }
 
-.push {
-	min-height: calc(100vh - 360px);
-}
 </style>
 </head>
 <body>
 	<div class="wrapper">
-		<div class="push"></div>
+		
 		<footer>
 			<p>
-				<a href="#">built with SEW in KH Academy </a>
+				<a href="#" style="	font-size: 15px;">built with SEW in KH Academy </a>
 			</p>
 			<p>
-				<a href="#" onclick="sendMail();">Email: sterme9@naver.com</a>
+				<a href="#" style="	font-size: 15px;" onclick="sendMail();">Email: sterme9@naver.com</a>
 			</p>
 			<script>
 				function sendMail() {

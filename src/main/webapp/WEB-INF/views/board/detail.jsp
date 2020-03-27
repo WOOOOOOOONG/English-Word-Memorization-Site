@@ -14,6 +14,7 @@
       width: 1200px;
       margin: 0 auto;
       margin-top: 50px;
+      min-height:650px;
    }
    
    .board-detail {
@@ -90,13 +91,13 @@
    .goList {
       width: 1200px;
       margin: 0 auto;
-      margin-bottom: 20px;
       text-align: right;
    }
    
     .listBtn {
       margin-top: 5px;
       margin-bottom: 5px;
+      height:30px;
    }
    
    /*  댓글 */
@@ -106,8 +107,10 @@
    }
    
    .replyContent textarea {
-      width: 1200px;
-      height: 120px;
+    width: 1100px;
+    height: 70px;
+    float: left;
+    resize:none;
    }
    
    .textarea {
@@ -124,6 +127,13 @@
       font-size: 12px;
       color: #848484;
    }
+   .tdContent2 > button{
+   		background-image: url( "resources/images/취소2.png" );
+  	    background-repeat: no-repeat;
+  	    background-size: cover ;
+  	    border:none;
+  	    width:20px; height:20px;
+   }
    
    .imotion {
     background: #f3f3f3;
@@ -133,7 +143,7 @@
    .imotion div {
     position: relative;
     display: inline-block;
-    border: 1px solid #d8d8d8;
+    
     margin-right: 10px;
 }
    
@@ -151,7 +161,7 @@
   font-size: 14px;
   text-align:center;
   margin-left: -35px;
-  margin-top: 3px;
+  margin-top: 6px;
 }
 
 .arrow_box:after {
@@ -184,6 +194,11 @@
 	height:30px;
 	max-width:30px;
 	border-radius:50%;
+}
+#replyInsert{
+	width: 100px;
+    height: 70px;
+    float: left;
 }
 </style>
 </head>
@@ -287,7 +302,7 @@
                <c:url var="nextBoard" value="detailBoard.bo">
                   <c:param name="bId" value="${boardList[status.index-1].bId}"/>
                </c:url>
-               <a href="${nextBoard}">다음글 : ${boardList[status.index-1].title}</a>
+               <a style="" href="${nextBoard}">다음글 : ${boardList[status.index-1].title}</a>
                <hr class="line3" style="margin-top: -1px; margin-bottom: -1px;">
             </c:if>
             <c:if test="${item.bId eq detailBoard.bId && item.bId ne boardList[fn:length(boardList)-1].bId}">
@@ -322,6 +337,7 @@
                   <button class="button-list" id="replyInsert" onclick="replyInsertFunc();">작성</button>
                </c:if>
             </div>
+            <div style="width:1100px; height:20px;float:left;"></div>
          </div>
          
          <!-- 댓글 리스트 -->
@@ -409,7 +425,7 @@
                            var $img = $("<img class='userreplyimg' src='${contextPath}/resources/profileimg/"+data[i].profileimg+"' >");
                            $memberimg.append($img);
                            if(${!empty sessionScope.loginMember} && (data[i].writerId == memberId || memberId == 'admin')) {                        	   
-                              var $deleteBtn = $("<td width='10'>").html("<div class='tdContent2'><button class='button" + i + "' onclick='deleteReply(" + data[i].rId + ", " + '"' + data[i].writerId + '"' + ");'>X</button></div>");                              
+                              var $deleteBtn = $("<td width='10'>").html("<div class='tdContent2'><button class='button" + i + "' onclick='deleteReply(" + data[i].rId + ", " + '"' + data[i].writerId + '"' + ");'></button></div>");                              
                            }else {
                         	  var reportBtn = $('<td width="10"><div class="imotion"><div><i class="far fa-angry imo" style="font-size: 25px;" onclick="reportReply(' + data[i].rId + ');"></i><p class="arrow_box" style="margin-left:-36px;">신고하기</p></div></div></td>');
                            }
