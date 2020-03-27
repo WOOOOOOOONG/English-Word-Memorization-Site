@@ -281,7 +281,7 @@ body :-ms-input-placeholder {
 	background-color: white;
 	border: 0;
 	padding: 5px 10px;
-	color: #3ac569;
+	color: #0a7bcc;
 	border-radius: 3px;
 	cursor: pointer;
 	width: 120px;
@@ -366,7 +366,7 @@ body :-ms-input-placeholder {
 }
 
 .modal-header {
-	width: 99.88%;
+	width: 100%;
     margin-left: 0.12%;
 	background: rgb(154, 234, 247);
 }
@@ -384,6 +384,8 @@ body :-ms-input-placeholder {
   color:white;
       font-weight: 400;
   }
+  
+
 </style>
 </head>
 
@@ -414,9 +416,15 @@ body :-ms-input-placeholder {
 			</div>
 
 		</div>
+		 <c:if test="${ !empty newuser }">
+		   	<script>
+		   		$(function(){
+		   			$("#newuserbtn").click();
+		   		});
+		   	</script>
+   		</c:if>
 		<script>
 			$(function(){
-				
 				$("#dd > button").hover(function(){
 					$(this).prev().css("font-size","20px");
 			    }, function() {
@@ -481,7 +489,7 @@ body :-ms-input-placeholder {
 								<input type="email" id="userEmail" name="email" required
 									style="width: 68.9%;"> <input type="button"
 									id="checkemailbtn" class="btn btn-primary btn-sm"
-									style="width: 29.5%;margin-bottom: 4px;" value="인증">
+									style="width: 29.5%;margin-bottom: 4px; background-color: #74d1f5;" value="인증">
 								<button id="hiddenemailbtn" type="button" data-toggle="modal"
 									data-target="#checkemailen" style="display: none;"></button>
 							</div>
@@ -497,7 +505,7 @@ body :-ms-input-placeholder {
 								<input type="text" id="postcode" name="add1"
 									style="width: 68.9%;" placeholder="우편번호"> <input
 									type="button" class="btn btn-primary btn-sm"
-									style="width: 29.5%; margin-bottom: 3px;"
+									style="width: 29.5%; margin-bottom: 3px; background-color: #74d1f5;"
 									onclick="execDaumPostcode()" value="우편번호 찾기"><br>
 								<input type="text" id="address" name="add2"
 									style="margin-bottom: 3px;" placeholder="주소"><br>

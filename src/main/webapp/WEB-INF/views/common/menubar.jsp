@@ -452,7 +452,7 @@ body {
 		</section>
 		<section id="navsection2">
 				<c:if test="${ empty loginMember }">
-					<a href="${ loginpage }" class="jha">회원가입</a>
+					<a href="${ loginpage }?n=n" class="jha">회원가입</a>
 					<a href="${ loginpage }" class="jha">로그인</a>
 				</c:if>
 				<c:if test="${ !empty loginMember }">
