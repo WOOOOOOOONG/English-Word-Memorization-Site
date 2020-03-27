@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.classs.model.vo.ClassMember;
@@ -32,7 +33,10 @@ public class commonController {
 	@Autowired
 	private MemberService mService;
 	@RequestMapping(value="/login.me")
-	public String gologin() {
+	public String gologin(String n,Model mv) {
+		if(n != null) {
+			mv.addAttribute("newuser", "yes");
+		}
 		return "common/login";
 	}
 	@RequestMapping(value="/mypage.me")
