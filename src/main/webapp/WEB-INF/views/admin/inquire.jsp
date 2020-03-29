@@ -64,7 +64,8 @@
 
 <body>
 	<jsp:include page="../common/menubar.jsp" />
-	<form action="insertInquire.ad" method="post" class="insertForm">
+	<p style="text-align: left; font-size: 30px; width:1290px; margin: 0 auto; margin-top: 30px; margin-bottom: -40px">문의</p>
+	<form action="insertInquire.ad" method="post" class="insertForm">		
 		<div id="content" class="row">
 			<div class="col-md-10">
 				<div class="box box-info">
@@ -82,10 +83,7 @@
 											<input type="text" autocomplete="off" placeholder="제목을 입력하세요"
 												name="title" class="form-control" id="input-title" style="width:600px; display: inline;">
 										</div>
-										<div class="col-md-offset-2 col-md-10">
-											<div class="hint-block" style="font-size: 12px; margin-left: 100px;">제목은 변경할
-												수 없습니다</div>
-										</div>
+										
 										<div class="col-md-offset-2 col-md-10">
 											<div class="help-block"></div>
 										</div>
@@ -263,8 +261,13 @@
 									<div class="form-group">
 										<label for="job-desc" class="control-label col-md-3"
 											style="font-weight: bold">문의 내용</label>
+										<div class="col-md-offset-2 col-md-10">
+											<div class="hint-block" style="font-size: 12px;">
+												한번 작성된 문의는 변경하실 수 없습니다.</div>
+											</div>
+										</div>
 										<div class="col-md-10">
-											<textarea name="content" class="textarea"></textarea>
+											<textarea name="content" class="textarea" id="textarea"></textarea>
 										</div>
 										<div class="col-md-offset-2 col-md-10"></div>
 										<div class="col-md-offset-2 col-md-10">
@@ -276,6 +279,7 @@
 						</fieldset>
 					</div>
 				</div>
+				
 			<div>
 					<button class="btn btn-outline-success" id="submitBtn"
 						style="margin-left: 532px">작성</button>
@@ -288,9 +292,24 @@
 			</div>
 		</div>
 		<script>
+		$('#submitBtn').click(function() {
+			var text = $('#textarea');
+			var title = $('#input-title');
+			if(title.val() == "") {
+				alert("제목을 입력하세요");
+				$('#submitBtn').prop("type", "button");
+				title.focus();
+			}else if(text.val() == "") {
+				alert("문의 내용을 입력하세요");
+				$('#submitBtn').prop("type", "button");
+				text.focus();
+			}else {
+				$('#submitBtn').prop("type", "none");
+			}
+		});
 			function cancel() {
-				if(window.confirm("작성을 취소하고 목록으로 이동하시겠습니까?")) {
-					location.href = "boardList.bo";
+				if(window.confirm("문의 작성을 취소하고 목록으로 이동하시겠습니까?")) {
+					location.href = "memberInquireList.ad";
 				}
 			}
 		</script>

@@ -31,7 +31,7 @@ body {
 	<jsp:include page="../../common/left-menubar.jsp" />
 
 	<div class="table">
-		<div id="piechart_3d" style="width: 1300px; height: 600px;">
+		<div id="piechart_3d" style="width: 1300px; height: 650px;">
 			<script type="text/javascript">
 				google.charts.load("current", {
 					packages : [ "corechart" ]

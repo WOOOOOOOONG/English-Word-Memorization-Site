@@ -36,12 +36,15 @@ public class AdminController {
 		ArrayList<Member> memberList = mService.selectList();
 		ArrayList<Inquire> inqList = aService.selectInquireList();
 		ArrayList<Classs> cList = cService.selectClassList();
-		ArrayList<Board> bList = bService.BoardAllList();
+		ArrayList<Board> bList = bService.boardViewList();
+		ArrayList<Board> noticeList = bService.noticeList();
 		
 		mv.addObject("inquireList", inqList);
 		mv.addObject("mList", memberList);
 		mv.addObject("cList", cList);
 		mv.addObject("bList", bList);
+		mv.addObject("nList" , noticeList);
+		
 		mv.setViewName("/common/mainPage");
 		
 		return mv;
@@ -162,7 +165,6 @@ public class AdminController {
 		Inquire inq = new Inquire();
 		inq.setiId(Integer.parseInt(iId));
 		inq.setAnswer(text);
-		System.out.println(text);
 		
 		int result = aService.insertResponse(inq);
 		
@@ -180,7 +182,7 @@ public class AdminController {
 			mv.addObject("msg", "문의 응답 작성 실패!");
 		}
 		
-		mv.setViewName("redirect:/viewTotal.ad");
+		viewTotal(mv);
 		return mv;
 	}
 	

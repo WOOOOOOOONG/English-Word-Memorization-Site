@@ -29,6 +29,10 @@
 	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <style>
 #top {
 	width: 99vw;
@@ -240,6 +244,12 @@ footer p {
 #index2 {
 	
 }
+
+.fa-user-circle {
+	font-size: 12px;
+	margin-left: -1px;
+	margin-top: -2px;
+}
 </style>
 <script>
 	$(function() {
@@ -270,19 +280,19 @@ footer p {
 		<section id="vision">
 			<!-- <div class="content"> -->
 			<!-- <p style="font-size: 40px; font-family: 'Roboto', sans-serif;">We Have a Vision</p> -->
-			<p style="font-size: 30px;">지루하게 공부하는 단어는 의미가 없습니다.</p>
+			<p style="font-size: 33px;">더 이상 지루하게 공부하지 마세요!</p>
 			<p>
 				<b style="font-size: 1.5em">옥</b>스퍼드 영어사전에 기재된 영단어는 75만개가 넘습니다. 또한,
 				수능 기출 어휘는 약 2,400개, 공무원 기출 영단어 중 직무 공통 영단어만 축소해 3600개입니다. 이렇게 많은
-				영단어를 외우기 위해서는 꿈에 대한 의지뿐만 아니라 가장 중요한 요소가 하나 있습니다. 바로 재미입니다. 재미있게 공부를
-				하면 시간가는 줄 모르고 꾸준하게 공부할 수 있습니다. 저희 'SEW'에서는 사용자분들이 '재미있게'공부할 수 있도록
+				영단어를 외우기 위해서는 꿈에 대한 의지뿐만 아니라 가장 중요한 요소가 하나 있습니다. 바로 <b style="font-size: 1.2em">재미</b>입니다. 재미있게 공부를
+				하면 시간가는 줄 모르고 꾸준하게 공부할 수 있습니다. 저희 <b style="font-size: 1.2em">'SEW'</b>에서는 사용자분들이 '재미있게'공부할 수 있도록
 				초점을 맞추어 서비스를 제공합니다.
 			</p>
 			<p>
 				<b style="font-size: 1.5em">저</b>희 SEW에서 영단어를 즐길 수 있는 방법은 크게 3가지입니다.
-				스스로 단어장을 만들고, 다른 사용자와 공유하고, 같은 목적을 가진 다른 사람과 함께 공부하는 방법입니다. 각각의 방법을
+				스스로 <b style="font-size: 1.2em">단어장</b>을 만들어 다른 사용자와 <b style="font-size: 1.2em">공유</b>하고, 같은 목적을 가진 다른 사람과 <b style="font-size: 1.2em">클래스</b>를 만들어 함께 공부하는 방법입니다. 각각의 방법을
 				보좌하기 위해 단어장을 낱말카드로 학습할 수 있고, 다른 사용자가 만든 좋은 단어장을 공유받아 나의 단어장처럼 사용할 수
-				있고, 클래스에서 클래스장 하에 실행하는 시험으로 틈틈히 자신이 얼마나 외웠는지 테스트하고 나만의 단어 공부 진행표를
+				있고, 클래스에서 클래스장 하에 실행하는 시험으로 틈틈히 자신이 얼마나 외웠는지 <b style="font-size: 1.2em">테스트</b>하고 나만의 단어 공부 진행표를
 				마이페이지에서 꼼꼼하게 진행하세요!
 			</p>
 			<!-- </div> -->
@@ -305,13 +315,15 @@ footer p {
 					<!--  class="col-sm-6 main-block-left" -->
 					<div class="main-block">
 						<h4 class="main-header">
-							<i class="fa fa-flag"></i> 공지사항
+						<a href="boardList.bo">
+          					<span class="glyphicon glyphicon-exclamation-sign"></span>
+          				</a>공지사항
 						</h4>
 						<div class="panel panel-default" style="width: 380px;">
 							<!-- Table -->
 							<ul class="list-group">
 								<c:set var="i" value="1" />
-								<c:forEach var="item" items="${bList}">
+								<c:forEach var="item" items="${nList}">
 									<c:if test="${item.type eq 1 && i <= 5}">
 										<c:set var="i" value="${i + 1}" />
 										<li
@@ -321,15 +333,14 @@ footer p {
 													<a href="detailBoard.bo?bId=${item.bId}">${item.title}</a>
 													<div class="list-group-item-author pull-right clearfix">
 														<div class='avatar avatar-x-small clearfix '>
-															<a href='/user/info/45597' class='avatar-photo'><img
-																src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+															<a href='#' class='avatar-photo'><i class='fas fa-user-circle'></i></a>
 															<div class="avatar-info">
-																<a class="nickname" href="/user/info/45597" title="OKKY">${item.referNickname}</a>
+																<a class="nickname" href="/user/info/45597" title="${item.referNickname}">${item.referNickname}</a>
 																<div class="activity">
-																	<span class="fa fa-flash"></span> ${item.views}
+																	<i class="fa fa-eye"></i> ${item.views}
 																</div>
 																<div class="date-created">
-																	<span class="timeago" title="2020-02-26 15:06:11.0">${item.createDate }</span>
+																	<span class="timeago" title="${item.createDate}">${item.createDate}</span>
 																</div>
 															</div>
 														</div>
@@ -347,7 +358,9 @@ footer p {
 					style="width: 420px; position: inline; float: left;">
 					<div class="main-block">
 						<h4 class="main-header">
-							<i class="fa fa-star"></i> 인기 게시글
+							<a href="boardList.bo">
+					          <span class="glyphicon glyphicon-comment"></span>
+					        </a>인기 게시글
 						</h4>
 						<div class="panel panel-default" style="width: 380px;">
 							<ul class="list-group">
@@ -362,15 +375,14 @@ footer p {
 													<a href="detailBoard.bo?bId=${item.bId}">${item.title}</a>
 													<div class="list-group-item-author pull-right clearfix">
 														<div class='avatar avatar-x-small clearfix '>
-															<a href='/user/info/45597' class='avatar-photo'><img
-																src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+															<a href='#' class='avatar-photo'><i class='fas fa-user-circle'></i></a>
 															<div class="avatar-info">
-																<a class="nickname" href="/user/info/45597" title="OKKY">${item.referNickname}</a>
+																<a class="nickname" href="/user/info/45597" title="${item.referNickname}">${item.referNickname}</a>
 																<div class="activity">
-																	<span class="fa fa-flash"></span> ${item.views}
+																	<i class="fa fa-eye"></i> ${item.views}
 																</div>
 																<div class="date-created">
-																	<span class="timeago" title="2020-02-26 15:06:11.0">${item.createDate }</span>
+																	<span class="timeago" title="${item.createDate }">${item.createDate }</span>
 																</div>
 															</div>
 														</div>
@@ -396,11 +408,13 @@ footer p {
 					style="width: 420px; position: inline; float: left;">
 					<div class="main-block">
 						<h4 class="main-header">
-							<i class="fa fa-flag"></i> 인기 단어장
+							<a href="#">
+					          <span class="glyphicon glyphicon-book"></span>
+					        </a> 인기 단어장
 						</h4>
 						<div class="panel panel-default" style="width: 380px;">
 							<!-- Table -->
-							<ul class="list-group">
+							<ul class="list-group" id="voca-list-group">
 								<c:set var="i" value="1" />
 								<c:forEach var="item" items="${bList}">
 									<c:if test="${item.type eq 1 && i <= 5}">
@@ -412,15 +426,14 @@ footer p {
 													<a href="detailBoard.bo?bId=${item.bId}">${item.title}</a>
 													<div class="list-group-item-author pull-right clearfix">
 														<div class='avatar avatar-x-small clearfix '>
-															<a href='/user/info/45597' class='avatar-photo'><img
-																src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+															<a href='#' class='avatar-photo'><i class='fas fa-user-circle'></i></a>
 															<div class="avatar-info">
-																<a class="nickname" href="/user/info/45597" title="OKKY">${item.referNickname}</a>
+																<a class="nickname" href="/user/info/45597" title="${item.referNickname}">${item.referNickname}</a>
 																<div class="activity">
-																	<span class="fa fa-flash"></span> ${item.views}
+																	<i class="fa fa-eye"></i> ${item.views}
 																</div>
 																<div class="date-created">
-																	<span class="timeago" title="2020-02-26 15:06:11.0">${item.createDate }</span>
+																	<span class="timeago" title="${item.createDate }">${item.createDate }</span>
 																</div>
 															</div>
 														</div>
@@ -432,13 +445,86 @@ footer p {
 								</c:forEach>
 							</ul>
 						</div>
+						<script>
+						var vocaList = Array();
+						var vocaLength = 0;
+						
+						
+						setTimeout(function() {
+							startAjax();
+						}, 3000);	
+						
+						function startAjax() {
+						$.ajax(
+					            {
+					                type: "POST",
+					                dataType: "json",
+					                contentType: "application/json; charset=utf-8",
+					                data: JSON.stringify({_id:"CSID_45"}),
+					                url: 'http://localhost:1222/total',
+					                success: function (data) {
+					                        var vocaLengthText = $("#vocaLength");
+					                        var $vocaListGroup = $('#voca-list-group');
+					                        vocaLength = data.length;
+					                        
+											// 2차원 배열화
+											for(var i = 0; i < vocaLength; i++) {
+												vocaList[i] = new Array();
+											}
+					                        
+											// 단어 데이터 추출
+					                        for(var i = 0; i < vocaLength; i++) {
+					                        	vocaList[i][0] = data[i].title;
+					                        	vocaList[i][1] = data[i].userId;
+					                        	vocaList[i][2] = data[i].privilege.length;
+					                        	vocaList[i][3] = data[i].category;
+					                        	
+					                        }
+					                        console.log(vocaList);
+					                        
+					                        // 값 넣기
+					                        for(var i = 0; i < 5; i++) {
+					                        	var $content = $('<li class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">'
+													+ '<div class="list-title-wrapper">'
+													+ '<h5 class="list-group-item-heading list-group-item-evaluate">'
+													+ '<a href="detailBoard.bo?bId=${item.bId}">' + vocaList[i][0] + '</a>'
+													+ '<div class="list-group-item-author pull-right clearfix">'
+													+ '<div class="avatar avatar-x-small clearfix ">'
+													+ '<a href="#" class="avatar-photo"><i class="fas fa-user-circle"></i></a>'
+													+ '<div class="avatar-info">'
+													+ '<a class="nickname" href="/user/info/45597" title="' + vocaList[i][1] + '">' + vocaList[i][1] + '</a>'
+													+ '<div class="activity">'
+													+ '<i class="fa fa-eye"></i> ' + vocaList[i][2]
+													+ '</div>'
+													+ 'div class="date-created">'
+													+ '<span class="timeago" title="' + vocaList[i][3] + '">' + vocaList[i][3] + '</span>'
+													+ '</div>'
+													+ '</div>'
+													+ '</div>'
+													+ '</div>'
+													+ '</h5>'
+													+ '</div>'
+													+ '</li>');
+					                        	
+					                        	$vocaListGroup.append(content);
+					                        }
+					                },
+					                error: function () {
+					                    alert("데이타베이스 연결에 실패하였습니다");
+					                    console.log("error has occured retriving data from MongoServer")
+					                }
+					            });
+						}
+						</script>
 					</div>
 				</div>
 				<div
 					style="width: 420px; position: inline; float: left;">
 					<div class="main-block">
 						<h4 class="main-header">
-							<i class="fa fa-star"></i> 인기 클래스
+							<a href="ClassList.do">
+					          <span class="glyphicon glyphicon-user"></span>
+					        </a> 인기 클래스
 						</h4>
 						<div class="panel panel-default" style="width: 380px;">
 							<ul class="list-group">
@@ -453,15 +539,14 @@ footer p {
 													<a href="classdetail.do?cNo=${item.cNo}">${item.title}</a>
 													<div class="list-group-item-author pull-right clearfix">
 														<div class='avatar avatar-x-small clearfix '>
-															<a href='/user/info/45597' class='avatar-photo'><img
-																src='//www.gravatar.com/avatar/b66da5ef6099211f5db8f5f7a3b4c36b?d=identicon&s=10' /></a>
+															<a href='#' class='avatar-photo'><i class='fas fa-user-circle'></i></a>
 															<div class="avatar-info">
-																<a class="nickname" href="/user/info/45597" title="OKKY">${item.ornerId}</a>
+																<a class="nickname" href="/user/info/45597" title="${item.ornerId}">${item.ornerId}</a>
 																<div class="activity">
-																	<span class="fa fa-flash"></span> ${item.classCount}
+																	<i class="fa fa-eye"></i> ${item.classCount}
 																</div>
 																<div class="date-created">
-																	<span class="timeago" title="2020-02-26 15:06:11.0">${item.classCreateDate}</span>
+																	<span class="timeago" title="${item.classCreateDate}">${item.classCreateDate}</span>
 																</div>
 															</div>
 														</div>
@@ -480,7 +565,7 @@ footer p {
 			</div>
 		</div>
 	</section>
-	<div style="min-height: calc(100vh - 360px);"></div>
+	<div style="min-height: calc(100vh - 240px);"></div>
 	<jsp:include page="../common/footer.jsp"/>
 </body>
 </html>
