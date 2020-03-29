@@ -21,6 +21,10 @@ public class BoardDao {
 		return sqlSession.selectOne("boardMapper.getListCount");
 	}
 	
+	public int getSearchListCount(Search search) {
+		return sqlSession.selectOne("boardMapper.getSearchListCount", search);
+	}
+	
 	public int addReadCount(int bId) {
 		return sqlSession.update("boardMapper.updateCount", bId);
 	}
@@ -69,11 +73,22 @@ public class BoardDao {
 		sqlSession.update("boardMapper.reportCountUp", rId);
 	}
 
-	public ArrayList<Board> searchList(Search search) {
-		return (ArrayList)sqlSession.selectList("boardMapper.searchList", search);
+	public ArrayList<Board> searchList(Search search, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.searchList", search, rowBounds);
 	}
 
 	public int deleteBoardReply(int rId) {
 		return sqlSession.delete("boardMapper.deleteBoardReply", rId);
+	}
+
+	public ArrayList<Board> noticeList() {
+		return (ArrayList)sqlSession.selectList("boardMapper.noticeList");
+	}
+
+	public ArrayList<Board> boardViewList() {
+		return (ArrayList)sqlSession.selectList("boardMapper.boardViewList");
 	}
 }

@@ -17,6 +17,7 @@
 
 <style>
 form {
+	
 }
 
 .hide {
@@ -42,8 +43,9 @@ form {
 }
 
 #table {
-	width:1100px;
+	width: 1100px;
 	margin: 0 auto;
+	margin-bottom: -113px;
 }
 
 .imotion {
@@ -97,6 +99,16 @@ form {
 .imo:hover+p.arrow_box {
 	display: block;
 }
+
+#registbtn {
+	background-image: url( "resources/images/writeicon.png" );
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 30px;
+	height: 30px;
+	border: 1px solid #ced4da;
+	border-radius: .25rem;
+}
 </style>
 </head>
 
@@ -107,6 +119,7 @@ form {
 	<br>
 	<form action="response.ad" method="POST">
 		<div class="table" id="table">
+			<p style="text-align: left; font-size: 30px; margin-bottom: -30px;">고객센터</p>
 			<table id="table_id" class="display">
 				<thead>
 					<tr>
@@ -122,17 +135,20 @@ form {
 					</tr>
 				</thead>
 				<tbody>
-					<c:set var="index" value="1"/>
-					<c:forEach var="item" items="${ mInquireList }">						
+					<c:set var="index" value="1" />
+					<c:forEach var="item" items="${ mInquireList }">
 						<tr class="view">
-							<td>${index}
-								<c:set var="index" value="${index+1}"/>
+							<td>${index}<c:set var="index" value="${index+1}" />
 							</td>
 							<td>${item.inquirerId}</td>
 							<td>${item.name}</td>
 							<td>${item.title}</td>
 							<td>${item.registDate}</td>
-							<td>${item.isAnswer}</td>
+							<td><c:if test="${item.isAnswer eq 'Y'}">
+									완료
+								</c:if> <c:if test="${item.isAnswer eq 'N'}">
+									미답변
+								</c:if></td>
 							<td><c:if test="${item.type eq 0}">
 											시스템
 										</c:if> <c:if test="${item.type eq 1}">
@@ -146,17 +162,22 @@ form {
 										</c:if> <c:if test="${item.type eq 5}">
 											기타
 							</c:if></td>
-							<td>${item.reportedId}</td>
 							<td>
-								<i class="fa fa-archive" style="font-size:28px;" onclick="deleteBtn('${item.iId}');"></i>
-								<script>
+								<c:if test="${item.reportedId eq null}">
+									없음
+								</c:if> 
+								<c:if test="${item.reportedId ne null}">
+									${item.reportedId }
+								</c:if>
+							</td>
+							<td><i class="fa fa-archive" style="font-size: 28px;"
+								onclick="deleteBtn('${item.iId}');"></i> <script>
 									function deleteBtn(iId) {
 										if(confirm("해당 문의를 삭제하시겠습니까?")) {
 											location.href="deleteInquire.ad?iId="+iId;
 										}
 									}
-								</script>
-							</td>
+								</script></td>
 						</tr>
 						<tr class="inquire">
 							<td colspan="9"><textarea style="width: 100%; height: 200px"
@@ -205,16 +226,20 @@ form {
 				</tbody>
 			</table>
 
-			<input type="button" value="글쓰기" style="margin-top: -40px; position: absolute;" 
-				onclick="location.href='insertInquireView.ad'" />
-		
+			<div class="regist">
+				<button type="button" id="registbtn"
+					style="margin-top: -40px; position: absolute;"
+					data-toggle="tooltip" data-placement="bottom"
+					onclick="location.href='insertInquireView.ad'" title="글 작성">
+				</button>
+			</div>
 			<script>
 				$(document).ready(
 						function() {
 							// DataTable 정의
 							$('#table_id').DataTable({
 								"ordering" : false,
-								"pageLength" : 40,
+								"pageLength" : 30,
 								"language" : {
 									"emptyTable" : "등록한 문의가 없습니다."
 								}
@@ -236,12 +261,30 @@ form {
 														".answer-button")
 												.slideToggle();
 									});
+
+							$(".paging_simple_numbers").click(function() {
+								$(".inquire").hide();
+								$(".answer").hide();
+								$(".answer-button").hide();
+								
+								$(".view").click(
+										function() {
+											$(this).next(".inquire").slideToggle();
+											$(this).next(".inquire")
+													.next(".answer").slideToggle();
+											$(this).next(".inquire")
+													.next(".answer").next(
+															".answer-button")
+													.slideToggle();
+										});
+							});
 						});
+				
 			</script>
 		</div>
 	</form>
 	<div style="min-height: calc(100vh - 360px);"></div>
-	<jsp:include page="../common/footer.jsp"/>
+	<jsp:include page="../common/footer.jsp" />
 </body>
 
 </html>

@@ -41,9 +41,9 @@
 @import
 	url("//netdna.bootstrapcdn.com/bootstrap/3.0.0-rc2/css/bootstrap-glyphicons.css")
 	;
-<style>
-/* 전체 */
-body {
+
+<
+style> /* 전체 */ body {
 	font-family: "Open Sans", Helvetica Neue, Helvetica, Arial, sans-serif;
 }
 
@@ -57,8 +57,11 @@ body {
 <body>
 	<div class="chart">
 		<div class="chart2 left">
+			<!-- <button type="button"
+							class="btn btn-outline-secondary btn-sm moreBtn2"
+							onclick="goHomePage(3);">크게 보기</button> -->
 			<div class="table chart-table">
-				<div id="chart_divC" style="width: 1200px; height: 600px">
+				<div id="chart_divC" style="width: 1300px; height: 650px">
 					<script>
 									google.charts.load('current', {
 										packages : [ 'corechart', 'bar' ]
@@ -76,7 +79,7 @@ body {
 											</c:forEach>
 										]);
 										var options = {
-											title : '인기 클래스',
+											title : '최다 조회수',
 											backgroundColor : "",
 											focusTarget : 'category',
 											hAxis : {
@@ -91,12 +94,14 @@ body {
 													color : '#053061',
 													bold : true,
 													italic : false,
+													fontName: "Roboto"
 												},
 												titleTextStyle : {
 													fontSize : 18,
 													color : '#053061',
 													bold : true,
-													italic : false
+													italic : false,
+													fontName: "Roboto"
 												},
 												gridlines : {
 													count : 24
@@ -104,16 +109,18 @@ body {
 											},
 											vAxis : {
 												textStyle : {
-													fontSize : 18,
+													fontSize : 14,
 													color : '#67055f',
 													bold : false,
-													italic : false
+													italic : false,
+													fontName: "Roboto"
 												},
 												titleTextStyle : {
 													fontSize : 18,
 													color : '#67055f',
 													bold : true,
-													italic : false
+													italic : false,
+													fontName: "Roboto"
 												}
 											}
 										};
@@ -126,7 +133,6 @@ body {
 				</div>
 			</div>
 		</div>
-	</div>
 </body>
 
 </html>

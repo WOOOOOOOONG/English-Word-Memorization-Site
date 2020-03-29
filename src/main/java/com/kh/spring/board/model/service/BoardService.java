@@ -79,11 +79,22 @@ public class BoardService {
 		bDao.reportReply(rId);
 	}
 
-	public ArrayList<Board> searchList(Search search) {
-		return bDao.searchList(search);
+	public ArrayList<Board> searchList(Search search, int page) {
+		int listCount = bDao.getSearchListCount(search);
+		PageInfo pi = Pagination.getPageInfo(page, listCount);
+				
+		return bDao.searchList(search, pi);
 	}
 
 	public int deleteBoardReply(int rId) {
 		return bDao.deleteBoardReply(rId);
+	}
+
+	public ArrayList<Board> noticeList() {
+		return bDao.noticeList();
+	}
+
+	public ArrayList<Board> boardViewList() {
+		return bDao.boardViewList();
 	}
 }

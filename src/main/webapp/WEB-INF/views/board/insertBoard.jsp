@@ -42,6 +42,7 @@
 	<jsp:include page="../common/menubar.jsp" />
 
 	<form action="insertBoard.bo" method="post" class="insertForm">
+		<p style="text-align: left; font-size: 30px; margin-left: 50px; margin-bottom: -20px;">게시글 작성</p>
 		<div id="content" class="row">
 			<div class="col-md-10">
 				<div class="box box-info">
@@ -59,11 +60,7 @@
 											style="font-weight: bold; display: inline; float: left; width: 100px; margin-top: 5px;">제목</label>
 										<div class="col-md-10">
 											<input type="text" autocomplete="off" placeholder="제목을 입력하세요"
-												name="title" class="form-control" id="input-title" style="width:600px; display: inline;" id="title">
-										</div>
-										<div class="col-md-offset-2 col-md-10">
-											<div class="hint-block" style="font-size: 12px; margin-left: 100px;">제목은 변경할
-												수 없습니다</div>
+												name="title" class="form-control" id="input-title" style="width:600px; display: inline;">
 										</div>
 										<div class="col-md-offset-2 col-md-10">
 											<div class="help-block"></div>
@@ -141,14 +138,16 @@
 			}
 			
 			$('#submitBtn').click(function() {
-				var text = $('#textarea').val();
-				var title = $('#title').val();
-				if(title == "") {
+				var text = $('#textarea');
+				var title = $('#input-title');
+				if(title.val() == "") {
 					alert("제목을 입력하세요");
 					$('#submitBtn').prop("type", "button");
-				}else if(text == "") {
-					alert("문의 내용을 입력하세요");
+					title.focus();
+				}else if(text.val() == "") {
+					alert("게시글 내용을 입력하세요");
 					$('#submitBtn').prop("type", "button");
+					text.focus();
 				}else {
 					$('#submitBtn').prop("type", "none");
 				}

@@ -51,46 +51,45 @@ body {
 </style>
 </head>
 <body>
-	<div class="chart2 left">
-		<div class="table chart-table">
-			<div id="piechart_4d" style="width: 1200px; height: 600px;">
-				<c:set var="cType0" value="0" />
-				<c:set var="cType1" value="0" />
-				<c:set var="cType2" value="0" />
-				<c:set var="cType3" value="0" />
-				<c:set var="cType4" value="0" />
-				<c:set var="cType5" value="0" />
-				<c:set var="cType6" value="0" />
-				<c:set var="cType7" value="0" />
-				<c:forEach var="item" items="${cvList}">
-					<c:choose>
-						<c:when test="${item.cateId eq 0}">
-							<c:set var="cType0" value="${cType0 + 1}" />
-						</c:when>
-						<c:when test="${item.cateId eq 1}">
-							<c:set var="cType1" value="${cType1 + 1}" />
-						</c:when>
-						<c:when test="${item.cateId eq 2}">
-							<c:set var="cType2" value="${cType2 + 1}" />
-						</c:when>
-						<c:when test="${item.cateId eq 3}">
-							<c:set var="cType3" value="${cType3 + 1}" />
-						</c:when>
-						<c:when test="${item.cateId eq 4}">
-							<c:set var="cType4" value="${cType4 + 1}" />
-						</c:when>
-						<c:when test="${item.cateId eq 5}">
-							<c:set var="cType5" value="${cType5 + 1}" />
-						</c:when>
-						<c:when test="${item.cateId eq 6}">
-							<c:set var="cType6" value="${cType6 + 1}" />
-						</c:when>
-						<c:when test="${item.cateId eq 7}">
-							<c:set var="cType7" value="${cType7 + 1}" />
-						</c:when>
-					</c:choose>
-				</c:forEach>
-				<script type="text/javascript">
+	<div class="table chart-table">
+		<div id="piechart_4d" style="width: 1800px; height: 650px;">
+			<c:set var="cType0" value="0" />
+			<c:set var="cType1" value="0" />
+			<c:set var="cType2" value="0" />
+			<c:set var="cType3" value="0" />
+			<c:set var="cType4" value="0" />
+			<c:set var="cType5" value="0" />
+			<c:set var="cType6" value="0" />
+			<c:set var="cType7" value="0" />
+			<c:forEach var="item" items="${cvList}">
+				<c:choose>
+					<c:when test="${item.cateId eq 0}">
+						<c:set var="cType0" value="${cType0 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 1}">
+						<c:set var="cType1" value="${cType1 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 2}">
+						<c:set var="cType2" value="${cType2 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 3}">
+						<c:set var="cType3" value="${cType3 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 4}">
+						<c:set var="cType4" value="${cType4 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 5}">
+						<c:set var="cType5" value="${cType5 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 6}">
+						<c:set var="cType6" value="${cType6 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 7}">
+						<c:set var="cType7" value="${cType7 + 1}" />
+					</c:when>
+				</c:choose>
+			</c:forEach>
+			<script type="text/javascript">
 									var type = new Array();
 									type[0] = ${cType0};
 									type[1] = ${cType1};
@@ -112,11 +111,12 @@ body {
 												[ '기타', type[4] ], [ 'ㄴㄴ', type[5] ], [ 'ㅇㅇ', type[6] ], [ 'ㄹㄹ', type[7] ] ]);
 										 
 										var options = {
-											title : '클래스 분포',
-											titleFontSize : 18,
-											fontSize : 18,
+											title : '유형별',
+											titleFontSize : 20,
+											fontSize : 20,
 											is3D : true,
-											backgroundColor : ""
+											backgroundColor : "",
+											fontName: "Roboto"
 										};
 					
 										var chart = new google.visualization.PieChart(document
@@ -124,10 +124,8 @@ body {
 										chart.draw(data, options);
 									}
 								</script>
-			</div>
 		</div>
 	</div>
-
 </body>
 
 </html>

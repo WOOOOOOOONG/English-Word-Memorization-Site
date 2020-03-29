@@ -42,7 +42,8 @@
 	<jsp:include page="../common/menubar.jsp" />
 
 	<form action="updateBoard.bo" method="post" class="updateForm">
-		<div id="content" class="row">
+		<p style="text-align: left; font-size: 30px; margin-left: 50px; margin-bottom: -20px;">게시글 수정</p>		
+		<div id="content" class="row">			
 			<div class="col-md-10">
 				<div class="box box-info">
 					<div class="box-body">
@@ -61,11 +62,9 @@
 											style="font-weight: bold; display: inline; float: left; width: 100px; margin-top: 5px;">제목</label>
 										<div class="col-md-10">
 											<input type="text" autocomplete="off" value="${ detailBoard.title }"
-												name="title" class="form-control" id="input-title" style="width:600px; display: inline;" readonly>
+												name="title" class="form-control" id="input-title" style="width:600px; display: inline;">
 										</div>
 										<div class="col-md-offset-2 col-md-10">
-											<div class="hint-block" style="font-size: 12px; margin-left: 100px;">제목은 변경할
-												수 없습니다</div>
 										</div>
 										<div class="col-md-offset-2 col-md-10">
 											<div class="help-block"></div>
@@ -137,17 +136,26 @@
 				</div>
 			</div>
 		</div>
-		<!-- <div>
-			<button class="btn btn-outline-success" id="submitBtn"
-				style="position: absolute; margin-left: 580px;"
-				onmouseover="inquire();">Success</button>
-			<button type="button" class="btn btn-outline-danger"
-				style="position: absolute; margin-left: 700px;">Danger</button>
-		</div> -->
 		<div id="saveText" style="display:none;">
 		
 		</div>
 		<script>
+			$('#submitBtn').click(function() {
+				var text = $('.textarea');
+				var title = $('#input-title');
+				if(title.val() == "") {
+					alert("제목을 입력하세요");
+					$('#submitBtn').prop("type", "button");
+					title.focus();
+				}else if(text.val() == "") {
+					alert("게시글 내용을 입력하세요");
+					$('#submitBtn').prop("type", "button");
+					text.focus();
+				}else {
+					$('#submitBtn').prop("type", "none");
+				}
+			});
+		
 			function cancel() {
 				if(window.confirm("게시판 수정을 취소하고 상세보기로 이동하시겠습니까?")) {
 					location.href = "detailBoard.bo?bId="+${detailBoard.bId};

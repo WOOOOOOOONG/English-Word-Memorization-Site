@@ -32,7 +32,7 @@ body {
 	<jsp:include page="../../common/left-menubar.jsp" />
 
 	<div class="table">
-		<div id="chart_div" style="width: 1300px; height: 600px">
+		<div id="chart_div" style="width: 1300px; height: 650px">
 			<script>
 				google.charts.load('current', {
 					packages : [ 'corechart', 'bar' ]

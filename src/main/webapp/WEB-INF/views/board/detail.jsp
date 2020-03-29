@@ -15,6 +15,7 @@
       margin: 0 auto;
       margin-top: 50px;
       min-height:650px;
+      margin-bottom: 60px;
    }
    
    .board-detail {
@@ -206,6 +207,7 @@
    <jsp:include page="../common/menubar.jsp"/>
 
    <div class="whole">
+   	<p style="text-align: left; font-size: 30px; margin-bottom: -30px;">게시판</p>
       <div class="board-detail">
          <hr class="line1">
          <h4 style="display: inline;">|

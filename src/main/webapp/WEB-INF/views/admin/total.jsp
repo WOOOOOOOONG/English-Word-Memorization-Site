@@ -277,6 +277,7 @@ nav.sidebar ul li.active a.expandable:hover {
 	/* background: whitesmoke; */
 	width: 650px;
 	height: 300px;
+	cursor: pointer;
 }
 
 .left {
@@ -359,7 +360,7 @@ nav.sidebar ul li.active a.expandable:hover {
 				class='glyphicon glyphicon-align-justify'></span>
 			</a>
 			<ul>
-				<li class='active'><a class='expandable' href='#sec1'
+				<li class='expandable'><a class='expandable' href='#sec1'
 					title='Dashboard'> <span
 						class='glyphicon glyphicon-home collapsed-element'></span> <span
 						class='expanded-element'>HOME</span>
@@ -374,7 +375,7 @@ nav.sidebar ul li.active a.expandable:hover {
 				</a></li>
 				<li><a class='expandable' href='#sec4' title='Settings'> <span
 						class='glyphicon glyphicon-cog collapsed-element'></span> <span
-						class='expanded-element'>Settings</span>
+						class='expanded-element'>stats</span>
 				</a></li>
 			</ul>
 			<a href='Memberlogout.me' id='logout-icon' title='Logout'> <span
@@ -576,7 +577,14 @@ nav.sidebar ul li.active a.expandable:hover {
 									<td>${item.name}</td>
 									<td>${item.title}</td>
 									<td>${item.registDate}</td>
-									<td>${item.isAnswer}</td>
+									<td>
+										<c:if test="${item.isAnswer eq 'Y'}">
+											완료
+										</c:if>
+										<c:if test="${item.isAnswer eq 'N'}">
+											미답변
+										</c:if>
+									</td>
 									<td><c:if test="${item.type eq 0}">
 											시스템
 										</c:if> <c:if test="${item.type eq 1}">
@@ -591,7 +599,7 @@ nav.sidebar ul li.active a.expandable:hover {
 											기타
 									</c:if></td>
 									<td><c:if test="${item.reportedId eq null}">
-											X
+											없음
 										</c:if> <c:if test="${item.reportedId ne null}">
 											${item.reportedId }
 										</c:if></td>
@@ -599,7 +607,7 @@ nav.sidebar ul li.active a.expandable:hover {
 										onclick="inquireDeleteBtn('${item.iId}');"></i> <script>
 											function inquireDeleteBtn(iId) {
 												if(confirm("해당 문의를 삭제하시겠습니까?")) {
-													location.href="deleteInquire.ad?iId="+iId;
+													location.href="deleteInquireAdmin.ad?iId="+iId;
 												}
 											}
 										</script></td>
@@ -684,12 +692,24 @@ nav.sidebar ul li.active a.expandable:hover {
 														resText.val(this.value);
 													});
 												</script>
-												<button>답변 등록</button>
+												<button type="button" class="resButton${item.iId}" onclick="response('${item.iId}');">답변 등록</button>
 											</form>
 										</td>
 									</tr>
 								</c:if>
 							</c:forEach>
+							<script>
+								function response(iId) {
+									var textarea = $('#textarea'+iId);
+									if(textarea.val() == "") {
+										alert("문의 내용을 입력하세요");
+										$('.resButton'+iId).prop("type", "button");
+										textarea.focus();
+									}else {
+										$('.resButton'+iId).prop("type", "none");
+									}
+								};
+							</script>
 						</tbody>
 					</table>
 
@@ -715,6 +735,23 @@ nav.sidebar ul li.active a.expandable:hover {
 				             	$(this).next(".inquire").next(".answer").slideToggle();
 				             	$(this).next(".inquire").next(".answer").next(".answer-button").slideToggle();
 				            });
+			              
+				            $(".paging_simple_numbers").click(function() {
+								$(".inquire").hide();
+								$(".answer").hide();
+								$(".answer-button").hide();
+								
+								$(".view").click(
+										function() {
+											$(this).next(".inquire").slideToggle();
+											$(this).next(".inquire")
+													.next(".answer").slideToggle();
+											$(this).next(".inquire")
+													.next(".answer").next(
+															".answer-button")
+													.slideToggle();
+										});
+							});
 			            });
 			            
 			            function responseDelete() {
@@ -735,7 +772,7 @@ nav.sidebar ul li.active a.expandable:hover {
 				<!-- class -->
 				<h6 class="title2">클래스 통계</h6>
 				<div class="chart">
-					<div class="chart2 left">
+					<div class="chart2 left" onclick="viewLarge(1)">
 						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(3);">크게 보기</button> -->
@@ -758,7 +795,7 @@ nav.sidebar ul li.active a.expandable:hover {
 											</c:forEach>
 										]);
 										var options = {
-											title : '인기 클래스',
+											title : '최다 조회수',
 											backgroundColor : "",
 											focusTarget : 'category',
 											hAxis : {
@@ -812,7 +849,7 @@ nav.sidebar ul li.active a.expandable:hover {
 							</div>
 						</div>
 					</div>
-					<div class="chart2 left">
+					<div class="chart2 left" onclick="viewLarge(2)">
 						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(4);">크게 보기</button> -->
@@ -876,9 +913,9 @@ nav.sidebar ul li.active a.expandable:hover {
 												[ '기타', type[4] ], [ 'ㄴㄴ', type[5] ], [ 'ㅇㅇ', type[6] ], [ 'ㄹㄹ', type[7] ] ]);
 										 
 										var options = {
-											title : '클래스 분포',
+											title : '유형별',
 											titleFontSize : 14,
-											fontSize : 18,
+											fontSize : 14,
 											is3D : true,
 											backgroundColor : "",
 											fontName: "Roboto"
@@ -898,7 +935,7 @@ nav.sidebar ul li.active a.expandable:hover {
 				<!-- inquire -->
 				<h6 class="title2">문의 통계</h6>
 				<div class="chart">
-					<div class="chart2">
+					<div class="chart2" onclick="viewLarge(3)">
 						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(5);">크게 보기</button> -->
@@ -942,9 +979,9 @@ nav.sidebar ul li.active a.expandable:hover {
 											[ '시스템', type[1] ], [ '사용자', type[2] ], [ '기타', type[3] ]]);
 				
 									var options = {
-										title : '신고 - 유형별',
-										titleFontSize : 18,
-										fontSize : 20,
+										title : '유형별',
+										titleFontSize : 14,
+										fontSize : 14,
 										is3D : true,
 										backgroundColor : ""
 									};
@@ -963,7 +1000,7 @@ nav.sidebar ul li.active a.expandable:hover {
 				<!-- visit -->
 				<h6 class="title2">방문 통계</h6>
 				<div class="chart">
-					<div class="chart2 left">
+					<div class="chart2 left" onclick="viewLarge(4)">
 						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(6);">크게 보기</button> -->
@@ -971,7 +1008,7 @@ nav.sidebar ul li.active a.expandable:hover {
 							<div id="chart_div1" style="width: 650px; height: 300px"></div>
 						</div>
 					</div>
-					<div class="chart2 left">
+					<div class="chart2 left" onclick="viewLarge(5)">
 						<!-- button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(7);">크게 보기</button> -->
@@ -1174,7 +1211,7 @@ nav.sidebar ul li.active a.expandable:hover {
 				<!-- voca -->
 				<h6 class="title2">단어장 통계</h6>
 				<div class="chart">
-					<div class="chart2 left">
+					<div class="chart2 left" onclick="viewLarge(6)">
 						<div class="table">
 							<div id="chart_div4" style="width: 650px; height: 300px">
 								<script>
@@ -1220,7 +1257,7 @@ nav.sidebar ul li.active a.expandable:hover {
 													</c:forEach>
 							                },
 							                error: function () {
-							                    alert("데이타베이스 연결에 실패하여씁니다!");
+							                    alert("데이타베이스 연결에 실패였습니다");
 							                    console.log("error has occured retriving data from MongoServer")
 							                }
 							            });
@@ -1242,7 +1279,7 @@ nav.sidebar ul li.active a.expandable:hover {
 						data4.addRows([[ vocaList[i][0], vocaList[i][1] ]]);
 					}
 					var options = {
-						title : '단어 - 전체',
+						title : '최다 조회수',
 						backgroundColor : "",
 						focusTarget : 'category',
 						hAxis : {
@@ -1257,6 +1294,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								color : '#053061',
 								bold : true,
 								italic : false,
+								fontName: "Roboto"
 							},
 							titleTextStyle : {
 								fontSize : 18,
@@ -1306,8 +1344,8 @@ nav.sidebar ul li.active a.expandable:hover {
 	
 						var options = {
 							title : '유형별',
-							titleFontSize : 18,
-							fontSize : 18,
+							titleFontSize : 14,
+							fontSize : 14,
 							is3D : true,
 							backgroundColor : ""
 						};
@@ -1321,7 +1359,7 @@ nav.sidebar ul li.active a.expandable:hover {
 							</div>
 						</div>
 					</div>
-					<div class="chart2 left">
+					<div class="chart2 left" onclick="viewLarge(7)">
 						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(5);">크게 보기</button> -->
@@ -1332,30 +1370,30 @@ nav.sidebar ul li.active a.expandable:hover {
 				</div>
 				</div>
 				<script>
-				function goHomePage(value) {
+				function viewLarge(value) {
 	            	var url = "";
 	            	
 	            	switch(value) {
 	            	case 1:
-	            		url = "${ admin1 }";
-	            		break;
-	            	case 2 :
-	            		url = "${ admin2 }";
-	            		break;
-	            	case 3:
 	            		url = "${ class2 }";
 	            		break;
-	            	case 4:
+	            	case 2 :
 	            		url = "${ class1 }";
 	            		break;
-	            	case 5:
+	            	case 3:
 	            		url = "${ inquire }";
 	            		break;
-	            	case 6:
+	            	case 4: 
+	            		url = "${ visit3 }";
+	            		break;
+	            	case 5:
 	            		url = "${ visit2 }";
 	            		break;
+	            	case 6:
+	            		url = "${ voca1 }";
+	            		break;
 	            	case 7:
-	            		url = "${ visit3 }";
+	            		url = "${ voca2 }";
 	            		break;
 	            	case 8:
 	            		url = "${ voca2 }";
@@ -1366,13 +1404,16 @@ nav.sidebar ul li.active a.expandable:hover {
 	            	default:
 	            		break;
 	            	}
-	            	console.log(url);
-	            	window.open(url, "_blank");           
+	            	var width = 1300;
+	            	var height = 650;
+	            	var openX = (window.screen.width / 2) - (width / 2);
+	            	var openY = (window.screen.height / 2) - (height / 2);
+	            	window.open(url, "_blank", "status=no, width=" + width + ",height=" + height + ", left=" + openX + ", top=" + openY);           
 	            }
 			</script>
 		</section>
 
-		<div style="height: 30px;"></div>
+		<div style="height: 30px; margin-bottom: 60px;"></div>
 	</c:if>
 
 	<c:if test="${sessionScope.loginMember.mId ne 'admin'}">
