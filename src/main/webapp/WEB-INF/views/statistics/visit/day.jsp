@@ -14,6 +14,7 @@
 <!--Load the AJAX API-->
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!-- <link rel="stylesheet" href="css/chart.css">
 <link rel="stylesheet" href="css/left-menubar.css"> -->
 <style>
@@ -60,9 +61,15 @@ body {
 		<!-- button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(7);">크게 보기</button> -->
-		<div class="table chart-table" id="t4">
+		<div class="table chart-table" id="t4" style="z-index: 10">
 			<div id="chart_div2" style="width: 1300px; height: 650px"></div>
 		</div>
+		<div style="text-align: center; ; margin-top: -60px; width:1300px; z-index: 999; position:absolute">
+				<button type="button" class="btn" id="prev">&lt;</button>
+				<button type="button" class="btn" id="curMonth"></button>
+				<button type="button" class="btn" id="next">&gt;</button>
+				
+			</div>
 	</div>
 	<script>
 								var arr1 = [];
@@ -142,13 +149,15 @@ body {
 									};
 				
 									var chart1 = new google.visualization.ColumnChart(document
-											.getElementById('chart_div1'));
+											.getElementById('chart_div2'));
 									chart1.draw(data, options);
 								}
 								
 								// 2
 								var arr2 = [];
 								var curMonth = 3;
+								var curM = $('#curMonth');
+								curM.text(curMonth + "월");
 								
 								$(document).ready(function() {
 									// 값 초기화
@@ -168,6 +177,7 @@ body {
 										if(curMonth > 1) {
 											curMonth = curMonth - 1;
 											drawAxisTickColors2();
+											curM.text(curMonth + "월");
 										}
 									});
 									
@@ -175,6 +185,7 @@ body {
 										if(curMonth < 12) {
 											curMonth = curMonth + 1;
 											drawAxisTickColors2();
+											curM.text(curMonth + "월");
 										}
 									});
 								});
