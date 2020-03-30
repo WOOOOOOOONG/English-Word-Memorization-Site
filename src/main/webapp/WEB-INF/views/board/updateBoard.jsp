@@ -76,7 +76,7 @@
 								<div class="col-sm-12">
 									<div class="form-group field-job-tipe">
 										<label for="job-tipe" class="control-label col-md-2"
-											style="font-weight: bold; float: left; width: 100px; margin-top: 5px;">유형</label>
+											style="font-weight: bold; float: left; width: 100px; margin-top: 5px;">주제</label>
 										<div class="col-md-10">
 											<select name="type" class="form-control" id="job-tipe" style="width:100px;"
 												name="type">

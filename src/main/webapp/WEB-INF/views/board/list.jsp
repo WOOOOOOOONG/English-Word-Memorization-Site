@@ -176,10 +176,19 @@ tbody>tr:hover {
 	width: 80px;
 	padding: 0 0 0 10px;
 	margin-right: 5px;
-	"
 }
 
 #searchCon2 {
+	float: left;
+	height: 30px;
+	font-size: 15px;
+	width: 175px;
+	padding: 0 0 0 10px;
+	margin-right: 5px;
+	display: none;
+}
+
+#searchCon3 {
 	float: left;
 	height: 30px;
 	font-size: 15px;
@@ -312,7 +321,7 @@ td {
 						<c:if test="${ search.searchContent eq '잡담'}">
 							<c:set var="getContent4" value="selected" />
 						</c:if>
-						<select class='selectCondition'>
+						<select class='selectCondition custom-select' style="height: 30px; font-size: 15px; width: 175px; padding: 0 0 0 10px; margin-left: 5px; display: inline;">
 							<option value='공지' ${getContent1}>공지</option>
 							<option value='단어장' ${getContent2}>단어장</option>
 							<option value='클래스' ${getContent3}>클래스</option>
@@ -322,7 +331,7 @@ td {
 							class="searchData" value="${search.searchContent}">
 					</c:if>
 					<c:if test="${search.searchCondition ne 3}">
-						<select class='selectCondition  custom-select' id="searchCon2">
+						<select class='selectCondition custom-select' id="searchCon2">
 							<option value='공지'>공지</option>
 							<option value='단어장'>단어장</option>
 							<option value='클래스'>클래스</option>
