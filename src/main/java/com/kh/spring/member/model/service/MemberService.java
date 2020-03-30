@@ -103,4 +103,10 @@ public class MemberService {
 	public int deleteMember(String mId) {
 		return mDao.deleteMember(mId);
 	}
+	public int updateMsgStatus(String mId) {
+		return mDao.updateMsgStatus(mId);
+	}
+	public void adminChat(String fId) {
+		mDao.adminChat(fId);
+	}
 }

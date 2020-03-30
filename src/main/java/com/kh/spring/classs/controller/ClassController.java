@@ -52,7 +52,7 @@ import net.sf.json.JSONArray;
 import com.kh.spring.member.model.vo.Member;
 
 
-@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList","allUserList","cnList","msg"})
+@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList","allUserList","cnList","msg","whatclick"})
 @Controller
 public class ClassController {
 	
@@ -87,7 +87,7 @@ public class ClassController {
 		mv.addObject("cList", cList);
 		mv.addObject("cateList",cateList);
 		mv.addObject("fList",fList);
-		
+		mv.addObject("whatclick", "class");
 		mv.setViewName("classs/classListView");
 
 		return mv;

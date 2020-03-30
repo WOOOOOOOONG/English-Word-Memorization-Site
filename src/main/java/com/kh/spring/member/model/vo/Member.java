@@ -15,7 +15,16 @@ public class Member {
 	private String introduce;
 	private String nickname;
 	private String profileimg;
+	private String msgStatus;
 	
+	public String getMsgStatus() {
+		return msgStatus;
+	}
+
+	public void setMsgStatus(String msgStatus) {
+		this.msgStatus = msgStatus;
+	}
+
 	public Member() {}
 
 	public Member(String mId, String pwd, String name, String birthDate, String email, String address, Date enrollDate,
@@ -135,8 +144,9 @@ public class Member {
 		return "Member [mId=" + mId + ", pwd=" + pwd + ", name=" + name + ", birthDate=" + birthDate + ", email="
 				+ email + ", address=" + address + ", enrollDate=" + enrollDate + ", updateDate=" + updateDate
 				+ ", userStatus=" + userStatus + ", introduce=" + introduce + ", nickname=" + nickname + ", profileimg="
-				+ profileimg + "]";
+				+ profileimg + ", msgStatus=" + msgStatus + "]";
 	}
+
 	
 	
 }

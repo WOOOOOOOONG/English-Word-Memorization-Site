@@ -90,4 +90,10 @@ public class MemberDao {
 	public int deleteMember(String mId) {
 		return sqlSession.update("memberMapper.deleteMember",mId);
 	}
+	public int updateMsgStatus(String mId) {
+		return sqlSession.update("memberMapper.updateMsgStatus",mId);
+	}
+	public void adminChat(String fId) {
+		sqlSession.update("memberMapper.adminChat", fId);
+	}
 }

@@ -25,7 +25,7 @@ import com.kh.spring.member.model.vo.Member;
 
 
 
-@SessionAttributes({"classs","cNo","cList","cmList","cateList","mycList"})
+@SessionAttributes({"classs","cNo","cList","cmList","cateList","mycList","whatclick"})
 @Controller
 public class commonController {
 	@Autowired
@@ -37,6 +37,7 @@ public class commonController {
 		if(n != null) {
 			mv.addAttribute("newuser", "yes");
 		}
+		mv.addAttribute("whatclick", "");
 		return "common/login";
 	}
 	@RequestMapping(value="/mypage.me")
@@ -45,12 +46,14 @@ public class commonController {
 		Member user = (Member) request.getSession().getAttribute("loginMember");
 		if(user == null) {
 			return "redirect:viewMain.ad";
-		}
+		}else if(user.getmId().equals("admin")) {
+			return "redirect:viewTotal.ad";
+		}else {
 		ArrayList<ClassMember> cmList = cService.selectMyClassList(user.getmId());
 		ArrayList<Classs> cList = new ArrayList<>();
 		ArrayList<Category> cateList = new ArrayList<>();
 		cateList = cService.selectCateList();
-		
+	
 		if(!cmList.isEmpty()) {
 			for(int i = 0 ; i < cmList.size(); i++) {
 				Classs classs = cService.selectClassOne(cmList.get(i).getcNo());
@@ -61,9 +64,11 @@ public class commonController {
 			mv.addAttribute("cList",cList);
 			mv.addAttribute("mycList",cList);
 			mv.addAttribute("cateList",cateList);
+			mv.addAttribute("whatclick", "mypage");
 		}
 				
 		return "mypage/mypage";
+		}
 		
 	}
 	// 이메일 인증코드 발송 메소드
