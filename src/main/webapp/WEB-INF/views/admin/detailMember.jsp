@@ -170,7 +170,9 @@ body {
 					</div>
 				</div>
 			</div>
+			<br><br>
 			<c:forEach var="item" begin="1" end="${i}">
+				<br>
 				<br>
 				<br>
 				<br>

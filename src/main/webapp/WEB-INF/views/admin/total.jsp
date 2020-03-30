@@ -485,7 +485,7 @@ nav.sidebar ul li.active a.expandable:hover {
 												<c:param name="userStatus" value="${ item.userStatus }" />
 											</c:url> <c:if test="${ item.userStatus eq 'Y' }">
 												<div class="imotion" style="cursor: pointer;">
-													<div>
+													<div style="border: none;">
 														<i class="fas fa-user-alt imo" style="font-size: 24px;"
 															onclick="changeStatus(this);"></i>
 														<p class="arrow_box" style="z-index: 5;">정상</p>
@@ -493,9 +493,9 @@ nav.sidebar ul li.active a.expandable:hover {
 												</div>
 											</c:if> <c:if test="${ item.userStatus eq 'N' }">
 												<div class="imotion" style="cursor: pointer;">
-													<div style="">
+													<div style="border: none;">
 														<i class="fas fa-user-alt-slash imo"
-															style="font-size: 24px;" onclick="changeStatus(this);"></i>
+															style="font-size: 24px; border:none; " onclick="changeStatus(this);"></i>
 														<p class="arrow_box" style="z-index: 5;">탈퇴</p>
 													</div>
 												</div>
