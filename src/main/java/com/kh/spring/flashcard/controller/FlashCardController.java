@@ -21,13 +21,23 @@ import net.sf.json.JSONObject;
 public class FlashCardController {
 
 	
-	@RequestMapping("flashcard.my")
-	public ModelAndView selectFlashCard(ModelAndView mv) {
-	
-		
-		mv.setViewName("flashcard/test");
-		
+	@RequestMapping("flashcard.fl")
+	public ModelAndView selectFlashCard(ModelAndView mv,  HttpSession session ) {
+		//Member mem = (Member)session.getAttribute("loginMember");
+		//System.out.println(mem);
+		//mv.addObject("loginMember",mem);
+		mv.setViewName("flashcard/test");	
 		return mv; 
 	}
+	
+	@RequestMapping("flashcard2.fl")
+	public ModelAndView selectFlashCard2(ModelAndView mv,  HttpSession session ) {
+		//Member mem = (Member)session.getAttribute("loginMember");
+		//System.out.println(mem);
+		//mv.addObject("loginMember",mem);
+		mv.setViewName("flashcard/maincardset");	
+		return mv; 
+	}
+	
 	
 }
