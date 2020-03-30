@@ -332,6 +332,7 @@
             <div class="textarea">
                <c:if test="${ empty sessionScope.loginMember }">
                   <textarea placeholder="로그인 후에 이용 가능합니다" readonly></textarea>
+                  <button class="button-list" id="replyInsert" disabled>작성</button>
                </c:if>
                <c:if test="${ !empty sessionScope.loginMember }">
                   <textarea placeholder="깨끗한 댓글 문화를 지켜주세요. &#13;&#10;지나친 비방, 광고 댓글은 예고없이 삭제될 수 있습니다," 

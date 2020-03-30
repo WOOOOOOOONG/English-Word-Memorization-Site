@@ -415,7 +415,7 @@ footer p {
 						<div class="panel panel-default" style="width: 380px;">
 							<!-- Table -->
 							<ul class="list-group" id="voca-list-group">
-								<c:set var="i" value="1" />
+								<%-- <c:set var="i" value="1" />
 								<c:forEach var="item" items="${bList}">
 									<c:if test="${item.type eq 1 && i <= 5}">
 										<c:set var="i" value="${i + 1}" />
@@ -442,7 +442,7 @@ footer p {
 											</div>
 										</li>
 									</c:if>
-								</c:forEach>
+								</c:forEach> --%>
 							</ul>
 						</div>
 						<script>
@@ -452,7 +452,7 @@ footer p {
 						
 						setTimeout(function() {
 							startAjax();
-						}, 3000);	
+						}, 1500);	
 						
 						function startAjax() {
 						$.ajax(
@@ -483,30 +483,57 @@ footer p {
 					                        console.log(vocaList);
 					                        
 					                        // 값 넣기
-					                        for(var i = 0; i < 5; i++) {
-					                        	var $content = $('<li class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">'
-													+ '<div class="list-title-wrapper">'
-													+ '<h5 class="list-group-item-heading list-group-item-evaluate">'
-													+ '<a href="detailBoard.bo?bId=${item.bId}">' + vocaList[i][0] + '</a>'
-													+ '<div class="list-group-item-author pull-right clearfix">'
-													+ '<div class="avatar avatar-x-small clearfix ">'
-													+ '<a href="#" class="avatar-photo"><i class="fas fa-user-circle"></i></a>'
-													+ '<div class="avatar-info">'
-													+ '<a class="nickname" href="/user/info/45597" title="' + vocaList[i][1] + '">' + vocaList[i][1] + '</a>'
-													+ '<div class="activity">'
-													+ '<i class="fa fa-eye"></i> ' + vocaList[i][2]
-													+ '</div>'
-													+ 'div class="date-created">'
-													+ '<span class="timeago" title="' + vocaList[i][3] + '">' + vocaList[i][3] + '</span>'
-													+ '</div>'
-													+ '</div>'
-													+ '</div>'
-													+ '</div>'
-													+ '</h5>'
-													+ '</div>'
-													+ '</li>');
-					                        	
-					                        	$vocaListGroup.append(content);
+					                        if(vocaLength > 5) {
+						                        for(var i = 0; i < 5; i++) {
+						                        	var $content = $('<li class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">'
+														+ '<div class="list-title-wrapper">'
+														+ '<h5 class="list-group-item-heading list-group-item-evaluate">'
+														+ '<a href="detailBoard.bo?bId=${item.bId}">' + vocaList[i][0] + '</a>'
+														+ '<div class="list-group-item-author pull-right clearfix">'
+														+ '<div class="avatar avatar-x-small clearfix ">'
+														+ '<a href="#" class="avatar-photo"><i class="fas fa-user-circle"></i></a>'
+														+ '<div class="avatar-info">'
+														+ '<a class="nickname" href="/user/info/45597" title="' + vocaList[i][1] + '">&nbsp;' + vocaList[i][1] + '&nbsp;</a>'
+														+ '<div class="activity">'
+														+ '<i class="fa fa-eye"></i> ' + vocaList[i][2]
+														+ '</div>'
+														+ '<div class="date-created">'
+														+ '<span class="timeago" title="' + vocaList[i][3] + '">' + vocaList[i][3] + '</span>'
+														+ '</div>'
+														+ '</div>'
+														+ '</div>'
+														+ '</div>'
+														+ '</h5>'
+														+ '</div>'
+														+ '</li>');
+						                        	
+						                        	$vocaListGroup.append($content);
+						                       	}
+					                        }else {
+					                        	for(var i = 0; i < vocaLength; i++) {
+						                        	var $content = $('<li class="list-group-item list-group-item-small list-group-item-question list-group-has-note clearfix">'
+														+ '<div class="list-title-wrapper">'
+														+ '<h5 class="list-group-item-heading list-group-item-evaluate">'
+														+ '<a href="detailBoard.bo?bId=${item.bId}">' + vocaList[i][0] + '</a>'
+														+ '<div class="list-group-item-author pull-right clearfix">'
+														+ '<div class="avatar avatar-x-small clearfix ">'
+														+ '<a href="#" class="avatar-photo"><i class="fas fa-user-circle"></i></a>'
+														+ '<div class="avatar-info">'
+														+ '<a class="nickname" href="/user/info/45597" title="' + vocaList[i][1] + '">&nbsp;' + vocaList[i][1] + '&nbsp;</a>'
+														+ '<div class="activity">'
+														+ '<i class="fa fa-eye"></i> ' + vocaList[i][2]
+														+ '</div>'
+														+ '<div class="date-created">'
+														+ '<span class="timeago" title="' + vocaList[i][3] + '">' + vocaList[i][3] + '</span>'
+														+ '</div>'
+														+ '</div>'
+														+ '</div>'
+														+ '</div>'
+														+ '</h5>'
+														+ '</div>'
+														+ '</li>');
+						                        	$vocaListGroup.append($content);
+						                       	}
 					                        }
 					                },
 					                error: function () {

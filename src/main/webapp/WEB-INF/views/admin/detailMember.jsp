@@ -369,14 +369,14 @@ body {
 				<br>
 				<div>
 					<h4 class="main-header" style="margin-left: -30px;">
-						<i class="fa fa-star"></i> 경고 메시지
+						<i class="fa fa-star"></i> 경고 메시지 목록
 					</h4>
 					<p class="subtitle" style="margin-left: -30px;">해당 회원에게 보낸
 						메시지입니다.</p>
 					<br>
 					<br>
 					<div id="chatting"
-						style="border: 1px solid black; padding-top: 15px; padding-left: 5px; width: 770px;">
+						style="border: 1px solid black; padding-top: 15px; padding-left: 5px; width: 770px; border-radius: 5px;">
 					</div>
 					<br> <br>
 				</div>
@@ -388,7 +388,7 @@ body {
 				var fId = $('#fId').val();
 				var content = $('#content').val();
 				$.ajax({
-					url : "chat.do",
+					url : "adminChat.do",
 					data : {
 						mId : mId,
 						fId : fId,
@@ -433,12 +433,14 @@ body {
 							type : "post",
 							success : function(data) {
 								var chatting = $('#chatting');
+								var msgContent = $("#content");
+								msgContent.val("");
 								chatting.html("");
 								if (data.msg != "none"
 										&& data.msg != "nothing") {
 									for ( var i in data.clist) {
-										var $pTag = data.clist[i].content;
-										chatting.append($pTag + "<br><hr>");
+										var $pTag = $("<p>" + data.clist[i].content + "</p><hr>");;
+										chatting.append($pTag);
 									}
 								} else if (data.msg == "nothing") {
 									var chatting = $("#chatting");

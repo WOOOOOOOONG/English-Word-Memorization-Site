@@ -1,3 +1,5 @@
 admin,잘못하셨네요,user01
 admin,이자식아,user01
 user01,관리자야,admin
+admin,ㅎㅇㅎㅇ,user01
+admin,ㅋㅋ,user01

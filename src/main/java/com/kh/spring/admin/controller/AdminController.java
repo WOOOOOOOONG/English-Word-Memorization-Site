@@ -16,6 +16,7 @@ import com.kh.spring.board.model.vo.Board;
 import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.classs.model.vo.ClassMember;
 import com.kh.spring.classs.model.vo.Classs;
+import com.kh.spring.member.model.dao.MemberDao;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 import com.kh.spring.member.model.vo.VisitRecord;
@@ -30,6 +31,8 @@ public class AdminController {
 	private ClassService cService;
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private MemberDao mDao;
 	
 	@RequestMapping("viewMain.ad")
 	public ModelAndView viewMain(ModelAndView mv) {
@@ -44,6 +47,7 @@ public class AdminController {
 		mv.addObject("cList", cList);
 		mv.addObject("bList", bList);
 		mv.addObject("nList" , noticeList);
+		mv.addObject("whatclick", "home");
 		
 		mv.setViewName("/common/mainPage");
 		
@@ -63,6 +67,7 @@ public class AdminController {
 		mv.addObject("mList", memberList);
 		mv.addObject("cList", cList);
 		mv.addObject("cvList", cvList);
+		mv.addObject("whatclick", "mypage");
 		mv.setViewName("admin/total");
 		
 		return mv; 
@@ -87,6 +92,7 @@ public class AdminController {
 		if(loginMember != null) {
 			ArrayList<Inquire> inqList = aService.selectMemberInquireList(loginMember.getmId());
 			mv.addObject("mInquireList", inqList);
+			mv.addObject("whatclick", "center");
 			mv.setViewName("admin/inquire-list");
 		}else {
 			mv.addObject("msg", "로그인 후 이용하실 수 있습니다");
@@ -293,6 +299,10 @@ public class AdminController {
 					iList.add(i);
 				}
 			}
+		}
+		
+		if(mem != null) {
+			mem.setProfileimg(mDao.selectProfileImg(mem));
 		}
 		
 		mv.addObject("detailMember", mem);

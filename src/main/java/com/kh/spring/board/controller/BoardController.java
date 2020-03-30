@@ -41,13 +41,19 @@ public class BoardController {
 		if (boardList != null) {
 			Map<Integer, Integer> rLength = new HashMap<>();
 			// 공지사항 게시글이 먼저 나오게하기 위함
-			// 만약 공지사항이 10개 이상이라면 2페이지부터는 나오지 않음.
+			// 공지사항 3개만
 			ArrayList<Board> bList = new ArrayList<>();
 
 			if (currentPage == 1) {
+				int noticeCount = 0;
 				for (Board b : boardAllList) {
 					if (b.getType() == 1) {
-						bList.add(b);
+						if(noticeCount < 3) {
+							bList.add(b);
+							noticeCount++;
+						}else {
+							break;
+						}
 					}
 				}
 			}
@@ -73,6 +79,7 @@ public class BoardController {
 			mv.addObject("rLength", rLength);
 			mv.addObject("boardList", bList);
 			mv.addObject("pi", Pagination.getPageInfo());
+			mv.addObject("whatclick", "community");
 			mv.setViewName("board/list");
 		} else {
 			mv.setViewName("common/errorPage");
