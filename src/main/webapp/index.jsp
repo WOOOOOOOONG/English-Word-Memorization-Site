@@ -500,7 +500,7 @@ html, body {
                <input type="text" name="loginmId" placeholder="Username"> 
                <input type="password" name="loginpwd" placeholder="Password">
                <button type="submit" id="login-button" style="margin-bottom: -15px;">Login</button>
-               <br><br><p><a href="login.me" style="margin-bottom: -15px;">회원가입</a>
+               <br><br><p><a href="login.me?n=n" style="margin-bottom: -15px;">회원가입</a>
                <br><a href="viewMain.ad">다음에 할게요</a>
                </p>
                

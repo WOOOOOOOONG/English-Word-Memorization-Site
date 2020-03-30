@@ -339,6 +339,10 @@ nav.sidebar ul li.active a.expandable:hover {
 .imo:hover+p.arrow_box {
 	display: block;
 }
+
+textarea{
+	resize: none;
+}
 </style>
 </head>
 <body>
@@ -468,39 +472,38 @@ nav.sidebar ul li.active a.expandable:hover {
 						<tbody>
 							<c:if test="${ mList ne null }">
 								<c:forEach var="item" items="${ mList }">
-									<tr>
-										<td onclick="detailMember('${item.mId}');"
-											style="cursor: pointer;">${ item.mId }</td>
-										<td onclick="detailMember('${item.mId}');"
-											style="cursor: pointer;">${ item.name }</td>
-										<td onclick="detailMember('${item.mId}');"
-											style="cursor: pointer;">${ item.nickname }</td>
-										<td onclick="detailMember('${item.mId}');"
-											style="cursor: pointer;">${ item.enrollDate }</td>
-										<td onclick="detailMember('${item.mId}');"
-											style="cursor: pointer;">${ item.updateDate }</td>
-										<td style="width: 70px;"><c:url var="updateStatus"
-												value="updateStatus.me">
-												<c:param name="mId" value="${ item.mId }" />
-												<c:param name="userStatus" value="${ item.userStatus }" />
-											</c:url> <c:if test="${ item.userStatus eq 'Y' }">
-												<div class="imotion" style="cursor: pointer;">
-													<div style="border: none;">
-														<i class="fas fa-user-alt imo" style="font-size: 24px;"
-															onclick="changeStatus(this);"></i>
-														<p class="arrow_box" style="z-index: 5;">정상</p>
+									<c:if test="${ item.mId ne 'admin' }">
+										<tr>
+											<td onclick="detailMember('${item.mId}');"
+												style="cursor: pointer;">${ item.mId }</td>
+											<td onclick="detailMember('${item.mId}');"
+												style="cursor: pointer;">${ item.name }</td>
+											<td onclick="detailMember('${item.mId}');"
+												style="cursor: pointer;">${ item.nickname }</td>
+											<td onclick="detailMember('${item.mId}');"
+												style="cursor: pointer;">${ item.enrollDate }</td>
+											<td onclick="detailMember('${item.mId}');"
+												style="cursor: pointer;">${ item.updateDate }</td>
+											<td style="width: 70px;">
+											<c:if test="${ item.userStatus eq 'Y' }">
+													<div class="imotion" style="cursor: pointer;">
+														<div style="border: none;">
+															<i class="fas fa-user-alt imo" style="font-size: 24px;"
+																onclick="changeStatus('${item.mId}', '${item.userStatus}');"></i>
+															<p class="arrow_box" style="z-index: 5;">정상</p>
+														</div>
 													</div>
-												</div>
-											</c:if> <c:if test="${ item.userStatus eq 'N' }">
-												<div class="imotion" style="cursor: pointer;">
-													<div style="border: none;">
-														<i class="fas fa-user-alt-slash imo"
-															style="font-size: 24px; border:none; " onclick="changeStatus(this);"></i>
-														<p class="arrow_box" style="z-index: 5;">탈퇴</p>
+												</c:if> <c:if test="${ item.userStatus eq 'N' }">
+													<div class="imotion" style="cursor: pointer;">
+														<div style="border: none;">
+															<i class="fas fa-user-alt-slash imo"
+																style="font-size: 24px; border:none; " onclick="changeStatus('${item.mId}', '${item.userStatus}');"></i>
+															<p class="arrow_box" style="z-index: 5;">탈퇴</p>
+														</div>
 													</div>
-												</div>
-											</c:if></td>
-									</tr>
+												</c:if></td>
+										</tr>
+									</c:if>
 								</c:forEach>
 								<script>
 									function detailMember(mId) {
@@ -530,14 +533,14 @@ nav.sidebar ul li.active a.expandable:hover {
 		            });  
 					
 					// 회원 탈퇴 상태 변경
-					function changeStatus(e) {
-						if($(e).hasClass("fa-user-alt")) {
+					function changeStatus(mId, userStatus) {
+						if(userStatus == 'Y') {
 							if(confirm("해당 회원을 탈퇴시키겠습니까?")) {
-								location.href="${ updateStatus }";
+								location.href="updateStatus.me?mId="+mId+"&userStatus="+userStatus;
 							}
-						}else if($(e).hasClass("fa-user-alt-slash")) {
+						}else if(userStatus == 'N') {
 							if(confirm("해당 회원을 복구시키겠습니까?")) {
-								location.href="${ updateStatus }";
+								location.href="updateStatus.me?mId="+mId+"&userStatus="+userStatus;
 							}
 						}
 					}
@@ -614,7 +617,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								</tr>
 								<tr class="inquire">
 									<td colspan="9"><textarea
-											style="width: 100%; height: 200px"
+											style="width: 100%; height: 200px; resize:none;"
 											placeholder="${item.content}" readonly></textarea></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
@@ -629,7 +632,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								<c:if test="${item.isAnswer eq 'Y'}">
 									<tr class="answer">
 										<td colspan="9"><textarea
-												style="width: 100%; height: 200px"
+												style="width: 100%; height: 200px; resize:none;"
 												placeholder="${item.answer}" readonly></textarea></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
@@ -659,7 +662,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								<c:if test="${item.isAnswer eq 'N' }">
 									<tr class="answer">
 										<td colspan="9"><textarea
-												style="width: 100%; height: 200px" class="textarea"
+												style="width: 100%; height: 200px; resize:none;" class="textarea"
 												id="textarea${item.iId}"></textarea></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
@@ -682,7 +685,7 @@ nav.sidebar ul li.active a.expandable:hover {
 										<td>
 											<form action="response.ad" method="post">
 												<textarea name="text" class="resText"
-													id="resText${item.iId}" style="display: none;"></textarea>
+													id="resText${item.iId}" style="display: none; resize:none;"></textarea>
 												<input type="text" name="iId" value="${item.iId}"
 													id="iId${item.iId}" style="display: none;">
 												<script>
@@ -788,7 +791,7 @@ nav.sidebar ul li.active a.expandable:hover {
 										var data = new google.visualization.DataTable();
 										var data = new google.visualization.DataTable();
 										data.addColumn('string', 'Element');
-										data.addColumn('number', 'Percentage');
+										data.addColumn('number', '조회수');
 										data.addRows([
 											<c:forEach var="item" items="${cvList}">
 												['${item.title}', ${item.nowMemberCount}], 
@@ -1040,7 +1043,7 @@ nav.sidebar ul li.active a.expandable:hover {
 									var data = new google.visualization.DataTable();
 									var data = new google.visualization.DataTable();
 									data.addColumn('string', 'Element');
-									data.addColumn('number', 'Percentage');
+									data.addColumn('number', '방문자수');
 									data.addRows([ [ '1월', arr1[1] ], [ '2월', arr1[2] ],
 											[ '3월', arr1[3] ], [ '4월', arr1[4] ], [ '5월', arr1[5] ],
 											[ '6월', arr1[6] ], [ '7월', arr1[7] ], [ '8월', arr1[8] ],
@@ -1139,7 +1142,7 @@ nav.sidebar ul li.active a.expandable:hover {
 								function drawAxisTickColors2() {
 									var data = new google.visualization.DataTable();
 									data.addColumn('string', 'Element');
-									data.addColumn('number', 'Percentage');
+									data.addColumn('number', '방문자수');
 									
 									data.addRows([ [ '1일', arr2[curMonth][1] ], [ '2일', arr2[curMonth][curMonth] ],
 										[ '3일', arr2[curMonth][curMonth] ], [ '4일', arr2[curMonth][4] ], [ '5일', arr2[curMonth][5] ],
@@ -1272,7 +1275,7 @@ nav.sidebar ul li.active a.expandable:hover {
 				function drawAxisTickColors4() {
 					var data4 = new google.visualization.DataTable();
 					data4.addColumn('string', 'Element');
-					data4.addColumn('number', 'Percentage');
+					data4.addColumn('number', '이용자수');
 					for(var i = 0; i < vocaLength; i++) {
 						
 						console.log(i);

@@ -236,6 +236,7 @@
 			         	function report(bId) {
 			         		if(window.confirm("해당 게시글을 신고하시겠습니까?")) {
 			         			location.href="insertInquireView.ad?reportedId="+bId+"&reportType="+4;
+			         			
 			         		}
 			         	}
 			         </script>
@@ -383,28 +384,38 @@
             }
             
             function reportReply(rId) {
-            	if(confirm("해당 게시글을 신고하시겠습니까?")) {
+            	if(confirm("해당 댓글을 신고하시겠습니까? 댓글 신고는 하루에 한 번만 가능합니다.")) {
             		alert("댓글은 5회 신고 시 자동으로 삭제됩니다.");
             		$.ajax({
             			url: "reportReply.bo",
             			data: {rId:rId},
             			dataType: "json",
             			success: function() {
-            				getReplyList();
+            				getReplyList(rId);
             			},
             			error: function() {
-            				getReplyList();
+            				getReplyList(rId);
             			}
             		});
             	}
             }
             
-            function getReplyList() {
+            function reportReply2() {
+            	alert("하루에 신고는 1회만 가능합니다.");
+            }
+            
+ 			setCookie("maindiv", "done", 1);
+         	function setCookie( name, value, expiredays ) {
+         		var todayDate = new Date();
+         		todayDate.setDate( todayDate.getDate() + expiredays );
+         		document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+         	}
+            
+            function getReplyList(rId) {
                var bId = ${detailBoard.bId};
-               
                $.ajax({
                   url: "selectBoardReplyList.bo",
-                  data: {bId:bId},
+                  data: {bId:bId, rId:rId},
                   dataType: "json",
                   success: function(data) {
                      $tableBody = $("#replyTable");
@@ -413,6 +424,12 @@
                      $(".replyCount").text("댓글 " + data.length + "개");
                      
                      if(data.length > 0){
+                    	 var isTrue = false;
+                    	 if(rId != undefined) {
+                    		 isTrue = true;
+                    	 }else {
+                    		 isTrue = false;
+                    	 }
                         for(var i in data){
                         	if(data[i].reportCount >= 5) {
                         		deleteReply(data[i].rId, data[i].writerId);
@@ -430,7 +447,12 @@
                            if(${!empty sessionScope.loginMember} && (data[i].writerId == memberId || memberId == 'admin')) {                        	   
                               var $deleteBtn = $("<td width='10'>").html("<div class='tdContent2'><button class='button" + i + "' onclick='deleteReply(" + data[i].rId + ", " + '"' + data[i].writerId + '"' + ");'></button></div>");                              
                            }else {
-                        	  var reportBtn = $('<td width="10"><div class="imotion"><div><i class="far fa-angry imo" style="font-size: 25px;" onclick="reportReply(' + data[i].rId + ');"></i><p class="arrow_box" style="margin-left:-36px;">신고하기</p></div></div></td>');
+                        	   if(isTrue) {
+                        		   var reportBtn = $('<td width="10"><div class="imotion"><div><i class="far fa-angry imo replyReport" style="font-size: 25px;" onclick="reportReply2(' + data[i].rId + ');"></i><p class="arrow_box" style="margin-left:-36px;">신고하기</p></div></div></td>');
+                        		   
+                        	   }else {
+                        		   var reportBtn = $('<td width="10"><div class="imotion"><div><i class="far fa-angry imo replyReport" style="font-size: 25px;" onclick="reportReply(' + data[i].rId + ');"></i><p class="arrow_box" style="margin-left:-36px;">신고하기</p></div></div></td>');
+                        	   }
                            }
                            var $hr = document.createElement("hr");         
                            var rId = $();
@@ -467,9 +489,7 @@
             function deleteReply(i, referId) {
                var bId = ${detailBoard.bId};
                
-               location.href="deleteBoardReply.bo?rId="+i+"&bId="+bId;   
-               
-               
+               location.href="deleteBoardReply.bo?rId="+i+"&bId="+bId;
             }
          </script>
       </div>

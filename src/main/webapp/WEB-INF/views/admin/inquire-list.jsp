@@ -167,7 +167,8 @@ form {
 									없음
 								</c:if> 
 								<c:if test="${item.reportedId ne null}">
-									${item.reportedId }
+									<%-- ${item.reportedId } --%>
+									***
 								</c:if>
 							</td>
 							<td><i class="fa fa-archive" style="font-size: 28px;"
