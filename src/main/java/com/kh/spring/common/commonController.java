@@ -88,4 +88,21 @@ public class commonController {
 		}
 		
 	}
+	
+	@RequestMapping(value="/email2.ck")
+	public void checkEmail2(HttpServletResponse response,String email, String code) throws IOException {
+		PrintWriter out = response.getWriter();
+		int result = mService.checkEmail(email);
+		if (result > 0) {
+			String content = "이메일 인증코드는 "+code+"입니다.";
+			MailSender mailSender = new MailSender();
+			mailSender.sendMail(email,"테스트","[SEW] 이메일 인증코드입니다.",content);
+			
+			out.write("success");
+		}else {
+			
+			out.write("없는 이메일입니다.");
+		}
+		
+	}
 }

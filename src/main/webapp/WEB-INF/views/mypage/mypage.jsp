@@ -599,8 +599,8 @@ body {
 }
 #updateMemberForm{
    width:90%;
-   height:90%;
-   margin:5%;
+   height:100%;
+   margin-left:5%;
 }
 .textdivarea{
    margin-left:20%;
@@ -918,6 +918,20 @@ ul.shelf li:nth-child(9) span.booktop{
     position: relative;
     cursor:pointer;
 }
+.commentarea{
+	width:50%;
+	color:red;
+	float: right;
+    margin-top: -15px;
+    margin-right: 20%;
+}
+.textdivarea{
+	width:20%;
+	
+}
+.entry:hover{
+	cursor:pointer;
+}
 </style>
 </head>
 
@@ -940,14 +954,7 @@ ul.shelf li:nth-child(9) span.booktop{
       }
 
     </script>
-    <c:if test="${ loginMember.profileimg =='defaultimg.png' }">
-       <script>
-          $(function(){
-             alert("처음 오셨습니다. 프로필을 작성해주세요 ^^");
-             $("#profile").click();
-          });
-       </script>
-    </c:if>   
+    
     <c:set var="contextPath" value="${pageContext.request.contextPath}"
    scope="application"/>
     <jsp:include page="../common/menubar.jsp"/>
@@ -1060,12 +1067,14 @@ ul.shelf li:nth-child(9) span.booktop{
 			            <div class="form-group row">
 			                <label for="mynickname" class="profilelabel">닉네임</label>
 			                <input type="text" class="form-control" id="mynickname" name="nickname"
-			                maxlength="8"
+			                maxlength="7"
 			                 value="${loginMember.nickname }" style="width:55%;  float: left;">
 			            </div>
 			            <script>
 			            	// 닉네임 중복체크
 			            	$(function(){
+			            		
+			            		
 			            		$("#mynickname").change(function(){
 			            			$.ajax({
 			            		        url:"mynickname.ck",
@@ -1115,34 +1124,44 @@ ul.shelf li:nth-child(9) span.booktop{
                 <div class="contenttitle">My Info</div>
                 <div id="updateArea" style="float:left;">
                     <div class="textdivarea">아이디</div>
+                    <div class="commentarea"></div>
                     <div class="inputdivarea">
                         <input type="text" name="mId" readonly value="${loginMember.mId }" >
                     </div>
-                    <div class="commentarea"></div>
+                   
 
                     <div class="textdivarea">비밀번호</div>
                     <div class="inputdivarea">
-                        <input type="password" name="pwd" placeholder="변경 시에만 적어주세요.">
+                        <input type="password" name="pwd" placeholder="변경 시에만 적어주세요."  maxlength="25">
                     </div>
-                    <div class="commentarea"></div>
 
+					<div class="textdivarea" style="display:none;">비밀번호 확인</div>
+					<div class="commentarea" style="margin-top: -15px;"></div>
+					<div class="inputdivarea" style="display:none;">
+						<input type="password" name="pwdCk"  maxlength="25">
+					</div>
+					
+					
                     <div class="textdivarea">이름</div>
+                    <div class="commentarea" style="margin-top: -15px;"></div>
                     <div class="inputdivarea">
-                        <input type="text" name="name" required value="${loginMember.name }" >
+                        <input type="text" name="name" required value="${loginMember.name }" maxlength="6">
                     </div>
-                    <div class="commentarea"></div>
+                   
 
                     <div class="textdivarea">이메일</div>
+                    <div class="commentarea" style="margin-top: -15px;"></div>
                     <div class="inputdivarea">
                         <input type="email" name="email"readonly value="${loginMember.email }">
                     </div>
-                    <div class="commentarea"></div>
+                    
 
                     <div class="textdivarea">생년월일</div>
+                    <div class="commentarea" style="margin-top: -15px;"></div>
                     <div class="inputdivarea">
-                        <input type="text" name="birthDate" required >
+                        <input type="text" name="birthDate" required maxlength="8">
                     </div>
-                    <div class="commentarea"></div>
+                    
                     <div class="textdivarea">주소</div>
                     <div class="inputdivarea" style="width:100%;">
                         <input type="text" id="postcode" name="add1" placeholder="우편번호" style="width: 32%;">
@@ -1153,7 +1172,7 @@ ul.shelf li:nth-child(9) span.booktop{
                         <input type="text" id="detailAddress" name="add3" placeholder="상세주소">
                     </div>
                 </div>
-                <button type="submit"  class="btn btn-warning" id="updateMemberbtn">변경하기</button>
+                <button class="btn btn-warning" id="updateMemberbtn" >변경하기</button>
                 <br>
                 <button type="button" id="deleteMemberbtn">탈퇴하기</button>
             </form>
@@ -1170,10 +1189,56 @@ ul.shelf li:nth-child(9) span.booktop{
           </div>
 
     </div>
+        
+      
       
     <script>
+		 // 개인정보 수정 사전검사
+			function insertcheck(){
+				var check = $("#updateMemberForm > #updateArea > .commentarea");
+				 for(var i =0; i<5; i++){
+					if(check[i].innerHTML.length >0){
+						check[i].focus();
+						return false;
+					}
+				} 
+				 return true;
+			}
+    
         $(function(){
-           //getAllMyDan('user9');
+        	$("#updateMemberForm input[name=pwd]").change(function(){
+        		$(this).parent().next().css("display","block");
+        		$("#updateMemberForm input[name=pwdCk]").parent().css("display","block");
+        		
+        	});
+        	// 비밀번호 일치여부
+    		$("#updateMemberForm input[name=pwdCk]").focusin(function(){
+    			$(this).focusout(function(){
+    				if($("#updateMemberForm input[name=pwd]").val() != $("#updateMemberForm input[name=pwdCk]").val()){
+    					$("#updateMemberForm input[name=pwdCk]").parent().prev().html("비밀번호가 일치하지 않습니다.");
+    				}else{
+    					$("#updateMemberForm input[name=pwdCk]").parent().prev().html("");
+    				}
+    			});
+    		});
+        	
+        	// 생년월일 일치여부
+    		$("#updateMemberForm input[name=birthDate]").focusin(function(){
+    			$(this).focusout(function(){
+    				var email = $(this);
+    				var idReg = /^[0-9]{8}$/g;
+    		        if( !idReg.test( email.val() ) ) {
+    		        	$("#updateMemberForm input[name=birthDate]").parent().prev().html("생년월일의 형식이 맞지 않습니다.").css("color","red");
+    		        	email.val("");
+    		            return;
+    		        }else{
+    		        	$("#updateMemberForm input[name=birthDate]").parent().prev().html("");
+    		        }	
+    			
+    			});
+    		});
+    		
+        	
            
            // 책 오픈
             $("ul.shelf li").click(function(){
@@ -1267,7 +1332,15 @@ ul.shelf li:nth-child(9) span.booktop{
             });
         }
     </script>
-
+<c:if test="${ loginMember.profileimg =='defaultimg.png' && loginMember.introduce == '자기소개입력' }">
+       <script>
+          $(function(){
+             alert("처음 오셨습니다. 프로필을 작성해주세요 ^^");
+             $("#profile").click();
+             $("#backicon").("disabled",true);
+          });
+       </script>
+    </c:if> 
     <!-- 스케쥴 일정추가 모달 -->
    <!-- Modal -->
    <div class="modal fade" id="scModal" tabindex="-1" role="dialog" aria-labelledby="scModalLabel" aria-hidden="true">

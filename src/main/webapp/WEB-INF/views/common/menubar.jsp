@@ -276,7 +276,7 @@ body {
    background-size: cover;
    width:30px;
    height:30px; float:left; 
-   margin-top: 5px; margin-left:20%;
+   margin-top: 5px; margin-left:10%;
 }
 .acceptfri{
    background-image: url( "resources/images/승인.png" );
@@ -393,7 +393,7 @@ body {
 	
 	#fri3{
 		display: none;
-    	width: 100%;
+    	width: 95%;
     	text-align: center;
     	font-size: 14px;
     	font-weight: 500;
@@ -426,8 +426,9 @@ body {
 		width:100%;
 		height:35px;
 		float:left;
-
+		font-size:13px;
 	}
+	
 </style>
 
 </head>
@@ -811,7 +812,7 @@ body {
 					$("#fri3").append($div).append(btn1).append(btn2); */
 					var $tr = $("<tr>");
 					var $btn1 = $("<button class='acceptfri' onclick='acceptfriend("+i+")'> ");
-		   			var $btn2 = $("<button class='cancelfri'>");
+		   			var $btn2 = $("<button class='cancelfri'onclick='cancelfriend("+i+")'> ");
 					var $idtd = $("<td>").html(data[i].fId);
 					var $nicktd = $("<td>").html(data[i].nickname);
 					var $acctd = $("<td>").append($btn1).append($btn2);
@@ -925,6 +926,30 @@ body {
 			
 		});	
 	}
+	
+	function cancelfriend(i){
+		var x = $("#fri3 > tbody").children()[i];
+		var y = $(x).children()[0];
+		var fId = '${loginMember.mId}';
+		var mId = $(y).html();
+		$.ajax({
+	        url:"cancelfriend.do",
+	        data:{fId:fId,mId:mId},
+	        type:"post",
+	   		success:function(data){
+	   			if(data =='success'){
+	   				alert("친구수락해제되었습니다.");
+	   				$(x).css("display","none");
+	   				reupdatelist();
+	   			}
+	   			else alert("실패!!");
+			},error:function(e){
+				alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+			}
+			
+		});	
+	}
+	
 	function reupdatelist(){
 		var mId = '${loginMember.mId}';
 			$.ajax({
@@ -1079,16 +1104,17 @@ $("#chatsend").click(function(){
    				if($("#chatlength").html() == -1){
    					$tableBody.html("");
    				}
-   	   		var $tr = $("<tr>");
+   	   		var $tr = $("<tr align='right'>");
 			var $tdimg = $(" <td class='chattd' width='50'>");
 			var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
 			$tdimg.append($profileimg);
 			var $chatContent = $(" <td class='chattd' colspan='11' >");
-			var $chat = $(" <p class='mychatp'>").text(content);
+			var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(content);
 			$chatContent.append($chat);
 			
-			$tr.append($tdimg);
+			
 			$tr.append($chatContent);
+			$tr.append($tdimg);
 			$tableBody.append($tr);
 			$("#chatlength").html($("#chatlength").html()+1);
 			 var objDiv = document.getElementById("chatting");
@@ -1123,16 +1149,17 @@ function chatclassloggo(imgList){
 				for(var i in data.clist){
 
 					if(data.clist[i].writerId == mId){
-						var $tr = $("<tr>");
+						var $tr = $("<tr align='right'>");
 						var $tdimg = $(" <td class='chattd' width='50'>");
 						var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
 						$tdimg.append($profileimg);
 						var $chatContent = $(" <td class='chattd' colspan='11' >");
-						var $chat = $(" <p class='mychatp'>").text(data.clist[i].content);
+						var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
 						$chatContent.append($chat);
 						
-						$tr.append($tdimg);
+						
 						$tr.append($chatContent);
+						$tr.append($tdimg);
 					}else{
 						var asd = "";
 						var nickname="";
@@ -1143,18 +1170,19 @@ function chatclassloggo(imgList){
 							}
 						}
 						
-						var $tr = $("<tr align='right'>");
+						var $tr = $("<tr >");
 						var $tdimg = $(" <td class='chattd' width='50'>");
 						var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/"+asd+"' width='50'>");
 						var $span = $("<span class='chatimgtag'>").html(nickname);
 						$tdimg.append($profileimg);
 						$tdimg.append($span);
 						var $chatContent = $(" <td class='chattd' colspan='11' >");
-						var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
+						var $chat = $(" <p class='mychatp' >").text(data.clist[i].content);
 						$chatContent.append($chat);
 						
-						$tr.append($chatContent);
+						
 						$tr.append($tdimg);
+						$tr.append($chatContent);
 					}
 					
 					$tableBody.append($tr);
@@ -1200,27 +1228,29 @@ function chatclassloggo(imgList){
 					for(var i in data.clist){
 	
 						if(data.clist[i].writerId == mId){
-							var $tr = $("<tr>");
+							var $tr = $("<tr align='right'>");
 							var $tdimg = $(" <td class='chattd' width='50'>");
 							var $profileimg = $("<img class='chatprofileimg' src='${ contextPath }/resources/profileimg/${loginMember.profileimg}' width='50'>");
+							$tdimg.append($profileimg);
+							var $chatContent = $(" <td class='chattd' colspan='11' >");
+							var $chat = $(" <p class='mychatp'  style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
+							$chatContent.append($chat);
+							
+							
+							$tr.append($chatContent);
+							$tr.append($tdimg);
+						}else{
+							var $tr = $("<tr >");
+							var $tdimg = $(" <td class='chattd' width='50'>");
+							var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/"+img+"' width='50'>");
 							$tdimg.append($profileimg);
 							var $chatContent = $(" <td class='chattd' colspan='11' >");
 							var $chat = $(" <p class='mychatp'>").text(data.clist[i].content);
 							$chatContent.append($chat);
 							
-							$tr.append($tdimg);
-							$tr.append($chatContent);
-						}else{
-							var $tr = $("<tr align='right'>");
-							var $tdimg = $(" <td class='chattd' width='50'>");
-							var $profileimg = $("<img class='chatprofileimg'src='${ contextPath }/resources/profileimg/"+img+"' width='50'>");
-							$tdimg.append($profileimg);
-							var $chatContent = $(" <td class='chattd' colspan='11' >");
-							var $chat = $(" <p class='mychatp' style='float:right; padding: 15px 20px;'>").text(data.clist[i].content);
-							$chatContent.append($chat);
 							
-							$tr.append($chatContent);
 							$tr.append($tdimg);
+							$tr.append($chatContent);
 						}
 						
 						$tableBody.append($tr);

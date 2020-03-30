@@ -49,4 +49,9 @@ public class FriendService {
 	public Member findFriend2(String nickname) {
 		return fDao.findFriend2(nickname);
 	}
+
+	public int cancelFriend(Friend f) {
+		// TODO Auto-generated method stub
+		return fDao.cancelFriend(f);
+	}
 }

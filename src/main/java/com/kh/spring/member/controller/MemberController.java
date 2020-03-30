@@ -92,6 +92,9 @@ public class MemberController {
 		String address = add1+"/"+add2+"/"+add3;
 		m.setAddress(address);
 		m.setProfileimg("defaultimg.png");
+		int num = (int) (Math.random()*1000+1);
+		m.setNickname("닉네임"+num);
+		
 		int result = mService.insertMember(m);
 		String msg="회원가입이 완료되었습니다.";
 		if(result < 1) msg="회원가입이 실패하였습니다.";
@@ -106,6 +109,13 @@ public class MemberController {
 		String msg="찾으신 결과가 없습니다.";
 		
 		String id = mService.findMemberId(email);
+		if(id.length() > 3) {
+			String star = "";
+			for(int i=0; i<id.length()-3; i++) {
+				star += "*";
+			}
+			id = id.substring(0, 3)+star;
+		}
 		if(id!=null) {
 			msg="찾으신 아이디는 "+id+"입니다.";
 		}
