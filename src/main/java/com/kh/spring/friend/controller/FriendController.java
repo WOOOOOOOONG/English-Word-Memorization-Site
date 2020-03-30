@@ -126,6 +126,18 @@ public class FriendController {
 		PrintWriter out = response.getWriter();
 		out.print(msg);
 	}
+	// 친구 승인 요청 해제
+	@RequestMapping("cancelfriend.do")
+	public void cancelFriend(Friend f, HttpServletResponse response)throws IOException {
+		int result = fService.cancelFriend(f);
+		
+		PrintWriter out = response.getWriter();
+		String msg = "fail";
+		if(result > 0) {
+			msg = "success";
+		}
+		out.print(msg);
+	}
 
 	// 친구 삭제
 	@RequestMapping("deleteFriend.do")

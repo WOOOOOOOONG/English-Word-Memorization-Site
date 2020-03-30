@@ -47,11 +47,11 @@ public class FriendDao {
 	}
 
 	public int deleteFriend(Friend f) {
-		int result = sqlSession.update("friendMapper.deleteFriend",f);
+		int result = sqlSession.delete("friendMapper.deleteFriend",f);
 		String mId = f.getmId();
 		f.setmId(f.getfId());
 		f.setfId(mId);
-		result += sqlSession.update("friendMapper.deleteFriend",f);
+		result += sqlSession.delete("friendMapper.deleteFriend",f);
 		return result;
 	}
 
@@ -66,6 +66,10 @@ public class FriendDao {
 	public Member findFriend2(String nickname) {
 		Member m = sqlSession.selectOne("friendMapper.findFriend2",nickname);
 		return sqlSession.selectOne("friendMapper.findFriend",m.getmId());
+	}
+
+	public int cancelFriend(Friend f) {
+		return sqlSession.update("friendMapper.deleteFriend",f);
 	}
 
 }

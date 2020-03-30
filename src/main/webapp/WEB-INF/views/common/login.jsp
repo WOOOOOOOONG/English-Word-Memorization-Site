@@ -447,13 +447,13 @@ body :-ms-input-placeholder {
 		</ul>
 	</div>
 	<!-- 회원가입 하는 모달 -->
-	<div class="modal fade" id="newMembermodal" data-backdrop="static"
-		tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
+	<div class="modal fade" id="newMembermodal" 
+		tabindex="-1" role="dialog" aria-labelledby="scModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel"
+					<h5 class="modal-title" 
 						style="margin-left: 42%;">회원가입</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -466,22 +466,22 @@ body :-ms-input-placeholder {
 						<div id="signArea">
 							<div class="textdivarea">*아이디</div>
 							<div class="inputdivarea">
-								<input type="text" name="mId" required>
+								<input type="text" name="mId"  required >
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">*비밀번호</div>
 							<div class="inputdivarea">
-								<input type="password" name="pwd" required>
+								<input type="password" name="pwd" required minlength="8" maxlength="25">
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">*비밀번호 확인</div>
 							<div class="inputdivarea">
-								<input type="password" name="userPwdCk" required>
+								<input type="password" name="userPwdCk" required minlength="8" maxlength="25">
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">*이름</div>
 							<div class="inputdivarea">
-								<input type="text" name="name" required>
+								<input type="text" name="name" required  maxlength="6">
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">*이메일</div>
@@ -497,7 +497,7 @@ body :-ms-input-placeholder {
 							<div class="textdivarea">*생년월일</div>
 							<div class="inputdivarea">
 								<input type="text" name="birthDate" placeholder="ex:19750524"
-									required>
+									required maxlength="8">
 							</div>
 							<div class="commentarea"></div>
 							<div class="textdivarea">주소</div>
@@ -662,13 +662,40 @@ body :-ms-input-placeholder {
 				}else{
 					$("#insertMemberForm input[name=userPwdCk]").parent().next().html("");
 				}
+				/* var leng = $("#insertMemberForm input[name=pwd]").val().length();
+				if(leng < 8 || leng > 12){
+					$("#insertMemberForm input[name=userPwdCk]").parent().next().html("비밀번호의 길이가 맞지 않습니다.");
+				}else{
+					$("#insertMemberForm input[name=userPwdCk]").parent().next().html("");
+				} */
 			});
 		});
+		// 생년월일 일치여부
+		$("#insertMemberForm input[name=birthDate]").focusin(function(){
+			$(this).focusout(function(){
+				var email = $(this);
+				var idReg = /^[0-9]{8}$/g;
+		        if( !idReg.test( email.val() ) ) {
+		        	$("#insertMemberForm input[name=birthDate]").parent().next().html("생년월일의 형식이 맞지 않습니다.").css("color","red");
+		        	email.val("");
+		            return;
+		        }else{
+		        	$("#insertMemberForm input[name=birthDate]").parent().next().html("");
+		        }	
+			
+			});
+		});
+		
 		// 아이디 중복검사
 		$("#insertMemberForm input[name=mId]").focusin(function(){
 			$(this).focusout(function(){
 				var mId = $(this);
-				
+				 var idReg = /^[a-z0-9]{5,12}$/g;
+			        if( !idReg.test( mId.val() ) ) {
+			        	$("#insertMemberForm input[name=mId]").parent().next().html("아이디는 6~12자 영문자,숫자조합이어야 합니다.").css("color","red");
+			        	mId.val("");
+			            return;
+			        }
 				if(mId.val().length > 3){
 					$(this).parent().next().html("");
 					if(!useable){
@@ -681,7 +708,7 @@ body :-ms-input-placeholder {
 							
 							if(data=="fail"){
 								$("#insertMemberForm input[name=mId]").parent().next().html("중복된 아이디입니다").css("color","red");
-								mId.focus();
+								//mId.focus();
 								useable=false;
 							}else{
 								if(confirm("사용 가능한 아이디입니다 사용하시겠습니까?")){
@@ -691,6 +718,7 @@ body :-ms-input-placeholder {
 									mId.css("background","lightgray");
 								}else{
 									mId.val("");
+									useable=false;
 								}
 								
 							}
@@ -727,13 +755,13 @@ body :-ms-input-placeholder {
 	</script>
 
 	<!-- 이메일 인증 모달 -->
-	<div class="modal fade" id="checkemailen" data-backdrop="static"
-		tabindex="-2" role="dialog" aria-labelledby="staticBackdropLabel"
+	<div class="modal fade" id="checkemailen" 
+		tabindex="-2" role="dialog" aria-labelledby="scModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel"
+					<h5 class="modal-title" 
 						style="margin-left: 40%;">이메일 인증</h5>
 					<button id="emailclosebtn" type="button" class="close"
 						data-dismiss="modal" aria-label="Close">
@@ -779,13 +807,13 @@ body :-ms-input-placeholder {
 	</script>
 
 	<!-- 아이디 찾는 모달 -->
-	<div class="modal fade" id="findmyiddiv" data-backdrop="static"
-		tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
+	<div class="modal fade" id="findmyiddiv" 
+		tabindex="-1" role="dialog" aria-labelledby="scModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel"
+					<h5 class="modal-title" 
 						style="margin-left: 40%;">아이디 찾기</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -810,13 +838,13 @@ body :-ms-input-placeholder {
 		</div>
 	</div>
 	<!-- 비밀번호 찾는 모달 -->
-	<div class="modal fade" id="findmypwddiv" data-backdrop="static"
-		tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
+	<div class="modal fade" id="findmypwddiv" 
+		tabindex="-1" role="dialog" aria-labelledby="scModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content" id="findpwdmodalcontent">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel"
+					<h5 class="modal-title" 
 						style="margin-left: 37%;">비밀번호 찾기</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close" id="closefindpwdbtn">
@@ -913,12 +941,16 @@ $(function(){
 		                code += scode;
 		            }
 		            $.ajax({
-						url:"email.ck",
+						url:"email2.ck",
 						data:{email:email,code:code},
 						type:"post",
 						success:function(data){
-							$("#answercode2").val(code);
-							StartClock();
+							if(data == "success"){
+								$("#answercode2").val(code);
+								StartClock();
+							}else{
+								alert(data);
+							}
 						},error:function(e){
 							alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 						}
@@ -937,13 +969,13 @@ $(function(){
 });
 </script>
 	<!-- 비밀번호 변경하는 모달 -->
-	<div class="modal fade" id="changemypwd" data-backdrop="static"
-		tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel"
+	<div class="modal fade" id="changemypwd" 
+		tabindex="-1" role="dialog" aria-labelledby="scModalLabel"
 		aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="staticBackdropLabel"
+					<h5 class="modal-title" 
 						style="margin-left: 38%;">비밀번호 변경</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
