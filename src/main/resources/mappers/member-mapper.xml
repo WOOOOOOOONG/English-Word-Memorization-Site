@@ -15,6 +15,7 @@
 		<result property="userStatus" column="STATUS"/>
 		<result property="introduce" column="INTRODUCE"/>
 		<result property="nickname" column="NICKNAME"/>
+		<result property="msgStatus" column="MSGSTATUS"/>
 	</resultMap>
 	
 	<resultMap id="visitResultSet" type="Visit">
@@ -124,6 +125,13 @@
 	
 	<update id="deleteMember" parameterType="string">
 		update Member set STATUS = 'N' where MID = #{mId}
+	</update>
+	
+	<update id="updateMsgStatus" parameterType="string">
+		update Member set MSGSTATUS = 'N' where MID = #{mId}
+	</update>
+	<update id="adminChat">
+		UPDATE MEMBER SET MSGSTATUS = 'Y' WHERE MID = #{fId}
 	</update>
 	
 </mapper>

@@ -68,8 +68,6 @@ public class ChattingController {
 		}else {
 			file = mId + fId + "chatlog.txt";
 		}
-		
-		/* ArrayList<Chatting> clist = new ArrayList<Chatting>(); */
 		String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
 		File f = new File(filepath);
 		if (!f.exists()) {
@@ -85,15 +83,6 @@ public class ChattingController {
 			while ((a = fr.read()) != -1) {
 				readcontent += (char) a;
 			}
-			/*
-			 * String[] rc = readcontent.split("\n"); for(int i=0; i<rc.length;i++) { int
-			 * sp1 = rc[i].indexOf(","); int sp2 = rc[i].lastIndexOf(","); String str1 =
-			 * rc[i].substring(0,sp1); String str2 = rc[i].substring(sp2+1,rc[i].length());
-			 * clist.add(new Chatting(i,str1,str2,rc[i].substring(sp1+1, sp2)));
-			 * 
-			 * }
-			 */
-
 			FileWriter fw = new FileWriter(f);
 			content = content.replaceAll("\n", "<br>");
 			if(readcontent.length() >0) {
@@ -227,4 +216,49 @@ public class ChattingController {
 		}
 		out.print(send);
 	}
+	
+	@RequestMapping(value = "adminChat.do", method = RequestMethod.POST)
+	public void adminChat(String mId, String fId, String content, HttpServletResponse response) throws IOException {
+		// 순서 작성자,내용,받는이
+		String file="";
+		if(fId.substring(0,3).equals("cNo")) {
+			file = fId + "chatlog.txt";
+		}else {
+			file = mId + fId + "chatlog.txt";
+		}
+		mService.adminChat(fId);
+		
+		String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
+		File f = new File(filepath);
+		if (!f.exists()) {
+			file = fId + mId + "chatlog.txt";
+			filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + file;
+			f = new File(filepath);
+			f.createNewFile();
+		}
+		try {
+			FileReader fr = new FileReader(f);
+			int a;
+			String readcontent = "";
+			while ((a = fr.read()) != -1) {
+				readcontent += (char) a;
+			}
+
+			FileWriter fw = new FileWriter(f);
+			content = content.replaceAll("\n", "<br>");
+			if(readcontent.length() >0) {
+				fw.write(readcontent);
+				fw.append("\n");
+			}
+			fw.write(mId + "," + content + "," + fId);
+			fw.close();
+			PrintWriter out = response.getWriter();
+			out.print("success");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	
 }

@@ -389,7 +389,8 @@ body {
 	}
 	#vooooq:hover{
 		background:red;
-
+	}
+	
 	#fri3{
 		display: none;
     	width: 100%;
@@ -446,7 +447,29 @@ body {
 <c:set var="contextPath" value="${pageContext.request.contextPath}"
    scope="application"/>
 <c:set var="loginpage" value="login.me"/>
-
+	<c:if test="${loginMember.msgStatus == 'Y' }">
+		<script>
+			$(function(){
+				alert("관리자에게 온 메세지가 있습니다. 확인해주세요.");
+				var mId= '${loginMember.mId}';
+				$.ajax({
+			        url:"updateMsgStatus.do",
+			        data:{mId:mId},
+			        type:"post",
+			   		success:function(data){
+			   			if(data=="good"){
+			   				console.log("메세지 삭제");
+			   			}else{
+			   				console.log("오류");
+			   			}
+					},error:function(e){
+						alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
+					}
+					
+				});	
+			});
+		</script>
+	</c:if>
 
 <div id="menubar" class="sticky-top">
 
@@ -456,14 +479,15 @@ body {
 			<a href="viewMain.ad" id="sewlogo">SEW</a>
 		</h1>
 
-		<section style="float:left; margin-top:7.5px; display:block; width:550px; height:100%;">
+		<section id="mainnavsection" style="float:left; margin-top:7.5px; display:block; width:550px; height:100%;">
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="viewMain.ad" class="jha">Home</a>
-			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" id="vooooq" class="jha" data-toggle="modal" data-target=".warning2">단어장</a>
+			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" class="jha" href="flashcard2.fl">단어장</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">클래스</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="boardList.bo" class="jha">커뮤니티</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="memberInquireList.ad" class="jha">고객센터</a>
 
 		</section>
+		
 		<section id="navsection2">
 				<c:if test="${ empty loginMember }">
 					<a href="${ loginpage }?n=n" class="jha">회원가입</a>
@@ -491,7 +515,24 @@ body {
 		</section>
 	</div> 
 </div>
- 
+ 	<c:if test="${ !empty whatclick }">
+			<script>
+				$(function(){
+					var sel = '${whatclick}';
+					console.log(sel);
+					var $nav = $("#mainnavsection");
+					switch(sel){
+					case 'home': {$($nav.children()[0]).css("text-shadow"," 0px 0px 8px coral"); break;}
+					case 'dan': {$($nav.children()[1]).css("text-shadow"," 0px 0px 8px coral"); break;}
+					case 'class': {$($nav.children()[2]).css("text-shadow"," 0px 0px 8px coral"); break;}
+					case 'community': {$($nav.children()[3]).css("text-shadow"," 0px 0px 8px coral"); break;}
+					case 'center': {$($nav.children()[4]).css("text-shadow"," 0px 0px 8px coral"); break;}
+					case 'mypage': {$($("#navsection2").children()[1]).css("text-shadow"," 0px 0px 8px coral"); break;}
+					
+					}
+				});
+			</script>
+	</c:if>
 
 <c:if test="${ !empty sessionScope.loginMember && sessionScope.loginMember.mId ne 'admin'  }">
 <div id="chatting">
@@ -583,7 +624,12 @@ body {
 		<h5 class="accordion-thumb">${ groupList.get(i)}</h5>
 
 		<ul class="accordion-panel">
-		
+				<c:if test="${groupList.get(i) == '일반' }">
+					<li style="height:25px; margin-bottom:5px;"><a class="myfriend" href="#">관리자</a>     
+					<span class="mycomments">시스템관리자</span>
+					<input type="text" style="display:none;"value="admin">
+				</li>
+				</c:if>
 		<c:forEach var="fltwo" items="${ friendList }" varStatus="status">
 			<c:if test="${ groupList.get(i) == fltwo.groupName }">
 				<li style="height:25px; margin-bottom:5px;"><a class="myfriend" href="#">${fltwo.nickname }</a>     
@@ -987,9 +1033,20 @@ $(document).on('click', '.myfriend', function(){
         data:{fId:fId},
         type:"post",
    		success:function(data){
-   			chatId = setInterval(function(){
-   				chatloggo(data);
+   			if(fId != "admin"){
+   				$("#chatcontent").attr("disabled",false);
+   	   			$("#chatsend").attr("disabled",false);
+   				chatId = setInterval(function(){
+   					chatloggo(data);
    				}, 3500);
+   			
+   			}else{
+   				$("#chatcontent").attr("disabled",true);
+   	   			$("#chatsend").attr("disabled",true);
+   				chatId = setInterval(function(){
+   	   				chatloggo("adminimg.jpg");
+   	   			}, 3500);
+   			}
 		},error:function(e){
 			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 		}	

@@ -150,7 +150,6 @@ public class MemberController {
 		mem.setPwd(loginpwd);
 
 		Member loginMember = mService.loginMember(mem);
-		
 		if(loginMember != null) {
 			mService.insertVisit(loginMember);	
 			ArrayList<Friend> flist = fService.friendList(loginMember.getmId());
@@ -276,6 +275,22 @@ public class MemberController {
 		}
 		return "redirect:mypage.me";
 	}
+	// 시스템 메시지 확인후 변경
+	@RequestMapping("updateMsgStatus.do")
+	public void updateMsgStatus(String mId,Model m,HttpServletResponse response) throws IOException {
+		int result = mService.updateMsgStatus(mId);
+		PrintWriter out = response.getWriter();
+		
+		if(result > 0) {
+			Member loginMember = (Member) m.getAttribute("loginMember");
+			loginMember.setMsgStatus("N");
+			m.addAttribute("loginMember", loginMember);
+			out.print("good");
+		}else {
+			out.print("bad");
+		}
+	}
+	
 	
 	// 파일 삭제
 	private void deleteFile(HttpServletRequest request, String img) {
