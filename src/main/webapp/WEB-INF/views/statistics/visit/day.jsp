@@ -95,7 +95,7 @@ body {
 									var data = new google.visualization.DataTable();
 									var data = new google.visualization.DataTable();
 									data.addColumn('string', 'Element');
-									data.addColumn('number', 'Percentage');
+									data.addColumn('number', '조회수');
 									data.addRows([ [ '1월', arr1[1] ], [ '2월', arr1[2] ],
 											[ '3월', arr1[3] ], [ '4월', arr1[4] ], [ '5월', arr1[5] ],
 											[ '6월', arr1[6] ], [ '7월', arr1[7] ], [ '8월', arr1[8] ],
@@ -198,7 +198,7 @@ body {
 								function drawAxisTickColors2() {
 									var data = new google.visualization.DataTable();
 									data.addColumn('string', 'Element');
-									data.addColumn('number', 'Percentage');
+									data.addColumn('number', '조회수');
 									
 									data.addRows([ [ '1일', arr2[curMonth][1] ], [ '2일', arr2[curMonth][curMonth] ],
 										[ '3일', arr2[curMonth][curMonth] ], [ '4일', arr2[curMonth][4] ], [ '5일', arr2[curMonth][5] ],

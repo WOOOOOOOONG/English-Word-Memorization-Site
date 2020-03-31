@@ -21,6 +21,7 @@
 		<result property="content" column="CONTENT"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="reportCount" column="REPORT_COUNT"/>
+		<result property="reportedId" column="REPORTED_ID"/>
 	</resultMap>
 	
 	<select id="getListCount" resultType="_int">
@@ -110,7 +111,7 @@
 	
 	<insert id="insertBoardReply">
 		INSERT INTO REPLY
-		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT, DEFAULT)
+		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT, NULL)
 	</insert>
 	
 	<delete id="deleteBoardReply">
@@ -127,6 +128,12 @@
 		SELECT *
 		FROM REPLY
 		WHERE BID=#{bId}
+	</select>
+	
+	<select id="selectReplyOne" resultMap="replyResultMap">
+		SELECT *
+		FROM REPLY
+		WHERE RID=#{rId}
 	</select>
 	
 	<select id="searchList" parameterType="Search" resultMap="boardResultMap">
@@ -157,7 +164,8 @@
 	
 	<update id="reportCountUp">
 		UPDATE REPLY
-		SET REPORT_COUNT = REPORT_COUNT + 1
+		SET REPORT_COUNT = REPORT_COUNT + 1,
+			REPORTED_ID = #{reportedId}
 		WHERE RID=#{rId}
 	</update>
 </mapper>

@@ -340,7 +340,7 @@ nav.sidebar ul li.active a.expandable:hover {
 	display: block;
 }
 
-textarea{
+textarea {
 	resize: none;
 }
 </style>
@@ -484,8 +484,8 @@ textarea{
 												style="cursor: pointer;">${ item.enrollDate }</td>
 											<td onclick="detailMember('${item.mId}');"
 												style="cursor: pointer;">${ item.updateDate }</td>
-											<td style="width: 70px;">
-											<c:if test="${ item.userStatus eq 'Y' }">
+											<td style="width: 70px;"><c:if
+													test="${ item.userStatus eq 'Y' }">
 													<div class="imotion" style="cursor: pointer;">
 														<div style="border: none;">
 															<i class="fas fa-user-alt imo" style="font-size: 24px;"
@@ -497,7 +497,8 @@ textarea{
 													<div class="imotion" style="cursor: pointer;">
 														<div style="border: none;">
 															<i class="fas fa-user-alt-slash imo"
-																style="font-size: 24px; border:none; " onclick="changeStatus('${item.mId}', '${item.userStatus}');"></i>
+																style="font-size: 24px; border: none;"
+																onclick="changeStatus('${item.mId}', '${item.userStatus}');"></i>
 															<p class="arrow_box" style="z-index: 5;">탈퇴</p>
 														</div>
 													</div>
@@ -507,7 +508,6 @@ textarea{
 								</c:forEach>
 								<script>
 									function detailMember(mId) {
-										console.log("hi?");
 										var width = 920;
 										var height = 620;
 										
@@ -580,14 +580,11 @@ textarea{
 									<td>${item.name}</td>
 									<td>${item.title}</td>
 									<td>${item.registDate}</td>
-									<td>
-										<c:if test="${item.isAnswer eq 'Y'}">
+									<td><c:if test="${item.isAnswer eq 'Y'}">
 											완료
-										</c:if>
-										<c:if test="${item.isAnswer eq 'N'}">
+										</c:if> <c:if test="${item.isAnswer eq 'N'}">
 											미답변
-										</c:if>
-									</td>
+										</c:if></td>
 									<td><c:if test="${item.type eq 0}">
 											시스템
 										</c:if> <c:if test="${item.type eq 1}">
@@ -617,7 +614,7 @@ textarea{
 								</tr>
 								<tr class="inquire">
 									<td colspan="9"><textarea
-											style="width: 100%; height: 200px; resize:none;"
+											style="width: 100%; height: 200px; resize: none;"
 											placeholder="${item.content}" readonly></textarea></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
@@ -632,7 +629,7 @@ textarea{
 								<c:if test="${item.isAnswer eq 'Y'}">
 									<tr class="answer">
 										<td colspan="9"><textarea
-												style="width: 100%; height: 200px; resize:none;"
+												style="width: 100%; height: 200px; resize: none;"
 												placeholder="${item.answer}" readonly></textarea></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
@@ -662,8 +659,8 @@ textarea{
 								<c:if test="${item.isAnswer eq 'N' }">
 									<tr class="answer">
 										<td colspan="9"><textarea
-												style="width: 100%; height: 200px; resize:none;" class="textarea"
-												id="textarea${item.iId}"></textarea></td>
+												style="width: 100%; height: 200px; resize: none;"
+												class="textarea" id="textarea${item.iId}"></textarea></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
 										<td style="display: none;"></td>
@@ -685,7 +682,8 @@ textarea{
 										<td>
 											<form action="response.ad" method="post">
 												<textarea name="text" class="resText"
-													id="resText${item.iId}" style="display: none; resize:none;"></textarea>
+													id="resText${item.iId}"
+													style="display: none; resize: none;"></textarea>
 												<input type="text" name="iId" value="${item.iId}"
 													id="iId${item.iId}" style="display: none;">
 												<script>
@@ -695,7 +693,8 @@ textarea{
 														resText.val(this.value);
 													});
 												</script>
-												<button type="button" class="resButton${item.iId}" onclick="response('${item.iId}');">답변 등록</button>
+												<button type="button" class="resButton${item.iId}"
+													onclick="response('${item.iId}');">답변 등록</button>
 											</form>
 										</td>
 									</tr>
@@ -857,7 +856,7 @@ textarea{
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(4);">크게 보기</button> -->
 						<div class="table chart-table">
-							<div id="piechart_4d" style="width: 650px; height: 300px;">
+							<div id="piechart_5d" style="width: 650px; height: 300px;">
 								<c:set var="cType0" value="0" />
 								<c:set var="cType1" value="0" />
 								<c:set var="cType2" value="0" />
@@ -866,6 +865,11 @@ textarea{
 								<c:set var="cType5" value="0" />
 								<c:set var="cType6" value="0" />
 								<c:set var="cType7" value="0" />
+								<c:set var="cType8" value="0" />
+								<c:set var="cType9" value="0" />
+								<c:set var="cType10" value="0" />
+								<c:set var="cType11" value="0" />
+								<c:set var="cType12" value="0" />
 								<c:forEach var="item" items="${cvList}">
 									<c:choose>
 										<c:when test="${item.cateId eq 0}">
@@ -892,30 +896,53 @@ textarea{
 										<c:when test="${item.cateId eq 7}">
 											<c:set var="cType7" value="${cType7 + 1}" />
 										</c:when>
+										<c:when test="${item.cateId eq 8}">
+											<c:set var="cType8" value="${cType8 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 9}">
+											<c:set var="cType9" value="${cType9 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 10}">
+											<c:set var="cType10" value="${cType10 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 11}">
+											<c:set var="cType11" value="${cType11 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 12}">
+											<c:set var="cType12" value="${cType12 + 1}" />
+										</c:when>
 									</c:choose>
 								</c:forEach>
 								<script type="text/javascript">
-									var type = new Array();
-									type[0] = ${cType0};
-									type[1] = ${cType1};
-									type[2] = ${cType2};
-									type[3] = ${cType3};
-									type[4] = ${cType4};
-									type[5] = ${cType5};
-									type[6] = ${cType6};
-									type[7] = ${cType7};
+									var ctype = new Array();
+									ctype[0] = ${cType0};
+									ctype[1] = ${cType1};
+									ctype[2] = ${cType2};
+									ctype[3] = ${cType3};
+									ctype[4] = ${cType4};
+									ctype[5] = ${cType5};
+									ctype[6] = ${cType6};
+									ctype[7] = ${cType7};
+									ctype[8] = ${cType8};
+									ctype[9] = ${cType9};
+									ctype[10] = ${cType10};
+									ctype[11] = ${cType11};
+									ctype[12] = ${cType12};
 									
 									google.charts.load("current", {
 										packages : [ "corechart" ]
 									});
-									google.charts.setOnLoadCallback(drawChart);
-									function drawChart() {
-										var data = google.visualization.arrayToDataTable([
-												[ 'Task', 'Hours per Day' ], [ '토익', type[0] ],
-												[ '9급 공무원', type[1] ], [ '경찰', type[2] ], [ '수능', type[3] ],
-												[ '기타', type[4] ], [ 'ㄴㄴ', type[5] ], [ 'ㅇㅇ', type[6] ], [ 'ㄹㄹ', type[7] ] ]);
+									google.charts.setOnLoadCallback(drawChart5);
+									function drawChart5() {
+										var data5 = google.visualization.arrayToDataTable([
+												[ 'Task', 'Hours per Day' ], [ 'TOEIC', ctype[0] ],
+												[ 'TOFEL', ctype[1] ], [ 'TEPS', ctype[2] ], [ 'G_TELP', ctype[3] ],
+												[ 'FLEX', ctype[4] ], [ '중등', ctype[5] ], [ '고등', ctype[6] ], [ '수능', ctype[7] ],
+												[ '9급 공무원', ctype[8] ], [ '경찰 공무원', ctype[9] ], [ '편입', ctype[10] ], [ '프로그래머', ctype[11] ],
+												[ '기타', ctype[12] ]
+												]);
 										 
-										var options = {
+										var options5 = {
 											title : '유형별',
 											titleFontSize : 14,
 											fontSize : 14,
@@ -924,9 +951,9 @@ textarea{
 											fontName: "Roboto"
 										};
 					
-										var chart = new google.visualization.PieChart(document
-												.getElementById('piechart_4d'));
-										chart.draw(data, options);
+										var chart5 = new google.visualization.PieChart(document
+												.getElementById('piechart_5d'));
+										chart5.draw(data5, options5);
 									}
 								</script>
 							</div>
@@ -942,23 +969,23 @@ textarea{
 						<!-- <button type="button"
 							class="btn btn-outline-secondary btn-sm moreBtn2"
 							onclick="goHomePage(5);">크게 보기</button> -->
-						<c:set var="type0" value="0" />
-						<c:set var="type1" value="0" />
-						<c:set var="type2" value="0" />
-						<c:set var="type3" value="0" />
+						<c:set var="itype0" value="0" />
+						<c:set var="itype1" value="0" />
+						<c:set var="itype2" value="0" />
+						<c:set var="itype3" value="0" />
 						<c:forEach var="item" items="${inquireList}">
 							<c:choose>
 								<c:when test="${item.type eq 0}">
-									<c:set var="type0" value="${type0 + 1}" />
+									<c:set var="itype0" value="${itype0 + 1}" />
 								</c:when>
 								<c:when test="${item.type eq 1}">
-									<c:set var="type1" value="${type1 + 1}" />
+									<c:set var="itype1" value="${itype1 + 1}" />
 								</c:when>
 								<c:when test="${item.type eq 2}">
-									<c:set var="type2" value="${type2 + 1}" />
+									<c:set var="itype2" value="${itype2 + 1}" />
 								</c:when>
 								<c:when test="${item.type eq 3}">
-									<c:set var="type3" value="${type3 + 1}" />
+									<c:set var="itype3" value="${itype3 + 1}" />
 								</c:when>
 							</c:choose>
 						</c:forEach>
@@ -966,11 +993,11 @@ textarea{
 						<div class="table chart-table">
 							<div id="piechart_3d" style="width: 650px; height: 300px;">
 								<script type="text/javascript">
-								var type = new Array();
-								type[0] = ${type0};
-								type[1] = ${type1};
-								type[2] = ${type2};
-								type[3] = ${type3};
+								var itype = new Array();
+								itype[0] = ${itype0};
+								itype[1] = ${itype1};
+								itype[2] = ${itype2};
+								itype[3] = ${itype3};
 								
 								google.charts.load("current", {
 									packages : [ "corechart" ]
@@ -978,8 +1005,8 @@ textarea{
 								google.charts.setOnLoadCallback(drawChart);
 								function drawChart() {
 									var data = google.visualization.arrayToDataTable([
-											[ 'Task', 'Hours per Day' ], [ '계정', type[0] ],
-											[ '시스템', type[1] ], [ '사용자', type[2] ], [ '기타', type[3] ]]);
+											[ 'Task', 'Hours per Day' ], [ '계정', itype[0] ],
+											[ '시스템', itype[1] ], [ '사용자', itype[2] ], [ '기타', itype[3] ]]);
 				
 									var options = {
 										title : '유형별',
@@ -1245,6 +1272,7 @@ textarea{
 							                        for(var i = 0; i < vocaLength; i++) {
 							                        	vocaList[i][0] = data[i].title;
 							                        	vocaList[i][1] = data[i].privilege.length;
+							                        	vocaList[i][2] = data[i].category;
 							                        }
 							                        console.log(vocaList);
 							                        
@@ -1277,8 +1305,6 @@ textarea{
 					data4.addColumn('string', 'Element');
 					data4.addColumn('number', '이용자수');
 					for(var i = 0; i < vocaLength; i++) {
-						
-						console.log(i);
 						data4.addRows([[ vocaList[i][0], vocaList[i][1] ]]);
 					}
 					var options = {
@@ -1330,11 +1356,15 @@ textarea{
 					chart.draw(data4, options);
 					
 					// 유형별 단어장
-					var type = new Array();
-					type[0] = ${type0};
-					type[1] = ${type1};
-					type[2] = ${type2};
-					type[3] = ${type3};
+					var vtype = new Array();
+					for(var i = 0; i < 13; i++) {
+						vtype[i] = 0;
+					}
+					
+					for(var i = 0; i < vocaLength; i++) {
+						console.log("여기 수정");
+						vocaList[i];
+					}
 					
 					google.charts.load("current", {
 						packages : [ "corechart" ]
@@ -1342,8 +1372,12 @@ textarea{
 					google.charts.setOnLoadCallback(drawChart4);
 					function drawChart4() {
 						var data = google.visualization.arrayToDataTable([
-								[ 'Task', 'Hours per Day' ], [ '수능', type[0] ],
-								[ 'TOEIC', type[1] ], [ '공무원 9급', type[2] ], [ '기타', type[3] ]]);
+								[ 'Task', 'Hours per Day' ], [ 'TOEIC', vtype[0] ],
+								[ 'TOFEL', vtype[1] ], [ 'TEPS', vtype[2] ], [ 'G_TELP', vtype[3] ],
+								[ 'FLEX', vtype[4] ], [ '중등', vtype[5] ], [ '고등', vtype[6] ],
+								[ '수능', vtype[7] ], [ '9급 공무원', vtype[8] ], [ '경찰 공무원', vtype[9] ],
+								[ '편입', vtype[10] ], [ '프로그래머', vtype[11] ], [ '기타', vtype[12] ],
+						]);
 	
 						var options = {
 							title : '유형별',
@@ -1363,14 +1397,11 @@ textarea{
 						</div>
 					</div>
 					<div class="chart2 left" onclick="viewLarge(7)">
-						<!-- <button type="button"
-							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(5);">크게 보기</button> -->
 						<div class="table chart-table">
 							<div id="piechart_3d4" style="width: 650px; height: 300px;">
+							</div>
 						</div>
 					</div>
-				</div>
 				</div>
 				<script>
 				function viewLarge(value) {

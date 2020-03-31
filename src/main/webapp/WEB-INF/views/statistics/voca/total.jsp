@@ -43,7 +43,7 @@ body {
 					var data = new google.visualization.DataTable();
 					var data = new google.visualization.DataTable();
 					data.addColumn('string', 'Element');
-					data.addColumn('number', 'Percentage');
+					data.addColumn('number', '조회수');
 					data.addRows([ [ '1\n시간', 78 ], [ '2\n시간', 21 ],
 							[ '3\n시간', 55 ], [ '4\n시간', 78 ], [ '5\n시간', 21 ],
 							[ '6\n시간', 55 ], [ '7\n시간', 78 ], [ '8\n시간', 21 ],

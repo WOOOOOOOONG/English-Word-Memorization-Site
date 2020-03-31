@@ -52,7 +52,7 @@ body {
 </head>
 <body>
 	<div class="table chart-table">
-		<div id="piechart_4d" style="width: 1800px; height: 650px;">
+		<div id="piechart_5d" style="width: 1300px; height: 650px; margin: 0 auto; margin-left: 100px;">
 			<c:set var="cType0" value="0" />
 			<c:set var="cType1" value="0" />
 			<c:set var="cType2" value="0" />
@@ -61,6 +61,11 @@ body {
 			<c:set var="cType5" value="0" />
 			<c:set var="cType6" value="0" />
 			<c:set var="cType7" value="0" />
+			<c:set var="cType8" value="0" />
+			<c:set var="cType9" value="0" />
+			<c:set var="cType10" value="0" />
+			<c:set var="cType11" value="0" />
+			<c:set var="cType12" value="0" />
 			<c:forEach var="item" items="${cvList}">
 				<c:choose>
 					<c:when test="${item.cateId eq 0}">
@@ -87,30 +92,53 @@ body {
 					<c:when test="${item.cateId eq 7}">
 						<c:set var="cType7" value="${cType7 + 1}" />
 					</c:when>
+					<c:when test="${item.cateId eq 8}">
+						<c:set var="cType8" value="${cType8 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 9}">
+						<c:set var="cType9" value="${cType9 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 10}">
+						<c:set var="cType10" value="${cType10 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 11}">
+						<c:set var="cType11" value="${cType11 + 1}" />
+					</c:when>
+					<c:when test="${item.cateId eq 12}">
+						<c:set var="cType12" value="${cType12 + 1}" />
+					</c:when>
 				</c:choose>
 			</c:forEach>
 			<script type="text/javascript">
-									var type = new Array();
-									type[0] = ${cType0};
-									type[1] = ${cType1};
-									type[2] = ${cType2};
-									type[3] = ${cType3};
-									type[4] = ${cType4};
-									type[5] = ${cType5};
-									type[6] = ${cType6};
-									type[7] = ${cType7};
+									var ctype = new Array();
+									ctype[0] = ${cType0};
+									ctype[1] = ${cType1};
+									ctype[2] = ${cType2};
+									ctype[3] = ${cType3};
+									ctype[4] = ${cType4};
+									ctype[5] = ${cType5};
+									ctype[6] = ${cType6};
+									ctype[7] = ${cType7};
+									ctype[8] = ${cType8};
+									ctype[9] = ${cType9};
+									ctype[10] = ${cType10};
+									ctype[11] = ${cType11};
+									ctype[12] = ${cType12};
 									
 									google.charts.load("current", {
 										packages : [ "corechart" ]
 									});
-									google.charts.setOnLoadCallback(drawChart);
-									function drawChart() {
-										var data = google.visualization.arrayToDataTable([
-												[ 'Task', 'Hours per Day' ], [ '토익', type[0] ],
-												[ '9급 공무원', type[1] ], [ '경찰', type[2] ], [ '수능', type[3] ],
-												[ '기타', type[4] ], [ 'ㄴㄴ', type[5] ], [ 'ㅇㅇ', type[6] ], [ 'ㄹㄹ', type[7] ] ]);
+									google.charts.setOnLoadCallback(drawChart5);
+									function drawChart5() {
+										var data5 = google.visualization.arrayToDataTable([
+												[ 'Task', 'Hours per Day' ], [ 'TOEIC', ctype[0] ],
+												[ 'TOFEL', ctype[1] ], [ 'TEPS', ctype[2] ], [ 'G_TELP', ctype[3] ],
+												[ 'FLEX', ctype[4] ], [ '중등', ctype[5] ], [ '고등', ctype[6] ], [ '수능', ctype[7] ],
+												[ '9급 공무원', ctype[8] ], [ '경찰 공무원', ctype[9] ], [ '편입', ctype[10] ], [ '프로그래머', ctype[11] ],
+												[ '기타', ctype[12] ]
+												]);
 										 
-										var options = {
+										var options5 = {
 											title : '유형별',
 											titleFontSize : 20,
 											fontSize : 20,
@@ -119,9 +147,9 @@ body {
 											fontName: "Roboto"
 										};
 					
-										var chart = new google.visualization.PieChart(document
-												.getElementById('piechart_4d'));
-										chart.draw(data, options);
+										var chart5 = new google.visualization.PieChart(document
+												.getElementById('piechart_5d'));
+										chart5.draw(data5, options5);
 									}
 								</script>
 		</div>

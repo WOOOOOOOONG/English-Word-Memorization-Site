@@ -222,7 +222,11 @@ public class BoardController {
 		ArrayList<Reply> rList = bService.selectBoardReplyList(bId);
 		for (int i = 0; i < rList.size(); i++) {
 			rList.get(i).setProfileimg(mService.selectProfileImg(rList.get(i).getWriterId()));
+			if(rList.get(i).getReportedId() != null) {
+				rList.get(i).setReportedArr(rList.get(i).getReportedId().split(","));
+			}
 		}
+		
 		Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 		return gson.toJson(rList);
 	}
@@ -247,9 +251,11 @@ public class BoardController {
 
 	@RequestMapping(value = "reportReply.bo")
 	@ResponseBody
-	public String reportReply(int rId) {
-		bService.reportReply(rId);
-
+	public String reportReply(int rId, String mId) {
+		Reply r = bService.selectReplyOne(rId);
+		r.setReportedId(r.getReportedId() + "," + mId);
+		bService.reportReply(r);
+		
 		return "success";
 	}
 

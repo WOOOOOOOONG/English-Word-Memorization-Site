@@ -72,7 +72,7 @@ style> /* 전체 */ body {
 										var data = new google.visualization.DataTable();
 										var data = new google.visualization.DataTable();
 										data.addColumn('string', 'Element');
-										data.addColumn('number', 'Percentage');
+										data.addColumn('number', '조회수');
 										data.addRows([
 											<c:forEach var="item" items="${cvList}">
 												['${item.title}', ${item.nowMemberCount}], 

@@ -471,12 +471,13 @@ footer p {
 											for(var i = 0; i < vocaLength; i++) {
 												vocaList[i] = new Array();
 											}
-					                        
+					                        console.log(data);
 											// 단어 데이터 추출
 					                        for(var i = 0; i < vocaLength; i++) {
 					                        	vocaList[i][0] = data[i].title;
-					                        	vocaList[i][1] = data[i].userId;
+					                        	vocaList[i][1] = data[i].userName;
 					                        	vocaList[i][2] = data[i].privilege.length;
+					                        	console.log("여기 수정");
 					                        	vocaList[i][3] = data[i].category;
 					                        	
 					                        }
