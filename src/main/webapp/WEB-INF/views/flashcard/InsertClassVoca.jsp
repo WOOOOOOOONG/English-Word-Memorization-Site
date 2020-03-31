@@ -354,55 +354,7 @@
     var userID = $("#cNo").val();
     var userName = "${ loginMember.name }";
     var newClas = false;
-    /* 
-    $(function () {
-      console.log("hello"); 
-      $.ajax(
-        {
-          type: "POST",
-          dataType: "json",
-          contentType: "application/json; charset=utf-8",
-          data: JSON.stringify( {userID : "taco"}),
-          url: 'http://localhost:1222/checkClass',
-          success: function (data) {
-            if(data.taco == "taco")
-            {
-            	newClas = true;
-            }
-            else
-            {	
-            	newClas = false;
-            }
-          },
-          error: function () {
-            alert("데이타베이스 연결에 실패하여씁니다!");
-            console.log("error has occured retriving data from MongoServer")
-          }
-        })
-    }) */
-
-
-
-
-   /*  function getSetList() {
-      $.ajax(
-
-        {
-          type: "POST",
-          dataType: "json",
-          contentType: "application/json; charset=utf-8",
-          data: send,
-          url: 'http://localhost:1222/getSetList',
-          success: function (data) {
-
-
-          },
-          error: function () {
-            alert("데이타베이스 연결에 실패하여씁니다!");
-            console.log("error has occured retriving data from MongoServer")
-          }
-        })
-    } */
+ 
 
   </script>
 
@@ -858,6 +810,8 @@
       
       request(send);
 
+      alert("단어장 입력이 완료되었습니다!");
+      location.href="myClass.do?cNo="+user_id;
 
     }
     else {
@@ -888,7 +842,7 @@
 
 
   function request(send) {
-	  
+	  var userID = $("#cNo").val();
 	 
 		  $.ajax(
 
@@ -899,7 +853,6 @@
 			        data: send,
 			        url: 'http://192.168.10.13:1222/findAndUpdateClass',
 			        success: function (data) {
-						console.log(data);
 
 			        },
 			        error: function () {

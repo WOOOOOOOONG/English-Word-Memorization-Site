@@ -242,6 +242,12 @@
 		</div>
 
 	
+	<c:if test="${ empty cList }">
+		<div style="width:100%; margin:auto; font-size:42px; text-align:center;"> 검색된 클래스가 존재하지 않습니다.</div>
+		<div style="width: 100%; height: 400px;"></div>
+	</c:if>
+	<c:if test="${ !empty cList }">
+	
 		<c:forEach var="i"  begin="1" end="${ row }">
 		 	
 		<!-- row div임 -->
@@ -350,7 +356,7 @@
 			</c:forEach>
 		</div>
  </c:forEach>
-			
+			</c:if>
 		
 		<!-- outer 끝 -->
 	</div>

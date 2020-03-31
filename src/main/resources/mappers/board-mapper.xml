@@ -68,13 +68,13 @@
 	<select id="selectBoardList" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
-		ORDER BY CREATE_DATE DESC
+		ORDER BY BID DESC
 	</select>
 	
 	<select id="boardAllList" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
-		ORDER BY CREATE_DATE DESC
+		ORDER BY BID DESC
 	</select>
 	
 	<select id="boardViewList" resultMap="boardResultMap">
@@ -88,7 +88,7 @@
 		SELECT *
 		FROM BOARD
 		WHERE TYPE = 1
-		ORDER BY CREATE_DATE DESC
+		ORDER BY BID DESC
 	</select>
 	
 	<insert id="insertBoard">
@@ -111,7 +111,7 @@
 	
 	<insert id="insertBoardReply">
 		INSERT INTO REPLY
-		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT, NULL)
+		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
 	<delete id="deleteBoardReply">
@@ -128,6 +128,7 @@
 		SELECT *
 		FROM REPLY
 		WHERE BID=#{bId}
+		ORDER BY RID ASC
 	</select>
 	
 	<select id="selectReplyOne" resultMap="replyResultMap">

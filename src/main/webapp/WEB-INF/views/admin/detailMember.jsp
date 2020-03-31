@@ -110,6 +110,10 @@ body {
 	height: 200px;
 	border-radius: 3px;
 }
+
+textarea {
+	color: black;
+}
 </style>
 </head>
 <body>
@@ -224,7 +228,7 @@ body {
 							<tr class="inquire">
 								<td colspan="8"><textarea
 										style="width: 100%; height: 200px"
-										placeholder="${item.content}" readonly></textarea></td>
+										readonly>${item.content }</textarea></td>
 								<td style="display: none;"></td>
 								<td style="display: none;"></td>
 								<td style="display: none;"></td>
@@ -238,7 +242,7 @@ body {
 								<tr class="answer">
 									<td colspan="8"><textarea
 											style="width: 100%; height: 200px"
-											placeholder="${item.answer}" readonly></textarea></td>
+											readonly>${item.answer }</textarea></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>
 									<td style="display: none;"></td>

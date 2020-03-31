@@ -201,6 +201,10 @@
     height: 70px;
     float: left;
 }
+
+#replyTable {
+	width: 1190px;
+}
 </style>
 </head>
 <body>
@@ -297,7 +301,16 @@
                <div class="content">${detailBoard.views}</div>
             </div>
          </div>
-         <div class="boardContent"><textarea id="inputText" onload="resize(this)" onkeydown="resize(this)" onkeyup="resize(this)" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke; border:none; outline:none;" readonly>${detailBoard.content}</textarea></div>
+         <%-- <div class="boardContent"><textarea id="inputText" onload="resize(this)" onkeydown="resize(this)" onkeyup="resize(this)" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke; border:none; outline:none;" readonly>${detailBoard.content}</textarea></div> --%>
+         <div id="inputText">${detailBoard.content }</div><br><br>
+         <script>
+         window.onload = function() {
+             var inputText = document.getElementById("inputText");
+             inputText.text = "${detailBoard.content}";
+             inputText.style.height = "1px";
+             obj.style.height = (12+obj.scrollHeight)+"px";
+          }
+         </script>
          <!-- 다음글, 이전글 -->
          <c:forEach var="item" items="${ boardList }" varStatus="status">
          	<c:if test="${item.bId eq detailBoard.bId && item.bId ne boardList[0].bId}">
@@ -434,7 +447,7 @@
                            $memberimg.append($img);
                            if(${!empty sessionScope.loginMember} && (data[i].writerId == memberId || memberId == 'admin')) {                        	   
                               var $deleteBtn = $("<td width='10'>").html("<div class='tdContent2'><button class='button" + i + "' onclick='deleteReply(" + data[i].rId + ", " + '"' + data[i].writerId + '"' + ");'></button></div>");                              
-                           }else {
+                           }else if(${!empty sessionScope.loginMember}){
                         	   if(data[i].reportedId != undefined && data[i].reportedId.includes('${sessionScope.loginMember.mId}')) {
                         		   var reportBtn = $('<td width="10"><div class="imotion"><div><i class="far fa-angry imo replyReport" style="font-size: 25px;" onclick="reportReply(' + data[i].rId + ', true);"></i><p class="arrow_box" style="margin-left:-36px;">신고하기</p></div></div></td>');                        		   
                         	   }else {
@@ -450,9 +463,11 @@
                            // 이미지 추가하기.
                            $tr.append($memberimg);
                            $tr.append($tWriter);
-                           $tr.append(reportBtn);
                            if(data[i].writerId == memberId || memberId == 'admin') {
                               $tr.append($deleteBtn);
+                           }else {
+
+                               $tr.append(reportBtn);
                            }
                            $tr.append(rId);
    

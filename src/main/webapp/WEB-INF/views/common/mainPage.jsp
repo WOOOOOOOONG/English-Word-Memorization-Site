@@ -461,7 +461,7 @@ footer p {
 					                dataType: "json",
 					                contentType: "application/json; charset=utf-8",
 					                data: JSON.stringify({_id:"CSID_45"}),
-					                url: 'http://localhost:1222/total',
+					                url: 'http://192.168.10.13:1222/total',
 					                success: function (data) {
 					                        var vocaLengthText = $("#vocaLength");
 					                        var $vocaListGroup = $('#voca-list-group');

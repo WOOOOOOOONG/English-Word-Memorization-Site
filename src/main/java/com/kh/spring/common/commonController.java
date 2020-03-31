@@ -60,6 +60,7 @@ public class commonController {
 				cList.add(classs);
 				
 			}
+			System.out.println(cList);
 			mv.addAttribute("cmList",cmList);
 			mv.addAttribute("cList",cList);
 			mv.addAttribute("mycList",cList);
