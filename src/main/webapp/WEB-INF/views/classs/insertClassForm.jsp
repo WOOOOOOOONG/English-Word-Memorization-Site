@@ -115,7 +115,7 @@
     <div style="width:100%; text-align: center; position: relative; margin-top: 20px; display: none;" id="page2"> 
         <div style=" font-size: 22pt; width: 800px; height:50px;position: relative;">
             <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">TITLE</span>
-            <input type="text" name="title" id="title" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 500px; height: 30px; font-size:12px;">
+            <input type="text" name="title" id="title" maxlength="40" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:16pt; width: 500px; height: 30px; font-size:12px;">
         </div>
 
         <div style=" font-size: 22pt; width: 800px; height:50px; position: relative;">

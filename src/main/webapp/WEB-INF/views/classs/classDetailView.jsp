@@ -49,10 +49,7 @@
 </c:url>
 
 	<!--  신고하기 -->
-   <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; margin:auto; text-align:center; position:absolute; top:145px; left:1200px; z-index:100;">
-   	<a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a>
-   </i>
-	
+  
     <div style="box-sizing: border-box; min-height: 100%; padding: 72px 0 20px; margin-top: 0px; background: #ebebeb; display: block; font-family: 'Jua', sans-serif;">
         <div style="margin-top: 0px;">
 
@@ -61,6 +58,11 @@
                 <!-- 찐 내용 시작-->
                 <div style=" margin-bottom:60px; width:900px; overflow:hidden; background-color:#fff; margin:auto; border-radius:25px;">
                     <!-- 사진, 지역 , 제목-->
+                    <i class="far fa-angry" style="color:orange; border:1px solid orange; padding:3px; position:absolute; right:50px;">
+                     <a href="${inquireView}" style="color:orange; text-decoration:none;">신고하기</a>
+                  </i>
+                    
+                    
                     <header>
                     	
                         <!-- 사진 -->
@@ -156,7 +158,7 @@
 	                                        <dd style="width:280px; display: inline-block;">${ email }</dd>
 	                                        
 	                                        <dt style="width:100px; color:#787878;">현재 인원 :</dt>
-	                                        <dd style="width:280px; display: inline-block;">${ classs.nowMemberCount } 명</dd>
+	                                        <dd style="width:280px; display: inline-block;">${ cmList.size() } 명</dd>
                                        	</c:when>
                                        	<c:otherwise>
                                        		<dt style="color:#787878; width: 55px;">과목:</dt>
@@ -178,7 +180,7 @@
 	                                        <dd style="width:280px; display: inline-block;">${ email }</dd>
 	                                        
 	                                        <dt style="width:100px; color:#787878;">현재 인원 :</dt>
-	                                        <dd style="width:280px; display: inline-block;">${ classs.nowMemberCount } 명</dd>
+	                                        <dd style="width:280px; display: inline-block;">${ cmList.size() } 명</dd>
                                        	</c:otherwise>
                                     </c:choose>
                                     </dl>

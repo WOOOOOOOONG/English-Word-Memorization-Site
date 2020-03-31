@@ -91,6 +91,7 @@
 		FROM CLASSS , CATEGORY
 		WHERE CLASSS.C_ID = CATEGORY.C_ID
 		AND NAME = #{cateList}
+		order by class_create_date desc
 	</select>
 
 	<select id="getClassnVoca" parameterType="string" resultMap="classResultSet">

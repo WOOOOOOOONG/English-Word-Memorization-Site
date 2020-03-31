@@ -185,7 +185,7 @@ public class BoardController {
 
 		if (b != null) {
 			ArrayList<Board> boardList = bService.BoardAllList();
-
+			b.setContent(b.getContent().replace("\n", "<br>"));
 			mv.addObject("boardList", boardList);
 			mv.addObject("detailBoard", b);
 			mv.addObject("currentPage", currentPage);

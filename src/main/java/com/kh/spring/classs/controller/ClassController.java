@@ -126,6 +126,7 @@ public class ClassController {
 		}
 		
 		String tel = cService.selectTell(classs.getOrnerId());
+		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
 		
 		mv.addObject("classs",classs);
 		mv.addObject("img1",img1);
@@ -133,6 +134,7 @@ public class ClassController {
 		mv.addObject("img3",img3);
 		mv.addObject("cateList",cateList);
 		mv.addObject("email",tel);
+		mv.addObject("cmList",cmList);
 		
 		mv.setViewName("classs/classDetailView");
 		
@@ -178,6 +180,7 @@ public class ClassController {
 		model.addAttribute("classs",cService.selectClassOneCount(cNo));
 		model.addAttribute("jwList",jwList);
 		mv.addObject("cNo",cNo);
+		mv.addObject("whatclick", "class");
 		mv.setViewName("classs/myClassView");
 		return mv;
 	}
@@ -1123,7 +1126,8 @@ public class ClassController {
 			}
 		}
 		
-		return "redirect:/mypage.me";
+		
+		return "mypage.me";
 	}
 	
 	@RequestMapping("InsertClassVocaForm.do")

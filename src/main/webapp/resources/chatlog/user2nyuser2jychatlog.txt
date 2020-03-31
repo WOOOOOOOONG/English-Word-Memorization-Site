@@ -1,0 +1,5 @@
+user2jy,나연아 안녕?,user2ny
+user2ny,안녕~~~~,user2jy
+user2ny,오늘은 뭐할꺼야?,user2jy
+user2ny,나는 공부할려고,user2jy
+user2jy,나도 같이 공부하자!,user2ny

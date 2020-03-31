@@ -780,7 +780,7 @@ body :-ms-input-placeholder {
 					<br> <span style="color: red;float:left; margin-left: 3%;"
 						class="trymin">03</span>: <span style="color: red; width: 10%;"
 						class="trysec">00</span> 
-						<input id="answercode" type="text"style="display: none;">
+						<input id="answercode" type="text">
 				</div>
 			</div>
 		</div>
