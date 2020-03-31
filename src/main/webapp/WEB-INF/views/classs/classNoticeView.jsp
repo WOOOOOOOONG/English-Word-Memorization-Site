@@ -13,7 +13,9 @@
 	<jsp:include page="../common/menubar.jsp"/>
 	<jsp:include page="../common/classSideMenubar.jsp"/>
 	<jsp:include page="../classs/fontStore.jsp"/>
-	
+		
+	<% int cc = 1; %>
+		
 	 <div style="margin-top :4vh; margin-left: 4vw; width:70%; height:800px; float: left; overflow: auto; position: relative;">
     	<div style="margin:auto; width:50%; text-align:center; border-bottom:1px solid gray; font-family:cinzel;">
         <h1>NOTICE</h1>
@@ -36,7 +38,8 @@
 					<c:param name="cNo" value="${ cNo }"/>
 				</c:url>
 	        		<tr onclick="location.href='${selectedNotice}'">
-	        			<td>${ cnList.get(i).cnid }</td>
+	        			<c:set var="cc" value="cc + 1"/>
+	        			<td><%= cc++ %></td>
 	        			<td>${ cnList.get(i).title }</td>
 	        			<td>${ cnList.get(i).id } </td>
 	        			<td>${ cnList.get(i).createDate }</td>
@@ -111,6 +114,5 @@
         </c:forEach>
         </div>
         
-        <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

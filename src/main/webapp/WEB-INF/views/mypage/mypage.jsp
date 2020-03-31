@@ -988,11 +988,12 @@ ul.shelf li:nth-child(9) span.booktop{
 			    <div id="classcontent" class="mypagecontent" style="overflow:hidden;" >
 			    	
 			    <div class="contenttitle">CLASS LIST</div>
-			    	<c:choose>
-					<c:when test="${ !empty cmList }">
-						<div>
+			    	<div>
 							<a href="classPorm.do" id="createBtn" class="createBtn">Create Class</a>
 						</div>
+			    	<c:choose>
+					<c:when test="${ !empty cmList }">
+						
 						<div style=" width:104%; height: 85%; padding:10px; 
 						overflow:scroll;overflow-x:hidden;overflow-y:auto;">
 							<c:choose>
@@ -1337,7 +1338,6 @@ ul.shelf li:nth-child(9) span.booktop{
           $(function(){
              alert("처음 오셨습니다. 프로필을 작성해주세요 ^^");
              $("#profile").click();
-             $("#backicon").("disabled",true);
           });
        </script>
     </c:if> 

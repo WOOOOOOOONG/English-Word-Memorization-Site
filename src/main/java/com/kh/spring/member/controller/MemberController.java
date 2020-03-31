@@ -191,9 +191,11 @@ public class MemberController {
 	}
 	// 로그아웃
 	@RequestMapping("Memberlogout.me")
-	public String logout(SessionStatus status) {
+	public String logout(SessionStatus status, HttpSession session) {
 		status.setComplete();
+		session.invalidate();
 		return "redirect:login.me";
+		
 	}
 	// 회원탈퇴
 	@RequestMapping("deleteMember.do")

@@ -147,11 +147,7 @@
 	                                        <dt style="width:55px; color:#787878;">정원:</dt>
 	                                        <dd style="width:145px; display: inline-block;">${ classs.memberCount } 명</dd>
 	                                        
-	                                        <dt style="color:#787878; width: 55px;">일정:</dt>
-	                                        <dd style="display: inline-block; width:355px;">${ classs.schedule }</dd>
-	
-	                                        <dt style="width:55px; color:#787878;">시간:</dt>
-	                                        <dd style="width:355px; display: inline-block;">${ classs.time }</dd>
+	                                       
 	
 	                                        <dt style="width:100px; color:#787878;">문의 아이디:</dt>
 	                                        <dd style="width:280px; display: inline-block;">${ classs.ornerId }</dd>

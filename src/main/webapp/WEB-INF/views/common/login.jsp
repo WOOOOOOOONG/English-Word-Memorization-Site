@@ -777,7 +777,7 @@ body :-ms-input-placeholder {
 						style="width: 20%; margin-right: 0.5%; margin-left: 1.5%;">인증</button>
 					<button id="retryemailcode" class="btn btn-outline-danger"
 						style="width: 20%;">재전송</button>
-					<br> <span style="color: red; width: 10%;float:left; margin-left: 3%;"
+					<br> <span style="color: red;float:left; margin-left: 3%;"
 						class="trymin">03</span>: <span style="color: red; width: 10%;"
 						class="trysec">00</span> 
 						<input id="answercode" type="text"style="display: none;">

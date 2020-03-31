@@ -242,7 +242,7 @@
 	          dataType: "json",
 	          contentType: "application/json; charset=utf-8",
 	          data: JSON.stringify( {userID : userID}),
-	          url: 'http://localhost:1222/checkClass',
+	          url: 'http://192.168.10.13:1222/checkClass',
 	          success: function (data) {
 	            if(data.taco == "taco")
 	            {
@@ -256,7 +256,7 @@
 	                               userID: userID,
 	                               userName: userName,
 	                           }),
-	           		        url: 'http://localhost:1222/createNewClass',
+	           		        url: 'http://192.168.10.13:1222/createNewClass',
 	           		        success: function (data) {
 	           		        	
 	           		        	// 단어장 리스트를 불러온다
@@ -298,7 +298,7 @@
                 dataType : "json",
                 contentType : "application/json; charset=utf-8",
                 data : send,
-                url : 'http://localhost:1222/getAllDataPlusUserName',
+                url : 'http://192.168.10.13:1222/getAllDataPlusUserName',
                 success : function(data) { 
                 	//console.log(data);
                 	
@@ -368,7 +368,7 @@
                 dataType : "json",
                 contentType : "application/json; charset=utf-8",
                 data : send,
-                url : 'http://localhost:1222/getClassCSID',
+                url : 'http://192.168.10.13:1222/getClassCSID',
                 success : function(data) {
                 	 // input.val(data);
                 	 var key = "csid";
@@ -384,6 +384,5 @@
       		}      	
       
       </script>
-      <jsp:include page="../common/footer.jsp"/>
 </body>
 </html>

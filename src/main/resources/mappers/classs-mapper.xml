@@ -65,6 +65,7 @@
 	<select id="selectClassList" resultMap="classResultSet">
 		SELECT *
 		FROM CLASSS
+		ORDER BY CLASS_CREATE_DATE DESC
 	</select>
 	<select id="classViewList" resultMap="classResultSet">
 	   SELECT *
