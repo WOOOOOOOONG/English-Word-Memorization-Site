@@ -1,6 +1,7 @@
 package com.kh.spring.board.model.vo;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class Reply {
 	private int rId;
@@ -11,19 +12,13 @@ public class Reply {
 	private Date createDate;
 	private int reportCount;
 	private String profileimg;
+	private String reportedId;
+	private String[] reportedArr;
 	
-	public String getProfileimg() {
-		return profileimg;
-	}
-
-	public void setProfileimg(String profileimg) {
-		this.profileimg = profileimg;
-	}
-
 	public Reply() {}
 
 	public Reply(int rId, int bId, String writerId, String writerNickname, String content, Date createDate,
-			int reportCount) {
+			int reportCount, String profileimg, String reportedId, String[] reportedArr) {
 		super();
 		this.rId = rId;
 		this.bId = bId;
@@ -32,6 +27,9 @@ public class Reply {
 		this.content = content;
 		this.createDate = createDate;
 		this.reportCount = reportCount;
+		this.profileimg = profileimg;
+		this.reportedId = reportedId;
+		this.reportedArr = reportedArr;
 	}
 
 	public int getrId() {
@@ -90,14 +88,37 @@ public class Reply {
 		this.reportCount = reportCount;
 	}
 
+	public String getProfileimg() {
+		return profileimg;
+	}
+
+	public void setProfileimg(String profileimg) {
+		this.profileimg = profileimg;
+	}
+
+	public String getReportedId() {
+		return reportedId;
+	}
+
+	public void setReportedId(String reportedId) {
+		this.reportedId = reportedId;
+	}
+
+	public String[] getReportedArr() {
+		return reportedArr;
+	}
+
+	public void setReportedArr(String[] reportedArr) {
+		this.reportedArr = reportedArr;
+	}
+
 	@Override
 	public String toString() {
 		return "Reply [rId=" + rId + ", bId=" + bId + ", writerId=" + writerId + ", writerNickname=" + writerNickname
 				+ ", content=" + content + ", createDate=" + createDate + ", reportCount=" + reportCount
-				+ ", profileimg=" + profileimg + "]";
+				+ ", profileimg=" + profileimg + ", reportedId=" + reportedId + ", reportedArr="
+				+ Arrays.toString(reportedArr) + "]";
 	}
-
-	
 
 	
 }

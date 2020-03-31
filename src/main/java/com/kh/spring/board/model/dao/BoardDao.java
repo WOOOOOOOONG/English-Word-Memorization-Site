@@ -69,8 +69,8 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardReplyList", bId);
 	}
 
-	public void reportReply(int rId) {
-		sqlSession.update("boardMapper.reportCountUp", rId);
+	public void reportReply(Reply r) {
+		sqlSession.update("boardMapper.reportCountUp", r);
 	}
 
 	public ArrayList<Board> searchList(Search search, PageInfo pi) {
@@ -90,5 +90,9 @@ public class BoardDao {
 
 	public ArrayList<Board> boardViewList() {
 		return (ArrayList)sqlSession.selectList("boardMapper.boardViewList");
+	}
+
+	public Reply selectReplyOne(int rId) {
+		return (Reply)sqlSession.selectOne("boardMapper.selectReplyOne", rId);
 	}
 }

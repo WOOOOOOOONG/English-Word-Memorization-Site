@@ -75,8 +75,8 @@ public class BoardService {
 		return bDao.selectBoardReplyList(bId);
 	}
 
-	public void reportReply(int rId) {
-		bDao.reportReply(rId);
+	public void reportReply(Reply r) {
+		bDao.reportReply(r);
 	}
 
 	public ArrayList<Board> searchList(Search search, int page) {
@@ -96,5 +96,9 @@ public class BoardService {
 
 	public ArrayList<Board> boardViewList() {
 		return bDao.boardViewList();
+	}
+
+	public Reply selectReplyOne(int rId) {
+		return bDao.selectReplyOne(rId);
 	}
 }
