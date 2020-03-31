@@ -202,13 +202,13 @@
             
 
             <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative;">
-                <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시작일</span>
+               <%--  <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시작일</span>
                 <input type="date" name="startday" id="startday" min="<%= realday %>"  style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:14pt; width: 200px; height: 30px; font-size:12px;">
                 <span style="position:absolute; left:450px; top:30px; font-size:11pt; color:#787878;">종료일</span>
-                <input type="date" name="endday" id="endday" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:14pt; width: 200px; height: 30px; font-size:12px;" disabled>
+                <input type="date" name="endday" id="endday" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 550px; top: 20px; font-size:14pt; width: 200px; height: 30px; font-size:12px;" disabled> --%>
                 <input type="text" name="schedule" id="schedule" style="display:none;" value="" >
-                 
-                <!-- 시작일 끝나는일  스트링 합치기-->
+                <!--  
+                시작일 끝나는일  스트링 합치기
                 <script>
                 	var schedule;
                 	
@@ -235,13 +235,13 @@
                 			$("#schedule").val(schedule);
                 		});
                 	});
-                </script>
+                </script> -->
                 
             </div>
 
             <div style="float:left; font-size: 22pt; width: 800px; height:50px;position: relative; padding : 40px;">
-                <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시간</span>
-                <input type="text" name="time" id="time" value="" placeholder="ex)16:00 - 18:00" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:12px; width: 200px; height: 30px;">
+               <!--  <span style="position:absolute; left:80px; top:30px; font-size:11pt; color:#787878;">시간</span>
+                <input type="text" name="time" id="time" value="" placeholder="ex)16:00 - 18:00" style="border:none; border-bottom: 1px solid gray; position:absolute; left: 200px; top: 20px; font-size:12px; width: 200px; height: 30px;"> -->
             </div>
         </div>
 
@@ -421,10 +421,6 @@
             			alert("지역을 입력해주세요");
             		}else if($("#memberCount").val() == ""){
             			alert("정원을 입력해주세요.");
-            		}else if($("#schedule").val() == ""){
-            			alert("날짜를 입력해주세요.");
-            		}else if($("#time").val() == ""){
-            			alert("시간대를 입력해주세요.");
             		}else{
             			$("#page2").css("display","none");
     	                $("#page2_title").css("display","none");

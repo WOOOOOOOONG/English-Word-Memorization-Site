@@ -258,8 +258,8 @@
 									<!-- 기간 -->
 									<div style="margin: 0 24px; height: 3pc; line-height: 50px; text-align: center; color: #787878; font-size: 14px; border-bottom: 1px solid #ebebeb; font-weight: 700;">
 										<c:choose>
-											<c:when test="${ not empty cList.get(lasize).schedule }">
-												<span style="color: #4c8def;">${ cList.get(lasize).schedule }</span> ${ cList.get(lasize).time }	
+											<c:when test="${ not empty cList.get(lasize).local }">
+												<span style="color: #FFA7A7;">오프라인 스터디</span>
 											</c:when>
 											<c:otherwise>
 												<span style="color: #4c8def;">온라인 스터디</span>
@@ -272,14 +272,13 @@
 										<span>
 											<c:choose>
 												<c:when test="${ not empty cList.get(lasize).local }">
-													${ cList.get(lasize).local }													
+													<span style="color: #FFA7A7;">${ cList.get(lasize).local }</span>
+													<span>&nbsp; | &nbsp;</span>													
 												</c:when>
-												<c:otherwise>
-													온라인
-												</c:otherwise>
+												
 											</c:choose>
 										</span>
-										<span>&nbsp; | &nbsp;</span> <span>${ cList.get(lasize).level }</span>
+										 <span>${ cList.get(lasize).level }</span>
 									</div>
 			
 									<!-- 제목 -->
@@ -339,7 +338,7 @@
 								</c:if>
 								<c:set var="imgFlag" value="true"/>
 								
-									<div style="background: #cff0da; position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
+									<div style="background: #D5D5D5; position: absolute; bottom: 0; width: 100%; height: 3pc; line-height: 50px; text-align: center; color: #fff; font-size: 14px; font-weight: 700">
 										신청 하기
 									</div>
 								</div>

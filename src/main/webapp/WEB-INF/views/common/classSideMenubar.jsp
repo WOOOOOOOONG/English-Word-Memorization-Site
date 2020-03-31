@@ -335,17 +335,16 @@ main .helper span {
          </c:url>
          
           
-         <li tabindex="0" class="icon-books icon"><a><span>스터디</span></a>
+         <li tabindex="0" class="icon-books icon" style="border-bottom:1px solid gray;"><a><span>스터디</span></a>
             <ul class="hide">
                <li class="homepage"><a href="${ myClass }" style="color:white; text-decoration:none;">스터디 단어장</a></li>
                <li class="homepage"><a href="${ classTestList }" style="color:white; text-decoration:none;">시험 목록</a></li>
                <li class="homepage"><a href="${ classNotice }" style="color:white; text-decoration:none;">공지 사항</a></li>
-               <li class="homepage"><a href="${ classIntroduce }" style="color:white; text-decoration:none;">클래스 소개보기</a></li>
                <li class="homepage"><a href="${ classPerson }" style="color:white; text-decoration:none;">클래스 구성원</a></li>
             </ul>
          </li>
          <c:if test="${ loginMember.mId eq classs.ornerId }">
-         <li tabindex="0" class="icon-users icon"><a><span>멤버 관리</span></a>
+         <li tabindex="0" class="icon-users icon" style="border-bottom:1px solid gray;"><a><span>멤버 관리</span></a>
             <ul class="hide">
                <li class="homepage"><a href="${ classMemberRight }" style="color:white; text-decoration:none;">멤버 권한 설정</a></li>
                <li class="homepage"><a href="${ classMemberTest }" style="color:white; text-decoration:none;">시험 정보 보기</a></li>
@@ -374,7 +373,7 @@ main .helper span {
                 dataType : "json",
                 contentType : "application/json; charset=utf-8",
                 data : send,
-                url : 'http://localhost:1222/getClassCSID',
+                url : 'http://192.168.10.13:1222/getClassCSID',
                 success : function(data) {
                 	 // input.val(data);
                 	 var key = "csid";
@@ -403,7 +402,7 @@ main .helper span {
                 dataType : "json",
                 contentType : "application/json; charset=utf-8",
                 data : send,
-                url : 'http://localhost:1222/getAllData',
+                url : 'http://192.168.10.13:1222/getAllData',
                 success : function(data) {
                 	 getCsid()
                 // vocaList 아래 인풋 
@@ -464,7 +463,7 @@ main .helper span {
             dataType : "json",
             contentType : "application/json; charset=utf-8",
             data : send,
-            url : 'http://localhost:1222/testURL',
+            url : 'http://192.168.10.13:1222/testURL',
             success : function(data) {
               	console.log(data);
 	           	var chkkor = $("#chkkor");

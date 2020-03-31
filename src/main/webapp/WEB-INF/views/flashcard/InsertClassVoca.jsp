@@ -897,7 +897,7 @@
 			        dataType: "json",
 			        contentType: "application/json; charset=utf-8",
 			        data: send,
-			        url: 'http://localhost:1222/findAndUpdateClass',
+			        url: 'http://192.168.10.13:1222/findAndUpdateClass',
 			        success: function (data) {
 						console.log(data);
 
