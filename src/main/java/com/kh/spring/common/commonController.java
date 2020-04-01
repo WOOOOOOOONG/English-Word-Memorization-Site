@@ -73,37 +73,44 @@ public class commonController {
 		
 	}
 	// 이메일 인증코드 발송 메소드
-	@RequestMapping(value="/email.ck")
-	public void checkEmail(HttpServletResponse response,String email, String code) throws IOException {
-		PrintWriter out = response.getWriter();
-		int result = mService.checkEmail(email);
-		if (result < 1) {
-			String content = "이메일 인증코드는 "+code+"입니다.";
-			MailSender mailSender = new MailSender();
-			mailSender.sendMail(email,"테스트","[SEW] 이메일 인증코드입니다.",content);
-			
-			out.write("success");
-		}else {
-			
-			out.write("중복된 이메일입니다.");
-		}
-		
-	}
-	
-	@RequestMapping(value="/email2.ck")
-	public void checkEmail2(HttpServletResponse response,String email, String code) throws IOException {
-		PrintWriter out = response.getWriter();
-		int result = mService.checkEmail(email);
-		if (result > 0) {
-			String content = "이메일 인증코드는 "+code+"입니다.";
-			MailSender mailSender = new MailSender();
-			mailSender.sendMail(email,"테스트","[SEW] 이메일 인증코드입니다.",content);
-			
-			out.write("success");
-		}else {
-			
-			out.write("없는 이메일입니다.");
-		}
-		
-	}
+	   @RequestMapping(value="/email.ck")
+	   public void checkEmail(HttpServletResponse response,String email, String code) throws IOException {
+	      PrintWriter out = response.getWriter();
+	      int result = mService.checkEmail(email);
+	      if (result < 1) {
+	         String content = "안녕하세요 SEW입니다 \n 요청하신 인증코드는     "+code+"    입니다.\n"
+	               + "SEW 본인 확인 메일입니다. 아래 인증번호를 입력하고, 본인 인증을 완료하여 주십시오.\n" + 
+	               "중요: 인증번호는 5분후에 만료됩니다. 5분 내로 입력하여 주시기 바랍니다.\n" + 
+	                "Sudden Eager Where \n SEW";
+	               
+	         MailSender mailSender = new MailSender();
+	         mailSender.sendMail(email,"newuser","[SEW] 이메일 인증코드입니다.",content);
+	         
+	         out.write("success");
+	      }else {
+	         
+	         out.write("중복된 이메일입니다.");
+	      }
+	      
+	   }
+	   
+	   @RequestMapping(value="/email2.ck")
+	   public void checkEmail2(HttpServletResponse response,String email, String code) throws IOException {
+	      PrintWriter out = response.getWriter();
+	      int result = mService.checkEmail(email);
+	      if (result > 0) {
+	         String content = "안녕하세요 SEW입니다 \n 요청하신 인증코드는     "+code+"    입니다.\n"
+	               + "SEW 본인 확인 메일입니다. 아래 인증번호를 입력하고, 본인 인증을 완료하여 주십시오.\n" + 
+	               "중요: 인증번호는 5분후에 만료됩니다. 5분 내로 입력하여 주시기 바랍니다.\n" + 
+	                "Sudden Eager Where \n SEW";
+	         MailSender mailSender = new MailSender();
+	         mailSender.sendMail(email,"newuser","[SEW] 이메일 인증코드입니다.",content);
+	         
+	         out.write("success");
+	      }else {
+	         
+	         out.write("없는 이메일입니다.");
+	      }
+	      
+	   }
 }

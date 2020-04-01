@@ -593,7 +593,7 @@ html, body {
         <div class="wrapper wra4">
        		<c:url var="admin2" value="selectInquireList.ad"/>
             <div class="message">
-                <h1>온라인으로 나만의 단어장과 함께 공부할 친구를 찾으세요!</h1>    
+                <h1>온라인으로 다양한 단어들을 관리하고, 함께 공부할 친구를 찾으세요!</h1>    
                 <p>저희 '외웟' 홈페이지에서는 자신의 단어장을 만들고, 단어를 쉽게 외우게 하기 위한 재밌는 게임으로 공부를 할 수 있으며, 클래스를 꾸려 함께 공부할 수 있는 홈페이지입니다.</p>
             </div>
         </div>

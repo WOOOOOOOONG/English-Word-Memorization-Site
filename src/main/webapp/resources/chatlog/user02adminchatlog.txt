@@ -6,3 +6,4 @@ admin,aaa,user02
 admin,안녕?,user02
 admin,ㅁㅁ,user02
 admin,ㅌㅌㅌ,user02
+admin,회원님이 다른 회원에게 불편한 메시지를 지속적으로 보내 메시지를 보냈습니다.<br>계속 지속될 경우 회원이 탈퇴됩니다.,user02

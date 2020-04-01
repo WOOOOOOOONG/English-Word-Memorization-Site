@@ -41,6 +41,10 @@ public class BoardDao {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList", null, rowBounds);
 	}
 
+	public ArrayList<Board> selectBoardWriter(String mId) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardWriter", mId);
+	}
+
 	public ArrayList<Board> BoardAllList() {
 		return (ArrayList)sqlSession.selectList("boardMapper.boardAllList");
 	}
@@ -94,5 +98,9 @@ public class BoardDao {
 
 	public Reply selectReplyOne(int rId) {
 		return (Reply)sqlSession.selectOne("boardMapper.selectReplyOne", rId);
+	}
+
+	public ArrayList<Reply> selectBoardReplyWriter(String mId) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardReplyWriter", mId);
 	}
 }

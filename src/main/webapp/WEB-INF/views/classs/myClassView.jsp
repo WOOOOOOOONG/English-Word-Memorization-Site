@@ -197,7 +197,7 @@
 						}
 					}
 					
-					div.append("<div class='voca'><div class='titleSpan'>"+ title +"</div><span class='vocaSpan'>" + (vocaCount - 1) +" 단어</span><img class='proimg' src='${ contextPath }/resources/profileimg/" +
+					div.append("<div class='voca'><div class='titleSpan' onclick ='getVoca(this)'>"+ title +"</div><span class='vocaSpan'>" + (vocaCount - 1) +" 단어</span><img class='proimg' src='${ contextPath }/resources/profileimg/" +
 							changeName  + "'><span class='name'>"+ cid + "</span></div>");
 					rowCount++;
 				}
@@ -213,8 +213,31 @@
 	setTimeout(function() {
 		$("#asd").click();
 	}, 4000);
+	
+	
 </script>
 
+<script>
+function getVoca(word)
+{
+	var title = $(word).text();
+	var csid = sessionStorage.getItem("csid");
+	var cNo = $("#cNo").val();
+	var cc = "?csid=" + csid + "&title=" + title+ "&edit=true&cNo=" + cNo;
+	
+	console.log(cc);
+	location.href = "flashcard_other_ROcl.fl"+ cc;
+	
+}
+	
+	$(function(){
+		$("#ttt").click(function(){
+			console.log("Dd");
+			//console.log($(this).html());
+		})
+	});
+	
+</script>
 <script>
 	var listCount = 1; // 단어장 번호
 	

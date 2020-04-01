@@ -947,7 +947,7 @@ ul.shelf li:nth-child(9) span.booktop{
 
         };
        function outclasss(cNo){
-			if(confirm("선택 클래스를 정말 탈퇴하시겠습니까 ? ")){
+			if(confirm("선택 스터디를 정말 탈퇴하시겠습니까 ? ")){
 				location.href="outClass.do?cNo="+cNo;				
 			}
          
@@ -963,9 +963,9 @@ ul.shelf li:nth-child(9) span.booktop{
     <ul class="shelf">
         <li class="bookmain" id="profile"><span class="booklabel"><h2>Profile</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
-        <li class="bookmain" id="class"><span class="booklabel"><h2>Class</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <li class="bookmain" id="class"><span class="booklabel"><h2>Study</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
-        <!-- id="dan" --><li class="bookmain" ><span class="booklabel"><h2>Word</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
+        <!-- id="dan" --><li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" id="schedule"><span class="booklabel"><h2>Schedule</h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
         <li class="bookmain" ><span class="booklabel"><h2></h2></span><span class="booktop"></span><span class="bookleft"></span><span class="bookright"></span></li>
@@ -987,9 +987,9 @@ ul.shelf li:nth-child(9) span.booktop{
             	<!-- 클래스 리스트  -->
 			    <div id="classcontent" class="mypagecontent" style="overflow:hidden;" >
 			    	
-			    <div class="contenttitle">CLASS LIST</div>
+			    <div class="contenttitle">STUDY LIST</div>
 			    	<div>
-							<a href="classPorm.do" id="createBtn" class="createBtn">Create Class</a>
+							<a href="classPorm.do" id="createBtn" class="createBtn">Create Study</a>
 						</div>
 			    	<c:choose>
 					<c:when test="${ !empty cmList }">
@@ -1028,7 +1028,7 @@ ul.shelf li:nth-child(9) span.booktop{
 						</div>
 					</c:when>
 					<c:otherwise>
-						<div style="margin:auto; text-align:center; margin-top:15px;">현재 가입중인 클래스가 없습니다.</div>
+						<div style="font-size:15px;margin:auto; text-align:center; margin-top:45px;">현재 가입중인 클래스가 없습니다.</div>
 					</c:otherwise>
 					</c:choose>
 					 
@@ -1651,6 +1651,11 @@ ul.shelf li:nth-child(9) span.booktop{
                 var dayNumber = +el.querySelectorAll('.day-number')[0].innerText || +el.querySelectorAll('.day-number')[0].textContent;
                 var day = this.current.clone().date(dayNumber);
                 var str = $("#selectedyear").val();
+                if(dayNumber < 10){
+                	dayNumber = "0" + dayNumber;
+                	
+                }
+                
             $("#selectedday").val(str+"-"+dayNumber);
             $("#selectedday2").val(str+"-"+dayNumber);
             

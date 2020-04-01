@@ -340,7 +340,7 @@ main .helper span {
                <li class="homepage"><a href="${ myClass }" style="color:white; text-decoration:none;">스터디 단어장</a></li>
                <li class="homepage"><a href="${ classTestList }" style="color:white; text-decoration:none;">시험 목록</a></li>
                <li class="homepage"><a href="${ classNotice }" style="color:white; text-decoration:none;">공지 사항</a></li>
-               <li class="homepage"><a href="${ classPerson }" style="color:white; text-decoration:none;">클래스 구성원</a></li>
+               <li class="homepage"><a href="${ classPerson }" style="color:white; text-decoration:none;">스터디 구성원</a></li>
             </ul>
          </li>
          <c:if test="${ loginMember.mId eq classs.ornerId }">
