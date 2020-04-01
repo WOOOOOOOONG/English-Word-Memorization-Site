@@ -90,7 +90,7 @@
 
   .flip-card {
     background-color: transparent;
-    width: 600px;
+    width: 800px;
     height: 400px;
     perspective: 1000px;
   }
@@ -116,13 +116,13 @@
 
 
   .flip-card-front {
-    background-color: #bbb;
+    background-color: whitesmoke;
     color: black;
   }
 
   .flip-card-back {
-    background-color: #2980b9;
-    color: white;
+    background-color: whitesmoke;
+    color: black;
     transform: rotateY(180deg);
   }
 
@@ -419,7 +419,7 @@
   }
 
   .text_settings {
-    font-size: 300%;
+    font-size: 500%;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -553,6 +553,18 @@
 
 
 
+.container_slide
+{
+  width: fit-content;
+  margin:auto;
+}
+
+
+
+  .cus_slides
+  {
+    display: none;
+  }
 
 
   .mySlides {
@@ -575,6 +587,112 @@
       opacity: 1
     }
   }
+
+
+
+
+
+
+
+
+
+/* https://css-tricks.com/snippets/css/stack-of-paper/ from this site */
+.paper_container
+{
+  width: 100%;
+}
+  .paper {
+  background: #fff;
+  display: inline-block;
+  margin-left: 110px;
+  position: relative;
+  width: 250px; height: 150px;
+}
+
+.paper,
+.paper::before,
+.paper::after {
+  /* Styles to distinguish sheets from one another */
+  box-shadow: 1px 1px 1px rgba(0,0,0,0.25);
+  border: 1px solid #bbb;
+}
+
+.paper::before,
+.paper::after {
+  content: "";
+  position: absolute;
+  height: 95%;
+  width: 99%;
+  background-color: #eee;
+}
+
+.paper::before {
+  right: 15px;
+  top: 0;
+  transform: rotate(-1deg);
+  z-index: -1;
+}
+
+.paper::after {
+  top: 5px;
+  right: -5px;
+  transform: rotate(1deg);
+  z-index: -2;
+}
+
+
+
+
+
+
+/*tooltip*/
+
+.tooltip_cus {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted whitesmoke;
+}
+
+.tooltip_cus .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 100%;
+  left: 50%;
+  margin-left: -60px;
+}
+
+.tooltip_cus:hover .tooltiptext {
+  visibility: visible;
+}
+
+
+
+
+.my_list_set
+{
+  display: none;
+  border: 1px solid grey;
+  width: 700px;
+  height: 350px;
+}
+.my_list_set p
+{
+  font-size: 120%;
+  position: absolute;
+}
+.my_list_set hr
+{
+ margin-top:2rem;
+}
 </style>
 
 <body>
@@ -604,8 +722,8 @@
       </div>
 
       <div id="display_edit" style="display: none;">
-        <a class="btn" href="http://localhost:8899/spring/flashcard.fl">새로 세트 작성하기</a>
-        <button class="btn" onclick="save()">저장하기</button>
+        <a class="btn" href="http://192.168.10.13:8800/spring/flashcard.fl">새로 세트 작성하기</a>
+        <button class="btn" onclick="checkTitleDuplicate()">저장하기</button>
       </div>
 
       <div id="display_test" style="display: none;">
@@ -617,9 +735,9 @@
 
         <div class="navbarOp nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="horizontal">
 
-          <a class="nav-link home_view active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+          <a class="nav-link home_view tooltip_cus active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
             aria-controls="v-pills-home" aria-selected="true">
-
+            <span class="tooltiptext">내 단어장</span>
             <i class="material-icons" style="font-size: 48px;width: 48px;">
               credit_card
             </i>
@@ -627,9 +745,41 @@
           </a>
 
 
-          <a class="nav-link test_view " id="v-pills-test-tab" data-toggle="pill" href="#v-pills-test" role="tab"
-            aria-controls="v-pills-tome" aria-selected="true">
 
+
+
+<!-- 다른사람 단어장 -->
+
+<a class="nav-link tooltip_cus list_view_card " id="v-pills-list_card-tab" data-toggle="pill" href="#v-pills-list_card" role="tab"
+aria-controls="v-pills-home" aria-selected="true">
+<span class="tooltiptext">공유된 단어장</span>
+<i class="material-icons" style="font-size: 48px;width: 48px;">
+  search
+</i>
+
+</a>
+<!-- 다른사람 단어장 -->
+
+
+
+<!--내 단어장 리스트-->
+
+<a class="nav-link tooltip_cus list_view_card2 " id="v-pills-list_card2-tab" data-toggle="pill" href="#v-pills-list_card2" role="tab"
+aria-controls="v-pills-home" aria-selected="true">
+ <span class="tooltiptext">단어장 리스트</span>
+<i class="material-icons" style="font-size: 48px;width: 48px;">
+  person
+</i>
+
+</a>
+
+
+<!--내 단어장 리스트-->
+
+          <a class="nav-link tooltip_cus test_view  " id="v-pills-test-tab" data-toggle="pill" href="#v-pills-test" role="tab"
+            aria-controls="v-pills-test" aria-selected="true" >
+              
+             <span class="tooltiptext"> 간단 테스트</span>
             <i class="material-icons" style="font-size: 48px;width: 48px;">
               import_contacts
             </i>
@@ -637,15 +787,17 @@
           </a>
 
 
-          <a class="nav-link edit_view" id="v-card-list-tab" data-toggle="pill" href="#v-card-list" role="tab"
-            aria-controls="v-card-list" aria-selected="false">
+          <a class="nav-link tooltip_cus edit_view" id="v-card-list-tab" data-toggle="pill" href="#v-card-list" role="tab"
+            aria-controls="v-pills-list" aria-selected="false">
+            <span class="tooltiptext">단어장 수정</span>
             <i class="material-icons" style="font-size: 48px;width: 48px;">
               dynamic_feed
             </i>
           </a>
 
-          <a class="nav-link  setting_view" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
+          <a class="nav-link tooltip_cus  setting_view" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
             role="tab" aria-controls="v-pills-settings" aria-selected="false">
+              <span class="tooltiptext">설정</span>
             <i class="material-icons" style="font-size: 48px;width: 48px;">
               settings
             </i>
@@ -714,14 +866,15 @@
 
 
 
-
+           <!--  
             <div class="container" id="fullScreen">
-
               <div id="placetoappend" class="carousel slide" data-ride="carousel" data-interval="false">
-
-                <div class="carousel-inner">
-
-                  <div class="carousel-item  active " id="onstartClone">
+                 <div class="carousel-inner">
+                   <div class="carousel-item  active " id="onstartClone">
+              -->
+               
+              <div class="container_slide" id = "slide_contained">
+                  <div class = "cus_slides fade_next" id="onstartClone">
                     <div class="flip-card">
                       <div class="flip-card-inner">
                         <div class="flip-card-front text_settings">
@@ -736,18 +889,16 @@
 
                     </div>
                   </div>
-
+                </div>
 
                   <!-- 버튼 추가는 여기에 -->
 
-                </div>
+               
 
+                <!-- 
+                   </div>
               </div>
-
-
-
-
-            </div>
+            </div>-->
 
 
 
@@ -767,7 +918,7 @@
 
 
 
-              <div class="container_test mySlides" id="test_for_cloned">
+              <div class="container_test mySlides fade_next" id="test_for_cloned">
                 <input type="text" class="answer_key" hidden>
 
                 <input type="text" class="user_answer_key" hidden>
@@ -806,9 +957,172 @@
           </div>
 
 
+          <div class="tab-pane fade" id="v-pills-list_card" role="tabpanel" aria-labelledby="v-pills-list_card-tab">
+          
+
+            <div class="paper_container">
+
+            </div>
+
+          
+            <div class="paper" id="other_user_card">
+              <input type="text" name="" class="csid_other_user" hidden>
+              <input type="number" class="pri_level"hidden>
+              <input type="text" class="title_saved"hidden>
+              <p style="position: absolute;" class="title_titied"></p>
+        
+              <hr style="margin-top:20px;background: red;">
+             <p style="position: absolute; " class="id_titied"></p>
+             
+              <hr style="margin-top:20px">
+              <p style="position: absolute; " class="category_titied"></p>
+              <hr style="margin-top:20px">
+           
+              <hr style="margin-top:20px">
+              <hr style="margin-top:20px">
+              <hr style="margin-top:20px">
+              
+          </div>
+
+
+          </div>
+
+          <div class="tab-pane fade" id="v-pills-list_card2" role="tabpanel" aria-labelledby="v-pills-list_card2-tab">
+            
+            
+
+                <div id="myset_container"style="    margin: auto;
+                width: fit-content;">
+
+                  
+  <div class="my_list_set"  id ="first_cloned_mylist_clone">
+
+    <P style="margin-left: 16%;">제목 </P>
+    <hr style="opacity: 0;">
+    <P class="title" style="font-size: 300%;"></P>
+    <hr style="background: red; margin-top:0px";>
+    <hr>
+    <hr>
 
 
 
+
+
+
+                          <hr>
+                          <hr>
+                          <hr>
+                          <hr>
+                          
+    
+    <div class="dropdown " style="width: fit-content;
+    position: absolute;     
+    width: 261px;
+    
+    ">
+      <button style="background: white;color:black;" class="btn btn-secondary dropdown-toggle" type="button"
+        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        현재 권한 있는 아이디
+                                 </button>
+                            <div class="dropdown-menu text-center card_set_list_2" aria-labelledby="dropdownMenuButton">
+                         
+                          </div>
+                      </div>
+                          <button class="btn"
+                        style="   position: absolute;  
+                            margin-left: 10%;"
+                            onclick="deleteMyPer()">삭제하기</button> 
+                        <button 
+                        style="   position: absolute;  
+                            margin-left: 25%;"
+                        
+                        class="btn" onclick="deleteMySet()">단어장 삭제하기</button>
+
+                          <hr>
+                          <hr>
+      </div>
+
+
+                </div>
+                
+                
+                
+                
+                   
+    <div class="dropdown " style="width: fit-content;
+    position: absolute;     
+    width: 261px;
+    margin-top: 79px;
+    margin-left: 433px;">
+      <button style="background: white;color:black;" class="btn btn-secondary dropdown-toggle set_autho" type="button"
+        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        권한 레벨 주기(기본값: 읽기만)
+                                 </button>
+                            <div class="dropdown-menu text-center " aria-labelledby="dropdownMenuButton">
+
+
+                              <button class="dropdown-item" onclick="setval2(this);">
+                                  읽기만
+                              </button>
+                              <button class="dropdown-item" onclick="setval2(this);">
+                                  읽기/수정
+                              </button>
+                             
+                          </div>
+                      </div>
+                
+                <div  style="width: fit-content;
+                margin: auto;">
+                  <div class="omrs-input-group" style="margin: 5px;margin-right: 17px; width: 32.4375rem;">
+                    <label class="omrs-input-underlined">
+                      <input style="    height: 50px;
+                    background: whitesmoke; text-align: center;
+                    width: 340px;
+                 " id="add_permisson_2">
+                 
+                 
+                 <button class="btn reqest_aud"> 추가하기</button>
+                      <span class="omrs-input-label">권한 추가하기</span>
+                    </label>
+                  </div>
+                </div>
+                <div style="width: fit-content;
+                margin: auto;">
+                  <button class="btn myPrev">
+                  <i class="material-icons" style="font-size: 48px;width: 48px;">
+                    keyboard_arrow_left
+                  </i>
+                </button>
+                  <button class="btn myNext">
+                    <i class="material-icons" style="font-size: 48px;width: 48px;">
+                      keyboard_arrow_right
+                    </i>
+                  </button>
+                </div>
+
+
+
+
+
+
+            <!-- <div class="paper" id="my_list_set">
+              <input type="text" name="" class="csid_other_user" hidden>
+              <input type="number" class="pri_level"hidden>
+              <p style="position: absolute;" class="title_titied"></p>
+        
+              <hr style="margin-top:20px;background: red;">
+             <p style="position: absolute; " class="id_titied"></p>
+             
+              <hr style="margin-top:20px">
+              <p style="position: absolute; " class="category_titied"></p>
+              <hr style="margin-top:20px">
+           
+              <hr style="margin-top:20px">
+              <hr style="margin-top:20px">
+              <hr style="margin-top:20px">
+              
+          </div> -->
+          </div>
 
           <div class="tab-pane fade  list-group" id="v-card-list" role="tabpanel" aria-labelledby="v-card-list-tab">
 
@@ -995,17 +1309,248 @@
 <!---->
 
 
+<script>
+
+
+function deleteMyPer()
+{
+  
+  
+
+}
+function deleteMySet()
+{
+
+}
+$(".my_list_set").click(function(){
+  var title= $(".my_list_set").eq(myCounter).find(".title").text();
+  if($("#csid_val").val() != null)
+  { 
+    var send = JSON.stringify({
+     _id:   $("#csid_val").val(),
+     card_word : title
+      
+      })
+      console.log(send);
+      $.ajax(
+      {
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data:send,
+        url: 'http://192.168.10.13:1222/getMyOtherSet',
+        success: function (data) {
+          console.log(data);
+
+        },
+        error: function () {
+          //alert("데이타베이스 연결에 실패하여씁니다!");
+          console.log("error has occured retriving data from MongoServer")
+        }
+      })
+
+  }
+
+})
+
+
+
+var clone_mylist = $("#first_cloned_mylist_clone").clone(true, true).removeAttr('id');
+$("#first_cloned_mylist_clone").removeAttr('id').remove();
+function getMyList(){
+  console.log("get my list")
+  $.ajax(
+      {
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({ _id:   $("#csid_val").val() }),
+        url: 'http://192.168.10.13:1222/mySet',
+        success: function (data) {
+
+        
+          var key = Object.keys(data.card_word);
+          title = Object.keys(data.card_word);
+          var authority =data.privilege;
+          for(var i = 0 ; i < key.length; i ++)
+          {
+            var temp = clone_mylist.clone(true,true);
+           
+          
+            
+            temp.find(".title").text(key[i])
+            //if 권한이 있으면 
+            console.log("get my list autho")
+            if(authority.hasOwnProperty(key[i]))
+            {
+          
+              var list = Object.keys(data.privilege[key[i]]);
+            
+              for(var j = 0; j < list.length; j ++)
+              { 
+                var aut = list_set_clone.clone(true,true);
+                aut.text(list[j]);
+                temp.find(".card_set_list_2").append(aut);
+              }
+            
+            }
+           
+
+
+
+            $("#myset_container").append(temp);
+          }
+        
+          $(".my_list_set").eq(0).show();
+          
+        },
+        error: function () {
+          //alert("데이타베이스 연결에 실패하여씁니다!");
+          console.log("error has occured retriving data from MongoServer")
+        }
+      })
+
+}
+/*
+
+    $(".mySlides").each(function () {
+      $(this).hide();
+    })
+    $(".mySlides").eq(curr_test_pos).show();
+
+*/
+var myCounter = 0;
+
+$(".myPrev").click(function(){
+
+ 
+
+  myCounter = myCounter -1
+  if(myCounter < 0)
+        myCounter = $(".my_list_set").length-1;
+
+  $(".my_list_set").each(function () {
+      $(this).hide();
+    })
+    $(".my_list_set").eq(myCounter).show();
+
+   
+
+})
+
+$(".myNext").click(function(){
+  myCounter = myCounter +1
+  if(myCounter >= $(".my_list_set").length)
+         myCounter = 0;
+  
+  $(".my_list_set").each(function () {
+      $(this).hide();
+    })
+    $(".my_list_set").eq(myCounter).show();
+
+})
+
+$(".reqest_aud").click(function(){
+  
+   var id = $("#add_permisson_2").val().trim()
+  console.log(id);
+  searchUser(id)
+ 
+   
+})
+function setval2(e) {
+    var new_title = $(e).text();
+    $(".set_autho").text(new_title)
+  }
+function addAuthor(userval)
+{
+
+    console.log(userval);
+    console.log($("#csid_val").val());
+    var this_title = $(".my_list_set").eq(myCounter).find(".title").text();
+    console.log(this_title +" is your title");
+    var pri;
+    if ($(".set_autho").text() == "읽기만")
+    {
+      pri =2;
+    }
+    else
+    pri = 3;
+    $.ajax(
+      {
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+           _id: $("#csid_val").val(),
+          userID: userval,
+          title : this_title,
+          pril : pri
+         
+      }),
+        url: 'http://192.168.10.13:1222/addAuthor',
+        success: function (data) {
+          
+
+        },
+        error: function () {
+          //alert("데이타베이스 연결에 실패하여씁니다!");
+          console.log("error has occured retriving data from MongoServer")
+        }
+      })
+  
+ 
+}
+function searchUser(search)
+{
+  $.ajax(
+      {
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+           userID : search
+      }),
+        url: 'http://192.168.10.13:1222/checkUser',
+        success: function (data) {
+          console.log(data);
+          if(data.taco == "taco")
+          {
+           alert("해당 유저는 존재하지 않습니다.")
+         
+          }
+          else
+          {
+         
+            addAuthor(search)
+          }
+
+        },
+        error: function () {
+          //alert("데이타베이스 연결에 실패하여씁니다!");
+          console.log("error has occured retriving data from MongoServer")
+        }
+      })
+}
+</script>
+
+
+
+
 
 
 <script>
+  var title_vertified = false;
   var cloned;
   var slide_clone;
+
 
   $(function () {
     $("#v-card-list_to").sortable();
     //$(".optionABS").css({ 'opacity': 0 }).attr('readonly', true);
     cloned = $("#cloneCard").clone(true, true).removeAttr('id');
     slide_clone = $("#test_for_cloned").clone(true, true).removeAttr('id');
+  
     $("#test_for_cloned").removeAttr('id').remove();
     $("#cloneCard").removeAttr('id').remove();
 
@@ -1042,6 +1587,7 @@
 <script>
   var word_list_test = [];
   var word_mean_test = [];
+  
 
   var list_set_clone = $('#list_D').removeAttr('id').remove().clone(true, true)
 
@@ -1081,19 +1627,19 @@
   $(function () {
     user_ID = "${ loginMember.mId }";
     if (user_ID.trim() == "")
-      location.href = "http://localhost:8899/spring/login.me";
+      location.href = "http://192.168.10.13:8800/spring/login.me";
     $.ajax(
       {
         type: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify({ userID: user_ID }),
-        url: 'http://localhost:1222/csid',
+        url: 'http://192.168.10.13:1222/csid',
         success: function (data) {
 
          
           if (data == "EMPTY")
-            location.href = "http://localhost:8899/spring/flashcard.fl";
+            location.href = "http://192.168.10.13:8800/spring/flashcard.fl";
           $("#csid_val").val(data);
           getit();
 
@@ -1104,30 +1650,29 @@
         }
       })
 
-
-
-
-
-
-
   })
 
   function getit() {
     console.log($("#csid_val").val());
 
     if ($("#csid_val").val().trim() == "" || $("#csid_val").val() == null) {
-      location.href = "http://localhost:8899/spring/flashcard.fl";
+      location.href = "http://192.168.10.13:8800/spring/flashcard.fl";
     }
     $.ajax({
       type: "POST",
       dataType: "json",
       contentType: "application/json; charset=utf-8",
       data: JSON.stringify({ _id: $("#csid_val").val() }),
-      url: 'http://localhost:1222/getCardSet',
+      url: 'http://192.168.10.13:1222/getCardSet',
       success: function (data) {
 
-        var key = Object.keys(data[1]);
+        if(data =="NEW")
+        {
+          location.href = "http://192.168.10.13:8800/spring/flashcard.fl";
+        }
 
+        var key = Object.keys(data[1]);
+        
         if (data[1][key].length > 0 && data[1][key] != "title_list") {
           console.log("데이타 불러오기 성공")
           var title = Object.keys(data[1])
@@ -1143,7 +1688,8 @@
             var key = Object.keys(set[0]);
 
             if (i == 0)
-              temp.addClass('active');
+            temp.addClass('active');
+        
             temp.find('.flip-card-front').text(key[i]);
             temp.find('.flip-card-back').text(set[0][key[i]]);
 
@@ -1162,11 +1708,16 @@
 
             $(".slide_for_test").append(temp3);
             $("#v-card-list_to").append(temp2);
-            $('#placetoappend .carousel-inner').eq(0).append(temp);
+            $('#slide_contained').append(temp);
           }
 
+          $('.cus_slides').eq(0).show();
+          console.log("get Shared Set")
+           getSharedSet();
+           console.log("set Test Ques")
+         //addTestQuestion();
 
-          addTestQuestion();
+
           $(".mySlides").eq(0).find(".pre_btn").prop('disabled', true);
           $(".mySlides").eq($(".mySlides").length - 1).find(".nex_btn").prop('disabled', true);
           maxView = size.length;
@@ -1177,24 +1728,33 @@
           $("#title_val").val(title);
           $('#load_set>.optionView').text(title);
           $("#cardCounter").text(cardCounterViewer + " / " + maxView);
+          $(".carcPrevBtn").attr("disabled", true);
+
           changePlaceholder();
           set = data[2][Object.keys(data[2])];
-
           for (var i = 0; i < set.length; i++) {
 
             var temp3 = list_set_clone.clone(true, true);
-
+            // 자기 세트 추가는 여기서 
+            
             temp3.text(set[i]);
+            
+           // var my_list_cow = my_list_set.clone(true,true);
+
+
             $("#card_set_list").append(temp3);
           }
+          console.log("get my set")
+          getMyList();
           $(".loading_page").remove();
           $("#nav_sticky").show();
           $('.flashCardViewContainer').show();
+         
 
         }
         else {
 
-          location.href = "http://localhost:8899/spring/flashcard.fl";
+          location.href = "http://192.168.10.13:8800/spring/flashcard.fl";
         }
 
 
@@ -1207,6 +1767,72 @@
 
 
   }
+  // 다른 사람거 가져 오기 
+  function getSharedSet()
+  {
+
+    var shared_flashed;
+
+    shared_flashed = $("#other_user_card").clone(true, true).removeAttr('id');
+    $("#other_user_card").removeAttr('id').remove();
+
+    $.ajax(
+      {
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+          search : user_ID
+        }),
+        url: 'http://192.168.10.13:1222/findPermisson',
+        success: function (data) {
+
+          console.log("getSHhared ste")
+          if(data == "null")
+          {
+            console.log("no data");
+          }
+          else
+          {
+            for(var i =0 ; i < data.length;i++)
+          { 
+                var temp_of  = shared_flashed.clone(true,true);
+                var div = data[i];
+                var CSID = data[i].CSID;
+                var owner = data[i].ownerID;
+                var title = data[i].title;
+                var privilege = data[i].privilege;
+                var cacy = data[i].category;
+
+                temp_of.find(".csid_other_user").val(CSID);
+                temp_of.find(".pri_level").val(privilege);
+                temp_of.find(".title_saved").val(title);
+
+                temp_of.find(".title_titied").text("제목: "+title);
+                temp_of.find(".id_titied").text("작성자ID: "+owner);
+                if(cacy == "undefined")
+                temp_of.find(".category_titied").text("카테고리: "+cacy);
+                else
+                temp_of.find(".category_titied").text("카테고리: "+"없음");
+
+
+                $(".paper_container").append(temp_of );
+          }
+          console.log("added compelte")
+          }
+          
+        },
+        error: function () {
+          // alert("데이타베이스 연결에 실패하여씁니다!");
+          console.log("error has occured retriving data from MongoServer")
+        }
+      })
+
+  }
+
+
+
+
   function getLoading() {
     $("#nav_sticky").hide();
     $("#flashCardViewContainer").hide();
@@ -1371,47 +1997,36 @@
   //firstCard  secondCard thirdCard
 
 
-
-  let slidPlayerOp = false;
-
-
-  function cycle() {
-    $('.carousel').carousel('cycle');
-  }
-  function pause() {
-    $('.carousel').carousel('pause');
-  }
-
-
-
-
-
-  $(function () {
-
-
-    pause();
-    $(".carcPrevBtn").attr("disabled", true);
-
+  var curr_test_pos2 = 0;
 
     //이전 버튼
     $('.carcPrevBtn').click(function () {
+     
       cardHandler(0);
-      $('.carousel').carousel('prev');
-      if (!slidPlayerOp)
-        pause();
-
+      console.log(curr_test_pos2)
+      if(curr_test_pos2-1 > 0 )
+      curr_test_pos2 = curr_test_pos2-1;
+      $(".cus_slides").each(function () {
+          $(this).hide();
+       })
+     
+       $(".cus_slides").eq(curr_test_pos2).show();
+    
     });
     // 다음 버튼
     $('.carcNextBtn').click(function () {
       cardHandler(1);
-      $('.carousel').carousel('next');
-      if (!slidPlayerOp)
-        pause();
+      console.log(curr_test_pos2)
+      if(curr_test_pos2+1 < cardSize )
+      curr_test_pos2 = curr_test_pos2+1;
+      $(".cus_slides").each(function () {
+               $(this).hide();
+       })
+       console.log(curr_test_pos2)
+       $(".cus_slides").eq(curr_test_pos2).show();
+    
     });
 
-
-
-  });
   function cardHandler(btn) {
     if (btn == 0 && current >= 0) {
       current = current - 1;
@@ -1422,8 +2037,10 @@
         $(".carcPrevBtn").attr("disabled", false);
         $(".carcNextBtn").attr("disabled", false);
       }
+      
     }
     else if (btn == 1 && current < cardSize) {
+     
       current = current + 1;
       if (current == cardSize) {
         $(".carcNextBtn").attr("disabled", true);
@@ -1436,6 +2053,9 @@
     }
     cardCounterViewer = current + 1;
     $("#cardCounter").text(cardCounterViewer + " / " + maxView);
+    console.log()
+   
+
   }
 </script>
 
@@ -1533,21 +2153,70 @@ function applySticky() {
 
 <script>
 
+$(".paper").click(function(){
+  // alert("my level is " + $(this).find(".pri_level").val());
+  if($(this).find(".pri_level").val() >2)
+  {
+    var mycsid = $(this).find(".csid_other_user").val();
+    var mytitle = $(this).find(".title_saved").val();
+    var cc = "?csid=" + mycsid + "&title=" + mytitle+ "&edit=true";
+    console.log(cc);
+    location.href = "flashcard_other_RO.fl"+ cc 
+    
+  }
+  else
+  {
+    var mycsid = $(this).find(".csid_other_user").val();;
+    var mytitle = $(this).find(".title_saved").val();
+    var cc = "?csid=" + mycsid + "&title=" + mytitle;
+    console.log(cc);
+    location.href = "flashcard_other_RO.fl"+cc;
+  }
+ 
+})
 
+function noDuplicateWord() {
+    var duplicate = true;
+    var size_of = $(".card_word_wrapper").length;
+    console.log(size_of);
+    
+    for (var i = 0; i < size_of; i++) {
+      for (var j = 0; j < size_of; j++) {
 
-  var title_vertified = false;
+        var a = $(".card_word_wrapper").eq(i).find(".defOfWord>.textSetting").val();
+        var b = $(".card_word_wrapper").eq(j).find(".defOfWord>.textSetting").val();
+       
+        if(i !=j && a == b)
+        {  
+         alert((i+1) + " 번쨰 단어와 " + (j+i) + " 번쨰 단가 중복입니다." );
+          duplicate= false;
+         
+          break;
+        }
+        
+      }
+      if(duplicate == false)
+          break;
+    }
+  
+
+    return duplicate;
+  }
 
   function save() {
-    title_vertified = false;
+   
     var card = $(".card_word_wrapper");
     var title = $("#title_val").val().trim();
     var orginal_tt = $("#original_title").val().trim();
     var card_type = $("#per_public").text().trim();
     var list = [];
     var temp = {};
-    checkTitleDuplicate();
+    
+    console.log("타이틀 입력")
 
-    if (title != "" && title_vertified == true) {
+    
+    if ( title != "" ) {
+      console.log("title")
       if (card.length >= 6) {
         card.each(
           function () {
@@ -1570,14 +2239,15 @@ function applySticky() {
           _id: csid,
           userID: user_ID,
           [title]: list,
-          orginal: orginal,
+          orginal: orginal_tt,
           rename: $("#title_val").val().trim()
         })
 
       
         if (title != $("#original_title").val().trim()) {
-
-          rename(send2);
+          console.log("동일하지 않은 타일틀")
+          rename_request(send2, title);
+         
 
         }
         else if (title == $("#original_title").val().trim()) {
@@ -1599,14 +2269,14 @@ function applySticky() {
   }
 
 
-  function request(send) {
+  function request(data_isSending) {
     $.ajax(
       {
         type: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: send,
-        url: 'http://localhost:1222/findAndUpdate',
+        data: data_isSending,
+        url: 'http://192.168.10.13:1222/findAndUpdate',
         success: function (data) {
 
 
@@ -1617,7 +2287,7 @@ function applySticky() {
         }
       })
   }
-  function deleteOriginal(orginal) {
+  function deleteOriginal(orginal , new_title_x) {
 
     $.ajax(
       {
@@ -1625,9 +2295,9 @@ function applySticky() {
         dataType: "json",
         contentType: "application/json; charset=utf-8",
         data: to_delete,
-        url: 'http://localhost:1222/delete_orginal_title',
+        url: 'http://192.168.10.13:1222/delete_orginal_title',
         success: function (data) {
-
+          $("#original_title").val(new_title_x);
 
         },
         error: function () {
@@ -1641,46 +2311,62 @@ function applySticky() {
   // 리스트 불러오기 
   function checkTitleDuplicate() {
     var title = $("#title_val").val().trim();
-    $.ajax(
+    if(noDuplicateWord() == true ) 
+    {
+      $.ajax(
 
+{
+  type: "POST",
+  dataType: "json",
+  contentType: "application/json; charset=utf-8",
+  data: JSON.stringify({
+    _id: $("#csid_val").val(),
+    newTitle: title
+  }),
+  url: 'http://192.168.10.13:1222/checkDup',
+  success: function (data) {
+
+    if (data.taco == "taco") {
+      title_vertified = false;
+      alert("중복되는 타이틀은 입력하실수 없습니다.")
+    }
+    else {
       {
-        type: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({
-          _id: $("#csid_val").val(),
-          newTitle: title
-        }),
-        url: 'http://localhost:1222/checkDup',
-        success: function (data) {
-
-          if (data.taco == "taco") {
-            title_vertified = false;
-            alert("중복되는 타이틀은 입력하실수 없습니다.")
-          }
-          else {
-            title_vertified = true;
-          }
-        },
-        error: function () {
-          /// alert("데이타베이스 연결에 실패하여씁니다!");
-          console.log("error has occured retriving data from MongoServer")
-        }
-      })
+        title_vertified = true;
+        save();
+        console.log("사용 가능한 타이틀")
+      }
+     
+    }
+  },
+  error: function () {
+    /// alert("데이타베이스 연결에 실패하여씁니다!");
+    console.log("error has occured retriving data from MongoServer")
+  }
+})
+    }
+    
   }
 
-  function rename(send) {
-
+  function rename_request(request_send) {
+    console.log("rename requesting")
     $.ajax(
       {
         type: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data: send,
-        url: 'http://localhost:1222/renameAndUpdate',
+        data: request_send,
+        url: 'http://192.168.10.13:1222/renameAndUpdate',
         success: function (data) {
 
-
+            if(data == true)
+            {
+                location.href = "http://192.168.10.13:8800/spring/flashcard2.fl"
+            } 
+            else
+            {
+              alert("failed")
+            }
         },
         error: function () {
           // alert("데이타베이스 연결에 실패하여씁니다!");
@@ -1780,4 +2466,10 @@ function applySticky() {
 
 </script>
 
+<script>
+
+  $('.text_view').hover(function(){
+    $(this).tooltip('show')
+  })
+</script>
 </html>

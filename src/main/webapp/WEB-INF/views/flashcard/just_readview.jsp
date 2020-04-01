@@ -10,20 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-  <!--
-
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-    crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-    crossorigin="anonymous"></script>
-    
--->
-
   <link rel="stylesheet" href="resources/css/cus_input.css">
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
@@ -383,47 +369,71 @@
     var userName = "${ loginMember.name }";
     var retrive = false;
     var title_vertified = false;
+    var cloned;
 
-    if (userID.trim() == "") {
-      console.log("empty")
-      location.href = "http://192.168.10.13:8800/spring/login.me";
-    }
-    else {
-      $(function () {
-        console.log("sending to check user exist")
 
-        $.ajax(
 
+$(function () {
+  var new_csid= "${csid}";
+      var new_title= "${title}"
+
+  $("#v-card-list").sortable();
+
+  cloned = $("#cloneCard").clone(true, true).removeAttr('id');
+  $("#cloneCard").removeAttr('id').remove();
+
+  $.ajax(
           {
             type: "POST",
             dataType: "json",
             contentType: "application/json; charset=utf-8",
-            data: JSON.stringify({ userID: userID }),
-            url: 'http://192.168.10.13:1222/checkUser',
+            data: JSON.stringify(
+              {
+                _id : new_csid,
+                card : new_title
+              }
+            ),
+            url: 'http://192.168.10.13:1222/getOhterUser',
             success: function (data) {
-              if (data.taco == "taco") {
-                // 새로운 유저를 생성 한다 
-                retrive = false;
-                console.log("새로운 유저생성 가능")
+              var title = Object.keys(data[1].card);
+                
+              $(".title_here").text(title[0]);
+              var wordlist = data[1].card[title[0]];
+              var defin = wordlist[0]
+              var size =  Object.keys(defin); // key
+              console.log(defin);
+              for(var i = 0; i <size.length; i++)
+              {    
+                
+                var newClone = cloned.clone(true, true);
+                  
+               
+                
+                newClone.find('.defOfWord>.textSetting').val(size[i]);
+                newClone.find('.meanOfWord>.textSetting').val(defin[size[i]]);
+                $("#v-card-list").append(newClone);
               }
-              else {
-                // 새로 작성하지 않는다  저장시 제목을 확인한다
-                retrive = true;
-                request_CSID();
-                console.log("유저 이미 존재")
-              }
-
+             
+              changePlaceholder();
             },
             error: function () {
-              //alert("데이타베이스 연결에 실패하여씁니다!");
+              // alert("데이타베이스 연결에 실패하여씁니다!");
               console.log("error has occured retriving data from MongoServer")
             }
-          })
-      })
-    }
+          
+         
+  })
 
 
 
+ /*  for (var i = 0; i < 6; i++) {
+    var newClone = cloned.clone(true, true);
+
+    $("#v-card-list").append(newClone);
+    changePlaceholder();
+  }
+ */
+})
 
 
     // 리스트 불러오기 
@@ -463,10 +473,7 @@
     // 새로운 카드 생성 
     function request(send) {
 
-      if (retrive == true) {
-        checkTitleDuplicate();
-      }
-      if (retrive == false) {
+   
         $.ajax(
 
           {
@@ -474,36 +481,16 @@
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             data: send,
-            url: 'http://192.168.10.13:1222/createNewUser',
-            success: function (data) {
-
-
-              if (data == true) {
-                location.href = "http://192.168.10.13:8800/spring/flashcard2.fl";
-              }
-              else {
-                console.log("update failed")
-              }
-            },
-            error: function () {
-              //alert("데이타베이스 연결에 실패하여씁니다!");
-              console.log("error has occured retriving data from MongoServer")
-            }
-          })
-
-      }
-      else if (retrive == true && title_vertified == true) {
-        $.ajax(
-
-          {
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: send,
-            url: 'http://192.168.10.13:1222/findAndUpdate',
+            url: 'http://192.168.10.13:1222/update_current',
             success: function (data) {
               if (data == true) {
-                location.href = "http://192.168.10.13:8800/spring/flashcard2.fl";
+                  var ssss= "${csid}";
+               var ddddd= "${title}"
+                 
+                var cc = "?csid=" + ssss + "&title=" + ddddd+ "&edit=true";
+                  console.log(cc);
+                     location.href = "flashcard_other_RO.fl"+ cc 
+           
               }
               else {
                 alert("실패했습니다")
@@ -515,49 +502,16 @@
               console.log("error has occured retriving data from MongoServer")
             }
           })
-      }
+      
     }
   </script>
 
-  </script>
-
-
   <!--  sticky top -->
-  <div id="nav_sticky">
-    <div class="center_center">
-      <!-- 카테고리 버트 여기에   <div class=" title_placeholder category" contenteditable="true">
-
-      </div> -->
-
-      <!-- input 디자인 출처 https://codepen.io/fatmali/pen/aboNdra-->
-      <div class="omrs-input-group" style="margin: 5px;margin-right: 17px;">
-        <label class="omrs-input-underlined">
-          <input style="height: 50px;
-          background: whitesmoke;
-          width: 340px;" id="title_val">
-          <span class="omrs-input-label">제목</span>
-        </label>
-      </div>
-      <div class="omrs-input-group" style=" margin: 5px;margin-right: 17px;">
-        <label class="omrs-input-underlined">
-          <input style="height: 50px;
-          background: whitesmoke;
-          width: 340px;" id="cate_val">
-          <span class="omrs-input-label">카테고리</span>
-        </label>
-      </div>
-      <div class="top_op">
-
-        <button class="btn btn_top" style="height: 38px;" onclick="save()">
-          <i class="material-icons" style="width:24px">save_outlined</i> </button>
-
-        <button class="btn btn_top" style="height: 38px" onclick="openModal(1)"> <i class="material-icons">settings</i>
-        </button>
-      </div>
-
-    </div>
-  </div>
-
+<div style = "width: 150px;margin:auto">
+  <button class=  "btn"  style="font-weight: bold;font-size: 150%; border:1px ridge grey"  onclick="save()">
+    저장하기
+  </button>
+</div>
 
   <!--  sticky top -->
   <div class="preview_textarea text_settings" style="display: none;">
@@ -736,20 +690,7 @@
 <script>
   // sticky navbar 
 
-  window.onscroll = function () { applySticky() };
-
-  var navbar = document.getElementById("nav_sticky");
-  var sticky = navbar.offsetTop;
-  var contents = $('.title_placeholder').html();
-
-  function applySticky() {
-    if (window.pageYOffset >= sticky) {
-  
-      navbar.classList.add("sticky")
-    } else {
-      navbar.classList.remove("sticky");
-    }
-  }
+ 
 
 
   var before;
@@ -901,25 +842,7 @@
 
 
 <script>
-  var cloned;
-
-
-
-  $(function () {
-    $("#v-card-list").sortable();
-
-    cloned = $("#cloneCard").clone(true, true).removeAttr('id');
-    $("#cloneCard").removeAttr('id').remove();
-
-
-    for (var i = 0; i < 6; i++) {
-      var newClone = cloned.clone(true, true);
-
-      $("#v-card-list").append(newClone);
-      changePlaceholder();
-    }
-
-  })
+ 
 
   $("#v-card-list").on("sortstop", function (event, ui) {
     changePlaceholder();
@@ -977,7 +900,6 @@
   }
 
   function noDuplicateWord() {
-    
     var duplicate = true;
     var size_of = $(".card_word_wrapper").length;
     console.log(size_of);
@@ -1010,8 +932,8 @@
   function save() {
 
     var card = $(".card_word_wrapper");
-    var title = $("#title_val").val().trim();
-    var cate = $("#cate_val").val().trim();
+    var title = "${title}";
+    var cate = ""
     var card_type = $("#per_public").text().trim();
 
     var list = [];
@@ -1032,29 +954,17 @@
         console.log(list);
         var send;
 
-        if (retrive == false) {
-          var userID2 = "${ loginMember.mId }";
-          var userName2 = "${ loginMember.name }";
-          console.log(userID2)
-          send = JSON.stringify({
-            userID: userID2,
-            userName: userName2,
-            cardType: card_type,
-            card_word: { [title]: list },
-            category: { [title]: cate },
-            privilege: { [title]: { userID: 3 } },
-          })
-        }
-        else {
+      
+        var new_csid= "${csid}";
+ 
 
           var csid = $("#csid_val").val();
           send = JSON.stringify({
-            _id: csid,
-            userID: userID,
-            [title]: list,
-            category: cate
+            _id: new_csid,
+            userID: "",
+            [title]: list
           })
-        }
+        
 
 
 
@@ -1077,28 +987,7 @@
 
 
   }
-  function request_CSID() {
-
-
-    $.ajax(
-      {
-        type: "POST",
-        dataType: "json",
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify({ userID: userID }),
-        url: 'http://192.168.10.13:1222/csid',
-        success: function (data) {
-
-          console.log(data);
-          $("#csid_val").val(data);
-
-        },
-        error: function () {
-          //alert("데이타베이스 연결에 실패하여씁니다!");
-          console.log("error has occured retriving data from MongoServer")
-        }
-      })
-  }
+ 
   function addPicture(add) {
     var addPic = $(add).parent().parent().find(".imgupload");
     addPic.click();
