@@ -3,7 +3,10 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Animation SVG</title>
+<title>SEW</title>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.3.0/snap.svg-min.js"></script>
 <style>

@@ -6,7 +6,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SEW</title>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <style>
 /* table css */
 .board {
@@ -379,9 +382,19 @@ td {
 							<button type="button" class="btn btn-light">&lt;</button>
 						</c:if>
 						<c:if test="${pi.currentPage > 1 }">
-							<c:url var="before" value="boardList.bo">
-								<c:param name="page" value="${pi.currentPage - 1}" />
-							</c:url>
+							<c:if test="${isSearch}">
+								<c:url var="before" value="searchBoard.bo">
+									<c:param name="page" value="${pi.currentPage - 1}" />
+									<c:param name="searchCondition" value="${search.searchCondition}"/>
+									<c:param name="searchContent" value="${search.searchContent}"/>
+									<c:param name="type" value="${search.type}"/>
+								</c:url>
+							</c:if>
+							<c:if test="${empty isSearch}">
+								<c:url var="before" value="boardList.bo">
+									<c:param name="page" value="${pi.currentPage - 1}" />
+								</c:url>
+							</c:if>
 							<button type="button" onclick="location.href='${before}'"
 								class="btn btn-light">&lt;</button>
 						</c:if>
@@ -392,9 +405,19 @@ td {
 								<button type="button" class="btn btn-light">${p}</button>
 							</c:if>
 							<c:if test="${p ne pi.currentPage }">
-								<c:url var="nextPage" value="boardList.bo">
-									<c:param name="page" value="${p}" />
-								</c:url>
+								<c:if test="${isSearch}">
+									<c:url var="nextPage" value="searchBoard.bo">
+										<c:param name="page" value="${p}" />
+										<c:param name="searchCondition" value="${search.searchCondition}"/>
+										<c:param name="searchContent" value="${search.searchContent}"/>
+										<c:param name="type" value="${search.type}"/>
+									</c:url>
+								</c:if>
+								<c:if test="${empty isSearch}">
+									<c:url var="nextPage" value="boardList.bo">
+										<c:param name="page" value="${p}" />
+									</c:url>
+								</c:if>
 								<button type="button" onclick="location.href='${nextPage}'"
 									class="btn btn-light">${p}</button>
 							</c:if>
@@ -405,9 +428,19 @@ td {
 							<button type="button" class="btn btn-light">&gt;</button>
 						</c:if>
 						<c:if test="${pi.currentPage < pi.endPage}">
-							<c:url var="next" value="boardList.bo">
-								<c:param name="page" value="${pi.currentPage + 1}" />
-							</c:url>
+							<c:if test="${isSearch}">
+								<c:url var="next" value="searchBoard.bo">
+									<c:param name="page" value="${pi.currentPage + 1}" />
+									<c:param name="searchCondition" value="${search.searchCondition}"/>
+									<c:param name="searchContent" value="${search.searchContent}"/>
+									<c:param name="type" value="${search.type}"/>
+								</c:url>
+							</c:if>
+							<c:if test="${empty isSearch}">
+								<c:url var="next" value="boardList.bo">
+									<c:param name="page" value="${pi.currentPage + 1}" />
+								</c:url>
+							</c:if>
 							<button type="button" onclick="location.href='${next}'"
 								class="btn btn-light">&gt;</button>
 						</c:if>

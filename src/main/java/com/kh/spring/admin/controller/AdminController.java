@@ -192,6 +192,38 @@ public class AdminController {
 		return mv;
 	}
 	
+	@RequestMapping("/responseAdmin.ad")
+	public ModelAndView insertResponseAdmin(
+			HttpServletRequest request,
+			ModelAndView mv) {
+		String text = request.getParameter("text");
+		String iId = request.getParameter("iId");
+		
+		Inquire inq = new Inquire();
+		inq.setiId(Integer.parseInt(iId));
+		inq.setAnswer(text);
+		
+		int result = aService.insertResponse(inq);
+		
+		
+		if(result > 0) {
+			ArrayList<Inquire> inqList = aService.selectInquireList();
+			ArrayList<Member> memberList = mService.selectList();
+			ArrayList<VisitRecord> vr = aService.selectLogList();
+			
+			mv.addObject("logList", vr);
+			mv.addObject("mList", memberList);
+			mv.addObject("inquireList", inqList);
+			mv.addObject("msg", "문의 응답 작성 완료!");
+		}else {
+			mv.addObject("msg", "문의 응답 작성 실패!");
+		}
+		
+		String mId = request.getParameter("mId");
+		mv.setViewName("redirect:/detailMember.ad?mId="+mId);
+		return mv;
+	}
+	
 	@RequestMapping("/responseDelete.ad")
 	public ModelAndView deleteResponse(int iId,
 			ModelAndView mv) {
@@ -210,6 +242,28 @@ public class AdminController {
 		}
 		
 		mv.setViewName("redirect:/viewTotal.ad");
+		return mv;
+	}
+	
+	@RequestMapping("/responseDeleteAdmin.ad")
+	public ModelAndView deleteResponseAdmin(int iId,
+			ModelAndView mv, HttpServletRequest request) {
+		int result = aService.deleteResponse(iId);
+		if(result > 0) {
+			ArrayList<Inquire> inqList = aService.selectInquireList();
+			ArrayList<Member> memberList = mService.selectList();
+			ArrayList<VisitRecord> vr = aService.selectLogList();
+			
+			mv.addObject("logList", vr);
+			mv.addObject("mList", memberList);
+			mv.addObject("inquireList", inqList);
+			mv.addObject("msg", "문의 응답 삭제 완료!");
+		}else {
+			mv.addObject("msg", "문의 응답 삭제 실패!");
+		}
+		
+		String mId = request.getParameter("mId");
+		mv.setViewName("redirect:/detailMember.ad?mId="+mId);
 		return mv;
 	}
 	

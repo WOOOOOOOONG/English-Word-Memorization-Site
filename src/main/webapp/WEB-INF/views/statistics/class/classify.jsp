@@ -10,9 +10,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>외웟</title>
+<title>SEW</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>외웟</title>
+
 <!--Load the AJAX API-->
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- <link rel="stylesheet" href=".../css/left-menubar.css"> -->
@@ -33,6 +33,9 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <style>
 /* 전체 */
 body {
@@ -52,66 +55,65 @@ body {
 </head>
 <body>
 	<div class="table chart-table">
-		<div id="piechart_5d" style="width: 1300px; height: 650px; margin: 0 auto; margin-left: 100px;">
-			<c:set var="cType0" value="0" />
-			<c:set var="cType1" value="0" />
-			<c:set var="cType2" value="0" />
-			<c:set var="cType3" value="0" />
-			<c:set var="cType4" value="0" />
-			<c:set var="cType5" value="0" />
-			<c:set var="cType6" value="0" />
-			<c:set var="cType7" value="0" />
-			<c:set var="cType8" value="0" />
-			<c:set var="cType9" value="0" />
-			<c:set var="cType10" value="0" />
-			<c:set var="cType11" value="0" />
-			<c:set var="cType12" value="0" />
-			<c:forEach var="item" items="${cvList}">
-				<c:choose>
-					<c:when test="${item.cateId eq 0}">
-						<c:set var="cType0" value="${cType0 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 1}">
-						<c:set var="cType1" value="${cType1 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 2}">
-						<c:set var="cType2" value="${cType2 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 3}">
-						<c:set var="cType3" value="${cType3 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 4}">
-						<c:set var="cType4" value="${cType4 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 5}">
-						<c:set var="cType5" value="${cType5 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 6}">
-						<c:set var="cType6" value="${cType6 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 7}">
-						<c:set var="cType7" value="${cType7 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 8}">
-						<c:set var="cType8" value="${cType8 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 9}">
-						<c:set var="cType9" value="${cType9 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 10}">
-						<c:set var="cType10" value="${cType10 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 11}">
-						<c:set var="cType11" value="${cType11 + 1}" />
-					</c:when>
-					<c:when test="${item.cateId eq 12}">
-						<c:set var="cType12" value="${cType12 + 1}" />
-					</c:when>
-				</c:choose>
-			</c:forEach>
-			<script type="text/javascript">
+							<div id="piechart_5d" style="width: 1300px; height: 650px; margin-left: 120px;">
+								<c:set var="cType1" value="0" />
+								<c:set var="cType2" value="0" />
+								<c:set var="cType3" value="0" />
+								<c:set var="cType4" value="0" />
+								<c:set var="cType5" value="0" />
+								<c:set var="cType6" value="0" />
+								<c:set var="cType7" value="0" />
+								<c:set var="cType8" value="0" />
+								<c:set var="cType9" value="0" />
+								<c:set var="cType10" value="0" />
+								<c:set var="cType11" value="0" />
+								<c:set var="cType12" value="0" />
+								<c:set var="cType13" value="0" />
+								<c:forEach var="item" items="${cvList}">
+									<c:choose>
+										<c:when test="${item.cateId eq 1}">
+											<c:set var="cType1" value="${cType1 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 2}">
+											<c:set var="cType2" value="${cType2 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 3}">
+											<c:set var="cType3" value="${cType3 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 4}">
+											<c:set var="cType4" value="${cType4 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 5}">
+											<c:set var="cType5" value="${cType5 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 6}">
+											<c:set var="cType6" value="${cType6 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 7}">
+											<c:set var="cType7" value="${cType7 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 8}">
+											<c:set var="cType8" value="${cType8 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 9}">
+											<c:set var="cType9" value="${cType9 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 10}">
+											<c:set var="cType10" value="${cType10 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 11}">
+											<c:set var="cType11" value="${cType11 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 12}">
+											<c:set var="cType12" value="${cType12 + 1}" />
+										</c:when>
+										<c:when test="${item.cateId eq 13}">
+											<c:set var="cType13" value="${cType13 + 1}" />
+										</c:when>
+									</c:choose>
+								</c:forEach>
+								<script type="text/javascript">
 									var ctype = new Array();
-									ctype[0] = ${cType0};
 									ctype[1] = ${cType1};
 									ctype[2] = ${cType2};
 									ctype[3] = ${cType3};
@@ -124,6 +126,8 @@ body {
 									ctype[10] = ${cType10};
 									ctype[11] = ${cType11};
 									ctype[12] = ${cType12};
+									ctype[13] = ${cType13};
+									console.log(ctype);
 									
 									google.charts.load("current", {
 										packages : [ "corechart" ]
@@ -131,11 +135,11 @@ body {
 									google.charts.setOnLoadCallback(drawChart5);
 									function drawChart5() {
 										var data5 = google.visualization.arrayToDataTable([
-												[ 'Task', 'Hours per Day' ], [ 'TOEIC', ctype[0] ],
-												[ 'TOFEL', ctype[1] ], [ 'TEPS', ctype[2] ], [ 'G_TELP', ctype[3] ],
-												[ 'FLEX', ctype[4] ], [ '중등', ctype[5] ], [ '고등', ctype[6] ], [ '수능', ctype[7] ],
-												[ '9급 공무원', ctype[8] ], [ '경찰 공무원', ctype[9] ], [ '편입', ctype[10] ], [ '프로그래머', ctype[11] ],
-												[ '기타', ctype[12] ]
+												[ 'Task', 'Hours per Day' ], [ 'TOEIC', ctype[1] ],
+												[ 'TOFEL', ctype[2] ], [ 'TEPS', ctype[3] ], [ 'G_TELP', ctype[4] ],
+												[ 'FLEX', ctype[5] ], [ '중등', ctype[6] ], [ '고등', ctype[7] ], [ '수능', ctype[8] ],
+												[ '9급 공무원', ctype[9] ], [ '경찰 공무원', ctype[10] ], [ '편입', ctype[11] ], [ '프로그래머', ctype[12] ],
+												[ '기타', ctype[13] ]
 												]);
 										 
 										var options5 = {
@@ -152,8 +156,8 @@ body {
 										chart5.draw(data5, options5);
 									}
 								</script>
-		</div>
-	</div>
+							</div>
+						</div>
 </body>
 
 </html>

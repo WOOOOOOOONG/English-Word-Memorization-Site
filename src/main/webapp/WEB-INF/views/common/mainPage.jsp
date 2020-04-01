@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Display page</title>
+<title>SEW</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- Basic page styling -->
 <link rel="stylesheet" type="text/css" href="base.css">
@@ -19,8 +19,6 @@
 <link
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css"
 	rel="stylesheet">
-<meta property="og:image"
-	content="//okky.kr/assets/okky_logo_fb-cea175ff727ef14a4d8be0e68cff730a.png">
 
 <link rel="stylesheet"
 	href="//okky.kr/assets/application-02720a4edf0f6edff35025d326624ba0.css" />
@@ -33,6 +31,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <style>
 #top {
 	width: 99vw;
@@ -302,7 +303,6 @@ footer p {
 		<script
 			src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		<!-- User scripts -->
-		<script type="text/javascript" src="script.js"></script>
 	</div>
 	<section id="product">
 		<div>
@@ -538,7 +538,6 @@ footer p {
 					                        }
 					                },
 					                error: function () {
-					                    alert("데이타베이스 연결에 실패하였습니다");
 					                    console.log("error has occured retriving data from MongoServer")
 					                }
 					            });

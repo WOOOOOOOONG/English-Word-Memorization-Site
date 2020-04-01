@@ -27,8 +27,10 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
-
-<title>Insert title here</title>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
+<title>SEW</title>
 <style>
 /* sidebar */
 @import "compass/css3";
@@ -649,10 +651,7 @@ textarea {
 										<td></td>
 										<td></td>
 										<td></td>
-										<c:url var="responseDelete" value="responseDelete.ad">
-											<c:param name="iId" value="${item.iId}" />
-										</c:url>
-										<td><button type="button" onclick="responseDelete();">답변
+										<td><button type="button" onclick="responseDelete('${item.iId}');">답변
 												삭제</button></td>
 									</tr>
 								</c:if>
@@ -756,9 +755,9 @@ textarea {
 							});
 			            });
 			            
-			            function responseDelete() {
+			            function responseDelete(iId) {
 			            	if(window.confirm('답변을 삭제하시겠습니까?')) {
-			            		location.href='${responseDelete}';
+			            		location.href='responseDelete.ad?iId='+iId;
 			            	}
 			            }
 	        		</script>
@@ -852,12 +851,8 @@ textarea {
 						</div>
 					</div>
 					<div class="chart2 left" onclick="viewLarge(2)">
-						<!-- <button type="button"
-							class="btn btn-outline-secondary btn-sm moreBtn2"
-							onclick="goHomePage(4);">크게 보기</button> -->
 						<div class="table chart-table">
 							<div id="piechart_5d" style="width: 650px; height: 300px;">
-								<c:set var="cType0" value="0" />
 								<c:set var="cType1" value="0" />
 								<c:set var="cType2" value="0" />
 								<c:set var="cType3" value="0" />
@@ -870,11 +865,9 @@ textarea {
 								<c:set var="cType10" value="0" />
 								<c:set var="cType11" value="0" />
 								<c:set var="cType12" value="0" />
+								<c:set var="cType13" value="0" />
 								<c:forEach var="item" items="${cvList}">
 									<c:choose>
-										<c:when test="${item.cateId eq 0}">
-											<c:set var="cType0" value="${cType0 + 1}" />
-										</c:when>
 										<c:when test="${item.cateId eq 1}">
 											<c:set var="cType1" value="${cType1 + 1}" />
 										</c:when>
@@ -911,11 +904,13 @@ textarea {
 										<c:when test="${item.cateId eq 12}">
 											<c:set var="cType12" value="${cType12 + 1}" />
 										</c:when>
+										<c:when test="${item.cateId eq 13}">
+											<c:set var="cType13" value="${cType13 + 1}" />
+										</c:when>
 									</c:choose>
 								</c:forEach>
 								<script type="text/javascript">
 									var ctype = new Array();
-									ctype[0] = ${cType0};
 									ctype[1] = ${cType1};
 									ctype[2] = ${cType2};
 									ctype[3] = ${cType3};
@@ -928,6 +923,8 @@ textarea {
 									ctype[10] = ${cType10};
 									ctype[11] = ${cType11};
 									ctype[12] = ${cType12};
+									ctype[13] = ${cType13};
+									console.log(ctype);
 									
 									google.charts.load("current", {
 										packages : [ "corechart" ]
@@ -935,11 +932,11 @@ textarea {
 									google.charts.setOnLoadCallback(drawChart5);
 									function drawChart5() {
 										var data5 = google.visualization.arrayToDataTable([
-												[ 'Task', 'Hours per Day' ], [ 'TOEIC', ctype[0] ],
-												[ 'TOFEL', ctype[1] ], [ 'TEPS', ctype[2] ], [ 'G_TELP', ctype[3] ],
-												[ 'FLEX', ctype[4] ], [ '중등', ctype[5] ], [ '고등', ctype[6] ], [ '수능', ctype[7] ],
-												[ '9급 공무원', ctype[8] ], [ '경찰 공무원', ctype[9] ], [ '편입', ctype[10] ], [ '프로그래머', ctype[11] ],
-												[ '기타', ctype[12] ]
+												[ 'Task', 'Hours per Day' ], [ 'TOEIC', ctype[1] ],
+												[ 'TOFEL', ctype[2] ], [ 'TEPS', ctype[3] ], [ 'G_TELP', ctype[4] ],
+												[ 'FLEX', ctype[5] ], [ '중등', ctype[6] ], [ '고등', ctype[7] ], [ '수능', ctype[8] ],
+												[ '9급 공무원', ctype[9] ], [ '경찰 공무원', ctype[10] ], [ '편입', ctype[11] ], [ '프로그래머', ctype[12] ],
+												[ '기타', ctype[13] ]
 												]);
 										 
 										var options5 = {
@@ -1130,7 +1127,7 @@ textarea {
 								
 								// 2
 								var arr2 = [];
-								var curMonth = 3;
+								var curMonth = 4;
 								
 								$(document).ready(function() {
 									// 값 초기화
@@ -1288,7 +1285,6 @@ textarea {
 													</c:forEach>
 							                },
 							                error: function () {
-							                    alert("데이타베이스 연결에 실패였습니다");
 							                    console.log("error has occured retriving data from MongoServer")
 							                }
 							            });
