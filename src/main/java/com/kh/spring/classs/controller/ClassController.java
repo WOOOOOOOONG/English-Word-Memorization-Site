@@ -49,6 +49,8 @@ import com.kh.spring.friend.model.vo.Friend;
 
 import net.sf.json.JSONArray;
 
+import com.kh.spring.member.controller.MemberController;
+import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
 
@@ -58,6 +60,8 @@ public class ClassController {
 	
 	@Autowired
 	private ClassService cService;
+	@Autowired
+	private MemberService mController;
 	
 	// 클래스 리스트 보러감
 	@RequestMapping("ClassList.do")
@@ -654,6 +658,12 @@ public class ClassController {
 		String[] outanswer = output.split(","); // 내가쓴답
 		String[] answer = test.getTestEng().split(","); // 정답
 		
+	
+		
+		
+		System.out.println("아웃 : " + outanswer);
+		System.out.println("앤설 : " + answer);
+		
 		for(int i = 0 ; i < test.getTestExno(); i++) {
 			if(outanswer[i].equalsIgnoreCase(answer[i])) {
 				ok = ok + "," + i;
@@ -670,6 +680,15 @@ public class ClassController {
 		}else {
 			score = count * 4;
 		}
+		
+		if(ok.length() == 0 || ok.equals("")) {
+			ok = ",";
+		}
+		if(nok.length() == 0 || nok.equals("")) {
+			nok = ",";
+		}
+		System.out.println("오케이 : " + ok);
+		System.out.println("shzpdl : " + nok);
 		my.setOk(ok.substring(1));
 		my.setNok(nok.substring(1));
 		my.setScore(score);
@@ -1195,7 +1214,10 @@ public class ClassController {
 		
 		String ornerId = cService.selectOrnerId(cNo);
 		ArrayList<ClassMember> cmList = cService.selectClassMemberList(cNo);
+		ArrayList<Member> allMember = mController.selectListAll();
 		
+		
+		mv.addObject("allMember",allMember);
 		mv.addObject("ornerId",ornerId);
 		mv.addObject("cmList",cmList);
 		mv.setViewName("classs/classPerson");

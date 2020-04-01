@@ -3,171 +3,195 @@
 "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
-	<resultMap id="boardResultMap" type="Board">
-		<id property="bId" column="BID"/>
-		<result property="referId" column="REFER_ID"/>
-		<result property="referNickname" column="REFER_NICKNAME"/>
-		<result property="title" column="TITLE"/>
-		<result property="type" column="TYPE"/>
-		<result property="content" column="CONTENT"/>
-		<result property="createDate" column="CREATE_DATE"/>
-		<result property="views" column="VIEWS"/>
-	</resultMap>
-	
-	<resultMap id="replyResultMap" type="Reply">
-		<id property="rId" column="RID"/>
-		<result property="writerId" column="WRITER_ID"/>
-		<result property="writerNickname" column="WRITER_NICKNAME"/>
-		<result property="content" column="CONTENT"/>
-		<result property="createDate" column="CREATE_DATE"/>
-		<result property="reportCount" column="REPORT_COUNT"/>
-		<result property="reportedId" column="REPORTED_ID"/>
-	</resultMap>
-	
-	<select id="getListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM BOARD
-	</select>
-	
-	<select id="getSearchListCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM BOARD
-		<where>
-			<choose>
-				<when test="searchCondition == 0">
-					AND (TITLE LIKE #{searchContent}
-						OR REFER_NICKNAME LIKE #{searchContent}
-						OR TYPE = #{type}
-					)
-				</when>
-				<when test="searchCondition == 1">
-					AND TITLE LIKE #{searchContent}
-				</when>
-				<when test="searchCondition == 2">
-					AND REFER_NICKNAME LIKE #{searchContent}
-				</when>
-				<when test="searchCondition == 3">
-					AND TYPE = #{type}
-				</when>
-			</choose>
-		</where>
-	</select>
-	
-	<update id="updateCount">
-		UPDATE BOARD
-		SET VIEWS = VIEWS + 1
-		WHERE BID = #{bId}
-	</update>
-	
-	<select id="selectBoardOne" resultMap="boardResultMap">
-		SELECT *
-		FROM BOARD
-		WHERE BID=#{bId}
-	</select>
-	
-	<select id="selectBoardList" resultMap="boardResultMap">
-		SELECT *
-		FROM BOARD
-		WHERE TYPE != 1
-		ORDER BY BID DESC
-	</select>
-	
-	<select id="boardAllList" resultMap="boardResultMap">
-		SELECT *
-		FROM BOARD
-		ORDER BY BID DESC
-	</select>
-	
-	<select id="boardViewList" resultMap="boardResultMap">
-		SELECT *
-		FROM BOARD
-		WHERE TYPE != 1
-		ORDER BY VIEWS DESC
-	</select>
-	
-	<select id="noticeList" resultMap="boardResultMap">
-		SELECT *
-		FROM BOARD
-		WHERE TYPE = 1
-		ORDER BY BID DESC
-	</select>
-	
-	<insert id="insertBoard">
-		INSERT INTO BOARD(BID, REFER_ID, REFER_NICKNAME, TITLE, TYPE, CONTENT, CREATE_DATE, VIEWS)
-		VALUES(BID_SEQ.NEXTVAL, #{referId}, #{referNickname}, #{title}, #{type},
-			#{content}, DEFAULT, DEFAULT)
-	</insert>
-	
-	<update id="updateBoard">
-		UPDATE BOARD
-		SET TITLE=#{title}, TYPE=#{type}, CONTENT=#{content}
-		WHERE BID=#{bId}
-	</update>
-	
-	<delete id="deleteBoard">
-		DELETE FROM BOARD
-		WHERE BID=#{bId}
-	</delete>
-	
-	
-	<insert id="insertBoardReply">
-		INSERT INTO REPLY
-		VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT, DEFAULT, DEFAULT)
-	</insert>
-	
-	<delete id="deleteBoardReply">
-		DELETE FROM REPLY
-		WHERE RID = #{rId}
-	</delete>
-	
-	<select id="allBoardReplyList" resultMap="replyResultMap">
-		SELECT *
-		FROM REPLY
-	</select>
-	
-	<select id="selectBoardReplyList" resultMap="replyResultMap">
-		SELECT *
-		FROM REPLY
-		WHERE BID=#{bId}
-		ORDER BY RID ASC
-	</select>
-	
-	<select id="selectReplyOne" resultMap="replyResultMap">
-		SELECT *
-		FROM REPLY
-		WHERE RID=#{rId}
-	</select>
-	
-	<select id="searchList" parameterType="Search" resultMap="boardResultMap">
-		<bind name="sv" value="'%' + _parameter.getSearchContent() + '%'"/>
-		SELECT *
-		FROM BOARD
-		<where>
-			<choose>
-				<when test="searchCondition == 0">
-					AND (TITLE LIKE #{sv}
-						OR REFER_NICKNAME LIKE #{sv}
-						OR TYPE = ${type}
-					)
-				</when>
-				<when test="searchCondition == 1">
-					AND TITLE LIKE #{sv}
-				</when>
-				<when test="searchCondition == 2">
-					AND REFER_NICKNAME LIKE #{sv}
-				</when>
-				<when test="searchCondition == 3">
-					AND TYPE = #{type}
-				</when>
-			</choose>
-		</where>
-		ORDER BY BID DESC
-	</select>
-	
-	<update id="reportCountUp">
-		UPDATE REPLY
-		SET REPORT_COUNT = REPORT_COUNT + 1,
-			REPORTED_ID = #{reportedId}
-		WHERE RID=#{rId}
-	</update>
+   <resultMap id="boardResultMap" type="Board">
+      <id property="bId" column="BID"/>
+      <result property="referId" column="REFER_ID"/>
+      <result property="referNickname" column="REFER_NICKNAME"/>
+      <result property="title" column="TITLE"/>
+      <result property="type" column="TYPE"/>
+      <result property="content" column="CONTENT"/>
+      <result property="createDate" column="CREATE_DATE"/>
+      <result property="views" column="VIEWS"/>
+   </resultMap>
+   
+   <resultMap id="replyResultMap" type="Reply">
+      <id property="rId" column="RID"/>
+      <result property="writerId" column="WRITER_ID"/>
+      <result property="writerNickname" column="WRITER_NICKNAME"/>
+      <result property="content" column="CONTENT"/>
+      <result property="createDate" column="CREATE_DATE"/>
+      <result property="reportCount" column="REPORT_COUNT"/>
+      <result property="reportedId" column="REPORTED_ID"/>
+   </resultMap>
+   
+   <resultMap id="replyWriterResultMap" type="Reply">
+      <id property="rId" column="RID"/>
+      <result property="writerId" column="WRITER_ID"/>
+      <result property="writerNickname" column="WRITER_NICKNAME"/>
+      <result property="content" column="CONTENT"/>
+      <result property="createDate" column="CREATE_DATE"/>
+      <result property="reportCount" column="REPORT_COUNT"/>
+      <result property="reportedId" column="REPORTED_ID"/>
+      <result property="bTitle" column="TITLE"/>
+   </resultMap>
+   
+   <select id="getListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM BOARD
+   </select>
+   
+   <select id="getSearchListCount" resultType="_int">
+      SELECT COUNT(*)
+      FROM BOARD
+      <where>
+         <choose>
+            <when test="searchCondition == 0">
+               AND (TITLE LIKE #{searchContent}
+                  OR REFER_NICKNAME LIKE #{searchContent}
+                  OR TYPE = #{type}
+               )
+            </when>
+            <when test="searchCondition == 1">
+               AND TITLE LIKE #{searchContent}
+            </when>
+            <when test="searchCondition == 2">
+               AND REFER_NICKNAME LIKE #{searchContent}
+            </when>
+            <when test="searchCondition == 3">
+               AND TYPE = #{type}
+            </when>
+         </choose>
+      </where>
+   </select>
+   
+   <update id="updateCount">
+      UPDATE BOARD
+      SET VIEWS = VIEWS + 1
+      WHERE BID = #{bId}
+   </update>
+   
+   <select id="selectBoardOne" resultMap="boardResultMap">
+      SELECT *
+      FROM BOARD
+      WHERE BID=#{bId}
+   </select>
+   
+   <select id="selectBoardList" resultMap="boardResultMap">
+      SELECT *
+      FROM BOARD
+      WHERE TYPE != 1
+      ORDER BY BID DESC
+   </select>
+   
+   <select id="selectBoardWriter" resultMap="boardResultMap">
+      SELECT *
+      FROM BOARD
+      WHERE REFER_ID = #{mId}
+      ORDER BY BID ASC
+   </select>
+   
+   <select id="selectBoardReplyWriter" resultMap="replyWriterResultMap">
+      SELECT R.RID, R.BID, R.WRITER_ID, R.WRITER_NICKNAME, R.CONTENT, R.CREATE_DATE, R.REPORT_COUNT, R.REPORTED_ID, B.TITLE
+      FROM REPLY R, BOARD B
+      WHERE R.WRITER_ID = #{mId} AND R.BID = B.BID
+   </select>
+   
+   <select id="boardAllList" resultMap="boardResultMap">
+      SELECT *
+      FROM BOARD
+      ORDER BY BID DESC
+   </select>
+   
+   <select id="boardViewList" resultMap="boardResultMap">
+      SELECT *
+      FROM BOARD
+      WHERE TYPE != 1
+      ORDER BY VIEWS DESC
+   </select>
+   
+   <select id="noticeList" resultMap="boardResultMap">
+      SELECT *
+      FROM BOARD
+      WHERE TYPE = 1
+      ORDER BY BID DESC
+   </select>
+   
+   <insert id="insertBoard">
+      INSERT INTO BOARD(BID, REFER_ID, REFER_NICKNAME, TITLE, TYPE, CONTENT, CREATE_DATE, VIEWS)
+      VALUES(BID_SEQ.NEXTVAL, #{referId}, #{referNickname}, #{title}, #{type},
+         #{content}, DEFAULT, DEFAULT)
+   </insert>
+   
+   <update id="updateBoard">
+      UPDATE BOARD
+      SET TITLE=#{title}, TYPE=#{type}, CONTENT=#{content}
+      WHERE BID=#{bId}
+   </update>
+   
+   <delete id="deleteBoard">
+      DELETE FROM BOARD
+      WHERE BID=#{bId}
+   </delete>
+   
+   
+   <insert id="insertBoardReply">
+      INSERT INTO REPLY
+      VALUES(RID_SEQ.NEXTVAL, #{bId}, #{writerId}, #{writerNickname}, #{content}, DEFAULT, DEFAULT, DEFAULT)
+   </insert>
+   
+   <delete id="deleteBoardReply">
+      DELETE FROM REPLY
+      WHERE RID = #{rId}
+   </delete>
+   
+   <select id="allBoardReplyList" resultMap="replyResultMap">
+      SELECT *
+      FROM REPLY
+   </select>
+   
+   <select id="selectBoardReplyList" resultMap="replyResultMap">
+      SELECT *
+      FROM REPLY
+      WHERE BID=#{bId}
+      ORDER BY RID ASC
+   </select>
+   
+   <select id="selectReplyOne" resultMap="replyResultMap">
+      SELECT *
+      FROM REPLY
+      WHERE RID=#{rId}
+   </select>
+   
+   <select id="searchList" parameterType="Search" resultMap="boardResultMap">
+      <bind name="sv" value="'%' + _parameter.getSearchContent() + '%'"/>
+      SELECT *
+      FROM BOARD
+      <where>
+         <choose>
+            <when test="searchCondition == 0">
+               AND (TITLE LIKE #{sv}
+                  OR REFER_NICKNAME LIKE #{sv}
+                  OR TYPE = ${type}
+               )
+            </when>
+            <when test="searchCondition == 1">
+               AND TITLE LIKE #{sv}
+            </when>
+            <when test="searchCondition == 2">
+               AND REFER_NICKNAME LIKE #{sv}
+            </when>
+            <when test="searchCondition == 3">
+               AND TYPE = #{type}
+            </when>
+         </choose>
+      </where>
+      ORDER BY BID DESC
+   </select>
+   
+   <update id="reportCountUp">
+      UPDATE REPLY
+      SET REPORT_COUNT = REPORT_COUNT + 1,
+         REPORTED_ID = #{reportedId}
+      WHERE RID=#{rId}
+   </update>
 </mapper>

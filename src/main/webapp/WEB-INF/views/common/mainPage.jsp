@@ -551,7 +551,7 @@ footer p {
 						<h4 class="main-header">
 							<a href="ClassList.do">
 					          <span class="glyphicon glyphicon-user"></span>
-					        </a> 인기 클래스
+					        </a> 인기 스터디
 						</h4>
 						<div class="panel panel-default" style="width: 380px;">
 							<ul class="list-group">

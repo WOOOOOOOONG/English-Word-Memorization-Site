@@ -31,6 +31,10 @@ public class BoardService {
 		// 2. 게시글 리스트 조회
 		return bDao.selectBoardList(pi);
 	}
+
+	public ArrayList<Board> selectBoardWriter(String mId) {
+		return bDao.selectBoardWriter(mId);
+	}
 	
 	public ArrayList<Board> BoardAllList() {
 		return bDao.BoardAllList();
@@ -100,5 +104,9 @@ public class BoardService {
 
 	public Reply selectReplyOne(int rId) {
 		return bDao.selectReplyOne(rId);
+	}
+
+	public ArrayList<Reply> selectBoardReplyWriter(String mId) {
+		return bDao.selectBoardReplyWriter(mId);
 	}
 }

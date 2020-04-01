@@ -152,8 +152,10 @@ public class FriendController {
 				filename = f.getfId()+ f.getmId() + "chatlog.txt";
 				filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\" + filename;
 				file = new File(filepath);
+				if(file.exists()) {
+					file.delete();
+				}
 			}
-			file.delete();
 			out.print("good");
 		} else {
 			out.print("bad");

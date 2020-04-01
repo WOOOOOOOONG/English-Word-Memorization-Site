@@ -194,7 +194,9 @@
 												var $memberSelect = 
 													"<select class='form-control report' id='report' style='width:100px;' name='reportedId'>"
 														+ '<c:forEach var="item" items="${mList}">'
+														+ '<c:if test="${item.mId ne sessionScope.loginMember.mId}">'
 														+ '<option value="${item.mId}">${item.nickname}</option>'
+														+ '</c:if>'
 														+ '</c:forEach>'
 													+ "</select>";
 												var $textInput = $("<input type='text' value='${reportedName}' class='textInput' name='reportedId'>");

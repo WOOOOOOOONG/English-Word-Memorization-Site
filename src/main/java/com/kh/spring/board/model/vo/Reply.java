@@ -13,12 +13,12 @@ public class Reply {
 	private int reportCount;
 	private String profileimg;
 	private String reportedId;
-	private String[] reportedArr;
+	private String bTitle;
 	
 	public Reply() {}
 
 	public Reply(int rId, int bId, String writerId, String writerNickname, String content, Date createDate,
-			int reportCount, String profileimg, String reportedId, String[] reportedArr) {
+			int reportCount, String profileimg, String reportedId, String bTitle) {
 		super();
 		this.rId = rId;
 		this.bId = bId;
@@ -29,7 +29,7 @@ public class Reply {
 		this.reportCount = reportCount;
 		this.profileimg = profileimg;
 		this.reportedId = reportedId;
-		this.reportedArr = reportedArr;
+		this.bTitle = bTitle;
 	}
 
 	public int getrId() {
@@ -103,21 +103,21 @@ public class Reply {
 	public void setReportedId(String reportedId) {
 		this.reportedId = reportedId;
 	}
-
-	public String[] getReportedArr() {
-		return reportedArr;
+	
+	public String getbTitle() {
+		return bTitle;
 	}
 
-	public void setReportedArr(String[] reportedArr) {
-		this.reportedArr = reportedArr;
+	public void setbTitle(String bTitle) {
+		this.bTitle = bTitle;
 	}
 
 	@Override
 	public String toString() {
 		return "Reply [rId=" + rId + ", bId=" + bId + ", writerId=" + writerId + ", writerNickname=" + writerNickname
 				+ ", content=" + content + ", createDate=" + createDate + ", reportCount=" + reportCount
-				+ ", profileimg=" + profileimg + ", reportedId=" + reportedId + ", reportedArr="
-				+ Arrays.toString(reportedArr) + "]";
+				+ ", profileimg=" + profileimg + ", reportedId=" + reportedId + ", bTitle="
+				+ bTitle + "]";
 	}
 
 	

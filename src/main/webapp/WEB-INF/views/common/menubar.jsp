@@ -483,7 +483,7 @@ body {
 		<section id="mainnavsection" style="float:left; margin-top:7.5px; display:block; width:550px; height:100%;">
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="viewMain.ad" class="jha">Home</a>
 			<a style="margin:4px 36px 0 0; font-size:18px; font-weight:600;" class="jha" href="flashcard2.fl">단어장</a>
-			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">클래스</a>
+			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="ClassList.do" class="jha">스터디</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="boardList.bo" class="jha">커뮤니티</a>
 			<a style="margin:4px 36px 0 0;  font-size:18px; font-weight:600;" href="memberInquireList.ad" class="jha">고객센터</a>
 
@@ -763,6 +763,7 @@ body {
 				   			if(data=="good") {
 				   				alert("정상적으로 친구해제되었습니다.");
 				   				$(this).parent().css("display","none");
+				   				reupdatelist();
 				   			}
 				   			else alert("친구해제 실패");
 						},error:function(e){

@@ -19,6 +19,7 @@
 		SELECT *
 		FROM CLASS_TEST
 		WHERE CLASS_NO = #{cNo}
+		order by test_no desc
 	</select>
 	<select id="selectTestOne" resultMap="classTestResultSet">
 		SELECT *

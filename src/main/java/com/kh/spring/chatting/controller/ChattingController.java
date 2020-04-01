@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.kh.spring.chatting.model.vo.Chatting;
 import com.kh.spring.classs.model.service.ClassService;
 import com.kh.spring.classs.model.vo.ClassMember;
+import com.kh.spring.classs.model.vo.Classs;
 import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
@@ -260,5 +261,103 @@ public class ChattingController {
 
 	}
 
+	
+	@RequestMapping("admingetchat.do")
+	   public void admingetChat(String mId, HttpServletResponse response) throws IOException {
+	      response.setContentType("application/json; charset=utf-8");
+	      PrintWriter out = response.getWriter();
+	      JSONObject send = new JSONObject();
+	      ArrayList<HashMap<String,String>> chatlist = new ArrayList<HashMap<String,String>>();
+	      
+	      // 개인 채팅 불러오기
+	      File folder = new File("C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog");
+	      if(folder.isDirectory()) {
+	         File[] fileList = folder.listFiles(); 
+	         for(int z = 0 ; z < fileList.length ; z++){
+	            File file = fileList[z]; 
+	            if(file.isFile()){
+	               if(file.getName().contains(mId)) {
+	                  String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\"
+	                        + file.getName();
+	                  File f = new File(filepath);
+	                  if (f.exists()) {
+	                     FileReader fr = new FileReader(f);
+	                     int a;
+	                     String readcontent = "";
+	                     while ((a = fr.read()) != -1) {
+	                        readcontent += (char) a;
+	                     }
+	                     if(!readcontent.isEmpty()) {
+		                     String[] rc = readcontent.split("\n");
+		                     for (int j = 0; j < rc.length; j++) {
+		                        int sp1 = rc[j].indexOf(",");
+		                        int sp2 = rc[j].lastIndexOf(",");
+		                        String str1 = rc[j].substring(0, sp1);
+		                        String fId = rc[j].substring(sp2 + 1, rc[j].length());
+		                        if(str1.equals(mId)) {
+		                           HashMap<String,String> hash = new HashMap<>();
+		                           hash.put(fId, rc[j].substring(sp1 + 1, sp2).replace("<br>", "\n"));
+		                           chatlist.add(hash);
+		                        }   
+		                     }   
+	                     }
+	                  }
+	               }            
+	            }
+	         }
+	      }
+	      
+	      // 클래스에 친 자기 채팅내용 가져오기
+	      ArrayList<ClassMember> cmList = cService.selectMyClassList(mId);
+	      
+	      if (!cmList.isEmpty()) {
+	         for (int i = 0; i < cmList.size(); i++) {
+	            Classs classs = cService.selectClassOne(cmList.get(i).getcNo());
+	            String cNo = classs.getcNo();
+	            String file = cNo + "chatlog.txt";
+	            String filepath = "C:\\Users\\user2\\git\\It-Where-Project\\src\\main\\webapp\\resources\\chatlog\\"
+	                  + file;
+	            File f = new File(filepath);
+	            if (f.exists()) {
+	               FileReader fr = new FileReader(f);
+	               int a;
+	               String readcontent = "";
+	               while ((a = fr.read()) != -1) {
+	                  readcontent += (char) a;
+	               }
+	               if(!readcontent.isEmpty()) {
+		               String[] rc = readcontent.split("\n");
+		               for (int j = 0; j < rc.length; j++) {
+		                  int sp1 = rc[j].indexOf(",");
+		                  int sp2 = rc[j].lastIndexOf(",");
+		                	  String str1 = rc[j].substring(0, sp1);
+			                  if(str1.equals(mId)) {
+			                     HashMap<String,String> hash = new HashMap<>();
+			                     hash.put(cNo, rc[j].substring(sp1 + 1, sp2).replace("<br>", "\n"));
+			                     chatlist.add(hash);
+			                  }     
+		                  
+		                  
+		               }
+	               }
+	            }
+	         }
+	      }
+	      // 클래스 채팅내용 끝
+	      if(chatlist.size() > 0) {
+	         JSONArray jarr = new JSONArray();
+	         int v = 1;
+	         for (HashMap<String,String> h : chatlist) {
+	            JSONObject chat = new JSONObject();
+	            chat.put(v++, h);
+	            jarr.add(chat);
+	         }
+	         send.put("userchatlist", jarr);
+	         out.print(send);
+	      }else {
+	         out.print("none");
+	      }
+	      
+	   }
 	
 }
