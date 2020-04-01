@@ -360,8 +360,8 @@ textarea {
 			<c:url var="visit1" value="visitTime.ad" />
 			<c:url var="visit2" value="visitDay.ad" />
 			<c:url var="visit3" value="visitMonth.ad" />
-			<c:url var="voca1" value="classify.voca" />
-			<c:url var="voca2" value="total.voca" />
+			<c:url var="voca2" value="classifyVoca.ad" />
+			<c:url var="voca1" value="totalVoca.ad" />
 			<a href='#' id='justify-icon'> <span
 				class='glyphicon glyphicon-align-justify'></span>
 			</a>
@@ -924,7 +924,6 @@ textarea {
 									ctype[11] = ${cType11};
 									ctype[12] = ${cType12};
 									ctype[13] = ${cType13};
-									console.log(ctype);
 									
 									google.charts.load("current", {
 										packages : [ "corechart" ]
@@ -1245,7 +1244,6 @@ textarea {
 								var vocaList = Array();
 								var vocaLength = 0;
 								
-								
 								$.ajax(
 							            {
 							                type: "POST",
@@ -1261,17 +1259,32 @@ textarea {
 							                        vocaLengthText.text("등록된 단어장 수 : " + vocaLength);
 													
 													// 2차원 배열화
-													for(var i = 0; i < vocaLength; i++) {
+													for(var i = 0; i < 100; i++) {
 														vocaList[i] = new Array();
 													}
-							                        
+							                        console.log(data);
 													// 단어 데이터 추출
-							                        for(var i = 0; i < vocaLength; i++) {
-							                        	vocaList[i][0] = data[i].title;
-							                        	vocaList[i][1] = data[i].privilege.length;
-							                        	vocaList[i][2] = data[i].category;
-							                        }
-							                        console.log(vocaList);
+
+													var count = 0;
+								                    for(var i = 0; i < vocaLength; i++) {
+								                       	for(var j in data[i].category) {
+								                       		vocaList[count][0] = j; // 단어장 제목
+								                       		vocaList[count][1] = data[i].category[j]; // 카테고리 숫자
+								                       		vocaList[count][2] = 0;
+								                        	for(var k in data[i].privilege) {
+								                        		if(vocaList[count][0] == k) {
+								                        			var priCount = 0;
+								                        			for(var l in data[i].privilege[k]) {
+								                        				priCount++;
+								                        			}
+								                        			vocaList[count][2] = priCount; // 사용자 수
+								                        		}
+								                        	}
+								                        	count++;
+								                        }
+								                    }
+								                    
+								                    vocaLength = count;
 							                        
 							                        // 전체 통계를 위한 배열 생성
 							                        for(var i = 0; i < 13; i++) {
@@ -1298,10 +1311,17 @@ textarea {
 
 				function drawAxisTickColors4() {
 					var data4 = new google.visualization.DataTable();
+					vocaList = vocaList.sort(function(a, b) {
+                   		return a[2] > b[2] ? -1 : a[2] < b[2] ? 1 : 0; 
+                   	});
+					
 					data4.addColumn('string', 'Element');
 					data4.addColumn('number', '이용자수');
+					if(vocaLength > 10) {
+						vocaLength = 10;
+					}
 					for(var i = 0; i < vocaLength; i++) {
-						data4.addRows([[ vocaList[i][0], vocaList[i][1] ]]);
+						data4.addRows([ [vocaList[i][0], vocaList[i][2]] ]);
 					}
 					var options = {
 						title : '최다 조회수',
@@ -1351,15 +1371,12 @@ textarea {
 							.getElementById('chart_div4'));
 					chart.draw(data4, options);
 					
+					
+					
 					// 유형별 단어장
 					var vtype = new Array();
 					for(var i = 0; i < 13; i++) {
 						vtype[i] = 0;
-					}
-					
-					for(var i = 0; i < vocaLength; i++) {
-						console.log("여기 수정");
-						vocaList[i];
 					}
 					
 					google.charts.load("current", {
@@ -1367,14 +1384,23 @@ textarea {
 					});
 					google.charts.setOnLoadCallback(drawChart4);
 					function drawChart4() {
+						var vocaType = Array();
+						for(var i = 0; i < 13; i++) {
+							vocaType[i] = 0;
+						} 
+						for(var i = 0; i < vocaLength; i++) {
+							if(vocaList[i][2] <= 13 && vocaList[i][2] >= 0) {
+								vocaType[vocaList[i][2]]++;
+							}
+						}
 						var data = google.visualization.arrayToDataTable([
-								[ 'Task', 'Hours per Day' ], [ 'TOEIC', vtype[0] ],
-								[ 'TOFEL', vtype[1] ], [ 'TEPS', vtype[2] ], [ 'G_TELP', vtype[3] ],
-								[ 'FLEX', vtype[4] ], [ '중등', vtype[5] ], [ '고등', vtype[6] ],
-								[ '수능', vtype[7] ], [ '9급 공무원', vtype[8] ], [ '경찰 공무원', vtype[9] ],
-								[ '편입', vtype[10] ], [ '프로그래머', vtype[11] ], [ '기타', vtype[12] ],
+								[ 'Task', 'Hours per Day' ], [ 'TOEIC', vocaType[0] ],
+								[ 'TOFEL', vocaType[1] ], [ 'TEPS', vocaType[2] ], [ 'G_TELP', vocaType[3] ],
+								[ 'FLEX', vocaType[4] ], [ '중등', vocaType[5] ], [ '고등', vocaType[6] ],
+								[ '수능', vocaType[7] ], [ '9급 공무원', vocaType[8] ], [ '경찰 공무원', vocaType[9] ],
+								[ '편입', vocaType[10] ], [ '프로그래머', vocaType[11] ], [ '기타', vocaType[12] ],
 						]);
-	
+
 						var options = {
 							title : '유형별',
 							titleFontSize : 14,
@@ -1382,7 +1408,7 @@ textarea {
 							is3D : true,
 							backgroundColor : ""
 						};
-	
+
 						var chart = new google.visualization.PieChart(document
 								.getElementById('piechart_3d4'));
 						chart.draw(data, options);

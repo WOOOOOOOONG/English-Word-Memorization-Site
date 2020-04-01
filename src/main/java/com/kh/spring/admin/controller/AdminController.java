@@ -329,7 +329,17 @@ public class AdminController {
 
       return mv;
    }
+   
+   @RequestMapping("/classifyVoca.ad")
+   public String classifyVoca() {
+	   return "statistics/voca/classify";
+   }
 
+   @RequestMapping("/totalVoca.ad")
+   public String totalVoca() {
+	   return "statistics/voca/total";
+   }
+   
    @RequestMapping("/inquireStat.ad")
    public ModelAndView inquireStatistics(ModelAndView mv) {
       ArrayList<Inquire> inq = aService.selectInquireList();
