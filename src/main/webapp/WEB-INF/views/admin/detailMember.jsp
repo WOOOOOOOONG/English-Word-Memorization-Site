@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SEW</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -39,6 +39,9 @@
 	href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8"
 	src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <style>
 body {
 	background: whitesmoke;
@@ -123,7 +126,7 @@ textarea {
 				<img id="myphoto"
 					src="${ pageContext.request.contextPath }/resources/profileimg/${detailMember.profileimg}" />
 				<h2>${detailMember.mId}</h2>
-				<p>${detailMember.nickname}:${detailMember.introduce}</p>
+				<p>${detailMember.nickname}: ${detailMember.introduce}</p>
 			</div>
 			<div style="margin-top: 20px; border: 1px solid black;"></div>
 
@@ -174,10 +177,8 @@ textarea {
 					</div>
 				</div>
 			</div>
-			<br><br>
+			<br><br><br>
 			<c:forEach var="item" begin="1" end="${i}">
-				<br>
-				<br>
 				<br>
 				<br>
 			</c:forEach>
@@ -259,8 +260,9 @@ textarea {
 									<td></td>
 									<td></td>
 									<td></td>
-									<c:url var="responseDelete" value="responseDelete.ad">
+									<c:url var="responseDelete" value="responseDeleteAdmin.ad">
 										<c:param name="iId" value="${item.iId}" />
+										<c:param name="mId" value="${detailMember.mId}"/>
 									</c:url>
 									<td><button type="button" onclick="responseDelete();">답변
 											삭제</button></td>
@@ -287,11 +289,12 @@ textarea {
 									<td></td>
 									<td></td>
 									<td>
-										<form action="response.ad" method="post">
+										<form action="responseAdmin.ad" method="post">
 											<textarea name="text" class="resText" id="resText${item.iId}"
 												style="display: none;"></textarea>
 											<input type="text" name="iId" value="${item.iId}"
 												id="iId${item.iId}" style="display: none;">
+											<input type="text" name="mId" value="${detailMember.mId}" style="display: none;">
 											<script>
 												var textarea = $('#textarea${item.iId}');
 												textarea

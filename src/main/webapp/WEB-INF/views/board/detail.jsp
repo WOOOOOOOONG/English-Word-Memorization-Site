@@ -6,8 +6,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>SEW</title>
  <script src="https://kit.fontawesome.com/89f82078c1.js" crossorigin="anonymous"></script>
+ <link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <style>
    /* 전체 */
    .whole {
@@ -303,14 +306,6 @@
          </div>
          <%-- <div class="boardContent"><textarea id="inputText" onload="resize(this)" onkeydown="resize(this)" onkeyup="resize(this)" style="width: 1180px; border: none; resize:none; overflow:hidden; background:whitesmoke; border:none; outline:none;" readonly>${detailBoard.content}</textarea></div> --%>
          <div id="inputText">${detailBoard.content }</div><br><br>
-         <script>
-         window.onload = function() {
-             var inputText = document.getElementById("inputText");
-             inputText.text = "${detailBoard.content}";
-             inputText.style.height = "1px";
-             obj.style.height = (12+obj.scrollHeight)+"px";
-          }
-         </script>
          <!-- 다음글, 이전글 -->
          <c:forEach var="item" items="${ boardList }" varStatus="status">
          	<c:if test="${item.bId eq detailBoard.bId && item.bId ne boardList[0].bId}">

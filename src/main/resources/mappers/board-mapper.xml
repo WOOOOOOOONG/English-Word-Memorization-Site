@@ -35,16 +35,16 @@
 		<where>
 			<choose>
 				<when test="searchCondition == 0">
-					AND (TITLE LIKE #{sv}
-						OR REFER_NICKNAME LIKE #{sv}
-						OR TYPE = ${type}
+					AND (TITLE LIKE #{searchContent}
+						OR REFER_NICKNAME LIKE #{searchContent}
+						OR TYPE = #{type}
 					)
 				</when>
 				<when test="searchCondition == 1">
-					AND TITLE LIKE #{sv}
+					AND TITLE LIKE #{searchContent}
 				</when>
 				<when test="searchCondition == 2">
-					AND REFER_NICKNAME LIKE #{sv}
+					AND REFER_NICKNAME LIKE #{searchContent}
 				</when>
 				<when test="searchCondition == 3">
 					AND TYPE = #{type}
@@ -68,6 +68,7 @@
 	<select id="selectBoardList" resultMap="boardResultMap">
 		SELECT *
 		FROM BOARD
+		WHERE TYPE != 1
 		ORDER BY BID DESC
 	</select>
 	

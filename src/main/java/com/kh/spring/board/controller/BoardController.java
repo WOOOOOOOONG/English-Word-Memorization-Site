@@ -2,6 +2,8 @@ package com.kh.spring.board.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.ListIterator;
 import java.util.Map;
 
 import javax.servlet.http.Cookie;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,21 +60,72 @@ public class BoardController {
 					}
 				}
 			}
-
-			int bLength = bList.size();
-			for (Board b : boardList) {
-				if (bLength >= 10) {
-					break;
+			if(currentPage >= 2) {
+				boardList = bService.selectBoardList(currentPage-1);
+				int noticeCount = 0;
+				for (Board b : boardAllList) {
+					if (b.getType() == 1) {
+						if(noticeCount < 3) {
+							noticeCount++;
+						}else {
+							break;
+						}
+					}
 				}
-
-				if (b.getType() == 1) {
-					continue;
+				
+				int inputCount = 0;
+				ListIterator<Board> li = boardList.listIterator(boardList.size());
+				while(li.hasPrevious()) {
+					if(inputCount >= noticeCount) {
+						break;
+					}else {
+						Board iterBoard = li.previous();
+						if(iterBoard.getType() != 1) {
+							bList.add(iterBoard);
+							inputCount++;
+						}
+					}
 				}
+				for(Board b : boardList) {
+					if(inputCount > noticeCount) {
+						break;
+					}else {
+						if(b.getType() == 1) {
+							bList.add(b);
+							inputCount++;
+						}
+					}
+				}
+				
+				boardList = bService.selectBoardList(currentPage);
+				int bLength = bList.size();
+				for (Board b : boardList) {
+					if (bLength >= 10) {
+						break;
+					}
 
-				bList.add(b);
-				bLength++;
+					if (b.getType() == 1) {
+						continue;
+					}
+
+					bList.add(b);
+					bLength++;
+				}
+			}else {
+				int bLength = bList.size();
+				for (Board b : boardList) {
+					if (bLength >= 10) {
+						break;
+					}
+	
+					if (b.getType() == 1) {
+						continue;
+					}
+	
+					bList.add(b);
+					bLength++;
+				}
 			}
-
 			for (Board boa : bList) {
 				rLength.put(boa.getbId(), bService.selectBoardReplyList(boa.getbId()).size());
 			}
@@ -100,9 +154,37 @@ public class BoardController {
 		if (result > 0) {
 			ArrayList<Board> boardList = bService.BoardAllList();
 			Board b = bService.selectBoardOne(boardList.get(0).getbId(), false);
+			b.setContent(b.getContent().replace("\n", "<br>"));
+			
+			ArrayList<Board> bList = new ArrayList<>();
+			int noticeCount = 0;
+			for (Board boa : boardList) {
+				if (boa.getType() == 1) {
+					if(noticeCount < 3) {
+						bList.add(boa);
+						noticeCount++;
+					}else {
+						break;
+					}
+				}
+			}
 
+			int bLength = bList.size();
+			for (Board boa : boardList) {
+				if (bLength >= 10) {
+					break;
+				}
+
+				if (boa.getType() == 1) {
+					continue;
+				}
+
+				bList.add(boa);
+				bLength++;
+			}
+			
 			mv.addObject("msg", "게시글이 성공적으로 등록되었습니다");
-			mv.addObject("boardList", boardList);
+			mv.addObject("boardList", bList);
 			mv.addObject("detailBoard", b);
 			mv.setViewName("board/detail");
 		} else {
@@ -115,6 +197,7 @@ public class BoardController {
 	@RequestMapping("viewBoardUpdate.bo")
 	public ModelAndView viewBoardUpdate(ModelAndView mv, int bId) {
 		Board b = bService.selectBoardOne(bId, false);
+		
 		mv.addObject("detailBoard", b);
 		mv.setViewName("board/updateBoard");
 
@@ -127,8 +210,38 @@ public class BoardController {
 		if (result >= 0) {
 			Board b = bService.selectBoardOne(board.getbId(), false);
 			ArrayList<Board> bList = bService.selectBoardList(1);
+			
+			ArrayList<Board> boaList = new ArrayList<>();
+			int noticeCount = 0;
+			for (Board boa : bList) {
+				if (boa.getType() == 1) {
+					if(noticeCount < 3) {
+						boaList.add(boa);
+						noticeCount++;
+					}else {
+						break;
+					}
+				}
+			}
+
+			int bLength = boaList.size();
+			for (Board boa : bList) {
+				if (bLength >= 10) {
+					break;
+				}
+
+				if (boa.getType() == 1) {
+					continue;
+				}
+
+				boaList.add(boa);
+				bLength++;
+			}
+
+			b.setContent(b.getContent().replace("\n", "<br>"));
+			
 			mv.addObject("msg", "게시판 수정이 완료되었습니다");
-			mv.addObject("boardList", bList);
+			mv.addObject("boardList", boaList);
 			mv.addObject("detailBoard", b);
 			mv.setViewName("board/detail");
 		} else {
@@ -185,8 +298,36 @@ public class BoardController {
 
 		if (b != null) {
 			ArrayList<Board> boardList = bService.BoardAllList();
+			
+			ArrayList<Board> bList = new ArrayList<>();
+			int noticeCount = 0;
+			for (Board boa : boardList) {
+				if (boa.getType() == 1) {
+					if(noticeCount < 3) {
+						bList.add(boa);
+						noticeCount++;
+					}else {
+						break;
+					}
+				}
+			}
+
+			int bLength = bList.size();
+			for (Board boa : boardList) {
+				if (bLength >= 10) {
+					break;
+				}
+
+				if (boa.getType() == 1) {
+					continue;
+				}
+
+				bList.add(boa);
+				bLength++;
+			}
+			
 			b.setContent(b.getContent().replace("\n", "<br>"));
-			mv.addObject("boardList", boardList);
+			mv.addObject("boardList", bList);
 			mv.addObject("detailBoard", b);
 			mv.addObject("currentPage", currentPage);
 			mv.setViewName("board/detail");
@@ -242,6 +383,8 @@ public class BoardController {
 
 		Board b = bService.selectBoardOne(bId, false);
 		ArrayList<Board> boardList = bService.BoardAllList();
+		b.setContent(b.getContent().replace("\n", "<br>"));
+		
 		mv.addObject("boardList", boardList);
 		mv.addObject("detailBoard", b);
 		mv.setViewName("board/detail");
@@ -262,7 +405,6 @@ public class BoardController {
 	@RequestMapping("searchBoard.bo")
 	public ModelAndView searchBoard(ModelAndView mv, Search search, @RequestParam(value = "page", required = false) Integer page) {
 		Integer currentPage = page != null ? page : 1;
-		
 		if (search.getSearchContent() != "") {
 			if (search.getSearchContent().equals("공지") || search.getSearchContent().equals("단어장")
 					|| search.getSearchContent().equals("클래스") || search.getSearchContent().equals("잡담")
@@ -297,6 +439,7 @@ public class BoardController {
 			mv.addObject("boardList", searchList);
 			mv.addObject("pi", Pagination.getPageInfo());
 			mv.addObject("search", search);
+			mv.addObject("isSearch", true);
 		}
 		
 		mv.setViewName("board/list");

@@ -10,13 +10,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-<title>외웟</title>
+<title>SEW</title>
 <!--Load the AJAX API-->
 <script type="text/javascript"
 	src="https://www.gstatic.com/charts/loader.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <!-- <link rel="stylesheet" href="css/chart.css">
 <link rel="stylesheet" href="css/left-menubar.css"> -->
+<link rel="shortcut icon"
+	href="${pageContext.request.contextPath}/resources/images/shotcuticon.png"
+	type="image/x-icon">
 <style>
 /* 전체 */
 body {
@@ -155,7 +158,7 @@ body {
 								
 								// 2
 								var arr2 = [];
-								var curMonth = 3;
+								var curMonth = 4;
 								var curM = $('#curMonth');
 								curM.text(curMonth + "월");
 								
