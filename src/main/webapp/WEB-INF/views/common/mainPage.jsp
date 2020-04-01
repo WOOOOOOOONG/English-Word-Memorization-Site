@@ -455,6 +455,7 @@ footer p {
 						}, 1500);	
 						
 						function startAjax() {
+							
 						$.ajax(
 					            {
 					                type: "POST",
@@ -468,20 +469,79 @@ footer p {
 					                        vocaLength = data.length;
 					                        
 											// 2차원 배열화
-											for(var i = 0; i < vocaLength; i++) {
+											for(var i = 0; i < 100; i++) {
 												vocaList[i] = new Array();
 											}
 					                        console.log(data);
-											// 단어 데이터 추출
-					                        for(var i = 0; i < vocaLength; i++) {
-					                        	vocaList[i][0] = data[i].title;
-					                        	vocaList[i][1] = data[i].userName;
-					                        	vocaList[i][2] = data[i].privilege.length;
-					                        	console.log("여기 수정");
-					                        	vocaList[i][3] = data[i].category;
-					                        	
-					                        }
+					                        
+					                        var count = 0;
+						                    for(var i = 0; i < vocaLength; i++) {
+						                       	for(var j in data[i].category) {
+						                       		vocaList[count][0] = j; // 단어장 제목
+						                       		vocaList[count][1] = data[i].userName;
+						                       		var str = "";
+						                       		switch(data[i].category[j]) {
+						                       		case "0":
+						                       			str = "TOEIC";
+						                       			break;
+						                       		case "1":
+						                       			str = "TOFEL";
+						                       			break;
+						                       		case "2":
+						                       			str = "TEPS";
+						                       			break;
+						                       		case "3":
+						                       			str = "G_TELP";
+						                       			break;
+						                       		case "4":
+						                       			str = "FLEX";
+						                       			break;
+						                       		case "5":
+						                       			str = "중등";
+						                       			break;
+						                       		case "6":
+						                       			str = "고등";
+						                       			break;
+						                       		case "7":
+						                       			str = "수능";
+						                       			break;
+						                       		case "8":
+						                       			str = "9급 공무원";
+						                       			break;
+						                       		case "9":
+						                       			str = "경찰 공무원";
+						                       			break;
+						                       		case "10":
+						                       			str = "편입";
+						                       			break;
+						                       		case "11":
+						                       			str = "프로그래머";
+						                       			break;
+						                       		default:
+						                       			str = "기타";
+					                       				break;
+						                       		}
+						                       		vocaList[count][2] = str; // 카테고리
+						                       		vocaList[count][3] = 0;
+						                        	for(var k in data[i].privilege) {
+						                        		if(vocaList[count][0] == k) {
+						                        			var priCount = 0;
+						                        			for(var l in data[i].privilege[k]) {
+						                        				priCount++;
+						                        			}
+						                        			vocaList[count][3] = priCount; // 사용자 수
+						                        		}
+						                        	}
+						                        	count++;
+						                        }
+						                    }
+						                    vocaLength = count;
+
 					                        console.log(vocaList);
+						                    vocaList.sort(function(a, b) {
+						                   		return a[3] > b[3] ? -1 : a[3] < b[3] ? 1 : 0; 
+						                   	});
+						                    
 					                        
 					                        // 값 넣기
 					                        if(vocaLength > 5) {
@@ -496,10 +556,10 @@ footer p {
 														+ '<div class="avatar-info">'
 														+ '<a class="nickname" href="/user/info/45597" title="' + vocaList[i][1] + '">&nbsp;' + vocaList[i][1] + '&nbsp;</a>'
 														+ '<div class="activity">'
-														+ '<i class="fa fa-eye"></i> ' + vocaList[i][2]
+														+ '<i class="fa fa-eye"></i> ' + vocaList[i][3]
 														+ '</div>'
 														+ '<div class="date-created">'
-														+ '<span class="timeago" title="' + vocaList[i][3] + '">' + vocaList[i][3] + '</span>'
+														+ '<span class="timeago" title="' + vocaList[i][3] + '">' + vocaList[i][2] + '</span>'
 														+ '</div>'
 														+ '</div>'
 														+ '</div>'
