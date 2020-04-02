@@ -1,2 +1,5 @@
 user02,안녕 지효야~,user2jh
 user02,단어는 외웠니 ?,user2jh
+user02,지효야 ~ 잘 잤어 ?,user2jh
+user2jh,왜 그러세요 나한테 ㅡㅡ,user02
+user02,왜그래?,user2jh

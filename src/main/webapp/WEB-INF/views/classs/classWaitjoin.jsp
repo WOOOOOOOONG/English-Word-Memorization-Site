@@ -24,8 +24,9 @@
 		        <thead style="font-family: 'Nanum Gothic', sans-serif;">
 		            <tr>
 		                <th scope="col" style="width:8%;"></th>
-		                <th scope="col" style="width:20%;">아이디</th>
-		                <th scope="col" style="width:43%;">자기소개</th>
+		                <th scope="col" style="width:15%;">아이디</th>
+		                <th scope="col" style="width:15%;">닉네임</th>
+		                <th scope="col" style="width:33%;">자기소개</th>
 		                <th scope="col" style="width:15%;">요청일</th>
 		                <th scope="col" style="width:7%;">승인</th>
 		                <th scope="col" style="width:7%;">거절</th>
@@ -44,6 +45,11 @@
 		        				</c:forEach>
 		        			</td>
 		        			<td>${ jwList.get(i).mId }</td>
+			        		<c:forEach var="t" begin="0" end="${ allMember.size() - 1 }">
+								<c:if test="${ jwList.get(i).mId eq allMember.get(t).mId }">
+									<td style="line-height:4;">${ allMember.get(t).nickname }</td>
+								</c:if>
+			                </c:forEach>
 		        			<td>${ jwList.get(i).introduce}</td>
 		        			<td>${ jwList.get(i).joindate }</td>
 		        			<td><input type="checkbox" name="" id="${ jwList.get(i).mId }" class="ok" style="height: 25px; width: 25px;"></td>

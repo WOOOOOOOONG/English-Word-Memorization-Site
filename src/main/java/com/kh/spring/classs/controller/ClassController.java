@@ -54,7 +54,7 @@ import com.kh.spring.member.model.service.MemberService;
 import com.kh.spring.member.model.vo.Member;
 
 
-@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList","allUserList","cnList","msg","whatclick"})
+@SessionAttributes({"classs","friendList","cNo","cmList","ctList","tvList","LastTestTitle","userList","jwList","allUserList","cnList","msg","whatclick","allMember"})
 @Controller
 public class ClassController {
 	
@@ -179,6 +179,9 @@ public class ClassController {
 		cn.setId(me.getmId());
 		cService.updateRecentDay(cn);
 		
+		ArrayList<Member> allMember = mController.selectListAll();
+		
+		model.addAttribute("allMember",allMember);
 		model.addAttribute("allUserList",allUserList);
 		model.addAttribute("cmList",cmList);
 		model.addAttribute("classs",cService.selectClassOneCount(cNo));

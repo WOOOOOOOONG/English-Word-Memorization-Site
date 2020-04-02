@@ -55,12 +55,12 @@
 
   .flip-card-front {
     background-color: burlywood;
-    color: black;
+    color: white;
   }
 
   .flip-card-back {
     background-color: burlywood;
-    color: black;
+    color: white;
     transform: rotateY(180deg);
   }
 
@@ -118,13 +118,14 @@
   </style>
 </head>
 <body>
-  <div class="text-center "><h1 class="title_here text_settings"></h1></div>
+  <div class="text-center "><h3 class="title_here text_settings" style="font-size: 70px;"></h3></div>
   <div class="container_slide" id = "slide_contained">
     
   </div>
   <div id='edit_button' style="display: none;    margin: auto;
   width: fit-content;">
-    <button class="btn">수정하기</button>
+    <button class="btn btn-primary" style="width: 800px;font-weight: bolder;font-size: 20px;
+    border-color: white;background: skyblue;">수정하기</button>
   </div>
   <div style="width: fit-content;
                 margin: auto;">

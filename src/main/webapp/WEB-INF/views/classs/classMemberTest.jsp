@@ -85,11 +85,12 @@ type="text/css">
         <thead style="font-family: 'Nanum Gothic', sans-serif;">
             <tr>
                 <th scope="col" style="width:8%;"></th>
-                <th scope="col" style="width:20%;">아이디</th>
+                <th scope="col" style="width:15%;">아이디</th>
+                <th scope="col" style="width:15%;">닉네임</th>
                 <th scope="col" style="width:12%;">시험일</th>
                 <th scope="col" style="width:20%;">점수</th>
-                <th scope="col" style="width:20%;">보기</th>
-                <th scope="col" style="width:20%;">재시험</th>
+                <th scope="col" style="width:15%;">보기</th>
+                <th scope="col" style="width:15%;">재시험</th>
             </tr>
         </thead>
         <tbody style="font-family: 'Nanum Gothic', sans-serif;">
@@ -106,18 +107,23 @@ type="text/css">
 								<c:forEach var="q" begin="0" end="${ userList.size() - 1 }" >	 <!--  ajoa2012 -->
 									<c:if test="${ tvList.get(j).id eq userList.get(q).refId && imgFlag2 }">
 										 <th scope="row">
-										 	<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }" style="width:100%;">
+										 	<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }" style="width:100%; height:50px; border-radius:50px;s">
 										 </th>
 										<c:set var="imgFlag2" value="false"/>
 									</c:if>
 								</c:forEach>
 								<c:if test="${ imgFlag2 }">
 									<th scope="row">
-										<img src="${ contextPath }/resources/profileimg/defaultimg.png" style="width:100%;">
+										<img src="${ contextPath }/resources/profileimg/defaultimg.png" style="width:100%; height:50px; border-radius:50px;">
 									</th>
 								</c:if>
         							
 					                <td style="line-height:4;" id="id${ match }">${ tvList.get(j).id }</td>
+					                <c:forEach var="t" begin="0" end="${ allMember.size() - 1 }">
+										<c:if test="${ tvList.get(j).id eq allMember.get(t).mId }">
+											<td style="line-height:4;">${ allMember.get(t).nickname }</td>
+										</c:if>
+					                </c:forEach>
 					                <td style="line-height:4;">${ tvList.get(j).testDate }</td>
 					                <td style="line-height:4;">${ tvList.get(j).score }</td>
 					                <td><button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".pre${ match }" id="pre${ match }">확인</button></td>
@@ -162,7 +168,8 @@ type="text/css">
             <tr>
                 <th scope="col" style="width:8%;"></th>
                 <th scope="col" style="width:20%;">아이디</th>
-                <th scope="col" style="width:72%;">마지막 방문일</th>
+                <th scope="col" style="width:20%;">닉네임</th>
+                <th scope="col" style="width:52%;">마지막 방문일</th>
             </tr>
         </thead>
         <tbody style="font-family: 'Nanum Gothic', sans-serif;"">
@@ -226,18 +233,23 @@ type="text/css">
 							<c:forEach var="q" begin="0" end="${ userList.size() - 1 }" >	 <!--  ajoa2012 -->
 								<c:if test="${ cmList.get(i).id eq userList.get(q).refId && imgFlag2 }">
 									 <th scope="row">
-									 	<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }" style="width:100%;">
+									 	<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }" style="width:100%; height:50px; border-radius:50px;">
 									 </th>
 									<c:set var="imgFlag2" value="false"/>
 								</c:if>
 							</c:forEach>
 							<c:if test="${ imgFlag2 }">
 								<th scope="row">
-									<img src="${ contextPath }/resources/profileimg/defaultimg.png" style="width:100%;">
+									<img src="${ contextPath }/resources/profileimg/defaultimg.png" style="width:100%; height:50px; border-radius:50px;">
 								</th>										
 								<c:set var="imgFlag2" value="false"/>
 							</c:if>
         					<td>${ cmList.get(i).id }</td>
+        					<c:forEach var="t" begin="0" end="${ allMember.size() - 1 }">
+								<c:if test="${ cmList.get(i).id eq allMember.get(t).mId }">
+									<td style="line-height:4;">${ allMember.get(t).nickname }</td>
+								</c:if>
+			                </c:forEach>
         					<td colspan="4">${ cmList.get(i).lastday }</td>
         				</tr>
         			</c:if>
@@ -251,7 +263,7 @@ type="text/css">
 							<c:forEach var="q" begin="0" end="${ userList.size() - 1 }" >	 <!--  ajoa2012 -->
 								<c:if test="${ cmList.get(i).id eq userList.get(q).refId && imgFlag2 }">
 									 <th scope="row">
-									 	<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }" style="width:100%;">
+									 	<img src="${ contextPath }/resources/profileimg/${ userList.get(q).changeName }" style="width:100%; height:50px; border-radius:50px;">
 									 </th>
 									<c:set var="imgFlag2" value="false"/>
 								</c:if>
@@ -263,6 +275,11 @@ type="text/css">
 								<c:set var="imgFlag2" value="false"/>
 							</c:if>
       					<td>${ cmList.get(i).id }</td>
+      					<c:forEach var="t" begin="0" end="${ allMember.size() - 1 }">
+							<c:if test="${ cmList.get(i).id eq allMember.get(t).mId }">
+								<td style="line-height:4;">${ allMember.get(t).nickname }</td>
+							</c:if>
+		                </c:forEach>
       					<td colspan="4">${ cmList.get(i).lastday }</td>
       				</tr>
         		</c:forEach>

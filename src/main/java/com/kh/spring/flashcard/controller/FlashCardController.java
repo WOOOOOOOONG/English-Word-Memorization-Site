@@ -56,6 +56,40 @@ public class FlashCardController {
 		mv.setViewName("flashcard/just_view");	
 		return mv; 
 	}
+	
+	@RequestMapping("flashcardMine.fl")
+	public ModelAndView myFlashEdit(ModelAndView mv,
+			@RequestParam(value="csid", required=true) String CSID,
+			@RequestParam(value="title", required=true) String title,
+		
+			HttpSession session ) {
+		//Member mem = (Member)session.getAttribute("loginMember");
+		//System.out.println(mem);
+		//mv.addObject("loginMember",mem);
+		mv.addObject("csid", CSID);
+		mv.addObject("title", title);
+	
+		mv.setViewName("flashcard/my_card_edit");	
+		return mv; 
+	}
+	
+	
+	@RequestMapping("flashcard_edit.fl")
+	public ModelAndView oneEditView(ModelAndView mv,
+			@RequestParam(value="csid", required=true) String CSID,
+			@RequestParam(value="title", required=true) String title,
+		
+			HttpSession session ) {
+		//Member mem = (Member)session.getAttribute("loginMember");
+		//System.out.println(mem);
+		//mv.addObject("loginMember",mem);
+		mv.addObject("csid", CSID);
+		mv.addObject("title", title);
+	
+		mv.setViewName("flashcard/just_readview");	
+		return mv; 
+	}
+	
 	@RequestMapping("flashcard_other_ROcl.fl")
 	public ModelAndView oneCardViewClass(ModelAndView mv,
 			@RequestParam(value="csid", required=true) String CSID,
@@ -71,22 +105,6 @@ public class FlashCardController {
 		mv.addObject("edit", edit);
 		mv.addObject("cNo",cNo);
 		mv.setViewName("flashcard/just_view2");	
-		return mv; 
-	}
-	
-	@RequestMapping("flashcard_edit.fl")
-	public ModelAndView oneEditView(ModelAndView mv,
-			@RequestParam(value="csid", required=true) String CSID,
-			@RequestParam(value="title", required=true) String title,
-		
-			HttpSession session ) {
-		//Member mem = (Member)session.getAttribute("loginMember");
-		//System.out.println(mem);
-		//mv.addObject("loginMember",mem);
-		mv.addObject("csid", CSID);
-		mv.addObject("title", title);
-	
-		mv.setViewName("flashcard/just_readview");	
 		return mv; 
 	}
 }

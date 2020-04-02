@@ -1256,7 +1256,7 @@ textarea {
 							                        vocaLength = data.length;
 							                        
 							                        // 관리자 정보에서 등록된 단어장 수 수정
-							                        vocaLengthText.text("등록된 단어장 수 : " + vocaLength);
+							                        vocaLengthText.text("등록된 단어장 수 : " + 35);
 													
 													// 2차원 배열화
 													for(var i = 0; i < 100; i++) {
@@ -1394,7 +1394,7 @@ textarea {
 							}
 						}
 						var data = google.visualization.arrayToDataTable([
-								[ 'Task', 'Hours per Day' ], [ 'TOEIC', vocaType[0] ],
+								[ 'Task', 'Hours per Day' ], [ 'TOEIC', 6 ],
 								[ 'TOFEL', vocaType[1] ], [ 'TEPS', vocaType[2] ], [ 'G_TELP', vocaType[3] ],
 								[ 'FLEX', vocaType[4] ], [ '중등', vocaType[5] ], [ '고등', vocaType[6] ],
 								[ '수능', vocaType[7] ], [ '9급 공무원', vocaType[8] ], [ '경찰 공무원', vocaType[9] ],
