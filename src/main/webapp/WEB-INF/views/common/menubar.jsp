@@ -1025,7 +1025,7 @@ $(document).on('click', '.myclasschat', function(){
    		success:function(data){
    			 chatId = setInterval(function(){
    				chatclassloggo(data);
-   				}, 3500);  
+   				}, 1500);  
 		},error:function(e){
 			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);
 		}	
@@ -1064,14 +1064,14 @@ $(document).on('click', '.myfriend', function(){
    	   			$("#chatsend").attr("disabled",false);
    				chatId = setInterval(function(){
    					chatloggo(data);
-   				}, 3500);
+   				}, 1500);
    			
    			}else{
    				$("#chatcontent").attr("disabled",true);
    	   			$("#chatsend").attr("disabled",true);
    				chatId = setInterval(function(){
    	   				chatloggo("adminimg.jpg");
-   	   			}, 3500);
+   	   			}, 1500);
    			}
 		},error:function(e){
 			alert("error code : "+ e.status + "\n"+"message : " + e.responseText);

@@ -357,12 +357,12 @@
 
 
   .flip-card-front {
-    background-color: #bbb;
-    color: black;
+    background-color: burlywood;
+    color: white;
   }
 
   .flip-card-back {
-    background-color: #2980b9;
+    background-color: burlywood;
     color: white;
     transform: rotateY(180deg);
   }
@@ -604,12 +604,7 @@
               delete
             </i>
           </button>
-          <button class="btn but_siz flashOption op_h" onclick="addPicture(this)">
-
-            <i class="material-icons">
-              image
-            </i>
-          </button>
+   
           <button class="btn but_siz flashOption op_h">
             <i class=" visbility material-icons">
               visibility
@@ -990,7 +985,7 @@
        
         if(i !=j && a == b)
         {  
-         alert((i+1) + " 번쨰 단어와 " + (j+i) + " 번쨰 단가 중복입니다." );
+         alert((i+1) + " 번쨰 단어와 " + (j+1) + " 번쨰 단어가 중복입니다." );
           duplicate= false;
          
           break;

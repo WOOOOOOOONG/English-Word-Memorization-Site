@@ -116,13 +116,13 @@
 
 
   .flip-card-front {
-    background-color: whitesmoke;
-    color: black;
+    background-color: burlywood;
+    color: white;
   }
 
   .flip-card-back {
-    background-color: whitesmoke;
-    color: black;
+    background-color: burlywood;
+    color: white;
     transform: rotateY(180deg);
   }
 
@@ -425,6 +425,12 @@
     justify-content: center;
   }
 
+  .text_settings2{
+    font-size: 200%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
   .loading_page {
     position: relative;
     left: 1em;
@@ -605,6 +611,7 @@
   background: #fff;
   display: inline-block;
   margin-left: 110px;
+  margin-top: 30px;
   position: relative;
   width: 250px; height: 150px;
 }
@@ -641,7 +648,19 @@
 }
 
 
-
+.cus_button{
+ font-weight: bolder;
+ font-size: 20px;
+ border-color:  #77b3cc;;
+ background: skyblue;
+}
+.cus_button:hover{
+ font-weight: bolder;
+ font-size: 20px;
+ border-color:  #77b3cc;
+ color: yellow;
+ background: skyblue;
+}
 
 
 
@@ -722,18 +741,16 @@
       </div>
 
       <div id="display_edit" style="display: none;">
-        <a class="btn" href="http://192.168.10.13:8800/spring/flashcard.fl">새로 세트 작성하기</a>
-        <button class="btn" onclick="checkTitleDuplicate()">저장하기</button>
+        <a class="btn btn-primary" href="http://192.168.10.13:8800/spring/flashcard.fl" style="font-weight: bolder;font-size: 20px;border-color: #2f8bb1;
+        border-color: white;background: skyblue;">새로 세트 작성하기</a>
+        <button class="btn btn-primary" onclick="checkTitleDuplicate()" style="font-weight: bolder;font-size: 20px;border-color: #2f8bb1;
+        border-color: white;background: skyblue;">저장하기</button>
       </div>
 
-      <div id="display_test" style="display: none;">
-        <button class="btn re_start" style="display: none;" onclick="score_check()">다시하기</button>
-        <button class="btn score" style="display: none;" onclick="score_check()">채점하기</button>
-      </div>
-
+    
       <div class=" main_side">
 
-        <div class="navbarOp nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="horizontal">
+        <div class="navbarOp  nav nav-pills" id="v-pills-tab" role="tablist" aria-orientation="horizontal">
 
           <a class="nav-link home_view tooltip_cus active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
             aria-controls="v-pills-home" aria-selected="true">
@@ -750,7 +767,7 @@
 
 <!-- 다른사람 단어장 -->
 
-<a class="nav-link tooltip_cus list_view_card " id="v-pills-list_card-tab" data-toggle="pill" href="#v-pills-list_card" role="tab"
+<a class="nav-link  setting_view tooltip_cus list_view_card " id="v-pills-list_card-tab" data-toggle="pill" href="#v-pills-list_card" role="tab"
 aria-controls="v-pills-home" aria-selected="true">
 <span class="tooltiptext">공유된 단어장</span>
 <i class="material-icons" style="font-size: 48px;width: 48px;">
@@ -764,7 +781,7 @@ aria-controls="v-pills-home" aria-selected="true">
 
 <!--내 단어장 리스트-->
 
-<a class="nav-link tooltip_cus list_view_card2 " id="v-pills-list_card2-tab" data-toggle="pill" href="#v-pills-list_card2" role="tab"
+<a class="nav-link tooltip_cus test_view list_view_card2 " id="v-pills-list_card2-tab" data-toggle="pill" href="#v-pills-list_card2" role="tab"
 aria-controls="v-pills-home" aria-selected="true">
  <span class="tooltiptext">단어장 리스트</span>
 <i class="material-icons" style="font-size: 48px;width: 48px;">
@@ -776,7 +793,7 @@ aria-controls="v-pills-home" aria-selected="true">
 
 <!--내 단어장 리스트-->
 
-          <a class="nav-link tooltip_cus test_view  " id="v-pills-test-tab" data-toggle="pill" href="#v-pills-test" role="tab"
+        <!--   <a class="nav-link tooltip_cus test_view  " id="v-pills-test-tab" data-toggle="pill" href="#v-pills-test" role="tab"
             aria-controls="v-pills-test" aria-selected="true" >
               
              <span class="tooltiptext"> 간단 테스트</span>
@@ -784,7 +801,7 @@ aria-controls="v-pills-home" aria-selected="true">
               import_contacts
             </i>
 
-          </a>
+          </a> -->
 
 
           <a class="nav-link tooltip_cus edit_view" id="v-card-list-tab" data-toggle="pill" href="#v-card-list" role="tab"
@@ -795,13 +812,13 @@ aria-controls="v-pills-home" aria-selected="true">
             </i>
           </a>
 
-          <a class="nav-link tooltip_cus  setting_view" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
+         <!--  <a class="nav-link tooltip_cus  setting_view" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings"
             role="tab" aria-controls="v-pills-settings" aria-selected="false">
               <span class="tooltiptext">설정</span>
             <i class="material-icons" style="font-size: 48px;width: 48px;">
               settings
             </i>
-          </a>
+          </a> -->
 
         </div>
       </div>
@@ -824,17 +841,15 @@ aria-controls="v-pills-home" aria-selected="true">
   <input type="text" name="" id="csid_val" hidden>
   <input type="text" id="original_title" hidden>
 
-  <div class="preview_textarea text_settings" style="display: none;">
+  <div class="preview_textarea text_settings2" style="display: none;">
 
     <div class="flip-card">
       <div class="flip-card-inner">
-        <div class="flip-card-front text_settings">
+        <div class="flip-card-front text_settings2">
           <!-- 단어 -->
         </div>
-        <div class="flip-card-back ">
-          <div class="def text_settings" style="width: 600px; height: 100%; overflow-wrap: break-word;">
-
-          </div>
+        <div class="flip-card-back text_settings2">
+        
 
         </div>
 
@@ -994,100 +1009,110 @@ aria-controls="v-pills-home" aria-selected="true">
                 <div id="myset_container"style="    margin: auto;
                 width: fit-content;">
 
-                  
-  <div class="my_list_set"  id ="first_cloned_mylist_clone">
+<div class="my_list_set"  id ="first_cloned_mylist_clone">
 
-    <P style="margin-left: 16%;">제목 </P>
-    <hr style="opacity: 0;">
-    <P class="title" style="font-size: 300%;"></P>
-    <hr style="background: red; margin-top:0px";>
-    <hr>
-    <hr>
-
-
-
-
-
-
-                          <hr>
-                          <hr>
-                          <hr>
-                          <hr>
-                          
-    
-    <div class="dropdown " style="width: fit-content;
-    position: absolute;     
-    width: 261px;
-    
-    ">
-      <button style="background: white;color:black;" class="btn btn-secondary dropdown-toggle" type="button"
-        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        현재 권한 있는 아이디
-                                 </button>
-                            <div class="dropdown-menu text-center card_set_list_2" aria-labelledby="dropdownMenuButton">
-                         
-                          </div>
-                      </div>
-                          <button class="btn"
-                        style="   position: absolute;  
-                            margin-left: 10%;"
-                            onclick="deleteMyPer()">삭제하기</button> 
-                        <button 
-                        style="   position: absolute;  
-                            margin-left: 25%;"
+  <P class="title" style="font-size: 30px;"></P>
+  <hr style="opacity: 0;">
+ 
+  <hr style="background: red; margin-top:0px";>
+  <hr>
+  <hr>
+                        <hr>
+                        <hr>
+                        <hr>
+                        <hr>
                         
-                        class="btn" onclick="deleteMySet()">단어장 삭제하기</button>
+  
 
-                          <hr>
-                          <hr>
-      </div>
+                        <hr>
+                        <hr>
+    </div>
+ 
 
 
+               
+
+
+                <div class="controller" style="width: fit-content; margin: auto;display: none;" id= "controller_copy">
+                  <div class="dropdown  " style="width: fit-content; margin: auto;
+                  display: inline-block;"> 
+
+
+                    <button style="background: white;color:black;
+                    width: 200px;" class="btn btn-secondary oneWithAuto dropdown-toggle" type="button"
+                      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      현재 권한 있는 아이디
+                                               </button>
+                                          <div class="dropdown-menu text-center card_set_list_2" aria-labelledby="dropdownMenuButton">
+                                       
+                                        </div>
+                      </div>
+                                        <button class="btn btn-primary cus_button"
+                                     
+                                          
+                                          onclick="deleteMyPer()">삭제하기</button> 
+                                      <button 
+                                    
+                                      
+                                      class="btn btn-primary cus_button" onclick="deleteMySet()">단어장 삭제하기</button>
+                                      <button 
+                                      
+                                    
+                                      
+                                      class="btn btn-primary cus_button" onclick="goToMyset()">단어장 보기/수정</button>
+              
                 </div>
                 
-                
-                
+              </div>
                 
                    
-    <div class="dropdown " style="width: fit-content;
-    position: absolute;     
-    width: 261px;
-    margin-top: 79px;
-    margin-left: 433px;">
-      <button style="background: white;color:black;" class="btn btn-secondary dropdown-toggle set_autho" type="button"
-        id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        권한 레벨 주기(기본값: 읽기만)
-                                 </button>
-                            <div class="dropdown-menu text-center " aria-labelledby="dropdownMenuButton">
-
-
-                              <button class="dropdown-item" onclick="setval2(this);">
-                                  읽기만
-                              </button>
-                              <button class="dropdown-item" onclick="setval2(this);">
-                                  읽기/수정
-                              </button>
-                             
-                          </div>
-                      </div>
+  
                 
                 <div  style="width: fit-content;
                 margin: auto;">
+                
                   <div class="omrs-input-group" style="margin: 5px;margin-right: 17px; width: 32.4375rem;">
                     <label class="omrs-input-underlined">
                       <input style="    height: 50px;
                     background: whitesmoke; text-align: center;
                     width: 340px;
                  " id="add_permisson_2">
+                 <div class="dropdown " style="width: fit-content;
+                 display: inline;
+               width: 261px;
+            
+               ">
+                 <button style="background: white;color:black;" class="btn btn-secondary dropdown-toggle set_autho" type="button"
+                   id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                   읽기만
+                                            </button>
+                                       <div class="dropdown-menu text-center " aria-labelledby="dropdownMenuButton">
+           
+           
+                                         <button class="dropdown-item" onclick="setval2(this);">
+                                             읽기만
+                                         </button>
+                                         <button class="dropdown-item" onclick="setval2(this);">
+                                             읽기/수정
+                                         </button>
+                                        
+                                     </div>
+                                 </div>
                  
+                 <button class="btn btn-primary reqest_aud  cus_button"
+                                 style="
+                                margin-top:4px;
+                                 width: 100%;
+                                ;"
                  
-                 <button class="btn reqest_aud"> 추가하기</button>
+                 > 추가하기</button>
                       <span class="omrs-input-label">권한 추가하기</span>
                     </label>
                   </div>
                 </div>
                 <div style="width: fit-content;
                 margin: auto;">
+                  
                   <button class="btn myPrev">
                   <i class="material-icons" style="font-size: 48px;width: 48px;">
                     keyboard_arrow_left
@@ -1123,7 +1148,7 @@ aria-controls="v-pills-home" aria-selected="true">
               
           </div> -->
           </div>
-
+          <button class="dropdown-item" id="list_D222" onclick="setval3(this);">Action</button>
           <div class="tab-pane fade  list-group" id="v-card-list" role="tabpanel" aria-labelledby="v-card-list-tab">
 
             <div class="center_center2">
@@ -1145,7 +1170,7 @@ aria-controls="v-pills-home" aria-selected="true">
                   <div class="col toolbarCard">
 
                     <div class="flashStep op_h">1</div>
-                    <button class="btn but_siz switchLocation op_h" onclick="addBelow();">
+                    <button class="btn but_siz switchLocation op_h" onclick="add();">
                       <i class="material-icons">
                         add
                       </i>
@@ -1156,12 +1181,7 @@ aria-controls="v-pills-home" aria-selected="true">
                         delete
                       </i>
                     </button>
-                    <button class="btn but_siz flashOption op_h" onclick="addPicture(this)">
-
-                      <i class="material-icons">
-                        image
-                      </i>
-                    </button>
+                 
                     <button class="btn but_siz flashOption op_h">
                       <i class=" visbility material-icons">
                         visibility
@@ -1311,36 +1331,53 @@ aria-controls="v-pills-home" aria-selected="true">
 
 <script>
 
+function goToMyset()
+{
+  { 
+    var mycsid = $("#csid_val").val();
+    var mytitle = $(".my_list_set").eq(myCounter).find(".title").text().trim();
+    var cc = "?csid=" + mycsid + "&title=" +mytitle;
 
+    location.href = "http://192.168.10.13:8800/spring/flashcardMine.fl" + cc
+
+  }
+}
 function deleteMyPer()
 {
-  
-  
+  var title = $(".my_list_set").eq(myCounter).find(".title").text();
+  var per = $(".controller").eq(myCounter).find(".oneWithAuto").text();
+  var unset = {}
 
-}
-function deleteMySet()
-{
-
-}
-$(".my_list_set").click(function(){
-  var title= $(".my_list_set").eq(myCounter).find(".title").text();
-  if($("#csid_val").val() != null)
-  { 
-    var send = JSON.stringify({
-     _id:   $("#csid_val").val(),
-     card_word : title
-      
-      })
-      console.log(send);
-      $.ajax(
+  $.ajax(
       {
         type: "POST",
         dataType: "json",
         contentType: "application/json; charset=utf-8",
-        data:send,
-        url: 'http://192.168.10.13:1222/getMyOtherSet',
+        data: JSON.stringify({
+          userID: per,
+          _id: $("#csid_val").val(),
+          unset : {["privilege."+title+"."+per]  : ""}
+      }),
+        url: 'http://192.168.10.13:1222/deleteRequest',
         success: function (data) {
-          console.log(data);
+          if(data ==true)
+          {
+            console.log("삭제가 완료되었습니다.")
+            $(".controller").eq(myCounter).find(".dropdown-item").each(
+              function(){
+                if($(this).text() == per)
+                {
+                  console.log($(this).text())
+                  $(this).remove();
+                }
+              })
+              $(".controller").eq(myCounter).find(".oneWithAuto").text("현재 권한 있는 아이디");
+          }  
+          else
+          {
+            console.log("삭제가 실패.")
+          }
+       
 
         },
         error: function () {
@@ -1349,7 +1386,57 @@ $(".my_list_set").click(function(){
         }
       })
 
+}
+function deleteMySet()
+{
+ 
+  var title = $(".my_list_set").eq(myCounter).find(".title").text();
+  var per = $(".controller").eq(myCounter).find(".oneWithAuto").text();
+  if(title != "")
+  {
+    var unset = {
+    ["card_word."+title]   : "",
+    ["category."+title]   : "",
+    ["privilege."+title]  : ""}
+  $.ajax(
+      {
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify({
+          _id: $("#csid_val").val(),
+          unset: unset
+        
+         
+      }),
+        url: 'http://192.168.10.13:1222/deleteRequest',
+        success: function (data) {
+          if(data ==true)
+          location.href = "http://192.168.10.13:8800/spring/flashcard2.fl";
+
+        },
+        error: function () {
+          //alert("데이타베이스 연결에 실패하여씁니다!");
+          console.log("error has occured retriving data from MongoServer")
+        }
+      })
   }
+  
+}
+
+
+
+$(".my_list_set").click(function(){
+  var title= $(".my_list_set").eq(myCounter).find(".title").text();
+/*   if($("#csid_val").val() != null)
+  { 
+    var mycsid = $("#csid_val").val();
+    var mytitle = $(".my_list_set").eq(myCounter).find(".title").text().trim();
+    var cc = "?csid=" + mycsid + "&title=" +mytitle;
+
+    location.href = "http://192.168.10.13:8000/spring/flashcardMine.fl" + cc
+
+  } */
 
 })
 
@@ -1357,6 +1444,10 @@ $(".my_list_set").click(function(){
 
 var clone_mylist = $("#first_cloned_mylist_clone").clone(true, true).removeAttr('id');
 $("#first_cloned_mylist_clone").removeAttr('id').remove();
+var clone_myControl = $("#controller_copy").clone(true, true).removeAttr('id');
+$("#controller_copy").removeAttr('id').remove();
+var list_set_clone2 = $("#list_D222").clone(true, true).removeAttr('id');
+$("#list_D222").removeAttr('id').remove();
 function getMyList(){
   console.log("get my list")
   $.ajax(
@@ -1372,37 +1463,38 @@ function getMyList(){
           var key = Object.keys(data.card_word);
           title = Object.keys(data.card_word);
           var authority =data.privilege;
+        
+     
+       
           for(var i = 0 ; i < key.length; i ++)
           {
             var temp = clone_mylist.clone(true,true);
-           
-          
+            var temp_2 = clone_myControl.clone(true,true);
             
             temp.find(".title").text(key[i])
-            //if 권한이 있으면 
-            console.log("get my list autho")
-            if(authority.hasOwnProperty(key[i]))
+            if(authority.hasOwnProperty(key[i]) )
             {
-          
+              
               var list = Object.keys(data.privilege[key[i]]);
             
               for(var j = 0; j < list.length; j ++)
-              { 
-                var aut = list_set_clone.clone(true,true);
+              {
+                var aut = list_set_clone2.clone(true,true);
                 aut.text(list[j]);
-                temp.find(".card_set_list_2").append(aut);
+                temp_2.find(".card_set_list_2").append(aut);
               }
             
             }
            
 
 
-
+            $("#myset_container").append(temp_2);
             $("#myset_container").append(temp);
           }
-        
-          $(".my_list_set").eq(0).show();
           
+          
+          $(".my_list_set").eq(0).show();
+          $(".controller").eq(0).show();
         },
         error: function () {
           //alert("데이타베이스 연결에 실패하여씁니다!");
@@ -1419,21 +1511,24 @@ function getMyList(){
     $(".mySlides").eq(curr_test_pos).show();
 
 */
+function setval3(value)
+{
+    $(value).text()
+   $(".controller").eq(myCounter).find(".oneWithAuto").text( $(value).text());
+}
 var myCounter = 0;
 
 $(".myPrev").click(function(){
-
- 
-
   myCounter = myCounter -1
   if(myCounter < 0)
         myCounter = $(".my_list_set").length-1;
 
   $(".my_list_set").each(function () {
       $(this).hide();
+      $(".controller").hide();
     })
     $(".my_list_set").eq(myCounter).show();
-
+    $(".controller").eq(myCounter).show();
    
 
 })
@@ -1445,8 +1540,10 @@ $(".myNext").click(function(){
   
   $(".my_list_set").each(function () {
       $(this).hide();
+      $(".controller").hide();
     })
     $(".my_list_set").eq(myCounter).show();
+    $(".controller").eq(myCounter).show();
 
 })
 
@@ -1490,8 +1587,26 @@ function addAuthor(userval)
       }),
         url: 'http://192.168.10.13:1222/addAuthor',
         success: function (data) {
-          
+            if(data == true)
+            {
+              var exist = false
+              var temp = list_set_clone2.clone(true,true);
+              console.log(temp.html())
+              temp.html(userval);
+              console.log(temp.html())
+              
+            $(".controller").eq(myCounter).find('.dropdown-item').each(function(){
+              
+               console.log();
+               if(userval == $(this).text())
+                exist = true
+              })
+              if( exist == false)
+              $(".controller").eq(myCounter).find(".card_set_list_2").append(temp)
 
+   
+            }
+      
         },
         error: function () {
           //alert("데이타베이스 연결에 실패하여씁니다!");
@@ -1587,6 +1702,7 @@ function searchUser(search)
 <script>
   var word_list_test = [];
   var word_mean_test = [];
+  var current_title_val = "";
   
 
   var list_set_clone = $('#list_D').removeAttr('id').remove().clone(true, true)
@@ -1723,6 +1839,7 @@ function searchUser(search)
           maxView = size.length;
           cardSize = maxView - 1;
           cardCounterViewer = current + 1;
+          current_title_val  = title; 
           $("#titleCard").text(title);
           $("#original_title").val(title);
           $("#title_val").val(title);
@@ -1794,8 +1911,9 @@ function searchUser(search)
           }
           else
           {
+            var count_my = 0;
             for(var i =0 ; i < data.length;i++)
-          { 
+                 { 
                 var temp_of  = shared_flashed.clone(true,true);
                 var div = data[i];
                 var CSID = data[i].CSID;
@@ -1803,7 +1921,8 @@ function searchUser(search)
                 var title = data[i].title;
                 var privilege = data[i].privilege;
                 var cacy = data[i].category;
-
+                if(CSID != $("#csid_val").val())
+              { count_my++;
                 temp_of.find(".csid_other_user").val(CSID);
                 temp_of.find(".pri_level").val(privilege);
                 temp_of.find(".title_saved").val(title);
@@ -1817,8 +1936,15 @@ function searchUser(search)
 
 
                 $(".paper_container").append(temp_of );
+              }
+              
           }
-          console.log("added compelte")
+          if(count_my ==0)
+            {
+              console.log("데이타가 없습니다 from Jae ")
+              $(".paper_container").append("<div style = 'width: fit-content;font-size: 500%;margin: auto;'>데이타가 없습니다</div>" );
+            }
+      
           }
           
         },
@@ -2003,7 +2129,7 @@ function searchUser(search)
     $('.carcPrevBtn').click(function () {
      
       cardHandler(0);
-      console.log(curr_test_pos2)
+    
       if(curr_test_pos2-1 > 0 )
       curr_test_pos2 = curr_test_pos2-1;
       $(".cus_slides").each(function () {
@@ -2188,7 +2314,7 @@ function noDuplicateWord() {
        
         if(i !=j && a == b)
         {  
-         alert((i+1) + " 번쨰 단어와 " + (j+i) + " 번쨰 단가 중복입니다." );
+         alert((i+1) + " 번쨰 단어와 " + (j+1) + " 번쨰 단가 중복입니다." );
           duplicate= false;
          
           break;
@@ -2279,6 +2405,14 @@ function noDuplicateWord() {
         url: 'http://192.168.10.13:1222/findAndUpdate',
         success: function (data) {
 
+            if(data == true)
+            {
+              location.href = "http://192.168.10.13:8800/spring/flashcard2.fl";
+            }
+            else
+            {
+              alert("에러 발생")
+            }
 
         },
         error: function () {
@@ -2328,6 +2462,13 @@ function noDuplicateWord() {
 
     if (data.taco == "taco") {
       title_vertified = false;
+      if(title == $("#original_title").val())
+      {
+        title_vertified = true;
+        save();
+      }
+    
+      else
       alert("중복되는 타이틀은 입력하실수 없습니다.")
     }
     else {

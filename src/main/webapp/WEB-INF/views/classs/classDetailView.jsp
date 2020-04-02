@@ -296,7 +296,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle" style="text-align:center; color:#474747; font-size:18px; margin:auto; font-weight:600;  font-family: 'Nanum Gothic', sans-serif;">간단한 포부를 적어주세요!</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle" style="text-align:center; color:#474747; font-size:18px; margin:auto; font-weight:600;  font-family: 'Nanum Gothic', sans-serif;">하고싶은 말을 입력해주세요.</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

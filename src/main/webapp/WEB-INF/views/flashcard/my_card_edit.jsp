@@ -84,9 +84,9 @@
   }
 
   .center_center {
-
+    
     align-items: center;
-    display: flex;
+    display: inline-block;
     justify-content: center;
   }
 
@@ -255,11 +255,11 @@
 
   .preview_textarea {
     box-shadow: 1px 2px 1px rgba(206, 200, 200, 0.2);
-    margin-left: 34%;
+    margin-left: 17%;
     margin-top: 1%;
-    width: 600px;
+    width: 800px;
     height: 400px;
-    position: fixed;
+    position: absolute;
     z-index: 10;
   }
 
@@ -291,7 +291,14 @@
 
 
   .text_settings {
-    font-size: 300%;
+    font-size: 500%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .text_settings2 {
+    font-size: 120%;;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -314,13 +321,22 @@
   }
 
 
-
   .flip-card {
     background-color: transparent;
-    width: 600px;
+    width: 800px;
     height: 400px;
     perspective: 1000px;
   }
+  .cus_button:hover{
+ font-weight: bolder;
+ font-size: 20px;
+ border-color:  #77b3cc;
+
+ background: skyblue;
+}
+
+
+
 
   .flip-card-inner {
     position: relative;
@@ -331,7 +347,6 @@
     transform-style: preserve-3d;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   }
-
   .flip-card-front,
   .flip-card-back {
     position: absolute;
@@ -339,9 +354,6 @@
     height: 100%;
     backface-visibility: hidden;
   }
-
-
-
   .flip-card-front {
     background-color: burlywood;
     color: white;
@@ -356,31 +368,80 @@
   .frontCard {
     transform: rotateY(180deg);
   }
+
+
+  .cus_slides
+  { margin-top: 100px;
+    display: none;
+  }
+
+
+  .mySlides {
+    display: none;
+  }
+
+  .fade_cus {
+    -webkit-animation-name: fade_next;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade_next;
+    animation-duration: 1.5s;
+  }
+
+  @keyframes fade_next {
+    from {
+      opacity: .4
+    }
+
+    to {
+      opacity: 1
+    }
+  }
+
+  
+.cus_button{
+ font-weight: bolder;
+ font-size: 20px;
+ border-color:  #77b3cc;;
+ background: skyblue;
+}
 </style>
 
 <body>
+  <input type="text" id="original_title" hidden>
+
   <input type="text" name="" id="csid_val" hidden>
   <script>
+
+
+
     var userID = "${ loginMember.mId }";
     var userName = "${ loginMember.name }";
-
+    user_ID = "${ loginMember.mId }";
+    if (user_ID.trim() == "")
+      location.href = "http://192.168.10.13:8800/spring/login.me";
     console.log(userID);
     var userID = "${ loginMember.mId }";
     var userName = "${ loginMember.name }";
     var retrive = false;
     var title_vertified = false;
     var cloned;
+    var clone2;
 
 
 
 $(function () {
   var new_csid= "${csid}";
       var new_title= "${title}"
-
+      $("#original_title").val(new_title)
+    $("#csid_val").val(new_csid)
+console.log(new_csid)
+console.log(new_title)
   $("#v-card-list").sortable();
-
+  $("#title_val").val(new_title)
   cloned = $("#cloneCard").clone(true, true).removeAttr('id');
+  cloned2= $("#onstartClone").clone(true, true).removeAttr('id');
   $("#cloneCard").removeAttr('id').remove();
+  $("#onstartClone").removeAttr('id').remove();
 
   $.ajax(
           {
@@ -406,14 +467,19 @@ $(function () {
               {    
                 
                 var newClone = cloned.clone(true, true);
+                var newClone2 = cloned2.clone(true,true);
                   
+                newClone2.find('.flip-card-front').html(size[i]);
+                newClone2.find('.flip-card-back').html(defin[size[i]]);
                
                 
                 newClone.find('.defOfWord>.textSetting').val(size[i]);
                 newClone.find('.meanOfWord>.textSetting').val(defin[size[i]]);
+                $("#word_view_container").append(newClone2);
+                
                 $("#v-card-list").append(newClone);
               }
-             
+              $(".cus_slides").eq(0).show();
               changePlaceholder();
             },
             error: function () {
@@ -421,9 +487,9 @@ $(function () {
               console.log("error has occured retriving data from MongoServer")
             }
           
-         
+           
   })
-
+          
 
 
  /*  for (var i = 0; i < 6; i++) {
@@ -433,110 +499,99 @@ $(function () {
     changePlaceholder();
   }
  */
+ 
 })
-
-
-    // 리스트 불러오기 
-    function checkTitleDuplicate() {
-      var title = $("#title_val").val().trim();
-      $.ajax(
-
-        {
-          type: "POST",
-          dataType: "json",
-          contentType: "application/json; charset=utf-8",
-          data: JSON.stringify({
-            _id: $("#csid_val").val(),
-            newTitle: title
-          }),
-          url: 'http://192.168.10.13:1222/checkDup',
-          success: function (data) {
-
-            if (data.taco == "taco") {
-              title_vertified = false;
-              alert("중복되는 타이틀은 입력하실수 없습니다.")
-            }
-            else {
-              title_vertified = true;
-            }
-          },
-          error: function () {
-            /// alert("데이타베이스 연결에 실패하여씁니다!");
-            console.log("error has occured retriving data from MongoServer")
-          }
-        })
-    }
 
 
 
 
     // 새로운 카드 생성 
-    function request(send) {
+    
 
-   
-        $.ajax(
-
-          {
-            type: "POST",
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            data: send,
-            url: 'http://192.168.10.13:1222/update_current',
-            success: function (data) {
-              if (data == true) {
-                  var ssss= "${csid}";
-               var ddddd= "${title}"
-                 
-                var cc = "?csid=" + ssss + "&title=" + ddddd+ "&edit=true";
-                  console.log(cc);
-                     location.href = "flashcard_other_RO.fl"+ cc 
-           
-              }
-              else {
-                alert("실패했습니다")
-              }
-
-            },
-            error: function () {
-              // alert("데이타베이스 연결에 실패하여씁니다!");
-              console.log("error has occured retriving data from MongoServer")
-            }
-          })
-      
-    }
   </script>
 
   <!--  sticky top -->
-  <div style = "width: fit-content;margin:auto">
-    <button class="btn btn-primary" style="width: 1200px;font-weight: bolder;font-size: 20px;
-    border-color: white;background: skyblue;" onclick="save()">수정하기</button>
-  </div>
-  <!--  sticky top -->
-  <div class="preview_textarea text_settings" style="display: none;">
 
-    <div class="flip-card">
-      <div class="flip-card-inner">
-        <div class="flip-card-front text_settings">
-          <!-- 단어 -->
-        </div>
-        <div class="flip-card-back ">
-          <div class="def text_settings" style="width: 600px; height: 100%; overflow-wrap: break-word;">
+  <div class="" id="word_view_container" style="width: fit-content;margin:auto;">
+      
+
+
+  </div>
+  <div style="margin:auto;width:fit-content">
+    
+      <button class="btn carcPrevBtn "><i class="material-icons" style="font-size: 48px;width: 48px;">
+          keyboard_arrow_left
+        </i></button>
+        <span id= "cardCounter"></span>
+      <button class="btn  carcNextBtn"> <i class="material-icons" style="font-size: 48px;width: 48px;">
+          keyboard_arrow_right
+        </i></button>
+   
+  </div>
+
+ 
+    <div class = "cus_slides fade_next" id="onstartClone">
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front text_settings">
+            <!-- 단어 -->
+          </div>
+          <div class="flip-card-back text_settings">
+            <!-- 뜻장-->
+
 
           </div>
-
         </div>
 
       </div>
+    </div>
+ 
 
+<hr style="margin:80px">
+
+  <div style="margin-top:150px;">
+<div style = "width: fit-content;margin:auto">
+  
+  <div class="center_center2" style="    display: inline-block; ">
+    <div class="omrs-input-group" style="margin: 5px;margin-right: 17px;">
+      <label class="omrs-input-underlined">
+        <input style="height: 50px;
+      background: whitesmoke; text-align: center;
+      width: 340px;
+   " id="title_val">
+        <span class="omrs-input-label">제목</span>
+      </label>
     </div>
   </div>
+  <button class=  "btn btn-primary cus_button"    onclick="checkTitleDuplicate()">
+    저장하기
+  </button>
+</div>
+
+  <!--  sticky top -->
+ 
 
 
 
 
   <div class="card_list_wrapper " id="v-card-list">
 
+    <div class="preview_textarea text_settings" style="display: none;">
 
+      <div class="flip-card">
+        <div class="flip-card-inner">
+          <div class="flip-card-front text_settings2">
+            <!-- 단어 -->
+          </div>
+          <div class="flip-card-back text_settings2 ">
+          
+  
+          </div>
+  
+        </div>
+  
+      </div>
+    </div>
 
     <!-- *******************************************************-->
     <div class="card_word_wrapper" id="cloneCard">
@@ -556,9 +611,9 @@ $(function () {
               delete
             </i>
           </button>
-         
+      
           <button class="btn but_siz flashOption op_h">
-            <i class=" visbility material-icons">
+            <i class="visbility_icon material-icons">
               visibility
             </i>
           </button>
@@ -667,7 +722,7 @@ $(function () {
   </div>
 
 
-
+</div>
 
 
 </body>
@@ -685,6 +740,68 @@ $(function () {
 
  
 
+var curr_test_pos2 = 0;
+
+//이전 버튼
+$('.carcPrevBtn').click(function () {
+  
+  console.log("hello")
+  
+    
+  console.log($(".cus_slides").length )
+  if(curr_test_pos2-1 > 0 )
+  curr_test_pos2 = curr_test_pos2-1;
+  $(".cus_slides").each(function () {
+      $(this).hide();
+   })
+ 
+   $(".cus_slides").eq(curr_test_pos2).show();
+
+});
+// 다음 버튼
+$('.carcNextBtn').click(function () {
+
+  console.log(curr_test_pos2)
+  if(curr_test_pos2+1 <  $(".cus_slides").length )
+  curr_test_pos2 = curr_test_pos2+1;
+  $(".cus_slides").each(function () {
+           $(this).hide();
+   })
+ 
+   $(".cus_slides").eq(curr_test_pos2).show();
+
+});
+
+function cardHandler(btn) {
+    if (btn == 0 && current >= 0) {
+      current = current - 1;
+      if (current == 0) {
+        $(".carcPrevBtn").attr("disabled", true);
+      }
+      else {
+        $(".carcPrevBtn").attr("disabled", false);
+        $(".carcNextBtn").attr("disabled", false);
+      }
+      
+    }
+    else if (btn == 1 && current < $(".cus_slides").length) {
+     
+      current = current + 1;
+      if (current == $(".cus_slides").length) {
+        $(".carcNextBtn").attr("disabled", true);
+
+      }
+      else {
+        $(".carcNextBtn").attr("disabled", false);
+        $(".carcPrevBtn").attr("disabled", false);
+      }
+    }
+    cardCounterViewer = current + 1;
+    $("#cardCounter").text(cardCounterViewer + " / " + $(".cus_slides").length );
+    console.log()
+   
+
+  }
 
   var before;
   $('#tempPlachodler').click(function () {
@@ -750,16 +867,83 @@ $(function () {
 
 <script>
   // 프리뷰 
-  $('.visbility').click(function () {
+  function checkTitleDuplicate() {
+    var title = $("#title_val").val().trim();
+    if(noDuplicateWord() == true ) 
+    {
+      $.ajax(
+
+{
+  type: "POST",
+  dataType: "json",
+  contentType: "application/json; charset=utf-8",
+  data: JSON.stringify({
+    _id: $("#csid_val").val(),
+    newTitle: title
+  }),
+  url: 'http://192.168.10.13:1222/checkDup',
+  success: function (data) {
+
+    if (data.taco == "taco") {
+      title_vertified = false;
+      if(title == $("#original_title").val())
+      {
+        title_vertified = true;
+        save();
+      }
+      else
+      alert("중복되는 타이틀은 입력하실수 없습니다.")
+    }
+    else {
+      {
+        title_vertified = true;
+        save();
+        console.log("사용 가능한 타이틀")
+      }
+     
+    }
+  },
+  error: function () {
+    /// alert("데이타베이스 연결에 실패하여씁니다!");
+    console.log("error has occured retriving data from MongoServer")
+  }
+})
+    }
+    
+  }
+
+
+  function rename_request(request_send) {
+    console.log("rename requesting")
+    $.ajax(
+      {
+        type: "POST",
+        dataType: "json",
+        contentType: "application/json; charset=utf-8",
+        data: request_send,
+        url: 'http://192.168.10.13:1222/renameAndUpdate',
+        success: function (data) {
+
+            if(data == true)
+            {
+                location.href = "http://192.168.10.13:8800/spring/flashcard2.fl"
+            } 
+            else
+            {
+              alert("failed")
+            }
+        },
+        error: function () {
+          // alert("데이타베이스 연결에 실패하여씁니다!");
+          console.log("error has occured retriving data from MongoServer")
+        }
+      })
+  }
+  $('.visbility_icon').click(function () {
     var curr = $(this).text();
     var pos = $('.preview_textarea');
-
-
-
-
     if (curr.trim() != "visibility") {
       $(this).text("visibility");
-
       pos.hide();
     }
     else {
@@ -771,35 +955,17 @@ $(function () {
       var def = parent.find('.defOfWord>textarea').val();
       var mean = parent.find('.meanOfWord>textarea').val();
 
-      if (parent.find(".imgupload").get(0).files.length === 0) {
-        console.log("no image")
+     
         $(".preview_textarea").find('#imageHolder').hide();
         $(".preview_textarea").find('.flip-card-back').removeClass('img_added');
-      }
-      else {
-        $(".preview_textarea").find('.flip-card-back').addClass('img_added');
-        console.log("image is here")
-        var input = parent.find(".imgupload").get(0);
-        if (input.files && input.files[0]) {
-          console.log("reading image")
-          var reader = new FileReader();
-          reader.onload = function (e) {
-            var add = "<div class='img_settings' ><img id= 'imageHolder'></div>";
-            $(".preview_textarea").find('.flip-card-back').append(add);
-            $(".preview_textarea").find('#imageHolder').attr("src", e.target.result);
-          }
-          reader.readAsDataURL(input.files[0]);
-        }
-
-        // $(".preview_textarea").find('#imageHolder').show();
-      }
+      
 
 
       $(".preview_textarea").find('.flip-card-front').html(def);
-      $(".preview_textarea").find('.flip-card-back .text_settings').html(mean);
+      $(".preview_textarea").find('.flip-card-back ').html(mean);
 
       let first = $(".preview_textarea").find('.flip-card-front');
-      let second = $(".preview_textarea").find('.flip-card-back .text_settings');
+      let second = $(".preview_textarea").find('.flip-card-back');
       console.log(first.innerWidth());
 
 
@@ -923,63 +1089,89 @@ $(function () {
 
   // 저장
   function save() {
+   
+   var card = $(".card_word_wrapper");
+   var title = $("#title_val").val().trim();
+   var orginal_tt = $("#original_title").val().trim();
+   var card_type = $("#per_public").text().trim();
+   var list = [];
+   var temp = {};
+   
+   console.log("타이틀 입력")
 
-    var card = $(".card_word_wrapper");
-    var title = "${title}";
-    var cate = ""
-    var card_type = $("#per_public").text().trim();
+   
+   if ( title != "" ) {
+     console.log("title")
+     if (card.length >= 6) {
+       card.each(
+         function () {
+           var def = $(this).find(".defOfWord>.textSetting").val();
+           var mean = $(this).find(".meanOfWord>.textSetting").val();
+           temp[[def]] = mean;
+         }
+       )
+       list.push(temp);
+    
+       var send;
 
-    var list = [];
-    var temp = {};
+       var csid = $("#csid_val").val();
+       send = JSON.stringify({
+         _id: csid,
+         userID: "${ loginMember.mId }",
+         [title]: list
+       })
+       var send2 = JSON.stringify({
+         _id: csid,
+         userID: "${ loginMember.mId }",
+         [title]: list,
+         orginal: orginal_tt,
+         rename: $("#title_val").val().trim()
+       })
 
-    if (cate != "" || title != "") {
-
-
-      if (card.length >= 6 && noDuplicateWord()) {
-        card.each(
-          function () {
-            var def = $(this).find(".defOfWord>.textSetting").val();
-            var mean = $(this).find(".meanOfWord>.textSetting").val();
-            temp[[def]] = mean;
-          }
-        )
-        list.push(temp);
-        console.log(list);
-        var send;
-
-      
-        var new_csid= "${csid}";
- 
-
-          var csid = $("#csid_val").val();
-          send = JSON.stringify({
-            _id: new_csid,
-            userID: "",
-            [title]: list
-          })
+     
+       if (title != $("#original_title").val().trim()) {
+         console.log("동일하지 않은 타일틀")
+         rename_request(send2, title);
         
 
+       }
+       else if (title == $("#original_title").val().trim()) {
+         console.log("동일한 타이틀")
+         request(send)
+       }
 
 
-        request(send);
-
-      } else {
-        alert(
-          "카드는 최소 6 장 이상입니다."
-        )
-      }
-
-
-
-    }
-    else {
-      alert("카테고리 또는 타이틀은 필수입니다")
-    }
+     } else {
+       alert(
+         "카드는 최소 6 장 이상 이여야합니다"
+       )
+     }
 
 
 
+   }
 
-  }
+ }
+
+
+ function request(data_isSending) {
+   $.ajax(
+     {
+       type: "POST",
+       dataType: "json",
+       contentType: "application/json; charset=utf-8",
+       data: data_isSending,
+       url: 'http://192.168.10.13:1222/findAndUpdate',
+       success: function (data) {
+
+
+       },
+       error: function () {
+         // alert("데이타베이스 연결에 실패하여씁니다!");
+         console.log("error has occured retriving data from MongoServer")
+       }
+     })
+ }
  
   function addPicture(add) {
     var addPic = $(add).parent().parent().find(".imgupload");
@@ -1016,5 +1208,39 @@ $(function () {
 
 </script>
 
+
+
+<script>
+  // add flash card 
+
+  $('.visbility').click(function () {
+    var curr = $(this).text();
+    var pos = $('.preview_textarea');
+    console.log(curr);
+    if (curr.trim() != "visibility") {
+      $(this).text("visibility");
+
+      pos.hide();
+    }
+    else {
+      $('.visbility').each(function () {
+        $(this).text("visibility");
+      })
+      $(this).text("visibility_off");
+      var parent = $(this).parent().parent().parent();
+      var def = parent.find('.defOfWord>textarea').val();
+
+      var imag;
+      var mean = parent.find('.meanOfWord>textarea').val();
+      $(".preview_textarea").find('.flip-card-front').text(def);
+      $(".preview_textarea").find('.flip-card-back').text(mean);
+      pos.show();
+    }
+  })
+
+
+
+
+</script>
 
 </html>
