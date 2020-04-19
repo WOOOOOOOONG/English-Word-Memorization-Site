@@ -28,67 +28,86 @@ Spring, Mybatis
   <img width="100%" height="500" src="images/DB.png">  
 </div>
 
-## 담당 역할
-> JSP/Servlet, DB 등 해당 내용에 관한 모든 처리
+## 페이지 소개
 <span>
-  <img align="left" width="450" height="400" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fb5GrRF%2FbtqCu0b7KzD%2FOTDk4pxtoCuPdVrcixE0Pk%2Fimg.png">
-  <b>회원가입</b><br><br>
-  ㆍ 회원 가입을 위한 정보에 대한 처리<br><br>
-  ㆍ 아이디 중복확인 기능<br><br>
-  ㆍ 비밀번호를 비롯한 모든 내용에 정규화<br><br>
-  ㆍ 이메일 인증<br><br>
-  ㆍ 잘못 기입하거나 기입하지 않은 내용이 있을 경우 '가입하기' 버튼 비활성화
+  <img align="left" width="450" height="400" src="images/initial.png">
+  <b>초기 페이지</b><br><br>
+  ㆍ 책갈피 형식으로 홈페이지 소개<br><br>
+  ㆍ 로그인 기능
 </span>            
+<br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div>
+  <img align="right" width="450" height="400" src="images/main.png">
+  <b>메인 페이지</b><br><br>
+  ㆍ 홈페이지 기획 의도 소개<br><br>
+  ㆍ 공지사항 및 인기 단어장, 스터디, 게시글 소개
+</div>  
+<br><br><br><br><br><br><br><br><br><br><br><br>
+  
+<div>
+  <img align="left" width="450" height="400" src="images/voca.png">
+  <b style="text-align:center;">단어장</b><br><br>
+  ㆍ 여러개의 단어장 리스트<br><br>
+  ㆍ 단어 추가 및 제거
+</div>  
+<br><br><br><br><br><br><br><br><br><br><br><br>
+  
+<div>
+  <img align="right" width="450" height="400" src="images/study.png">
+  <b>스터디</b><br><br>
+  ㆍ 공동의 목표를 가진 사용자간 스터디 생성<br><br>
+  ㆍ 스터디장이 만든 단어장을 구성원이 열람 및 암기 기능<br><br>
+  ㆍ 단어 시험 기능
+</div>  
+<br><br><br><br><br><br><br><br><br><br>
+
+<div>
+  <img align="left" width="450" height="400" src="images/mypage.png">
+  <b style="text-align:center;">마이페이지</b><br><br>
+  ㆍ 책을 꺼내보는 형식으로 마이페이지 제공<br><br>
+  ㆍ 자기소개 수정<br><br>
+  ㆍ 가입한 스터디<br><br>
+  ㆍ 단어장 목록<br><br>
+  ㆍ 개인정보 수정
+</div>  
+<br><br>
+
+<div>
+  <img align="right" width="450" height="400" src="images/chatting.png">
+  <b style="text-align:center;">채팅</b><br><br>
+  ㆍ 사용자간 친구추가 기능<br><br>
+  ㆍ 채팅 기능<br><br>
+</div>  
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div>
+  <img align="left" width="450" height="400" src="images/board.png">
+  <b style="text-align:center;">게시판</b><br><br>
+  ㆍ 기본 게시판 기능 제공<br><br>
+  ㆍ 글 검색, 페이징 처리 및<br><br>
+  ㆍ 최근 공지사항 최상단 배치<br><br>
+  ㆍ 댓글 기능 및 댓글 신고 기능
+</div>  
 <br><br><br><br><br><br><br>
 
 <div>
-  <img align="right" width="450" height="400" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FLm7TV%2FbtqCsHqu4NN%2FKgAUkXsLSvXHwa2GqoOaI1%2Fimg.png">
-  <b>ID/PWD 찾기</b><br><br>
-  ㆍ 요구사항과 DB에 저장되어있는 정보가 일치한다면 ID 또는 Password 출력
+  <img align="right" width="450" height="400" src="images/inquire.png">
+  <b style="text-align:center;">문의</b><br><br>
+  ㆍ 사용자별 문의 작성<br><br>
+  ㆍ 작성한 문의 확인<br><br>
+  ㆍ 스터디, 단어장, 게시글, 불건전한 사용자에 대한 신고 가능
 </div>  
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-  
-<div>
-  <img align="left" width="450" height="400" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbFHlcF%2FbtqCtW1Zm81%2FDpvKWicogmT9j3yNT7hbbk%2Fimg.png">
-  <b style="text-align:center;">Login</b><br><br>
-  ㆍ ID/PWD 정보가 일치한다면 로그인<br><br>
-  ㆍ 비밀번호 실패에 대한 처리<br><br>
-  ㆍ 로그인 후 메인 페이지로 이동 후 로그인 확인에 대한 처리
-</div>  
-<br><br><br><br><br><br><br><br><br><br><br>
-  
-<div>
-  <img align="right" width="450" height="400" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fbrmqut%2FbtqCynKSAjH%2Ft2iGwi8Mt983LLiZK8eXjK%2Fimg.png">
-  <b>MyPage</b><br><br>
-   -좌측<br><br>
-  ㆍ 회원별 프로필 사진과 별명을 화면에 보여주고, 클릭을 통한 프로필 사진 교체 기능  <br><br>
-  ㆍ 로그아웃/회원정보 수정/내가 쓴 게시글 확인 등 홈페이지 내 사용자의 활동 내역 확인  <br><br><br>
-  -중앙<br><br>
-  ㆍ Google의 FullCalendar를 사용<br><br>
-  ㆍ DB와 연동하여 저장된 여행 계획을 사용자에게 보여준다.  
-</div>  
-<br><br><br>
+<br><br><br><br><br><br><br><br><br><br>
 
 <div>
-  <img align="left" width="450" height="400" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FcFIQH1%2FbtqCrO4n79P%2FVvIqff32jxkjcLC2yYiJQk%2Fimg.png">
-  <b style="text-align:center;">여행지 & 축제 불러오기</b><br><br>
-  ㆍ 홈페이지에서 제공하는 여행지 및 축제 보여주기 기능<br><br>
-  ㆍ <b>'드래그'를 통해 간단하게 여행 일정을 추가</b>하는 기능
+  <img align="left" width="450" height="400" src="images/admin.png">
+  <b style="text-align:center;">관리자</b><br><br>
+  ㆍ 한 페이지에서 전체 내용을 볼 수 있도록 구성한 화면<br><br>
+  ㆍ 홈페이지의 총 방문자 수, 회원 수, 등록된 클래스 수 등 홈페이지의 정보 확인<br><br>
+  ㆍ 회원 목록<br><br>
+  ㆍ 회원 상세 조회로 신고된 내역 및 활동 내역 확인과 개인 메시지 전송 기능<br><br>
+  ㆍ 문의 처리 기능<br><br>
+  ㆍ Google Chart API를 이용해 단어, 클래스, 문의 유형, 방문 기록에 대한 통계 처리
 </div>  
-<br><br><br><br><br><br><br><br><br><br><br><br><br>  
-
-<div>
-  <img align="right" width="450" height="400" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FLoJhk%2FbtqCrlnZEbc%2Fzs1ro7iU51NRYGDl4wN4l1%2Fimg.png">
-  <b style="text-align:center;">요일별 일정 List</b><br><br>
-  ㆍ Google Calendar API 사용<br><br>
-  ㆍ DB와 연동 후 저장된 값을 사용자에게 보여지도록 구현
-</div>  
-<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-
-<div>
-  <img align="left" width="450" height="400" src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2Fu0Yhy%2FbtqCync4HXa%2FnvMVV3hzK70BpR7u2nNpcK%2Fimg.png">
-  <b style="text-align:center;">일정 추가</b><br><br>
-  ㆍ 여행에 필요한 정보를 입력받아 DB에 추가 기능<br><br>
-  ㆍ Ajax를 통해 Calendar에 값 추가
-</div>  
-<br><br><br><br><br><br><br><br><br><br><br><br><br>
+<br><br>
