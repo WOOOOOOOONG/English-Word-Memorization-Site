@@ -74,7 +74,7 @@ Spring, Mybatis
 <br><br><br><br><br><br>
 
 <div>
-  <img align="right" width="450" height="400" src="images/chatting.png">
+  <img align="right" width="450" height="400" src="chatting.png">
   <b style="text-align:center;">채팅</b><br><br>
   ㆍ 사용자간 친구추가 기능<br><br>
   ㆍ 채팅 기능<br><br>
