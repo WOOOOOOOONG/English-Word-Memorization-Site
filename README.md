@@ -30,7 +30,7 @@ Spring, Mybatis
 
 ## 페이지 소개
 <span>
-  <img align="left" width="450" height="400" src="images/initial.png">
+  <img align="left" width="450" height="400" src="images/initial.PNG">
   <b>초기 페이지</b><br><br>
   ㆍ 책갈피 형식으로 홈페이지 소개<br><br>
   ㆍ 로그인 기능
@@ -38,7 +38,7 @@ Spring, Mybatis
 <br><br><br><br><br><br><br><br><br><br><br><br>
 
 <div>
-  <img align="right" width="450" height="400" src="images/main.png">
+  <img align="right" width="450" height="400" src="images/main.PNG">
   <b>메인 페이지</b><br><br>
   ㆍ 홈페이지 기획 의도 소개<br><br>
   ㆍ 공지사항 및 인기 단어장, 스터디, 게시글 소개
@@ -92,7 +92,7 @@ Spring, Mybatis
 <br><br><br><br><br><br><br>
 
 <div>
-  <img align="right" width="450" height="400" src="images/inquire.png">
+  <img align="right" width="450" height="400" src="images/inquire.PNG">
   <b style="text-align:center;">문의</b><br><br>
   ㆍ 사용자별 문의 작성<br><br>
   ㆍ 작성한 문의 확인<br><br>
