@@ -71,7 +71,7 @@ Spring, Mybatis
   ㆍ 단어장 목록<br><br>
   ㆍ 개인정보 수정
 </div>  
-<br><br>
+<br><br><br><br><br><br>
 
 <div>
   <img align="right" width="450" height="400" src="images/chatting.png">
