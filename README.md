@@ -25,7 +25,7 @@ Spring, Mybatis
 
 ## DB 설계
 <div>
-  <img width="100%" height="500" src="images/DB.png">  
+  <img width="100%" height="500" src="images/DB.PNG">  
 </div>
 
 ## 페이지 소개
