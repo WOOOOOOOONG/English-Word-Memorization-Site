@@ -8,7 +8,7 @@
 <img align="left" width="200" height="200" src="images/mypage.png">
 <img align="left" width="200" height="200" src="images/board.png">
 <img align="left" width="200" height="200" src="images/inquire.PNG">
-<img align="left" width="200" height="200" src="images/admin.png">
+<img align="" width="200" height="200" src="images/admin.png">
 
 <br/><br/><br/>
 
