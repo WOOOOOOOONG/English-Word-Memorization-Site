@@ -1,14 +1,14 @@
 # It-Where-Project
 영어를 잘 하기 위해 꼭 필요하지만, 지루하게 느껴질 수 있는 '단어 외우기'를 우리 홈페이지에서 제공하는 암기 기능을 이용하고,
-다른 사람과 함께 함으로써 더 재밌게 영단어를 외울 수 있는 페이지
-<img align="left" width="450" height="400" src="images/initial.PNG"> 
-<img align="right" width="450" height="400" src="images/main.PNG">
-<img align="left" width="450" height="400" src="images/voca.png">
-<img align="right" width="450" height="400" src="images/study.png">
-<img align="left" width="450" height="400" src="images/mypage.png">
-<img align="left" width="450" height="400" src="images/board.png">
-<img align="right" width="450" height="400" src="images/inquire.PNG">
-<img align="left" width="450" height="400" src="images/admin.png">
+다른 사람과 함께 함으로써 더 재밌게 영단어를 외울 수 있는 페이지<br/>
+<img align="left" width="200" height="200" src="images/initial.PNG"> 
+<img align="left" width="200" height="200" src="images/main.PNG">
+<img align="left" width="200" height="200" src="images/voca.png">
+<img align="left" width="200" height="200" src="images/study.png">
+<img align="left" width="200" height="200" src="images/mypage.png">
+<img align="left" width="200" height="200" src="images/board.png">
+<img align="left" width="200" height="200" src="images/inquire.PNG">
+<img align="left" width="200" height="200" src="images/admin.png">
 
 ## 개발 환경
 * Programming Language    
