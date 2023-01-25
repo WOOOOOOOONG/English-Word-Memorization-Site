@@ -24,20 +24,6 @@ Tomcat 8.5, JSP/Servlet
 * Framework
 Spring 4.0, Mybatis
 
-## 주요 기능
-* 계정
-* 마이페이지
-* 단어 저장 및 공유
-* 스터디
-* 커뮤니티
-* 고객센터
-* 관리자 전용 페이지
-
-## DB 설계
-<div>
-  <img width="100%" height="500" src="images/DB.PNG">  
-</div>
-
 ## 담당 역할
 * 초기 페이지
 * 메인 페이지
@@ -45,3 +31,10 @@ Spring 4.0, Mybatis
 * 문의 사항
 * 관리자 페이지
 * 위 기술한 내용에 대한 풀스택 개발
+
+## DB 설계
+<div>
+  <img width="100%" height="500" src="images/DB.PNG">  
+</div>
+
+
