@@ -26,7 +26,7 @@ Tomcat 8.5, JSP/Servlet
 Spring 4.0, Mybatis
 
 ## 담당 역할
-* Member, Board, Reaply, Visit_record, Inquire DB 설계
+* Member, Board, Reply, Visit_record, Inquire DB 설계
 * 메인, 커뮤니티, 고객센터, 관리자 페이지 Full Stack 구현
 * 관리자 페이지를 통한 사용자 제제 기능 구현
 * Google Chart API를 이용한 인기 단어장, 클래스, 일별 사용자 접속 수 통계 구현
